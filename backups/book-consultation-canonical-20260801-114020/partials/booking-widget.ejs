@@ -1,0 +1,984 @@
+<!-- Booking Form Widget - Shows on all pages except homepage and booking pages -->
+<div id="booking-widget" style="display: none;">
+    <style>
+    .booking-widget-wrapper {
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        padding: 50px 20px;
+        margin: 80px 0 0 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .booking-widget-wrapper::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>');
+        background-size: 100px 100px;
+        opacity: 0.3;
+    }
+
+    .booking-widget-container {
+        max-width: 600px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+    }
+
+    .booking-widget-header {
+        text-align: center;
+        color: white;
+        margin-bottom: 30px;
+    }
+
+    .booking-widget-header h2 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin: 0 0 10px 0;
+    }
+
+    .booking-widget-header p {
+        font-size: 1.1rem;
+        opacity: 0.95;
+        margin: 0;
+    }
+
+    .booking-form-card {
+        background: white;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .booking-form-group {
+        margin-bottom: 20px;
+    }
+
+    .booking-form-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: #4a5568;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .booking-form-input,
+    .booking-form-select {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: all 0.2s;
+        background: #fafafa;
+        font-family: inherit;
+    }
+
+    .booking-form-input:focus,
+    .booking-form-select:focus {
+        outline: none;
+        border-color: #3b82f6;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .booking-form-select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234a5568' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 16px center;
+        padding-right: 40px;
+        cursor: pointer;
+    }
+
+    .booking-form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    /* Calendar Styles */
+    .date-picker-wrapper {
+        position: relative;
+    }
+
+    .date-picker-display {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 15px;
+        background: #fafafa;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.2s;
+    }
+
+    .date-picker-display:hover,
+    .date-picker-display.active {
+        border-color: #3b82f6;
+        background: white;
+    }
+
+    .date-picker-display span {
+        color: #a0aec0;
+    }
+
+    .date-picker-display.selected span {
+        color: #2d3748;
+    }
+
+    .calendar-icon {
+        font-size: 18px;
+        color: #4a5568;
+    }
+
+    .calendar-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        margin-top: 8px;
+        padding: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+        display: none;
+    }
+
+    .calendar-dropdown.open {
+        display: block;
+    }
+
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+
+    .calendar-nav-btn {
+        background: #f7fafc;
+        border: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 18px;
+        color: #4a5568;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+    }
+
+    .calendar-nav-btn:hover {
+        background: #e2e8f0;
+    }
+
+    .calendar-month {
+        font-weight: 600;
+        font-size: 16px;
+        color: #2d3748;
+    }
+
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 4px;
+    }
+
+    .calendar-day-header {
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        color: #718096;
+        padding: 8px 0;
+    }
+
+    .calendar-day {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+        color: #2d3748;
+    }
+
+    .calendar-day.empty {
+        cursor: default;
+    }
+
+    .calendar-day.disabled {
+        color: #cbd5e0;
+        cursor: not-allowed;
+        background: transparent;
+    }
+
+    .calendar-day.available {
+        background: #c6f6d5;
+        color: #22543d;
+        font-weight: 500;
+    }
+
+    .calendar-day.available:hover {
+        background: #9ae6b4;
+    }
+
+    .calendar-day.selected {
+        background: #48bb78;
+        color: white;
+        font-weight: 600;
+    }
+
+    .calendar-day.today {
+        border: 2px solid #3b82f6;
+    }
+
+    .location-info {
+        background: #e0f2fe;
+        border-left: 3px solid #3b82f6;
+        padding: 10px 12px;
+        margin-top: 8px;
+        font-size: 13px;
+        color: #0c4a6e;
+        border-radius: 6px;
+    }
+
+    .booking-consent-box {
+        background: #f8fafc;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        margin: 4px 0 12px;
+    }
+
+    .booking-consent-label {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        cursor: pointer;
+    }
+
+    .booking-consent-label input[type="checkbox"] {
+        margin-top: 2px;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        flex-shrink: 0;
+        accent-color: #1e3a8a;
+    }
+
+    .booking-consent-label span {
+        color: #475569;
+        font-size: 11px;
+        line-height: 1.55;
+    }
+
+    .booking-consent-label a {
+        color: #1e3a8a;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .booking-consent-label a:hover {
+        text-decoration: underline;
+    }
+
+    .booking-submit-btn {
+        width: 100%;
+        padding: 16px;
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 10px;
+    }
+
+    .booking-submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4);
+    }
+
+    .booking-submit-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .booking-feedback {
+        margin: 15px 0;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        text-align: center;
+        display: none;
+    }
+
+    .booking-feedback.success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        display: block;
+    }
+
+    .booking-feedback.error {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+        display: block;
+    }
+
+    .booking-recaptcha-wrap {
+        margin: 12px 0 8px;
+        display: flex;
+        justify-content: center;
+        min-height: 78px;
+        align-items: center;
+    }
+
+    .booking-recaptcha-wrap .g-recaptcha > div {
+        margin: 0 auto;
+    }
+
+    .booking-widget-features {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 25px;
+        flex-wrap: wrap;
+    }
+
+    .booking-widget-feature {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: white;
+        font-size: 14px;
+        opacity: 0.95;
+    }
+
+    .booking-widget-feature svg {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+        .booking-widget-wrapper {
+            padding: 40px 15px;
+            margin: 60px 0 0 0;
+        }
+
+        .booking-widget-header h2 {
+            font-size: 1.8rem;
+        }
+
+        .booking-widget-header p {
+            font-size: 1rem;
+        }
+
+        .booking-form-card {
+            padding: 25px 20px;
+        }
+
+        .booking-form-row {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .booking-widget-features {
+            gap: 15px;
+        }
+
+        .booking-widget-feature {
+            font-size: 13px;
+        }
+    }
+    </style>
+
+    <section class="booking-widget-wrapper">
+        <div class="booking-widget-container">
+            <div class="booking-widget-header">
+                <h2>Book Your Consultation</h2>
+                <p>Schedule your appointment in 30 seconds</p>
+            </div>
+
+            <div class="booking-form-card">
+                <form id="widgetBookingForm">
+                    <div class="booking-form-group">
+                        <label class="booking-form-label">Full Name *</label>
+                        <input type="text" class="booking-form-input" name="fullName" placeholder="John Doe" required>
+                    </div>
+
+                    <div class="booking-form-row">
+                        <div class="booking-form-group">
+                            <label class="booking-form-label">Age *</label>
+                            <input type="number" class="booking-form-input" name="age" placeholder="30" min="1" max="120" required>
+                        </div>
+                        <div class="booking-form-group">
+                            <label class="booking-form-label">Phone (optional)</label>
+                            <input type="tel" class="booking-form-input" name="phone" placeholder="(555) 123-4567">
+                        </div>
+                    </div>
+
+                    <div class="booking-form-group">
+                        <label class="booking-form-label">Email *</label>
+                        <input type="email" class="booking-form-input" name="email" placeholder="john@example.com" required>
+                    </div>
+
+                    <div class="booking-form-group">
+                        <label class="booking-form-label">Preferred Location *</label>
+                        <select class="booking-form-select" name="location" id="widgetLocation" required>
+                            <option value="">Choose your preferred location</option>
+                            <option value="Beverly Hills">Beverly Hills</option>
+                            <option value="Westlake Village">Westlake Village</option>
+                        </select>
+                        <div id="widgetLocationInfo" class="location-info" style="display: none;"></div>
+                    </div>
+
+                    <div class="booking-form-group">
+                        <label class="booking-form-label">Preferred Date *</label>
+                        <div class="date-picker-wrapper">
+                            <div class="date-picker-display" id="widgetDateDisplay">
+                                <span id="widgetDateText">Select a location first</span>
+                                <span class="calendar-icon">📅</span>
+                            </div>
+                            <input type="hidden" name="date" id="widgetDateInput" required>
+                            
+                            <div class="calendar-dropdown" id="widgetCalendar">
+                                <div class="calendar-header">
+                                    <button type="button" class="calendar-nav-btn" id="widgetPrevMonth">‹</button>
+                                    <div class="calendar-month" id="widgetMonthYear"></div>
+                                    <button type="button" class="calendar-nav-btn" id="widgetNextMonth">›</button>
+                                </div>
+                                <div class="calendar-grid" id="widgetCalendarGrid">
+                                    <div class="calendar-day-header">Su</div>
+                                    <div class="calendar-day-header">Mo</div>
+                                    <div class="calendar-day-header">Tu</div>
+                                    <div class="calendar-day-header">We</div>
+                                    <div class="calendar-day-header">Th</div>
+                                    <div class="calendar-day-header">Fr</div>
+                                    <div class="calendar-day-header">Sa</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="booking-form-group">
+                        <label class="booking-form-label">Preferred Time *</label>
+                        <select class="booking-form-select" name="time" required>
+                            <option value="">Select time</option>
+                            <option value="8:00 AM">8:00 AM</option>
+                            <option value="9:00 AM">9:00 AM</option>
+                            <option value="10:00 AM">10:00 AM</option>
+                            <option value="11:00 AM">11:00 AM</option>
+                            <option value="12:00 PM">12:00 PM</option>
+                            <option value="1:00 PM">1:00 PM</option>
+                            <option value="2:00 PM">2:00 PM</option>
+                            <option value="3:00 PM">3:00 PM</option>
+                            <option value="4:00 PM">4:00 PM</option>
+                        </select>
+                    </div>
+
+                    <div class="booking-form-group">
+                        <label class="booking-form-label">Procedure interest (optional)</label>
+                        <select class="booking-form-select" name="surgeryExamType">
+                            <option value="">Prefer not to say / decide at consult</option>
+                            <option value="SMILE">SMILE</option>
+                            <option value="LASIK">LASIK</option>
+                            <option value="SuperLASIK">SuperLASIK</option>
+                            <option value="EVO ICL">EVO ICL</option>
+                            <option value="PIE">PIE</option>
+                            <option value="Laser cataract surgery">Laser cataract surgery</option>
+                            <option value="Cosmetic outcome pterygium">Cosmetic outcome pterygium</option>
+                            <option value="CXL / CTAK">CXL / CTAK</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="booking-consent-box">
+                        <label class="booking-consent-label">
+                            <input type="checkbox" id="widgetConsent" name="consent" required>
+                            <span>By submitting this form, you agree to receive calls and text messages from Khanna Vision Institute regarding your inquiry, appointments, and related services. Your mobile carrier's standard message and data rates may apply, and message frequency may vary. You may opt out at any time by replying STOP or reply HELP for assistance. Your information will be handled in accordance with our <a href="/privacy/">Privacy Policy</a> and applicable regulations.</span>
+                        </label>
+                    </div>
+
+                    <!-- honeypot (bots) — must stay empty -->
+                    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+
+                    <!-- reCAPTCHA v2 — same site key as seminar-rsvp / booking API -->
+                    <div class="booking-form-group booking-recaptcha-wrap">
+                        <div id="widgetBookingRecaptcha"></div>
+                    </div>
+
+                    <div id="widgetBookingFeedback" class="booking-feedback"></div>
+
+                    <button type="submit" class="booking-submit-btn">Book Appointment</button>
+                </form>
+
+                <div class="booking-widget-features">
+                    <div class="booking-widget-feature">
+                        <svg fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        Free Consultation
+                    </div>
+                    <div class="booking-widget-feature">
+                        <svg fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        Same-Day Appointments
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+(function() {
+    // Control which pages show the booking widget
+    var currentPath = window.location.pathname;
+    
+    // Pages where we DON'T want to show the booking widget
+    var excludedPaths = [
+        '/',
+        '/index.html',
+        '/khanna-booking.html',
+        '/book-consultation/',
+        '/contact/schedule-consultation/',
+        '/contact/forms/'
+    ];
+    
+    // Show everywhere else (including /book-consultation/). Do not use a broad
+    // pathname substring like "booking" — that would hide /book-consultation/.
+    var shouldShow = true;
+    for (var i = 0; i < excludedPaths.length; i++) {
+        if (currentPath === excludedPaths[i]) {
+            shouldShow = false;
+            break;
+        }
+    }
+    
+    var widgetRecaptchaId = null;
+    var RECAPTCHA_SITE_KEY = '6Lf0P20sAAAAAK_xE5Swnx5IaGRNkrEVRtTzZu5r';
+
+    // Explicit render=explicit + onload is Google's recommended pattern. Do not load api.js twice.
+    window.__kviBookingWidgetCaptchaOnload = function() {
+        setTimeout(function() {
+            tryRenderWidgetRecaptcha();
+        }, 100);
+    };
+
+    function tryRenderWidgetRecaptcha() {
+        if (widgetRecaptchaId !== null) return true;
+        var el = document.getElementById('widgetBookingRecaptcha');
+        if (!el || !window.grecaptcha || typeof window.grecaptcha.render !== 'function') {
+            return false;
+        }
+        try {
+            widgetRecaptchaId = window.grecaptcha.render(el, {
+                sitekey: RECAPTCHA_SITE_KEY
+            });
+            return true;
+        } catch (err) {
+            console.error('reCAPTCHA render failed:', err);
+            return false;
+        }
+    }
+
+    function injectBookingWidgetRecaptchaScript() {
+        if (document.querySelector('script[data-kvi-booking-recaptcha]')) return;
+        var s = document.createElement('script');
+        s.setAttribute('data-kvi-booking-recaptcha', '1');
+        s.src = 'https://www.google.com/recaptcha/api.js?onload=__kviBookingWidgetCaptchaOnload&render=explicit';
+        s.async = true;
+        s.defer = true;
+        document.head.appendChild(s);
+    }
+
+    // Show widget first, then init CAPTCHA after layout so the iframe can size (hidden parents break render).
+    if (shouldShow) {
+        var widget = document.getElementById('booking-widget');
+        if (widget) {
+            widget.style.display = 'block';
+        }
+        setTimeout(function() {
+            if (document.querySelector('script[src*="google.com/recaptcha/api.js"]')) {
+                var n = 0;
+                var poll = setInterval(function() {
+                    n++;
+                    if (tryRenderWidgetRecaptcha()) {
+                        clearInterval(poll);
+                        return;
+                    }
+                    if (n >= 100) {
+                        clearInterval(poll);
+                        console.warn('Khanna booking-widget: reCAPTCHA did not render after waiting. Check domain / ad blockers.');
+                    }
+                }, 100);
+                return;
+            }
+            injectBookingWidgetRecaptchaScript();
+        }, 200);
+    }
+
+    function calendarYmd(d) {
+        return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+    }
+
+    // Location schedules
+    var locationSchedule = {
+        'Beverly Hills': {
+            days: [1, 4], // Monday and Thursday
+            info: 'Monday & Thursday (8:00 AM - 4:00 PM)'
+        },
+        'Westlake Village': {
+            days: [2, 3, 5], // Tuesday, Wednesday, Friday
+            info: 'Tuesday, Wednesday, Friday (8:00 AM - 4:00 PM)'
+        }
+    };
+
+    var currentLocation = null;
+    var selectedDate = null;
+    var currentMonth = new Date().getMonth();
+    var currentYear = new Date().getFullYear();
+    var HOLIDAY_CLOSED_DATES = new Set([
+        '2026-07-04',
+        '2026-09-07',
+        '2026-11-26',
+        '2026-12-25',
+        '2027-01-01',
+        '2027-05-31'
+    ]);
+    var HOLIDAY_HALF_DAY_DATES = new Set([
+        '2026-12-24',
+        '2026-12-31'
+    ]);
+    var HALF_DAY_HOURS = ['8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM'];
+    var DEFAULT_HOURS = ['8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'];
+
+    // Location change handler
+    var locationSelect = document.getElementById('widgetLocation');
+    var locationInfo = document.getElementById('widgetLocationInfo');
+    var dateDisplay = document.getElementById('widgetDateDisplay');
+    var dateText = document.getElementById('widgetDateText');
+
+    if (locationSelect) {
+        locationSelect.addEventListener('change', function() {
+            currentLocation = this.value;
+            selectedDate = null;
+            
+            if (currentLocation && locationSchedule[currentLocation]) {
+                locationInfo.textContent = locationSchedule[currentLocation].info;
+                locationInfo.style.display = 'block';
+                dateText.textContent = 'Select a date';
+                dateDisplay.classList.remove('selected');
+                renderCalendar();
+                renderTimeOptionsForDate('');
+            } else {
+                locationInfo.style.display = 'none';
+                dateText.textContent = 'Select a location first';
+                dateDisplay.classList.remove('selected');
+                renderTimeOptionsForDate('');
+            }
+        });
+    }
+
+    // Calendar functionality
+    var calendarDropdown = document.getElementById('widgetCalendar');
+    
+    if (dateDisplay) {
+        dateDisplay.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (currentLocation) {
+                calendarDropdown.classList.toggle('open');
+                if (calendarDropdown.classList.contains('open')) {
+                    renderCalendar();
+                }
+            }
+        });
+    }
+
+    // Close calendar when clicking outside
+    document.addEventListener('click', function(e) {
+        if (calendarDropdown && !calendarDropdown.contains(e.target) && e.target !== dateDisplay) {
+            calendarDropdown.classList.remove('open');
+        }
+    });
+
+    // Calendar navigation
+    document.getElementById('widgetPrevMonth')?.addEventListener('click', function() {
+        currentMonth--;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        }
+        renderCalendar();
+    });
+
+    document.getElementById('widgetNextMonth')?.addEventListener('click', function() {
+        currentMonth++;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+        }
+        renderCalendar();
+    });
+
+    function renderCalendar() {
+        if (!currentLocation) return;
+
+        var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'];
+        
+        document.getElementById('widgetMonthYear').textContent = 
+            monthNames[currentMonth] + ' ' + currentYear;
+
+        var firstDay = new Date(currentYear, currentMonth, 1).getDay();
+        var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+        var todayYmd = calendarYmd(today);
+
+        var calendarGrid = document.getElementById('widgetCalendarGrid');
+        
+        // Remove all day elements (keep headers)
+        var dayElements = calendarGrid.querySelectorAll('.calendar-day');
+        dayElements.forEach(function(el) { el.remove(); });
+
+        var schedule = locationSchedule[currentLocation];
+
+        // Empty cells before first day
+        for (var i = 0; i < firstDay; i++) {
+            var emptyDiv = document.createElement('div');
+            emptyDiv.className = 'calendar-day empty';
+            calendarGrid.appendChild(emptyDiv);
+        }
+
+        // Days of the month
+        for (var day = 1; day <= daysInMonth; day++) {
+            var date = new Date(currentYear, currentMonth, day);
+            var dayOfWeek = date.getDay();
+            var cellYmd = calendarYmd(date);
+            var isHolidayBlackout = isHolidayClosed(date);
+            var isAvailable = schedule.days.includes(dayOfWeek) && cellYmd >= todayYmd && !isHolidayBlackout;
+
+            var dayDiv = document.createElement('div');
+            dayDiv.className = 'calendar-day';
+            dayDiv.textContent = day;
+
+            if (cellYmd === todayYmd) {
+                dayDiv.classList.add('today');
+            }
+
+            if (isAvailable) {
+                dayDiv.classList.add('available');
+                dayDiv.setAttribute('data-date', formatDate(date));
+                
+                if (selectedDate && formatDate(date) === selectedDate) {
+                    dayDiv.classList.add('selected');
+                }
+
+                (function(dateStr, dateObj) {
+                    dayDiv.addEventListener('click', function() {
+                        selectedDate = dateStr;
+                        document.getElementById('widgetDateInput').value = dateStr;
+                        dateText.textContent = formatDisplayDate(dateObj);
+                        dateDisplay.classList.add('selected');
+                        calendarDropdown.classList.remove('open');
+                    renderTimeOptionsForDate(dateStr);
+                        renderCalendar(); // Re-render to show selection
+                    });
+                })(formatDate(date), date);
+            } else {
+                dayDiv.classList.add('disabled');
+            }
+
+            calendarGrid.appendChild(dayDiv);
+        }
+    }
+
+    function formatDate(date) {
+        var year = date.getFullYear();
+        var month = String(date.getMonth() + 1).padStart(2, '0');
+        var day = String(date.getDate()).padStart(2, '0');
+        return year + '-' + month + '-' + day;
+    }
+
+    function formatDisplayDate(date) {
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        return months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
+    }
+
+    function isHolidayClosed(dateObj) {
+        return HOLIDAY_CLOSED_DATES.has(formatDate(dateObj));
+    }
+
+    function getAllowedHoursForDate(dateStr) {
+        if (!dateStr) return [];
+        if (HOLIDAY_HALF_DAY_DATES.has(dateStr)) return HALF_DAY_HOURS.slice();
+        return DEFAULT_HOURS.slice();
+    }
+
+    function renderTimeOptionsForDate(dateStr) {
+        var timeSelect = form ? form.querySelector('[name="time"]') : null;
+        if (!timeSelect) return;
+        var previousValue = timeSelect.value;
+        var hours = getAllowedHoursForDate(dateStr);
+        timeSelect.innerHTML = '<option value="">Select time</option>';
+        hours.forEach(function (hour) {
+            var option = document.createElement('option');
+            option.value = hour;
+            option.textContent = hour;
+            timeSelect.appendChild(option);
+        });
+        if (hours.indexOf(previousValue) !== -1) {
+            timeSelect.value = previousValue;
+        }
+    }
+
+    // Handle form submission
+    var form = document.getElementById('widgetBookingForm');
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            var submitBtn = form.querySelector('.booking-submit-btn');
+            var feedback = document.getElementById('widgetBookingFeedback');
+            
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            var consentEl = form.querySelector('[name="consent"]');
+            if (!consentEl || !consentEl.checked) {
+                feedback.className = 'booking-feedback error';
+                feedback.style.display = 'block';
+                feedback.textContent = '✗ Please agree to the calls and text messages disclosure to continue.';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Book Appointment';
+                return;
+            }
+            
+            var recaptchaToken = '';
+            try {
+                if (widgetRecaptchaId !== null && window.grecaptcha && window.grecaptcha.getResponse) {
+                    recaptchaToken = window.grecaptcha.getResponse(widgetRecaptchaId) || '';
+                } else if (window.grecaptcha && window.grecaptcha.getResponse) {
+                    recaptchaToken = window.grecaptcha.getResponse() || '';
+                }
+            } catch (err) {
+                recaptchaToken = '';
+            }
+            if (!recaptchaToken) {
+                feedback.className = 'booking-feedback error';
+                feedback.style.display = 'block';
+                feedback.textContent = '✗ Please complete the reCAPTCHA verification.';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Book Appointment';
+                return;
+            }
+
+            var honeypot = form.querySelector('[name="website"]');
+            var websiteVal = honeypot ? honeypot.value : '';
+
+            // Collect form data
+            var formData = {
+                fullName: form.querySelector('[name="fullName"]').value,
+                age: form.querySelector('[name="age"]').value,
+                email: form.querySelector('[name="email"]').value,
+                phone: (form.querySelector('[name="phone"]') && form.querySelector('[name="phone"]').value) ? form.querySelector('[name="phone"]').value.trim() : '',
+                location: form.querySelector('[name="location"]').value,
+                date: form.querySelector('[name="date"]').value,
+                time: form.querySelector('[name="time"]').value,
+                surgeryExamType: (function () {
+                    var el = form.querySelector('[name="surgeryExamType"]');
+                    return el && el.value ? el.value.trim() : '';
+                })(),
+                consent: true,
+                pageUrl: window.location.href,
+                website: websiteVal,
+                recaptchaToken: recaptchaToken
+            };
+            
+            try {
+                var response = await fetch('/api/booking/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                var result = await response.json();
+                
+                if (response.ok && result.success) {
+                    feedback.className = 'booking-feedback success';
+                    feedback.textContent = '✓ Booking confirmed! We\'ll contact you within 24 hours.';
+                    form.reset();
+                    currentLocation = null;
+                    selectedDate = null;
+                    locationInfo.style.display = 'none';
+                    dateText.textContent = 'Select a location first';
+                    dateDisplay.classList.remove('selected');
+                    try {
+                        if (widgetRecaptchaId !== null && window.grecaptcha && window.grecaptcha.reset) {
+                            window.grecaptcha.reset(widgetRecaptchaId);
+                        } else if (window.grecaptcha && window.grecaptcha.reset) {
+                            window.grecaptcha.reset();
+                        }
+                    } catch (err) {}
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(function() {
+                        feedback.style.display = 'none';
+                    }, 5000);
+                } else {
+                    feedback.className = 'booking-feedback error';
+                    feedback.textContent = '✗ ' + (result.message || 'Booking failed. Please try again.');
+                    try {
+                        if (widgetRecaptchaId !== null && window.grecaptcha && window.grecaptcha.reset) {
+                            window.grecaptcha.reset(widgetRecaptchaId);
+                        } else if (window.grecaptcha && window.grecaptcha.reset) {
+                            window.grecaptcha.reset();
+                        }
+                    } catch (err) {}
+                }
+            } catch (error) {
+                feedback.className = 'booking-feedback error';
+                feedback.textContent = '✗ Network error. Please check your connection and try again.';
+                try {
+                    if (widgetRecaptchaId !== null && window.grecaptcha && window.grecaptcha.reset) {
+                        window.grecaptcha.reset(widgetRecaptchaId);
+                    } else if (window.grecaptcha && window.grecaptcha.reset) {
+                        window.grecaptcha.reset();
+                    }
+                } catch (err) {}
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Book Appointment';
+            }
+        });
+    }
+})();
+</script>

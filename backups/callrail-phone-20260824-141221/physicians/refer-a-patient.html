@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Physician Referral Form | Khanna Vision Institute</title>
+  <meta name="description" content="Secure digital referral form for referring providers: provider information, patient demographics, consultation request, and co-management preferences for Khanna Vision Institute.">
+  <link rel="canonical" href="https://khannainstitute.com/referrals/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/public/css/header.css">
+  <link rel="stylesheet" href="/public/css/footer.css">
+  <style>
+    :root {
+      --rf-navy: #132844;
+      --rf-navy-700: #1e3a5f;
+      --rf-blue: #2563eb;
+      --rf-ink: #0f172a;
+      --rf-muted: #475569;
+      --rf-line: #d1d5db;
+      --rf-wash: #eef2f7;
+      --rf-err: #b91c1c;
+    }
+    .rf-page {
+      font-family: "DM Sans", system-ui, sans-serif;
+      color: var(--rf-ink);
+      background: var(--rf-wash);
+    }
+    .rf-brand {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 20px 22px 0;
+      text-align: center;
+    }
+    .rf-brand img { max-height: 52px; width: auto; }
+    .rf-wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 12px 22px 80px;
+    }
+    .rf-card {
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 22px 20px 26px;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+    }
+    .rf-alert {
+      display: none;
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+    .rf-alert--ok { display: block; background: #ecfdf5; border: 1px solid #6ee7b7; color: #065f46; }
+    .rf-alert--err { display: block; background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+    details.rf-acc {
+      border: 1px solid var(--rf-line);
+      border-radius: 10px;
+      padding: 0 14px;
+      margin-bottom: 12px;
+      background: #fafafa;
+    }
+    details.rf-acc[open] { background: #fff; }
+    details.rf-acc > summary {
+      cursor: pointer;
+      list-style: none;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      color: var(--rf-navy-700);
+      padding: 14px 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    details.rf-acc > summary::-webkit-details-marker { display: none; }
+    details.rf-acc > summary::after {
+      content: "▾";
+      font-size: 0.9rem;
+      color: var(--rf-navy-700);
+    }
+    details.rf-acc[open] > summary::after { transform: rotate(180deg); display: inline-block; }
+    .rf-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 16px;
+      padding-bottom: 14px;
+    }
+    .rf-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .rf-field { display: flex; flex-direction: column; gap: 4px; }
+    .rf-field--full { grid-column: 1 / -1; }
+    .rf-field label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #334155;
+    }
+    .rf-req { color: var(--rf-err); font-weight: 800; margin-left: 2px; }
+    .rf-field input[type="text"],
+    .rf-field input[type="tel"],
+    .rf-field input[type="email"],
+    .rf-field input[type="date"],
+    .rf-field select,
+    .rf-field textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 11px;
+      border: 1px solid #94a3b8;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      background: #fff;
+    }
+    .rf-field textarea { min-height: 120px; resize: vertical; }
+    .rf-hint { font-size: 0.75rem; color: var(--rf-muted); }
+    .rf-stack { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+    .rf-radio { display: flex; align-items: flex-start; gap: 8px; font-size: 0.88rem; line-height: 1.4; color: #1e293b; }
+    .rf-radio input { margin-top: 3px; }
+    .rf-cols {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 10px;
+    }
+    .rf-subhead { font-size: 0.85rem; font-weight: 800; color: var(--rf-navy-700); margin: 8px 0 6px; }
+    .rf-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    .rf-submit {
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: var(--rf-blue);
+      color: #fff;
+    }
+    .rf-submit:disabled { opacity: 0.55; cursor: not-allowed; }
+    .rf-file { font-size: 0.86rem; }
+    .rf-powered { text-align: right; font-size: 0.75rem; color: #94a3b8; margin-top: 16px; }
+    @media (max-width: 760px) {
+      .rf-grid, .rf-grid--3 { grid-template-columns: 1fr; }
+      .rf-cols { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="rf-page">
+  <%- include('/partials/header') %>
+  <%- include('/partials/seminar-banner') %>
+
+  <div class="rf-brand">
+    <a href="/" aria-label="Khanna Vision Institute home">
+      <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/khannainstitute/Logo+2.png" alt="Khanna Vision Institute" width="240" height="67" decoding="async">
+    </a>
+  </div>
+
+  <main class="rf-wrap">
+    <div class="rf-card">
+      <div id="rf-msg" class="rf-alert" role="status" aria-live="polite"></div>
+      <p style="margin:0 0 16px;font-size:0.95rem;line-height:1.55;color:var(--rf-muted);">
+        This form is for referring providers. If you are a patient, please use
+        <a href="/book-consultation/">online scheduling</a> or call <a href="tel:310-997-4490">(310) 997-4490</a>.
+      </p>
+
+      <form id="rf-form" action="/api/physician-referral/submit" method="post" novalidate>
+        <input type="text" name="companyWebsite" value="" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <details class="rf-acc" open>
+          <summary>Referring provider information</summary>
+          <div class="rf-grid">
+            <div class="rf-field">
+              <label for="refNpi">Referring Doctor NPI<span class="rf-req" aria-hidden="true">*</span></label>
+              <input id="refNpi" name="refNpi" type="text" inputmode="numeric" autocomplete="off" required>
+              <a class="rf-hint" href="https://npiregistry.cms.hhs.gov/" target="_blank" rel="noopener">NPI Lookup — search the NPPES registry</a>
+            </div>
+            <div class="rf-field" style="justify-content:flex-end;">
+              <label class="rf-radio" style="padding-top:10px;">
+                <input type="checkbox" name="refNpiLetters" id="refNpiLetters" value="yes">
+                <span>Contains letters</span>
+              </label>
+            </div>
+            <div class="rf-field">
+              <label for="refDoctorName">Referring Doctor Name<span class="rf-req">*</span></label>
+              <input id="refDoctorName" name="refDoctorName" type="text" autocomplete="name" required>
+            </div>
+            <div class="rf-field">
+              <label for="refPractice">Referring Doctor Practice</label>
+              <input id="refPractice" name="refPractice" type="text" autocomplete="organization">
+            </div>
+            <div class="rf-field">
+              <label for="refCredentials">Referring Doctor Credentials<span class="rf-req">*</span></label>
+              <select id="refCredentials" name="refCredentials" required>
+                <option value="">Select</option>
+                <option>MD</option>
+                <option>DO</option>
+                <option>OD</option>
+                <option>PA</option>
+                <option>NP</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="rf-field">
+              <label for="refEmail">Referring Doctor Email<span class="rf-req">*</span></label>
+              <input id="refEmail" name="refEmail" type="email" autocomplete="email" required>
+            </div>
+            <div class="rf-field">
+              <label for="refPhone">Referring Doctor Phone<span class="rf-req">*</span></label>
+              <input id="refPhone" name="refPhone" type="tel" autocomplete="tel" placeholder="10-digit number" required>
+            </div>
+            <div class="rf-field">
+              <label for="refFax">Referring Doctor Fax<span class="rf-req">*</span></label>
+              <input id="refFax" name="refFax" type="tel" autocomplete="fax" required>
+            </div>
+            <div class="rf-field rf-field--full">
+              <label for="refAddress">Referring Doctor Address</label>
+              <input id="refAddress" name="refAddress" type="text" autocomplete="street-address">
+            </div>
+            <div class="rf-field">
+              <label for="refCity">City</label>
+              <input id="refCity" name="refCity" type="text" autocomplete="address-level2">
+            </div>
+            <div class="rf-field">
+              <label for="refStateZip">State &amp; ZIP</label>
+              <input id="refStateZip" name="refStateZip" type="text" autocomplete="address-level1">
+            </div>
+          </div>
+        </details>
+
+        <details class="rf-acc" open>
+          <summary>Patient information</summary>
+          <div class="rf-grid">
+            <div class="rf-field">
+              <label for="patientFirstName">First Name<span class="rf-req">*</span></label>
+              <input id="patientFirstName" name="patientFirstName" type="text" autocomplete="given-name" required>
+            </div>
+            <div class="rf-field">
+              <label for="patientLastName">Last Name<span class="rf-req">*</span></label>
+              <input id="patientLastName" name="patientLastName" type="text" autocomplete="family-name" required>
+            </div>
+            <div class="rf-field">
+              <label for="patientPhone">Phone<span class="rf-req">*</span></label>
+              <input id="patientPhone" name="patientPhone" type="tel" autocomplete="tel" required>
+            </div>
+            <div class="rf-field">
+              <label for="patientEmail">Email</label>
+              <input id="patientEmail" name="patientEmail" type="email" autocomplete="email">
+            </div>
+            <div class="rf-field">
+              <label for="patientDob">Date of Birth<span class="rf-req">*</span></label>
+              <input id="patientDob" name="patientDob" type="date" required>
+            </div>
+            <div class="rf-field">
+              <label for="patientAddress">Address</label>
+              <input id="patientAddress" name="patientAddress" type="text" autocomplete="street-address">
+            </div>
+            <div class="rf-field">
+              <label for="patientCity">City</label>
+              <input id="patientCity" name="patientCity" type="text" autocomplete="address-level2">
+            </div>
+            <div class="rf-field">
+              <label for="patientState">State</label>
+              <input id="patientState" name="patientState" type="text" autocomplete="address-level1">
+            </div>
+            <div class="rf-field">
+              <label for="patientZip">ZIP</label>
+              <input id="patientZip" name="patientZip" type="text" autocomplete="postal-code">
+            </div>
+            <div class="rf-field">
+              <label for="patientGender">Gender</label>
+              <select id="patientGender" name="patientGender">
+                <option value="">Select</option>
+                <option>Female</option>
+                <option>Male</option>
+                <option>Non-binary</option>
+                <option>Prefer not to say</option>
+              </select>
+            </div>
+            <div class="rf-field">
+              <label for="interpreterNeeded">Interpreter needed</label>
+              <select id="interpreterNeeded" name="interpreterNeeded">
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+              </select>
+            </div>
+            <div class="rf-field rf-field--full" id="rf-lang-wrap" hidden>
+              <label for="interpreterLanguage">Interpreter language</label>
+              <input id="interpreterLanguage" name="interpreterLanguage" type="text" placeholder="Language">
+            </div>
+            <div class="rf-field rf-field--full">
+              <p class="rf-subhead">Insurance (optional)</p>
+            </div>
+            <div class="rf-field">
+              <label for="primaryInsurance">Primary insurance</label>
+              <input id="primaryInsurance" name="primaryInsurance" type="text">
+            </div>
+            <div class="rf-field">
+              <label for="primaryInsuranceId">Member ID</label>
+              <input id="primaryInsuranceId" name="primaryInsuranceId" type="text">
+            </div>
+            <div class="rf-field">
+              <label for="primaryInsuranceGroup">Group #</label>
+              <input id="primaryInsuranceGroup" name="primaryInsuranceGroup" type="text">
+            </div>
+            <div class="rf-field">
+              <label for="secondaryInsurance">Secondary insurance</label>
+              <input id="secondaryInsurance" name="secondaryInsurance" type="text">
+            </div>
+            <div class="rf-field">
+              <label for="secondaryInsuranceId">Secondary member ID</label>
+              <input id="secondaryInsuranceId" name="secondaryInsuranceId" type="text">
+            </div>
+            <div class="rf-field">
+              <label for="secondaryInsuranceGroup">Secondary group #</label>
+              <input id="secondaryInsuranceGroup" name="secondaryInsuranceGroup" type="text">
+            </div>
+          </div>
+        </details>
+
+        <details class="rf-acc" open>
+          <summary>Appointment request</summary>
+          <div class="rf-field rf-field--full">
+            <div class="rf-subhead">What type of consultation is needed?<span class="rf-req">*</span></div>
+            <div class="rf-stack" role="radiogroup" aria-label="Consultation type">
+              <% const consultTypes = [
+                'Cataract / lens evaluation',
+                'Robotic laser cataract surgery consult',
+                'LASIK consult',
+                'SMILE consult',
+                'PRK / ASA consult',
+                'EVO ICL / implantable lens consult',
+                'PIE / RLE (presbyopia lens) consult',
+                'Keratoconus / CTAK / CXL consult',
+                'Cornea evaluation',
+                'Glaucoma evaluation',
+                'Dry eye evaluation',
+                'Retina evaluation',
+                'General ophthalmology visit',
+                'Oculoplastics evaluation',
+                'Myopia management / specialty',
+                'Other / multi-focus consult'
+              ]; %>
+              <% consultTypes.forEach(function(ct, i) { %>
+              <label class="rf-radio">
+                <input type="radio" name="consultType" value="<%= ct %>" <%= i === 0 ? 'required' : '' %>>
+                <span><%= ct %></span>
+              </label>
+              <% }); %>
+            </div>
+          </div>
+
+          <div class="rf-cols">
+            <div>
+              <div class="rf-subhead">Select a provider<span class="rf-req">*</span></div>
+              <div class="rf-stack" role="radiogroup" aria-label="Preferred provider">
+                <label class="rf-radio">
+                  <input type="radio" name="preferredPhysician" value="No preference / first available" required>
+                  <span>No preference / first available</span>
+                </label>
+                <label class="rf-radio">
+                  <input type="radio" name="preferredPhysician" value="Dr. Rajesh Khanna, MD">
+                  <span>Dr. Rajesh Khanna, MD</span>
+                </label>
+              </div>
+            </div>
+            <div>
+              <div class="rf-subhead">Preferred location(s)<span class="rf-req">*</span></div>
+              <div class="rf-stack">
+                <label class="rf-radio"><input type="checkbox" name="preferredLocation" value="Any"> Any</label>
+                <label class="rf-radio"><input type="checkbox" name="preferredLocation" value="Beverly Hills"> Beverly Hills</label>
+                <label class="rf-radio"><input type="checkbox" name="preferredLocation" value="Westlake Village"> Westlake Village</label>
+              </div>
+              <p class="rf-hint">Select at least one (use “Any” if either office works).</p>
+            </div>
+          </div>
+
+          <div class="rf-field rf-field--full" style="margin-top:12px;">
+            <div class="rf-subhead">Urgent referral?<span class="rf-req">*</span> <span class="rf-hint" style="font-weight:500;">(pain, severe redness, flashes/new floaters, etc.)</span></div>
+            <div class="rf-stack" role="radiogroup" aria-label="Urgent referral">
+              <label class="rf-radio"><input type="radio" name="urgentReferral" value="Yes" required> Yes</label>
+              <label class="rf-radio"><input type="radio" name="urgentReferral" value="No"> No</label>
+            </div>
+          </div>
+
+          <div class="rf-field rf-field--full">
+            <label for="clinicalNotes">Notes for scheduling / clinical context</label>
+            <textarea id="clinicalNotes" name="clinicalNotes" placeholder="Conditions to evaluate, relevant history, lens status, prior ocular surgery, allergies, etc."></textarea>
+          </div>
+
+          <div class="rf-field rf-field--full">
+            <p class="rf-hint" style="margin:0;padding:12px 14px;background:#f8fafc;border:1px solid var(--rf-line);border-radius:10px;">
+              To share chart notes or imaging, please fax your office records to the number on your referral pad or call <a href="tel:310-997-4490">(310) 997-4490</a> after submitting this form. File upload is not required here.
+            </p>
+          </div>
+        </details>
+
+        <details class="rf-acc" open>
+          <summary>Co-management preferences</summary>
+          <p class="rf-hint" style="margin:4px 0 10px;">
+            If surgery is recommended, tell us how you&rsquo;d like to collaborate on post-operative care (our team will confirm what is medically appropriate).
+          </p>
+          <div class="rf-grid">
+            <div class="rf-field rf-field--full">
+              <label for="coManagePostOp">If surgery is recommended, I&rsquo;d like to co-manage the patient&rsquo;s post-op care when the surgeon agrees it is appropriate.</label>
+              <select id="coManagePostOp" name="coManagePostOp">
+                <option value="">Select</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                <option value="Discuss with surgeon">Discuss with surgeon</option>
+                <option value="Not sure yet">Not sure yet</option>
+              </select>
+            </div>
+            <div class="rf-field rf-field--full">
+              <label for="coManageResume">If surgery is recommended, I prefer Khanna Vision Institute to co-manage post-op care; I will resume primary care after the post-op period.</label>
+              <select id="coManageResume" name="coManageResume">
+                <option value="">Select</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                <option value="Discuss with surgeon">Discuss with surgeon</option>
+                <option value="Not sure yet">Not sure yet</option>
+              </select>
+            </div>
+          </div>
+        </details>
+
+        <div class="rf-actions">
+          <button type="submit" class="rf-submit" id="rf-submit">Submit referral</button>
+        </div>
+      </form>
+      <p class="rf-powered">Secure submission to Khanna Vision Institute scheduling team.</p>
+    </div>
+  </main>
+
+  <%- include('/partials/footer') %>
+
+  <script>
+    (function () {
+      var form = document.getElementById('rf-form');
+      var msg = document.getElementById('rf-msg');
+      var submit = document.getElementById('rf-submit');
+      var interp = document.getElementById('interpreterNeeded');
+      var langWrap = document.getElementById('rf-lang-wrap');
+
+      function setInterp() {
+        if (!interp || !langWrap) return;
+        var on = interp.value === 'Yes';
+        langWrap.hidden = !on;
+        langWrap.style.display = on ? 'flex' : 'none';
+      }
+      if (interp) {
+        interp.addEventListener('change', setInterp);
+        setInterp();
+      }
+
+      function show(kind, text) {
+        msg.className = 'rf-alert rf-alert--' + kind;
+        msg.textContent = text;
+        msg.style.display = 'block';
+        if (kind === 'ok') {
+          try { msg.focus(); } catch (e) {}
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+
+      if (!form) return;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var locChecked = form.querySelectorAll('input[name="preferredLocation"]:checked');
+        if (!locChecked.length) {
+          show('err', 'Please choose at least one preferred location (or select “Any”).');
+          return;
+        }
+        var fd = new FormData(form);
+        var params = new URLSearchParams();
+        fd.forEach(function (value, key) {
+          if (key === 'clinicalFile') return;
+          params.append(key, value);
+        });
+        submit.disabled = true;
+        msg.style.display = 'none';
+        fetch('/api/physician-referral/submit', {
+          method: 'POST',
+          body: params,
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+          },
+          credentials: 'same-origin'
+        })
+          .then(function (r) {
+            return r.text().then(function (t) {
+              var data = {};
+              try {
+                data = t ? JSON.parse(t) : {};
+              } catch (e) {
+                data = { message: 'Unexpected server response.' };
+              }
+              return { ok: r.ok, data: data };
+            });
+          })
+          .then(function (res) {
+            submit.disabled = false;
+            if (res.ok && res.data && res.data.success) {
+              form.reset();
+              setInterp();
+              show('ok', 'Thank you — your referral was submitted. Our team will follow up using the contacts provided.');
+            } else {
+              var m = (res.data && res.data.message) || 'Could not submit. Please call (310) 997-4490.';
+              show('err', m);
+            }
+          })
+          .catch(function () {
+            submit.disabled = false;
+            show('err', 'Network error. Please try again or call (310) 997-4490.');
+          });
+      });
+    })();
+  </script>
+</body>
+</html>

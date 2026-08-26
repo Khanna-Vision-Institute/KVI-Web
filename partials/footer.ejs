@@ -1,0 +1,69 @@
+<%- include('/partials/booking-widget') %>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Locations</h3>
+            <ul>
+                <li><strong>Westlake Village</strong></li>
+                <li>31824 Village Center Rd Suite F, Westlake Village, CA 91361, United States</li>
+                <li style="margin-top: 1rem;"><strong>Beverly Hills</strong></li>
+                <li>9100 Wilshire Blvd Suite 265E, Beverly Hills, CA 90212, United States</li>
+                <li style="margin-top: 1rem;"><strong>Phone:</strong> <a href="tel:310-677-0760">(310) 677-0760</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Procedures</h3>
+            <ul>
+                <li><a href="/procedures/laser-vision/smile-laser/">SMILE Laser</a></li>
+                <li><a href="/procedures/laser-vision/lasik/">LASIK</a></li>
+                <li><a href="/procedures/laser-vision/superlasik/">SuperLASIK</a></li>
+                <li><a href="/procedures/lens-solutions/evo-icl/">EVO ICL</a></li>
+                <li><a href="/procedures/lens-solutions/pie/">Presbyopic Implants (PIE)</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="/about/why-choose-us/technology/">Our Technology</a></li>
+                <li><a href="/patients/resources/financing-options/">Financing Options</a></li>
+                <li><a href="/contact/virtual-consultation/">Virtual Consultation</a></li>
+                <li><a href="/contact/emergency-care/">Emergency Care</a></li>
+                <li><a href="/tools/am-i-a-candidate/">Vision Quiz</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Connect</h3>
+            <ul>
+                <li><a href="/contact/schedule-consultation/">Book Consultation</a></li>
+                <li><a href="/contact/virtual-consultation/">Virtual Consult</a></li>
+                <li><a href="/about/locations/beverly-hills/">Beverly Hills</a></li>
+                <li><a href="/about/locations/westlake-village/">Westlake Village</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Khanna Vision Institute. Your vision is our mission. | <a href="/privacy" style="color: inherit;">Privacy Policy</a></p>
+    </div>
+</footer>
+
+<script src="/public/js/header.js" defer></script>
+
+<!-- Guru AI Chat Widget: load after first paint / idle to reduce main-thread work on mobile -->
+<script>
+(function () {
+  function loadGuru() {
+    if (document.querySelector('script[data-guru-chat]')) return;
+    var s = document.createElement('script');
+    s.src = '/public/js/guru-chat-embed.js';
+    s.defer = true;
+    s.setAttribute('data-guru-chat', '1');
+    document.body.appendChild(s);
+  }
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadGuru, { timeout: 4000 });
+  } else {
+    window.addEventListener('load', function () { setTimeout(loadGuru, 0); });
+  }
+})();
+</script>

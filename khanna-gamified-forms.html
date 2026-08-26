@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision Quest - Unlock Your Perfect Vision Journey | Khanna Institute</title>
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;600;700&display=swap');
+        
+        :root {
+            --neon-purple: #9D4EDD;
+            --neon-pink: #FF006E;
+            --neon-blue: #3A86FF;
+            --neon-green: #06FFB4;
+            --neon-yellow: #FFB700;
+            --dark-bg: #0A0E27;
+            --darker-bg: #050714;
+            --white: #FFFFFF;
+            --cyber-red: #FF073A;
+            --gold: #FFD700;
+            --silver: #C0C0C0;
+            --bronze: #CD7F32;
+            --diamond: #B9F2FF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(135deg, #0A0E27 0%, #050714 100%);
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           XP SYSTEM & WALLET
+        ============================================ */
+        
+        .xp-system {
+            position: fixed;
+            top: 110px;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 1rem;
+            z-index: 1000;
+            border-bottom: 2px solid var(--neon-purple);
+        }
+        
+        .xp-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .xp-progress-bar {
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            height: 40px;
+            overflow: hidden;
+            border: 2px solid var(--neon-purple);
+        }
+        
+        .xp-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink), var(--neon-blue));
+            border-radius: 50px;
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+        }
+        
+        .xp-text {
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .tier-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            border: 2px solid var(--bronze);
+            transition: all 0.3s;
+        }
+        
+        .tier-badge.silver { border-color: var(--silver); }
+        .tier-badge.gold { border-color: var(--gold); }
+        .tier-badge.diamond { 
+            border-color: var(--diamond); 
+            animation: diamond-shine 2s infinite;
+        }
+        
+        @keyframes diamond-shine {
+            0%, 100% { box-shadow: 0 0 20px rgba(185, 242, 255, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(185, 242, 255, 0.8); }
+        }
+        
+        .tier-icon {
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .tier-name {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .reward-wallet {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--gold), var(--neon-yellow));
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .reward-wallet:hover {
+            transform: scale(1.05);
+        }
+        
+        .wallet-amount {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--dark-bg);
+        }
+        
+        .wallet-label {
+            font-size: 0.8rem;
+            color: var(--dark-bg);
+            text-transform: uppercase;
+        }
+        
+        /* ============================================
+           MAIN FORM CONTAINER
+        ============================================ */
+        
+        .form-container {
+            max-width: 600px;
+            margin: 240px auto 2rem;
+            padding: 2rem;
+        }
+        
+        .quest-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .quest-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        .quest-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        
+        /* ============================================
+           LEVEL CARDS
+        ============================================ */
+        
+        .level-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--neon-purple);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .level-card.locked {
+            opacity: 0.5;
+            pointer-events: none;
+            filter: grayscale(0.8);
+        }
+        
+        .level-card.locked::after {
+            content: '🔒';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            opacity: 0.5;
+        }
+        
+        .level-card.completed {
+            border-color: var(--neon-green);
+            background: rgba(6, 255, 180, 0.1);
+        }
+        
+        .level-card.active {
+            border-color: var(--neon-pink);
+            animation: glow 2s infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 110, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 0, 110, 0.6); }
+        }
+        
+        .level-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .level-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .level-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+        }
+        
+        .level-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        
+        .level-xp {
+            padding: 0.5rem 1rem;
+            background: rgba(6, 255, 180, 0.2);
+            border: 2px solid var(--neon-green);
+            border-radius: 20px;
+            font-weight: 700;
+            color: var(--neon-green);
+        }
+        
+        /* ============================================
+           FORM FIELDS WITH ANIMATIONS
+        ============================================ */
+        
+        .form-field {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            color: var(--white);
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--neon-purple);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 30px rgba(157, 78, 221, 0.3);
+        }
+        
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .input-label {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: var(--dark-bg);
+            padding: 0 10px;
+            font-size: 0.9rem;
+            color: var(--neon-purple);
+            font-weight: 600;
+        }
+        
+        .input-addon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+        }
+        
+        /* ============================================
+           INTERACTIVE BUTTONS
+        ============================================ */
+        
+        .action-button {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            border: none;
+            border-radius: 15px;
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(157, 78, 221, 0.4);
+        }
+        
+        .action-button:active {
+            transform: translateY(0);
+        }
+        
+        .action-button.success {
+            background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
+        }
+        
+        /* ============================================
+           XP GAIN ANIMATION
+        ============================================ */
+        
+        .xp-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            padding: 2rem 3rem;
+            border-radius: 20px;
+            text-align: center;
+            z-index: 2000;
+            animation: xp-gain 2s ease forwards;
+        }
+        
+        @keyframes xp-gain {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); }
+            50% { transform: translate(-50%, -50%) scale(1.2) rotate(180deg); }
+            100% { transform: translate(-50%, -50%) scale(1) rotate(360deg); }
+        }
+        
+        .xp-amount {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+        
+        .xp-message {
+            font-size: 1.2rem;
+        }
+        
+        /* ============================================
+           REWARD UNLOCKS
+        ============================================ */
+        
+        .unlock-notification {
+            position: fixed;
+            top: 100px;
+            right: -400px;
+            background: linear-gradient(135deg, var(--gold), var(--neon-yellow));
+            color: var(--dark-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            min-width: 300px;
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.4);
+            transition: right 0.5s ease;
+            z-index: 1500;
+        }
+        
+        .unlock-notification.show {
+            right: 20px;
+        }
+        
+        .unlock-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .unlock-icon {
+            font-size: 2rem;
+        }
+        
+        .unlock-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .unlock-reward {
+            font-size: 1.3rem;
+            font-weight: 900;
+        }
+        
+        /* ============================================
+           SOCIAL PROOF TICKER
+        ============================================ */
+        
+        .social-proof-ticker {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--neon-purple);
+            border-radius: 10px;
+            padding: 1rem;
+            max-width: 300px;
+            z-index: 500;
+        }
+        
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: slide-up 0.5s ease;
+        }
+        
+        @keyframes slide-up {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .ticker-avatar {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        /* ============================================
+           QUIZ SECTION
+        ============================================ */
+        
+        .quiz-container {
+            display: none;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin-top: 2rem;
+        }
+        
+        .quiz-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .quiz-question {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .quiz-option {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .quiz-option:hover {
+            border-color: var(--neon-purple);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.3);
+        }
+        
+        .quiz-option.selected {
+            background: rgba(157, 78, 221, 0.2);
+            border-color: var(--neon-purple);
+        }
+        
+        /* ============================================
+           PARTICLES
+        ============================================ */
+        
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            animation: float-up 2s ease-out forwards;
+        }
+        
+        @keyframes float-up {
+            to {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--neon-yellow);
+            animation: confetti-fall 3s ease-out forwards;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        /* ============================================
+           SCHEDULE SECTION
+        ============================================ */
+        
+        .schedule-section {
+            display: none;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.1), rgba(255, 0, 110, 0.1));
+            border-radius: 20px;
+            margin-top: 2rem;
+        }
+        
+        .schedule-section.active {
+            display: block;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .calendar-day {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .calendar-day:hover {
+            border-color: var(--neon-purple);
+            transform: scale(1.05);
+        }
+        
+        .calendar-day.selected {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            border-color: transparent;
+        }
+        
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .time-slot {
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .time-slot:hover {
+            border-color: var(--neon-green);
+            transform: scale(1.05);
+        }
+        
+        .time-slot.selected {
+            background: rgba(6, 255, 180, 0.2);
+            border-color: var(--neon-green);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .xp-system {
+                top: 120px;
+            }
+
+            .form-container {
+                margin: 260px auto 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .xp-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .quest-title {
+                font-size: 2rem;
+            }
+            
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+
+            .xp-system {
+                top: 130px;
+            }
+
+            .form-container {
+                margin: 280px auto 2rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <%- include('/partials/header') %>
+
+    <!-- XP SYSTEM BAR -->
+    <div class="xp-system">
+        <div class="xp-container">
+            <div class="xp-progress-bar">
+                <div class="xp-fill" id="xpFill" style="width: 0%">
+                    <span class="xp-text" id="xpText">0 / 100 XP</span>
+                </div>
+            </div>
+            
+            <div class="tier-badge" id="tierBadge">
+                <span class="tier-icon">🥉</span>
+                <span class="tier-name">BRONZE</span>
+            </div>
+            
+            <div class="reward-wallet">
+                <div class="wallet-amount" id="walletAmount">$0</div>
+                <div class="wallet-label">Rewards</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- PARTICLE CONTAINER -->
+    <div class="particle-container" id="particleContainer"></div>
+    
+    <!-- MAIN FORM CONTAINER -->
+    <div class="form-container">
+        <div class="quest-header">
+            <h1 class="quest-title">VISION QUEST</h1>
+            <p class="quest-subtitle">Every step unlocks real savings on your procedure</p>
+        </div>
+        
+        <!-- LEVEL 1: NAME -->
+        <div class="level-card active" id="level1">
+            <div class="level-header">
+                <div class="level-info">
+                    <div class="level-number">1</div>
+                    <div class="level-title">Vision Seeker</div>
+                </div>
+                <div class="level-xp">+50 XP</div>
+            </div>
+            
+            <div class="form-field">
+                <label class="input-label">What should we call you?</label>
+                <input type="text" class="form-input" id="firstName" placeholder="Enter your first name" autocomplete="given-name">
+                <span class="input-addon">👤</span>
+            </div>
+
+            <div class="form-field" style="margin-top: 1rem;">
+                <label class="input-label">And your last name?</label>
+                <input type="text" class="form-input" id="lastName" placeholder="Enter your last name" autocomplete="family-name">
+                <span class="input-addon">🧬</span>
+            </div>
+            
+            <button class="action-button" onclick="completeLevel1()">
+                Start My Journey →
+            </button>
+            
+            <p style="text-align: center; margin-top: 1rem; opacity: 0.7; font-size: 0.9rem;">
+                Join 15,847 vision seekers this month
+            </p>
+        </div>
+        
+        <!-- LEVEL 2: EMAIL -->
+        <div class="level-card locked" id="level2">
+            <div class="level-header">
+                <div class="level-info">
+                    <div class="level-number">2</div>
+                    <div class="level-title">Clarity Hunter</div>
+                </div>
+                <div class="level-xp">+75 XP</div>
+            </div>
+            
+            <div class="form-field">
+                <label class="input-label">Unlock your personalized vision report</label>
+                <input type="email" class="form-input" id="email" placeholder="your@email.com" autocomplete="email">
+                <span class="input-addon">📧</span>
+            </div>
+            
+            <button class="action-button" onclick="completeLevel2()">
+                Unlock $100 Reward →
+            </button>
+            
+            <div style="display: flex; justify-content: space-around; margin-top: 1rem; opacity: 0.7;">
+                <span>✓ Instant reward</span>
+                <span>✓ No spam</span>
+                <span>✓ Unsubscribe anytime</span>
+            </div>
+        </div>
+        
+        <!-- LEVEL 3: PHONE -->
+        <div class="level-card locked" id="level3">
+            <div class="level-header">
+                <div class="level-info">
+                    <div class="level-number">3</div>
+                    <div class="level-title">Perception Master</div>
+                </div>
+                <div class="level-xp">+100 XP</div>
+            </div>
+            
+            <div class="form-field">
+                <label class="input-label">Get VIP text updates & exclusive offers</label>
+                <input type="tel" class="form-input" id="phone" placeholder="(555) 123-4567" autocomplete="tel">
+                <span class="input-addon">📱</span>
+            </div>
+            
+            <button class="action-button" onclick="completeLevel3()">
+                Unlock $150 More →
+            </button>
+            
+            <p style="text-align: center; margin-top: 1rem; opacity: 0.7; font-size: 0.9rem;">
+                💎 Text STOP to cancel • 2-3 msgs/month • Exclusive flash sales
+            </p>
+        </div>
+        
+        <!-- LEVEL 4: VISION QUIZ -->
+        <div class="level-card locked" id="level4">
+            <div class="level-header">
+                <div class="level-info">
+                    <div class="level-number">4</div>
+                    <div class="level-title">Vision Champion</div>
+                </div>
+                <div class="level-xp">+150 XP</div>
+            </div>
+            
+            <button class="action-button" onclick="startQuiz()">
+                Take Vision Quiz →
+            </button>
+            
+            <div class="quiz-container" id="quizContainer">
+                <div class="quiz-question">How would you describe your current vision?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectQuizOption(this, 'nearsighted')">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🤓</div>
+                        <div>Nearsighted</div>
+                        <div style="font-size: 0.8rem; opacity: 0.7;">Can't see far</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, 'farsighted')">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔍</div>
+                        <div>Farsighted</div>
+                        <div style="font-size: 0.8rem; opacity: 0.7;">Can't see close</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, 'astigmatism')">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">😵</div>
+                        <div>Astigmatism</div>
+                        <div style="font-size: 0.8rem; opacity: 0.7;">Blurry all around</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectQuizOption(this, 'presbyopia')">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">👴</div>
+                        <div>Presbyopia</div>
+                        <div style="font-size: 0.8rem; opacity: 0.7;">Need reading glasses</div>
+                    </div>
+                </div>
+                
+                <button class="action-button success" onclick="completeQuiz()" style="margin-top: 1.5rem;">
+                    Complete Quiz (+$150) →
+                </button>
+            </div>
+        </div>
+        
+        <!-- LEVEL 5: SCHEDULE -->
+        <div class="level-card locked" id="level5">
+            <div class="level-header">
+                <div class="level-info">
+                    <div class="level-number">5</div>
+                    <div class="level-title">Legendary Patient</div>
+                </div>
+                <div class="level-xp">+200 XP</div>
+            </div>
+            
+            <button class="action-button" onclick="openScheduler()">
+                Schedule Free Consultation →
+            </button>
+            
+            <div class="schedule-section" id="scheduleSection">
+                <h3 style="text-align: center; margin-bottom: 1rem;">Choose Your Perfect Day</h3>
+                
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Days will be generated by JS -->
+                </div>
+                
+                <h4 style="margin-top: 2rem; margin-bottom: 1rem;">Select Time</h4>
+                <div class="time-slots" id="timeSlots">
+                    <div class="time-slot" onclick="selectTime(this, '9:00 AM')">9:00 AM</div>
+                    <div class="time-slot" onclick="selectTime(this, '10:00 AM')">10:00 AM</div>
+                    <div class="time-slot" onclick="selectTime(this, '11:00 AM')">11:00 AM</div>
+                    <div class="time-slot" onclick="selectTime(this, '12:00 PM')">12:00 PM</div>
+                    <div class="time-slot" onclick="selectTime(this, '1:00 PM')">1:00 PM</div>
+                    <div class="time-slot" onclick="selectTime(this, '2:00 PM')">2:00 PM</div>
+                    <div class="time-slot" onclick="selectTime(this, '3:00 PM')">3:00 PM</div>
+                    <div class="time-slot" onclick="selectTime(this, '4:00 PM')">4:00 PM</div>
+                </div>
+                
+                <button class="action-button success" onclick="confirmSchedule()" style="margin-top: 2rem;">
+                    🎉 Confirm & Unlock $500 Total Savings →
+                </button>
+            </div>
+            
+            <p style="text-align: center; margin-top: 1rem; opacity: 0.7; font-size: 0.9rem;">
+                ⚡ Book within 24 hours for extra $50 bonus
+            </p>
+        </div>
+    </div>
+    
+    <!-- XP POPUP -->
+    <div class="xp-popup" id="xpPopup" style="display: none;">
+        <div class="xp-amount" id="xpAmount">+50 XP</div>
+        <div class="xp-message" id="xpMessage">Level Complete!</div>
+    </div>
+    
+    <!-- UNLOCK NOTIFICATION -->
+    <div class="unlock-notification" id="unlockNotification">
+        <div class="unlock-header">
+            <span class="unlock-icon">🎁</span>
+            <span class="unlock-title">REWARD UNLOCKED!</span>
+        </div>
+        <div class="unlock-reward" id="unlockReward">$100 Added to Wallet</div>
+    </div>
+    
+    <!-- SOCIAL PROOF TICKER -->
+    <div class="social-proof-ticker" id="socialProof">
+        <div class="ticker-item">
+            <div class="ticker-avatar">JD</div>
+            <div>Jake just reached Gold status!</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <%- include('/partials/footer') %>
+
+    <script>
+        // Game State
+        let gameState = {
+            currentLevel: 1,
+            totalXP: 0,
+            walletAmount: 0,
+            tier: 'bronze',
+            userData: {
+                firstName: '',
+                lastName: '',
+                email: '',
+                phone: '',
+                visionType: '',
+                selectedDate: '',
+                selectedTime: ''
+            },
+            startTime: Date.now(),
+            interactions: []
+        };
+
+        async function sendToZohoCRM(state) {
+            try {
+                const response = await fetch('/api/vision-quest/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        firstName: state.userData.firstName,
+                        lastName: state.userData.lastName,
+                        email: state.userData.email,
+                        phone: state.userData.phone,
+                        visionType: state.userData.visionType,
+                        selectedDate: state.userData.selectedDate,
+                        selectedTime: state.userData.selectedTime,
+                        totalXP: state.totalXP,
+                        tier: state.tier,
+                        walletAmount: state.walletAmount,
+                        completionTime: Math.round((Date.now() - state.startTime) / 1000) + ' seconds'
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    console.log('✅ Data saved to Zoho CRM successfully');
+                    showUnlock('DATA SAVED!', 'Your information is now with our team');
+                    return true;
+                }
+
+                console.error('❌ Failed to save to Zoho CRM:', result.message);
+                return false;
+            } catch (error) {
+                console.error('❌ Error sending to Zoho CRM:', error);
+                return false;
+            }
+        }
+
+        async function trackLevelCompletion(level, xpGained, rewardAmount) {
+            if (!gameState.userData.email) {
+                return;
+            }
+
+            try {
+                await fetch('/api/vision-quest/level-complete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: gameState.userData.email,
+                        level,
+                        xpGained,
+                        rewardAmount
+                    })
+                });
+            } catch (error) {
+                console.error('Error tracking level completion:', error);
+            }
+        }
+        
+        // Sound System
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playSound(frequency, duration, type = 'sine') {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = frequency;
+            oscillator.type = type;
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration);
+        }
+        
+        function playLevelUpSound() {
+            const notes = [523, 659, 784, 1047]; // C major arpeggio
+            notes.forEach((note, i) => {
+                setTimeout(() => playSound(note, 0.3), i * 100);
+            });
+        }
+        
+        function playRewardSound() {
+            playSound(880, 0.1); // A5
+            setTimeout(() => playSound(1047, 0.2), 100); // C6
+        }
+        
+        // Haptic Feedback
+        function haptic(pattern = [50]) {
+            if (navigator.vibrate) {
+                navigator.vibrate(pattern);
+            }
+        }
+        
+        // Particle Effects
+        function createParticles(x, y, count = 20) {
+            const container = document.getElementById('particleContainer');
+            
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                
+                // Random direction
+                const angle = (Math.PI * 2 * i) / count;
+                const velocity = 50 + Math.random() * 50;
+                particle.style.transform = `translate(${Math.cos(angle) * velocity}px, ${Math.sin(angle) * velocity}px)`;
+                
+                container.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 2000);
+            }
+        }
+        
+        function createConfetti() {
+            const container = document.getElementById('particleContainer');
+            const colors = ['#FF006E', '#06FFB4', '#3A86FF', '#FFB700', '#9D4EDD'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    container.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+        
+        // XP System
+        function addXP(amount) {
+            const startXP = gameState.totalXP;
+            gameState.totalXP += amount;
+            
+            // Animate XP bar
+            updateXPBar();
+            
+            // Show XP popup
+            showXPGain(amount);
+            
+            // Check tier upgrade
+            checkTierUpgrade();
+            
+            // Play sound
+            playLevelUpSound();
+            
+            // Haptic feedback
+            haptic([100, 50, 100]);
+            
+            // Track interaction
+            gameState.interactions.push({
+                type: 'xp_gain',
+                amount: amount,
+                timestamp: Date.now()
+            });
+        }
+        
+        function updateXPBar() {
+            const tierThresholds = {
+                bronze: 100,
+                silver: 500,
+                gold: 1000,
+                diamond: 2000
+            };
+            
+            const currentThreshold = tierThresholds[gameState.tier];
+            const progress = Math.min((gameState.totalXP / currentThreshold) * 100, 100);
+            
+            document.getElementById('xpFill').style.width = progress + '%';
+            document.getElementById('xpText').textContent = `${gameState.totalXP} / ${currentThreshold} XP`;
+        }
+        
+        function checkTierUpgrade() {
+            const oldTier = gameState.tier;
+            
+            if (gameState.totalXP >= 1000) {
+                gameState.tier = 'diamond';
+            } else if (gameState.totalXP >= 500) {
+                gameState.tier = 'gold';
+            } else if (gameState.totalXP >= 100) {
+                gameState.tier = 'silver';
+            }
+            
+            if (oldTier !== gameState.tier) {
+                upgradeTier();
+            }
+        }
+        
+        function upgradeTier() {
+            const badge = document.getElementById('tierBadge');
+            const icons = {
+                bronze: '🥉',
+                silver: '🥈', 
+                gold: '🥇',
+                diamond: '💎'
+            };
+            
+            badge.className = `tier-badge ${gameState.tier}`;
+            badge.querySelector('.tier-icon').textContent = icons[gameState.tier];
+            badge.querySelector('.tier-name').textContent = gameState.tier.toUpperCase();
+            
+            // Celebration
+            createConfetti();
+            showUnlock(`${gameState.tier.toUpperCase()} STATUS ACHIEVED!`, '');
+        }
+        
+        function showXPGain(amount) {
+            const popup = document.getElementById('xpPopup');
+            document.getElementById('xpAmount').textContent = `+${amount} XP`;
+            
+            popup.style.display = 'block';
+            
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 2000);
+        }
+        
+        // Wallet System
+        function addToWallet(amount) {
+            gameState.walletAmount += amount;
+            document.getElementById('walletAmount').textContent = `$${gameState.walletAmount}`;
+            
+            // Animate wallet
+            const wallet = document.querySelector('.reward-wallet');
+            wallet.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                wallet.style.transform = 'scale(1)';
+            }, 300);
+            
+            playRewardSound();
+        }
+        
+        function showUnlock(title, reward) {
+            const notification = document.getElementById('unlockNotification');
+            document.getElementById('unlockReward').textContent = reward;
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Social Proof
+        const socialProofMessages = [
+            'Sarah just earned $250 in rewards!',
+            'Mike completed Level 5 - Legend Status!',
+            'Emma saved $500 on her SMILE procedure',
+            '12 people are taking the quiz now',
+            'Alex booked a consultation for tomorrow',
+            'Lisa just reached Diamond tier!',
+            'John unlocked VIP scheduling'
+        ];
+        
+        function showSocialProof() {
+            const ticker = document.getElementById('socialProof');
+            const randomMsg = socialProofMessages[Math.floor(Math.random() * socialProofMessages.length)];
+            
+            ticker.innerHTML = `
+                <div class="ticker-item">
+                    <div class="ticker-avatar">${randomMsg.charAt(0)}</div>
+                    <div>${randomMsg}</div>
+                </div>
+            `;
+            
+            ticker.style.animation = 'none';
+            setTimeout(() => {
+                ticker.style.animation = 'slide-up 0.5s ease';
+            }, 10);
+        }
+        
+        // Start social proof rotation
+        setInterval(showSocialProof, 5000);
+        
+        // LEVEL COMPLETION FUNCTIONS
+        
+        function completeLevel1() {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            
+            if (!firstName) {
+                document.getElementById('firstName').style.borderColor = 'var(--cyber-red)';
+                haptic([30, 10, 30]);
+                return;
+            }
+
+            if (!lastName) {
+                document.getElementById('lastName').style.borderColor = 'var(--cyber-red)';
+                haptic([30, 10, 30]);
+                return;
+            }
+            
+            gameState.userData.firstName = firstName;
+            gameState.userData.lastName = lastName;
+            document.getElementById('firstName').style.borderColor = '';
+            document.getElementById('lastName').style.borderColor = '';
+            
+            // Add XP
+            addXP(50);
+            
+            // Add wallet reward
+            addToWallet(0); // No money for level 1, just XP
+            
+            // Update UI
+            document.getElementById('level1').classList.remove('active');
+            document.getElementById('level1').classList.add('completed');
+            document.getElementById('level2').classList.remove('locked');
+            document.getElementById('level2').classList.add('active');
+            
+            // Create celebration
+            const rect = event.target.getBoundingClientRect();
+            createParticles(rect.left + rect.width/2, rect.top + rect.height/2);
+            
+            // Show personalized message
+            showUnlock('Welcome, ' + firstName + '!', 'Vision journey started');
+            
+            gameState.currentLevel = 2;
+        }
+        
+        function completeLevel2() {
+            const email = document.getElementById('email').value.trim();
+            
+            if (!email || !email.includes('@')) {
+                document.getElementById('email').style.borderColor = 'var(--cyber-red)';
+                haptic([30, 10, 30]);
+                return;
+            }
+            
+            gameState.userData.email = email;
+            
+            // Add XP
+            addXP(75);
+            
+            // Add wallet reward
+            addToWallet(100);
+
+            // Track completion once we have the player's email
+            trackLevelCompletion(2, 75, 100);
+            
+            // Update UI
+            document.getElementById('level2').classList.remove('active');
+            document.getElementById('level2').classList.add('completed');
+            document.getElementById('level3').classList.remove('locked');
+            document.getElementById('level3').classList.add('active');
+            
+            // Create celebration
+            createConfetti();
+            
+            // Show unlock
+            showUnlock('EMAIL VERIFIED!', '$100 Added to Wallet');
+            
+            gameState.currentLevel = 3;
+        }
+        
+        function completeLevel3() {
+            const phone = document.getElementById('phone').value.trim();
+            
+            if (!phone || phone.length < 10) {
+                document.getElementById('phone').style.borderColor = 'var(--cyber-red)';
+                haptic([30, 10, 30]);
+                return;
+            }
+            
+            gameState.userData.phone = phone;
+            
+            // Add XP
+            addXP(100);
+            
+            // Add wallet reward
+            addToWallet(150);
+            
+            // Update UI
+            document.getElementById('level3').classList.remove('active');
+            document.getElementById('level3').classList.add('completed');
+            document.getElementById('level4').classList.remove('locked');
+            document.getElementById('level4').classList.add('active');
+            
+            // Create celebration
+            createConfetti();
+            
+            // Show unlock
+            showUnlock('VIP STATUS UNLOCKED!', '$150 Added - Total: $250');
+            
+            gameState.currentLevel = 4;
+        }
+        
+        // Quiz Functions
+        function startQuiz() {
+            document.getElementById('quizContainer').classList.add('active');
+            event.target.style.display = 'none';
+            haptic([50]);
+        }
+        
+        function selectQuizOption(element, type) {
+            // Remove previous selection
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Add selection
+            element.classList.add('selected');
+            gameState.userData.visionType = type;
+            
+            // Feedback
+            playSound(600, 0.1);
+            haptic([20]);
+        }
+        
+        function completeQuiz() {
+            if (!gameState.userData.visionType) {
+                haptic([30, 10, 30]);
+                return;
+            }
+            
+            // Add XP
+            addXP(150);
+            
+            // Add wallet reward
+            addToWallet(150);
+            
+            // Update UI
+            document.getElementById('level4').classList.remove('active');
+            document.getElementById('level4').classList.add('completed');
+            document.getElementById('level5').classList.remove('locked');
+            document.getElementById('level5').classList.add('active');
+            
+            // Create celebration
+            createConfetti();
+            
+            // Show unlock
+            showUnlock('VISION PROFILE COMPLETE!', '$150 Added - Total: $400');
+            
+            gameState.currentLevel = 5;
+        }
+        
+        // Schedule Functions
+        function openScheduler() {
+            document.getElementById('scheduleSection').classList.add('active');
+            event.target.style.display = 'none';
+            
+            // Generate calendar days
+            const grid = document.getElementById('calendarGrid');
+            const today = new Date();
+            
+            for (let i = 1; i <= 14; i++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() + i);
+                
+                const day = document.createElement('div');
+                day.className = 'calendar-day';
+                day.onclick = function() { selectDate(this, date.toDateString()); };
+                day.innerHTML = `
+                    <div style="font-size: 0.8rem; opacity: 0.7;">${date.toLocaleDateString('en-US', { weekday: 'short' })}</div>
+                    <div style="font-size: 1.2rem; font-weight: 700;">${date.getDate()}</div>
+                `;
+                
+                grid.appendChild(day);
+            }
+            
+            haptic([50]);
+        }
+        
+        function selectDate(element, date) {
+            document.querySelectorAll('.calendar-day').forEach(day => {
+                day.classList.remove('selected');
+            });
+            
+            element.classList.add('selected');
+            gameState.userData.selectedDate = date;
+            
+            playSound(600, 0.1);
+            haptic([20]);
+        }
+        
+        function selectTime(element, time) {
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                slot.classList.remove('selected');
+            });
+            
+            element.classList.add('selected');
+            gameState.userData.selectedTime = time;
+            
+            playSound(700, 0.1);
+            haptic([20]);
+        }
+        
+        function confirmSchedule() {
+            if (!gameState.userData.selectedDate || !gameState.userData.selectedTime) {
+                haptic([30, 10, 30]);
+                return;
+            }
+            
+            // Add XP
+            addXP(200);
+            
+            // Add wallet reward
+            addToWallet(100);
+            
+            // Check for speed bonus
+            const timeTaken = Date.now() - gameState.startTime;
+            if (timeTaken < 300000) { // 5 minutes
+                addToWallet(50);
+                showUnlock('SPEED BONUS!', 'Extra $50 for fast completion!');
+            }
+            
+            // Update UI
+            document.getElementById('level5').classList.remove('active');
+            document.getElementById('level5').classList.add('completed');
+            
+            // EPIC celebration
+            createConfetti();
+            setTimeout(createConfetti, 500);
+            setTimeout(createConfetti, 1000);
+            
+            // Play celebration sound
+            playLevelUpSound();
+            setTimeout(playLevelUpSound, 200);
+            
+            // Big haptic
+            haptic([200, 100, 200, 100, 500]);
+            
+            // Show final unlock
+            setTimeout(() => {
+                showUnlock('🎉 LEGENDARY STATUS ACHIEVED! 🎉', `Total Savings: $${gameState.walletAmount}`);
+            }, 1000);
+
+            // Send the final payload to Zoho CRM
+            sendToZohoCRM(gameState).then((success) => {
+                if (!success) {
+                    showUnlock('SYNC ISSUE', 'We will retry saving your info shortly.');
+                }
+            });
+            
+            // Log completion
+            console.log('User Data Collected:', gameState.userData);
+            console.log('Total Rewards:', gameState.walletAmount);
+            console.log('Final Tier:', gameState.tier);
+            console.log('Completion Time:', (Date.now() - gameState.startTime) / 1000, 'seconds');
+        }
+        
+        // Auto-save progress
+        setInterval(() => {
+            localStorage.setItem('visionQuest', JSON.stringify(gameState));
+        }, 5000);
+        
+        // Load saved progress
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('visionQuest');
+            if (saved) {
+                // Optionally restore progress
+                // gameState = JSON.parse(saved);
+                // updateUI();
+            }
+        });
+    </script>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', () => {
+            const headerInner = document.querySelector('.header-inner');
+            const toggleButton = document.querySelector('.menu-toggle');
+            if (toggleButton && headerInner) {
+                toggleButton.addEventListener('click', () => {
+                    const isOpen = headerInner.classList.toggle('is-open');
+                    toggleButton.setAttribute('aria-expanded', String(isOpen));
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!headerInner.contains(event.target) && headerInner.classList.contains('is-open')) {
+                        headerInner.classList.remove('is-open');
+                        toggleButton.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                document.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape' && headerInner.classList.contains('is-open')) {
+                        headerInner.classList.remove('is-open');
+                        toggleButton.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

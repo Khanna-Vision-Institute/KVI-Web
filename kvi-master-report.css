@@ -1,0 +1,1759 @@
+/* KVI Master Report Dashboard CSS */
+/* ================================= */
+
+:root {
+  --kvi-blue: #00539F;
+  --kvi-light-blue: #5DADE2;
+  --kvi-dark: #1a1a2e;
+  --success: #27AE60;
+  --warning: #F39C12;
+  --error: #E74C3C;
+  --critical: #C0392B;
+  --bg-light: #f8f9fa;
+  --text-dark: #2C3E50;
+  --text-light: #7F8C8D;
+  --border-light: #ECF0F1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: var(--text-dark);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* Header */
+.dashboard-header {
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left h1 {
+  font-size: 24px;
+  color: var(--kvi-blue);
+  margin-bottom: 5px;
+}
+
+.last-update {
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.auto-refresh {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.btn-refresh {
+  background: var(--kvi-blue);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-refresh:hover {
+  background: var(--kvi-light-blue);
+  transform: translateY(-2px);
+}
+
+/* Loading Overlay */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 26, 46, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loader-content {
+  text-align: center;
+  color: white;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--kvi-light-blue);
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loader-status {
+  color: var(--kvi-light-blue);
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Main Container */
+.dashboard-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+/* Master Health Score */
+.health-score-section {
+  margin-bottom: 30px;
+}
+
+.master-health-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 3px solid;
+  transition: all 0.3s;
+}
+
+.health-excellent {
+  border-color: var(--success);
+}
+
+.health-good {
+  border-color: var(--kvi-light-blue);
+}
+
+.health-warning {
+  border-color: var(--warning);
+}
+
+.health-critical {
+  border-color: var(--error);
+  animation: pulse-alert 2s infinite;
+}
+
+@keyframes pulse-alert {
+  0%, 100% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); }
+  50% { box-shadow: 0 10px 40px rgba(231, 76, 60, 0.3); }
+}
+
+.health-score-circle {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 30px;
+  position: relative;
+}
+
+.circular-progress {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.circular-progress circle {
+  transition: stroke-dasharray 1s ease;
+}
+
+.health-excellent .circular-progress circle:last-child {
+  stroke: var(--success);
+}
+
+.health-good .circular-progress circle:last-child {
+  stroke: var(--kvi-light-blue);
+}
+
+.health-warning .circular-progress circle:last-child {
+  stroke: var(--warning);
+}
+
+.health-critical .circular-progress circle:last-child {
+  stroke: var(--error);
+}
+
+.score-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.score-number {
+  font-size: 48px;
+  font-weight: 700;
+  background: linear-gradient(45deg, var(--kvi-blue), var(--kvi-light-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.score-label {
+  font-size: 14px;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.health-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  padding-top: 20px;
+  border-top: 2px solid var(--border-light);
+}
+
+.summary-stat {
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  color: var(--text-light);
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.issues-count {
+  color: var(--error);
+}
+
+/* SEO Categories */
+.seo-categories-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.seo-category-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.seo-category-card h3 {
+  color: var(--kvi-blue);
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.category-score {
+  margin-bottom: 15px;
+}
+
+.score-bar {
+  height: 8px;
+  background: var(--border-light);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.score-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--kvi-blue), var(--kvi-light-blue));
+  transition: width 1s ease;
+}
+
+.score-text {
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+.category-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.job-mini {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  background: var(--bg-light);
+  border-radius: 6px;
+  font-size: 13px;
+  border-left: 3px solid;
+}
+
+.job-mini.status-healthy {
+  border-left-color: var(--success);
+}
+
+.job-mini.status-warning {
+  border-left-color: var(--warning);
+}
+
+.job-mini.status-critical {
+  border-left-color: var(--error);
+}
+
+.job-name {
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.job-status {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Quick Stats */
+.quick-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.stat-icon {
+  font-size: 32px;
+}
+
+.stat-details {
+  flex: 1;
+}
+
+.stat-details .stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--kvi-blue);
+}
+
+.stat-details .stat-label {
+  font-size: 12px;
+  color: var(--text-light);
+  text-transform: uppercase;
+}
+
+/* Jobs Grid */
+.jobs-section {
+  margin-bottom: 30px;
+}
+
+.jobs-section h2 {
+  color: var(--text-dark);
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.job-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 2px solid transparent;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.job-card.status-healthy {
+  border-color: var(--success);
+}
+
+.job-card.status-warning {
+  border-color: var(--warning);
+}
+
+.job-card.status-critical {
+  border-color: var(--error);
+}
+
+.job-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.job-icon {
+  font-size: 24px;
+}
+
+.job-title {
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 14px;
+}
+
+.job-card-body {
+  font-size: 13px;
+}
+
+.job-status {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.job-status.status-healthy {
+  background: var(--success);
+  color: white;
+}
+
+.job-status.status-warning {
+  background: var(--warning);
+  color: white;
+}
+
+.job-status.status-critical {
+  background: var(--error);
+  color: white;
+}
+
+.job-metrics {
+  margin: 10px 0;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.metric-label {
+  color: var(--text-light);
+  font-size: 12px;
+}
+
+.metric-value {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.job-issues-count {
+  background: var(--error);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  display: inline-block;
+  margin: 10px 0;
+}
+
+.job-success {
+  color: var(--success);
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.job-last-run {
+  color: var(--text-light);
+  font-size: 11px;
+  margin-top: 10px;
+}
+
+.job-actions {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-light);
+  display: block;
+  width: 100%;
+}
+
+.btn-run-job {
+  width: 100%;
+  padding: 10px 16px;
+  background: #00539F;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 83, 159, 0.3);
+  display: block;
+  text-align: center;
+}
+
+.btn-run-job:hover {
+  background: #003d7a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 83, 159, 0.4);
+}
+
+.btn-run-job:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 83, 159, 0.3);
+}
+
+.btn-run-job:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  opacity: 0.6;
+}
+
+/* Running job state animation */
+.job-running {
+  position: relative;
+  animation: pulse-border 2s ease-in-out infinite;
+}
+
+.job-running::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid var(--kvi-blue);
+  border-radius: 8px;
+  animation: pulse-border 2s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes pulse-border {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+/* Spinner animation for running jobs */
+.btn-run-job .spinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Issues Panel */
+.issues-section {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.issues-section h3 {
+  color: var(--text-dark);
+  margin-bottom: 20px;
+}
+
+.issues-filter {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: var(--bg-light);
+  border: 1px solid var(--border-light);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.filter-btn:hover {
+  background: var(--kvi-light-blue);
+  color: white;
+  border-color: var(--kvi-light-blue);
+}
+
+.filter-btn.active {
+  background: var(--kvi-blue);
+  color: white;
+  border-color: var(--kvi-blue);
+}
+
+.issues-list {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.issue-item {
+  padding: 12px;
+  margin-bottom: 10px;
+  background: var(--bg-light);
+  border-radius: 8px;
+  border-left: 4px solid;
+  transition: transform 0.2s;
+}
+
+.issue-item:hover {
+  transform: translateX(5px);
+}
+
+.issue-item.severity-critical {
+  border-left-color: var(--error);
+  background: rgba(231, 76, 60, 0.05);
+}
+
+.issue-item.severity-warning {
+  border-left-color: var(--warning);
+  background: rgba(243, 156, 18, 0.05);
+}
+
+.issue-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.issue-type {
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 14px;
+}
+
+.issue-job {
+  background: var(--kvi-blue);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+}
+
+.issue-url {
+  color: var(--text-light);
+  font-size: 13px;
+  margin-bottom: 5px;
+  word-break: break-all;
+}
+
+.issue-details {
+  color: var(--text-light);
+  font-size: 12px;
+  font-style: italic;
+}
+
+.btn-export-issues {
+  background: var(--kvi-blue);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-export-issues:hover {
+  background: var(--kvi-light-blue);
+  transform: translateY(-2px);
+}
+
+/* Recommendations */
+.recommendations-section {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.recommendations-section h3 {
+  color: var(--text-dark);
+  margin-bottom: 20px;
+}
+
+.recommendations-list {
+  display: grid;
+  gap: 15px;
+}
+
+.recommendation-card {
+  border: 2px solid;
+  border-radius: 8px;
+  padding: 15px;
+  transition: transform 0.2s;
+}
+
+.recommendation-card:hover {
+  transform: translateX(5px);
+}
+
+.recommendation-card.priority-critical {
+  border-color: var(--error);
+  background: rgba(231, 76, 60, 0.05);
+}
+
+.recommendation-card.priority-high {
+  border-color: var(--warning);
+  background: rgba(243, 156, 18, 0.05);
+}
+
+.recommendation-card.priority-medium {
+  border-color: var(--kvi-light-blue);
+  background: rgba(93, 173, 226, 0.05);
+}
+
+.rec-header {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.rec-priority {
+  background: var(--error);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.priority-high .rec-priority {
+  background: var(--warning);
+}
+
+.priority-medium .rec-priority {
+  background: var(--kvi-light-blue);
+}
+
+.rec-category {
+  background: var(--bg-light);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--text-dark);
+}
+
+.rec-action {
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.rec-details {
+  display: grid;
+  gap: 5px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.btn-implement {
+  background: var(--success);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-implement:hover {
+  background: #229954;
+  transform: translateY(-2px);
+}
+
+/* Detailed Reports Tabs */
+.detailed-reports {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--border-light);
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-light);
+  transition: all 0.3s;
+  position: relative;
+}
+
+.tab-btn:hover {
+  color: var(--kvi-blue);
+}
+
+.tab-btn.active {
+  color: var(--kvi-blue);
+}
+
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--kvi-blue);
+}
+
+.tab-content {
+  padding: 20px 0;
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+.technical-grid,
+.content-grid,
+.links-grid,
+.performance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.tech-item,
+.content-item,
+.links-item,
+.perf-item {
+  background: var(--bg-light);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.tech-item h4,
+.content-item h4,
+.links-item h4,
+.perf-item h4 {
+  color: var(--kvi-blue);
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+/* Export Section */
+.export-section {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.export-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.btn-export {
+  background: var(--kvi-blue);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-export:hover {
+  background: var(--kvi-light-blue);
+  transform: translateY(-2px);
+}
+
+.export-preview {
+  background: var(--bg-light);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.export-preview h4 {
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.export-preview pre {
+  background: white;
+  padding: 15px;
+  border-radius: 6px;
+  font-size: 12px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Quick Actions */
+.quick-actions {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.quick-actions h2 {
+  color: var(--text-dark);
+  margin-bottom: 20px;
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.action-btn {
+  background: linear-gradient(135deg, var(--kvi-blue), var(--kvi-light-blue));
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.action-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 83, 159, 0.3);
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--text-light);
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: var(--text-dark);
+}
+
+/* Footer */
+.dashboard-footer {
+  background: var(--kvi-dark);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.footer-content p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .header-right {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .seo-categories-section {
+    grid-template-columns: 1fr;
+  }
+
+  .jobs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .actions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .export-buttons {
+    flex-direction: column;
+  }
+
+  .tabs {
+    flex-direction: column;
+  }
+
+  .tab-btn {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .header-right,
+  .quick-actions,
+  .export-section,
+  .action-btn,
+  .btn-export,
+  .btn-implement {
+    display: none !important;
+  }
+
+  .dashboard-container {
+    padding: 0;
+  }
+
+  .job-card,
+  .recommendation-card,
+  .issue-item {
+    page-break-inside: avoid;
+  }
+}
+
+/* KVI Master Report - Running Jobs State Management CSS */
+/* ====================================================== */
+
+/* Job Running State - Animated */
+.job-card.job-running {
+  background: linear-gradient(-45deg, #f0f8ff, #ffffff, #e6f3ff, #ffffff);
+  background-size: 400% 400%;
+  animation: gradientShift 3s ease infinite;
+  border-color: #5DADE2 !important;
+  box-shadow: 0 0 20px rgba(93, 173, 226, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient animation for running cards */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Running status badge */
+.job-status.status-running {
+  background: linear-gradient(90deg, #5DADE2, #3498DB, #5DADE2);
+  background-size: 200% 100%;
+  color: white !important;
+  animation: slideGradient 2s linear infinite;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@keyframes slideGradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Running button state */
+.job-card.job-running .btn-run-job {
+  background: linear-gradient(90deg, #5DADE2, #3498DB);
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.9;
+  animation: pulse 1.5s infinite;
+  position: relative;
+}
+
+/* Pulse animation for buttons */
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+/* Job running info text */
+.job-running-info {
+  color: #3498DB;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px;
+  background: rgba(52, 152, 219, 0.1);
+  border-radius: 6px;
+  margin: 10px 0;
+  text-align: center;
+  animation: fadeInOut 2s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* Completed state */
+.job-card.job-completed {
+  background: linear-gradient(135deg, #f0fff4, #ffffff);
+  border-color: #27AE60 !important;
+  animation: successFlash 0.5s ease;
+}
+
+@keyframes successFlash {
+  0% { background: #ffffff; }
+  50% { background: #e8f8f5; }
+  100% { background: linear-gradient(135deg, #f0fff4, #ffffff); }
+}
+
+.job-card.job-completed .btn-run-job {
+  background: #27AE60 !important;
+  color: white;
+  animation: successPulse 0.5s ease;
+}
+
+@keyframes successPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Timeout state */
+.job-card.job-timeout {
+  background: linear-gradient(135deg, #fff5e6, #ffffff);
+  border-color: #F39C12 !important;
+}
+
+.job-card.job-timeout .btn-run-job {
+  background: #F39C12 !important;
+  color: white;
+}
+
+/* Loading overlay adjustment for running jobs */
+#master-loader.preserve-running {
+  background: rgba(26, 26, 46, 0.5); /* More transparent */
+  pointer-events: none; /* Allow clicking through */
+}
+
+#master-loader.preserve-running .loader-content {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Running job progress indicator */
+.job-card.job-running::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #3498DB, transparent);
+  animation: scanLine 2s linear infinite;
+}
+
+@keyframes scanLine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Job last run text when running */
+.job-card.job-running .job-last-run {
+  color: #3498DB;
+  font-weight: 600;
+  background: rgba(52, 152, 219, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 8px;
+}
+
+/* Disable hover effects on running cards */
+.job-card.job-running:hover {
+  transform: none;
+  cursor: wait;
+}
+
+/* Running job metrics hidden */
+.job-card.job-running .job-metrics {
+  opacity: 0.3;
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+/* Button disabled state */
+.btn-run-job:disabled {
+  cursor: not-allowed !important;
+  opacity: 0.8;
+}
+
+/* Status running animation for text */
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* Add visual feedback for polling */
+.job-card.job-running .job-card-header::after {
+  content: '⚡';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  animation: spin 2s linear infinite;
+  color: #3498DB;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .job-card.job-running {
+    animation-duration: 4s; /* Slower animation on mobile */
+  }
+  
+  .job-running-info {
+    font-size: 12px;
+    padding: 6px;
+  }
+}
+
+/* Dark mode support (if applicable) */
+@media (prefers-color-scheme: dark) {
+  .job-card.job-running {
+    background: linear-gradient(-45deg, #1a3a52, #0d1117, #1a3a52, #0d1117);
+    background-size: 400% 400%;
+  }
+  
+  .job-running-info {
+    background: rgba(93, 173, 226, 0.2);
+    color: #5DADE2;
+  }
+}
+
+/* Minimal Loading Indicator */
+#minimal-loading-indicator,
+.minimal-loader {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #5DADE2;
+  border-radius: 8px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  gap: 12px;
+  animation: slideIn 0.3s ease;
+  font-weight: 600;
+  color: #2C3E50;
+}
+
+#minimal-loading-indicator::before,
+.minimal-loader::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 3px solid #E3F2FD;
+  border-top-color: #5DADE2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Preserve running job visuals */
+.job-card.job-running.preserved {
+  position: relative;
+  z-index: 100;
+  box-shadow: 0 0 30px rgba(93, 173, 226, 0.5);
+}
+
+.job-card.job-running.preserved::before {
+  content: 'RUNNING';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: linear-gradient(90deg, #5DADE2, #3498DB);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  animation: pulse 1.5s infinite;
+  z-index: 101;
+}
+
+.value-changed {
+  animation: valueChange 0.8s ease;
+}
+
+@keyframes valueChange {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); color: #5DADE2; }
+  100% { transform: scale(1); }
+}
+
+#all-jobs-grid.refreshing {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+#all-jobs-grid.refreshing .job-card:not(.job-running) {
+  opacity: 0.5;
+  filter: blur(1px);
+}
+
+.job-card[data-preserved="true"] {
+  outline: 2px solid rgba(93, 173, 226, 0.3);
+  outline-offset: 4px;
+}
+
+.running-jobs-indicator {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #5DADE2, #3498DB);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  animation: slideUp 0.3s ease;
+}
+
+.running-jobs-indicator::before {
+  content: '';
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 12px;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}/* KVI Master Report - CSS Fixes for Running Jobs */
+/* ================================================ */
+
+/* Minimal Loading Indicator - Non-blocking */
+.minimal-loader {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #5DADE2;
+  border-radius: 8px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none; /* Don't block interactions */
+}
+
+.minimal-loader-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mini-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #E3F2FD;
+  border-top-color: #5DADE2;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Minimal Update Indicator */
+.minimal-update-indicator {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(93, 173, 226, 0.95);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 1000;
+  pointer-events: none;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { 
+    transform: translateX(-50%) translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Running Job Card - MUST NOT BE AFFECTED BY REFRESH */
+.job-card.job-running {
+  background: linear-gradient(-45deg, #f0f8ff, #ffffff, #e6f3ff, #ffffff);
+  background-size: 400% 400%;
+  animation: gradientShift 3s ease infinite;
+  border: 2px solid #5DADE2 !important;
+  box-shadow: 0 0 20px rgba(93, 173, 226, 0.3);
+  position: relative;
+  z-index: 10; /* Keep above other cards */
+  pointer-events: all !important; /* Ensure clickable */
+}
+
+/* Prevent opacity changes on running cards */
+.job-card.job-running {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+/* Running status badge */
+.job-status.status-running {
+  background: linear-gradient(90deg, #5DADE2, #3498DB, #5DADE2);
+  background-size: 200% 100%;
+  color: white !important;
+  animation: slideGradient 2s linear infinite;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@keyframes slideGradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Running job button */
+.job-card.job-running .btn-run-job {
+  background: linear-gradient(90deg, #5DADE2, #3498DB) !important;
+  color: white !important;
+  cursor: not-allowed !important;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.job-card.job-running .btn-run-job .spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Job running info */
+.job-running-info {
+  color: #3498DB;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px;
+  background: rgba(52, 152, 219, 0.1);
+  border-radius: 6px;
+  margin: 10px 0;
+  text-align: center;
+  animation: fadeInOut 2s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* Running job last run text */
+.job-card.job-running .job-last-run {
+  color: #3498DB !important;
+  font-weight: 600 !important;
+  background: rgba(52, 152, 219, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 8px;
+}
+
+/* Progress line animation for running jobs */
+.job-card.job-running::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #3498DB, transparent);
+  animation: scanLine 2s linear infinite;
+}
+
+@keyframes scanLine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Ensure running cards stay visible during any loading state */
+#master-loader ~ * .job-card.job-running,
+.loading .job-card.job-running,
+.refreshing .job-card.job-running {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+/* Completed state flash */
+.job-card.job-completed {
+  animation: successFlash 0.5s ease;
+}
+
+@keyframes successFlash {
+  0% { background: #ffffff; }
+  50% { background: #e8f8f5; box-shadow: 0 0 20px rgba(39, 174, 96, 0.4); }
+  100% { background: #ffffff; }
+}
+
+/* Timeout state */
+.job-card.job-timeout {
+  background: linear-gradient(135deg, #fff5e6, #ffffff);
+  border-color: #F39C12 !important;
+}
+
+/* Preserve running state marker */
+.job-card[data-is-running="true"] {
+  /* This ensures the card is recognized as running even after DOM updates */
+  border-color: #5DADE2 !important;
+}
+
+/* Hide full loading screen when jobs are running */
+body.has-running-jobs #master-loader {
+  display: none !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .minimal-loader {
+    top: 10px;
+    right: 10px;
+    left: auto;
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+  
+  .minimal-update-indicator {
+    bottom: 10px;
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+}
+
+/* Cache and Unavailable Indicators */
+.unavailable-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #F39C12;
+  color: white;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  z-index: 5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  animation: pulse 2s infinite;
+}
+
+.cache-indicator {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #5DADE2;
+  color: white;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  z-index: 5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.cache-indicator.stale {
+  background: #F39C12;
+}
+
+.job-card-header {
+  position: relative;
+}
+
+.job-status.status-unavailable {
+  background: #F39C12;
+  color: white;
+}
+
+.job-unavailable {
+  color: #F39C12;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px;
+  background: rgba(243, 156, 18, 0.1);
+  border-radius: 4px;
+  margin: 8px 0;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}

@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your SMILE Consultation | Khanna Vision Institute</title>
+    <link rel="canonical" href="https://khannainstitute.com/smile-book-consultation/">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q0TGBPVS92"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Q0TGBPVS92');
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #0a0a0a; color: #ffffff; }
+        .brand-wordmark {
+            font-family: 'Playfair Display', Georgia, serif;
+            letter-spacing: 0.02em;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Date & time picker — same logic as /contact/schedule-consultation/, dark theme */
+        .sbc-dt * { box-sizing: border-box; }
+        .sbc-dt .sbc-form-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: #9ca3af;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+        .sbc-dt .sbc-location-info {
+            display: none;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.15) 100%);
+            border-left: 3px solid #818cf8;
+            padding: 10px 12px;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #a5b4fc;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .sbc-dt .sbc-dt-section {
+            border: 2px solid #374151;
+            border-radius: 12px;
+            padding: 14px;
+            background: rgba(0, 0, 0, 0.35);
+        }
+        .sbc-dt .sbc-dt-section.sbc-locked { opacity: 0.55; pointer-events: none; }
+        .sbc-dt .sbc-date-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 11px 14px;
+            background: #030712;
+            border: 2px solid #374151;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .sbc-dt .sbc-date-display:hover:not(.sbc-no-loc) {
+            border-color: #60a5fa;
+            box-shadow: 0 2px 12px rgba(96, 165, 250, 0.2);
+        }
+        .sbc-dt .sbc-date-display.sbc-no-loc { cursor: not-allowed; }
+        .sbc-dt .sbc-date-display span.sbc-date-text {
+            color: #6b7280;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .sbc-dt .sbc-date-display.selected span.sbc-date-text { color: #f9fafb; }
+        .sbc-dt .sbc-calendar-icon { font-size: 18px; line-height: 1; }
+        .sbc-dt .sbc-calendar-container {
+            background: #111827;
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 10px;
+            display: none;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+            border: 1px solid #374151;
+        }
+        .sbc-dt .sbc-calendar-container.open { display: block; }
+        .sbc-dt .sbc-calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 0 4px;
+        }
+        .sbc-dt .sbc-calendar-header button {
+            background: #1f2937;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 6px 12px;
+            color: #e5e7eb;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-weight: 700;
+        }
+        .sbc-dt .sbc-calendar-header button:hover {
+            background: #3b82f6;
+            color: white;
+        }
+        .sbc-dt .sbc-calendar-month {
+            font-size: 14px;
+            font-weight: 700;
+            color: #f9fafb;
+        }
+        .sbc-dt .sbc-calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+        .sbc-dt .sbc-calendar-day-header {
+            text-align: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: #6b7280;
+            padding: 6px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .sbc-dt .sbc-calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #4b5563;
+            font-weight: 600;
+        }
+        .sbc-dt .sbc-calendar-day.available {
+            color: #e5e7eb;
+            background: #1f2937;
+        }
+        .sbc-dt .sbc-calendar-day.available:hover {
+            background: rgba(59, 130, 246, 0.35);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .sbc-dt .sbc-calendar-day.highlighted {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(245, 87, 108, 0.35);
+        }
+        .sbc-dt .sbc-calendar-day.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.45);
+        }
+        .sbc-dt .sbc-calendar-day.disabled {
+            color: #374151;
+            cursor: not-allowed;
+        }
+        .sbc-dt .sbc-calendar-day.today {
+            border: 2px solid #60a5fa;
+        }
+        .sbc-dt .sbc-time-selection {
+            display: none;
+            margin-top: 12px;
+        }
+        .sbc-dt .sbc-time-selection.visible { display: block; }
+        .sbc-dt .sbc-time-label {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .sbc-dt .sbc-time-slots {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+        }
+        @media (max-width: 480px) {
+            .sbc-dt .sbc-time-slots { grid-template-columns: repeat(3, 1fr); }
+        }
+        .sbc-dt .sbc-time-slot {
+            padding: 9px 6px;
+            border: 2px solid #374151;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #030712;
+            font-weight: 600;
+            color: #d1d5db;
+            font-size: 12px;
+        }
+        .sbc-dt .sbc-time-slot:hover {
+            border-color: #60a5fa;
+            background: rgba(59, 130, 246, 0.2);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        .sbc-dt .sbc-time-slot.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.35);
+        }
+        .sbc-dt .sbc-selected-datetime {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(139, 92, 246, 0.2) 100%);
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 12px;
+            color: #c7d2fe;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+            font-size: 12px;
+            border: 1px solid rgba(129, 140, 248, 0.4);
+        }
+        .sbc-dt .sbc-selected-datetime.visible { display: block; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center min-h-[5rem] sm:min-h-[5.5rem] py-2">
+            <a href="/" class="flex items-center gap-2 sm:gap-4 min-w-0 py-1 pr-2 flex-1" aria-label="Khanna Vision Institute home">
+                <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/Logo1.png" alt="" width="280" height="102" class="h-11 sm:h-14 md:h-16 w-auto shrink-0 max-w-[min(44vw,200px)] sm:max-w-[min(320px,78vw)] object-contain object-left" loading="eager" decoding="async" />
+                <span class="flex flex-col justify-center border-l border-gray-700 pl-2.5 sm:pl-4 min-w-0 text-left leading-[1.15]">
+                    <span class="brand-wordmark text-white font-semibold text-base sm:text-lg md:text-xl tracking-tight">Khanna Vision Institute</span>
+                    <span class="text-[10px] sm:text-[11px] md:text-xs text-cyan-400/90 font-bold uppercase tracking-[0.2em] mt-1">Beverly Hills · Westlake</span>
+                </span>
+            </a>
+            <a href="/smile-cost/" class="hidden sm:inline-flex bg-blue-600 hover:bg-blue-500 text-white px-5 py-2 rounded-full font-bold text-sm transition-all shadow-[0_0_15px_rgba(37,99,235,0.5)]">SMILE cost</a>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen flex flex-col justify-center overflow-hidden pt-28 sm:pt-32 pb-16">
+        <div class="absolute inset-0 z-0 bg-gradient-to-br from-gray-900 via-black to-slate-900"></div>
+        <div class="absolute inset-0 z-0 opacity-40 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(56,189,248,0.35),transparent)]"></div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-t from-black via-transparent to-black/40 pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-6xl mx-auto px-4 w-full grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div>
+                <div class="inline-block bg-blue-500/20 border border-blue-500/50 text-blue-400 font-bold px-4 py-1 rounded-full text-sm mb-6 uppercase tracking-wide">
+                    SMILE laser vision
+                </div>
+                <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-tight">
+                    Book your <span class="gradient-text">consultation</span>
+                </h1>
+                <p class="text-lg text-gray-300 font-medium mb-6 max-w-lg">
+                    Same scheduling experience as our main booking form: choose a location first, then pick an available day and time.
+                </p>
+                <div class="rounded-2xl border border-gray-700 bg-black/40 p-5 mb-6 text-sm text-gray-300 leading-relaxed">
+                    <p class="font-bold text-white mb-3 uppercase tracking-wider text-xs text-cyan-400/90">Consultation hours</p>
+                    <ul class="space-y-2">
+                        <li><span class="text-white font-semibold">Beverly Hills</span> — Monday &amp; Thursday, 8:00 AM – 4:00 PM</li>
+                        <li><span class="text-white font-semibold">Westlake Village</span> — Tuesday, Wednesday &amp; Friday, 8:00 AM – 4:00 PM</li>
+                    </ul>
+                </div>
+                <ul class="space-y-3 text-gray-400 text-sm">
+                    <li class="flex gap-2"><span class="text-cyan-400 font-bold">✓</span> Zeiss VisuMax SMILE expertise</li>
+                    <li class="flex gap-2"><span class="text-cyan-400 font-bold">✓</span> Financing options available</li>
+                    <li class="flex gap-2"><span class="text-cyan-400 font-bold">✓</span> Call or text <a href="tel:8188571735" class="text-white hover:underline underline-offset-2">818 857 1735</a></li>
+                </ul>
+            </div>
+
+            <div class="bg-gray-900/90 backdrop-blur-xl rounded-3xl border border-gray-700 shadow-2xl p-6 sm:p-10">
+                <h2 class="text-xl font-bold text-white mb-2">Request a consultation</h2>
+                <p class="text-sm text-gray-400 mb-6">Fields marked with <span class="text-red-400">*</span> are required.</p>
+
+                <form id="smile-book-consult-form" class="space-y-5" novalidate>
+                    <input type="text" name="website" autocomplete="off" tabindex="-1" class="absolute opacity-0 pointer-events-none h-0 w-0" aria-hidden="true">
+
+                    <div>
+                        <label for="sbc-full-name" class="block text-sm font-bold text-gray-300 mb-1.5">Full name <span class="text-red-400">*</span></label>
+                        <input id="sbc-full-name" name="fullName" type="text" required autocomplete="name" maxlength="120"
+                            class="w-full bg-black border border-gray-700 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            placeholder="Jane Doe">
+                    </div>
+                    <div>
+                        <label for="sbc-email" class="block text-sm font-bold text-gray-300 mb-1.5">Email <span class="text-red-400">*</span></label>
+                        <input id="sbc-email" name="email" type="email" required autocomplete="email" maxlength="254"
+                            class="w-full bg-black border border-gray-700 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            placeholder="you@example.com">
+                    </div>
+                    <div>
+                        <label for="sbc-phone" class="block text-sm font-bold text-gray-300 mb-1.5">Phone <span class="text-gray-500 font-normal">(optional)</span></label>
+                        <input id="sbc-phone" name="phone" type="tel" autocomplete="tel" maxlength="40"
+                            class="w-full bg-black border border-gray-700 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            placeholder="818 555 1234">
+                    </div>
+                    <div>
+                        <label for="sbc-age" class="block text-sm font-bold text-gray-300 mb-1.5">Age <span class="text-red-400">*</span></label>
+                        <input id="sbc-age" name="age" type="number" inputmode="numeric" min="1" max="120" required
+                            class="w-full bg-black border border-gray-700 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            placeholder="e.g. 32">
+                    </div>
+
+                    <div class="sbc-dt">
+                        <label for="sbc-location" class="sbc-form-label">Location <span class="text-red-400">*</span></label>
+                        <select id="sbc-location" name="location" required
+                            class="w-full bg-black border border-gray-700 rounded-xl py-3 px-4 text-white focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                            <option value="">Choose your preferred location</option>
+                            <option value="Beverly Hills">Beverly Hills</option>
+                            <option value="Westlake Village">Westlake Village</option>
+                        </select>
+                        <div id="sbc-location-info" class="sbc-location-info" aria-live="polite"></div>
+
+                        <label class="sbc-form-label mt-5">Date &amp; time <span class="text-red-400">*</span></label>
+                        <div id="sbc-dt-section" class="sbc-dt-section sbc-locked">
+                            <div class="sbc-date-display sbc-no-loc" id="sbc-date-display" role="button" tabindex="0" aria-expanded="false">
+                                <span class="sbc-date-text" id="sbc-date-text">Select a location to choose a date</span>
+                                <span class="sbc-calendar-icon" aria-hidden="true">📅</span>
+                            </div>
+
+                            <div class="sbc-calendar-container" id="sbc-calendar-container">
+                                <div class="sbc-calendar-header">
+                                    <button type="button" id="sbc-prev-month" aria-label="Previous month">&lt;</button>
+                                    <div class="sbc-calendar-month" id="sbc-calendar-month"></div>
+                                    <button type="button" id="sbc-next-month" aria-label="Next month">&gt;</button>
+                                </div>
+                                <div class="sbc-calendar-grid" id="sbc-calendar-grid"></div>
+                            </div>
+
+                            <div class="sbc-time-selection" id="sbc-time-selection">
+                                <div class="sbc-time-label">Available times</div>
+                                <div class="sbc-time-slots" id="sbc-time-slots"></div>
+                            </div>
+
+                            <div class="sbc-selected-datetime" id="sbc-selected-datetime"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center sm:justify-start overflow-x-auto py-1">
+                        <div class="g-recaptcha" data-sitekey="6Lf0P20sAAAAAK_xE5Swnx5IaGRNkrEVRtTzZu5r"></div>
+                    </div>
+
+                    <p id="smile-book-consult-msg" class="hidden text-sm font-semibold" role="status"></p>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-black py-4 rounded-xl shadow-[0_0_24px_rgba(37,99,235,0.45)] transition-all">
+                        Submit request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-gray-800 py-12 bg-black">
+        <div class="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
+            <p class="mb-2 font-bold text-gray-400">Khanna Vision Institute</p>
+            <p>Beverly Hills | Westlake Village</p>
+            <p class="mt-4">Call or text: <a href="tel:8188571735" class="text-gray-400 hover:text-white underline underline-offset-2">818 857 1735</a></p>
+            <p class="mt-4"><a href="/smile-cost/" class="text-blue-400 hover:text-blue-300">← Back to SMILE cost</a></p>
+        </div>
+    </footer>
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+(function () {
+  function calendarYmd(d) {
+    return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+  }
+
+  var locationSchedule = {
+    'Beverly Hills': {
+      name: 'Beverly Hills',
+      schedule: 'Monday & Thursday (8:00 AM - 4:00 PM)',
+      days: [1, 4],
+      hours: ['8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM']
+    },
+    'Westlake Village': {
+      name: 'Westlake Village',
+      schedule: 'Tuesday, Wednesday, Friday (8:00 AM - 4:00 PM)',
+      days: [2, 3, 5],
+      hours: ['8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM']
+    }
+  };
+
+  var selectedLocation = null;
+  var selectedDate = null;
+  var selectedTime = null;
+  var todayDate = new Date();
+  var currentMonth = todayDate.getMonth();
+  var currentYear = todayDate.getFullYear();
+  var HOLIDAY_CLOSED_DATES = new Set([
+    '2026-07-04',
+    '2026-09-07',
+    '2026-11-26',
+    '2026-12-25',
+    '2027-01-01',
+    '2027-05-31'
+  ]);
+  var HOLIDAY_HALF_DAY_DATES = new Set([
+    '2026-12-24',
+    '2026-12-31'
+  ]);
+  var HALF_DAY_HOURS = ['8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM'];
+
+  var locationSelect = document.getElementById('sbc-location');
+  var locationInfo = document.getElementById('sbc-location-info');
+  var dtSection = document.getElementById('sbc-dt-section');
+  var dateDisplay = document.getElementById('sbc-date-display');
+  var dateText = document.getElementById('sbc-date-text');
+  var calendarContainer = document.getElementById('sbc-calendar-container');
+  var calendarMonth = document.getElementById('sbc-calendar-month');
+  var calendarGrid = document.getElementById('sbc-calendar-grid');
+  var timeSelection = document.getElementById('sbc-time-selection');
+  var timeSlots = document.getElementById('sbc-time-slots');
+  var selectedDatetime = document.getElementById('sbc-selected-datetime');
+  var prevMonthBtn = document.getElementById('sbc-prev-month');
+  var nextMonthBtn = document.getElementById('sbc-next-month');
+  var formMsg = document.getElementById('smile-book-consult-msg');
+
+  function showFormMsg(text, isError) {
+    if (!formMsg) return;
+    formMsg.textContent = text;
+    formMsg.classList.remove('hidden', 'text-green-400', 'text-red-400');
+    formMsg.classList.add(isError ? 'text-red-400' : 'text-cyan-300');
+  }
+
+  function toIsoDate(dateObj) {
+    var yy = dateObj.getFullYear();
+    var mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+    var dd = String(dateObj.getDate()).padStart(2, '0');
+    return yy + '-' + mm + '-' + dd;
+  }
+
+  function isHolidayClosed(dateObj) {
+    return HOLIDAY_CLOSED_DATES.has(toIsoDate(dateObj));
+  }
+
+  function getHoursForDate(schedule, dateObj) {
+    var iso = toIsoDate(dateObj);
+    if (HOLIDAY_HALF_DAY_DATES.has(iso)) {
+      return schedule.hours.filter(function (h) { return HALF_DAY_HOURS.indexOf(h) !== -1; });
+    }
+    return schedule.hours.slice();
+  }
+
+  function clearFormMsg() {
+    if (!formMsg) return;
+    formMsg.classList.add('hidden');
+    formMsg.textContent = '';
+  }
+
+  function setLocationLocked(locked) {
+    if (!dtSection || !dateDisplay) return;
+    if (locked) {
+      dtSection.classList.add('sbc-locked');
+      dateDisplay.classList.add('sbc-no-loc');
+      dateText.textContent = 'Select a location to choose a date';
+      dateDisplay.classList.remove('selected');
+    } else {
+      dtSection.classList.remove('sbc-locked');
+      dateDisplay.classList.remove('sbc-no-loc');
+      if (!selectedDate) {
+        dateText.textContent = 'Select a date';
+        dateDisplay.classList.remove('selected');
+      }
+    }
+  }
+
+  function resetDateTimeUi() {
+    selectedDate = null;
+    selectedTime = null;
+    if (dateText) {
+      dateText.textContent = selectedLocation ? 'Select a date' : 'Select a location to choose a date';
+    }
+    if (dateDisplay) {
+      dateDisplay.classList.toggle('selected', false);
+      dateDisplay.setAttribute('aria-expanded', 'false');
+    }
+    if (calendarContainer) calendarContainer.classList.remove('open');
+    if (timeSelection) timeSelection.classList.remove('visible');
+    if (selectedDatetime) selectedDatetime.classList.remove('visible');
+    if (calendarGrid) calendarGrid.innerHTML = '';
+  }
+
+  if (locationSelect) {
+    locationSelect.addEventListener('change', function (e) {
+      selectedLocation = e.target.value || null;
+      clearFormMsg();
+      if (selectedLocation && locationSchedule[selectedLocation]) {
+        var sch = locationSchedule[selectedLocation];
+        locationInfo.style.display = 'block';
+        locationInfo.innerHTML = '<strong>' + sch.name + '</strong> — ' + sch.schedule;
+        setLocationLocked(false);
+        resetDateTimeUi();
+        if (dateText && !selectedDate) dateText.textContent = 'Select a date';
+        renderCalendar();
+      } else {
+        locationInfo.style.display = 'none';
+        locationInfo.innerHTML = '';
+        setLocationLocked(true);
+        resetDateTimeUi();
+      }
+    });
+  }
+
+  setLocationLocked(true);
+
+  function toggleCalendar(open) {
+    if (!calendarContainer) return;
+    var shouldOpen = open !== undefined ? open : !calendarContainer.classList.contains('open');
+    calendarContainer.classList.toggle('open', shouldOpen);
+    if (dateDisplay) dateDisplay.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+  }
+
+  if (dateDisplay) {
+    dateDisplay.addEventListener('click', function () {
+      if (!selectedLocation) {
+        showFormMsg('Please select a location first. Available days depend on which office you choose.', true);
+        return;
+      }
+      clearFormMsg();
+      renderCalendar();
+      toggleCalendar();
+    });
+    dateDisplay.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        dateDisplay.click();
+      }
+    });
+  }
+
+  if (prevMonthBtn) {
+    prevMonthBtn.addEventListener('click', function () {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      renderCalendar();
+    });
+  }
+  if (nextMonthBtn) {
+    nextMonthBtn.addEventListener('click', function () {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      renderCalendar();
+    });
+  }
+
+  function renderCalendar() {
+    if (!selectedLocation || !calendarGrid) return;
+
+    var firstDay = new Date(currentYear, currentMonth, 1);
+    var lastDay = new Date(currentYear, currentMonth + 1, 0);
+    var daysInMonth = lastDay.getDate();
+    var startingDayOfWeek = firstDay.getDay();
+
+    var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'];
+    calendarMonth.textContent = monthNames[currentMonth] + ' ' + currentYear;
+
+    calendarGrid.innerHTML = '';
+
+    var dayHeaders = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+    dayHeaders.forEach(function (day) {
+      var header = document.createElement('div');
+      header.className = 'sbc-calendar-day-header';
+      header.textContent = day;
+      calendarGrid.appendChild(header);
+    });
+
+    for (var i = 0; i < startingDayOfWeek; i++) {
+      var emptyDay = document.createElement('div');
+      emptyDay.className = 'sbc-calendar-day';
+      calendarGrid.appendChild(emptyDay);
+    }
+
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    var todayYmd = calendarYmd(today);
+
+    var schedule = locationSchedule[selectedLocation];
+
+    for (var day = 1; day <= daysInMonth; day++) {
+      var date = new Date(currentYear, currentMonth, day);
+      var dayOfWeek = date.getDay();
+      var cellYmd = calendarYmd(date);
+      var dayElement = document.createElement('div');
+      dayElement.className = 'sbc-calendar-day';
+      dayElement.textContent = day;
+
+      var isPast = cellYmd < todayYmd;
+      var isHolidayBlackout = isHolidayClosed(date);
+      var isAvailable = schedule.days.indexOf(dayOfWeek) !== -1 && !isPast && !isHolidayBlackout;
+
+      if (isPast) {
+        dayElement.classList.add('disabled');
+      } else if (isAvailable) {
+        dayElement.classList.add('available');
+
+        var nextWeek = new Date(today);
+        nextWeek.setDate(today.getDate() + 7);
+        var nextWeekYmd = calendarYmd(nextWeek);
+        if (cellYmd >= todayYmd && cellYmd <= nextWeekYmd) {
+          dayElement.classList.add('highlighted');
+        }
+
+        dayElement.addEventListener('click', function (d) {
+          return function () {
+            selectDate(d);
+          };
+        }(new Date(currentYear, currentMonth, day)));
+      } else {
+        dayElement.classList.add('disabled');
+      }
+
+      if (cellYmd === todayYmd) {
+        dayElement.classList.add('today');
+      }
+
+      if (selectedDate && calendarYmd(date) === calendarYmd(selectedDate)) {
+        dayElement.classList.add('selected');
+      }
+
+      calendarGrid.appendChild(dayElement);
+    }
+  }
+
+  function selectDate(date) {
+    selectedDate = date;
+    selectedTime = null;
+
+    var options = { weekday: 'long', month: 'short', day: 'numeric' };
+    dateText.textContent = date.toLocaleDateString('en-US', options);
+    dateDisplay.classList.add('selected');
+
+    toggleCalendar(false);
+
+    renderCalendar();
+    renderTimeSlots();
+
+    timeSelection.classList.add('visible');
+    selectedDatetime.classList.remove('visible');
+  }
+
+  function renderTimeSlots() {
+    var schedule = locationSchedule[selectedLocation];
+    if (!schedule || !timeSlots) return;
+    timeSlots.innerHTML = '';
+
+    var hours = getHoursForDate(schedule, selectedDate);
+    hours.forEach(function (time) {
+      var slot = document.createElement('div');
+      slot.className = 'sbc-time-slot';
+      slot.textContent = time;
+      slot.addEventListener('click', function () {
+        selectTime(slot, time);
+      });
+      timeSlots.appendChild(slot);
+    });
+  }
+
+  function selectTime(element, time) {
+    var all = document.querySelectorAll('.sbc-time-slot');
+    for (var i = 0; i < all.length; i++) all[i].classList.remove('selected');
+    element.classList.add('selected');
+    selectedTime = time;
+
+    var options = { weekday: 'long', month: 'short', day: 'numeric' };
+    var dateStr = selectedDate.toLocaleDateString('en-US', options);
+    selectedDatetime.textContent = '✓ ' + dateStr + ' at ' + time;
+    selectedDatetime.classList.add('visible');
+    clearFormMsg();
+  }
+
+  window.__sbcGetScheduling = function () {
+    return {
+      selectedLocation: selectedLocation,
+      selectedDate: selectedDate,
+      selectedTime: selectedTime
+    };
+  };
+})();
+
+(function () {
+  var form = document.getElementById('smile-book-consult-form');
+  if (!form) return;
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var msg = document.getElementById('smile-book-consult-msg');
+    var sched = window.__sbcGetScheduling ? window.__sbcGetScheduling() : {};
+    var token = '';
+    try {
+      token = (window.grecaptcha && window.grecaptcha.getResponse) ? window.grecaptcha.getResponse() : '';
+    } catch (err) { token = ''; }
+    if (!token) {
+      if (msg) {
+        msg.textContent = 'Please complete the reCAPTCHA verification.';
+        msg.classList.remove('hidden', 'text-green-400');
+        msg.classList.add('text-red-400');
+      }
+      return;
+    }
+    if (!sched.selectedLocation || !sched.selectedDate || !sched.selectedTime) {
+      if (msg) {
+        msg.textContent = 'Please select a location, an available date, and a time.';
+        msg.classList.remove('hidden', 'text-green-400');
+        msg.classList.add('text-red-400');
+      }
+      return;
+    }
+    var fullName = document.getElementById('sbc-full-name').value.trim();
+    var email = document.getElementById('sbc-email').value.trim();
+    var phone = document.getElementById('sbc-phone').value.trim();
+    var ageEl = document.getElementById('sbc-age');
+    var age = ageEl ? parseInt(ageEl.value, 10) : NaN;
+    var location = sched.selectedLocation;
+    var d = sched.selectedDate;
+    var yyyy = d.getFullYear();
+    var mm = String(d.getMonth() + 1).padStart(2, '0');
+    var dd = String(d.getDate()).padStart(2, '0');
+    var preferredDate = yyyy + '-' + mm + '-' + dd;
+    var preferredTime = sched.selectedTime;
+    var hp = form.querySelector('input[name="website"]');
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    if (msg) msg.classList.add('hidden');
+    var submitUrl = (typeof window.SMILE_BOOK_CONSULT_SUBMIT_URL === 'string' && window.SMILE_BOOK_CONSULT_SUBMIT_URL)
+      ? window.SMILE_BOOK_CONSULT_SUBMIT_URL
+      : (window.location.origin + '/api/smile-book-consult/submit');
+    try {
+      var res = await fetch(submitUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({
+          fullName: fullName,
+          email: email,
+          phone: phone,
+          age: Number.isFinite(age) ? age : null,
+          location: location,
+          preferredDate: preferredDate,
+          preferredTime: preferredTime,
+          recaptchaToken: token,
+          website: hp ? hp.value : '',
+          pageUrl: window.location.href
+        })
+      });
+      var raw = await res.text();
+      var out = null;
+      try { out = raw ? JSON.parse(raw) : null; } catch (parseErr) { out = null; }
+      if (!out || typeof out !== 'object') {
+        if (msg) {
+          msg.textContent = 'We could not reach the server (error ' + res.status + '). Please try again or call 818 857 1735.';
+          msg.classList.remove('hidden', 'text-green-400');
+          msg.classList.add('text-red-400');
+        }
+      } else if (out.success) {
+        try { if (window.grecaptcha && window.grecaptcha.reset) window.grecaptcha.reset(); } catch (x) {}
+        var next = (out.redirectUrl && typeof out.redirectUrl === 'string') ? out.redirectUrl : '/smile-book-consultation-thank-you/';
+        window.location.href = next;
+        return;
+      } else {
+        if (msg) {
+          msg.textContent = out.message || 'Something went wrong. Please try again.';
+          msg.classList.remove('hidden', 'text-green-400');
+          msg.classList.add('text-red-400');
+        }
+      }
+    } catch (err) {
+      if (msg) {
+        msg.textContent = 'Network error — check your connection and try again, or call 818 857 1735.';
+        msg.classList.remove('hidden', 'text-green-400');
+        msg.classList.add('text-red-400');
+      }
+    } finally {
+      btn.disabled = false;
+    }
+  });
+})();
+    </script>
+</body>
+</html>

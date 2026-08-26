@@ -1,0 +1,838 @@
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
+const ejs = require('ejs');
+const dotenv = require('dotenv');
+const cron = require('node-cron');
+
+dotenv.config({ path: path.resolve(__dirname, '.env') });
+
+const visionQuestRoutes = require('./routes/visionQuest');
+const bookingRoutes = require('./routes/booking');
+const blogRoutes = require('./routes/blog');
+const { getPageBySlug } = require('./services/pages');
+const { getAllBlogs } = require('./services/mongodb');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.engine('html', ejs.renderFile);
+app.set('view engine', 'html');
+app.set('views', path.join(__dirname));
+app.set("view cache", false);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
+
+const resolveViewPath = (reqPath, { ensureHtml = false } = {}) => {
+  let normalized = decodeURIComponent(reqPath)
+    .replace(/^\/+/, '')
+    .replace(/\/+$/, '');
+
+  if (!normalized) {
+    normalized = 'index';
+  }
+
+  if (ensureHtml && !normalized.endsWith('.html')) {
+    normalized += '.html';
+  }
+
+  return normalized;
+};
+
+const originalFileLoader = ejs.fileLoader;
+ejs.fileLoader = (filePath) => {
+  const candidates = [];
+
+  const addCandidate = (candidate) => {
+    if (!candidates.includes(candidate)) {
+      candidates.push(candidate);
+    }
+    if (!path.extname(candidate)) {
+      const withExt = `${candidate}.ejs`;
+      if (!candidates.includes(withExt)) {
+        candidates.push(withExt);
+      }
+    }
+  };
+
+  const normalizedPath = path.normalize(filePath);
+
+  addCandidate(filePath);
+  addCandidate(path.join(__dirname, normalizedPath));
+
+  const partialMarker = `${path.sep}partials${path.sep}`;
+  const idx = normalizedPath.lastIndexOf(partialMarker);
+  if (idx !== -1) {
+    const partialPath = normalizedPath.slice(idx + 1); // remove leading separator
+    addCandidate(partialPath);
+    addCandidate(path.join(__dirname, partialPath));
+  }
+
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) {
+      return originalFileLoader(candidate);
+    }
+  }
+
+  return originalFileLoader(filePath);
+};
+
+const renderView = (viewPath, res, next) => {
+  res.render(viewPath, (err, html) => {
+    if (err) {
+      if (err.message && err.message.includes('Failed to lookup view')) {
+        return next();
+      }
+      return next(err);
+    }
+    res.send(html);
+  });
+};
+
+app.use('/api/vision-quest', visionQuestRoutes);
+app.use('/api/booking', bookingRoutes);
+app.use('/blog', blogRoutes);
+
+// ============================================
+// SITEMAP ROUTES
+// ============================================
+
+/**
+ * Generate sitemap-blog-pages.xml
+ * Automatically fetches all blog posts from /blog/latest/ and generates XML sitemap
+ * 
+ * This sitemap is dynamically generated on each request, so:
+ * - New blog posts added to Strapi or MongoDB will automatically appear
+ * - No manual updates needed
+ * - Always reflects the current state of all published blog posts
+ * 
+ * Blog URLs format: /YYYY/MM/slug (e.g., /2025/11/lasik-vs-smile)
+ */
+app.get('/sitemap-blog-pages.xml', async (req, res) => {
+  try {
+    // Fetch all blog posts (from both Strapi and MongoDB)
+    // This automatically includes all published posts from both sources
+    const blogs = await getAllBlogs();
+    
+    // Set XML content type
+    res.set('Content-Type', 'application/xml');
+    
+    // Generate XML sitemap
+    let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+    
+    // Base URL - always use https for production
+    const host = req.get('host') || 'khannainstitute.com';
+    const baseUrl = `https://${host}`;
+    
+    // Add each blog post to sitemap
+    blogs.forEach(blog => {
+      // Blog posts use format: /YYYY/MM/slug
+      // The slug already contains the full path (year/month/slug) from transformStrapiBlog
+      const blogUrl = blog.slug.startsWith('/') ? blog.slug : `/${blog.slug}`;
+      const fullUrl = `${baseUrl}${blogUrl}`;
+      
+      // Get last modified date (use publishedAt or date field)
+      const lastMod = blog.publishedAt || blog.date || new Date();
+      const lastModDate = new Date(lastMod).toISOString().split('T')[0];
+      
+      // Determine priority (newer posts get higher priority)
+      const postDate = new Date(lastMod);
+      const daysSincePost = (Date.now() - postDate.getTime()) / (1000 * 60 * 60 * 24);
+      let priority = '0.7'; // Default
+      if (daysSincePost < 30) priority = '0.9'; // Recent posts
+      else if (daysSincePost < 90) priority = '0.8'; // Recent-ish posts
+      
+      xml += '  <url>\n';
+      xml += `    <loc>${fullUrl}</loc>\n`;
+      xml += `    <lastmod>${lastModDate}</lastmod>\n`;
+      xml += `    <changefreq>monthly</changefreq>\n`;
+      xml += `    <priority>${priority}</priority>\n`;
+      xml += '  </url>\n';
+    });
+    
+    xml += '</urlset>';
+    
+    res.send(xml);
+  } catch (error) {
+    console.error('Error generating blog sitemap:', error);
+    res.status(500).set('Content-Type', 'application/xml').send(
+      '<?xml version="1.0" encoding="UTF-8"?>\n<error>Failed to generate sitemap</error>'
+    );
+  }
+});
+
+// ============================================
+// TEST ROUTE - Strapi Page Testing
+// ============================================
+// This route lets you test Strapi pages without affecting production
+app.get('/test/smile-laser/', async (req, res, next) => {
+  try {
+    const pageData = await getPageBySlug('test-smile-laser-eye-surgery');
+    
+    if (pageData) {
+      console.log('✅ Loaded Strapi test page:', pageData.title);
+      // Render with the actual SMILE template (with all the beautiful design)
+      return res.render('procedures/laser-vision/smile-page-complete.html', { pageData });
+    } else {
+      return res.status(404).send('Test page not found in Strapi. Make sure the page with slug "test-smile-laser-eye-surgery" is published.');
+    }
+  } catch (error) {
+    console.error('Error loading test page:', error);
+    return res.status(500).send('Error loading test page: ' + error.message);
+  }
+});
+
+// ============================================
+// CRON JOB SYSTEM
+// ============================================
+
+// Import extended cron jobs (will be available once file is copied to jobs/ directory)
+let extendedCronJobs = null;
+try {
+  extendedCronJobs = require('./jobs/kvi-cron-system-extended');
+} catch (error) {
+  console.log('Extended cron jobs not loaded. Copy kvi-cron-system-extended.js to jobs/ directory when disk space is available.');
+}
+
+// Store job results (keep last 50 results per job type)
+const jobResults = {
+  backups: [],
+  fourOhFour: [],
+  phoneValidation: [],
+  sslCheck: [],
+  formTesting: [],
+  schemaValidation: [],
+  internalLinking: [],
+  contentValidation: [],
+  coreWebVitals: []
+};
+
+// Helper function to send alerts (can be extended with email/SMS/Slack)
+async function sendAlert(type, message) {
+  console.log(`[ALERT] ${type}: ${message}`);
+  // TODO: Add email/SMS/Slack notifications here
+}
+
+// Schedule extended cron jobs if available
+if (extendedCronJobs) {
+  // SSL check daily at 2am
+  cron.schedule('0 2 * * *', async () => {
+    console.log('[CRON] Running SSL certificate check...');
+    try {
+      const result = await extendedCronJobs.checkSSLCertificate();
+      jobResults.sslCheck.unshift(result);
+      if (jobResults.sslCheck.length > 50) jobResults.sslCheck.pop();
+      
+      if (result.warnings && result.warnings.length > 0) {
+        await sendAlert('SSL EXPIRY WARNING', `Certificate expiring soon! ${result.warnings.length} warning(s)`);
+      }
+    } catch (error) {
+      console.error('[CRON] SSL check error:', error.message);
+    }
+  });
+
+  // Form testing every 4 hours
+  cron.schedule('0 */4 * * *', async () => {
+    console.log('[CRON] Running form submission tests...');
+    try {
+      const result = await extendedCronJobs.testFormSubmissions();
+      jobResults.formTesting.unshift(result);
+      if (jobResults.formTesting.length > 50) jobResults.formTesting.pop();
+      
+      const failed = result.forms?.filter(f => f.submissionStatus === 'failed' || f.submissionStatus === 'error') || [];
+      if (failed.length > 0) {
+        await sendAlert('FORM FAILURE', `${failed.length} form(s) not working!`);
+      }
+    } catch (error) {
+      console.error('[CRON] Form testing error:', error.message);
+    }
+  });
+
+  // Schema validation daily at 3am
+  cron.schedule('0 3 * * *', async () => {
+    console.log('[CRON] Running schema markup validation...');
+    try {
+      const result = await extendedCronJobs.validateSchemaMarkup();
+      jobResults.schemaValidation.unshift(result);
+      if (jobResults.schemaValidation.length > 50) jobResults.schemaValidation.pop();
+      
+      const complianceRate = parseFloat(result.stats?.complianceRate?.replace('%', '') || '0');
+      if (complianceRate < 80) {
+        await sendAlert('SCHEMA ISSUES', `Only ${result.stats.complianceRate} compliance!`);
+      }
+    } catch (error) {
+      console.error('[CRON] Schema validation error:', error.message);
+    }
+  });
+
+  // Internal linking check weekly on Sundays at 4am
+  cron.schedule('0 4 * * 0', async () => {
+    console.log('[CRON] Running internal linking check...');
+    try {
+      const result = await extendedCronJobs.checkInternalLinking();
+      jobResults.internalLinking.unshift(result);
+      if (jobResults.internalLinking.length > 50) jobResults.internalLinking.pop();
+    } catch (error) {
+      console.error('[CRON] Internal linking check error:', error.message);
+    }
+  });
+
+  // Content validation weekly on Mondays at 5am
+  cron.schedule('0 5 * * 1', async () => {
+    console.log('[CRON] Running content validation...');
+    try {
+      const result = await extendedCronJobs.validateContent();
+      jobResults.contentValidation.unshift(result);
+      if (jobResults.contentValidation.length > 50) jobResults.contentValidation.pop();
+    } catch (error) {
+      console.error('[CRON] Content validation error:', error.message);
+    }
+  });
+
+  // Core Web Vitals daily at 6am
+  cron.schedule('0 6 * * *', async () => {
+    console.log('[CRON] Running Core Web Vitals check...');
+    try {
+      const result = await extendedCronJobs.checkCoreWebVitals();
+      jobResults.coreWebVitals.unshift(result);
+      if (jobResults.coreWebVitals.length > 50) jobResults.coreWebVitals.pop();
+    } catch (error) {
+      console.error('[CRON] Core Web Vitals check error:', error.message);
+    }
+  });
+
+  console.log('[CRON] Extended cron jobs scheduled successfully');
+} else {
+  console.log('[CRON] Extended cron jobs not available. To enable:');
+  console.log('  1. Free up disk space');
+  console.log('  2. Copy kvi-cron-system-extended.js from Downloads/files (9)/ to jobs/ directory');
+  console.log('  3. Restart the server');
+}
+
+// API endpoints for React Dashboard compatibility
+app.get('/api/status', (req, res) => {
+  res.json({
+    status: 'healthy',
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+    jobs: {
+      backups: jobResults.backups?.[0] || null,
+      fourOhFour: jobResults.fourOhFour?.[0] || null,
+      phoneValidation: jobResults.phoneValidation?.[0] || null,
+      sslCheck: jobResults.sslCheck?.[0] || null,
+      formTesting: jobResults.formTesting?.[0] || null,
+      schemaValidation: jobResults.schemaValidation?.[0] || null,
+      internalLinking: jobResults.internalLinking?.[0] || null,
+      contentValidation: jobResults.contentValidation?.[0] || null,
+      coreWebVitals: jobResults.coreWebVitals?.[0] || null
+    }
+  });
+});
+
+app.get('/api/jobs/:jobType', (req, res) => {
+  const { jobType } = req.params;
+  const limit = parseInt(req.query.limit) || 10;
+  
+  // Map job type names
+  const jobTypeMap = {
+    'backups': 'backups',
+    'fourOhFour': 'fourOhFour',
+    'phoneValidation': 'phoneValidation',
+    'sslCheck': 'sslCheck',
+    'formTesting': 'formTesting',
+    'schemaValidation': 'schemaValidation',
+    'internalLinking': 'internalLinking',
+    'contentValidation': 'contentValidation',
+    'coreWebVitals': 'coreWebVitals'
+  };
+  
+  const mappedType = jobTypeMap[jobType] || jobType;
+  
+  if (jobResults[mappedType]) {
+    res.json(jobResults[mappedType].slice(0, limit));
+  } else {
+    res.status(404).json({ error: 'Job type not found' });
+  }
+});
+
+// API endpoint to view cron job results
+app.get('/api/cron/results', (req, res) => {
+  res.json({
+    success: true,
+    jobs: {
+      sslCheck: jobResults.sslCheck.slice(0, 10),
+      formTesting: jobResults.formTesting.slice(0, 10),
+      schemaValidation: jobResults.schemaValidation.slice(0, 10),
+      internalLinking: jobResults.internalLinking.slice(0, 10),
+      contentValidation: jobResults.contentValidation.slice(0, 10),
+      coreWebVitals: jobResults.coreWebVitals.slice(0, 10)
+    },
+    extendedJobsAvailable: extendedCronJobs !== null
+  });
+});
+
+// API endpoint to manually trigger a cron job (for testing)
+app.post('/api/cron/trigger/:jobName', async (req, res) => {
+  if (!extendedCronJobs) {
+    return res.status(503).json({
+      success: false,
+      message: 'Extended cron jobs not available. Copy kvi-cron-system-extended.js to jobs/ directory.'
+    });
+  }
+
+  const { jobName } = req.params;
+  const jobMap = {
+    'ssl': extendedCronJobs.checkSSLCertificate,
+    'forms': extendedCronJobs.testFormSubmissions,
+    'schema': extendedCronJobs.validateSchemaMarkup,
+    'links': extendedCronJobs.checkInternalLinking,
+    'content': extendedCronJobs.validateContent,
+    'vitals': extendedCronJobs.checkCoreWebVitals
+  };
+
+  const job = jobMap[jobName];
+  if (!job) {
+    return res.status(400).json({
+      success: false,
+      message: `Unknown job: ${jobName}. Available: ${Object.keys(jobMap).join(', ')}`
+    });
+  }
+
+  try {
+    const result = await job();
+    const resultKey = {
+      'ssl': 'sslCheck',
+      'forms': 'formTesting',
+      'schema': 'schemaValidation',
+      'links': 'internalLinking',
+      'content': 'contentValidation',
+      'vitals': 'coreWebVitals'
+    }[jobName];
+
+    jobResults[resultKey].unshift(result);
+    if (jobResults[resultKey].length > 50) jobResults[resultKey].pop();
+
+    res.json({
+      success: true,
+      job: jobName,
+      result: result
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// Manual trigger endpoints for React Dashboard
+app.post('/api/trigger/:jobType', async (req, res) => {
+  const { jobType } = req.params;
+  
+  if (!extendedCronJobs) {
+    return res.status(503).json({ error: 'Extended cron jobs not available' });
+  }
+  
+  try {
+    let result;
+    const jobMap = {
+      'backup': () => Promise.resolve({ status: 'not_implemented', message: 'Backup job not implemented in extended cron system' }),
+      'fourOhFour': () => Promise.resolve({ status: 'not_implemented', message: '404 check not implemented in extended cron system' }),
+      'phoneValidation': () => Promise.resolve({ status: 'not_implemented', message: 'Phone validation not implemented in extended cron system' }),
+      'ssl': () => extendedCronJobs.checkSSLCertificate(),
+      'forms': () => extendedCronJobs.testFormSubmissions(),
+      'schema': () => extendedCronJobs.validateSchemaMarkup(),
+      'links': () => extendedCronJobs.checkInternalLinking(),
+      'content': () => extendedCronJobs.validateContent(),
+      'vitals': () => extendedCronJobs.checkCoreWebVitals()
+    };
+    
+    const job = jobMap[jobType];
+    if (!job) {
+      return res.status(404).json({ error: 'Invalid job type' });
+    }
+    
+    result = await job();
+    
+    // Store result in appropriate array
+    const resultKeyMap = {
+      'ssl': 'sslCheck',
+      'forms': 'formTesting',
+      'schema': 'schemaValidation',
+      'links': 'internalLinking',
+      'content': 'contentValidation',
+      'vitals': 'coreWebVitals'
+    };
+    
+    const resultKey = resultKeyMap[jobType];
+    if (resultKey && jobResults[resultKey]) {
+      jobResults[resultKey].unshift(result);
+      if (jobResults[resultKey].length > 50) jobResults[resultKey].pop();
+    }
+    
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Route mapping for clean URLs
+const routeMap = {
+  // HOME
+  '/': 'index.html',
+  
+  // CRON DASHBOARD
+  '/cron-dashboard': 'cron-dashboard.html',
+  
+  // PROCEDURES - Laser Vision
+  '/procedures/laser-vision/smile-laser/': 'procedures/laser-vision/smile-page-complete.html',
+  '/procedures/laser-vision/lasik/': 'procedures/laser-vision/lasik-page-complete.html',
+  '/procedures/laser-vision/superlasik/': 'procedures/laser-vision/superlasik-no-cut-page.html',
+  '/procedures/laser-vision/asa/': 'procedures/laser-vision/asa_procedure_page_gen_z.html',
+  '/procedures/laser-vision/compare/': 'procedures/laser-vision/compare.html',
+  '/procedures/laser-vision/compare/pie-vs-evo-icl/': 'procedures/laser-vision/compare/pie-vs-evo-icl.html',
+  '/procedures/laser-vision/compare/presbyopic-iol/': 'procedures/laser-vision/compare/presbyopic-iol.html',
+  
+  // PROCEDURES - Lens Solutions
+  '/procedures/lens-solutions/evo-icl/': 'procedures/lens-solutions/evo-icl-service-page.html',
+  '/procedures/lens-solutions/pie/': 'procedures/lens-solutions/pie-rle-service-page.html',
+  '/procedures/lens-solutions/robotic-cataract-surgery/': 'procedures/lens-solutions/lensar-Robotic-Laser-cataract-surgery-page.html',
+  '/procedures/lens-solutions/which-lens-is-right/': 'procedures/lens-solutions/which-lens-is-right.html',
+  
+  // PROCEDURES - Specialty Treatments
+  '/procedures/specialty-treatments/cxl-keratoconus/': 'procedures/specialty-treatments/cxl-keratoconus-page.html',
+  '/procedures/specialty-treatments/ctak-keratoconus/': 'procedures/specialty-treatments/ctak-keratoconus-page.html',
+  '/procedures/specialty-treatments/pterygium-surgery/': 'procedures/specialty-treatments/Cosmetic Pterygium Surgery Restore Your Bright, Clear, Healthy-Looking Eyes.html',
+  '/procedures/specialty-treatments/dry-eye-solutions/': 'procedures/specialty-treatments/hello-dry-eye-treatment.html',
+  '/procedures/specialty-treatments/chalazion-treatment/': 'procedures/specialty-treatments/Advanced Chalazion Treatment.html',
+  
+  // TOOLS
+  '/tools/am-i-a-candidate/': 'critical-page-quiz.html',
+  '/tools/procedure-comparison/': 'procedures/laser-vision/compare.html',
+  
+  // BOOKING
+  '/book-consultation/': 'khanna-booking.html',
+  
+  // ABOUT - Dr. Khanna
+  '/about/dr-khanna/biography/': 'about/dr-khanna/biography.html',
+  '/about/dr-khanna/credentials-awards/': 'about/dr-khanna/credentials-awards.html',
+  '/about/dr-khanna/books/': 'about/dr-khanna/books.html',
+  '/about/dr-khanna/media/': 'about/dr-khanna/media.html',
+  
+  // ABOUT - Why Choose Us
+  '/about/why-choose-us/technology/': 'about/why-choose-us/Our technology.html',
+  '/about/why-choose-us/success-stories/': 'about/why-choose-us/success-stories.html',
+  '/about/why-choose-us/celebrity-patients/': 'about/why-choose-us/celebrity-patients.html',
+  '/about/why-choose-us/gallery/': 'about/why-choose-us/gallery.html',
+  
+  // ABOUT - Locations
+  '/about/locations/beverly-hills/': 'about/locations/beverly-hills-location.html',
+  '/about/locations/westlake-village/': 'about/locations/westlake-village-location.html',
+  
+  // PATIENTS - Your Journey
+  '/patients/your-journey/first-visit-guide/': 'patients/your-journey/first-visit-guide.html',
+  '/patients/your-journey/what-to-expect/': 'patients/your-journey/what-to-expect.html',
+  '/patients/your-journey/what-to-expect/lasik/': 'patients/your-journey/what-to-expect/lasik.html',
+  '/patients/your-journey/what-to-expect/smile/': 'patients/your-journey/what-to-expect/smile.html',
+  '/patients/your-journey/what-to-expect/cataract/': 'patients/your-journey/what-to-expect/cataract.html',
+  '/patients/your-journey/what-to-expect/cxl/': 'patients/your-journey/what-to-expect/cxl.html',
+  '/patients/your-journey/what-to-expect/pterygium/': 'patients/your-journey/what-to-expect/pterygium.html',
+  '/patients/your-journey/recovery-timeline/': 'patients/your-journey/recovery-timeline.html',
+  '/patients/your-journey/post-op-care/': 'patients/your-journey/post-op-care.html',
+  '/patients/your-journey/recovery/lasik/': 'patients/your-journey/recovery/lasik.html',
+  '/patients/your-journey/recovery/smile/': 'patients/your-journey/recovery/smile.html',
+  '/patients/your-journey/recovery/cataract/': 'patients/your-journey/recovery/cataract.html',
+  '/patients/your-journey/recovery/cxl/': 'patients/your-journey/recovery/cxl.html',
+  '/patients/your-journey/recovery/pterygium/': 'patients/your-journey/recovery/pterygium.html',
+  
+  // PATIENTS - Resources
+  '/patients/resources/faqs/': 'patients/resources/faqs/index.html',
+  '/patients/resources/faqs/smile/': 'patients/resources/faqs/smile.html',
+  '/patients/resources/faqs/lasik/': 'patients/resources/faqs/lasik.html',
+  '/patients/resources/faqs/cxl/': 'patients/resources/faqs/cxl.html',
+  '/patients/resources/faqs/ctak/': 'patients/resources/faqs/ctak.html',
+  '/patients/resources/faqs/pterygium-surgery/': 'patients/resources/faqs/pterygium-surgery.html',
+  '/patients/resources/faqs/robotic-laser-cataract/': 'patients/resources/faqs/robotic-laser-cataract.html',
+  '/patients/resources/faqs/yag-vitreolysis/': 'patients/resources/faqs/yag-vitreolysis.html',
+  '/patients/resources/financing-options/': 'patients/resources/All You Ever wanted to Know About financing.html',
+  '/patients/resources/insurance-info/': 'patients/resources/insurance-info.html',
+  '/patients/resources/forms/': 'patients/resources/forms.html',
+  
+  // PATIENTS - Results
+  '/patients/results/testimonials/': 'patients/results/testimonials.html',
+  '/patients/results/video-stories/': 'patients/results/video-stories.html',
+  '/patients/results/reviews/': 'patients/results/reviews.html',
+  
+  // PRICING & FINANCING
+  '/pricing-financing/procedure-costs/': 'pricing-financing/procedure-costs.html',
+  '/pricing-financing/insurance-coverage/': 'pricing-financing/insurance-coverage.html',
+  '/pricing-financing/calculator/': 'financing-calculator-page.html',
+  '/pricing-financing/special-offers/': 'pricing-financing/special-offers.html',
+  
+  // BLOGS - handled by blog router
+  '/blog/procedure-guides/': 'blog/procedure-guides.html',
+  
+  // CONTACT
+  '/contact/schedule-consultation/': 'khanna-booking.html',
+  '/contact/virtual-consultation/': 'contact/Virtual  IRl Consult.html',
+  '/contact/forms/': 'khanna-booking.html', // Display booking form but keep URL as /contact/forms/
+  '/contact/emergency-care/': 'contact/Emergence Care after eye surgery.html',
+  
+  // Legacy routes (keep for backward compatibility)
+  '/khanna-gamified-forms': 'khanna-gamified-forms.html',
+  '/schedule-consultation': 'khanna-booking.html',
+  '/khanna-booking': 'khanna-booking.html',
+  '/booking-success': 'booking-success.html',
+};
+
+// Strapi page slugs mapping (URL path -> Strapi slug)
+// Add pages here as you migrate them to Strapi
+const strapiPageSlugs = {
+  // Test URL - won't affect production page
+  '/test/smile-laser/': 'test-smile-laser-eye-surgery',
+  
+  // Production URLs - NOW LIVE with Strapi! (First 6)
+  '/procedures/laser-vision/smile-laser/': 'test-smile-laser-eye-surgery',
+  '/procedures/laser-vision/lasik/': 'lasik-eye-surgery',
+  '/procedures/lens-solutions/evo-icl/': 'evo-icl-surgery',
+  '/procedures/lens-solutions/robotic-cataract-surgery/': 'robotic-cataract-surgery',
+  '/procedures/laser-vision/superlasik/': 'superlasik-surgery',
+  '/procedures/lens-solutions/pie/': 'pie-rle-surgery',
+  
+  // Additional Procedure Pages (Batch 2 - 10 more pages)
+  '/procedures/laser-vision/asa/': 'asa-procedure',
+  '/procedures/laser-vision/compare/': 'procedure-comparison',
+  '/procedures/laser-vision/compare/pie-vs-evo-icl/': 'pie-vs-evo-icl-comparison',
+  '/procedures/laser-vision/compare/presbyopic-iol/': 'presbyopic-iol-comparison',
+  '/procedures/lens-solutions/which-lens-is-right/': 'which-lens-is-right',
+  '/procedures/specialty-treatments/cxl-keratoconus/': 'cxl-keratoconus-treatment',
+  '/procedures/specialty-treatments/ctak-keratoconus/': 'ctak-keratoconus-treatment',
+  '/procedures/specialty-treatments/pterygium-surgery/': 'pterygium-surgery',
+  '/procedures/specialty-treatments/dry-eye-solutions/': 'dry-eye-solutions',
+  '/procedures/specialty-treatments/chalazion-treatment/': 'chalazion-treatment',
+  
+  // About Pages (7 pages)
+  '/about/dr-khanna/biography/': 'dr-khanna-biography',
+  '/about/dr-khanna/credentials-awards/': 'dr-khanna-credentials-awards',
+  '/about/dr-khanna/books/': 'dr-khanna-books',
+  '/about/dr-khanna/media/': 'dr-khanna-media',
+  '/about/why-choose-us/technology/': 'our-technology',
+  '/about/locations/beverly-hills/': 'beverly-hills-location',
+  '/about/locations/westlake-village/': 'westlake-village-location',
+  
+  // Patient Resource Pages (19 pages)
+  '/patients/your-journey/what-to-expect/': 'what-to-expect',
+  '/patients/your-journey/recovery-timeline/': 'recovery-timeline',
+  '/patients/your-journey/post-op-care/': 'post-op-care',
+  '/patients/your-journey/what-to-expect/lasik/': 'what-to-expect-lasik',
+  '/patients/your-journey/what-to-expect/smile/': 'what-to-expect-smile',
+  '/patients/your-journey/what-to-expect/cataract/': 'what-to-expect-cataract',
+  '/patients/your-journey/what-to-expect/cxl/': 'what-to-expect-cxl',
+  '/patients/your-journey/what-to-expect/pterygium/': 'what-to-expect-pterygium',
+  '/patients/your-journey/recovery/lasik/': 'recovery-lasik',
+  '/patients/your-journey/recovery/smile/': 'recovery-smile',
+  '/patients/your-journey/recovery/cataract/': 'recovery-cataract',
+  '/patients/your-journey/recovery/cxl/': 'recovery-cxl',
+  '/patients/your-journey/recovery/pterygium/': 'recovery-pterygium',
+  '/patients/resources/faqs/': 'faqs-main',
+  '/patients/resources/faqs/smile/': 'faqs-smile',
+  '/patients/resources/faqs/lasik/': 'faqs-lasik',
+  '/patients/resources/faqs/cxl/': 'faqs-cxl',
+  '/patients/resources/faqs/ctak/': 'faqs-ctak',
+  '/patients/resources/faqs/pterygium-surgery/': 'faqs-pterygium',
+  '/patients/resources/faqs/robotic-laser-cataract/': 'faqs-robotic-cataract',
+  '/patients/resources/faqs/yag-vitreolysis/': 'faqs-yag-vitreolysis',
+  '/patients/resources/financing-options/': 'financing-options',
+
+  // Pricing & Financing
+  '/pricing-financing/procedure-costs/': 'procedure-costs',
+  '/pricing-financing/calculator/': 'financing-calculator',
+
+  // Contact Pages
+  '/contact/schedule-consultation/': 'contact-booking',
+  '/contact/forms/': 'contact-booking',
+  '/contact/virtual-consultation/': 'virtual-consultation',
+  '/contact/emergency-care/': 'emergency-care',
+};
+
+// Register all mapped routes (handle both with and without trailing slash)
+Object.entries(routeMap).forEach(([url, filePath]) => {
+  // Normalize file path to handle spaces and special characters
+  const normalizedFilePath = path.normalize(filePath);
+  
+  // Register route with trailing slash
+  app.get(url, async (req, res, next) => {
+    // Check if this route has a Strapi page
+    const strapiSlug = strapiPageSlugs[url];
+    
+    if (strapiSlug) {
+      try {
+        const pageData = await getPageBySlug(strapiSlug);
+        
+        if (pageData) {
+          // Render with Strapi data
+          return res.render(normalizedFilePath, { pageData });
+        }
+      } catch (error) {
+        console.error(`Error fetching Strapi page for ${url}:`, error.message);
+        // Fall through to static rendering
+      }
+    }
+    
+    // Fallback: render static file
+    const fullPath = path.join(__dirname, normalizedFilePath);
+    if (fs.existsSync(fullPath)) {
+      // Use normalized path but ensure we don't expose the actual file path in URL
+      renderView(normalizedFilePath, res, next);
+    } else {
+      // File doesn't exist but route is in menu - show coming soon page
+      renderView('coming-soon.html', res, next);
+    }
+});
+
+  // Also register without trailing slash (except for root)
+  if (url !== '/' && url.endsWith('/')) {
+    const urlWithoutSlash = url.slice(0, -1);
+    app.get(urlWithoutSlash, async (req, res, next) => {
+      // Check if this route has a Strapi page
+      const strapiSlug = strapiPageSlugs[url]; // Use original URL with slash
+      
+      if (strapiSlug) {
+        try {
+          const pageData = await getPageBySlug(strapiSlug);
+          
+          if (pageData) {
+            // Render with Strapi data
+            return res.render(normalizedFilePath, { pageData });
+          }
+        } catch (error) {
+          console.error(`Error fetching Strapi page for ${urlWithoutSlash}:`, error.message);
+          // Fall through to static rendering
+        }
+      }
+      
+      // Fallback: render static file
+      const fullPath = path.join(__dirname, normalizedFilePath);
+      if (fs.existsSync(fullPath)) {
+        renderView(normalizedFilePath, res, next);
+      } else {
+        // File doesn't exist but route is in menu - show coming soon page
+        renderView('coming-soon.html', res, next);
+      }
+    });
+  }
+});
+
+// Redirect old file-based URLs to new clean URLs
+const redirectMap = {
+  // Procedures - Laser Vision
+  '/procedures/laser-vision/smile-page-complete.html': '/procedures/laser-vision/smile-laser/',
+  '/procedures/laser-vision/smile-page-complete': '/procedures/laser-vision/smile-laser/',
+  '/procedures/laser-vision/lasik-page-complete.html': '/procedures/laser-vision/lasik/',
+  '/procedures/laser-vision/lasik-page-complete': '/procedures/laser-vision/lasik/',
+  '/procedures/laser-vision/superlasik-no-cut-page.html': '/procedures/laser-vision/superlasik/',
+  '/procedures/laser-vision/superlasik-no-cut-page': '/procedures/laser-vision/superlasik/',
+  '/procedures/laser-vision/asa_procedure_page_gen_z.html': '/procedures/laser-vision/asa/',
+  '/procedures/laser-vision/asa_procedure_page_gen_z': '/procedures/laser-vision/asa/',
+  
+  // Procedures - Lens Solutions
+  '/procedures/lens-solutions/evo-icl-service-page.html': '/procedures/lens-solutions/evo-icl/',
+  '/procedures/lens-solutions/evo-icl-service-page': '/procedures/lens-solutions/evo-icl/',
+  '/procedures/lens-solutions/pie-rle-service-page.html': '/procedures/lens-solutions/pie/',
+  '/procedures/lens-solutions/pie-rle-service-page': '/procedures/lens-solutions/pie/',
+  '/procedures/lens-solutions/lensar-Robotic-Laser-cataract-surgery-page.html': '/procedures/lens-solutions/robotic-cataract-surgery/',
+  '/procedures/lens-solutions/lensar-Robotic-Laser-cataract-surgery-page': '/procedures/lens-solutions/robotic-cataract-surgery/',
+  
+  // Procedures - Specialty Treatments
+  '/procedures/specialty-treatments/cxl-keratoconus-page.html': '/procedures/specialty-treatments/cxl-keratoconus/',
+  '/procedures/specialty-treatments/cxl-keratoconus-page': '/procedures/specialty-treatments/cxl-keratoconus/',
+  '/procedures/specialty-treatments/ctak-keratoconus-page.html': '/procedures/specialty-treatments/ctak-keratoconus/',
+  '/procedures/specialty-treatments/ctak-keratoconus-page': '/procedures/specialty-treatments/ctak-keratoconus/',
+  '/procedures/specialty-treatments/Cosmetic Pterygium Surgery Restore Your Bright, Clear, Healthy-Looking Eyes.html': '/procedures/specialty-treatments/pterygium-surgery/',
+  '/procedures/specialty-treatments/hello-dry-eye-treatment.html': '/procedures/specialty-treatments/dry-eye-solutions/',
+  '/procedures/specialty-treatments/hello-dry-eye-treatment': '/procedures/specialty-treatments/dry-eye-solutions/',
+  '/procedures/specialty-treatments/Advanced Chalazion Treatment.html': '/procedures/specialty-treatments/chalazion-treatment/',
+  
+  // Tools
+  '/critical-page-quiz.html': '/tools/am-i-a-candidate/',
+  '/critical-page-quiz': '/tools/am-i-a-candidate/',
+  
+  // Contact
+  '/contact/Virtual  IRl Consult.html': '/contact/virtual-consultation/',
+  '/contact/Emergence Care after eye surgery.html': '/contact/emergency-care/',
+  
+  // Patients Resources
+  '/patients/resources/All You Ever wanted to Know About financing.html': '/patients/resources/financing-options/',
+  
+  // FAQ Redirects
+  '/patients/resources/faqs/smile.html': '/patients/resources/faqs/smile/',
+  '/patients/resources/faqs/lasik.html': '/patients/resources/faqs/lasik/',
+  '/patients/resources/faqs/cxl.html': '/patients/resources/faqs/cxl/',
+  '/patients/resources/faqs/ctak.html': '/patients/resources/faqs/ctak/',
+  '/patients/resources/faqs/pterygium-surgery.html': '/patients/resources/faqs/pterygium-surgery/',
+  '/patients/resources/faqs/robotic-laser-cataract.html': '/patients/resources/faqs/robotic-laser-cataract/',
+  '/patients/resources/faqs/yag-vitreolysis.html': '/patients/resources/faqs/yag-vitreolysis/',
+  
+  // What to Expect Redirects
+  '/patients/your-journey/what-to-expect/lasik.html': '/patients/your-journey/what-to-expect/lasik/',
+  '/patients/your-journey/what-to-expect/smile.html': '/patients/your-journey/what-to-expect/smile/',
+  '/patients/your-journey/what-to-expect/cataract.html': '/patients/your-journey/what-to-expect/cataract/',
+  '/patients/your-journey/what-to-expect/cxl.html': '/patients/your-journey/what-to-expect/cxl/',
+  '/patients/your-journey/what-to-expect/pterygium.html': '/patients/your-journey/what-to-expect/pterygium/',
+  
+  // Pricing
+  '/financing-calculator-page.html': '/pricing-financing/calculator/',
+  '/financing-calculator-page': '/pricing-financing/calculator/',
+};
+
+// Register redirects
+Object.entries(redirectMap).forEach(([oldUrl, newUrl]) => {
+  app.get(oldUrl, (req, res) => {
+    res.redirect(301, newUrl);
+  });
+});
+
+// Blog routes (after specific routes to avoid conflicts, but exclude API routes)
+app.use((req, res, next) => {
+  // Skip blog routes for API endpoints
+  if (req.path.startsWith('/api/')) {
+    return next();
+  }
+  blogRoutes(req, res, next);
+});
+
+// Catch-all route for .html files to render with EJS (for includes)
+// Exclude our clean URL patterns to prevent conflicts
+app.get(/^(?!\/api)(?!\/public)(?!\/assets)(?!\/procedures\/laser-vision\/smile-laser)(?!\/procedures\/laser-vision\/lasik)(?!\/procedures\/laser-vision\/superlasik)(?!\/procedures\/laser-vision\/asa)(?!\/procedures\/laser-vision\/compare)(?!\/procedures\/lens-solutions\/evo-icl)(?!\/procedures\/lens-solutions\/pie)(?!\/procedures\/lens-solutions\/robotic-cataract-surgery)(?!\/procedures\/lens-solutions\/which-lens-is-right)(?!\/procedures\/specialty-treatments\/cxl-keratoconus)(?!\/procedures\/specialty-treatments\/ctak-keratoconus)(?!\/procedures\/specialty-treatments\/pterygium-surgery)(?!\/procedures\/specialty-treatments\/dry-eye-solutions)(?!\/procedures\/specialty-treatments\/chalazion-treatment).+\.html$/, (req, res, next) => {
+  const viewPath = resolveViewPath(req.path);
+  renderView(viewPath, res, next);
+});
+
+// Handle extension-less URLs by looking for matching HTML files
+// Exclude our clean URL patterns (procedures, about, patients, pricing-financing, blog, contact, tools, book-consultation, faqs)
+app.get(/^(?!\/api)(?!\/public)(?!\/assets)(?!\/procedures)(?!\/about)(?!\/patients)(?!\/pricing-financing)(?!\/blog)(?!\/contact)(?!\/tools)(?!\/book-consultation)(?!\/faq)(?!.*\.[a-zA-Z0-9]+).+$/, (req, res, next) => {
+  const viewPath = resolveViewPath(req.path, { ensureHtml: true });
+  renderView(viewPath, res, next);
+});
+
+// 404 handler (skip for API routes)
+app.use((req, res) => {
+  // For API routes, return JSON error
+  if (req.path.startsWith('/api/')) {
+    return res.status(404).json({ error: 'API endpoint not found' });
+  }
+  // For other routes, render 404 page
+  res.status(404);
+  renderView('404.html', res, () => {
+    res.status(404).send('Page not found');
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`KVI site running at http://localhost:${PORT}`);
+});

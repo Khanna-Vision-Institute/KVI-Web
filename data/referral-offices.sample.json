@@ -1,0 +1,26 @@
+{
+  "directoryPages": {
+    "HeritageFamily": {
+      "title": "Heritage referral partners",
+      "subtitle": "Choose your practice to open the physician referral worksheet with referring provider fields preloaded."
+    }
+  },
+  "aliases": {},
+  "offices": [
+    {
+      "slug": "century-city-optometry-dr-adrian-garcia",
+      "doctor_name": "Dr. Adrian Garcia",
+      "practice_name": "CENTURY CITY OPTOMETRY",
+      "credentials": "OD",
+      "doctor_npi": "",
+      "email": "",
+      "fax": "",
+      "address_street": "10250 Santa Monica Blvd Ste 170",
+      "address_line": "10250 Santa Monica Blvd Ste 170, Los Angeles, CA 90067",
+      "city": "Los Angeles",
+      "state_or_zip": "CA 90067",
+      "phone": "(310)277-3032",
+      "raw_block": "Dr. Adrian Garcia\nCENTURY CITY OPTOMETRY\n10250 Santa Monica Blvd Ste 170\nLos Angeles, CA 90067\n(310)277-3032"
+    }
+  ]
+}

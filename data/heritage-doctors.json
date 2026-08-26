@@ -1,0 +1,11 @@
+[
+  {
+    "practice_name": "CENTURY CITY OPTOMETRY",
+    "doctor_name": "Dr. Adrian Garcia",
+    "credentials": "OD",
+    "phone": "(310)277-3032",
+    "address_line": "10250 Santa Monica Blvd Ste 170, Los Angeles, CA 90067",
+    "raw_block": "Dr. Adrian Garcia\nCENTURY CITY OPTOMETRY\n10250 Santa Monica Blvd Ste 170\nLos Angeles, CA 90067\n(310)277-3032",
+    "directory_hubs": ["HeritageFamily"]
+  }
+]

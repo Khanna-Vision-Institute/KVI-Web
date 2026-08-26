@@ -1,0 +1,675 @@
+<!-- COMPLETE BOOKS BY DR. KHANNA PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e3a8a;
+            --accent-blue: #3b82f6;
+            --light-blue: #dbeafe;
+            --gold: #f59e0b;
+            --dark-gray: #1f2937;
+            --medium-gray: #6b7280;
+            --light-gray: #f3f4f6;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--dark-gray);
+            background-color: var(--white);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+            color: var(--white);
+            padding: 140px 20px 60px;
+            margin-top: 100px;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-section .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn-amazon {
+            background-color: var(--gold);
+            color: var(--dark-gray);
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+        }
+
+        .btn-amazon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .intro-section {
+            padding: 60px 20px;
+            background-color: var(--light-gray);
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .book-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .book-card h2 {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .book-card .book-subtitle {
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .book-card p {
+            margin-bottom: 20px;
+            color: var(--medium-gray);
+            line-height: 1.8;
+        }
+
+        .chapter-list {
+            margin-top: 30px;
+        }
+
+        .chapter-item {
+            background: var(--light-blue);
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .chapter-item h4 {
+            color: var(--primary-blue);
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .chapter-item p {
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        .quote-section {
+            background: linear-gradient(to right, var(--light-blue), var(--white));
+            padding: 60px 20px;
+        }
+
+        .quote-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid var(--gold);
+        }
+
+        .quote-card blockquote {
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--dark-gray);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .quote-card .quote-author {
+            font-weight: 700;
+            color: var(--primary-blue);
+            font-size: 1rem;
+        }
+
+        .author-section {
+            padding: 60px 20px;
+            background-color: var(--dark-gray);
+            color: var(--white);
+        }
+
+        .author-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .author-bio h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: var(--white);
+        }
+
+        .credentials {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+        }
+
+        .credentials h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .credentials ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .credentials li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .credentials li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .faq-section {
+            padding: 60px 20px;
+            background-color: var(--light-gray);
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 50px;
+        }
+
+        .faq-item {
+            background: var(--white);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        }
+
+        .faq-item h3 {
+            color: var(--primary-blue);
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .faq-item p {
+            color: var(--medium-gray);
+            line-height: 1.8;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--primary-blue) 100%);
+            color: var(--white);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 35px;
+            opacity: 0.95;
+        }
+
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .highlight-box h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .author-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+        }
+    
+</style>
+
+<!-- NOW THE HTML CONTENT STARTS -->
+
+<!-- Navigation Header -->
+    
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1>Published Works by Dr. Rajesh Khanna, MD</h1>
+            <p class="subtitle">Authoritative guides to cutting-edge vision correction procedures, backed by 50,000+ successful surgeries and three decades of clinical excellence</p>
+            <div class="hero-cta">
+                <a href="https://www.amazon.com" class="btn-amazon" target="_blank">Available on Amazon</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="intro-section">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--primary-blue); font-size: 2.5rem; margin-bottom: 30px;">Two Essential Books for Modern Vision Correction</h2>
+            <p style="text-align: center; max-width: 900px; margin: 0 auto 40px; font-size: 1.15rem; color: var(--medium-gray);">
+                Dr. Rajesh Khanna has authored two comprehensive guides that demystify the latest advances in laser vision correction and presbyopia treatment. These books combine clinical expertise with patient-centered education, providing the detailed knowledge you need to make informed decisions about your vision.
+            </p>
+
+            <div class="books-grid">
+                <!-- SMILE Book Card -->
+                <div class="book-card">
+                    <h2>SMILE Laser Eye Surgery</h2>
+                    <p class="book-subtitle">Next Generation LASIK</p>
+                    <p><strong>First Edition | Available on Amazon</strong></p>
+                    <p>Discover why SMILE (Small Incision Lenticule Extraction) represents the most significant advancement in laser vision correction since LASIK. This comprehensive guide takes you through the revolutionary flapless procedure that's changing how surgeons approach myopia and astigmatism correction.</p>
+                    
+                    <div class="highlight-box">
+                        <h3>What Makes SMILE Superior?</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 8px 0;">✓ Only 2-4mm incision vs. LASIK's 18-20mm flap</li>
+                            <li style="padding: 8px 0;">✓ Fully robotic 5-minute procedure</li>
+                            <li style="padding: 8px 0;">✓ Minimal dry eyes and faster recovery</li>
+                            <li style="padding: 8px 0;">✓ Safe for contact sports and water activities</li>
+                            <li style="padding: 8px 0;">✓ Enhanced corneal stability</li>
+                        </ul>
+                    </div>
+
+                    <div class="chapter-list">
+                        <h3 style="color: var(--primary-blue); margin-bottom: 20px; font-size: 1.5rem;">Chapter-by-Chapter Insights</h3>
+                        
+                        <div class="chapter-item">
+                            <h4>Chapter 1: Let's Learn About SMILE</h4>
+                            <p>Introduction to Small Incision Lenticule Extraction and why it puts a SMILE on your face. Explores the evolution from glasses and contacts to radial keratotomy, LASIK, and now SMILE as the next-generation solution for visual freedom.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 2: Optics of SMILE</h4>
+                            <p>Detailed explanation of how the femtosecond laser creates a disc-shaped lenticule inside the cornea, the physics behind vision correction, and how SMILE's approach differs from surface-based procedures. Includes technical diagrams that make complex optical principles accessible.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 3: Are You a Good Candidate?</h4>
+                            <p>Comprehensive candidacy criteria including age requirements (18+), prescription ranges for myopia and astigmatism, corneal thickness considerations, and conditions that may disqualify candidates. Helps readers determine if SMILE is right for their unique situation.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 4: Advantages of SMILE</h4>
+                            <p>In-depth analysis of SMILE's six key benefits: minimally invasive approach, no flap creation, minimal dry eyes, enhanced corneal stability, and quick recovery. Explains why each advantage matters for long-term visual outcomes and lifestyle compatibility.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 5: Removing Barriers Before the Procedure</h4>
+                            <p>Practical guidance on preparing for SMILE surgery, including discontinuing contact lens wear, understanding insurance and HSA/FSA options, and addressing common fears and misconceptions about laser eye surgery.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 6: SMILE Procedure</h4>
+                            <p>Step-by-step walkthrough of the actual SMILE procedure, from pre-operative preparations through the 5-minute robotic laser process to immediate post-operative care. Demystifies what happens in the surgical suite to reduce anxiety.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 7: After SMILE Laser Eye Surgery</h4>
+                            <p>Detailed recovery timeline showing what to expect in the first 24 hours, week, and month post-procedure. Includes activity restrictions, medication protocols, and signs of normal healing versus complications requiring attention.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 8: LASIK vs. SMILE</h4>
+                            <p>Comprehensive comparison showing why SMILE is safer than LASIK across five critical metrics: no early flap complications, minimal dry eyes, faster recovery, enhanced corneal stability, and reduced infection risk from smaller incisions.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 9: PRK, EVO, PIE & Other Alternatives</h4>
+                            <p>Overview of alternative vision correction procedures including PRK (surface ablation), EVO ICL (implantable contact lenses), and PIE (Presbyopic Implants in Eye). Helps readers understand when each procedure might be more appropriate than SMILE.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 10: What Real Patients Say</h4>
+                            <p>Authentic success stories from diverse patients including a pickleball player, Olympic diver, attorney, dental student, golfer, award-winning cameraman, CPA, and interventional radiologist. Demonstrates SMILE's impact across various professions and lifestyles.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 11-13: Special Considerations</h4>
+                            <p>Advanced topics including SMILE after previous eye surgeries, management of dry eyes and pterygium, and honest discussion of risks and complications with strategies for prevention and mitigation.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 14-17: Resources & Conclusion</h4>
+                            <p>Frequently asked questions, concluding thoughts on SMILE's revolutionary impact, author biography highlighting Dr. Khanna's extensive credentials, and comprehensive glossary of vision correction terminology.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PIE Book Card -->
+                <div class="book-card">
+                    <h2>Rejuvenating Aging Eyes</h2>
+                    <p class="book-subtitle">The Miracle of PIE</p>
+                    <p><strong>Published 2020 | Available on Amazon</strong></p>
+                    <p>After 45, presbyopia affects nearly everyone—that frustrating moment when reading glasses become necessary. This groundbreaking book reveals how PIE (Presbyopic Implant in Eye) offers a permanent solution superior to both LASIK and traditional cataract surgery for aging vision.</p>
+                    
+                    <div class="highlight-box">
+                        <h3>Why PIE Changes Everything</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 8px 0;">✓ Permanent presbyopia correction</li>
+                            <li style="padding: 8px 0;">✓ Eliminates reading glasses forever</li>
+                            <li style="padding: 8px 0;">✓ Superior to LASIK for patients over 45</li>
+                            <li style="padding: 8px 0;">✓ Advanced implant technology</li>
+                            <li style="padding: 8px 0;">✓ Full-range vision at all distances</li>
+                        </ul>
+                    </div>
+
+                    <div class="chapter-list">
+                        <h3 style="color: var(--primary-blue); margin-bottom: 20px; font-size: 1.5rem;">Comprehensive Chapter Guide</h3>
+                        
+                        <div class="chapter-item">
+                            <h4>Chapter 1: Understanding Vision & Aging Eyes</h4>
+                            <p>Explores the fascinating evolution of human vision and why eyes age. Explains the science of how light carries information, how the eye and brain work in tandem, and the inevitable changes that occur after 40 leading to presbyopia.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 2: Presbyopia and Non-Surgical Treatment</h4>
+                            <p>Detailed examination of presbyopia—the age-dependent need for reading glasses—and conventional solutions including reading glasses, bifocals, progressive lenses, and monovision contact lenses. Discusses why these temporary solutions fall short.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 3: PIE - Cure Presbyopia Permanently</h4>
+                            <p>Introduction to Presbyopic Implant in Eye (PIE) surgery as the definitive permanent solution. Explains how replacing the aging natural lens with advanced presbyopic implants restores youthful vision across all distances without glasses dependency.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 4: Advantages of PIE</h4>
+                            <p>Comprehensive analysis of PIE's benefits over both LASIK and standard cataract surgery, including permanent presbyopia correction, prevention of future cataracts, potential astigmatism correction, and restoration of youthful accommodation range.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 5: Contemplating PIE & Consultation</h4>
+                            <p>Guides readers through the decision-making process with detailed consultation information, candidacy evaluation criteria, pre-operative testing requirements, and questions to ask your surgeon to ensure optimal outcomes.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 6: PIE Procedure</h4>
+                            <p>Step-by-step explanation of the surgical process, including femtosecond laser pre-treatment, phacoemulsification techniques for lens removal, and precision implant insertion. Includes discussion of both traditional and laser-assisted approaches.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 7: Choosing the Best Presbyopic Implant</h4>
+                            <p>Critical chapter comparing different implant classes: Crystalens (accommodating), Tecnis and Restor (multifocal), Symfony (extended depth of focus), and Panoptix (trifocal). Provides decision framework matching implants to lifestyle and visual priorities.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 8: Success Stories</h4>
+                            <p>Inspiring testimonials from physicians, medical personnel, attorneys, educators, artists, and patients from diverse backgrounds. Demonstrates PIE's transformative impact across professions, hobbies, and daily activities requiring clear vision at all distances.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 9: PIE After Previous Surgeries</h4>
+                            <p>Specialized guidance for patients who've had prior LASIK, radial keratotomy (RK), or other refractive surgeries. Explains how PIE can still achieve excellent outcomes with proper planning and technique modifications.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 10: Neuroadaptation & Fine-Tuning</h4>
+                            <p>Revolutionary concept explaining how the brain learns to optimize vision with presbyopic implants. Discusses the neuroadaptation timeline, what to expect during the adjustment period, and strategies to accelerate visual optimization.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 11: Astigmatism Management</h4>
+                            <p>Technical discussion of toric implants for correcting astigmatism during PIE surgery, limbal relaxing incisions (LRI), and other techniques to ensure excellent uncorrected vision in patients with corneal astigmatism.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 12: Dry Eyes</h4>
+                            <p>Comprehensive overview of dry eye syndrome, its causes, symptoms, and treatments. Explains the relationship between dry eyes and vision correction procedures, with strategies for managing dry eyes before, during, and after PIE.</p>
+                        </div>
+
+                        <div class="chapter-item">
+                            <h4>Chapter 13: Risks and Complications</h4>
+                            <p>Honest, detailed discussion of potential complications including infection, inflammation, secondary membrane formation, and implant-related issues. Emphasizes prevention strategies and how experienced surgeons minimize risks through advanced techniques.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Patient Testimonials Section -->
+    <section class="quote-section">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--primary-blue); font-size: 2.5rem; margin-bottom: 40px;">What Patients Are Saying</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; font-size: 1.1rem; color: var(--medium-gray);">Real success stories from Dr. Khanna's books demonstrate the life-changing impact of advanced vision correction</p>
+
+            <div class="quote-card">
+                <blockquote>
+                    "I was tired of the daily hassles of glasses and contact lenses. I play in the open-air courts. There the wind would bother my eyes when wearing contacts. SMILE appealed to me with safety and being flapless yet fast recovery. I underwent SMILE surgery at Khanna Vision Institute. Believe it or not, I was back at the court in 3 days! Within a month I left the beginner courts and started playing in the Challenge advanced courts."
+                </blockquote>
+                <div class="quote-author">— Debbie, Pickleball Player (SMILE Patient)</div>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    "College is 99% inspiration and 1% perspiration. People forget it is 100% vision. As a student juggling work, studies and sports the hassle of remembering to take care of contacts was a struggle. Glasses fogged up from the marine layer on the coast Santa Monica. SMILE surgery has provided me with clear vision - 20/15 each eye, which is a line better than 20/20. I finally have a great work life balance."
+                </blockquote>
+                <div class="quote-author">— Dina, Dental Student (SMILE Patient)</div>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    "I have been an avid golfer from as long as I can remember. At one point my golf game started deteriorating. I thought my clubs had got spoiled, having been exposed to the extreme climate at Big Bear. So I threw them away and bought a brand-new set. The scores still did not improve. I was on to my third set when I bumped into Dr Khanna who suggested a vision check. That brought out my visual deficiency. Rather than experiment with contacts and glasses, I opted for SMILE laser vision surgery. Not only did my scores recover they surpassed previous levels. I often wonder if I had done SMILE sooner, I could have saved a lot of clubs."
+                </blockquote>
+                <div class="quote-author">— Patrick, Professional Golfer (SMILE Patient)</div>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    "Interventional radiology requires a doctor to look at the screen, while manipulating the probe. Glasses hamper looking down at the probe and then quickly up at the monitoring screen. SMILE made my life and profession so much easier."
+                </blockquote>
+                <div class="quote-author">— Dr. P.A., Interventional Radiologist (SMILE Patient)</div>
+            </div>
+
+            <div class="quote-card">
+                <blockquote>
+                    "I am an award-winning cameraman. My glasses kept fogging up from the high intense lights at the movie shoot. Contact lenses were worse. At that frustrating juncture, I read Dr. Khanna's amazing book. It was intriguing to learn how much common was between my eyes and the professional cameras I use. SMILE has helped me see better through the camera in all types of lighting."
+                </blockquote>
+                <div class="quote-author">— Nick, Award-Winning Cameraman (SMILE Patient)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Author Section -->
+    <section class="author-section">
+        <div class="container">
+            <div class="author-content">
+                <div class="author-image">
+                    <div style="background: rgba(255,255,255,0.1); padding: 40px; border-radius: 12px; text-align: center;">
+                        <h3 style="color: var(--gold); font-size: 1.8rem; margin-bottom: 15px;">50,000+</h3>
+                        <p style="font-size: 1.1rem;">Successful Procedures</p>
+                        <h3 style="color: var(--gold); font-size: 1.8rem; margin: 25px 0 15px;">30+</h3>
+                        <p style="font-size: 1.1rem;">Years Clinical Experience</p>
+                        <h3 style="color: var(--gold); font-size: 1.8rem; margin: 25px 0 15px;">2</h3>
+                        <p style="font-size: 1.1rem;">Published Books</p>
+                    </div>
+                </div>
+                <div class="author-bio">
+                    <h2>About Dr. Rajesh Khanna, MD</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 25px;">
+                        Dr. Rajesh Khanna is a fellowship-trained corneal and refractive surgeon who has dedicated his career to advancing the art and science of vision correction. His extensive training and clinical experience have established him as one of the leading authorities in cutting-edge procedures including SMILE, EVO ICL, and PIE surgery.
+                    </p>
+                    
+                    <div class="credentials">
+                        <h3>Education & Training</h3>
+                        <ul>
+                            <li>Fellowship in Corneal and Refractive Surgery, University of Cincinnati</li>
+                            <li>Ophthalmology Residency, SUNY Downstate Medical Center, New York</li>
+                            <li>Over 50,000 vision correction procedures performed</li>
+                        </ul>
+                    </div>
+
+                    <div class="credentials">
+                        <h3>Clinical Practice</h3>
+                        <ul>
+                            <li>Founder, Khanna Vision Institute (Beverly Hills & Westlake Village)</li>
+                            <li>Specializes in SMILE, LASIK, EVO ICL, PIE, and keratoconus treatment</li>
+                            <li>Featured in Beverly Hills Times</li>
+                            <li>Trusted by celebrity patients including Brenda Song and Corbin Bleu</li>
+                        </ul>
+                    </div>
+
+                    <div class="credentials">
+                        <h3>Published Works</h3>
+                        <ul>
+                            <li>"SMILE Laser Eye Surgery: Next Gen LASIK" - First Edition</li>
+                            <li>"Rejuvenating Aging Eyes: The Miracle of PIE" - Published 2020</li>
+                            <li>Both available on Amazon</li>
+                        </ul>
+                    </div>
+
+                    <p style="font-size: 1.05rem; margin-top: 25px; font-style: italic;">
+                        Dr. Khanna's approach combines surgical precision with a passion for patient education, ensuring individuals make fully informed decisions about their vision. His commitment to excellence has established Khanna Vision Institute as a premier destination for those seeking the highest standard of care in vision correction.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3>What is Dr. Khanna's SMILE book about?</h3>
+                <p>"SMILE Laser Eye Surgery: Next Gen LASIK" is a comprehensive guide to Small Incision Lenticule Extraction, covering how SMILE's minimally invasive flapless approach offers superior safety compared to traditional LASIK. The book includes detailed chapters on optical principles, candidacy criteria, advantages, step-by-step procedure explanations, and real patient success stories from diverse professions and lifestyles.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Who should read the PIE book?</h3>
+                <p>"Rejuvenating Aging Eyes: The Miracle of PIE" is essential reading for anyone over 45 experiencing presbyopia (age-related reading vision loss), those considering cataract surgery, patients who want to eliminate reading glasses permanently, and individuals seeking to understand advanced presbyopic implant options. The book provides detailed comparisons of different implant types and helps readers match solutions to their lifestyle needs.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Where can I purchase Dr. Khanna's books?</h3>
+                <p>Both "SMILE Laser Eye Surgery: Next Gen LASIK" and "Rejuvenating Aging Eyes: The Miracle of PIE" are available for purchase on Amazon in paperback format. Search for "Dr. Rajesh Khanna" or the book titles to find them.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What makes Dr. Khanna qualified to write these books?</h3>
+                <p>Dr. Rajesh Khanna completed fellowship training in corneal and refractive surgery at the University of Cincinnati following his ophthalmology residency at SUNY Downstate Medical Center in New York. He has performed over 50,000 vision correction procedures during his three-decade career. His extensive clinical experience, combined with his dedication to patient education, makes him uniquely qualified to author these comprehensive guides that translate complex medical concepts into accessible information.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Do the books include patient testimonials?</h3>
+                <p>Yes! Both books feature extensive real patient success stories. The SMILE book includes testimonials from a pickleball player, Olympic diver trainee, attorney, dental student, golfer, award-winning cameraman, CPA, and interventional radiologist. The PIE book showcases success stories from physicians, medical personnel, attorneys, educators, artists, and patients from diverse backgrounds, demonstrating the transformative impact across various professions and lifestyles.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Are the books technical or easy to understand?</h3>
+                <p>Dr. Khanna wrote both books to be accessible to general readers while maintaining scientific accuracy. Complex optical principles and surgical techniques are explained using clear language, helpful diagrams, and relatable analogies. Both books include comprehensive glossaries to help readers understand medical terminology. Whether you're a prospective patient or medical professional seeking to expand your knowledge, the books balance depth with readability.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Do the books discuss risks and complications?</h3>
+                <p>Yes, both books include dedicated chapters on risks and complications. Dr. Khanna provides honest, detailed discussions of potential issues while emphasizing prevention strategies and how experienced surgeons minimize risks through advanced techniques. This transparent approach helps readers make fully informed decisions about their vision correction options.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can I schedule a consultation after reading the books?</h3>
+                <p>Absolutely! Many patients find that reading Dr. Khanna's books helps them prepare informed questions for their consultation. You can schedule a consultation at Khanna Vision Institute in Beverly Hills (310-482-1240) or Westlake Village (805-230-2126) to discuss which procedure—SMILE, PIE, EVO ICL, or another option—is best for your unique vision needs and lifestyle.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Invest in Your Vision Education Today</h2>
+            <p>Join thousands of readers who have discovered the latest advances in vision correction through Dr. Khanna's authoritative guides</p>
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+                <a href="https://www.amazon.com" class="btn-amazon" target="_blank">Order SMILE Book on Amazon</a>
+                <a href="https://www.amazon.com" class="btn-amazon" target="_blank">Order PIE Book on Amazon</a>
+            </div>
+            <p style="margin-top: 40px; font-size: 1rem; opacity: 0.9;">
+                Ready to take the next step? Schedule your consultation at Khanna Vision Institute<br>
+                <strong>Beverly Hills:</strong> (310) 482-1240 | <strong>Westlake Village:</strong> (805) 230-2126
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->

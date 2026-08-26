@@ -1,0 +1,210 @@
+{
+  "enrollments": [
+    {
+      "id": "940ea19526c2962a",
+      "status": "cancelled",
+      "enrolledAt": "2026-06-23T15:27:01.141Z",
+      "email": "kapil@khannavision.com",
+      "lead": {
+        "fullName": "Kapil",
+        "email": "kapil@khannavision.com",
+        "phone": "+18059061634",
+        "location": "Beverly Hills"
+      },
+      "jobs": [
+        {
+          "id": "8f1a73466b93a7e1",
+          "type": "sms_day0",
+          "dueAt": "2026-06-23T20:00:00.000Z",
+          "status": "skipped",
+          "attempts": 0,
+          "detail": "test_reschedule",
+          "completedAt": "2026-06-23T15:27:47.100Z"
+        },
+        {
+          "id": "c0df89a88572c0e6",
+          "type": "sms_day1",
+          "dueAt": "2026-06-24T20:00:00.000Z",
+          "status": "skipped",
+          "attempts": 0,
+          "detail": "test_reschedule",
+          "completedAt": "2026-06-23T15:27:47.100Z"
+        },
+        {
+          "id": "64097dcd28b1d764",
+          "type": "sms_day2",
+          "dueAt": "2026-06-25T20:00:00.000Z",
+          "status": "skipped",
+          "attempts": 0,
+          "detail": "test_reschedule",
+          "completedAt": "2026-06-23T15:27:47.100Z"
+        },
+        {
+          "id": "5047ba02c0cf665b",
+          "type": "sms_day3",
+          "dueAt": "2026-06-26T20:00:00.000Z",
+          "status": "skipped",
+          "attempts": 0,
+          "detail": "test_reschedule",
+          "completedAt": "2026-06-23T15:27:47.100Z"
+        },
+        {
+          "id": "7efee9da41482194",
+          "type": "email_day3",
+          "dueAt": "2026-06-26T20:15:00.000Z",
+          "status": "skipped",
+          "attempts": 0,
+          "detail": "test_reschedule",
+          "completedAt": "2026-06-23T15:27:47.100Z"
+        },
+        {
+          "id": "7b6f6c6d1f987877",
+          "type": "sms_day5",
+          "dueAt": "2026-06-28T20:00:00.000Z",
+          "status": "skipped",
+          "attempts": 0,
+          "detail": "test_reschedule",
+          "completedAt": "2026-06-23T15:27:47.100Z"
+        },
+        {
+          "id": "7c57d3ffec95f0e9",
+          "type": "call_day5",
+          "dueAt": "2026-06-28T20:05:00.000Z",
+          "status": "skipped",
+          "attempts": 0,
+          "detail": "test_reschedule",
+          "completedAt": "2026-06-23T15:27:47.100Z"
+        },
+        {
+          "id": "c83fb2022c29849c",
+          "type": "sms_day7",
+          "dueAt": "2026-06-30T20:00:00.000Z",
+          "status": "skipped",
+          "attempts": 0,
+          "detail": "test_reschedule",
+          "completedAt": "2026-06-23T15:27:47.100Z"
+        },
+        {
+          "id": "67369b9227011a4c",
+          "type": "call_day7",
+          "dueAt": "2026-06-30T20:05:00.000Z",
+          "status": "skipped",
+          "attempts": 0,
+          "detail": "test_reschedule",
+          "completedAt": "2026-06-23T15:27:47.100Z"
+        },
+        {
+          "id": "29cdb6293e11c5a7",
+          "type": "sms_day10",
+          "dueAt": "2026-07-03T20:00:00.000Z",
+          "status": "skipped",
+          "attempts": 0,
+          "detail": "test_reschedule",
+          "completedAt": "2026-06-23T15:27:47.100Z"
+        },
+        {
+          "id": "fe733c5fe77dd957",
+          "type": "sms_day14",
+          "dueAt": "2026-07-07T20:00:00.000Z",
+          "status": "skipped",
+          "attempts": 0,
+          "detail": "test_reschedule",
+          "completedAt": "2026-06-23T15:27:47.100Z"
+        }
+      ],
+      "cancelledAt": "2026-06-23T15:27:47.100Z",
+      "cancelReason": "test_reschedule"
+    },
+    {
+      "id": "919dcb6ccae37faa",
+      "status": "active",
+      "enrolledAt": "2026-06-23T15:27:47.114Z",
+      "email": "kapil@khannavision.com",
+      "lead": {
+        "fullName": "Kapil",
+        "email": "kapil@khannavision.com",
+        "phone": "+18059061634",
+        "location": "Beverly Hills"
+      },
+      "jobs": [
+        {
+          "id": "1a31bbcd37ecccc1",
+          "type": "sms_day0",
+          "dueAt": "2026-06-23T18:25:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "c488572bb42de78b",
+          "type": "sms_day1",
+          "dueAt": "2026-06-23T18:30:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "7e207e28353af323",
+          "type": "sms_day2",
+          "dueAt": "2026-06-23T18:35:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "7e4b5aae75166480",
+          "type": "sms_day3",
+          "dueAt": "2026-06-23T18:40:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "190f0e3aed258a00",
+          "type": "email_day3",
+          "dueAt": "2026-06-23T18:45:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "1eb75a44a2186d9b",
+          "type": "sms_day5",
+          "dueAt": "2026-06-23T18:50:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "c3396577758039c7",
+          "type": "call_day5",
+          "dueAt": "2026-06-23T18:55:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "32f1e6fa1f5b9d68",
+          "type": "sms_day7",
+          "dueAt": "2026-06-23T19:00:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "927580e49babe956",
+          "type": "call_day7",
+          "dueAt": "2026-06-23T19:05:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "13f61484e01b4dab",
+          "type": "sms_day10",
+          "dueAt": "2026-06-23T19:10:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "24d5000440c76d37",
+          "type": "sms_day14",
+          "dueAt": "2026-06-23T19:15:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        }
+      ]
+    }
+  ]
+}

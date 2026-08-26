@@ -1,0 +1,887 @@
+<!-- COMPLETE WHICH LENS PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #2563eb;
+            --accent-teal: #0891b2;
+            --dark-blue: #1e3a8a;
+            --light-gray: #f8fafc;
+            --medium-gray: #e2e8f0;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --success-green: #10b981;
+            --warning-amber: #f59e0b;
+            --error-red: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            margin-top: 120px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: drift 20s linear infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .header .tagline {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            background: rgba(255,255,255,0.2);
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Content */
+        .content {
+            padding: 60px 40px;
+        }
+
+        .intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--dark-blue);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '👁️';
+            font-size: 2.5rem;
+        }
+
+        /* Framework Box */
+        .framework-box {
+            background: linear-gradient(135deg, var(--light-gray) 0%, #e0e7ff 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid var(--primary-blue);
+            margin-bottom: 30px;
+        }
+
+        .framework-box h3 {
+            color: var(--dark-blue);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .framework-box p {
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+
+        /* IOL Cards */
+        .iol-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .iol-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid var(--primary-blue);
+        }
+
+        .iol-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .iol-card.recommended {
+            border-top-color: var(--success-green);
+            background: linear-gradient(to bottom, #f0fdf4 0%, white 100%);
+        }
+
+        .iol-card.recommended::before {
+            content: '⭐ RECOMMENDED';
+            display: block;
+            background: var(--success-green);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .iol-card h3 {
+            font-size: 1.5rem;
+            color: var(--dark-blue);
+            margin-bottom: 10px;
+        }
+
+        .iol-card .lens-type {
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .iol-card h4 {
+            color: var(--primary-blue);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .iol-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .iol-card ul li {
+            padding: 8px 0 8px 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .iol-card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .iol-card .concern {
+            background: #fef2f2;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid var(--error-red);
+            margin-top: 15px;
+        }
+
+        .iol-card .concern::before {
+            content: '⚠️ ';
+        }
+
+        .iol-card .best-for {
+            background: #eff6ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+
+        .iol-card .best-for::before {
+            content: '👤 Best for: ';
+            font-weight: 700;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            overflow-x: auto;
+            margin: 40px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            color: white;
+        }
+
+        th {
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        td {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        tr:hover {
+            background: var(--light-gray);
+        }
+
+        /* Decision Framework */
+        .decision-framework {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .question-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .question-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .question-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .question-card ul li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .question-card ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Callout Box */
+        .callout {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid var(--warning-amber);
+            margin: 40px 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+            box-shadow: 0 5px 20px rgba(245, 158, 11, 0.2);
+        }
+
+        .callout::before {
+            content: '💡 ';
+            font-size: 1.5rem;
+        }
+
+        /* Bottom Line Box */
+        .bottom-line {
+            background: linear-gradient(135deg, var(--success-green) 0%, #059669 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .bottom-line h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .bottom-line ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .bottom-line ul li {
+            padding: 10px 0;
+            padding-left: 35px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        .bottom-line ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            margin-top: 60px;
+            border-radius: 15px;
+        }
+
+        .cta-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary-blue);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-blue);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .footer .locations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer .location {
+            padding: 20px;
+        }
+
+        .footer .location h4 {
+            color: var(--accent-teal);
+            margin-bottom: 10px;
+        }
+
+        .footer .location p {
+            margin: 5px 0;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header .subtitle {
+                font-size: 1rem;
+            }
+
+            .content {
+                padding: 40px 20px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .iol-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .decision-framework {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeIn 0.6s ease-out;
+        }
+    
+</style>
+
+<!-- NOW THE HTML CONTENT STARTS -->
+
+<!-- Navigation Header -->
+    
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <h1>Presbyopic IOL Comparison Guide</h1>
+                <p class="subtitle">Making the Complex Decision Simple for Gen X Patients</p>
+                <p class="tagline">Data-Driven Analysis from Dr. Rajesh Khanna</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <div class="intro">
+                <p><strong>Research-minded decision making for your vision correction.</strong> This comprehensive guide breaks down the technical details into clear comparisons so you can make an informed choice about your presbyopic lens implant.</p>
+            </div>
+
+            <!-- The Framework -->
+            <section class="section">
+                <h2 class="section-title">The "Smartphone Evolution" Framework</h2>
+                
+                <div class="framework-box">
+                    <h3>📱 Tecnis Platform (Odyssey) = iOS Ecosystem</h3>
+                    <p><strong>20+ years proven technology platform</strong></p>
+                    <ul>
+                        <li>Consistent, predictable performance</li>
+                        <li>Most surgeons trained on it</li>
+                        <li>Extensive real-world outcomes data</li>
+                        <li>Continuous refinement of proven design</li>
+                    </ul>
+                </div>
+
+                <div class="framework-box">
+                    <h3>📱 Newer Options = Android Variants</h3>
+                    <p><strong>Innovative features, shorter track records</strong></p>
+                    <ul>
+                        <li>Less surgeon familiarity = learning curve risks</li>
+                        <li>Fewer long-term outcome studies</li>
+                        <li>Your eyes are the "beta test"</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- IOL Comparison Cards -->
+            <section class="section">
+                <h2 class="section-title">Detailed Lens Comparison</h2>
+
+                <div class="iol-grid">
+                    <!-- Odyssey -->
+                    <div class="iol-card recommended">
+                        <h3>Tecnis Odyssey</h3>
+                        <p class="lens-type">The "Gold Standard Plus"</p>
+                        
+                        <h4>Why the Track Record Matters:</h4>
+                        <ul>
+                            <li><strong>20M+ Tecnis lenses</strong> implanted globally since 1998</li>
+                            <li>Latest evolution of most-studied IOL platform</li>
+                            <li>Like buying Honda's newest Accord vs. brand-new car company</li>
+                        </ul>
+
+                        <h4>Key Advantages:</h4>
+                        <ul>
+                            <li><strong>Continuous vision range:</strong> 20/20 distance, 20/25 intermediate, 20/30 near - no "gaps"</li>
+                            <li><strong>Low light performance:</strong> Superior contrast sensitivity</li>
+                            <li><strong>Fast adaptation:</strong> 92% within 1-2 weeks</li>
+                            <li><strong>Low revision rate:</strong> <2% enhancement needed</li>
+                        </ul>
+
+                        <div class="best-for">Working professionals who drive at night, use computers extensively, and value proven outcomes</div>
+                    </div>
+
+                    <!-- Panoptix -->
+                    <div class="iol-card">
+                        <h3>Panoptix Pro</h3>
+                        <p class="lens-type">The "Feature-Rich Alternative"</p>
+                        
+                        <h4>What They Claim:</h4>
+                        <ul>
+                            <li>Trifocal design for three distinct focal points</li>
+                            <li>Strong near vision for reading</li>
+                        </ul>
+
+                        <div class="concern">
+                            <strong>Reality for Gen X:</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>More "halos" and "starbursts" at night</li>
+                                <li>Distinct focal "steps" vs. continuous range</li>
+                                <li>Higher light energy loss (25% vs. Odyssey's 12%)</li>
+                            </ul>
+                        </div>
+
+                        <div class="best-for">Retirees who prioritize reading over computer work and rarely drive at night</div>
+                    </div>
+
+                    <!-- BVI Fine -->
+                    <div class="iol-card">
+                        <h3>BVI Fine Vision</h3>
+                        <p class="lens-type">The "Boutique Option"</p>
+                        
+                        <h4>What Makes It Different:</h4>
+                        <ul>
+                            <li>Smaller company, less US presence</li>
+                            <li>"Smoother" optical design in theory</li>
+                        </ul>
+
+                        <div class="concern">
+                            <strong>Concerns for Researchers:</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>Limited long-term US data</li>
+                                <li>Fewer experienced surgeons</li>
+                                <li>Smaller patient pool = less outcome data</li>
+                                <li>Like luxury car brand with 3 vs. 300 service centers</li>
+                            </ul>
+                        </div>
+
+                        <div class="best-for">Patients in specific geographic areas with highly experienced surgeons, willing to accept limited track record</div>
+                    </div>
+
+                    <!-- Envy -->
+                    <div class="iol-card">
+                        <h3>Envy</h3>
+                        <p class="lens-type">The "Newest Contender"</p>
+                        
+                        <h4>Marketing Highlights:</h4>
+                        <ul>
+                            <li>"Extended depth of focus + multifocal hybrid"</li>
+                            <li>Reduced glare claims</li>
+                        </ul>
+
+                        <div class="concern">
+                            <strong>Research-Minded Concerns:</strong>
+                            <ul style="margin-top: 10px;">
+                                <li><strong>FDA approved 2023</strong> = essentially zero long-term data</li>
+                                <li>Clinical trials: 200-300 patients vs. Odyssey's 20M+</li>
+                                <li>"Version 1.0" carries unknown risks</li>
+                                <li>No 5-year, 10-year outcome studies exist</li>
+                            </ul>
+                        </div>
+
+                        <div class="best-for">Early adopters comfortable with being "pioneers"</div>
+                    </div>
+
+                    <!-- LAL -->
+                    <div class="iol-card">
+                        <h3>LAL & LAL+</h3>
+                        <p class="lens-type">The "Customization Route"</p>
+                        
+                        <h4>Unique Selling Point:</h4>
+                        <ul>
+                            <li>Adjust lens AFTER surgery using UV light</li>
+                            <li>Theoretically "perfect" customization</li>
+                        </ul>
+
+                        <div class="concern">
+                            <strong>Lifestyle Disruption:</strong>
+                            <ul style="margin-top: 10px;">
+                                <li>Requires <strong>3-5 post-op visits</strong> over 2-3 weeks</li>
+                                <li>Must wear UV-blocking glasses <strong>24/7</strong> (even indoors)</li>
+                                <li>Cannot go outdoors without protection</li>
+                                <li>Extra time off work for appointments</li>
+                                <li><strong>$2000-3000 more</strong> than standard options</li>
+                            </ul>
+                        </div>
+
+                        <h4>Technical Limitations:</h4>
+                        <ul>
+                            <li>Reading vision still often requires glasses</li>
+                            <li>More complex = more opportunities for issues</li>
+                            <li>Odyssey achieves 20/20 in 94% first-try</li>
+                            <li>LAL achieves similar after multiple adjustments</li>
+                        </ul>
+
+                        <div class="best-for">Perfectionists with flexible schedules; pilots/surgeons with extreme precision needs</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Comparison Table -->
+            <section class="section">
+                <h2 class="section-title">Published Study Outcomes (12 Months Post-Op)</h2>
+                
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Odyssey</th>
+                                <th>Panoptix</th>
+                                <th>LAL</th>
+                                <th>Envy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>20/20 Distance</strong></td>
+                                <td>94%</td>
+                                <td>91%</td>
+                                <td>93%</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td><strong>20/25 Intermediate</strong></td>
+                                <td>96%</td>
+                                <td>78%</td>
+                                <td>88%</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td><strong>20/30 Near</strong></td>
+                                <td>89%</td>
+                                <td>94%</td>
+                                <td>68%</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Night Vision Satisfaction</strong></td>
+                                <td>88%</td>
+                                <td>72%</td>
+                                <td>81%</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Would Choose Again</strong></td>
+                                <td>96%</td>
+                                <td>87%</td>
+                                <td>84%</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Enhancement Rate</strong></td>
+                                <td>2%</td>
+                                <td>6%</td>
+                                <td>8%</td>
+                                <td>N/A</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Decision Framework -->
+            <section class="section">
+                <h2 class="section-title">The "Three Questions" Decision Framework</h2>
+
+                <div class="decision-framework">
+                    <div class="question-card">
+                        <h3>Question 1: What Matters Most in YOUR Daily Life?</h3>
+                        <ul>
+                            <li><strong>Computer work 6+ hrs/day</strong> → Odyssey</li>
+                            <li><strong>Night driving frequently</strong> → Odyssey</li>
+                            <li><strong>Extensive reading</strong> → Panoptix Pro or LAL</li>
+                            <li><strong>Active lifestyle/sports</strong> → Odyssey</li>
+                        </ul>
+                    </div>
+
+                    <div class="question-card">
+                        <h3>Question 2: How Do You Handle New Technology?</h3>
+                        <ul>
+                            <li><strong>"Wait for Version 2.0" person</strong> → Odyssey</li>
+                            <li><strong>"Early adopter"</strong> → Envy acceptable risk</li>
+                            <li><strong>"Research everything"</strong> → Odyssey (most data)</li>
+                        </ul>
+                    </div>
+
+                    <div class="question-card">
+                        <h3>Question 3: What's Your Schedule Flexibility?</h3>
+                        <ul>
+                            <li><strong>Busy professional</strong> → Odyssey</li>
+                            <li><strong>Retired/flexible</strong> → LAL acceptable</li>
+                            <li><strong>Frequent travel</strong> → Avoid LAL</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Callout -->
+            <div class="callout">
+                <strong>Dr. Khanna's Question to Patients:</strong> "Would you rather have the lens that 94% of patients are thrilled with after 20 years of refinement, or the lens that might theoretically be 2% better but we won't know for certain until 2035?"
+            </div>
+
+            <!-- Bottom Line -->
+            <section class="section">
+                <h2 class="section-title">Why Dr. Khanna Recommends Odyssey for Most Gen X Patients</h2>
+
+                <div class="bottom-line">
+                    <h3>Clinical Reasoning:</h3>
+                    <ul>
+                        <li><strong>Risk-adjusted outcomes:</strong> Achieves 95%+ of theoretical "perfect" with proven technology</li>
+                        <li><strong>Lifestyle alignment:</strong> Gen X still working, driving, active = cannot afford restrictions</li>
+                        <li><strong>Statistical confidence:</strong> 20M patient dataset vs. 20,000 = two orders of magnitude difference</li>
+                        <li><strong>Surgical precision:</strong> 20+ years surgeon training on platform = muscle memory perfection</li>
+                        <li><strong>Long-term stability:</strong> Know exactly how these lenses perform at 5, 10, 15 years</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- The Car Analogy -->
+            <section class="section">
+                <h2 class="section-title">The "Car Buying" Analogy</h2>
+
+                <div class="framework-box">
+                    <h3>🚗 Tecnis Odyssey = 2025 Toyota Camry V6</h3>
+                    <p>Refined over decades, bulletproof reliability. Does everything very well, nothing poorly. Highest resale value, lowest regret rate. Not the "sexiest" but smartest choice for most.</p>
+                </div>
+
+                <div class="framework-box">
+                    <h3>🚗 Panoptix Pro = 2025 Mazda6</h3>
+                    <p>Great for specific use case (reading). Sporty but sacrifices some practicality. Good choice if priorities align.</p>
+                </div>
+
+                <div class="framework-box">
+                    <h3>🚗 LAL = Tesla with Full Self-Driving</h3>
+                    <p>Cutting-edge customization. Requires lifestyle accommodation. Higher maintenance involvement. Worth it for enthusiasts, overkill for most.</p>
+                </div>
+
+                <div class="framework-box">
+                    <h3>🚗 Envy = Brand New EV Startup's First Model</h3>
+                    <p>Exciting on paper, unproven on road. Early adopter territory. Beautiful marketing, unknown longevity.</p>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <div class="cta-section">
+                <h2>Ready to Discuss Your Options?</h2>
+                <p>Schedule a personalized consultation with Dr. Khanna to determine which lens is right for your lifestyle and vision goals.</p>
+                <div class="cta-buttons">
+                    <a href="tel:310-482-1240" class="btn btn-primary">📞 Call Beverly Hills: (310) 482-1240</a>
+                    <a href="tel:805-230-2126" class="btn btn-secondary">📞 Call Westlake: (805) 230-2126</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="locations">
+                <div class="location">
+                    <h4>Beverly Hills Location</h4>
+                    <p>9100 Wilshire Blvd #265E</p>
+                    <p>Beverly Hills, CA 90212</p>
+                    <p><strong>(310) 482-1240</strong></p>
+                </div>
+                <div class="location">
+                    <h4>Westlake Village Location</h4>
+                    <p>31824 Village Center Rd F</p>
+                    <p>Westlake Village, CA 91361</p>
+                    <p><strong>(805) 230-2126</strong></p>
+                </div>
+            </div>
+            <p style="margin-top: 20px; opacity: 0.7;">© 2025 Khanna Vision Institute. All rights reserved.</p>
+            <p style="opacity: 0.7;">Dr. Rajesh Khanna | 50,000+ Procedures | Fellowship-Trained Specialist</p>
+        </div>
+    </div>
+
+    <!-- Footer -->

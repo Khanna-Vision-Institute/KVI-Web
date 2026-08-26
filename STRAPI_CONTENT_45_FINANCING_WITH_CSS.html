@@ -1,0 +1,133 @@
+<!-- COMPLETE FINANCING OPTIONS PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+    :root{
+      --bg:#0B0D12;--text:#E8ECEF;--muted:#A7B0B5;--card:#121520;--border:#232836;
+      --accent:#5EE1E6;--alpheon:#E02020;--carecredit:#1E68FF;--good:#12B76A;--focus:#94A3FF
+    }
+    *{box-sizing:border-box} html,body{margin:0;background:var(--bg);color:var(--text);
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1120px;margin:0 auto;padding:24px}
+    header.hero{border:1px solid var(--border);background:linear-gradient(180deg,#111522 0%, #0B0D12 60%);border-radius:24px;padding:28px}
+    .kicker{color:var(--accent);font-weight:800;letter-spacing:.04em;font-size:12px;text-transform:uppercase}
+    h1{font-size:clamp(28px,4vw,44px);line-height:1.05;margin:10px 0 12px}
+    .lead{color:var(--muted);font-size:clamp(16px,2.2vw,18px)}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 18px;border-radius:14px;border:1px solid transparent;font-weight:700}
+    .btn:focus{outline:3px solid var(--focus);outline-offset:2px}
+    .btn-brand-al{background:var(--alpheon);color:#fff}
+    .btn-brand-cc{background:var(--carecredit);color:#fff}
+    .btn-primary{background:var(--accent);color:#0B0D12}
+    .grid{display:grid;gap:20px}
+    .cards{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px}
+    .pill{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted)}
+    .list{margin:10px 0 0;padding:0;list-style:none}
+    .list li{padding-left:22px;position:relative;margin:10px 0}
+    .list li:before{content:"✔";position:absolute;left:0;top:0;color:var(--good);font-weight:700}
+    .split{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+    @media (max-width:900px){.split{grid-template-columns:1fr}}
+    img{width:100%;height:auto;border-radius:16px;border:1px solid var(--border)}
+    .note{font-size:12px;color:var(--muted);margin-top:8px}
+    .qr-tiles{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    .qr{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:14px}
+    .qr h3{margin:0 0 6px;font-size:16px}
+    .qr small{color:var(--muted)}
+    .qr .frame{display:grid;place-items:center;background:#0D111A;border:1px dashed var(--border);border-radius:14px;padding:12px}
+    .badge{font-size:12px;padding:6px 10px;border-radius:999px;background:#0D1A2B;border:1px solid var(--border);color:var(--text)}
+    .faq{border-top:1px solid var(--border);margin-top:24px}
+    .faq details{border-bottom:1px solid var(--border)}
+    .faq summary{cursor:pointer;padding:16px;font-weight:700}
+    .faq .a{padding:0 16px 16px;color:var(--muted)}
+    .disclaimer{font-size:12px;color:var(--muted)}
+    footer{margin-top:32px;color:var(--muted);font-size:12px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  
+</style>
+
+<!-- NOW THE HTML CONTENT STARTS -->
+
+<a class="sr-only" href="#main">Skip to content</a>
+  <div class="wrap" id="main">
+
+    <!-- HERO -->
+    <header class="hero split" role="banner" aria-label="Financing hero">
+      <div>
+        <div class="kicker">Khanna Vision Institute</div>
+        <h1>See Clearly Now. Pay Over Time.</h1>
+        <p class="lead">
+          Check eligibility in ~2 minutes with a <strong>soft check</strong> that does not impact your credit.
+          Choose <strong>0% APR up to 24 months</strong> or low monthly payments.
+        </p>
+        <div class="cta-row" role="group" aria-label="Tap-to-apply">
+          <!-- Keep tap CTAs for mobile-first UX; replace hrefs with your live links if desired -->
+          <a class="btn btn-brand-al" href="https://apply.alpheon.com/your-practice-link" target="_blank" rel="noopener">Apply with Alpheon</a>
+          <a class="btn btn-brand-cc" href="https://www.carecredit.com/apply/your-practice-link" target="_blank" rel="noopener">Apply with CareCredit</a>
+          <a class="btn btn-primary" href="/book">Book Consultation</a>
+        </div>
+        <p class="note">Prefer to scan? Use the QR codes below. They encode the same application URLs.</p>
+      </div>
+      <div>
+        <img src="https://khannainstitute.com/assets/og/financing-hero.jpg" alt="Happy patient after vision correction" loading="lazy" />
+      </div>
+    </header>
+
+    <!-- QR TILES -->
+    <section class="qr-tiles" aria-label="Scan to apply">
+      <article class="qr" aria-label="Alpheon QR">
+        <div class="badge">Alpheon</div>
+        <h3>Scan to Pre-Qualify</h3>
+        <small>Soft check. No impact to credit.</small>
+        <div class="frame" aria-hidden="false">
+          <!-- Replace src with your red QR image file -->
+          <img src="/assets/qr/alpheon-red.png" alt="Alpheon pre-qualification QR code" />
+        </div>
+      </article>
+
+      <article class="qr" aria-label="CareCredit QR">
+        <div class="badge">CareCredit</div>
+        <h3>Scan to Pre-Qualify</h3>
+        <small>Soft check. No impact to credit.</small>
+        <div class="frame" aria-hidden="false">
+          <!-- Replace src with your blue QR image file -->
+          <img src="/assets/qr/carecredit-blue.png" alt="CareCredit pre-qualification QR code" />
+        </div>
+      </article>
+    </section>
+
+    <!-- QUICK FACTS -->
+    <section class="grid cards" aria-label="Fast facts">
+      <article class="card"><span class="pill">Soft Check</span><h3>No Impact at Pre-Qual</h3>
+        <ul class="list"><li>Instant check without affecting score</li><li>See your monthly estimate first</li><li>Decide with full transparency</li></ul>
+      </article>
+      <article class="card"><span class="pill">0% APR</span><h3>Flexible Plans</h3>
+        <ul class="list"><li>0% APR up to 24 months</li><li>Low payments from <strong>$99/eye</strong> on select terms</li><li>Use HSA/FSA or tax refund</li></ul>
+      </article>
+      <article class="card"><span class="pill">Eligible</span><h3>What You Can Finance</h3>
+        <ul class="list"><li>SMILE, LASIK, PRK</li><li>EVO ICL</li><li>PIE / RLE</li></ul>
+      </article>
+    </section>
+
+    <!-- FAQ (unchanged) -->
+    <section id="faq" class="faq" aria-label="Frequently asked questions">
+      <h2>Financing FAQs</h2>
+      <details><summary>Will pre-qualification affect my credit score?</summary><div class="a">No. Pre-qualification uses a <strong>soft inquiry</strong>. A hard inquiry may occur only if you proceed to final approval and accept an offer.</div></details>
+      <details><summary>Do I pick Alpheon or CareCredit now?</summary><div class="a">You can check both and compare offers. Choose the best fit before scheduling.</div></details>
+      <details><summary>Eligible procedures?</summary><div class="a">SMILE, LASIK, PRK, EVO ICL, and PIE/RLE at Khanna Vision Institute.</div></details>
+      <details><summary>Fees or surprises?</summary><div class="a">Terms and any fees are set by the financing provider. You see them before you accept.</div></details>
+    </section>
+
+    <!-- Disclosures -->
+    <section class="disclaimer" aria-label="Disclosures">
+      <p><strong>Disclosures:</strong> Pre-qualification is a soft credit check and won’t impact your credit score. If you proceed with a selected offer, the provider may run a hard inquiry. 0% APR and examples depend on approval, term, and promo eligibility. Terms can change. Khanna Vision Institute does not make credit decisions.</p>
+    </section>
+
+  </div>
+
+  <script>
+    const track=(e,d={})=>{try{window.dataLayer=window.dataLayer||[];d.event=e;window.dataLayer.push(d)}catch(_){}}; 
+    document.querySelectorAll('a.btn').forEach(a=>a.addEventListener('click',()=>track('financing_cta_click',{label:a.textContent.trim()})));
+  </script>

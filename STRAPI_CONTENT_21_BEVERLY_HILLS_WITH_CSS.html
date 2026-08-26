@@ -1,0 +1,1098 @@
+<!-- COMPLETE BEVERLY HILLS LOCATION PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success: #10b981;
+            --text-dark: #1a202c;
+            --text-light: #718096;
+            --white: #ffffff;
+            --shadow: 0 10px 40px rgba(0,0,0,0.1);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            color: var(--white);
+            padding: 80px 20px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .location-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: -40px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Quick Actions Card */
+        .quick-actions {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            padding: 40px;
+            margin-bottom: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--white);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .action-btn:hover::before {
+            left: 100%;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .action-icon {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .action-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .action-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Main Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .info-card h2 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .info-card h2 .icon {
+            background: var(--primary-gradient);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* Amenities List */
+        .amenity-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .amenity-item {
+            padding: 20px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #f0f2f5 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .amenity-item:hover {
+            background: var(--primary-gradient);
+            color: var(--white);
+            transform: translateX(10px);
+        }
+
+        .amenity-icon {
+            font-size: 1.5rem;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .amenity-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .amenity-content p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Procedures Grid */
+        .procedures-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .procedure-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--white);
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .procedure-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .procedure-card:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.5);
+        }
+
+        .procedure-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .procedure-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .procedure-subtitle {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Directions Card */
+        .directions-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .directions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .direction-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf3 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .direction-item h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .direction-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .direction-item li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .direction-item li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        /* Gallery */
+        .gallery {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: var(--white);
+            padding: 20px;
+            font-weight: 600;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-label {
+            transform: translateY(0);
+        }
+
+        /* Map Section */
+        .map-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 450px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            background: var(--primary-gradient);
+            color: var(--white);
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .contact-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button {
+            background: var(--white);
+            color: #667eea;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            background: var(--accent-gradient);
+            color: var(--white);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--white);
+            color: #667eea;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-actions {
+                padding: 30px 20px;
+            }
+
+            .info-card {
+                padding: 30px 20px;
+            }
+
+            .hero-stats {
+                gap: 20px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding: 60px 20px 40px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .procedures-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .directions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-cta h2 {
+                font-size: 1.8rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .cta-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Achievement Badges */
+        .achievement-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .badge-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            color: var(--white);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .badge-item:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .badge-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .badge-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Progress Bar */
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            z-index: 9999;
+            transition: width 0.1s;
+        }
+    
+</style>
+
+<!-- NOW THE HTML CONTENT STARTS -->
+
+<!-- Progress Indicator -->
+    <div class="progress-indicator" id="progressBar"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="location-badge">📍 Beverly Hills Premier Location</div>
+            <h1>Your Vision, Perfected</h1>
+            <p class="subtitle">Experience world-class eye care in the heart of Beverly Hills</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">50K+</span>
+                    <span class="stat-label">Procedures Performed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">20+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">98%</span>
+                    <span class="stat-label">Patient Satisfaction</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Container -->
+    <div class="container">
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <a href="tel:310-677-0760" class="action-btn">
+                <span class="action-icon">📞</span>
+                <span class="action-title">Call Now</span>
+                <span class="action-subtitle">(310) 677-0760</span>
+            </a>
+            <a href="#directions" class="action-btn">
+                <span class="action-icon">🗺️</span>
+                <span class="action-title">Get Directions</span>
+                <span class="action-subtitle">Navigate to our office</span>
+            </a>
+            <a href="#parking" class="action-btn">
+                <span class="action-icon">🅿️</span>
+                <span class="action-title">Free Parking</span>
+                <span class="action-subtitle">Valet & Self Available</span>
+            </a>
+            <a href="#procedures" class="action-btn">
+                <span class="action-icon">👁️</span>
+                <span class="action-title">Our Procedures</span>
+                <span class="action-subtitle">SMILE, LASIK & More</span>
+            </a>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="content-grid">
+            <!-- Main Info Column -->
+            <div>
+                <!-- Address & Contact -->
+                <div class="info-card">
+                    <h2>
+                        <span class="icon">📍</span>
+                        Visit Our Beverly Hills Office
+                    </h2>
+                    <div style="font-size: 1.2rem; line-height: 1.8;">
+                        <p style="margin-bottom: 15px;"><strong>Khanna Vision Institute</strong></p>
+                        <p style="margin-bottom: 10px;">9100 Wilshire Boulevard, Suite #265E</p>
+                        <p style="margin-bottom: 10px;">Beverly Hills, CA 90212</p>
+                        <p style="margin-bottom: 10px;">📞 <a href="tel:310-677-0760" style="color: #667eea; text-decoration: none; font-weight: 600;">(310) 677-0760</a></p>
+                        <p style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #f5f7fa;">
+                            <strong>Building Location:</strong> Prestigious twin towers at the corner of Wilshire Blvd & Doheny Drive
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Amenities -->
+                <div class="info-card" id="parking" style="margin-top: 30px;">
+                    <h2>
+                        <span class="icon">✨</span>
+                        Premium Amenities
+                    </h2>
+                    <ul class="amenity-list">
+                        <li class="amenity-item">
+                            <div class="amenity-icon">🅿️</div>
+                            <div class="amenity-content">
+                                <h3>Complimentary Valet Parking</h3>
+                                <p>Professional valet service for your convenience. Garage entrance on Doheny Drive.</p>
+                            </div>
+                        </li>
+                        <li class="amenity-item">
+                            <div class="amenity-icon">🚗</div>
+                            <div class="amenity-content">
+                                <h3>Complimentary Self-Parking Available</h3>
+                                <p>Ample parking spaces plus easy street parking on Wilshire & Doheny.</p>
+                            </div>
+                        </li>
+                        <li class="amenity-item">
+                            <div class="amenity-icon">📶</div>
+                            <div class="amenity-content">
+                                <h3>Free High-Speed WiFi</h3>
+                                <p>Stay connected while you wait with complimentary WiFi throughout our office.</p>
+                            </div>
+                        </li>
+                        <li class="amenity-item">
+                            <div class="amenity-icon">🏙️</div>
+                            <div class="amenity-content">
+                                <h3>Spectacular Views</h3>
+                                <p>Panoramic vistas of Hollywood Hills, Beverly Hills, and Downtown LA.</p>
+                            </div>
+                        </li>
+                        <li class="amenity-item">
+                            <div class="amenity-icon">🛡️</div>
+                            <div class="amenity-content">
+                                <h3>24/7 Security</h3>
+                                <p>On-site security personnel and management for your peace of mind.</p>
+                            </div>
+                        </li>
+                        <li class="amenity-item">
+                            <div class="amenity-icon">☕</div>
+                            <div class="amenity-content">
+                                <h3>Building Amenities</h3>
+                                <p>Trimana Café, LA Fitness gym, salon, and sundry shop on premises.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Procedures -->
+                <div class="info-card" id="procedures" style="margin-top: 30px;">
+                    <h2>
+                        <span class="icon">👁️</span>
+                        Procedures We Perform
+                    </h2>
+                    <p style="margin-bottom: 20px; font-size: 1.1rem; color: var(--text-light);">
+                        Advanced vision correction procedures performed by fellowship-trained Dr. Rajesh Khanna
+                    </p>
+                    <div class="procedures-grid">
+                        <div class="procedure-card">
+                            <div class="procedure-icon">✨</div>
+                            <div class="procedure-name">SMILE</div>
+                            <div class="procedure-subtitle">Latest Laser Vision Technology</div>
+                        </div>
+                        <div class="procedure-card">
+                            <div class="procedure-icon">👁️</div>
+                            <div class="procedure-name">LASIK</div>
+                            <div class="procedure-subtitle">Proven Vision Correction</div>
+                        </div>
+                        <div class="procedure-card">
+                            <div class="procedure-icon">🔬</div>
+                            <div class="procedure-name">CTAK</div>
+                            <div class="procedure-subtitle">Advanced Keratoconus Treatment</div>
+                        </div>
+                        <div class="procedure-card">
+                            <div class="procedure-icon">💎</div>
+                            <div class="procedure-name">EVO ICL</div>
+                            <div class="procedure-subtitle">Implantable Contact Lens</div>
+                        </div>
+                        <div class="procedure-card">
+                            <div class="procedure-icon">🎯</div>
+                            <div class="procedure-name">PIE</div>
+                            <div class="procedure-subtitle">Presbyopia Solution</div>
+                        </div>
+                        <div class="procedure-card">
+                            <div class="procedure-icon">📋</div>
+                            <div class="procedure-name">Consultations</div>
+                            <div class="procedure-subtitle">All Procedures Available</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div>
+                <!-- Achievement Badges -->
+                <div class="achievement-section">
+                    <h2 style="font-size: 1.5rem; margin-bottom: 20px;">Why Choose Us</h2>
+                    <div class="badges-grid">
+                        <div class="badge-item">
+                            <span class="badge-icon">🏆</span>
+                            <span class="badge-label">Super Doctor 2023</span>
+                        </div>
+                        <div class="badge-item">
+                            <span class="badge-icon">📚</span>
+                            <span class="badge-label">Published Author</span>
+                        </div>
+                        <div class="badge-item">
+                            <span class="badge-icon">⭐</span>
+                            <span class="badge-label">Celebrity Patients</span>
+                        </div>
+                        <div class="badge-item">
+                            <span class="badge-icon">🎓</span>
+                            <span class="badge-label">Fellowship Trained</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hours -->
+                <div class="info-card" style="margin-top: 20px;">
+                    <h2 style="font-size: 1.5rem;">
+                        <span class="icon">🕐</span>
+                        Office Hours
+                    </h2>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        <p><strong>Monday - Friday:</strong> 8:00 AM - 5:00 PM</p>
+                        <p><strong>Saturday:</strong> By Appointment</p>
+                        <p><strong>Sunday:</strong> Closed</p>
+                        <p style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, #f5f7fa 0%, #e8edf3 100%); border-radius: 10px; font-size: 0.95rem;">
+                            <strong>💡 Pro Tip:</strong> Call ahead to schedule your free consultation and skip the wait!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Quick Contact -->
+                <div class="info-card" style="margin-top: 20px; background: var(--primary-gradient); color: var(--white);">
+                    <h2 style="font-size: 1.5rem; color: var(--white);">
+                        <span class="icon" style="background: rgba(255,255,255,0.2);">📱</span>
+                        Quick Contact
+                    </h2>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <p style="font-size: 1.1rem; margin-bottom: 20px; opacity: 0.95;">Ready to transform your vision?</p>
+                        <a href="tel:310-677-0760" style="display: inline-block; background: var(--white); color: #667eea; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s ease; margin-bottom: 15px;">
+                            📞 (310) 677-0760
+                        </a>
+                        <p style="font-size: 0.9rem; opacity: 0.9;">Or schedule online 24/7</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Directions -->
+        <div class="directions-card" id="directions">
+            <h2 style="font-size: 2rem; margin-bottom: 10px;">
+                <span style="margin-right: 10px;">🗺️</span>
+                How to Find Us
+            </h2>
+            <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 30px;">
+                Easy access from all major Los Angeles areas
+            </p>
+            
+            <div class="directions-grid">
+                <div class="direction-item">
+                    <h3>🚗 From Downtown LA / East</h3>
+                    <ul>
+                        <li>Take I-10 West to exit 8A for Robertson Blvd</li>
+                        <li>Turn right onto S Robertson Blvd</li>
+                        <li>Turn left onto Wilshire Blvd</li>
+                        <li>Building on right at corner of Wilshire & Doheny</li>
+                        <li>Garage entrance on Doheny Drive</li>
+                    </ul>
+                </div>
+                
+                <div class="direction-item">
+                    <h3>🌊 From Santa Monica / West</h3>
+                    <ul>
+                        <li>Take I-10 East towards Los Angeles</li>
+                        <li>Exit 8B for Bundy Drive</li>
+                        <li>Continue on Bundy to Wilshire Blvd</li>
+                        <li>Turn left on Wilshire Blvd, head east</li>
+                        <li>Building on left at Wilshire & Doheny</li>
+                    </ul>
+                </div>
+                
+                <div class="direction-item">
+                    <h3>🌴 From San Fernando Valley</h3>
+                    <ul>
+                        <li>Take US-101 South to I-405 South</li>
+                        <li>Exit Wilshire Blvd East</li>
+                        <li>Continue east on Wilshire Blvd</li>
+                        <li>Building at corner of Wilshire & Doheny</li>
+                        <li>Parking entrance on Doheny Drive</li>
+                    </ul>
+                </div>
+                
+                <div class="direction-item">
+                    <h3>🅿️ Parking Instructions</h3>
+                    <ul>
+                        <li><strong>Valet:</strong> Main entrance on Wilshire Blvd</li>
+                        <li><strong>Self-Parking:</strong> Garage entrance on Doheny Dr</li>
+                        <li><strong>Street Parking:</strong> Metered spots on Wilshire & Doheny</li>
+                        <li>All parking options are complimentary for patients</li>
+                        <li>Validate your parking at our front desk</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; color: var(--white); text-align: center;">
+                <p style="font-size: 1.1rem; margin-bottom: 15px;"><strong>🎯 Landmark:</strong> We're in the prestigious twin towers at the famous Wilshire & Doheny intersection</p>
+                <p style="font-size: 0.95rem; opacity: 0.95;">Walking distance from Rodeo Drive and Beverly Hills finest shopping & dining</p>
+            </div>
+        </div>
+
+        <!-- Map -->
+        <div class="map-section">
+            <h2 style="font-size: 2rem; margin-bottom: 10px;">
+                <span style="margin-right: 10px;">📍</span>
+                Interactive Map
+            </h2>
+            <p style="font-size: 1.1rem; color: var(--text-light);">
+                Click for directions from your location
+            </p>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.4134726588773!2d-118.38166882346147!3d34.06196947315456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2bbe2b3d51c9f%3A0x9a64f324d964abc4!2s9100%20Wilshire%20Blvd%2C%20Beverly%20Hills%2C%20CA%2090212!5e0!3m2!1sen!2sus!4v1731331200000!5m2!1sen!2sus" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Gallery Section -->
+        <div class="gallery">
+            <h2 style="font-size: 2rem; margin-bottom: 10px;">
+                <span style="margin-right: 10px;">📸</span>
+                Experience Our Office
+            </h2>
+            <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 10px;">
+                Take a virtual tour of our state-of-the-art facility
+            </p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipMQCOqxl8gfmxWxQo8rQBXqBHKH5oU5Y-PQEcpJ=s1360-w1360-h1020" alt="Building Exterior" loading="lazy">
+                    <div class="gallery-label">Building Exterior - Twin Towers</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipOLYq2VKWEeIPYMHpxrQqvXTwKLOQUz3kAx8Evk=s1360-w1360-h1020" alt="Main Lobby" loading="lazy">
+                    <div class="gallery-label">Elegant Main Lobby</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipNQZzTpyxOUCZQXYy0RrQkHvF4Z8QXkN5nKRLpC=s1360-w1360-h1020" alt="Building Corner" loading="lazy">
+                    <div class="gallery-label">Wilshire & Doheny Corner</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipN8K8lLGVn-BsBnKtN8r8KaH8oY8qQyqnXJKUNx=s1360-w1360-h1020" alt="Evening View" loading="lazy">
+                    <div class="gallery-label">Stunning Evening Views</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; text-align: center;">
+                <p style="font-size: 0.95rem; color: var(--text-light);">
+                    📷 Want to see more? Follow us on social media for the latest updates and patient testimonials
+                </p>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="contact-cta">
+            <h2>Ready to Transform Your Vision?</h2>
+            <p>Schedule your free consultation today and discover why Beverly Hills trusts Dr. Khanna</p>
+            <div class="cta-buttons">
+                <a href="tel:310-677-0760" class="cta-button">
+                    📞 Call (310) 677-0760
+                </a>
+                <a href="#" class="cta-button secondary">
+                    📅 Book Online Now
+                </a>
+            </div>
+            <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2);">
+                <p style="font-size: 0.95rem; opacity: 0.9;">
+                    ⭐ Join thousands of satisfied patients | ✨ Same-day consultations available | 🎁 Special offers for new patients
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Scroll Progress -->
+    <script>
+        // Scroll Progress Bar
+        window.addEventListener('scroll', function() {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.info-card, .direction-item, .procedure-card, .gallery-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Click tracking for gamification
+        document.querySelectorAll('.action-btn, .cta-button').forEach(button => {
+            button.addEventListener('click', function() {
+                // Could integrate with analytics here
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+    </script>

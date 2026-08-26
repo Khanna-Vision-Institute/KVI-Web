@@ -1,0 +1,225 @@
+<!-- COMPLETE WHAT TO EXPECT PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+        :root {
+            --primary-blue: #2563eb;
+            --accent-teal: #0891b2;
+            --dark-blue: #1e3a8a;
+            --light-gray: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --success-green: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--light-gray);
+        }
+
+        .wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 140px 20px 60px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 60px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .preparation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .preparation-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid var(--primary-blue);
+        }
+
+        .preparation-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .preparation-card h2 {
+            color: var(--dark-blue);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .preparation-card .description {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .preparation-card .features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .preparation-card .features li {
+            padding: 8px 0 8px 30px;
+            position: relative;
+            color: var(--text-dark);
+        }
+
+        .preparation-card .features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: var(--primary-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--dark-blue);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .preparation-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .wrap {
+                padding: 120px 20px 40px;
+            }
+        }
+    
+</style>
+
+<!-- NOW THE HTML CONTENT STARTS -->
+
+<!-- Navigation Header -->
+    
+
+    <div class="wrap">
+        <div class="hero">
+            <h1>What to Expect Before Your Procedure</h1>
+            <p>Step-by-step preparation guides to help you get ready for your eye surgery. Learn about contact lens removal, eye drops, fasting instructions, makeup guidelines, and what to bring on procedure day.</p>
+        </div>
+
+        <div class="preparation-grid">
+            <article class="preparation-card">
+                <h2>Before LASIK Eye Surgery</h2>
+                <p class="description">Complete preparation guide for LASIK including contact lens removal, antibiotic/combo drops, makeup and fragrance guidelines, and what to bring on surgery day.</p>
+                <ul class="features">
+                    <li>Contact lens removal timeline</li>
+                    <li>Antibiotic drop schedule</li>
+                    <li>Day-of-surgery checklist</li>
+                    <li>Transportation requirements</li>
+                </ul>
+                <a href="/patients/your-journey/what-to-expect/lasik/" class="btn">View LASIK Preparation Guide</a>
+            </article>
+
+            <article class="preparation-card">
+                <h2>Before SMILE Laser Eye Surgery</h2>
+                <p class="description">Preparation guide for SMILE including yellow-cap combo drops, contact lens removal, makeup guidelines, and everything you need to know before your procedure.</p>
+                <ul class="features">
+                    <li>Yellow-cap combo drops</li>
+                    <li>Contact lens guidelines</li>
+                    <li>Pre-surgery checklist</li>
+                    <li>What to bring</li>
+                </ul>
+                <a href="/patients/your-journey/what-to-expect/smile/" class="btn">View SMILE Preparation Guide</a>
+            </article>
+
+            <article class="preparation-card">
+                <h2>Before Cataract Surgery</h2>
+                <p class="description">Step-by-step preparation for cataract surgery including contact lens removal, antibiotic eye drops, fasting instructions, and what to expect on surgery day.</p>
+                <ul class="features">
+                    <li>Contact lens removal</li>
+                    <li>Antibiotic drop schedule</li>
+                    <li>Fasting instructions</li>
+                    <li>Surgery day checklist</li>
+                </ul>
+                <a href="/patients/your-journey/what-to-expect/cataract/" class="btn">View Cataract Preparation Guide</a>
+            </article>
+
+            <article class="preparation-card">
+                <h2>Before Epi-off Corneal Cross-Linking (CXL)</h2>
+                <p class="description">Preparation guide for epi-off CXL including contact lens removal, antibiotic drops, fragrance restrictions, and everything you need to know before your procedure.</p>
+                <ul class="features">
+                    <li>Contact lens guidelines</li>
+                    <li>Antibiotic drop schedule</li>
+                    <li>Fragrance restrictions</li>
+                    <li>Day-of-procedure checklist</li>
+                </ul>
+                <a href="/patients/your-journey/what-to-expect/cxl/" class="btn">View CXL Preparation Guide</a>
+            </article>
+
+            <article class="preparation-card">
+                <h2>Before Pterygium Surgery</h2>
+                <p class="description">Pre-operative checklist for cosmetic pterygium removal including contact lens removal, artificial tears, antibiotic ointment, and preparation guidelines.</p>
+                <ul class="features">
+                    <li>Contact lens removal</li>
+                    <li>Artificial tears purchase</li>
+                    <li>Antibiotic ointment schedule</li>
+                    <li>Pre-surgery checklist</li>
+                </ul>
+                <a href="/patients/your-journey/what-to-expect/pterygium/" class="btn">View Pterygium Preparation Guide</a>
+            </article>
+        </div>
+    </div>
+
+    <!-- Footer -->

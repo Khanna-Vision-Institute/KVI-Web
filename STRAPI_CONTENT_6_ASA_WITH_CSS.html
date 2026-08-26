@@ -1,0 +1,543 @@
+<!-- COMPLETE ASA PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+    :root{
+      /* Swap these three with your exact brand hex codes */
+      --brand-primary:#00A3FF;      /* primary */
+      --brand-secondary:#00E5A8;    /* secondary */
+      --brand-dark:#0f1221;         /* bg base */
+
+      --bg:var(--brand-dark);
+      --bg-soft:#11142a;
+      --card:#15193a;
+      --text:#e9ecff;
+      --muted:#b8bfda;
+      --accent:var(--brand-primary);
+      --accent-2:var(--brand-secondary);
+      --good:#5fe1a5;
+      --warn:#ffd166;
+      --danger:#ff7a7a;
+      --border:rgba(255,255,255,.08);
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+      --maxw:1100px;
+
+      /* Financing brand accents */
+      --alphaeon:#d71920;    /* ALPHAEON red */
+      --capitalone:#00427c;  /* Capital One blue */
+      --carecredit:#007a5e;  /* CareCredit green */
+    }
+    html,body{height:100%;background:linear-gradient(180deg,#0e1124 0%, #0a0c18 100%);color:var(--text);font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial;line-height:1.5}
+    *{box-sizing:border-box}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{opacity:.9}
+    .container{max-width:var(--maxw);margin:0 auto;padding:24px}
+
+    /* HERO */
+    .hero{position:relative;overflow:hidden}
+    .hero .wrap{padding:48px 24px;border-radius:var(--radius);background:radial-gradient(1200px 600px at 10% -10%, color-mix(in oklab,var(--accent) 25%, transparent), transparent 60%),
+                                                 radial-gradient(900px 500px at 110% -20%, color-mix(in oklab,var(--accent-2) 22%, transparent), transparent 60%),
+                                                 linear-gradient(180deg, #121636, #0d1130)}
+    .badge{display:inline-block;padding:6px 12px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:12px;letter-spacing:.2px}
+    h1{font-size:clamp(28px,4vw,46px);margin:16px 0 10px 0;line-height:1.1}
+    .accent{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .kicker{color:var(--muted);max-width:780px}
+    .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 18px;border-radius:14px;border:1px solid var(--border);background:var(--card);color:var(--text);box-shadow:var(--shadow);font-weight:700}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#071016}
+    .btn.ghost{background:transparent}
+    .hero-points{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px;color:var(--muted)}
+    .hero-points li{list-style:none;padding:10px 12px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px}
+
+    /* TABS */
+    .tabs{position:sticky;top:0;z-index:10;background:rgba(15,18,33,.8);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+    .tablist{display:flex;flex-wrap:wrap;gap:8px;max-width:var(--maxw);margin:0 auto;padding:10px 24px}
+    .tablist button{appearance:none;border:none;background:#0f1221;color:var(--muted);padding:10px 12px;border-radius:12px;border:1px solid var(--border);cursor:pointer;font-weight:700}
+    .tablist button[aria-selected="true"]{color:#071016;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+
+    .panel{display:none;padding:24px}
+    .panel[aria-hidden="false"]{display:block}
+
+    /* CONTENT CARDS */
+    .grid{display:grid;gap:16px}
+    .grid.x2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid.x3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid.x4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    @media (max-width:960px){.grid.x3,.grid.x4{grid-template-columns:1fr}.grid.x2{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+    .card h3{margin:0 0 6px 0;font-size:18px}
+    .tag{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--border);font-size:12px;color:var(--muted)}
+
+    .numlist{counter-reset:step;display:grid;gap:10px}
+    .numlist li{list-style:none;padding:14px 14px 14px 46px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--border);position:relative}
+    .numlist li::before{counter-increment:step;content:counter(step);position:absolute;left:12px;top:12px;width:24px;height:24px;display:grid;place-items:center;border-radius:8px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#071016;font-weight:900}
+
+    .check{display:flex;gap:10px;align-items:flex-start}
+    .check i{width:22px;height:22px;display:grid;place-items:center;border-radius:6px;background:rgba(95,225,165,.15);color:var(--good);font-weight:900}
+
+    /* Figure diagram */
+    .diagram{display:block}
+    .diagram svg{width:100%;height:auto}
+
+    /* Financing cards */
+    .finance{display:grid;gap:16px}
+    .finance .finance-card{position:relative}
+    .finance .finance-card.alphaeon{border-left:4px solid var(--alphaeon)}
+    .finance .finance-card.capitalone{border-left:4px solid var(--capitalone)}
+    .finance .finance-card.carecredit{border-left:4px solid var(--carecredit)}
+
+    .calc{display:grid;gap:10px;grid-template-columns:repeat(2,minmax(0,1fr))}
+    .calc label{font-size:12px;color:var(--muted)}
+    .calc input{width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);background:#0f1221;color:var(--text)}
+    .calc .full{grid-column:1/-1}
+    .result{font-weight:800;font-size:20px}
+
+    /* Forms */
+    form.hipaa{display:grid;gap:10px}
+    form.hipaa input, form.hipaa select{padding:12px;border-radius:10px;border:1px solid var(--border);background:#0f1221;color:var(--text)}
+    form.hipaa .row{display:grid;gap:10px;grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media (max-width:800px){form.hipaa .row{grid-template-columns:1fr}}
+
+    /* STICKY MOBILE CTA */
+    .sticky-cta{position:fixed;bottom:12px;left:12px;right:12px;display:flex;gap:10px;justify-content:center}
+    .sticky-cta a{flex:1;text-align:center}
+
+    /* FOOTER */
+    footer{border-top:1px solid var(--border);color:var(--muted)}
+    .footer-grid{display:grid;gap:16px;grid-template-columns:1fr 1fr}
+    @media (max-width:800px){.footer-grid{grid-template-columns:1fr}}
+
+    /* Accessibility helpers */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  
+</style>
+
+<!-- NOW THE HTML CONTENT STARTS -->
+
+<header class="hero">
+    <div class="container">
+      <div class="wrap">
+        <span class="badge">Flap‑free laser vision</span>
+        <h1>Advanced Surface Ablation <span class="accent">(ASA)</span></h1>
+        <p class="kicker">A modern family of surface procedures — <strong>mechanical PRK</strong>, <strong>LASEK</strong>, <strong>Epi‑LASIK</strong>, and <strong>transepithelial PRK</strong> — designed for thin corneas, active lifestyles, and dry‑eye risk.</p>
+        <div class="hero-cta">
+          <a class="btn primary" href="tel:+18188571735" aria-label="Call or text 818-857-1735">📱 Text or call 818‑857‑1735</a>
+          <a class="btn ghost" href="mailto:info@khannainstitute.com">✉️ Email info@khannainstitute.com</a>
+        </div>
+        <ul class="hero-points">
+          <li>🚫 No corneal flap</li>
+          <li>💪 Strong corneal biomechanics</li>
+          <li>🧊 Smart comfort plan</li>
+          <li>🎯 Predictable long‑term results</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tabs -->
+  <div class="tabs" id="asaTabs">
+    <div class="tablist" role="tablist" aria-label="ASA content tabs">
+      <button role="tab" id="tab-how" aria-controls="panel-how" aria-selected="true">⚡ How it works</button>
+      <button role="tab" id="tab-candidate" aria-controls="panel-candidate" aria-selected="false" tabindex="-1">🎯 Who’s a candidate</button>
+      <button role="tab" id="tab-recovery" aria-controls="panel-recovery" aria-selected="false" tabindex="-1">⏱️ Recovery</button>
+      <button role="tab" id="tab-finance" aria-controls="panel-finance" aria-selected="false" tabindex="-1">💳 Financing</button>
+      <button role="tab" id="tab-risks" aria-controls="panel-risks" aria-selected="false" tabindex="-1">🧠 Risks & side effects</button>
+      <button role="tab" id="tab-faq" aria-controls="panel-faq" aria-selected="false" tabindex="-1">❓ FAQ</button>
+      <button role="tab" id="tab-next" aria-controls="panel-next" aria-selected="false" tabindex="-1">📍 Next steps</button>
+    </div>
+  </div>
+
+  <!-- Panels -->
+  <main class="container">
+    <section id="panel-how" class="panel" role="tabpanel" aria-labelledby="tab-how" aria-hidden="false">
+      <div class="grid x2">
+        <div class="card">
+          <h3>Step 1 · Map + plan</h3>
+          <p>We scan your eyes in 3D, check tear film and pupils, and design a custom ablation for day and night vision.</p>
+        </div>
+        <div class="card">
+          <h3>Step 2 · Remove the surface layer</h3>
+          <p>Your surgeon selects the approach that best fits your cornea and goals. All are flap‑free.</p>
+        </div>
+      </div>
+
+      <figure class="card diagram" role="img" aria-label="ASA steps: Remove epithelium, Laser reshape, Bandage lens">
+        <svg viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1">
+              <stop offset="0" stop-color="var(--accent)"/>
+              <stop offset="1" stop-color="var(--accent-2)"/>
+            </linearGradient>
+          </defs>
+          <rect x="30" y="50" rx="16" ry="16" width="240" height="120" fill="url(#g1)" opacity="0.25" stroke="url(#g1)"/>
+          <text x="150" y="115" text-anchor="middle" font-size="16" fill="#e9ecff">Remove epithelium</text>
+          <text x="150" y="138" text-anchor="middle" font-size="12" fill="#b8bfda">Mechanical · LASEK · Epi‑LASIK · tPRK</text>
+
+          <rect x="330" y="50" rx="16" ry="16" width="240" height="120" fill="url(#g1)" opacity="0.25" stroke="url(#g1)"/>
+          <text x="450" y="115" text-anchor="middle" font-size="16" fill="#e9ecff">Laser reshape</text>
+          <text x="450" y="138" text-anchor="middle" font-size="12" fill="#b8bfda">Modern excimer profiles</text>
+
+          <rect x="630" y="50" rx="16" ry="16" width="240" height="120" fill="url(#g1)" opacity="0.25" stroke="url(#g1)"/>
+          <text x="750" y="115" text-anchor="middle" font-size="16" fill="#e9ecff">Bandage lens</text>
+          <text x="750" y="138" text-anchor="middle" font-size="12" fill="#b8bfda">Protects while healing</text>
+
+          <polygon points="290,110 320,110 320,100 340,120 320,140 320,130 290,130" fill="url(#g1)"/>
+          <polygon points="590,110 620,110 620,100 640,120 620,140 620,130 590,130" fill="url(#g1)"/>
+        </svg>
+        <figcaption class="tag">Three steps · Same day · Flap‑free</figcaption>
+      </figure>
+      <div style="height:10px"></div>
+      <div class="grid x4">
+        <div class="card">
+          <span class="tag">ASA technique</span>
+          <h3>Mechanical PRK</h3>
+          <p>Epithelium is gently polished away with a micro‑brush. Then the laser reshapes the cornea.</p>
+        </div>
+        <div class="card">
+          <span class="tag">ASA technique</span>
+          <h3>LASEK</h3>
+          <p>A dilute alcohol ring loosens the epithelium, which is lifted as a sheet and then repositioned after laser treatment.</p>
+        </div>
+        <div class="card">
+          <span class="tag">ASA technique</span>
+          <h3>Epi‑LASIK</h3>
+          <p>A blunt epikeratome separates the epithelial sheet without alcohol and it is replaced after reshaping.</p>
+        </div>
+        <div class="card">
+          <span class="tag">ASA technique</span>
+          <h3>Transepithelial PRK</h3>
+          <p>“No‑touch.” The laser removes the epithelium and performs the treatment in one plan.</p>
+        </div>
+      </div>
+
+      <div style="height:10px"></div>
+      <div class="grid x3">
+        <div class="card">
+          <h3>Step 3 · Laser reshaping</h3>
+          <p>Modern excimer profiles with appropriately sized optical zones sharpen focus and aim to minimize halos.</p>
+        </div>
+        <div class="card">
+          <h3>Step 4 · Anti‑haze protection</h3>
+          <p>In higher prescriptions, a brief medication may be used to reduce haze risk. Your surgeon personalizes this.</p>
+        </div>
+        <div class="card">
+          <h3>Step 5 · Bandage contact lens</h3>
+          <p>A soft protective lens shields the surface while it heals over the first few days.</p>
+        </div>
+      </div>
+
+      <div style="height:10px"></div>
+      <div class="card">
+        <h3>Comfort plan</h3>
+        <div class="grid x2">
+          <div class="check"><i>✓</i><p>Therapeutic bandage lens for 4–7 days.</p></div>
+          <div class="check"><i>✓</i><p>Short course of topical drops only as appropriate.</p></div>
+          <div class="check"><i>✓</i><p>Tailored oral meds to keep the first 48–72 hours manageable.</p></div>
+          <div class="check"><i>✓</i><p>Chilled tears or cold packs for extra relief.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-candidate" class="panel" role="tabpanel" aria-labelledby="tab-candidate" aria-hidden="true">
+      <div class="grid x2">
+        <div class="card">
+          <h3>Great fit if…</h3>
+          <ul>
+            <li>Corneas are thinner and a flap isn’t ideal</li>
+            <li>Topography is borderline or irregular</li>
+            <li>Contact or impact‑prone sports or jobs</li>
+            <li>Higher dry‑eye risk and you want a flap‑free option</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>How we decide</h3>
+          <p>Final candidacy follows corneal tomography, tear testing, pupil analysis, and a detailed eye exam.</p>
+          <p class="tag">Goal: safest path to clear vision</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-recovery" class="panel" role="tabpanel" aria-labelledby="tab-recovery" aria-hidden="true">
+      <div class="grid x2">
+        <div class="card">
+          <h3>Timeline</h3>
+          <ul>
+            <li><strong>Days 0–2</strong> · Light sensitivity and grittiness are common. Rest and sunglasses help.</li>
+            <li><strong>Days 3–5</strong> · Surface closes for most. Bandage lens removed when healing is complete.</li>
+            <li><strong>Weeks 1–2</strong> · Functional vision for work and driving returns. Halos fade.</li>
+            <li><strong>1–3 months</strong> · Vision polishes to long‑term clarity.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Back‑to‑life guide</h3>
+          <ul>
+            <li>Office screens: usually 3–5 days</li>
+            <li>Driving: after clearance post bandage removal</li>
+            <li>Eye makeup: 1 week</li>
+            <li>Swimming/hot tubs: 2–3 weeks</li>
+            <li>Contact sports: after surgeon clearance</li>
+            <li>Sunglasses: strongly advised for 3 months midday</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-finance" class="panel" role="tabpanel" aria-labelledby="tab-finance" aria-hidden="true">
+      <div class="grid x2 finance">
+        <div class="card finance-card alphaeon">
+          <h3>ALPHAEON Credit</h3>
+          <p>Promotional plans including 0% APR options for qualified applicants.</p>
+          <a class="btn" href="#apply-alphaeon" aria-label="Apply with ALPHAEON Credit">Apply now</a>
+        </div>
+        
+        <div class="card finance-card carecredit">
+          <h3>CareCredit</h3>
+          <p>Healthcare financing accepted here. Special financing for eligible plans.</p>
+          <a class="btn" href="#apply-carecredit" aria-label="Apply with CareCredit">Apply</a>
+        </div>
+      </div>
+
+      <div style="height:10px"></div>
+      <div class="card">
+        <h3>Monthly payment calculator</h3>
+        <div class="calc">
+          <div>
+            <label for="fc-amount">Total procedure cost ($)</label>
+            <input id="fc-amount" type="number" min="0" step="50" placeholder="e.g., 6000 for both eyes" />
+          </div>
+          <div>
+            <label for="fc-term">Term (months)</label>
+            <input id="fc-term" type="number" value="24" min="6" step="6" />
+          </div>
+          <div>
+            <label for="fc-apr">APR (%)</label>
+            <input id="fc-apr" type="number" value="0" min="0" step="0.25" />
+          </div>
+          <div class="full">
+            <button type="button" class="btn primary" id="fc-run">Calculate</button>
+          </div>
+          <div class="full result" id="fc-result" aria-live="polite"></div>
+          <p class="tag full">Examples only. Subject to credit approval and terms. Not all applicants qualify.</p>
+        </div>
+      </div>
+
+      <div class="grid x3">
+        <div class="card">
+          <h3>Use HSA/FSA</h3>
+          <p>Eligible medical expense in most plans. Check your plan details.</p>
+        </div>
+        <div class="card">
+          <h3>Tax‑refund friendly</h3>
+          <p>Apply your refund toward total cost or split with financing.</p>
+        </div>
+        <div class="card">
+          <h3>Split per eye</h3>
+          <p>Discuss staged timing and payments with your counselor.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-risks" class="panel" role="tabpanel" aria-labelledby="tab-risks" aria-hidden="true">
+      <div class="card">
+        <h3>What to know</h3>
+        <ul>
+          <li>Temporary discomfort and light sensitivity are expected early.</li>
+          <li>Recovery is slower than LASIK during week one.</li>
+          <li>Dry‑eye symptoms, halos, or glare can occur during healing.</li>
+          <li>Delayed epithelial healing or corneal haze are uncommon; your plan reduces that risk.</li>
+          <li>Infection and scarring are rare but possible with any surgery.</li>
+        </ul>
+        <p class="tag">We’ll match technique and medications to your exam.</p>
+      </div>
+    </section>
+
+    <section id="panel-faq" class="panel" role="tabpanel" aria-labelledby="tab-faq" aria-hidden="true">
+      <div class="grid x2">
+        <div class="card">
+          <h3>Is ASA the same as “old PRK”?</h3>
+          <p>No. ASA is a modern, flap‑free family using updated lasers, epithelium techniques, routine bandage lenses, and evidence‑based comfort and anti‑haze strategies.</p>
+        </div>
+        <div class="card">
+          <h3>Which ASA technique is best?</h3>
+          <p>Outcomes are comparable. Your cornea, dryness risk, prescription, and the laser platform guide the choice.</p>
+        </div>
+        <div class="card">
+          <h3>Does ASA hurt?</h3>
+          <p>Expect a few days of discomfort while the surface heals. Today’s bandage lenses, chilled lubrication, and short‑course meds make it manageable for most.</p>
+        </div>
+        <div class="card">
+          <h3>Is the vision as good as LASIK after healing?</h3>
+          <p>Yes for appropriate prescriptions. ASA trades a slower first week for a strong biomechanical profile and no flap.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-next" class="panel" role="tabpanel" aria-labelledby="tab-next" aria-hidden="true">
+      <div class="grid x2">
+        <div class="card">
+          <h3>Book your free screening</h3>
+          <p>Text or call <a href="tel:+18188571735">818‑857‑1735</a> or email <a href="mailto:info@khannainstitute.com">info@khannainstitute.com</a>.</p>
+          <div class="hero-cta" style="margin-top:6px">
+            <a class="btn primary" href="/book">🗓️ Book online</a>
+            <a class="btn ghost" href="sms:+18188571735">💬 Text us</a>
+          </div>
+        </div>
+        <div class="card">
+          <h3>HIPAA‑secure request</h3>
+          <form class="hipaa" id="hipaa-form" action="/secure/lead" method="post" data-secure="true">
+            <div class="row">
+              <input name="full_name" placeholder="Full name" required/>
+              <input name="mobile" type="tel" placeholder="Mobile (for text updates)" required/>
+            </div>
+            <div class="row">
+              <input name="email" type="email" placeholder="Email"/>
+              <select name="interest">
+                <option value="">Procedure interest</option>
+                <option>Mechanical PRK</option>
+                <option>LASEK</option>
+                <option>Epi‑LASIK</option>
+                <option>Transepithelial PRK</option>
+                <option>Unsure—help me choose</option>
+              </select>
+            </div>
+            <div class="row">
+              <select name="contact_pref">
+                <option value="text">Prefer text</option>
+                <option value="call">Prefer call</option>
+                <option value="email">Prefer email</option>
+              </select>
+              <input name="zip" placeholder="ZIP code"/>
+            </div>
+            <label style="font-size:12px;color:var(--muted)"><input type="checkbox" required/> I consent to be contacted by SMS/call/email. This form collects only contact details; medical history will be gathered via a secure portal.</label>
+            <button class="btn primary" type="submit">Send secure request</button>
+          </form>
+        </div>
+      </div>
+      <div class="grid x2">
+        <div class="card">
+          <h3>Locations</h3>
+          <p><strong>Westlake Village</strong><br>31824 Village Center Rd F, Westlake Village, CA 91361<br>Mon–Fri 9:00 AM–5:00 PM; Saturday by appointment</p>
+          <p><strong>Beverly Hills</strong><br>9100 Wilshire Blvd #265e, Beverly Hills, CA 90212<br>Mon–Fri 9:00 AM–5:00 PM; Saturday by appointment</p>
+        </div>
+        <div class="card">
+          <h3>Questions?</h3>
+          <p>We’ll help you choose the technique that fits your eyes and lifestyle.</p>
+          <a class="btn ghost" href="#faq">See FAQ</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="sticky-cta" aria-hidden="false">
+    <a class="btn primary" href="tel:+18188571735">📱 Text or call 818‑857‑1735</a>
+    <a class="btn ghost" href="#finance">💳 Financing</a>
+  </div>
+
+  <footer class="container">
+    <div class="footer-grid">
+      <p>© Khanna Vision Institute. This page is informational and not medical advice. Individual results vary.</p>
+      <p>Prefer a LASIK‑alternative with no flap? ASA could be right for you. Ask us which technique fits your eyes.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Tabs + hash
+    (function(){
+      const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+      const panels = Array.from(document.querySelectorAll('.panel'));
+      function activate(id){
+        tabs.forEach(t=>{
+          const selected = (t.id === 'tab-' + id);
+          t.setAttribute('aria-selected', selected);
+          if(selected){ t.removeAttribute('tabindex'); } else { t.setAttribute('tabindex','-1'); }
+        });
+        panels.forEach(p=>{
+          const active = (p.id === 'panel-' + id);
+          p.setAttribute('aria-hidden', !active);
+        });
+      }
+      function fromHash(){
+        const hash = (location.hash || '#how').replace('#','');
+        const valid = ['how','candidate','recovery','finance','risks','faq','next'];
+        activate(valid.includes(hash)?hash:'how');
+      }
+      tabs.forEach(t=>{
+        t.addEventListener('click',()=>{
+          const id = t.id.replace('tab-','');
+          history.replaceState(null,'','#'+id);
+          activate(id);
+        });
+        t.addEventListener('keydown',e=>{
+          const i = tabs.indexOf(t);
+          if(e.key==='ArrowRight'){ e.preventDefault(); tabs[(i+1)%tabs.length].click(); }
+          if(e.key==='ArrowLeft'){ e.preventDefault(); tabs[(i-1+tabs.length)%tabs.length].click(); }
+        });
+      });
+      fromHash();
+      window.addEventListener('hashchange', fromHash);
+    })();
+
+    // Financing calculator
+    (function(){
+      const amt = document.getElementById('fc-amount');
+      const term = document.getElementById('fc-term');
+      const apr = document.getElementById('fc-apr');
+      const run = document.getElementById('fc-run');
+      const out = document.getElementById('fc-result');
+      function money(x){return x.toLocaleString(undefined,{style:'currency',currency:'USD',maximumFractionDigits:2});}
+      function calc(){
+        const P = parseFloat(amt && amt.value) || 0;
+        const n = Math.max(1, parseInt(term && term.value || '24',10));
+        const r = Math.max(0, parseFloat(apr && apr.value || '0'))/100/12;
+        if(!P){ out.textContent=''; return; }
+        let m = 0;
+        if(r === 0){ m = P / n; }
+        else { m = P * (r / (1 - Math.pow(1 + r, -n))); }
+        out.innerHTML = `Estimated monthly payment: <span class="tag">${money(m)}</span> · Total: ${money(m*n)}`;
+      }
+      if(run){ run.addEventListener('click', calc); }
+      ;[amt,term,apr].forEach(el=>{ if(el){ el.addEventListener('input', calc); }});
+    })();
+  </script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalClinic",
+    "name": "Khanna Vision Institute",
+    "url": "https://khannainstitute.com/asa",
+    "telephone": "+1-818-857-1735",
+    "medicalSpecialty": "Ophthalmology",
+    "areaServed": {"@type":"Place","name":"Southern California"},
+    "address": [{
+      "@type": "PostalAddress",
+      "streetAddress": "31824 Village Center Rd F",
+      "addressLocality": "Westlake Village",
+      "addressRegion": "CA",
+      "postalCode": "91361",
+      "addressCountry": "US"
+    },{
+      "@type": "PostalAddress",
+      "streetAddress": "9100 Wilshire Blvd #265e",
+      "addressLocality": "Beverly Hills",
+      "addressRegion": "CA",
+      "postalCode": "90212",
+      "addressCountry": "US"
+    }]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Is ASA the same as old PRK?","acceptedAnswer":{"@type":"Answer","text":"No. ASA is a modern, flap‑free family using updated lasers, epithelium techniques, routine bandage lenses, and evidence‑based comfort and anti‑haze strategies."}},
+      {"@type":"Question","name":"Which ASA technique is best?","acceptedAnswer":{"@type":"Answer","text":"Outcomes are comparable. Your cornea, dryness risk, prescription, and platform guide the choice between mechanical PRK, LASEK, Epi‑LASIK, and transepithelial PRK."}},
+      {"@type":"Question","name":"Does ASA hurt?","acceptedAnswer":{"@type":"Answer","text":"Expect a few days of discomfort while the surface heals. Bandage lenses, chilled lubrication, and short‑course meds help most patients."}},
+      {"@type":"Question","name":"Is long‑term vision as good as LASIK?","acceptedAnswer":{"@type":"Answer","text":"Yes for appropriate prescriptions. ASA trades a slower first week for strong biomechanics and no corneal flap."}}
+    ]
+  }
+  </script>

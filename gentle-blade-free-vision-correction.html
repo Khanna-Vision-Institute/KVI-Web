@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gentle, Blade-Free Vision Correction | Khanna Vision Institute</title>
+    <meta name="description" content="Experience gentle, blade-free vision correction with SMILE at Khanna Vision Institute. Precision, comfort, and rapid recovery — the evolution of laser vision correction.">
+    <meta property="og:title" content="Gentle, Blade-Free Vision Correction | Khanna Vision Institute">
+    <meta property="og:description" content="Say goodbye to traditional blade-based procedures. SMILE at Khanna Vision Institute — precision, comfort, and rapid recovery.">
+    <meta property="og:image" content="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/khannainstitute/Logo+2.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --accent: #ffb924;
+            --accent-dark: #c47d00;
+            --accent-mid: #e89f00;
+            --accent-light: #fff8e6;
+            --accent-border: #f0c060;
+            --accent-text: #4a3000;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            color: #1a1a1a;
+            background: #fff;
+            line-height: 1.65;
+        }
+
+        /* ── HERO ── */
+        .smile-hero {
+            background: #ffb924;
+            display: flex;
+            align-items: stretch;
+            min-height: 240px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 142px;
+        }
+
+        @media (max-width: 1024px) {
+            .smile-hero { margin-top: 80px; }
+        }
+
+        .hero-gif-wrap {
+            flex: 0 0 auto;
+            width: 45%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .hero-gif-wrap img {
+            width: 420px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .hero-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 36px 48px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: clamp(24px, 3.2vw, 42px);
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: -0.3px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.38);
+            display: inline-block;
+            padding: 20px 28px;
+            border-radius: 12px;
+        }
+
+        /* ── INTRO ── */
+        .smile-intro {
+            background: var(--accent-light);
+            border-bottom: 1.5px solid var(--accent-border);
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        .smile-intro h2 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: clamp(20px, 3vw, 28px);
+            font-weight: 400;
+            color: var(--accent-text);
+            margin-bottom: 12px;
+        }
+
+        .smile-intro p {
+            font-size: 15px;
+            color: #5a3d00;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.78;
+        }
+
+        /* ── MAIN ── */
+        .smile-main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 64px 24px 88px;
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 52px;
+            align-items: start;
+        }
+
+        /* LEFT */
+        .smile-content h3 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--accent-text);
+            margin: 40px 0 14px;
+            line-height: 1.2;
+        }
+
+        .smile-content h3:first-child { margin-top: 0; }
+
+        .smile-content p {
+            font-size: 15.5px;
+            color: #334155;
+            margin-bottom: 14px;
+            line-height: 1.78;
+        }
+
+        /* Testimonial */
+        .testimonial {
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 36px 0;
+            box-shadow: 0 8px 36px rgba(196,125,0,0.15);
+            border: 1.5px solid var(--accent-border);
+        }
+
+        .testimonial-body {
+            background: linear-gradient(145deg, var(--accent-text), var(--accent-dark));
+            padding: 40px 36px;
+            color: #fff;
+            position: relative;
+        }
+
+        .testimonial-body::before {
+            content: '\201C';
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 120px;
+            color: rgba(255,255,255,0.1);
+            position: absolute;
+            top: -14px;
+            left: 18px;
+            line-height: 1;
+        }
+
+        .testimonial-body blockquote {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 20px;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-body cite {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            opacity: 0.78;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .testimonial-body cite::before {
+            content: '';
+            display: inline-block;
+            width: 28px;
+            height: 2px;
+            background: rgba(255,255,255,0.5);
+        }
+
+        /* Benefits */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .benefit-card {
+            background: var(--accent-light);
+            border: 1.5px solid var(--accent-border);
+            border-radius: 16px;
+            padding: 28px 20px;
+            text-align: center;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 36px rgba(196,125,0,0.18);
+        }
+
+        .benefit-icon { font-size: 38px; margin-bottom: 12px; display: block; }
+
+        .benefit-card h4 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 15px;
+            color: var(--accent-text);
+            font-weight: 400;
+            line-height: 1.35;
+        }
+
+        /* Trust line */
+        .trust-banner {
+            background: var(--accent);
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin: 32px 0;
+            text-align: center;
+            border: 1.5px solid var(--accent-border);
+        }
+
+        .trust-banner p {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 19px;
+            font-style: italic;
+            color: var(--accent-text);
+            margin: 0;
+        }
+
+        /* Stats */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--accent-border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 40px 0 0;
+        }
+
+        .stat-box {
+            background: var(--accent-light);
+            padding: 24px 16px;
+            text-align: center;
+        }
+
+        .stat-box .number {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 32px;
+            color: var(--accent-dark);
+            display: block;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .stat-box .label {
+            font-size: 12px;
+            color: var(--accent-text);
+            font-weight: 500;
+            letter-spacing: 0.04em;
+        }
+
+        /* CTA */
+        .cta-strip {
+            background: linear-gradient(135deg, var(--accent-text), var(--accent-dark));
+            border-radius: 20px;
+            padding: 36px 40px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .cta-strip h3 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+
+        .cta-strip p { font-size: 14px; opacity: 0.85; color: #fff; margin: 0; }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--accent-text);
+            font-weight: 700;
+            font-size: 14px;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: all 0.22s ease;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .cta-btn:hover {
+            background: #ffd070;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        /* ── SIDEBAR ── */
+        .smile-sidebar {
+            position: sticky;
+            top: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .doctor-card {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(196,125,0,0.15);
+            border: 1.5px solid var(--accent-border);
+        }
+
+        .doctor-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+        }
+
+        .doctor-caption {
+            background: linear-gradient(135deg, var(--accent-text), var(--accent-dark));
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .doctor-caption strong {
+            display: block;
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 19px;
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+
+        .doctor-caption span {
+            font-size: 12px;
+            opacity: 0.75;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .trust-badge {
+            background: var(--accent-light);
+            border: 1.5px solid var(--accent-border);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .trust-badge .badge-icon { font-size: 32px; margin-bottom: 8px; display: block; }
+
+        .trust-badge h4 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 17px;
+            color: var(--accent-text);
+            font-weight: 400;
+            margin-bottom: 6px;
+        }
+
+        .trust-badge p { font-size: 13px; color: #7a5000; margin: 0; }
+
+        .book-sidebar-btn {
+            display: block;
+            background: linear-gradient(135deg, var(--accent-text), var(--accent-dark));
+            color: #fff;
+            text-align: center;
+            font-weight: 700;
+            font-size: 15px;
+            padding: 16px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.22s ease;
+            box-shadow: 0 4px 18px rgba(196,125,0,0.3);
+        }
+
+        .book-sidebar-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(196,125,0,0.45);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .smile-hero { flex-direction: column; min-height: auto; }
+
+            .hero-gif-wrap { width: 100%; padding: 20px 20px 0; justify-content: center; }
+            .hero-gif-wrap img { width: 240px; }
+
+            .hero-text { width: 100%; padding: 20px 20px 28px; text-align: center; }
+            .hero-text h1 { font-size: clamp(22px, 6vw, 30px); padding: 16px 20px; }
+
+            .smile-main { grid-template-columns: 1fr; padding: 40px 16px 60px; gap: 40px; }
+            .smile-sidebar { position: static; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .cta-strip { flex-direction: column; text-align: center; padding: 28px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<%- include('/partials/header') %>
+
+<!-- ── HERO BANNER ── -->
+<section class="smile-hero">
+    <div class="hero-gif-wrap">
+        <img src="https://i.ibb.co/DDMxCgqJ/workout.gif" alt="Work out without glasses — SMILE at Khanna Vision Institute" loading="eager">
+    </div>
+    <div class="hero-text">
+        <h1>Gentle, Blade-Free Vision Correction</h1>
+    </div>
+</section>
+
+<!-- ── INTRO ── -->
+<div class="smile-intro">
+    <h2>Precision, Comfort, And Rapid Recovery – The Evolution of Laser Vision Correction</h2>
+    <p>Experience the future of vision correction with SMILE at Khanna Vision Institute. Say goodbye to traditional blade-based procedures and hello to a gentle, blade-free alternative that offers precision and comfort.</p>
+</div>
+
+<!-- ── MAIN CONTENT + SIDEBAR ── -->
+<div class="smile-main">
+
+    <!-- LEFT: Content -->
+    <div class="smile-content">
+
+        <h3>The Evolution of Laser Vision Correction</h3>
+        <p>Experience the future of vision correction with the innovative advancements in laser technology at Khanna Vision Institute. Discover the perfect blend of precision, comfort, and rapid recovery through our state-of-the-art procedures that have revolutionized the field of vision correction.</p>
+
+        <!-- Testimonial -->
+        <div class="testimonial">
+            <div class="testimonial-body">
+                <blockquote>"Life-changing! Dr. Khanna's SMILE surgery gave me perfect vision. Highly recommend!"</blockquote>
+                <cite>Emily, SMILE Patient</cite>
+            </div>
+        </div>
+
+        <h3>Benefits of SMILE Surgery at Khanna Vision Institute</h3>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <span class="benefit-icon">😌</span>
+                <h4>Less Discomfort</h4>
+            </div>
+            <div class="benefit-card">
+                <span class="benefit-icon">💧</span>
+                <h4>Lower Risk of Dry Eye Symptoms</h4>
+            </div>
+            <div class="benefit-card">
+                <span class="benefit-icon">🎯</span>
+                <h4>Precise Technology</h4>
+            </div>
+        </div>
+
+        <p>Experience the future of vision correction with SMILE technology offered by Dr. Khanna. Say goodbye to traditional blade-based procedures and hello to a gentle, blade-free solution for clearer vision.</p>
+
+        <p>If you are looking for a SMILE Surgery from Board Certified Surgeon, you can find it on Khanna Vision Institute.</p>
+
+        <!-- Trust line -->
+        <div class="trust-banner">
+            <p>"Khanna Vision Institute, led by Dr. Khanna, recognized as the trusted choice for vision excellence."</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-row">
+            <div class="stat-box">
+                <span class="number">25K+</span>
+                <span class="label">Procedures Performed</span>
+            </div>
+            <div class="stat-box">
+                <span class="number">0</span>
+                <span class="label">Blades Used</span>
+            </div>
+            <div class="stat-box">
+                <span class="number">99%</span>
+                <span class="label">Patient Satisfaction</span>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-strip">
+            <div>
+                <h3>Ready for Gentle, Blade-Free Vision?</h3>
+                <p>Schedule your free consultation at Beverly Hills or Westlake Village.</p>
+            </div>
+            <a href="/khanna-booking" class="cta-btn">Book Free Consultation →</a>
+        </div>
+
+    </div>
+
+    <!-- RIGHT: Sidebar -->
+    <div class="smile-sidebar">
+
+        <div class="doctor-card">
+            <img src="https://i.ibb.co/Qv61ZWRz/Z50-3428-64201-opt.jpg" alt="Dr. Rajesh Khanna — Board Certified Ophthalmologist">
+            <div class="doctor-caption">
+                <strong>Dr. Rajesh Khanna</strong>
+                <span>Trusted Choice for Vision Excellence</span>
+            </div>
+        </div>
+
+        <div class="trust-badge">
+            <span class="badge-icon">🛡️</span>
+            <h4>Trusted Choice for Vision Excellence</h4>
+            <p>Board Certified · Pioneer of SMILE in the US · 25,000+ blade-free procedures performed</p>
+        </div>
+
+        <a href="/khanna-booking" class="book-sidebar-btn">Schedule Free Consultation →</a>
+
+    </div>
+
+</div>
+
+<%- include('/partials/footer') %>
+
+<script src="/public/js/guru-chat-embed.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Menu Test</title>
+    <link rel="stylesheet" href="/public/css/header.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .content {
+            margin-top: 150px;
+            padding: 2rem;
+        }
+        .debug-info {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #000;
+            color: #0f0;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-inner">
+            <a href="/" class="logo-area" aria-label="Khanna Vision Institute">
+                <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/khannainstitute/Logo+2.png" alt="Khanna Vision Institute logo">
+            </a>
+
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="nav-primary" aria-label="Main navigation">
+                <ul class="primary-nav">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link">Home</a>
+                    </li>
+
+                    <li class="nav-item has-mega">
+                        <a href="#procedures-menu" class="nav-link" aria-haspopup="true">Procedures</a>
+                        <div class="mega-menu" id="procedures-menu">
+                            <div class="mega-columns">
+                                <div class="mega-column">
+                                    <h4>Laser Vision</h4>
+                                    <ul>
+                                        <li><a href="#">SMILE Laser</a></li>
+                                        <li><a href="#">LASIK</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item has-dropdown">
+                        <a href="#contact-menu" class="nav-link" aria-haspopup="true">Contact</a>
+                        <div class="dropdown-menu" id="contact-menu">
+                            <ul>
+                                <li><a href="#">Schedule Consultation</a></li>
+                                <li><a href="#">Virtual Consultation</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <a href="#" class="nav-cta-button">Book Consultation</a>
+        </div>
+    </header>
+
+    <div class="content">
+        <h1>Mobile Menu Debug Test</h1>
+        <p>This is a test page. Try opening the hamburger menu on mobile.</p>
+    </div>
+
+    <div class="debug-info" id="debugInfo">
+        Debug Log:<br>
+    </div>
+
+    <script>
+        const debugLog = document.getElementById('debugInfo');
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            debugLog.innerHTML += `[${timestamp}] ${message}<br>`;
+            debugLog.scrollTop = debugLog.scrollHeight;
+        }
+
+        log('Page loaded');
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            log('DOMContentLoaded fired');
+            
+            const headerInner = document.querySelector('.header-inner');
+            const toggleButton = document.querySelector('.menu-toggle');
+            const navPrimary = document.querySelector('.nav-primary');
+
+            log(`headerInner: ${!!headerInner}`);
+            log(`toggleButton: ${!!toggleButton}`);
+            log(`navPrimary: ${!!navPrimary}`);
+
+            if (!headerInner || !toggleButton || !navPrimary) {
+                log('ERROR: Required elements not found');
+                return;
+            }
+
+            const navItems = Array.from(headerInner.querySelectorAll('.nav-item.has-mega, .nav-item.has-dropdown'));
+            log(`Found ${navItems.length} nav items with dropdowns`);
+
+            const mediaQuery = window.matchMedia('(max-width: 1024px)');
+            log(`Mobile view: ${mediaQuery.matches}`);
+
+            toggleButton.setAttribute('aria-controls', 'main-navigation');
+            navPrimary.setAttribute('id', 'main-navigation');
+
+            const closeMenu = () => {
+                headerInner.classList.remove('is-open');
+                toggleButton.setAttribute('aria-expanded', 'false');
+                log('Menu closed');
+            };
+
+            const openMenu = () => {
+                headerInner.classList.add('is-open');
+                toggleButton.setAttribute('aria-expanded', 'true');
+                log('Menu opened');
+            };
+
+            const collapseAllDropdowns = () => {
+                navItems.forEach((item) => {
+                    item.classList.remove('is-expanded');
+                });
+                log('All dropdowns collapsed');
+            };
+
+            const toggleNavItem = (parentItem) => {
+                const isCurrentlyExpanded = parentItem.classList.contains('is-expanded');
+                collapseAllDropdowns();
+                
+                if (!isCurrentlyExpanded) {
+                    parentItem.classList.add('is-expanded');
+                    log(`Expanded: ${parentItem.querySelector('.nav-link').textContent}`);
+                }
+            };
+
+            toggleButton.addEventListener('click', (event) => {
+                event.stopPropagation();
+                log('Toggle button clicked');
+                
+                const isOpen = headerInner.classList.contains('is-open');
+                
+                if (isOpen) {
+                    closeMenu();
+                    collapseAllDropdowns();
+                } else {
+                    openMenu();
+                }
+            });
+
+            navItems.forEach((item) => {
+                const link = item.querySelector('.nav-link');
+                if (!link) return;
+
+                link.addEventListener('click', (event) => {
+                    log(`Nav link clicked: ${link.textContent}`);
+                    if (mediaQuery.matches) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        toggleNavItem(item);
+                    }
+                });
+
+                link.addEventListener('touchstart', (event) => {
+                    log(`Nav link touched: ${link.textContent}`);
+                    if (mediaQuery.matches) {
+                        toggleNavItem(item);
+                    }
+                }, { passive: true });
+            });
+
+            log('All event listeners bound');
+        });
+    </script>
+</body>
+</html>
+

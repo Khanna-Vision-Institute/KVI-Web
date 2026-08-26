@@ -1,0 +1,45 @@
+================================================================================
+JOB EXECUTION REPORT: Core Web Vitals
+================================================================================
+
+Execution Date: 11/22/2025, 7:00:00 AM
+Status: SUCCESS
+Duration: 0.50 seconds
+Mode: production
+
+CORE WEB VITALS REPORT
+--------------------------------------------------------------------------------
+
+Total Pages Discovered: 0
+Pages Tested: 2
+
+PERFORMANCE METRICS BY PAGE (detailed analysis):
+--------------------------------------------------------------------------------
+1. Page: https://khannainstitute.com/
+   Load Time: N/A
+   HTML Size: N/A
+   Images: 0
+   Scripts: 0
+   Stylesheets: 0
+   Performance Score: 0.85
+   Status: ✓ GOOD - Minor optimizations possible
+
+2. Page: https://khannainstitute.com/procedures/laser-vision/smile-laser/
+   Load Time: N/A
+   HTML Size: N/A
+   Images: 0
+   Scripts: 0
+   Stylesheets: 0
+   Performance Score: 0.85
+   Status: ✓ GOOD - Minor optimizations possible
+
+OVERALL PERFORMANCE SUMMARY:
+--------------------------------------------------------------------------------
+Average Performance Score: 0.85
+Overall Status: ⚠️ Good
+
+
+================================================================================
+Report generated at: 11/22/2025, 7:00:00 AM
+Report file: Core_Web_Vitals_2025-11-22_07-00-00.txt
+================================================================================

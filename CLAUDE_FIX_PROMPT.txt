@@ -1,0 +1,61 @@
+I have a KVI SEO Monitoring Dashboard with critical issues. Please diagnose and fix ALL problems.
+
+## System Access
+URL: [PROVIDE URL]
+Admin Username: [PROVIDE USERNAME]
+Admin Password: [PROVIDE PASSWORD]
+
+## Current Issues
+
+1. **Services Showing "Unavailable":** Multiple services (Backup, Phone, Schema, Og Tag, Meta Tags, Image, Canonical, Robot, Internal Links) showing "Service Unavailable" status even though they may be running.
+
+2. **Values Showing as 0:** Many metrics showing 0 values (Pages Checked: 0, Compliance Rate: 0, etc.) even when services have run. Data may not be persisting or API returning empty data.
+
+3. **Cron Jobs Not Working:** Jobs showing "Never" as last run. Scheduled jobs not executing. Manual "Run Now" buttons may not work.
+
+## Server Details
+- AWS EC2 Linux server
+- PM2 process: `kvi-monitoring` (ID: 13)
+- Application path: `/home/ec2-user/kvi-home/monitoring/`
+- Frontend: `kvi-master-report.js`
+
+## Your Task
+
+1. **Access the system** using credentials above
+2. **Check PM2 processes:** `pm2 list`, `pm2 logs kvi-monitoring --lines 100`
+3. **Test all API endpoints:** `/api/jobs/[jobType]` for each service
+4. **Check database:** Verify data is being saved and retrieved correctly
+5. **Check cron jobs:** Verify scheduled jobs are configured and executing
+6. **Check job execution:** Test manual job triggers and verify results save
+7. **Fix ALL issues found:**
+   - Start/restart services if down
+   - Fix API endpoints if wrong
+   - Fix database connection if failing
+   - Fix data persistence if not saving
+   - Fix cron configuration if missing
+   - Fix job scripts if failing
+   - Fix data parsing if incorrect
+8. **Verify fixes:** Test each service, verify data displays correctly, verify cron jobs run
+
+## Services to Check
+- Backup, Phone, Schema, Og Tag, Meta Tags, Image, Canonical, Robot, Internal Links, 404 Monitor
+
+## Expected Outcome
+After fixes:
+- ✅ All services show correct status (no false "Unavailable")
+- ✅ All metrics show correct values (no false zeros)
+- ✅ All cron jobs execute and update "Last Run" times
+- ✅ Manual "Run Now" buttons work for all services
+- ✅ Data persists and displays correctly
+
+## Report Required
+Please provide:
+1. Root causes identified
+2. All fixes applied
+3. Files modified
+4. Configuration changes
+5. Test results
+6. Any remaining issues
+
+**Start by accessing the system and performing comprehensive diagnostic. Then fix ALL issues and provide detailed report.**
+

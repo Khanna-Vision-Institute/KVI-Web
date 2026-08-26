@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!-- KVI referral-directory: HERITAGE_TABS_v6 — View Source must contain HERITAGE_TABS_v6 -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Referral partners | Khanna Vision Institute</title>
+  <meta name="description" content="Find your practice and open your personalized physician referral worksheet.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Libre+Baskerville:ital,wght@0,700;1,700&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/Doctorportal/physician-portal-brochure.css?v=20260604heritage">
+  <style>
+    .rd-wrap { max-width: 1180px; margin: 0 auto; }
+    .rd-hero h1 { margin: 0 0 10px; }
+    .rd-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 18px 0 14px; }
+    .rd-search { flex: 1 1 280px; min-width: 220px; }
+    .rd-input {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(10,12,20,0.55);
+      color: #f4f5f7;
+      padding: 12px 12px;
+      outline: none;
+    }
+    .rd-btn {
+      max-width: 100%;
+      box-sizing: border-box;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(214,176,102,0.14);
+      color: #f4e6c8;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .rd-btn--quiet {
+      background: transparent;
+      color: #e7e9ef;
+      border-color: rgba(255,255,255,0.12);
+      font-weight: 700;
+    }
+    .rd-table-wrap { overflow: auto; border-radius: 14px; border: 1px solid rgba(255,255,255,0.10); }
+    .rd-acc-root { min-width: 0; }
+    .rd-practice-acc { border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .rd-practice-acc:last-child { border-bottom: none; }
+    .rd-practice-sum {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 14px;
+      margin: 0;
+      font-weight: 800;
+      color: #f4f5f7;
+      line-height: 1.35;
+      user-select: none;
+    }
+    .rd-practice-sum::-webkit-details-marker { display: none; }
+    .rd-practice-sum::marker { content: ''; }
+    .rd-practice-sum-title { flex: 1 1 auto; text-align: left; min-width: 0; }
+    .rd-practice-sum-meta { display: inline-flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+    .rd-acc-chevron { display: inline-block; transition: transform 0.2s ease; font-size: 0.72rem; color: #a7adbb; }
+    .rd-practice-acc[open] .rd-acc-chevron { transform: rotate(180deg); }
+    .rd-acc-panel { padding: 4px 8px 16px 14px; overflow: auto; }
+    table.rd-mini-table { width: 100%; border-collapse: collapse; min-width: 640px; }
+    .rd-mini-table th,
+    .rd-mini-table td { text-align: left; padding: 10px 10px; border-top: 1px solid rgba(255,255,255,0.06); vertical-align: top; }
+    .rd-mini-table th {
+      font-size: 0.68rem;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: #a7adbb;
+      background: rgba(10,12,20,0.35);
+    }
+    .rd-doc { color: #e7e9ef; line-height: 1.35; }
+    .rd-muted { color: #a7adbb; font-size: 0.92rem; line-height: 1.45; }
+    .rd-link {
+      display: inline-block;
+      margin-top: 6px;
+      border-radius: 999px;
+      padding: 8px 12px;
+      border: 1px solid rgba(214,176,102,0.35);
+      color: #f4e6c8;
+      text-decoration: none;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .rd-link:hover { background: rgba(214,176,102,0.10); }
+    .rd-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+    .rd-err { margin: 12px 0; color: #fecaca; }
+
+    .rd-loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      min-height: 180px;
+      padding: 32px 16px;
+      color: #c7c9d1;
+      font-size: 0.95rem;
+    }
+    .rd-loading[hidden] { display: none !important; }
+    .rd-spinner {
+      width: 42px;
+      height: 42px;
+      border: 3px solid rgba(255,255,255,0.12);
+      border-top-color: rgba(214,176,102,0.92);
+      border-radius: 50%;
+      animation: rd-spin 0.75s linear infinite;
+      box-sizing: border-box;
+    }
+    @keyframes rd-spin {
+      to { transform: rotate(360deg); }
+    }
+    .rd-loading-text { font-weight: 600; }
+
+    /* Loose in-page code for Heritage `/HeritageFamily` only — edit HERITAGE_CODE in <script>. */
+    .rd-gate {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+      padding: 28px 16px 36px;
+    }
+    .rd-gate[hidden] { display: none !important; }
+    .rd-gate-card {
+      width: min(440px, 100%);
+      max-width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(10,12,20,0.72);
+      padding: 22px 20px 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+    .rd-gate-card .rd-input {
+      margin: 0;
+    }
+    .rd-gate-card .rd-btn {
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+    .rd-gate-title { margin: 0 0 8px; font-weight: 800; color: #f4f5f7; font-size: 1.08rem; }
+    .rd-gate-hint { margin: 0 0 16px; color: #a7adbb; font-size: 0.92rem; line-height: 1.45; }
+    .rd-gate-label { display: block; margin: 0 0 6px; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: #a7adbb; font-weight: 700; }
+    .rd-gate-err {
+      margin: 10px 0 14px;
+      color: #fecaca;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .rd-gate-err[hidden] { display: none !important; }
+    #rd-directory-unlocked[hidden] { display: none !important; }
+
+    /* 2026-05-28 visual refresh: #6dbae3 / #a6e0ff + gold contrast accents */
+    :root {
+      --rd-blue-a: #6dbae3;
+      --rd-blue-b: #a6e0ff;
+      --rd-gold: #d8b25f;
+      --rd-ink-dark: #0d1c2a;
+      --rd-ink-soft: #dceaf4;
+    }
+    .rd-hero h1 {
+      margin: 0 0 12px;
+      font-family: "Playfair Display", "Libre Baskerville", Georgia, serif;
+      font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+      letter-spacing: 0.04em;
+      color: var(--rd-gold);
+      text-shadow: 0 8px 26px rgba(0, 0, 0, 0.35);
+    }
+    .rd-toolbar {
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(166, 224, 255, 0.28);
+      background: linear-gradient(135deg, rgba(109, 186, 227, 0.2), rgba(166, 224, 255, 0.08));
+      box-shadow: 0 8px 26px rgba(5, 12, 24, 0.22);
+    }
+    .rd-input {
+      border: 1px solid rgba(166, 224, 255, 0.45);
+      background: rgba(9, 20, 34, 0.76);
+      color: #f6fbff;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+    .rd-input::placeholder {
+      color: rgba(214, 236, 249, 0.72);
+    }
+    .rd-input:focus {
+      border-color: rgba(166, 224, 255, 0.85);
+      box-shadow: 0 0 0 3px rgba(109, 186, 227, 0.22);
+    }
+    .rd-btn {
+      border: 1px solid rgba(109, 186, 227, 0.48);
+      background: linear-gradient(120deg, rgba(109, 186, 227, 0.9), rgba(166, 224, 255, 0.92));
+      color: var(--rd-ink-dark);
+      font-weight: 800;
+      transition: transform 0.12s ease, box-shadow 0.16s ease, filter 0.16s ease;
+      box-shadow: 0 10px 24px rgba(38, 98, 136, 0.28);
+    }
+    .rd-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+    }
+    .rd-btn--quiet {
+      color: #dff1fc;
+      border-color: rgba(166, 224, 255, 0.34);
+      background: rgba(8, 24, 40, 0.42);
+      box-shadow: none;
+    }
+    .rd-table-wrap {
+      border: 1px solid rgba(166, 224, 255, 0.24);
+      background: linear-gradient(180deg, rgba(9, 18, 31, 0.78), rgba(8, 15, 27, 0.88));
+      box-shadow: 0 18px 44px rgba(3, 9, 20, 0.3);
+    }
+    .rd-practice-acc {
+      border-bottom: 1px solid rgba(166, 224, 255, 0.16);
+    }
+    .rd-practice-sum {
+      color: #f4f9fd;
+      background: linear-gradient(90deg, rgba(109, 186, 227, 0.1), rgba(166, 224, 255, 0.05));
+    }
+    .rd-practice-sum:hover {
+      background: linear-gradient(90deg, rgba(109, 186, 227, 0.16), rgba(166, 224, 255, 0.08));
+    }
+    .rd-mini-table th {
+      color: #102131;
+      background: linear-gradient(90deg, rgba(166, 224, 255, 0.86), rgba(109, 186, 227, 0.84));
+      border-top-color: rgba(11, 31, 46, 0.2);
+    }
+    .rd-mini-table td {
+      border-top: 1px solid rgba(166, 224, 255, 0.12);
+    }
+    .rd-doc {
+      color: #eff8ff;
+      font-weight: 600;
+    }
+    .rd-muted {
+      color: var(--rd-ink-soft);
+    }
+    .rd-link {
+      border: 1px solid rgba(216, 178, 95, 0.6);
+      color: #f9e8be;
+      background: rgba(216, 178, 95, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    .rd-link:hover {
+      background: rgba(216, 178, 95, 0.2);
+    }
+    .rd-spinner {
+      border: 3px solid rgba(166, 224, 255, 0.22);
+      border-top-color: var(--rd-gold);
+    }
+    .rd-gate-card {
+      border: 1px solid rgba(166, 224, 255, 0.35);
+      background: linear-gradient(145deg, rgba(9, 24, 40, 0.9), rgba(8, 17, 30, 0.9));
+      box-shadow: 0 22px 54px rgba(4, 10, 22, 0.38);
+    }
+    .rd-gate-title {
+      color: var(--rd-gold);
+      font-family: "Playfair Display", "Libre Baskerville", Georgia, serif;
+      letter-spacing: 0.03em;
+    }
+    .rd-gate-hint,
+    .rd-gate-label {
+      color: #cae7f8;
+    }
+
+    .rd-subtitle {
+      margin: 0 0 18px;
+      max-width: 52rem;
+      color: var(--rd-ink-soft);
+      font-size: 1.02rem;
+      line-height: 1.55;
+    }
+    .rd-segments-sticky {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      margin: 0 0 14px;
+      padding: 10px 0 12px;
+      background: linear-gradient(180deg, rgba(8, 12, 20, 0.97) 0%, rgba(8, 12, 20, 0.92) 75%, rgba(8, 12, 20, 0));
+    }
+    .rd-segments {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+    }
+    .rd-seg {
+      border-radius: 999px;
+      border: 1px solid rgba(166, 224, 255, 0.28);
+      background: rgba(8, 24, 40, 0.5);
+      color: #dff1fc;
+      padding: 9px 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+    .rd-seg[aria-selected="true"],
+    .rd-seg[aria-pressed="true"] {
+      border-color: rgba(216, 178, 95, 0.55);
+      background: linear-gradient(120deg, rgba(109, 186, 227, 0.35), rgba(216, 178, 95, 0.18));
+      color: #fff8e8;
+    }
+    .rd-seg--md[aria-selected="true"] {
+      border-color: rgba(216, 178, 95, 0.65);
+      background: linear-gradient(120deg, rgba(216, 178, 95, 0.28), rgba(109, 186, 227, 0.12));
+    }
+    .rd-seg--od[aria-selected="true"] {
+      border-color: rgba(166, 224, 255, 0.55);
+      background: linear-gradient(120deg, rgba(109, 186, 227, 0.35), rgba(166, 224, 255, 0.1));
+    }
+    .rd-seg-num {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      background: rgba(0, 0, 0, 0.25);
+    }
+    .rd-counts {
+      margin: 0 0 10px;
+      color: #a7adbb;
+      font-size: 0.88rem;
+    }
+    .rd-badge {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 800;
+      vertical-align: middle;
+    }
+    .rd-badge--od {
+      border: 1px solid rgba(166, 224, 255, 0.45);
+      color: #dff1fc;
+      background: rgba(109, 186, 227, 0.15);
+    }
+    .rd-badge--md {
+      border: 1px solid rgba(216, 178, 95, 0.5);
+      color: #f9e8be;
+      background: rgba(216, 178, 95, 0.12);
+    }
+    .rd-link--md {
+      border-color: rgba(216, 178, 95, 0.65);
+      background: linear-gradient(120deg, rgba(216, 178, 95, 0.22), rgba(109, 186, 227, 0.12));
+    }
+    .rd-heritage-only[hidden] { display: none !important; }
+    body:not(.rd-is-heritage) .rd-heritage-only { display: none !important; }
+
+    .rd-split-view { display: none; }
+    body.rd-is-heritage .rd-split-view { display: block; }
+    body.rd-is-heritage .rd-single-list { display: none !important; }
+    .rd-section[hidden] { display: none !important; }
+
+    .rd-section {
+      border-radius: 16px;
+      border: 1px solid rgba(166, 224, 255, 0.22);
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(3, 9, 20, 0.28);
+    }
+    .rd-section--md {
+      border-color: rgba(216, 178, 95, 0.45);
+      background: linear-gradient(180deg, rgba(216, 178, 95, 0.08), rgba(8, 17, 30, 0.92));
+    }
+    .rd-section--od {
+      border-color: rgba(109, 186, 227, 0.35);
+      background: linear-gradient(180deg, rgba(109, 186, 227, 0.08), rgba(8, 17, 30, 0.92));
+    }
+    .rd-section-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px 16px;
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .rd-section-head h2 {
+      margin: 0;
+      font-family: "Playfair Display", "Libre Baskerville", Georgia, serif;
+      font-size: 1.22rem;
+      letter-spacing: 0.03em;
+      color: #f4f9fd;
+    }
+    .rd-section--md .rd-section-head h2 { color: var(--rd-gold); }
+    .rd-section-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .rd-section-pill--md {
+      border: 1px solid rgba(216, 178, 95, 0.55);
+      color: #f9e8be;
+      background: rgba(216, 178, 95, 0.14);
+    }
+    .rd-section-pill--od {
+      border: 1px solid rgba(166, 224, 255, 0.45);
+      color: #dff1fc;
+      background: rgba(109, 186, 227, 0.14);
+    }
+    .rd-section-desc {
+      margin: 0;
+      flex: 1 1 100%;
+      color: #cae7f8;
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+    .rd-section-count {
+      color: #a7adbb;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+    .rd-build {
+      margin-top: 18px;
+      text-align: center;
+      color: #6b7f92;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+    }
+  </style>
+</head>
+<body class="kvi-brochure">
+
+<header class="kh-header">
+  <div class="kh-header-inner">
+    <a class="kh-logo" href="https://khannainstitute.com/" aria-label="Khanna Vision Institute">
+      <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/Logo1.png"
+           alt="Khanna Vision Institute" decoding="async">
+    </a>
+    <nav class="kh-nav" aria-label="Main navigation">
+      <a class="kh-nav-link" href="https://khannainstitute.com/">Home</a>
+      <a class="kh-nav-link" href="/Doctorportal/for-physicians">For Physicians</a>
+      <a class="kh-nav-link" href="/Doctorportal/refer-a-patient">Referral Worksheet</a>
+      <a class="kh-nav-cta" href="tel:8052302126">(805) 230-2126</a>
+    </nav>
+  </div>
+</header>
+
+<div class="rf-breadcrumb" aria-label="Breadcrumb">
+  <div class="rf-breadcrumb-inner">
+    <a href="https://khannainstitute.com/">Home</a>
+    <span class="sep">›</span>
+    <a href="/Doctorportal/for-physicians">For Physicians</a>
+    <span class="sep">›</span>
+    <span class="cur" id="rd-crumb">Referral partners</span>
+  </div>
+</div>
+
+<main class="kv-main-pad rf-refer-main">
+  <div class="rf-page rf-page--wide rd-wrap">
+    <div class="rd-hero">
+      <h1 id="rd-title">Referral partners</h1>
+      <p class="rd-subtitle" id="rd-subtitle" hidden>Two referral paths: optometry worksheet (OD) and physician online booking (MD/DO).</p>
+      <div class="kv-rule" aria-hidden="true"></div>
+    </div>
+
+    <!-- `/HeritageFamily` only (see script): correct code hides this block and reveals #rd-directory-unlocked. -->
+    <section id="heritage-code-screen" class="rd-gate" hidden>
+      <div class="rd-gate-card">
+        <p class="rd-gate-title">Access code</p>
+        <p class="rd-gate-hint">Enter the staff code to view this directory.</p>
+        <label class="rd-gate-label" for="heritage-code-input">Code</label>
+        <input class="rd-input" id="heritage-code-input" type="password" autocomplete="off" placeholder="Enter code">
+        <div class="rd-gate-err" id="heritage-code-err" role="alert" hidden></div>
+        <button class="rd-btn" type="button" id="heritage-code-submit">Unlock</button>
+      </div>
+    </section>
+
+    <!-- Hidden until script runs — prevents showing the roster before Heritage code check applies. -->
+    <div id="rd-directory-unlocked" hidden>
+      <div class="rd-segments-sticky rd-heritage-only" id="rd-segments-wrap">
+        <div class="rd-segments" id="rd-segments" role="tablist" aria-label="Referral partner type">
+          <button type="button" class="rd-seg rd-seg--md" role="tab" id="rd-tab-md" data-seg="md" aria-selected="true" aria-controls="rd-panel-md">
+            Physicians (MD/DO)<span class="rd-seg-num" id="rd-seg-md-n">—</span>
+          </button>
+          <button type="button" class="rd-seg rd-seg--od" role="tab" id="rd-tab-od" data-seg="od" aria-selected="false" aria-controls="rd-panel-od">
+            Optometrists (OD)<span class="rd-seg-num" id="rd-seg-od-n">—</span>
+          </button>
+        </div>
+      </div>
+      <p class="rd-counts rd-heritage-only" id="rd-counts"></p>
+      <div class="rd-toolbar" id="rd-toolbar" role="search">
+        <label class="rd-search" for="rd-q">
+          <span class="sr-only">Search partners</span>
+          <input class="rd-input" id="rd-q" type="search" placeholder="Search practice, physician, phone, or address…" autocomplete="off">
+        </label>
+        <button class="rd-btn" type="button" id="rd-search-btn">Search</button>
+      </div>
+
+      <div class="rd-err" id="rd-err" hidden></div>
+
+      <div class="rd-table-wrap" id="rd-directory-wrap" aria-busy="true">
+        <div id="rd-loading" class="rd-loading" role="status" aria-live="polite" aria-busy="true">
+          <span class="rd-spinner" aria-hidden="true"></span>
+          <span class="rd-loading-text">Loading partners…</span>
+        </div>
+        <div id="rd-split-view" class="rd-split-view" hidden aria-hidden="true">
+          <section class="rd-section rd-section--md" id="rd-panel-md" role="tabpanel" aria-labelledby="rd-tab-md">
+            <div class="rd-section-head">
+              <span class="rd-section-pill rd-section-pill--md">MD / DO</span>
+              <h2 id="rd-md-heading">Physician referrals — book consultation</h2>
+              <p class="rd-section-desc">Primary-care physician partners. Each link opens <strong>Book consultation</strong> with referring doctor &amp; practice prefilled.</p>
+              <span class="rd-section-count" id="rd-md-count"></span>
+            </div>
+            <div id="rd-acc-md" class="rd-acc-root" role="region" aria-label="MD and DO physicians"></div>
+          </section>
+          <section class="rd-section rd-section--od" id="rd-panel-od" role="tabpanel" aria-labelledby="rd-tab-od" hidden>
+            <div class="rd-section-head">
+              <span class="rd-section-pill rd-section-pill--od">OD</span>
+              <h2 id="rd-od-heading">Optometrist referrals — worksheet</h2>
+              <p class="rd-section-desc">Each link opens the <strong>structured referral worksheet</strong> with your practice and doctor preloaded.</p>
+              <span class="rd-section-count" id="rd-od-count"></span>
+            </div>
+            <div id="rd-acc-od" class="rd-acc-root" role="region" aria-label="Optometrist partners"></div>
+          </section>
+        </div>
+        <div id="rd-acc-root" class="rd-acc-root rd-single-list" role="region" aria-label="Referral partners grouped by practice" hidden aria-hidden="true"></div>
+        <p class="rd-build rd-heritage-only" id="rd-build" aria-hidden="true">Directory build HERITAGE_TABS_v6</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="kh-footer">
+  <div class="kh-footer-inner">
+    <div class="kh-footer-grid">
+      <div>
+        <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/Logo1.png" alt="Khanna Vision Institute">
+        <p class="kh-footer-tagline">Precision vision care for Greater Los Angeles —<br>Beverly Hills & Westlake Village.</p>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Physician Portal</p>
+        <a href="/Doctorportal/for-physicians">Physician Hub</a>
+        <a href="/Doctorportal/refer-a-patient">Refer a Patient</a>
+        <a href="/Doctorportal/book-consultation">Online Scheduling</a>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Contact</p>
+        <a href="tel:8052302126">(805) 230-2126</a>
+        <a href="https://khannainstitute.com/contact/">Contact Us</a>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Locations</p>
+        <span>Beverly Hills</span>
+        <span>Westlake Village</span>
+      </div>
+    </div>
+    <div class="kh-footer-copy">
+      <p>© 2026 Khanna Vision Institute. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  function hubKeyFromPath() {
+    try {
+      var p = location.pathname || '';
+      var m = p.match(/\/Doctorportal\/network\/([^/]+)\/?$/i);
+      if (m && m[1]) return decodeURIComponent(m[1]).replace(/\.html$/i, '');
+      /** Apex hub: `/HeritageFamily` (and trailing slash / .html variants). */
+      if (/(^|\/)HeritageFamily(?:\.html)?\/?$/i.test(p)) return 'HeritageFamily';
+      var parts = p.split('/').filter(Boolean);
+      if (!parts.length) return '';
+      return parts[parts.length - 1].replace(/\.html$/i, '');
+    } catch (e) {
+      return '';
+    }
+  }
+
+  var hub = hubKeyFromPath();
+  /** Path segment for HeritageFamily hub (matches JSON `directoryPages.HeritageFamily`). */
+  var HERITAGE_HUB = 'heritagefamily';
+  /** Change this staff code anytime (visible in View Source — casual lock only, no username). */
+  var HERITAGE_CODE = 'KVIHeritage2026';
+
+  function normSlug(seg) {
+    return String(seg || '').trim().replace(/\.html$/i, '').toLowerCase();
+  }
+
+  function isHeritagePage() {
+    return normSlug(hub) === HERITAGE_HUB;
+  }
+
+  function heritageUnlockedThisTab() {
+    try {
+      return sessionStorage.getItem('kvi_heritage_ok') === '1';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function setHeritageUnlockedThisTab() {
+    try {
+      sessionStorage.setItem('kvi_heritage_ok', '1');
+    } catch (e) {}
+  }
+
+  var heritageScreen = document.getElementById('heritage-code-screen');
+  var heritageInput = document.getElementById('heritage-code-input');
+  var heritageBtn = document.getElementById('heritage-code-submit');
+  var heritageErrEl = document.getElementById('heritage-code-err');
+  var unlockedWrap = document.getElementById('rd-directory-unlocked');
+
+  function setHeritageMsg(msg) {
+    if (!heritageErrEl) return;
+    heritageErrEl.hidden = !msg;
+    heritageErrEl.textContent = msg || '';
+  }
+
+  /** Show code screen + hide directory, or the reverse — run before any `load()` on Heritage. */
+  function applyHeritageLockState() {
+    if (!heritageScreen || !unlockedWrap) return;
+    var need = isHeritagePage();
+    var ok = heritageUnlockedThisTab();
+    if (!need) {
+      heritageScreen.setAttribute('hidden', '');
+      unlockedWrap.removeAttribute('hidden');
+      setHeritageMsg('');
+      return;
+    }
+    if (!ok) {
+      heritageScreen.removeAttribute('hidden');
+      unlockedWrap.setAttribute('hidden', '');
+      setHeritageMsg('');
+      return;
+    }
+    heritageScreen.setAttribute('hidden', '');
+    unlockedWrap.removeAttribute('hidden');
+    setHeritageMsg('');
+  }
+
+  function tryHeritageUnlock() {
+    var v = heritageInput && heritageInput.value != null ? String(heritageInput.value).trim() : '';
+    if (v === String(HERITAGE_CODE)) {
+      setHeritageUnlockedThisTab();
+      applyHeritageLockState();
+      load();
+      return;
+    }
+    setHeritageMsg('Wrong code.');
+  }
+
+  var accRoot = document.getElementById('rd-acc-root');
+  var accMd = document.getElementById('rd-acc-md');
+  var accOd = document.getElementById('rd-acc-od');
+  var splitView = document.getElementById('rd-split-view');
+  var panelMd = document.getElementById('rd-panel-md');
+  var panelOd = document.getElementById('rd-panel-od');
+  var segmentsEl = document.getElementById('rd-segments');
+  var segMdNum = document.getElementById('rd-seg-md-n');
+  var segOdNum = document.getElementById('rd-seg-od-n');
+  var mdCountEl = document.getElementById('rd-md-count');
+  var odCountEl = document.getElementById('rd-od-count');
+  var currentSegment = 'md';
+  var dirWrap = document.getElementById('rd-directory-wrap');
+  var loadingEl = document.getElementById('rd-loading');
+
+  function setListVisibility(on) {
+    if (loadingEl) loadingEl.hidden = !on;
+    if (splitView && isHeritagePage()) {
+      splitView.hidden = !!on;
+      if (on) splitView.setAttribute('aria-hidden', 'true');
+      else splitView.removeAttribute('aria-hidden');
+    }
+    if (accRoot && !isHeritagePage()) {
+      accRoot.hidden = !!on;
+      if (on) accRoot.setAttribute('aria-hidden', 'true');
+      else accRoot.removeAttribute('aria-hidden');
+    }
+  }
+
+  function setLoading(on) {
+    if (loadingEl && on) loadingEl.setAttribute('aria-busy', 'true');
+    if (loadingEl && !on) loadingEl.removeAttribute('aria-busy');
+    setListVisibility(on);
+    if (dirWrap) {
+      if (on) dirWrap.setAttribute('aria-busy', 'true');
+      else dirWrap.removeAttribute('aria-busy');
+    }
+  }
+
+  var title = document.getElementById('rd-title');
+  var subtitleEl = document.getElementById('rd-subtitle');
+  var countsEl = document.getElementById('rd-counts');
+  var err = document.getElementById('rd-err');
+  var crumb = document.getElementById('rd-crumb');
+  var qEl = document.getElementById('rd-q');
+  var btn = document.getElementById('rd-search-btn');
+
+  var allOffices = [];
+
+  function readStoredSegment() {
+    try {
+      var s = sessionStorage.getItem('kvi_heritage_tab');
+      if (s === 'md' || s === 'od') return s;
+    } catch (e) {}
+    return 'md';
+  }
+
+  function applySegmentPanels() {
+    if (!isHeritagePage()) return;
+    if (panelMd) panelMd.hidden = currentSegment !== 'md';
+    if (panelOd) panelOd.hidden = currentSegment !== 'od';
+    if (segmentsEl) {
+      var btns = segmentsEl.querySelectorAll('.rd-seg');
+      for (var i = 0; i < btns.length; i++) {
+        var seg = btns[i].getAttribute('data-seg');
+        var on = seg === currentSegment;
+        btns[i].setAttribute('aria-selected', on ? 'true' : 'false');
+      }
+    }
+  }
+
+  function setSegment(seg) {
+    if (seg !== 'md' && seg !== 'od') return;
+    currentSegment = seg;
+    try {
+      sessionStorage.setItem('kvi_heritage_tab', seg);
+    } catch (e) {}
+    applySegmentPanels();
+    if (countsEl && isHeritagePage()) {
+      countsEl.textContent =
+        currentSegment === 'md'
+          ? 'Showing physicians (MD/DO) — book consultation links. Switch tab for optometry worksheet.'
+          : 'Showing optometrists (OD) — referral worksheet links. Switch tab for physician booking.';
+    }
+    var jump = document.getElementById('rd-segments-wrap');
+    if (jump && typeof jump.scrollIntoView === 'function') {
+      jump.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  if (segmentsEl) {
+    segmentsEl.addEventListener('click', function (ev) {
+      var b = ev.target && ev.target.closest ? ev.target.closest('.rd-seg') : null;
+      if (!b) return;
+      setSegment(b.getAttribute('data-seg') || 'md');
+    });
+  }
+
+  function initHeritagePage() {
+    if (!isHeritagePage()) return;
+    document.body.classList.add('rd-is-heritage');
+    currentSegment = readStoredSegment();
+    applySegmentPanels();
+    if (title) title.textContent = 'Doctor outreach';
+    if (subtitleEl) {
+      subtitleEl.textContent = '';
+      subtitleEl.setAttribute('hidden', '');
+    }
+    if (crumb) crumb.textContent = 'Heritage Family';
+    var buildEl = document.getElementById('rd-build');
+    if (buildEl) buildEl.removeAttribute('aria-hidden');
+  }
+
+  initHeritagePage();
+
+  function providerTypeOf(row) {
+    var t = row && row.providerType ? String(row.providerType).toLowerCase() : '';
+    if (t === 'md' || t === 'physician') return 'md';
+    var rel = String(
+      (row && (row.referralRelativeUrl || row.bookingRelativeUrl)) || ''
+    ).toLowerCase();
+    if (rel.indexOf('book-consultation') >= 0) return 'md';
+    var slug = String((row && row.slug) || '').toLowerCase();
+    if (slug.indexOf('mdvip-') === 0) return 'md';
+    var prac = String((row && row.practiceName) || '').toLowerCase();
+    if (/^(?:mdvip-|heritage-md-)/i.test(slug)) return 'md';
+    var cred = String((row && row.credentials) || '');
+    if (/\b(MD|DO|FACC|FACP|FAAFP|FAAFM)\b/i.test(cred) && !/\bOD\b/i.test(cred)) return 'md';
+    return 'od';
+  }
+
+  function partitionOffices(offices) {
+    var md = [];
+    var od = [];
+    offices.forEach(function (row) {
+      if (providerTypeOf(row) === 'md') md.push(row);
+      else od.push(row);
+    });
+    return { md: md, od: od };
+  }
+
+  function updateCounts(offices) {
+    var parts = partitionOffices(offices);
+    if (mdCountEl) {
+      mdCountEl.textContent =
+        parts.md.length === 1 ? '1 physician' : String(parts.md.length) + ' physicians';
+    }
+    if (odCountEl) {
+      odCountEl.textContent =
+        parts.od.length === 1 ? '1 optometrist' : String(parts.od.length) + ' optometrists';
+    }
+    if (segMdNum) segMdNum.textContent = String(parts.md.length);
+    if (segOdNum) segOdNum.textContent = String(parts.od.length);
+    if (countsEl && isHeritagePage()) {
+      setSegment(currentSegment);
+    }
+  }
+
+  function showErr(t) {
+    if (!err) return;
+    err.hidden = !t;
+    err.textContent = t || '';
+  }
+
+  function absUrl(rel) {
+    try {
+      return new URL(rel, location.origin).toString();
+    } catch (e) {
+      return rel;
+    }
+  }
+
+  function escHtml(s) {
+    return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+  }
+
+  function escAttr(s) {
+    return String(s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;');
+  }
+
+  function lineBlock(lines) {
+    var parts = [];
+    for (var i = 0; i < lines.length; i++) {
+      if (lines[i] && String(lines[i]).trim()) {
+        parts.push('<div>' + escHtml(String(lines[i]).trim()) + '</div>');
+      }
+    }
+    return parts.length ? parts.join('') : '<div class="rd-muted">—</div>';
+  }
+
+  function copyText(t) {
+    if (!t) return Promise.resolve();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(String(t)).catch(function () {
+        try {
+          window.prompt('Copy link:', String(t));
+        } catch (e2) {}
+        return undefined;
+      });
+    }
+    try {
+      window.prompt('Copy link:', String(t));
+    } catch (e2) {}
+    return Promise.resolve();
+  }
+
+  function displayPracticeName(name) {
+    return String(name || '')
+      .trim()
+      .replace(/^MDVIP\s*[—–-]\s*/i, '')
+      .replace(/^MDVIP\s+/i, '');
+  }
+
+  function groupOffices(offices) {
+    var map = {};
+    offices.forEach(function (row) {
+      var key = displayPracticeName(row.practiceName);
+      if (!key) key = '— Practice not listed —';
+      if (!map[key]) map[key] = [];
+      map[key].push(row);
+    });
+    var practices = Object.keys(map).sort(function (a, b) {
+      return a.localeCompare(b, undefined, { sensitivity: 'base', numeric: true });
+    });
+    practices.forEach(function (p) {
+      map[p].sort(function (a, b) {
+        return String(a.doctorName || '').localeCompare(String(b.doctorName || ''), undefined, {
+          sensitivity: 'base',
+          numeric: true
+        });
+      });
+    });
+    return practices.map(function (p) {
+      return { practice: p, rows: map[p] };
+    });
+  }
+
+  function linkMetaForRow(row) {
+    var isMd = providerTypeOf(row) === 'md';
+    var rel = isMd
+      ? row.referralRelativeUrl || row.bookingRelativeUrl || ''
+      : row.referralRelativeUrl || '';
+    var label = isMd ? 'Book consultation' : 'Open worksheet';
+    var cls = isMd ? 'rd-link rd-link--md' : 'rd-link';
+    return { rel: rel, full: row.referralAbsoluteUrl || absUrl(rel), label: label, cls: cls, isMd: isMd };
+  }
+
+  function actionColumnLabel(kind) {
+    if (kind === 'md') return 'Book consultation link';
+    if (kind === 'od') return 'Referral worksheet link';
+    return 'Personal worksheet link';
+  }
+
+  function renderAccordionInto(targetRoot, offices, kind) {
+    if (!targetRoot) return;
+    targetRoot.innerHTML = '';
+
+    if (!offices.length) {
+      targetRoot.innerHTML =
+        '<div class="rd-muted" style="padding:16px;">No partners in this section match your search.</div>';
+      return;
+    }
+
+    var groups = groupOffices(offices);
+    var plainPhysicianCell = kind === 'md' || isHeritagePage();
+    groups.forEach(function (g) {
+      var det = document.createElement('details');
+      det.className = 'rd-practice-acc';
+
+      var sum = document.createElement('summary');
+      sum.className = 'rd-practice-sum';
+
+      var n = g.rows.length;
+      sum.innerHTML =
+        '<span class="rd-practice-sum-title">' +
+        escHtml(g.practice) +
+        '</span><span class="rd-practice-sum-meta">' +
+        '<span class="rd-muted">' +
+        String(n) +
+        (n === 1 ? ' physician' : ' physicians') +
+        '</span>' +
+        '<span class="rd-acc-chevron" aria-hidden="true">▼</span>' +
+        '</span>';
+
+      var panel = document.createElement('div');
+      panel.className = 'rd-acc-panel';
+
+      var tbl = document.createElement('table');
+      tbl.className = 'rd-mini-table';
+      tbl.setAttribute('aria-label', 'Physicians in this practice group');
+
+      var thead = document.createElement('thead');
+      var actionCol = actionColumnLabel(kind);
+      thead.innerHTML =
+        '<tr>' +
+          '<th scope="col">Referring physician</th>' +
+          '<th scope="col">Contact</th>' +
+          '<th scope="col">Practice address</th>' +
+          '<th scope="col">' +
+          escHtml(actionCol) +
+          '</th>' +
+        '</tr>';
+      tbl.appendChild(thead);
+
+      var tbody = document.createElement('tbody');
+
+      g.rows.forEach(function (row) {
+        var link = linkMetaForRow(row);
+
+        var tr = document.createElement('tr');
+
+        var tdProv = document.createElement('td');
+        var docHtml;
+        if (plainPhysicianCell) {
+          docHtml = '<div class="rd-doc">' + escHtml(row.doctorName) + '</div>';
+        } else {
+          docHtml = '<div class="rd-doc">' + escHtml(row.doctorName) + '</div>';
+          if (row.credentials && String(row.credentials).trim()) {
+            docHtml += '<div class="rd-muted">' + escHtml(row.credentials) + '</div>';
+          }
+        }
+        tdProv.innerHTML = docHtml;
+        tr.appendChild(tdProv);
+
+        var tdCt = document.createElement('td');
+        tdCt.innerHTML = lineBlock([row.phone]);
+        tr.appendChild(tdCt);
+
+        var tdA = document.createElement('td');
+        if (row.addressLine && String(row.addressLine).trim()) {
+          tdA.innerHTML =
+            '<div class="rd-muted" style="max-width:340px;line-height:1.45;">' +
+            escHtml(String(row.addressLine).trim()) +
+            '</div>';
+        } else {
+          tdA.innerHTML = '<div class="rd-muted">—</div>';
+        }
+        tr.appendChild(tdA);
+
+        var tdGo = document.createElement('td');
+        tdGo.innerHTML =
+          '<div class="rd-actions">' +
+            '<a class="' +
+            escAttr(link.cls) +
+            '" href="' +
+            escAttr(link.rel) +
+            '">' +
+            escHtml(link.label) +
+            '</a>' +
+            '<button type="button" class="rd-btn rd-btn--quiet rd-copy-btn" data-copy="' +
+            escAttr(link.full) +
+            '">Copy link</button>' +
+          '</div>';
+        tr.appendChild(tdGo);
+
+        tbody.appendChild(tr);
+      });
+
+      tbl.appendChild(tbody);
+      panel.appendChild(tbl);
+      det.appendChild(sum);
+      det.appendChild(panel);
+      targetRoot.appendChild(det);
+    });
+  }
+
+  function bindCopyHandlers(container) {
+    if (!container) return;
+    container.onclick = function (ev) {
+      var tgt = ev.target;
+      if (!tgt || typeof tgt.closest !== 'function') return;
+      var b = tgt.closest('.rd-copy-btn');
+      if (!b) return;
+      var url = b.getAttribute('data-copy') || '';
+      copyText(url).then(function () {
+        try {
+          b.textContent = 'Copied!';
+          window.setTimeout(function () { b.textContent = 'Copy link'; }, 1600);
+        } catch (e3) {}
+      });
+    };
+  }
+
+  function renderDirectory(offices) {
+    if (isHeritagePage()) {
+      var parts = partitionOffices(offices);
+      renderAccordionInto(accMd, parts.md, 'md');
+      renderAccordionInto(accOd, parts.od, 'od');
+      bindCopyHandlers(splitView);
+      updateCounts(offices);
+      applySegmentPanels();
+      return;
+    }
+    updateCounts(offices);
+    renderAccordionInto(accRoot, offices, 'mixed');
+    bindCopyHandlers(accRoot);
+  }
+
+  function renderAccordion(offices) {
+    renderDirectory(offices);
+  }
+
+  function load() {
+    if (!hub) {
+      showErr('Missing referral hub segment in URL.');
+      if (loadingEl) {
+        loadingEl.hidden = true;
+        loadingEl.removeAttribute('aria-busy');
+      }
+      if (accRoot) {
+        accRoot.hidden = true;
+        accRoot.setAttribute('aria-hidden', 'true');
+        accRoot.innerHTML = '';
+      }
+      if (dirWrap) dirWrap.removeAttribute('aria-busy');
+      return;
+    }
+    showErr('');
+    setLoading(true);
+    if (accRoot) accRoot.innerHTML = '';
+    if (accMd) accMd.innerHTML = '';
+    if (accOd) accOd.innerHTML = '';
+
+    var qp = qEl && qEl.value ? '?q=' + encodeURIComponent(qEl.value) + '&limit=2500' : '?limit=2500';
+
+    fetch('/api/referral-directory/' + encodeURIComponent(hub) + qp, {
+      credentials: 'same-origin',
+      headers: { Accept: 'application/json' }
+    })
+      .then(function (r) { return r.json().catch(function () { return {}; }); })
+      .then(function (data) {
+        if (!data || !data.ok) {
+          showErr((data && data.message) || 'Could not load directory.');
+          renderAccordion([]);
+          setLoading(false);
+          return;
+        }
+        var disp =
+          data.hub && data.hub.displaySlug
+            ? data.hub.displaySlug
+            : hub;
+        if (crumb) crumb.textContent = disp || 'Referral partners';
+
+        if (title && data.hub && data.hub.title) title.textContent = data.hub.title;
+        document.title = (data.hub && data.hub.title ? data.hub.title + ' · ' : '') + 'Khanna Vision Institute';
+
+        if (subtitleEl) {
+          var sub = data.hub && data.hub.subtitle ? String(data.hub.subtitle).trim() : '';
+          if (sub) {
+            subtitleEl.textContent = sub;
+            subtitleEl.removeAttribute('hidden');
+          } else {
+            subtitleEl.setAttribute('hidden', '');
+            subtitleEl.textContent = '';
+          }
+        }
+
+        var off = Array.isArray(data.offices) ? data.offices : [];
+        allOffices = off;
+        renderDirectory(allOffices);
+        setLoading(false);
+      })
+      .catch(function () {
+        showErr('Network error loading partner list.');
+        renderAccordion([]);
+        setLoading(false);
+      });
+  }
+
+  if (btn) btn.addEventListener('click', load);
+  if (qEl) qEl.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Enter') { ev.preventDefault(); load(); }
+  });
+
+  if (heritageBtn) heritageBtn.addEventListener('click', tryHeritageUnlock);
+  if (heritageInput) {
+    heritageInput.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Enter') {
+        ev.preventDefault();
+        tryHeritageUnlock();
+      }
+    });
+  }
+
+  /** Lock UI first so Heritage roster never flashes before code entry. */
+  applyHeritageLockState();
+
+  if (isHeritagePage() && !heritageUnlockedThisTab()) {
+    window.setTimeout(function () {
+      try {
+        if (heritageInput) heritageInput.focus();
+      } catch (e) {}
+    }, 40);
+  } else {
+    load();
+  }
+})();
+</script>
+
+</body>
+</html>

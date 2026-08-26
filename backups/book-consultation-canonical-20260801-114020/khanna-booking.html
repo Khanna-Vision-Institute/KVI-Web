@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <% if (typeof pageData !== 'undefined' && pageData && pageData.metaTitle) { %>
+  <title><%= pageData.metaTitle %></title>
+  <% } else { %>
+  <title>Schedule a Consultation | Khanna Vision Institute</title>
+  <% } %>
+
+  <% if (typeof pageData !== 'undefined' && pageData && pageData.metaDescription) { %>
+  <meta name="description" content="<%= pageData.metaDescription %>">
+  <% } else { %>
+  <meta name="description" content="Book an in-person or virtual consultation with Khanna Vision Institute.">
+  <% } %>
+
+  <link rel="canonical" href="https://khannainstitute.com/contact/schedule-consultation/">
+  <link rel="stylesheet" href="/public/css/header.css">
+  <link rel="stylesheet" href="/public/css/footer.css">
+</head>
+<body>
+  <%- include('/partials/header') %>
+
+  <%#
+    Main booking UI ships from the repo so dropdown, optional fields, and calendar
+    fixes deploy with the app. Strapi `pageData.content` is intentionally not rendered
+    here (it was an outdated HTML blob). Title/description above still come from Strapi when set.
+  %>
+  <%- include('/partials/booking-consult-main') %>
+
+  <%- include('/partials/footer') %>
+</body>
+</html>

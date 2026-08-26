@@ -1,0 +1,44 @@
+# Environment variables (never commit secrets)
+.env
+.env.local
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+tools/.venv/
+tools/.venv312/
+
+# Local / generated backups (keep scripts; exclude heavy snapshots)
+backups/full-stack-*/
+backups/performance-*/
+server-reports/reports/
+
+# Deploy scratch
+.deploy-test.txt
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Backups
+*-backup-*
+production-backup-*
+*.tar.gz
+*.zip
+
+# Sensitive docs (review before committing)
+LOGIN_CREDENTIALS.md
+PASSWORD_CHANGED.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo

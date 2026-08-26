@@ -1,0 +1,14 @@
+version = 0.1
+
+[default.deploy.parameters]
+stack_name = "kvi-physician-portal-auth"
+resolve_s3 = true
+s3_prefix = "kvi-physician-portal-auth"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "StageName=\"prod\" WebsiteOriginPrimary=\"https://khannainstitute.com\" WebsiteOriginWWW=\"https://www.khannainstitute.com\""
+image_repositories = []
+
+[default.global.parameters]
+region = "us-east-1"

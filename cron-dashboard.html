@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KVI Cron System Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .controls {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+        
+        .btn-secondary {
+            background: #48bb78;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #38a169;
+        }
+        
+        .btn-trigger {
+            background: #ed8936;
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+        
+        .btn-trigger:hover {
+            background: #dd6b20;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-completed {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        
+        .status-failed {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+        
+        .status-started {
+            background: #feebc8;
+            color: #7c2d12;
+        }
+        
+        .status-skipped {
+            background: #e2e8f0;
+            color: #2d3748;
+        }
+        
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .job-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .job-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .job-card h3::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #667eea;
+        }
+        
+        .job-info {
+            margin-bottom: 1rem;
+        }
+        
+        .job-info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .job-info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .job-info-label {
+            font-weight: 600;
+            color: #4a5568;
+        }
+        
+        .job-info-value {
+            color: #2d3748;
+        }
+        
+        .results-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 1rem;
+        }
+        
+        .result-item {
+            background: #f7fafc;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            border-left: 3px solid #667eea;
+        }
+        
+        .result-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-item-time {
+            font-size: 0.85rem;
+            color: #718096;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #718096;
+        }
+        
+        .error {
+            background: #fed7d7;
+            color: #742a2a;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        
+        .success {
+            background: #c6f6d5;
+            color: #22543d;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #718096;
+        }
+        
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>KVI Cron System Dashboard</h1>
+        <p>Monitor automated jobs and system health</p>
+    </div>
+    
+    <div class="container">
+        <div class="controls">
+            <button class="btn btn-primary" onclick="loadResults()">Refresh Data</button>
+            <button class="btn btn-secondary" onclick="autoRefresh()">Auto Refresh: <span id="autoRefreshStatus">Off</span></button>
+            <div style="margin-left: auto; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <button class="btn btn-trigger" onclick="triggerJob('ssl')">Test SSL</button>
+                <button class="btn btn-trigger" onclick="triggerJob('forms')">Test Forms</button>
+                <button class="btn btn-trigger" onclick="triggerJob('schema')">Test Schema</button>
+                <button class="btn btn-trigger" onclick="triggerJob('links')">Test Links</button>
+                <button class="btn btn-trigger" onclick="triggerJob('content')">Test Content</button>
+                <button class="btn btn-trigger" onclick="triggerJob('vitals')">Test Vitals</button>
+            </div>
+        </div>
+        
+        <div id="message"></div>
+        
+        <div id="jobsContainer" class="jobs-grid">
+            <div class="loading">Loading cron job results...</div>
+        </div>
+    </div>
+    
+    <script>
+        let autoRefreshInterval = null;
+        
+        const jobNames = {
+            sslCheck: 'SSL Certificate Monitor',
+            formTesting: 'Form Testing',
+            schemaValidation: 'Schema Markup Validator',
+            internalLinking: 'Internal Linking Check',
+            contentValidation: 'Content Freshness Check',
+            coreWebVitals: 'Core Web Vitals'
+        };
+        
+        const jobIcons = {
+            sslCheck: '🔒',
+            formTesting: '📝',
+            schemaValidation: '🏗️',
+            internalLinking: '🔗',
+            contentValidation: '📄',
+            coreWebVitals: '⚡'
+        };
+        
+        async function loadResults() {
+            try {
+                const response = await fetch('/api/cron/results');
+                const data = await response.json();
+                
+                if (!data.success) {
+                    showMessage('Failed to load results', 'error');
+                    return;
+                }
+                
+                if (!data.extendedJobsAvailable) {
+                    showMessage('Extended cron jobs not available. Make sure jobs/kvi-cron-system-extended.js exists.', 'error');
+                }
+                
+                renderJobs(data.jobs);
+            } catch (error) {
+                showMessage('Error loading results: ' + error.message, 'error');
+                console.error(error);
+            }
+        }
+        
+        function renderJobs(jobs) {
+            const container = document.getElementById('jobsContainer');
+            
+            if (!jobs || Object.keys(jobs).length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📊</div>
+                        <h3>No job results yet</h3>
+                        <p>Jobs will appear here after they run. Use the trigger buttons to test jobs manually.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            
+            for (const [jobKey, results] of Object.entries(jobs)) {
+                const jobName = jobNames[jobKey] || jobKey;
+                const icon = jobIcons[jobKey] || '📋';
+                const latest = results && results.length > 0 ? results[0] : null;
+                
+                html += `
+                    <div class="job-card">
+                        <h3>${icon} ${jobName}</h3>
+                        ${latest ? `
+                            <div class="job-info">
+                                <div class="job-info-item">
+                                    <span class="job-info-label">Status:</span>
+                                    <span class="status-badge status-${latest.status}">${latest.status}</span>
+                                </div>
+                                <div class="job-info-item">
+                                    <span class="job-info-label">Last Run:</span>
+                                    <span class="job-info-value">${formatTime(latest.timestamp)}</span>
+                                </div>
+                                ${latest.stats ? `
+                                    <div class="job-info-item">
+                                        <span class="job-info-label">Stats:</span>
+                                        <span class="job-info-value">${JSON.stringify(latest.stats).replace(/[{}"]/g, '').replace(/:/g, ': ')}</span>
+                                    </div>
+                                ` : ''}
+                                ${latest.warnings && latest.warnings.length > 0 ? `
+                                    <div class="job-info-item">
+                                        <span class="job-info-label">Warnings:</span>
+                                        <span class="job-info-value" style="color: #e53e3e;">${latest.warnings.length}</span>
+                                    </div>
+                                ` : ''}
+                                ${latest.error ? `
+                                    <div class="job-info-item">
+                                        <span class="job-info-label">Error:</span>
+                                        <span class="job-info-value" style="color: #e53e3e;">${latest.error}</span>
+                                    </div>
+                                ` : ''}
+                            </div>
+                            ${results.length > 1 ? `
+                                <div class="results-list">
+                                    <strong>Recent Results:</strong>
+                                    ${results.slice(1, 6).map(r => `
+                                        <div class="result-item">
+                                            <div class="result-item-header">
+                                                <span class="status-badge status-${r.status}">${r.status}</span>
+                                                <span class="result-item-time">${formatTime(r.timestamp)}</span>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        ` : `
+                            <div class="empty-state" style="padding: 1rem;">
+                                <p>No results yet</p>
+                            </div>
+                        `}
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        async function triggerJob(jobName) {
+            try {
+                showMessage(`Triggering ${jobName} job...`, 'success');
+                const response = await fetch(`/api/cron/trigger/${jobName}`, {
+                    method: 'POST'
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    showMessage(`${jobName} job completed successfully!`, 'success');
+                    setTimeout(loadResults, 1000);
+                } else {
+                    showMessage(`Error: ${data.message}`, 'error');
+                }
+            } catch (error) {
+                showMessage('Error triggering job: ' + error.message, 'error');
+            }
+        }
+        
+        function autoRefresh() {
+            if (autoRefreshInterval) {
+                clearInterval(autoRefreshInterval);
+                autoRefreshInterval = null;
+                document.getElementById('autoRefreshStatus').textContent = 'Off';
+            } else {
+                autoRefreshInterval = setInterval(loadResults, 30000);
+                document.getElementById('autoRefreshStatus').textContent = 'On (30s)';
+                showMessage('Auto refresh enabled (every 30 seconds)', 'success');
+            }
+        }
+        
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.className = type;
+            messageDiv.textContent = message;
+            messageDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
+        
+        function formatTime(timestamp) {
+            if (!timestamp) return 'N/A';
+            const date = new Date(timestamp);
+            return date.toLocaleString();
+        }
+        
+        // Load results on page load
+        loadResults();
+        
+        // Auto refresh every 30 seconds
+        setInterval(loadResults, 30000);
+    </script>
+</body>
+</html>
+

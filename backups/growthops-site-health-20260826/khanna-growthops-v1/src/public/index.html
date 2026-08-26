@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khanna GrowthOps</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=15">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <img class="brand-mark" src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/khannainstitute/Logo+2.png" alt="Khanna Vision Institute">
+        <div class="brand-text">
+          <h1>Khanna GrowthOps</h1>
+          <p>Internal · Drafts only · Human approval</p>
+        </div>
+      </div>
+
+      <div class="topbar-status">
+        <div class="int-pills" id="intPills"></div>
+        <div class="badges">
+          <span class="badge sample" id="dataBadge">Sample data</span>
+          <span class="badge safe">No auto-publish</span>
+        </div>
+      </div>
+
+      <button class="btn primary hidden" id="generateBlogBtn" type="button">
+        <span class="spinner" aria-hidden="true"></span>
+        <span class="btn-label">✦ Generate blog</span>
+      </button>
+      <button class="btn primary hidden" id="generateSeoBtn" type="button">
+        <span class="spinner" aria-hidden="true"></span>
+        <span class="btn-label">✦ Generate SEO report</span>
+      </button>
+      <button class="btn primary hidden" id="generateEmailBtn" type="button">
+        <span class="spinner" aria-hidden="true"></span>
+        <span class="btn-label">✦ Generate email</span>
+      </button>
+    </div>
+
+    <nav class="mainnav channel-nav">
+      <div class="mainnav-inner" id="channelTabs">
+        <button class="nav-btn active" data-channel="blog" data-active="true">Blog</button>
+        <button class="nav-btn" data-channel="seo" data-active="true">SEO / Search Console</button>
+        <button class="nav-btn" data-channel="email" data-active="true">Email</button>
+        <button class="nav-btn" data-channel="crm" data-active="true">CRM</button>
+        <button class="nav-btn soon" data-channel="social" data-active="false">Social Media <span class="soon-badge">Soon</span></button>
+        <button class="nav-btn soon" data-channel="gads" data-active="false">Google Ads <span class="soon-badge">Soon</span></button>
+        <button class="nav-btn soon" data-channel="meta" data-active="false">Social Ads <span class="soon-badge">Soon</span></button>
+      </div>
+    </nav>
+
+    <nav class="mainnav subnav hidden" id="blogSubnav">
+      <div class="mainnav-inner">
+        <button class="nav-btn sub active" data-blog-sub="drafts">Draft queue</button>
+        <button class="nav-btn sub" data-blog-sub="published">Published blogs</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page">
+    <div id="view"></div>
+  </main>
+
+  <div class="drawer-scrim" id="drawerScrim"></div>
+  <aside class="drawer" id="drawer" aria-label="Draft detail">
+    <div class="drawer-head">
+      <div class="drawer-tags" id="drawerTitle"></div>
+      <button class="drawer-close" id="drawerClose" aria-label="Close">✕</button>
+    </div>
+    <h2 class="drawer-heading" id="drawerHeading"></h2>
+    <div class="drawer-body" id="drawerBody"></div>
+    <div class="drawer-foot" id="drawerFoot" hidden></div>
+  </aside>
+
+  <div class="toasts" id="toasts"></div>
+
+  <div class="pub-editor-scrim" id="pubEditorScrim"></div>
+  <aside class="pub-editor" id="pubEditor" aria-label="Edit published blog">
+    <div class="pub-editor-head">
+      <h3>Edit published blog</h3>
+      <button type="button" class="drawer-close" id="pubEditorClose" aria-label="Close">✕</button>
+    </div>
+    <div class="pub-editor-body">
+      <label class="pub-editor-label" for="pubEditTitle">Title</label>
+      <input id="pubEditTitle" class="pub-editor-input" type="text" />
+      <label class="pub-editor-label" for="pubEditAuthor">Author</label>
+      <input id="pubEditAuthor" class="pub-editor-input" type="text" />
+      <label class="pub-editor-label" for="pubEditContent">Content (HTML/Markdown)</label>
+      <textarea id="pubEditContent" class="pub-editor-textarea"></textarea>
+    </div>
+    <div class="pub-editor-foot">
+      <button type="button" class="btn ghost" id="pubEditorCancel">Cancel</button>
+      <button type="button" class="btn primary" id="pubEditorSave">Save changes</button>
+    </div>
+  </aside>
+
+  <div class="modal-scrim hidden" id="genScrim"></div>
+  <div class="modal-panel hidden" id="genModal" role="dialog" aria-label="Generate blog">
+    <div class="modal-head">
+      <h3>Generate a blog post</h3>
+      <button type="button" class="drawer-close" id="genClose">✕</button>
+    </div>
+    <form id="genForm" class="gen-form">
+      <div class="gen-grid">
+        <label class="pub-editor-label">City <small>(US — local SEO)</small>
+          <select id="genCity" class="pub-editor-input">
+            <option value="">National (no city)</option>
+          </select>
+        </label>
+        <label class="pub-editor-label">Word count
+          <input type="number" id="genWords" class="pub-editor-input" min="300" max="2500" step="50" value="700">
+        </label>
+      </div>
+      <label class="pub-editor-label">Topic <small>(blank = agent picks from Search Console + GA4)</small></label>
+      <div class="topic-row">
+        <input type="text" id="genTopic" class="pub-editor-input" placeholder="e.g. SMILE vs LASIK for active lifestyles">
+        <button type="button" class="btn ghost sm" id="genSuggest">✦ Suggest</button>
+      </div>
+      <div id="genSuggestions" class="suggestions hidden"></div>
+      <fieldset class="research-box">
+        <legend>Research sources</legend>
+        <label class="check-row"><input type="checkbox" id="genGsc" checked> Use <strong>Search Console</strong> demand <small id="gscHint"></small></label>
+        <label class="check-row"><input type="checkbox" id="genGa" checked> Use <strong>Analytics</strong> traffic <small id="gaHint"></small></label>
+      </fieldset>
+      <div class="pub-editor-foot">
+        <button type="submit" class="btn primary" id="genSubmit">✦ Generate</button>
+        <button type="button" class="btn ghost" id="genCancel">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-scrim hidden" id="emailScrim"></div>
+  <div class="modal-panel hidden" id="emailModal" role="dialog" aria-label="Generate email">
+    <div class="modal-head">
+      <h3>Generate an email</h3>
+      <button type="button" class="drawer-close" id="emailClose">✕</button>
+    </div>
+    <form id="emailForm" class="gen-form">
+      <label class="pub-editor-label">Email type
+        <select id="emailKind" class="pub-editor-input">
+          <option value="newsletter">Newsletter</option>
+          <option value="reminder">Reminder mail</option>
+        </select>
+      </label>
+      <label class="pub-editor-label">Topic <small>(blank = agent picks a theme)</small></label>
+      <div class="topic-row">
+        <input type="text" id="emailTopic" class="pub-editor-input" placeholder="e.g. What patients ask about SMILE recovery">
+        <button type="button" class="btn ghost sm" id="emailSuggest">✦ Suggest</button>
+      </div>
+      <div id="emailSuggestions" class="suggestions hidden"></div>
+      <label class="pub-editor-label">Base on approved blog <small>(optional)</small>
+        <select id="emailBlog" class="pub-editor-input">
+          <option value="">None — write from topic / analytics</option>
+        </select>
+      </label>
+      <fieldset class="research-box">
+        <legend>Seminar &amp; Webinar</legend>
+        <p class="muted-note" id="emailSeminarHint" style="margin:0 0 10px">Loading event details from khannainstitute.com/seminar-rsvp/ …</p>
+        <label class="check-row"><input type="checkbox" id="emailSeminar" checked> Include <strong>Seminar &amp; Webinar</strong> section with RSVP button</label>
+      </fieldset>
+      <div class="pub-editor-foot">
+        <button type="submit" class="btn primary" id="emailSubmit">✦ Generate</button>
+        <button type="button" class="btn ghost" id="emailCancel">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="/app.js?v=18"></script>
+</body>
+</html>

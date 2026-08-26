@@ -1,0 +1,814 @@
+<!-- COMPLETE MEDIA & PRESS PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 20px 60px;
+            margin-top: 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+            animation: slide 20s linear infinite;
+        }
+        
+        @keyframes slide {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .tagline {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .section {
+            background: white;
+            margin: 30px 0;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h2 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #764ba2, transparent);
+        }
+        
+        .celebrity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .celebrity-card {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .celebrity-card::before {
+            content: '⭐';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5em;
+            opacity: 0.3;
+        }
+        
+        .celebrity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .celebrity-name {
+            font-size: 1.5em;
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .celebrity-quote {
+            font-style: italic;
+            color: #555;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            position: relative;
+        }
+        
+        .celebrity-quote::before {
+            content: '"';
+            font-size: 3em;
+            color: #667eea;
+            opacity: 0.3;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+        }
+        
+        .video-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .video-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .video-card:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+        
+        .video-title {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .video-description {
+            font-size: 0.95em;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        
+        .media-coverage {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+        
+        .media-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .media-item {
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .media-item:hover {
+            transform: scale(1.1);
+        }
+        
+        .media-logo {
+            width: 150px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .social-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            border-top: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            color: #764ba2;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .testimonial-slider {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .testimonial {
+            padding: 25px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 15px 0;
+        }
+        
+        .testimonial-text {
+            font-size: 1.1em;
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-author {
+            color: #667eea;
+            font-weight: bold;
+            text-align: right;
+        }
+        
+        .press-feature {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .press-image {
+            width: 200px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .press-content h3 {
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+        
+        .press-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .celebrity-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .press-feature {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .social-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    
+</style>
+
+<!-- NOW THE HTML CONTENT STARTS -->
+
+<!-- Navigation Header -->
+    
+    
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1>📹 Media Showcase & Celebrity Testimonials</h1>
+            <p class="tagline">Trusted by Hollywood Stars • Featured in Beverly Hills Times • 36K+ Social Media Followers</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Celebrity Patients Section -->
+        <div class="section">
+            <h2>🌟 Celebrity Patients Trust Dr. Khanna</h2>
+            <div class="celebrity-grid">
+                <div class="celebrity-card">
+                    <div class="celebrity-name">Brenda Song</div>
+                    <div class="celebrity-details">
+                        <strong>Actress</strong> - Disney Channel Star, Suite Life of Zack & Cody
+                    </div>
+                    <div class="celebrity-quote">
+                        "Dr. Khanna changed my life. I wake up seeing perfectly. No more contact solution in my trailer. It's freedom I never imagined."
+                    </div>
+                    <div style="color: #667eea; margin-top: 15px;">
+                        <strong>📺 Featured on KTLA</strong><br>
+                        <strong>👁️ 20,000+ YouTube Views</strong>
+                    </div>
+                </div>
+                
+                <div class="celebrity-card">
+                    <div class="celebrity-name">Corbin Bleu</div>
+                    <div class="celebrity-details">
+                        <strong>Actor & Singer</strong> - High School Musical Star
+                    </div>
+                    <div class="celebrity-quote">
+                        "SMILE with Dr. Khanna was the best investment in my career. Perfect vision without restrictions—that's priceless for a performer."
+                    </div>
+                    <div style="color: #667eea; margin-top: 15px;">
+                        <strong>🎭 Broadway Performer</strong><br>
+                        <strong>✨ Crystal Clear Vision Achieved</strong>
+                    </div>
+                </div>
+                
+                <div class="celebrity-card">
+                    <div class="celebrity-name">Kevin Sorbo</div>
+                    <div class="celebrity-details">
+                        <strong>Actor</strong> - Television's Iconic Hercules
+                    </div>
+                    <div class="celebrity-quote">
+                        "Dr. Khanna performed both my vision correction and cosmetic pterygium surgery. His expertise and care are unmatched in Beverly Hills."
+                    </div>
+                    <div style="color: #667eea; margin-top: 15px;">
+                        <strong>💪 Legendary Action Star</strong><br>
+                        <strong>🎬 Multiple Procedures</strong>
+                    </div>
+                </div>
+                
+                <div class="celebrity-card">
+                    <div class="celebrity-name">David Paich</div>
+                    <div class="celebrity-details">
+                        <strong>Musician</strong> - Grammy-winning Keyboardist, Toto
+                    </div>
+                    <div class="celebrity-quote">
+                        "As a musician, perfect vision is crucial for reading music and performing. Dr. Khanna delivered results beyond my expectations."
+                    </div>
+                    <div style="color: #667eea; margin-top: 15px;">
+                        <strong>🎹 "Africa" & "Rosanna" Songwriter</strong><br>
+                        <strong>🏆 Multiple Grammy Winner</strong>
+                    </div>
+                </div>
+                
+                <div class="celebrity-card">
+                    <div class="celebrity-name">Stephanie Beacham</div>
+                    <div class="celebrity-details">
+                        <strong>Actress</strong> - Dynasty & Coronation Street Star
+                    </div>
+                    <div class="celebrity-quote">
+                        "The care and precision Dr. Khanna brings to his work is extraordinary. I trusted him completely with my vision."
+                    </div>
+                    <div style="color: #667eea; margin-top: 15px;">
+                        <strong>👑 British Television Icon</strong><br>
+                        <strong>📺 Dynasty Legend</strong>
+                    </div>
+                </div>
+                
+                <div class="celebrity-card">
+                    <div class="celebrity-name">Robby Krieger</div>
+                    <div class="celebrity-details">
+                        <strong>Guitarist</strong> - The Doors Legendary Guitarist
+                    </div>
+                    <div class="celebrity-quote">
+                        "After decades of wearing glasses on stage, Dr. Khanna gave me the gift of perfect vision. Revolutionary experience."
+                    </div>
+                    <div style="color: #667eea; margin-top: 15px;">
+                        <strong>🎸 Rock & Roll Hall of Fame</strong><br>
+                        <strong>🎵 "Light My Fire" Composer</strong>
+                    </div>
+                </div>
+                
+                <div class="celebrity-card">
+                    <div class="celebrity-name">Rita Garcia</div>
+                    <div class="celebrity-details">
+                        <strong>News Anchor</strong> - Fox News Correspondent
+                    </div>
+                    <div class="celebrity-quote">
+                        "Dr. Khanna performed my cosmetic pterygium surgery flawlessly. On camera, my eyes have never looked better."
+                    </div>
+                    <div style="color: #667eea; margin-top: 15px;">
+                        <strong>📺 Television Journalist</strong><br>
+                        <strong>🎥 On-Camera Professional</strong>
+                    </div>
+                </div>
+                
+                <div class="celebrity-card">
+                    <div class="celebrity-name">Bethany Hamilton's Team</div>
+                    <div class="celebrity-details">
+                        <strong>Soul Surfer</strong> - Care Team Member
+                    </div>
+                    <div class="celebrity-quote">
+                        "Dr. Khanna's expertise was crucial in providing vision care for our inspiring athlete's journey."
+                    </div>
+                    <div style="color: #667eea; margin-top: 15px;">
+                        <strong>🏄‍♀️ Inspiring Story</strong><br>
+                        <strong>🌊 Professional Surfer Care</strong>
+                    </div>
+                </div>
+                
+                <div class="celebrity-card">
+                    <div class="celebrity-name">Michael Wilk</div>
+                    <div class="celebrity-details">
+                        <strong>Theatre Actor</strong> - Steppenwolf Theatre Ensemble
+                    </div>
+                    <div class="celebrity-quote">
+                        "Stage performance demands perfect vision. Dr. Khanna delivered exactly what I needed for my theatrical career."
+                    </div>
+                    <div style="color: #667eea; margin-top: 15px;">
+                        <strong>🎭 Chicago Theatre Legend</strong><br>
+                        <strong>🌟 Ensemble Member</strong>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%); padding: 30px; border-radius: 15px; margin-top: 40px; text-align: center;">
+                <p style="font-size: 1.2em; color: #667eea; font-weight: bold; margin-bottom: 15px;">
+                    "I've also operated on many other celebrities who, for HIPAA and privacy reasons, I cannot mention. They trust that what happens in my office stays confidential."
+                </p>
+                <p style="color: #666; font-style: italic;">- Dr. Rajesh Khanna</p>
+            </div>
+        </div>
+
+        <!-- Family Trust Section -->
+        <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="color: white; border-color: white;">👨‍👩‍👦 The Ultimate Trust: Operating on Family</h2>
+            <div style="text-align: center; padding: 30px;">
+                <p style="font-size: 1.3em; margin-bottom: 30px;">
+                    When a surgeon operates on their own family, it speaks volumes about their confidence and skill.
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin: 30px 0;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
+                        <div style="font-size: 3em; margin-bottom: 15px;">👩</div>
+                        <h3 style="font-size: 1.4em; margin-bottom: 10px;">His Mother</h3>
+                        <p style="font-size: 0.95em; opacity: 0.9;">
+                            "After talking to my son's patients and seeing how happy they were, I realized the best surgeon was right here - my own son."
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
+                        <div style="font-size: 3em; margin-bottom: 15px;">👨‍💼</div>
+                        <h3 style="font-size: 1.4em; margin-bottom: 10px;">His Son</h3>
+                        <p style="font-size: 0.95em; opacity: 0.9;">
+                            "He trusted his dad," Dr. Khanna says simply. The results speak for themselves - perfect vision achieved.
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
+                        <div style="font-size: 3em; margin-bottom: 15px;">👥</div>
+                        <h3 style="font-size: 1.4em; margin-bottom: 10px;">Staff & Family Members</h3>
+                        <p style="font-size: 0.95em; opacity: 0.9;">
+                            Multiple staff members and extended family have chosen Dr. Khanna for their vision correction.
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.2); padding: 25px; border-radius: 15px; margin-top: 30px;">
+                    <p style="font-size: 1.2em; font-weight: bold; margin-bottom: 10px;">
+                        "When your own family won't trust anyone else, patients take notice."
+                    </p>
+                    <p style="font-size: 1em; opacity: 0.95;">
+                        Dr. Khanna's wife has made her position clear: she would only have surgery with him and no one else.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Content Section -->
+        <div class="video-section">
+            <h2 style="color: white; border-color: white;">📺 Featured Video Content</h2>
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-title">🎬 Brenda Song's LASIK Journey</div>
+                    <div class="video-description">
+                        Watch actress Brenda Song's complete LASIK transformation at Khanna Vision Institute. From consultation to recovery, see her amazing results.
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-title">🎪 Corbin Bleu Testimonial</div>
+                    <div class="video-description">
+                        High School Musical star Corbin Bleu shares his LASIK experience and how it changed his performance career.
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-title">👨‍⚕️ Dr. Khanna Welcome Message</div>
+                    <div class="video-description">
+                        Personal introduction from Dr. Khanna explaining the advanced vision correction procedures available at KVI.
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-title">💎 Premium Cataract Surgery</div>
+                    <div class="video-description">
+                        Detailed explanation of the latest laser cataract surgery technology using Lensx and Catalys systems.
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-title">😊 SMILE Procedure Explained</div>
+                    <div class="video-description">
+                        Learn about the revolutionary SMILE laser vision correction - the latest advancement beyond LASIK.
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-title">🏆 Patient Success Stories</div>
+                    <div class="video-description">
+                        Real patients share their life-changing vision correction experiences at Khanna Vision Institute.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Media Coverage -->
+        <div class="media-coverage">
+            <h2>📰 Featured In Major Media</h2>
+            
+            <div class="press-feature">
+                <div class="press-image">Beverly Hills Times</div>
+                <div class="press-content">
+                    <h3>Cover Story Feature</h3>
+                    <p>Dr. Khanna was featured on the cover of Beverly Hills Times, highlighting his pioneering work in advanced vision correction and celebrity patient care. The feature article discussed his innovative approaches to LASIK, SMILE, and presbyopic treatments.</p>
+                </div>
+            </div>
+            
+            <div class="press-feature">
+                <div class="press-image">KTLA News</div>
+                <div class="press-content">
+                    <h3>Celebrity LASIK Coverage</h3>
+                    <p>KTLA covered Brenda Song's LASIK journey with Dr. Khanna, showcasing the advanced wavefront technology and painless procedure that attracted Hollywood's elite to Khanna Vision Institute.</p>
+                </div>
+            </div>
+            
+            <div class="press-feature">
+                <div class="press-image">The Acorn</div>
+                <div class="press-content">
+                    <h3>Regular Health Columnist</h3>
+                    <p>Dr. Khanna writes regular columns for The Acorn Newspapers, educating the community about the latest advances in vision correction technology and eye health.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Media Stats -->
+        <div class="section">
+            <h2>📱 Digital & Social Media Presence</h2>
+            <div class="social-stats">
+                <div class="stat-card">
+                    <div class="stat-number">36K+</div>
+                    <div class="stat-label">Instagram Followers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2K+</div>
+                    <div class="stat-label">Facebook Fans</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">479</div>
+                    <div class="stat-label">Instagram Posts</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">20K+</div>
+                    <div class="stat-label">YouTube Views</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="testimonial-slider">
+            <h2>💬 What Patients Are Saying</h2>
+            
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "After decades of wearing glasses on stage, Dr. Khanna gave me the gift of perfect vision. Revolutionary experience. I can now see my guitar fretboard and the audience perfectly."
+                </div>
+                <div class="testimonial-author">- Robby Krieger, The Doors Guitarist</div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "As a musician, perfect vision is crucial for reading music and performing. Dr. Khanna delivered results beyond my expectations. No more squinting at sheet music during recording sessions."
+                </div>
+                <div class="testimonial-author">- David Paich, Grammy-winning Keyboardist (Toto)</div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "Dr. Khanna performed both my vision correction and cosmetic pterygium surgery. His expertise and care are unmatched in Beverly Hills. My eyes have never looked better on screen."
+                </div>
+                <div class="testimonial-author">- Kevin Sorbo, Actor (Hercules)</div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "I'm an award-winning cameraman. My glasses kept fogging up from the high intense lights at movie shoots. SMILE has helped me see better through the camera in all types of lighting."
+                </div>
+                <div class="testimonial-author">- Nick, Professional Cinematographer</div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "As an interventional radiologist, I need perfect vision. SMILE made my life and profession so much easier. The precision Dr. Khanna brings to his work is exceptional."
+                </div>
+                <div class="testimonial-author">- Dr. P.A., Interventional Radiologist</div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "I've been wearing contacts and glasses for 23 years. After meeting Dr. Khanna, I felt so confident. The LASIK surgery was completely pain-free! I went from 20/400 to 20/15!"
+                </div>
+                <div class="testimonial-author">- Recent LASIK Patient</div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "My vision at 63 years old is now perfect! Reading, driving, shopping - everything is so much easier. The PIE procedure was life-changing. Thank you, Khanna Vision!"
+                </div>
+                <div class="testimonial-author">- PIE Surgery Patient</div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "One pilot called Dr. Khanna from the cockpit after his procedure. He could see the coast of Japan much sharper than ever before - that's the level of results we're talking about."
+                </div>
+                <div class="testimonial-author">- Airline Pilot Patient</div>
+            </div>
+        </div>
+
+        <!-- YouTube Channel -->
+        <div class="section">
+            <h2>🎥 YouTube Channel: @KhannaVision</h2>
+            <p style="font-size: 1.1em; color: #666; margin-top: 20px;">
+                Subscribe to our YouTube channel for the latest videos on vision correction procedures, patient testimonials, and educational content from Dr. Khanna.
+            </p>
+            <div style="margin-top: 30px;">
+                <h3 style="color: #764ba2; margin-bottom: 15px;">Popular Video Series:</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;">
+                        📹 <strong>Celebrity Patient Journeys</strong> - Behind-the-scenes with famous patients
+                    </li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;">
+                        📚 <strong>Educational Series</strong> - Understanding LASIK, SMILE, and PIE procedures
+                    </li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;">
+                        💡 <strong>Technology Showcases</strong> - Latest laser equipment demonstrations
+                    </li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid #eee;">
+                        🎙️ <strong>Aye Eye Doc Podcast</strong> - Dr. Khanna's insights on vision care
+                    </li>
+                    <li style="padding: 10px 0;">
+                        ✨ <strong>Recovery Stories</strong> - Real patients sharing their experiences
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2 style="color: white; border: none;">Join Thousands of Satisfied Patients</h2>
+            <p style="font-size: 1.2em; margin: 20px 0;">
+                Experience the same premium care trusted by celebrities and professionals
+            </p>
+            <div>
+                <a href="tel:8052302126" class="cta-button">📞 Call Westlake: (805) 230-2126</a>
+                <a href="tel:3104821240" class="cta-button">📞 Call Beverly Hills: (310) 482-1240</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->

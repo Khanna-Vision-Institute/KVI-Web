@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khanna Vision - Next-Gen Eye Surgery Experience</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+        
+        :root {
+            --neon-purple: #9D4EDD;
+            --neon-pink: #FF006E;
+            --neon-blue: #3A86FF;
+            --neon-green: #06FFB4;
+            --dark-bg: #0A0E27;
+            --darker-bg: #050714;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--dark-bg);
+            color: var(--white);
+            overflow-x: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="%239D4EDD" opacity="0.8"/></svg>'), auto;
+        }
+        
+        /* 1. GAMING-STYLE HERO WITH PARALLAX */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 50% 50%, #1a1a3e 0%, #0A0E27 100%);
+            overflow: hidden;
+        }
+        
+        .floating-eyes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .floating-eye {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            border-radius: 50% 0;
+            animation: float-random 20s infinite ease-in-out;
+            opacity: 0.3;
+        }
+        
+        .floating-eye:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-eye:nth-child(2) { top: 20%; right: 15%; animation-delay: 3s; }
+        .floating-eye:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 6s; }
+        .floating-eye:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 9s; }
+        .floating-eye:nth-child(5) { top: 50%; left: 50%; animation-delay: 12s; }
+        
+        @keyframes float-random {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, -50px) rotate(90deg); }
+            50% { transform: translate(-30px, 30px) rotate(180deg); }
+            75% { transform: translate(40px, 40px) rotate(270deg); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .glitch-title {
+            font-size: 5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            position: relative;
+            animation: glitch 2s infinite;
+        }
+        
+        .glitch-title::before,
+        .glitch-title::after {
+            content: "20/20 Vision";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch-title::before {
+            animation: glitch-1 0.5s infinite;
+            color: var(--neon-blue);
+            z-index: -1;
+        }
+        
+        .glitch-title::after {
+            animation: glitch-2 0.5s infinite;
+            color: var(--neon-pink);
+            z-index: -2;
+        }
+        
+        @keyframes glitch {
+            0%, 100% { text-shadow: 0 0 10px var(--neon-purple); }
+            50% { text-shadow: 0 0 20px var(--neon-purple), 0 0 30px var(--neon-pink); }
+        }
+        
+        @keyframes glitch-1 {
+            0%, 100% { clip: rect(132px, 9999px, 101px, 0); transform: translate(0); }
+            20% { clip: rect(10px, 9999px, 50px, 0); transform: translate(-2px, 2px); }
+            40% { clip: rect(80px, 9999px, 120px, 0); transform: translate(2px, -2px); }
+            60% { clip: rect(25px, 9999px, 75px, 0); transform: translate(-1px, 1px); }
+            80% { clip: rect(90px, 9999px, 140px, 0); transform: translate(1px, -1px); }
+        }
+        
+        @keyframes glitch-2 {
+            0%, 100% { clip: rect(20px, 9999px, 60px, 0); transform: translate(0); }
+            20% { clip: rect(70px, 9999px, 110px, 0); transform: translate(2px, -2px); }
+            40% { clip: rect(40px, 9999px, 80px, 0); transform: translate(-2px, 2px); }
+            60% { clip: rect(100px, 9999px, 140px, 0); transform: translate(1px, -1px); }
+            80% { clip: rect(5px, 9999px, 45px, 0); transform: translate(-1px, 1px); }
+        }
+        
+        /* 2. TINDER-STYLE PROCEDURE SWIPER */
+        .swiper-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+        }
+        
+        .swiper-container {
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+            height: 600px;
+        }
+        
+        .swipe-card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(157, 78, 221, 0.4);
+            cursor: grab;
+            transition: transform 0.2s, opacity 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .swipe-card.dragging {
+            transition: none;
+            cursor: grabbing;
+        }
+        
+        .swipe-card.liked {
+            transform: translateX(150%) rotate(20deg);
+            opacity: 0;
+        }
+        
+        .swipe-card.noped {
+            transform: translateX(-150%) rotate(-20deg);
+            opacity: 0;
+        }
+        
+        .card-emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .card-price {
+            font-size: 1.5rem;
+            color: var(--neon-green);
+            margin-bottom: 1rem;
+        }
+        
+        .card-features {
+            list-style: none;
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+        
+        .swipe-indicators {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 2rem;
+            pointer-events: none;
+        }
+        
+        .like-indicator, .nope-indicator {
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .like-indicator {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+        }
+        
+        .nope-indicator {
+            background: var(--neon-pink);
+            color: var(--white);
+        }
+        
+        /* 3. INTERACTIVE VISION SIMULATOR */
+        .vision-simulator {
+            padding: 5rem 2rem;
+            background: var(--darker-bg);
+            text-align: center;
+        }
+        
+        .simulator-title {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .vision-display {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(58, 134, 255, 0.3);
+        }
+        
+        .vision-image {
+            width: 100%;
+            height: 400px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400"><rect fill="%23667eea" width="800" height="400"/><text x="400" y="200" fill="white" font-size="30" text-anchor="middle" font-family="Arial">CRYSTAL CLEAR GAMING</text></svg>') center/cover;
+            filter: blur(10px);
+            transition: filter 0.5s ease;
+        }
+        
+        .vision-image.clear {
+            filter: blur(0);
+        }
+        
+        .prescription-slider {
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .slider {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 10px;
+            border-radius: 5px;
+            background: linear-gradient(90deg, var(--neon-pink) 0%, var(--neon-green) 100%);
+            outline: none;
+            cursor: pointer;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--white);
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--neon-purple);
+        }
+        
+        /* 4. ACHIEVEMENT BADGES */
+        .achievements-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+        }
+        
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .achievement-badge {
+            background: rgba(157, 78, 221, 0.1);
+            border: 2px solid var(--neon-purple);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .achievement-badge:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(157, 78, 221, 0.5);
+            border-color: var(--neon-green);
+        }
+        
+        .achievement-badge::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink), var(--neon-blue), var(--neon-green));
+            border-radius: 20px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s;
+            animation: rgb-border 3s linear infinite;
+        }
+        
+        .achievement-badge:hover::before {
+            opacity: 1;
+        }
+        
+        @keyframes rgb-border {
+            0%, 100% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .badge-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .badge-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .badge-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .badge-status {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            background: var(--neon-green);
+            color: var(--dark-bg);
+            border-radius: 20px;
+            font-weight: 700;
+        }
+        
+        /* 5. COUNTDOWN TIMER FOR OFFERS */
+        .countdown-banner {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(255, 0, 110, 0.4);
+            z-index: 1000;
+            animation: pulse-banner 2s infinite;
+        }
+        
+        @keyframes pulse-banner {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .countdown-title {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .countdown-timer {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .countdown-cta {
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            background: var(--white);
+            color: var(--neon-purple);
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .countdown-cta:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* 6. PARTICLE CURSOR TRAIL */
+        .cursor-particle {
+            position: fixed;
+            pointer-events: none;
+            width: 10px;
+            height: 10px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            animation: particle-fade 1s ease-out forwards;
+            z-index: 9999;
+        }
+        
+        @keyframes particle-fade {
+            0% {
+                transform: scale(1) translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0) translate(random(-50px, 50px), random(-50px, 50px));
+                opacity: 0;
+            }
+        }
+        
+        /* 7. SCROLL-TRIGGERED ANIMATIONS */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 8. NEON BUTTON STYLES */
+        .neon-button {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 2px solid var(--neon-green);
+            color: var(--neon-green);
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .neon-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--neon-green);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+        
+        .neon-button:hover {
+            color: var(--dark-bg);
+            box-shadow: 0 0 30px var(--neon-green);
+            transform: scale(1.05);
+        }
+        
+        .neon-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .neon-button span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .glitch-title {
+                font-size: 3rem;
+            }
+            
+            .achievements-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            
+            .countdown-banner {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. HERO WITH FLOATING EYES -->
+    <section class="hero-section">
+        <div class="floating-eyes">
+            <div class="floating-eye"></div>
+            <div class="floating-eye"></div>
+            <div class="floating-eye"></div>
+            <div class="floating-eye"></div>
+            <div class="floating-eye"></div>
+        </div>
+        <div class="hero-content">
+            <h1 class="glitch-title">20/20 Vision</h1>
+            <p style="font-size: 1.5rem; margin: 2rem 0;">Level up your eyesight. No more glasses holding you back.</p>
+            <button class="neon-button">
+                <span>Start Your Journey</span>
+            </button>
+        </div>
+    </section>
+    
+    <!-- 2. TINDER-STYLE PROCEDURE SWIPER -->
+    <section class="swiper-section">
+        <div style="text-align: center; margin-bottom: 3rem;">
+            <h2 style="font-size: 3rem; background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                Swipe Your Perfect Procedure
+            </h2>
+            <p style="font-size: 1.2rem; opacity: 0.8;">← Swipe left to skip | Swipe right to learn more →</p>
+        </div>
+        
+        <div class="swiper-container">
+            <div class="swipe-indicators">
+                <div class="nope-indicator">NOPE</div>
+                <div class="like-indicator">LOVE IT</div>
+            </div>
+            
+            <div class="swipe-card" id="card1">
+                <div class="card-emoji">🚀</div>
+                <h3 class="card-title">SMILE LASER</h3>
+                <p class="card-price">From $97/month</p>
+                <ul class="card-features">
+                    <li>✓ Back to gaming in 24hrs</li>
+                    <li>✓ No flap complications</li>
+                    <li>✓ Less dry eye</li>
+                    <li>✓ Perfect for sports</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 3. VISION SIMULATOR -->
+    <section class="vision-simulator">
+        <h2 class="simulator-title">See The Difference</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.8;">Slide to experience your vision transformation</p>
+        
+        <div class="vision-display">
+            <div class="vision-image" id="visionImage"></div>
+        </div>
+        
+        <div class="prescription-slider">
+            <div class="slider-label">
+                <span>Before Surgery 🤓</span>
+                <span>After Surgery 😎</span>
+            </div>
+            <input type="range" class="slider" id="visionSlider" min="0" max="100" value="0">
+        </div>
+    </section>
+    
+    <!-- 4. ACHIEVEMENT BADGES -->
+    <section class="achievements-section">
+        <h2 style="text-align: center; font-size: 3rem; margin-bottom: 3rem; background: linear-gradient(90deg, var(--neon-blue), var(--neon-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            Unlock Your Achievements
+        </h2>
+        
+        <div class="achievements-grid">
+            <div class="achievement-badge fade-in-up">
+                <div class="badge-icon">👁️</div>
+                <div class="badge-title">Vision Master</div>
+                <div class="badge-description">Achieve 20/20 vision</div>
+                <div class="badge-status">LOCKED</div>
+            </div>
+            
+            <div class="achievement-badge fade-in-up">
+                <div class="badge-icon">🎮</div>
+                <div class="badge-title">Gaming God</div>
+                <div class="badge-description">24hr recovery speedrun</div>
+                <div class="badge-status">LOCKED</div>
+            </div>
+            
+            <div class="achievement-badge fade-in-up">
+                <div class="badge-icon">💰</div>
+                <div class="badge-title">Smart Saver</div>
+                <div class="badge-description">0% APR financing</div>
+                <div class="badge-status">LOCKED</div>
+            </div>
+            
+            <div class="achievement-badge fade-in-up">
+                <div class="badge-icon">🏆</div>
+                <div class="badge-title">Elite Player</div>
+                <div class="badge-description">Join celebrity patients</div>
+                <div class="badge-status">LOCKED</div>
+            </div>
+            
+            <div class="achievement-badge fade-in-up">
+                <div class="badge-icon">⚡</div>
+                <div class="badge-title">Speed Runner</div>
+                <div class="badge-description">Same-day consultation</div>
+                <div class="badge-status">LOCKED</div>
+            </div>
+            
+            <div class="achievement-badge fade-in-up">
+                <div class="badge-icon">🌟</div>
+                <div class="badge-title">5-Star Legend</div>
+                <div class="badge-description">Leave a review</div>
+                <div class="badge-status">LOCKED</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 5. COUNTDOWN OFFER -->
+    <div class="countdown-banner">
+        <div class="countdown-title">LIMITED TIME OFFER</div>
+        <div class="countdown-timer" id="countdown">00:59:59</div>
+        <button class="countdown-cta">CLAIM NOW</button>
+    </div>
+    
+    <script>
+        // Particle cursor trail
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.9) { // Create particle 10% of the time
+                const particle = document.createElement('div');
+                particle.className = 'cursor-particle';
+                particle.style.left = e.pageX + 'px';
+                particle.style.top = e.pageY + 'px';
+                particle.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                document.body.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 1000);
+            }
+        });
+        
+        // Tinder-style swipe functionality
+        let startX = null;
+        let currentX = null;
+        let cardBeingDragged = null;
+        
+        const cards = document.querySelectorAll('.swipe-card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mousedown', handleStart);
+            card.addEventListener('touchstart', handleStart);
+            card.addEventListener('mousemove', handleMove);
+            card.addEventListener('touchmove', handleMove);
+            card.addEventListener('mouseup', handleEnd);
+            card.addEventListener('touchend', handleEnd);
+            card.addEventListener('mouseleave', handleEnd);
+        });
+        
+        function handleStart(e) {
+            cardBeingDragged = e.currentTarget;
+            startX = e.pageX || e.touches[0].pageX;
+            cardBeingDragged.classList.add('dragging');
+        }
+        
+        function handleMove(e) {
+            if (!startX) return;
+            
+            currentX = e.pageX || e.touches[0].pageX;
+            const translateX = currentX - startX;
+            const rotate = translateX * 0.1;
+            
+            cardBeingDragged.style.transform = `translateX(${translateX}px) rotate(${rotate}deg)`;
+            
+            // Show indicators
+            if (translateX > 50) {
+                document.querySelector('.like-indicator').style.opacity = Math.min(1, translateX / 150);
+                document.querySelector('.nope-indicator').style.opacity = 0;
+            } else if (translateX < -50) {
+                document.querySelector('.nope-indicator').style.opacity = Math.min(1, Math.abs(translateX) / 150);
+                document.querySelector('.like-indicator').style.opacity = 0;
+            }
+        }
+        
+        function handleEnd(e) {
+            if (!startX) return;
+            
+            const translateX = currentX - startX;
+            
+            if (translateX > 100) {
+                cardBeingDragged.classList.add('liked');
+                setTimeout(() => {
+                    // Show next card or action
+                    alert('Great choice! Let\'s learn more about this procedure.');
+                }, 300);
+            } else if (translateX < -100) {
+                cardBeingDragged.classList.add('noped');
+                setTimeout(() => {
+                    // Show next card
+                    cardBeingDragged.style.display = 'none';
+                }, 300);
+            } else {
+                cardBeingDragged.style.transform = '';
+            }
+            
+            // Reset
+            startX = null;
+            currentX = null;
+            cardBeingDragged.classList.remove('dragging');
+            document.querySelector('.like-indicator').style.opacity = 0;
+            document.querySelector('.nope-indicator').style.opacity = 0;
+        }
+        
+        // Vision simulator
+        const visionSlider = document.getElementById('visionSlider');
+        const visionImage = document.getElementById('visionImage');
+        
+        visionSlider.addEventListener('input', (e) => {
+            const value = e.target.value;
+            const blurAmount = 10 - (value / 10);
+            visionImage.style.filter = `blur(${blurAmount}px)`;
+            
+            if (value > 80) {
+                visionImage.classList.add('clear');
+            } else {
+                visionImage.classList.remove('clear');
+            }
+        });
+        
+        // Countdown timer
+        let timeLeft = 3600; // 1 hour in seconds
+        
+        function updateCountdown() {
+            const hours = Math.floor(timeLeft / 3600);
+            const minutes = Math.floor((timeLeft % 3600) / 60);
+            const seconds = timeLeft % 60;
+            
+            document.getElementById('countdown').textContent = 
+                `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateCountdown, 1000);
+            }
+        }
+        
+        updateCountdown();
+        
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.floating-eyes');
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+        
+        // Interactive button sound effect (visual feedback for now)
+        document.querySelectorAll('.neon-button, .countdown-cta').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.width = ripple.style.height = '40px';
+                ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+                ripple.style.borderRadius = '50%';
+                ripple.style.transform = 'translate(-50%, -50%)';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+                
+                const rect = this.getBoundingClientRect();
+                ripple.style.left = (e.clientX - rect.left) + 'px';
+                ripple.style.top = (e.clientY - rect.top) + 'px';
+                
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+        
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    width: 200px;
+                    height: 200px;
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

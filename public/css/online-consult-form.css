@@ -1,0 +1,209 @@
+/* Online consultation form styles scoped under .online-consult */
+
+.online-consult .zf-templateWidth {
+    margin: 0 auto;
+    padding: 30px 20px;
+    max-width: 800px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.online-consult .zf-templateWrapper {
+    background: #fff;
+    box-shadow: 0 0 22px 0 #d8dfed;
+    border-radius: 10px;
+}
+
+.online-consult .zf-tempHeadBdr {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.online-consult .zf-tempHeadContBdr {
+    background: #fff;
+    border-bottom: 1px solid #ced3e0;
+    margin: 0;
+    padding: 28px 40px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+}
+
+.online-consult .zf-frmTitle {
+    color: #252c3e;
+    font-size: 33px;
+    font-weight: 500;
+}
+
+.online-consult .zf-frmDesc {
+    color: #667291;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 8px;
+}
+
+.online-consult .zf-subContWrap {
+    padding: 16px 0;
+}
+
+.online-consult .zf-tempFrmWrapper {
+    padding: 16px 40px;
+    box-sizing: border-box;
+}
+
+.online-consult .zf-tempFrmWrapper .zf-labelName {
+    font-weight: 500;
+    font-size: 16px;
+    color: #252c3e;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.online-consult .zf-tempContDiv input[type="text"],
+.online-consult .zf-tempContDiv textarea {
+    background: #fff;
+    border: 1px solid rgba(184, 187, 211, 1);
+    border-radius: 4px;
+    padding: 11px 10px;
+    font-size: 15px;
+    color: #252c3e;
+    transition: 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.online-consult .zf-tempContDiv textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.online-consult .zf-tempContDiv input[type="text"]:focus,
+.online-consult .zf-tempContDiv textarea:focus {
+    border: 1px solid #2eb79f;
+    box-shadow: 0 0 2px 0 #2eb79f;
+    outline: none;
+}
+
+.online-consult .zf-tempContDiv span label {
+    display: block;
+    font-size: 13px;
+    color: #252c3e;
+    opacity: 0.8;
+    margin-top: 8px;
+}
+
+.online-consult .zfgrid_Wrapper {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.online-consult .zftwoColumn {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.online-consult .zftwoColumn .zfCol {
+    flex: 1 1 240px;
+}
+
+.online-consult .zf-address .zf-tempContDiv span,
+.online-consult .zf-tempContDiv .zf-addrCont span {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.online-consult .address_row_3,
+.online-consult .address_row_4 {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.online-consult .address_row_3 .zf-addresCols,
+.online-consult .address_row_4 .zf-addresCols {
+    flex: 1 1 220px;
+}
+
+.online-consult .zf-sideBySide .zf-tempContDiv span,
+.online-consult .zf-oneColumns .zf-tempContDiv span {
+    display: block;
+    margin-bottom: 16px;
+}
+
+.online-consult .zf-sideBySide .zf-tempContDiv span input[type="checkbox"] {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.online-consult .zf-sideBySide .zf-tempContDiv span label {
+    display: inline-block;
+    font-size: 15px;
+    color: #47476b;
+}
+
+.online-consult .zf-fmFooter {
+    padding: 10px 25px 40px 25px;
+    text-align: center;
+}
+
+.online-consult .zf-submitColor {
+    color: #fff;
+    border: none;
+    background: rgba(46, 183, 159, 1);
+    border-radius: 150px;
+    min-width: 160px;
+    padding: 13px 38px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform .25s cubic-bezier(0.33, 0.04, 0.63, 0.93);
+}
+
+.online-consult .zf-submitColor:hover {
+    transform: scale3d(1.03, 1.03, 1);
+}
+
+.online-consult .zf-errorMessage {
+    color: #f41033;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.online-consult .form-feedback {
+    text-align: center;
+    font-weight: 600;
+    margin: 16px 40px 0;
+}
+
+.online-consult .form-feedback.success {
+    color: #2f855a;
+}
+
+.online-consult .form-feedback.error {
+    color: #c53030;
+}
+
+@media (max-width: 768px) {
+    .online-consult .zf-templateWrapper {
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    .online-consult .zf-tempHeadContBdr,
+    .online-consult .zf-tempFrmWrapper,
+    .online-consult .zfgrid_Wrapper {
+        padding: 20px;
+    }
+
+    .online-consult .zftwoColumn {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .online-consult .address_row_3,
+    .online-consult .address_row_4 {
+        gap: 10px 0;
+    }
+}

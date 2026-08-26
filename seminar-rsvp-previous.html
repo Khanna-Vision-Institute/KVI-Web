@@ -1,0 +1,155 @@
+<!--
+  PREVIOUS SEMINAR RSVP TEMPLATE (KVI blue theme)
+  To switch back: rename seminar-rsvp.html to seminar-rsvp-new.html
+  and rename this file to seminar-rsvp.html
+  Or update server routeMap to point to seminar-rsvp-previous.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KVI Seminar RSVP 3/24/2026 | Khanna Vision Institute</title>
+    <meta name="description" content="RSVP for Khanna Vision Institute's seminar on March 24, 2026 at our Westlake Village location.">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --kvi-blue: #0066cc;
+            --kvi-blue-dark: #004d99;
+            --kvi-blue-light: #e8f4fc;
+            --text-dark: #1f2d3d;
+            --text-muted: #5a6c7d;
+            --white: #ffffff;
+            --border: #e2e8f0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 30%, #f0f7ff 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .rsvp-hero {
+            background: linear-gradient(135deg, var(--white) 0%, var(--kvi-blue-light) 100%);
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            border-bottom: 3px solid var(--kvi-blue);
+        }
+        .rsvp-hero .logo { height: 72px; width: auto; margin-bottom: 1.5rem; }
+        .rsvp-hero h1 { font-size: 2rem; font-weight: 700; color: var(--kvi-blue); margin-bottom: 0.5rem; }
+        .rsvp-hero .subtitle { font-size: 1rem; color: var(--text-muted); }
+        .rsvp-container { max-width: 560px; margin: -2rem auto 4rem; padding: 0 1.5rem; }
+        .rsvp-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 102, 204, 0.12);
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+        }
+        .rsvp-intro { font-size: 1.05rem; color: var(--text-dark); margin-bottom: 2rem; line-height: 1.7; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; font-size: 0.95rem; }
+        .form-group input[type="text"], .form-group input[type="tel"] {
+            width: 100%; padding: 0.9rem 1rem; border: 2px solid var(--border); border-radius: 12px;
+            font-size: 1rem; font-family: inherit; transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-group input:focus { outline: none; border-color: var(--kvi-blue); box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15); }
+        .form-group input::placeholder { color: #94a3b8; }
+        .radio-group { margin: 1rem 0; }
+        .radio-option {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 1rem 1.25rem; background: var(--kvi-blue-light); border: 2px solid transparent;
+            border-radius: 12px; cursor: pointer; transition: all 0.2s;
+        }
+        .radio-option:hover { background: #d6ecff; }
+        .radio-option input { width: 20px; height: 20px; accent-color: var(--kvi-blue); cursor: pointer; }
+        .radio-option label { font-weight: 600; color: var(--kvi-blue); cursor: pointer; margin: 0; }
+        .radio-option:has(input:checked) { border-color: var(--kvi-blue); background: #d6ecff; }
+        .form-note {
+            font-size: 0.9rem; color: var(--text-muted); margin-top: 1.5rem; padding: 1rem;
+            background: #f8fafc; border-radius: 10px; border-left: 4px solid var(--kvi-blue);
+        }
+        .submit-btn {
+            width: 100%; padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--kvi-blue) 0%, var(--kvi-blue-dark) 100%);
+            color: var(--white); font-size: 1.1rem; font-weight: 700; border: none; border-radius: 12px;
+            cursor: pointer; margin-top: 2rem; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 102, 204, 0.35); }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .success-message { display: none; text-align: center; padding: 2rem; }
+        .success-message.show { display: block; }
+        .success-message .icon { font-size: 4rem; margin-bottom: 1rem; }
+        .success-message h2 { color: var(--kvi-blue); margin-bottom: 0.5rem; }
+        .success-message p { color: var(--text-muted); }
+        .form-wrap { display: block; }
+        .form-wrap.hidden { display: none; }
+        .error-msg { color: #dc2626; font-size: 0.9rem; margin-top: 0.5rem; }
+    </style>
+</head>
+<body>
+    <%- include('/partials/header') %>
+    <section class="rsvp-hero">
+        <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/khannainstitute/Logo+2.png" alt="Khanna Vision Institute" class="logo">
+        <h1>KVI Seminar RSVP 3/24/2026</h1>
+        <p class="subtitle">Westlake Village • 4:00 PM – 6:00 PM PST</p>
+    </section>
+    <div class="rsvp-container">
+        <div class="rsvp-card">
+            <div class="form-wrap" id="formWrap">
+                <p class="rsvp-intro">Khanna Vision Institute is excited to share that we will be hosting a seminar on <strong>3/24/2026</strong> from <strong>4:00 PM – 6:00 PM PST</strong> in our Westlake Village location. Please RSVP below if you are interested in joining us for this event.</p>
+                <form id="rsvpForm">
+                    <div class="form-group">
+                        <label for="fullName">What is your first and last name? *</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="e.g. Jane Smith" required>
+                        <span class="error-msg" id="nameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">What is your phone number? *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="e.g. (310) 555-1234" required>
+                        <span class="error-msg" id="phoneError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>By selecting the following option, you are agreeing to RSVP for our seminar on 3/24/2026. *</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="agree" name="agree" value="I understand and will be there." required>
+                                <label for="agree">I understand and will be there.</label>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="form-note">If you plan to bring any other guests with you, please fill out this form again with their information so we can properly account for how many guests will be joining. Thank you and we look forward to seeing you on 3/24/2026!</p>
+                    <button type="submit" class="submit-btn" id="submitBtn">Submit RSVP</button>
+                </form>
+            </div>
+            <div class="success-message" id="successMessage">
+                <div class="icon">✓</div>
+                <h2>Thank You!</h2>
+                <p>Your RSVP has been received. We look forward to seeing you at our seminar on March 24, 2026.</p>
+            </div>
+        </div>
+    </div>
+    <%- include('/partials/footer') %>
+    <script>
+        document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            var btn = document.getElementById('submitBtn');
+            var fullName = document.getElementById('fullName').value.trim();
+            var phone = document.getElementById('phone').value.trim();
+            var agree = document.querySelector('input[name="agree"]:checked');
+            if (!fullName || !phone || !agree) return;
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+            try {
+                var res = await fetch('/api/seminar-rsvp/submit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ fullName: fullName, phone: phone, agree: agree.value }) });
+                var data = await res.json();
+                if (data.success) { document.getElementById('formWrap').classList.add('hidden'); document.getElementById('successMessage').classList.add('show'); }
+                else { alert(data.message || 'Something went wrong.'); btn.disabled = false; btn.textContent = 'Submit RSVP'; }
+            } catch (err) { alert('Unable to submit. Please try again.'); btn.disabled = false; btn.textContent = 'Submit RSVP'; }
+        });
+    </script>
+</body>
+</html>

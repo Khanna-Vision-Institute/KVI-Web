@@ -1,0 +1,803 @@
+<!-- COMPLETE DR. KHANNA BIOGRAPHY PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e5a8e;
+            --accent-gold: #d4af37;
+            --light-blue: #e8f4f8;
+            --dark-gray: #2c3e50;
+            --light-gray: #ecf0f1;
+            --text-dark: #333;
+            --text-light: #666;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.8;
+            color: var(--text-dark);
+            background: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #2980b9 100%);
+            color: white;
+            padding: 140px 20px 60px;
+            margin-top: 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.03)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5em;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: var(--accent-gold);
+            font-weight: 300;
+        }
+
+        .hero-tagline {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--light-blue);
+            padding: 40px 20px;
+            margin-top: -30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: var(--primary-blue);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.95em;
+        }
+
+        /* Main Content */
+        .content {
+            padding: 60px 20px;
+        }
+
+        .content-section {
+            margin-bottom: 60px;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--accent-gold);
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: var(--primary-blue);
+        }
+
+        h3 {
+            font-size: 1.6em;
+            color: var(--dark-gray);
+            margin: 30px 0 15px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        /* Celebrity Grid */
+        .celebrity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+            padding: 30px;
+            background: var(--light-gray);
+            border-radius: 10px;
+        }
+
+        .celebrity-item {
+            padding: 15px;
+            background: white;
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .celebrity-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .celebrity-name {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .celebrity-description {
+            color: var(--text-light);
+            font-size: 0.95em;
+        }
+
+        /* Technology List */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .tech-item {
+            padding: 25px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+            border-radius: 10px;
+            border: 2px solid var(--light-blue);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            border-color: var(--primary-blue);
+            box-shadow: 0 8px 20px rgba(30, 90, 142, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .tech-name {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.2em;
+            margin-bottom: 8px;
+        }
+
+        .tech-description {
+            color: var(--text-light);
+            font-size: 0.95em;
+        }
+
+        /* Story Boxes */
+        .story-box {
+            background: linear-gradient(to right, var(--light-blue), #fff);
+            padding: 40px;
+            margin: 40px 0;
+            border-radius: 15px;
+            border-left: 6px solid var(--accent-gold);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .story-box.featured {
+            background: linear-gradient(135deg, #fff9e6 0%, #ffffff 100%);
+            border-left-color: var(--primary-blue);
+            border-left-width: 8px;
+        }
+
+        .story-box h3 {
+            color: var(--primary-blue);
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .story-box p {
+            font-style: italic;
+            color: var(--text-dark);
+        }
+
+        .story-quote {
+            font-size: 1.15em;
+            font-style: italic;
+            color: var(--dark-gray);
+            padding-left: 30px;
+            border-left: 4px solid var(--accent-gold);
+            margin: 25px 0;
+        }
+
+        /* Pullquote */
+        .pullquote {
+            font-size: 1.5em;
+            font-style: italic;
+            color: var(--primary-blue);
+            text-align: center;
+            margin: 50px 0;
+            padding: 30px;
+            position: relative;
+        }
+
+        .pullquote::before {
+            content: '"';
+            font-size: 4em;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            color: var(--accent-gold);
+            opacity: 0.3;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #2980b9 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 40px auto 0;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .contact-card h3 {
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .contact-card p {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        .contact-card a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.3em;
+            display: inline-block;
+            margin-top: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: var(--accent-gold);
+        }
+
+        .cta-buttons {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--accent-gold);
+            color: var(--dark-gray);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent-gold);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: white;
+            border-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .cta-button.secondary:hover {
+            background: white;
+            color: var(--primary-blue);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            background: var(--light-gray);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: var(--light-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: var(--primary-blue);
+        }
+
+        .feature-card h4 {
+            color: var(--primary-blue);
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2em;
+            }
+
+            .hero-tagline {
+                font-size: 1em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .story-box {
+                padding: 25px;
+            }
+
+            .pullquote {
+                font-size: 1.2em;
+                padding: 20px;
+            }
+
+            .celebrity-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Accessibility */
+        a:focus, button:focus {
+            outline: 3px solid var(--accent-gold);
+            outline-offset: 2px;
+        }
+
+        /* Print Styles */
+        @media print {
+            .hero {
+                background: white;
+                color: black;
+            }
+
+            .contact-section {
+                background: white;
+                color: black;
+            }
+
+            .cta-buttons {
+                display: none;
+            }
+        }
+    
+</style>
+
+<!-- NOW THE HTML CONTENT STARTS -->
+
+<!-- Navigation Header -->
+    
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Dr. Rajesh Khanna: Where Cutting-Edge Technology Meets Old-World Care</h1>
+            <p class="hero-subtitle">The Surgeon Who Operated on a Boy Others Said "Didn't Need to See Far"—and Changed Everything</p>
+            <p class="hero-tagline">After 34 years and more than 50,000 procedures, Dr. Khanna still feels he's just getting started</p>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">50,000+</span>
+                <span class="stat-label">Procedures Performed</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">34</span>
+                <span class="stat-label">Years of Excellence</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">6</span>
+                <span class="stat-label">Consecutive Super Doctor Years</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">2</span>
+                <span class="stat-label">Beverly Hills & Westlake Locations</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container content">
+        <!-- Introduction -->
+        <section class="content-section">
+            <p>Some surgeons see patients. Dr. Rajesh Khanna sees life stories waiting to be transformed.</p>
+            
+            <p>After 34 years and more than 50,000 procedures, most eye surgeons would be coasting toward retirement. Not Dr. Khanna. "Sometimes I feel I'm just getting started," he says from his Beverly Hills practice, where celebrities, first responders, physicians, and families alike trust him with their vision. "Every new robotic technology, every upgrade—I'm still fascinated by how we can make surgery safer and outcomes better. The technology keeps evolving, and so do I."</p>
+
+            <p>That relentless pursuit of excellence explains why his own mother flew across the country to have him perform her procedure. Why his wife refused to let anyone else touch her eyes. Why a mother brought her son—a boy born with no arms and legs—when other surgeons asked "why does he need to see far?" And why Hollywood's biggest names—from Kevin Sorbo of <em>Hercules</em> fame to Doors legend Robby Krieger—quietly slip into his Westlake Village and Beverly Hills offices.</p>
+        </section>
+
+        <!-- Family Trust -->
+        <section class="content-section">
+            <h2>The Ultimate Trust: Operating on Family</h2>
+            
+            <p>The story of Dr. Khanna's mother reveals everything you need to know about his practice.</p>
+            
+            <p>She came to visit, planning to have her vision correction procedure done elsewhere. "She came to my office and started talking to patients before and after their surgeries," Dr. Khanna recalls. "She was amazed at how happy they were, how they described the whole experience. She realized one of the best surgeons was her son. Why should she go elsewhere?"</p>
+
+            <p>But the seeds of that trust were planted decades earlier. When his son was just three years old, Dr. Khanna had to perform emergency stitches on the boy's forehead. A year before that, he'd operated on his nephew. These family experiences gave his young son confidence when, years later, he needed his own vision correction. "He trusted his dad," Dr. Khanna says simply.</p>
+
+            <p>Perhaps most tellingly, his wife—who has watched him care for patients and perform procedures since his training days—made her position clear: she would only have surgery with him and no one else.</p>
+
+            <div class="pullquote">
+                When your own family won't trust anyone else, patients take notice.
+            </div>
+        </section>
+
+        <!-- Celebrity Patients -->
+        <section class="content-section">
+            <h2>The Celebrity Surgeon Who Doesn't Need to Advertise</h2>
+            
+            <p>Dr. Khanna's Beverly Hills Times features and celebrity patient roster read like a Hollywood who's who, yet he rarely advertises these relationships. The list includes:</p>
+
+            <div class="celebrity-grid">
+                <div class="celebrity-item">
+                    <div class="celebrity-name">Brenda Song</div>
+                    <div class="celebrity-description">Disney star turned acclaimed actress</div>
+                </div>
+                <div class="celebrity-item">
+                    <div class="celebrity-name">Corbin Bleu</div>
+                    <div class="celebrity-description">High School Musical sensation</div>
+                </div>
+                <div class="celebrity-item">
+                    <div class="celebrity-name">Kevin Sorbo</div>
+                    <div class="celebrity-description">Television's iconic Hercules (also cosmetic pterygium surgery)</div>
+                </div>
+                <div class="celebrity-item">
+                    <div class="celebrity-name">Bethany Hamilton's Team</div>
+                    <div class="celebrity-description">Soul Surfer care team</div>
+                </div>
+                <div class="celebrity-item">
+                    <div class="celebrity-name">David Paich</div>
+                    <div class="celebrity-description">Grammy-winning keyboardist and songwriter for Toto</div>
+                </div>
+                <div class="celebrity-item">
+                    <div class="celebrity-name">Stephanie Beacham</div>
+                    <div class="celebrity-description">Dynasty star</div>
+                </div>
+                <div class="celebrity-item">
+                    <div class="celebrity-name">Robby Krieger</div>
+                    <div class="celebrity-description">Legendary guitarist for The Doors</div>
+                </div>
+                <div class="celebrity-item">
+                    <div class="celebrity-name">Michael Wilk</div>
+                    <div class="celebrity-description">Steppenwolf Theatre ensemble member</div>
+                </div>
+                <div class="celebrity-item">
+                    <div class="celebrity-name">Darren Darrebrough</div>
+                    <div class="celebrity-description">Actor and stunt coordinator</div>
+                </div>
+                <div class="celebrity-item">
+                    <div class="celebrity-name">Rita Garcia</div>
+                    <div class="celebrity-description">Fox News anchor (cosmetic pterygium surgery)</div>
+                </div>
+            </div>
+
+            <p>"I've also operated on many other celebrities who, for HIPAA and privacy reasons, I cannot mention," Dr. Khanna notes. "They trust that what happens in my office stays confidential."</p>
+
+            <p>The celebrity connection isn't about bragging rights—it's about what these high-profile patients reveal: when your career, your image, and your livelihood depend on perfect vision, you don't take chances. You find the best.</p>
+        </section>
+
+        <!-- When Doctors Choose -->
+        <section class="content-section">
+            <h2>When Doctors Choose a Doctor</h2>
+            
+            <p>Perhaps more telling than celebrity patients: Dr. Khanna has operated on physicians, pharmacists, surgeons, CEOs, police officers, and firefighters. When healthcare professionals need vision correction, they choose the surgeon who meets their own exacting standards.</p>
+
+            <div class="story-box">
+                <h3>The Pilot Who Called From the Cockpit</h3>
+                <p>"I got worried thinking maybe he wasn't able to see and was in trouble," Dr. Khanna remembers with a laugh. "But he called to say he'd never seen so well from the sky. After his procedure, he could see the coast of Japan much sharper than ever before."</p>
+            </div>
+        </section>
+
+        <!-- Technology -->
+        <section class="content-section">
+            <h2>More Technology Than Most Beverly Hills Surgeons</h2>
+            
+            <p>Walk into most Beverly Hills vision correction practices and you'll find LASIK. Dr. Khanna offers a full arsenal:</p>
+
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-name">SMILE</div>
+                    <div class="tech-description">Small Incision Lenticule Extraction - The latest minimally invasive technology</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">LASIK</div>
+                    <div class="tech-description">Traditional and bladeless variants</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">ASA</div>
+                    <div class="tech-description">Advanced Surface Ablation including PRK</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">EVO ICL</div>
+                    <div class="tech-description">For patients who aren't LASIK candidates</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">CXL</div>
+                    <div class="tech-description">Corneal Cross-Linking for keratoconus and corneal weakness</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">CTAK</div>
+                    <div class="tech-description">Advanced keratoconus treatment</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">PIE</div>
+                    <div class="tech-description">Presbyopic Implant in Eye - Revolutionary solution for aging vision</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">Cosmetic Pterygium Surgery</div>
+                    <div class="tech-description">For actors, news anchors, and anyone bothered by visible eye growths</div>
+                </div>
+            </div>
+
+            <p>"I offer more technologies than most surgeons in Beverly Hills because every eye is different," he explains. "If there's a contraindication to one procedure, I have other options. My style is very individualistic."</p>
+
+            <p>And for patients who want to explore their options before committing to an in-person visit, Dr. Khanna offers <strong>virtual consultations</strong>—a convenient way to discuss your vision goals and determine candidacy from the comfort of home.</p>
+        </section>
+
+        <!-- Philosophy -->
+        <section class="content-section">
+            <h2>"Each Patient Is a Life Story, Not a Number"</h2>
+            
+            <p>Dr. Khanna's approach defies the high-volume, assembly-line mentality of many Beverly Hills practices.</p>
+
+            <p>"I like to get to know my patients and understand exactly what their pain points are so the best technology can be offered," he says. "I listen to them, understand their fears and their desired goals, and see which are achievable. We write everything down. Six months after the procedure, we can see if we achieved success."</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h4>Educational Materials</h4>
+                    <p>Receive Dr. Khanna's books and resources—no pressure to memorize in the consult room</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h4>Direct Access</h4>
+                    <p>Dr. Khanna personally follows patients and provides his cell phone number</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h4>Goal Tracking</h4>
+                    <p>Written documentation of your goals, reviewed at 6-month follow-up</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h4>Virtual Consults</h4>
+                    <p>Start your journey from home with convenient video consultations</p>
+                </div>
+            </div>
+
+            <div class="pullquote">
+                For me, each patient is a life story waiting to be enhanced, not a number.
+            </div>
+        </section>
+
+        <!-- Transformation Stories -->
+        <section class="content-section">
+            <h2>Transformation Stories That Changed Everything</h2>
+
+            <div class="story-box featured">
+                <h3>🌟 The Boy Other Surgeons Said "Didn't Need to See Far"</h3>
+                <p>A mother brought her son to Dr. Khanna—a boy born with no arms and legs. He desperately needed LASIK because he couldn't wear glasses, but surgeon after surgeon had refused.</p>
+                
+                <p>One doctor even asked: "Why does he need to see far?"</p>
+                
+                <p>Dr. Khanna saw a different question: Why <em>wouldn't</em> he deserve perfect vision?</p>
+                
+                <div class="story-quote">
+                    "On his way home after the procedure, his mother called. She said he'd never been so excited in his life. He was shouting out all the new things he could see."
+                </div>
+                
+                <p>A world that already presented countless physical challenges had just become infinitely richer and more accessible. Not because Dr. Khanna saw a patient. Because he saw a person with dreams, desires, and the right to experience life fully.</p>
+            </div>
+
+            <div class="story-box">
+                <h3>The Receptionist Who Became a Different Person</h3>
+                <p>One of Dr. Khanna's earliest Santa Monica staff members wore thick glasses, long conservative skirts, and hair pulled back tight. She looked every bit the stereotypical schoolteacher. A few days after her LASIK procedure, a young woman walked into the office with shorter hair, a shorter skirt, and the confidence of a college student.</p>
+                
+                <p>Dr. Khanna didn't recognize her.</p>
+                
+                <p>"She said LASIK transformed the way she saw herself in the mirror," he recalls. "It wasn't just about seeing clearly—it was about seeing herself differently."</p>
+            </div>
+
+            <div class="story-box">
+                <h3>The Autistic Teen Nobody Else Would Help</h3>
+                <p>An overweight, autistic teenager had been turned down by multiple surgeons. Too risky, they said. Too difficult, they claimed. His mother heard about Dr. Khanna and made the journey.</p>
+                
+                <p>"I was able to interact and win his approval for the surgery, which went uneventfully," Dr. Khanna says. "A few months later, he came in for follow-up and I didn't recognize him—he'd lost 30 pounds. His mother told me the surgery transformed his life."</p>
+                
+                <p>When you can't see clearly, you can't connect with the world. When you can't connect, sometimes you disconnect from everything—including your own health. Clear vision gave this young man a connection that changed everything.</p>
+            </div>
+
+            <div class="story-box">
+                <h3>The Boy Who Needed Noise to Navigate</h3>
+                <p>During his training in New York, Dr. Khanna encountered a young camp patient with advanced cataracts and developmental challenges. The boy carried toys everywhere and made constant noise—his way of interacting with a world he couldn't see.</p>
+                
+                <p>"I asked my professor why nobody operated on him," Dr. Khanna remembers. "They said everybody was afraid. I said I would do it."</p>
+                
+                <p>After the surgery, something remarkable happened. The boy could see. He could make visual connections with the universe around him. He didn't need noise anymore to interact with his environment.</p>
+                
+                <div class="story-quote">
+                    "That taught me early on: never turn away someone who needs help just because it's difficult."
+                </div>
+            </div>
+        </section>
+
+        <!-- Old World Principles -->
+        <section class="content-section">
+            <h2>Old-World Principles Meet Space-Age Technology</h2>
+            
+            <p>Dr. Khanna represents a rare combination in modern medicine: a surgeon who uses the most advanced robotic technologies while maintaining the bedside manner of a 1950s family doctor.</p>
+
+            <p>He offers first responder discounts. He gives teacher discounts. He spends as much time as needed in consultation—whether in person or via virtual visit. He builds a network of trusted specialists for procedures outside his expertise, ensuring patients always get the best care even when it's not from him.</p>
+
+            <div class="pullquote">
+                I use the latest, safest technology. But I also have the old-world principle of listening to the patient and spending enough time with them so they feel comfortable with this life-changing decision.
+            </div>
+        </section>
+
+        <!-- Still Getting Started -->
+        <section class="content-section">
+            <h2>34 Years In, Still Getting Started</h2>
+            
+            <p>Most surgeons with Dr. Khanna's credentials—fellowship training at University of Cincinnati, residency at SUNY Downstate, six consecutive years as Southern California Super Doctor (2019-2024), author of two books on vision correction, over 50,000 procedures performed—would be counting down to retirement.</p>
+
+            <p>Dr. Khanna is counting up to what's next.</p>
+
+            <p>"Every new technology excites me," he says. "Every patient story inspires me. Sometimes I feel I'm just getting started."</p>
+
+            <p>For the celebrities who trust him, the families who fly across the country to see him, the boy with no arms and legs whom other surgeons turned away, the autistic teen who lost 30 pounds, the pilot who called from 30,000 feet, and the receptionist who discovered a new version of herself in the mirror—that's very good news indeed.</p>
+        </section>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 style="color: white; border-bottom: 3px solid var(--accent-gold);">Khanna Vision Institute</h2>
+            <p style="font-size: 1.2em; max-width: 800px; margin: 20px auto;">Offering SMILE, LASIK, EVO ICL, PIE, cosmetic pterygium surgery, and advanced treatments for keratoconus. Virtual consultations available. First responder and teacher discounts.</p>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>📍 Beverly Hills</h3>
+                    <p>9100 Wilshire Blvd #265E<br>Beverly Hills, CA 90212</p>
+                    <a href="tel:310-482-1240">(310) 482-1240</a>
+                </div>
+                <div class="contact-card">
+                    <h3>📍 Westlake Village</h3>
+                    <p>31824 Village Center Rd F<br>Westlake Village, CA 91361</p>
+                    <a href="tel:805-230-2126">(805) 230-2126</a>
+                </div>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="tel:310-482-1240" class="cta-button">Schedule Your Consultation</a>
+                <a href="#" class="cta-button secondary">Virtual Consultation Available</a>
+            </div>
+
+            <p style="margin-top: 40px; font-style: italic; opacity: 0.9;">Dr. Khanna personally available to all patients</p>
+        </div>
+    </section>
+    
+    <!-- Footer -->

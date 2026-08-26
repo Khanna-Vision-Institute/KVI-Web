@@ -1,0 +1,85 @@
+{
+  "enrollments": [
+    {
+      "id": "1377c904dcb8534d",
+      "status": "active",
+      "enrolledAt": "2026-06-23T15:27:47.118Z",
+      "email": "kapil@khannavision.com",
+      "lead": {
+        "fullName": "Kapil",
+        "email": "kapil@khannavision.com",
+        "phone": "+18059061634",
+        "location": "",
+        "date": "",
+        "time": "",
+        "surgeryExamType": "PIE",
+        "pageUrl": "/procedures/lens-solutions/pie"
+      },
+      "jobs": [
+        {
+          "id": "28acbe5e3f1458f3",
+          "type": "sms_day0",
+          "dueAt": "2026-06-23T19:20:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "643d73e4c5ed74ee",
+          "type": "call_day0",
+          "dueAt": "2026-06-23T19:25:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "bf7c1b4158e0baf7",
+          "type": "sms_day1",
+          "dueAt": "2026-06-23T19:30:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "0e366c17673deae5",
+          "type": "sms_day2",
+          "dueAt": "2026-06-23T19:35:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "c56eb14d0aa83a65",
+          "type": "sms_day3",
+          "dueAt": "2026-06-23T19:40:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "969c8bb853003ca8",
+          "type": "email_day5",
+          "dueAt": "2026-06-23T19:45:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "50b9666cd0845957",
+          "type": "call_day7",
+          "dueAt": "2026-06-23T19:50:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "5e83921af96bb076",
+          "type": "sms_day10",
+          "dueAt": "2026-06-23T19:55:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "a29aaa7745c138d2",
+          "type": "sms_day14",
+          "dueAt": "2026-06-23T20:00:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        }
+      ]
+    }
+  ]
+}

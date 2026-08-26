@@ -1,0 +1,909 @@
+<!-- CONTACT BOOKING — STRAPI PASTE REFERENCE -->
+<!--
+  Production: khanna-booking.html renders partials/booking-consult-main.ejs (repo),
+  not Strapi body HTML, so fixes deploy with the app.
+
+  Use this file only if you switch khanna-booking back to rendering pageData.content
+  and paste the *inner* markup (no EJS includes) into Strapi.
+-->
+
+<style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f7fafc;
+            min-height: 100vh;
+            padding: 140px 15px 40px;
+        }
+
+        .page-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .booking-section {
+            margin-bottom: 40px;
+        }
+
+        .container {
+            max-width: 520px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .form-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 32px 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .form-header h2 {
+            font-size: 24px;
+            color: #1a202c;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .form-header p {
+            font-size: 13px;
+            color: #718096;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-feedback {
+            margin: 12px 0;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .form-feedback.success {
+            color: #2f855a;
+        }
+
+        .form-feedback.error {
+            color: #c53030;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 11px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.2s;
+            background: #fafafa;
+            color: #2d3748;
+            font-weight: 500;
+        }
+
+        input::placeholder {
+            color: #a0aec0;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234a5568' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 38px;
+            cursor: pointer;
+        }
+
+        .location-info {
+            background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%);
+            border-left: 3px solid #667eea;
+            padding: 10px 12px;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #5a67d8;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .date-time-section {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 14px;
+            background: #fafafa;
+        }
+
+        .date-picker-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 11px 14px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .date-picker-display:hover {
+            border-color: #667eea;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+        }
+
+        .date-picker-display span {
+            color: #a0aec0;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .date-picker-display.selected span {
+            color: #2d3748;
+        }
+
+        .calendar-icon {
+            font-size: 18px;
+        }
+
+        .calendar-container {
+            background: white;
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 10px;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .calendar-container.open {
+            display: block;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 0 4px;
+        }
+
+        .calendar-header button {
+            background: #f7fafc;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 6px 12px;
+            color: #4a5568;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .calendar-header button:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .calendar-month {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a202c;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: #718096;
+            padding: 6px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #cbd5e0;
+            font-weight: 600;
+        }
+
+        .calendar-day.available {
+            color: #2d3748;
+            background: #f7fafc;
+        }
+
+        .calendar-day.available:hover {
+            background: #e0e7ff;
+            color: #5a67d8;
+            transform: scale(1.05);
+        }
+
+        .calendar-day.highlighted {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(245, 87, 108, 0.3);
+        }
+
+        .calendar-day.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+        }
+
+        .calendar-day.disabled {
+            color: #e2e8f0;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.today {
+            border: 2px solid #667eea;
+        }
+
+        .time-selection {
+            display: none;
+            margin-top: 12px;
+        }
+
+        .time-selection.visible {
+            display: block;
+        }
+
+        .time-label {
+            font-size: 11px;
+            color: #4a5568;
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+        }
+
+        .time-slot {
+            padding: 9px 6px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 12px;
+        }
+
+        .time-slot:hover {
+            border-color: #667eea;
+            background: #e0e7ff;
+            color: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .time-slot.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .selected-datetime {
+            background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%);
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 12px;
+            color: #5a67d8;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+            font-size: 12px;
+        }
+
+        .selected-datetime.visible {
+            display: block;
+        }
+
+        .consent-box {
+            background: #f7fafc;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+            margin-bottom: 16px;
+        }
+
+        .consent-label {
+            display: flex;
+            align-items: start;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .consent-label input[type="checkbox"] {
+            margin-top: 2px;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            flex-shrink: 0;
+            accent-color: #667eea;
+        }
+
+        .consent-label span {
+            color: #4a5568;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .consent-label a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .consent-label a:hover {
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .form-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .form-card {
+                padding: 24px 20px;
+            }
+
+            .form-row-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .time-slots {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    
+</style>
+
+<%- include('/partials/header') %>
+
+    <div class="page-wrap">
+        <section class="booking-section">
+            <div class="container">
+                <div class="form-card">
+                    <div class="form-header">
+                        <h2>Book Your Appointment</h2>
+                        <p>Schedule your consultation with our vision experts</p>
+                    </div>
+
+                    <form id="bookingForm">
+                        <div class="form-group">
+                            <label class="form-label">Name</label>
+                            <div class="form-row-2">
+                                <input type="text" id="firstName" name="firstName" placeholder="First" required autocomplete="given-name">
+                                <input type="text" id="lastName" name="lastName" placeholder="Last" required autocomplete="family-name">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Age</label>
+                            <input type="number" id="age" name="age" min="1" max="120" placeholder="Enter your age" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Phone (optional)</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1" autocomplete="tel">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Location</label>
+                            <select id="location" name="location" required>
+                                <option value="">Choose your preferred location</option>
+                                <option value="Beverly Hills">Beverly Hills</option>
+                                <option value="Westlake Village">Westlake Village</option>
+                            </select>
+                            <div id="locationInfo" class="location-info" style="display: none;"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Date & Time</label>
+                            <div class="date-time-section">
+                                <div class="date-picker-display" id="dateDisplay">
+                                    <span id="dateText">Select a date</span>
+                                    <span class="calendar-icon">📅</span>
+                                </div>
+
+                                <div class="calendar-container" id="calendarContainer">
+                                    <div class="calendar-header">
+                                        <button type="button" id="prevMonth">&lt;</button>
+                                        <div class="calendar-month" id="calendarMonth"></div>
+                                        <button type="button" id="nextMonth">&gt;</button>
+                                    </div>
+                                    <div class="calendar-grid" id="calendarGrid"></div>
+                                </div>
+
+                                <div class="time-selection" id="timeSelection">
+                                    <div class="time-label">Available Times</div>
+                                    <div class="time-slots" id="timeSlots"></div>
+                                </div>
+
+                                <div class="selected-datetime" id="selectedDatetime"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Procedure interest (optional)</label>
+                            <select id="surgeryExamType" name="surgeryExamType">
+                                <option value="">Prefer not to say / decide at consult</option>
+                                <option value="SMILE">SMILE</option>
+                                <option value="LASIK">LASIK</option>
+                                <option value="SuperLASIK">SuperLASIK</option>
+                                <option value="EVO ICL">EVO ICL</option>
+                                <option value="PIE">PIE</option>
+                                <option value="Laser cataract surgery">Laser cataract surgery</option>
+                                <option value="Cosmetic outcome pterygium">Cosmetic outcome pterygium</option>
+                                <option value="CXL / CTAK">CXL / CTAK</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="consent-box">
+                            <label class="consent-label">
+                                <input type="checkbox" id="consent" name="consent" required>
+                                <span>By submitting this form, you agree to receive calls and text messages from Khanna Vision Institute regarding your inquiry, appointments, and related services. Your mobile carrier's standard message and data rates may apply, and message frequency may vary. You may opt out at any time by replying STOP or reply HELP for assistance. Your information will be handled in accordance with our <a href="/privacy/">Privacy Policy</a> and applicable regulations.</span>
+                            </label>
+                        </div>
+
+                        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+
+                        <div class="form-group" style="display:flex;justify-content:center;margin:16px 0;">
+                            <div id="mainBookingRecaptcha"></div>
+                        </div>
+
+                        <div id="formFeedback" class="form-feedback" role="status" aria-live="polite"></div>
+
+                        <button type="submit" class="submit-btn">Confirm Appointment</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <%- include('/partials/footer') %>
+
+    <script>
+        function calendarYmd(d) {
+            return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+        }
+
+        const locationSchedule = {
+            'Beverly Hills': {
+                name: 'Beverly Hills',
+                schedule: 'Monday & Thursday (8:00 AM - 4:00 PM)',
+                days: [1, 4],
+                hours: ['8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM']
+            },
+            'Westlake Village': {
+                name: 'Westlake Village',
+                schedule: 'Tuesday, Wednesday, Friday (8:00 AM - 4:00 PM)',
+                days: [2, 3, 5],
+                hours: ['8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM']
+            }
+        };
+
+        let selectedLocation = null;
+        let selectedDate = null;
+        let selectedTime = null;
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+
+        const locationSelect = document.getElementById('location');
+        const locationInfo = document.getElementById('locationInfo');
+        const dateDisplay = document.getElementById('dateDisplay');
+        const dateText = document.getElementById('dateText');
+        const calendarContainer = document.getElementById('calendarContainer');
+        const calendarMonth = document.getElementById('calendarMonth');
+        const calendarGrid = document.getElementById('calendarGrid');
+        const timeSelection = document.getElementById('timeSelection');
+        const timeSlots = document.getElementById('timeSlots');
+        const selectedDatetime = document.getElementById('selectedDatetime');
+        const prevMonthBtn = document.getElementById('prevMonth');
+        const nextMonthBtn = document.getElementById('nextMonth');
+
+        const RECAPTCHA_SITE_KEY = '6Lf0P20sAAAAAK_xE5Swnx5IaGRNkrEVRtTzZu5r';
+        let mainBookingRecaptchaId = null;
+
+        function loadRecaptchaScriptForMainForm(onReady) {
+            if (document.querySelector('script[src*="google.com/recaptcha/api.js"]')) {
+                (function wait() {
+                    if (window.grecaptcha && window.grecaptcha.render) onReady();
+                    else setTimeout(wait, 50);
+                })();
+                return;
+            }
+            var s = document.createElement('script');
+            s.src = 'https://www.google.com/recaptcha/api.js';
+            s.async = true;
+            s.defer = true;
+            s.onload = function() { setTimeout(onReady, 0); };
+            document.head.appendChild(s);
+        }
+
+        loadRecaptchaScriptForMainForm(function() {
+            try {
+                var el = document.getElementById('mainBookingRecaptcha');
+                if (el && mainBookingRecaptchaId === null) {
+                    mainBookingRecaptchaId = grecaptcha.render('mainBookingRecaptcha', { sitekey: RECAPTCHA_SITE_KEY });
+                }
+            } catch (err) {
+                console.error('reCAPTCHA render:', err);
+            }
+        });
+
+        locationSelect.addEventListener('change', (e) => {
+            selectedLocation = e.target.value;
+            if (selectedLocation) {
+                const schedule = locationSchedule[selectedLocation];
+                locationInfo.style.display = 'block';
+                locationInfo.innerHTML = `<strong>${schedule.name}</strong> - ${schedule.schedule}`;
+                selectedDate = null;
+                selectedTime = null;
+                dateText.textContent = 'Select a date';
+                dateDisplay.classList.remove('selected');
+                calendarContainer.classList.remove('open');
+                timeSelection.classList.remove('visible');
+                selectedDatetime.classList.remove('visible');
+                renderCalendar();
+            } else {
+                locationInfo.style.display = 'none';
+                calendarContainer.classList.remove('open');
+                timeSelection.classList.remove('visible');
+            }
+        });
+
+        dateDisplay.addEventListener('click', () => {
+            if (!selectedLocation) {
+                setFeedback('Select a location to see available dates.', 'error');
+                return;
+            }
+            calendarContainer.classList.toggle('open');
+        });
+
+        prevMonthBtn.addEventListener('click', () => {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            renderCalendar();
+        });
+
+        nextMonthBtn.addEventListener('click', () => {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            renderCalendar();
+        });
+
+        function renderCalendar() {
+            if (!selectedLocation) return;
+
+            const firstDay = new Date(currentYear, currentMonth, 1);
+            const lastDay = new Date(currentYear, currentMonth + 1, 0);
+            const daysInMonth = lastDay.getDate();
+            const startingDayOfWeek = firstDay.getDay();
+
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'];
+            calendarMonth.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+            calendarGrid.innerHTML = '';
+
+            const dayHeaders = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+            dayHeaders.forEach(day => {
+                const header = document.createElement('div');
+                header.className = 'calendar-day-header';
+                header.textContent = day;
+                calendarGrid.appendChild(header);
+            });
+
+            for (let i = 0; i < startingDayOfWeek; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day';
+                calendarGrid.appendChild(emptyDay);
+            }
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const todayYmd = calendarYmd(today);
+
+            const schedule = locationSchedule[selectedLocation];
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(currentYear, currentMonth, day);
+                const dayOfWeek = date.getDay();
+                const cellYmd = calendarYmd(date);
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+
+                const isPast = cellYmd < todayYmd;
+                const isAvailable = schedule.days.includes(dayOfWeek) && !isPast;
+
+                if (isPast) {
+                    dayElement.classList.add('disabled');
+                } else if (isAvailable) {
+                    dayElement.classList.add('available');
+                    
+                    const nextWeek = new Date(today);
+                    nextWeek.setDate(today.getDate() + 7);
+                    const nextWeekYmd = calendarYmd(nextWeek);
+                    if (cellYmd >= todayYmd && cellYmd <= nextWeekYmd) {
+                        dayElement.classList.add('highlighted');
+                    }
+
+                    dayElement.addEventListener('click', () => selectDate(date, day));
+                } else {
+                    dayElement.classList.add('disabled');
+                }
+
+                if (cellYmd === todayYmd) {
+                    dayElement.classList.add('today');
+                }
+
+                if (selectedDate && calendarYmd(date) === calendarYmd(selectedDate)) {
+                    dayElement.classList.add('selected');
+                }
+
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+
+        function selectDate(date, day) {
+            selectedDate = date;
+            selectedTime = null;
+            
+            const options = { weekday: 'long', month: 'short', day: 'numeric' };
+            dateText.textContent = date.toLocaleDateString('en-US', options);
+            dateDisplay.classList.add('selected');
+            
+            calendarContainer.classList.remove('open');
+            
+            renderCalendar();
+            renderTimeSlots();
+            
+            timeSelection.classList.add('visible');
+            selectedDatetime.classList.remove('visible');
+        }
+
+        function renderTimeSlots() {
+            const schedule = locationSchedule[selectedLocation];
+            timeSlots.innerHTML = '';
+
+            schedule.hours.forEach(time => {
+                const slot = document.createElement('div');
+                slot.className = 'time-slot';
+                slot.textContent = time;
+                slot.addEventListener('click', () => selectTime(slot, time));
+                timeSlots.appendChild(slot);
+            });
+        }
+
+        function selectTime(element, time) {
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                slot.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            selectedTime = time;
+
+            const options = { weekday: 'long', month: 'short', day: 'numeric' };
+            const dateStr = selectedDate.toLocaleDateString('en-US', options);
+            selectedDatetime.textContent = `✓ ${dateStr} at ${time}`;
+            selectedDatetime.classList.add('visible');
+        }
+
+        const bookingForm = document.getElementById('bookingForm');
+        const formFeedback = document.getElementById('formFeedback');
+
+        function setFeedback(message, type) {
+            formFeedback.textContent = message;
+            formFeedback.classList.remove('success', 'error');
+            if (type) {
+                formFeedback.classList.add(type);
+            }
+        }
+
+        bookingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!selectedLocation || !selectedDate || !selectedTime) {
+                setFeedback('Please choose a location, date, and time before confirming your appointment.', 'error');
+                return;
+            }
+
+            const schedule = locationSchedule[selectedLocation];
+            if (!schedule) {
+                setFeedback('Selected location is not available. Please choose another.', 'error');
+                return;
+            }
+
+            const fn = document.getElementById('firstName').value.trim();
+            const ln = document.getElementById('lastName').value.trim();
+            const fullName = (fn + ' ' + ln).trim();
+            const age = document.getElementById('age').value;
+            const surgeryExamType = document.getElementById('surgeryExamType').value.trim();
+
+            let recaptchaToken = '';
+            try {
+                if (mainBookingRecaptchaId !== null && window.grecaptcha && window.grecaptcha.getResponse) {
+                    recaptchaToken = window.grecaptcha.getResponse(mainBookingRecaptchaId) || '';
+                } else if (window.grecaptcha && window.grecaptcha.getResponse) {
+                    recaptchaToken = window.grecaptcha.getResponse() || '';
+                }
+            } catch (err) {
+                recaptchaToken = '';
+            }
+            if (!recaptchaToken) {
+                setFeedback('Please complete the reCAPTCHA verification.', 'error');
+                return;
+            }
+
+            const hp = bookingForm.querySelector('[name="website"]');
+            const websiteVal = hp ? hp.value : '';
+
+            const mm = String(selectedDate.getMonth() + 1).padStart(2, '0');
+            const dd = String(selectedDate.getDate()).padStart(2, '0');
+            const yyyy = selectedDate.getFullYear();
+            const dateForApi = `${mm}/${dd}/${yyyy}`;
+
+            const formData = {
+                fullName: fullName,
+                age: age,
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                location: schedule.name,
+                date: dateForApi,
+                time: selectedTime,
+                surgeryExamType: surgeryExamType,
+                pageUrl: window.location.href,
+                website: websiteVal,
+                recaptchaToken: recaptchaToken
+            };
+
+            if (!formData.fullName || !formData.age || !formData.email) {
+                setFeedback('Please complete your name, age, and email.', 'error');
+                return;
+            }
+
+            setFeedback('Saving your appointment...', null);
+
+            try {
+                const response = await fetch('/api/booking/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (!response.ok || !result.success) {
+                    throw new Error(result.message || 'Unable to save your appointment at the moment.');
+                }
+
+                setFeedback(`✓ Appointment Confirmed! ${formData.location} — ${formData.date} at ${formData.time}`, 'success');
+
+                bookingForm.reset();
+                selectedLocation = null;
+                selectedDate = null;
+                selectedTime = null;
+                locationSelect.value = '';
+                locationInfo.style.display = 'none';
+                dateText.textContent = 'Select a date';
+                dateDisplay.classList.remove('selected');
+                calendarContainer.classList.remove('open');
+                timeSelection.classList.remove('visible');
+                selectedDatetime.classList.remove('visible');
+                calendarGrid.innerHTML = '';
+                try {
+                    if (mainBookingRecaptchaId !== null && window.grecaptcha && window.grecaptcha.reset) {
+                        window.grecaptcha.reset(mainBookingRecaptchaId);
+                    } else if (window.grecaptcha && window.grecaptcha.reset) {
+                        window.grecaptcha.reset();
+                    }
+                } catch (err) {}
+            } catch (error) {
+                console.error('Booking submission failed:', error);
+                setFeedback(error.message || 'Something went wrong. Please try again.', 'error');
+                try {
+                    if (mainBookingRecaptchaId !== null && window.grecaptcha && window.grecaptcha.reset) {
+                        window.grecaptcha.reset(mainBookingRecaptchaId);
+                    } else if (window.grecaptcha && window.grecaptcha.reset) {
+                        window.grecaptcha.reset();
+                    }
+                } catch (err) {}
+            }
+        });
+
+        const todayDate = new Date();
+        currentMonth = todayDate.getMonth();
+        currentYear = todayDate.getFullYear();
+    </script>

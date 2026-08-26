@@ -1,0 +1,211 @@
+<!-- COMPLETE COMPARE PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+        :root {
+            --primary-blue: #2563eb;
+            --accent-teal: #0891b2;
+            --dark-blue: #1e3a8a;
+            --light-gray: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--light-gray);
+        }
+
+        .wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 140px 20px 60px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 60px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .comparison-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid var(--primary-blue);
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .comparison-card h2 {
+            color: var(--dark-blue);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .comparison-card .description {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .comparison-card .features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .comparison-card .features li {
+            padding: 8px 0 8px 30px;
+            position: relative;
+            color: var(--text-dark);
+        }
+
+        .comparison-card .features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: var(--primary-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--dark-blue);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .wrap {
+                padding: 120px 20px 40px;
+            }
+        }
+    
+</style>
+
+<!-- NOW THE HTML CONTENT STARTS -->
+
+<!-- Navigation Header -->
+    
+
+    <div class="wrap">
+        <div class="hero">
+            <h1>Procedure Comparison Guides</h1>
+            <p>Make informed decisions with our comprehensive comparison guides. Compare different vision correction options side-by-side to find the best solution for your needs.</p>
+        </div>
+
+        <div class="comparison-grid">
+            <article class="comparison-card">
+                <h2>PIE vs EVO ICL</h2>
+                <p class="description">Compare Presbyopic Implant in Eye (PIE) and EVO ICL to understand which "inside the eye" solution is right for you. Perfect for Gen X patients in their 40s, 50s, or early 60s.</p>
+                <ul class="features">
+                    <li>Plain English explanations</li>
+                    <li>Side-by-side comparison</li>
+                    <li>Age-specific guidance</li>
+                    <li>Lifestyle considerations</li>
+                </ul>
+                <a href="/procedures/laser-vision/compare/pie-vs-evo-icl/" class="btn">View Comparison</a>
+            </article>
+
+            <article class="comparison-card">
+                <h2>Presbyopic IOL Comparison</h2>
+                <p class="description">Data-driven analysis comparing presbyopic intraocular lenses including Tecnis Odyssey, Panoptix Pro, LAL, Envy, and more. Designed for Gen X patients making lens implant decisions.</p>
+                <ul class="features">
+                    <li>Published study outcomes</li>
+                    <li>Decision framework</li>
+                    <li>Real-world data</li>
+                    <li>Expert recommendations</li>
+                </ul>
+                <a href="/procedures/laser-vision/compare/presbyopic-iol/" class="btn">View Comparison</a>
+            </article>
+
+            <article class="comparison-card">
+                <h2>Which Lens Is Right?</h2>
+                <p class="description">Comprehensive guide to choosing the right presbyopic lens implant. Detailed comparison of all available options with clinical reasoning and patient-focused explanations.</p>
+                <ul class="features">
+                    <li>Complete lens comparison</li>
+                    <li>Clinical outcomes data</li>
+                    <li>Three-question framework</li>
+                    <li>Expert guidance</li>
+                </ul>
+                <a href="/procedures/lens-solutions/which-lens-is-right/" class="btn btn-secondary">View Guide</a>
+            </article>
+        </div>
+    </div>
+
+    <!-- Footer -->

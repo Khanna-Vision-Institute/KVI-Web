@@ -1,0 +1,567 @@
+<!-- COMPLETE PIE VS EVO ICL PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+    :root {
+      --primary: #0b7285;
+      --secondary: #ffb703;
+      --bg: #f4f7fb;
+      --card-bg: #ffffff;
+      --text-main: #222222;
+      --text-muted: #555555;
+      --border-soft: #dde4ee;
+      --shadow-soft: 0 10px 25px rgba(0,0,0,0.06);
+      --radius-lg: 18px;
+      --radius-pill: 100px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #e3f2fd, #f4f7fb);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+      margin-top: 120px;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px 20px;
+      margin: 16px 0 24px;
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-soft);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      background: #e0f7fa;
+      color: #015871;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      width: fit-content;
+    }
+
+    .badge span {
+      font-size: 16px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      line-height: 1.2;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 640px;
+    }
+
+    .highlight-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+
+    .highlight-pill {
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      background: #f1f3f5;
+      color: #495057;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 18px;
+      margin-bottom: 26px;
+    }
+
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 20px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card h2,
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .tagline {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .pill-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .pill-icl {
+      background: #e3f2fd;
+      color: #0b5394;
+    }
+
+    .pill-pie {
+      background: #fff3cd;
+      color: #8a5a00;
+    }
+
+    .pill-icl span,
+    .pill-pie span {
+      font-size: 16px;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 0;
+      font-size: 0.94rem;
+    }
+
+    li { margin-bottom: 4px; }
+
+    .infographic {
+      margin: 28px 0 30px;
+      padding: 20px 18px;
+      background: linear-gradient(135deg, #fdfcfb, #e8f6ff);
+      border-radius: 22px;
+      border: 1px dashed #aac4da;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .infographic-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .infographic-header span {
+      font-size: 24px;
+    }
+
+    .infographic-title {
+      font-weight: 700;
+      font-size: 1.02rem;
+    }
+
+    .infographic-sub {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .infographic-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 700px) {
+      .infographic-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .info-eye {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 14px 12px;
+      border: 1px solid #d0e2f2;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-eye-emoji {
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+
+    .info-eye-label {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
+    .info-eye-tag {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .info-eye-list {
+      list-style: none;
+      padding-left: 0;
+      font-size: 0.85rem;
+    }
+
+    .info-eye-list li {
+      margin-bottom: 3px;
+      display: flex;
+      align-items: flex-start;
+      gap: 5px;
+    }
+
+    .info-eye-bullet {
+      font-size: 0.9rem;
+      margin-top: 2px;
+    }
+
+    .tiny-caption {
+      margin-top: 8px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 4px;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 8px 6px;
+      border-bottom: 1px solid var(--border-soft);
+      text-align: left;
+    }
+
+    th {
+      background: #f1f5f9;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #495057;
+    }
+
+    .cta {
+      margin-top: 24px;
+      padding: 18px 16px;
+      background: #0b7285;
+      color: #ffffff;
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cta strong { font-size: 1rem; }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+      align-items: center;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 18px;
+      border-radius: var(--radius-pill);
+      border: none;
+      background: #ffb703;
+      color: #2b2b2b;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    }
+
+    .cta-note {
+      font-size: 0.82rem;
+      opacity: 0.92;
+    }
+
+    .faq {
+      margin-top: 24px;
+      padding: 18px 16px;
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .faq h3 { margin-top: 0; }
+
+    .faq-item {
+      margin-bottom: 12px;
+      font-size: 0.92rem;
+    }
+
+    .faq-q {
+      font-weight: 600;
+    }
+
+    .faq-a {
+      color: var(--text-muted);
+    }
+
+    .disclaimer {
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+  
+</style>
+
+<!-- NOW THE HTML CONTENT STARTS -->
+
+<!-- Navigation Header -->
+    
+
+  <div class="page">
+    <header>
+      <div class="badge">
+        <span>👓</span> Vision options for Gen&nbsp;X
+      </div>
+      <h1>EVO ICL vs Presbyopic Implant in Eye<br />What’s the Difference?</h1>
+      <p>
+        If you are in your 40s, 50s, or early 60s and tired of juggling distance
+        glasses, readers, and progressives, there are two very different “inside the eye”
+        solutions: <strong>EVO ICL</strong> and the <strong>Presbyopic Implant in Eye (PIE)</strong>.
+        Here is a simple side-by-side explanation.
+      </p>
+      <div class="highlight-bar">
+        <div class="highlight-pill">Plain English, no jargon</div>
+        <div class="highlight-pill">Focused on Gen&nbsp;X lifestyles</div>
+        <div class="highlight-pill">Quick comparison at a glance</div>
+      </div>
+    </header>
+
+    <!-- Cartoon-style infographic section -->
+    <section class="infographic" aria-label="Cartoon infographic comparing EVO ICL and Presbyopic Implant in Eye">
+      <div class="infographic-header">
+        <span>🎨</span>
+        <div>
+          <div class="infographic-title">Cartoon Snapshot: Two Different Eye “Upgrades”</div>
+          <div class="infographic-sub">
+            Imagine two friendly cartoon eyes standing side by side, each getting a different high-tech upgrade.
+          </div>
+        </div>
+      </div>
+
+      <div class="infographic-grid">
+        <div class="info-eye">
+          <div class="info-eye-emoji">👁️➕📄</div>
+          <div class="info-eye-label">EVO ICL</div>
+          <div class="info-eye-tag">
+            “Contact lens inside the eye” — your natural lens stays.
+          </div>
+          <ul class="info-eye-list">
+            <li><span class="info-eye-bullet">•</span><span>Best for younger adults with moderate to high nearsightedness.</span></li>
+            <li><span class="info-eye-bullet">•</span><span>Great if your cornea is too thin for LASIK.</span></li>
+            <li><span class="info-eye-bullet">•</span><span>Lens is <strong>add-on</strong> and can be removed or changed.</span></li>
+          </ul>
+        </div>
+
+        <div class="info-eye">
+          <div class="info-eye-emoji">👁️🔁💡</div>
+          <div class="info-eye-label">Presbyopic Implant in Eye (PIE)</div>
+          <div class="info-eye-tag">
+            “Lens upgrade” — we swap your aging lens for a new one.
+          </div>
+          <ul class="info-eye-list">
+            <li><span class="info-eye-bullet">•</span><span>Designed for 45+ with reading-glasses or bifocal problems.</span></li>
+            <li><span class="info-eye-bullet">•</span><span>Helps you see far, near, and in-between without progressives.</span></li>
+            <li><span class="info-eye-bullet">•</span><span>Also removes early cataract so it can’t come back.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tiny-caption">
+        This section can be turned into a full cartoon infographic by your designer:
+        two simple characters, labeled eye diagrams, and these key bullets.
+      </div>
+    </section>
+
+    <!-- Simple cards for each procedure -->
+    <section class="grid">
+      <article class="card">
+        <div class="pill-label pill-icl">
+          <span>👁️</span> EVO ICL
+        </div>
+        <h2>EVO ICL in one minute</h2>
+        <p class="tagline">
+          Think of EVO ICL as adding a super-thin contact lens <strong>inside</strong> your eye.
+          Your own lens stays in place.
+        </p>
+        <ul>
+          <li><strong>Who it’s for:</strong> Usually 21–45, moderate to high nearsightedness, often still seeing well up close.</li>
+          <li><strong>Main goal:</strong> Clear distance vision without thick glasses or full-time contacts.</li>
+          <li><strong>What we do:</strong> Place a soft, curved lens behind the colored part of your eye (iris).</li>
+          <li><strong>Reversible:</strong> The lens can be removed or exchanged if needed.</li>
+          <li><strong>Cataract:</strong> Your natural lens (and future cataract) is still there; cataract surgery may be needed later in life.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="pill-label pill-pie">
+          <span>✨</span> Presbyopic Implant in Eye
+        </div>
+        <h2>Presbyopic Implant in one minute</h2>
+        <p class="tagline">
+          PIE is more like a lens <strong>upgrade</strong>. We remove your natural aging lens
+          and replace it with a new, high-tech lens.
+        </p>
+        <ul>
+          <li><strong>Who it’s for:</strong> Typically 45–65, struggling with readers, bifocals, or progressives.</li>
+          <li><strong>Main goal:</strong> See far, near, and computer distance with much less dependence on glasses.</li>
+          <li><strong>What we do:</strong> Gently remove your cloudy or stiff lens and implant a presbyopic or multifocal lens.</li>
+          <li><strong>Not reversible in the same way:</strong> The natural lens is gone; we can fine-tune with different implants or laser if needed.</li>
+          <li><strong>Cataract:</strong> Cataract is removed in the process — you usually won’t need cataract surgery again.</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- Comparison table -->
+    <section class="card">
+      <h3>Side-by-side comparison</h3>
+      <table aria-label="Comparison table of EVO ICL and Presbyopic Implant in Eye">
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>EVO ICL</th>
+            <th>PIE (Presbyopic Implant in Eye)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Typical age range</td>
+            <td>20s–40s</td>
+            <td>Mid-40s to mid-60s</td>
+          </tr>
+          <tr>
+            <td>Main problem it solves</td>
+            <td>Moderate–high nearsightedness (distance blur)</td>
+            <td>Presbyopia (reading problems) + early cataract</td>
+          </tr>
+          <tr>
+            <td>What happens to your natural lens?</td>
+            <td>Stays in place</td>
+            <td>Removed and replaced</td>
+          </tr>
+          <tr>
+            <td>Reversible?</td>
+            <td>Lens can usually be removed or exchanged</td>
+            <td>Natural lens cannot be put back; implant can be adjusted</td>
+          </tr>
+          <tr>
+            <td>Helps with reading vision?</td>
+            <td>Not directly; you may still need readers later</td>
+            <td>Yes, designed to reduce or remove need for reading glasses</td>
+          </tr>
+          <tr>
+            <td>Also treats cataract?</td>
+            <td>No – cataract surgery may be needed in the future</td>
+            <td>Yes – cataract is treated at the same time</td>
+          </tr>
+          <tr>
+            <td>Good option if cornea is thin?</td>
+            <td>Yes, often chosen instead of LASIK</td>
+            <td>Yes, because it works inside the eye, not on the cornea</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- FAQ and CTA -->
+    <section class="faq">
+      <h3>Common questions from Gen&nbsp;X patients</h3>
+
+      <div class="faq-item">
+        <div class="faq-q">“I’m 50 and need readers. I also hate my distance glasses. Which one is more likely for me?”</div>
+        <div class="faq-a">
+          At that age, especially if reading glasses are a big frustration, PIE is often the stronger choice
+          because it targets both distance and near, and removes early cataract at the same time.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">“Is EVO ICL only for very young people?”</div>
+        <div class="faq-a">
+          Not at all. Some patients in their late 30s or early 40s still benefit from EVO ICL, especially
+          if they are highly nearsighted and want a reversible option. The key is your exam and lens health.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">“Can I ‘upgrade’ from EVO ICL to PIE later?”</div>
+        <div class="faq-a">
+          Yes. If you have EVO ICL when you are younger, you can still choose PIE or cataract surgery later in life.
+          That’s part of the long-term plan we discuss with you.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">“How do I know which one is actually right for my eyes and lifestyle?”</div>
+        <div class="faq-a">
+          We look at your age, your prescription, your cornea, your lens, and your daily life:
+          driving at night, screens, sports, hobbies, and how strongly you want to avoid glasses.
+          Then we walk you through a personalized plan — not a one-size-fits-all answer.
+        </div>
+      </div>
+
+      <div class="cta">
+        <strong>Still unsure which direction fits you?</strong>
+        <div class="cta-row">
+          <a href="tel:18052302126" class="cta-btn">Text or call (805) 230-2126</a>
+          <div class="cta-note">
+            Ask for an “EVO vs PIE consult” and we’ll map out your options in under an hour.
+          </div>
+        </div>
+      </div>
+
+      <p class="disclaimer">
+        This page is educational and not medical advice. Only a complete eye exam and discussion with your surgeon
+        can determine whether EVO ICL, PIE, or another option is safest for you.
+      </p>
+    </section>
+  </div>
+
+    <!-- Footer -->

@@ -1,0 +1,21 @@
+<% /* Normalizes address copy inside Strapi HTML for location pages (canonical "Suite" format). */ %>
+<%
+  var out = typeof html === 'string' ? html : String(html || '');
+  if (site === 'westlake') {
+    const wlLine = '31824 Village Center Rd Suite F';
+    out = out.replace(/31824\s+Village\s+Center\s+Road(?:\s|<[^>]+>|&nbsp;|,)*(?:Suite|Ste\.?)\s+F/gi, wlLine);
+    out = out.replace(/31824\s+Village\s+Center\s+Rd\s*,\s*(?:Suite|Ste\.?)\s+F/gi, wlLine);
+    out = out.replace(/31824\s+Village\s+Center\s+Rd\s+F\b/gi, wlLine);
+    out = out.replace(/31824\s+Village\s+Center\s+Road/gi, wlLine);
+    out = out.replace(/Westlake\s+Village,\s*CA\s*91361(?:\s*,\s*United States)?/gi, 'Westlake Village, CA 91361, United States');
+  }
+  if (site === 'beverly') {
+    const bhStreet = '9100 Wilshire Blvd Suite 265E';
+    out = out.replace(/9100\s+Wilshire\s+Blvd\s*#\s*265e/gi, bhStreet);
+    out = out.replace(/9100\s+Wilshire\s+Blvd\s*#\s*265E/gi, bhStreet);
+    out = out.replace(/9100\s+Wilshire\s+Blvd\s*,?\s*Suite\s*#?\s*265E/gi, bhStreet);
+    out = out.replace(/9100\s+Wilshire\s+Blvd\s*,?\s*Ste\.?\s*#?\s*265E/gi, bhStreet);
+    out = out.replace(/Beverly\s+Hills,\s*CA\s*90212(?:\s*,\s*United States)?/gi, 'Beverly Hills, CA 90212, United States');
+  }
+%>
+<%- out %>

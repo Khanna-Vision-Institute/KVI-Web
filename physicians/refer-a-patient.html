@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Refer a Patient | Physician Referral Worksheet | Khanna Vision Institute</title>
+  <meta name="description" content="Physician referral worksheet for Khanna Vision Institute — Beverly Hills and Westlake Village.">
+  <link rel="canonical" href="https://khannainstitute.com/referrals/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Libre+Baskerville:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+  <style>
+    /* ─── Reset ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ─── Tokens ──────────────────────────────────── */
+    :root {
+      --navy:       #132844;
+      --navy-lt:    #1e3a5f;
+      --gold:       #c9a23a;
+      --gold-dk:    #b08a2a;
+      --gold-bg:    #fdf8ec;
+      --gold-rim:   rgba(201,162,58,0.28);
+      --gold-ring:  rgba(201,162,58,0.22);
+      --ink:        #1a2035;
+      --muted:      #4a5568;
+      --faint:      #64748b;
+      --line:       #e2e8f0;
+      --page-bg:    #f4f6f9;
+      --card-bg:    #ffffff;
+      --err:        #dc2626;
+      --ok:         #15803d;
+      --r:          10px;
+      --r-sm:       7px;
+    }
+
+    body.rf-body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--page-bg);
+      min-height: 100vh;
+    }
+
+    /* ─── HEADER ──────────────────────────────────── */
+    .kh-header {
+      position: sticky; top: 0; z-index: 200;
+      background: #fff; border-bottom: 1px solid var(--line);
+      box-shadow: 0 1px 16px rgba(19,40,68,0.07);
+    }
+    .kh-header-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      height: 74px; display: flex; align-items: center;
+      justify-content: space-between; gap: 16px;
+    }
+    .kh-logo img { height: 52px; width: auto; display: block; }
+    .kh-nav { display: flex; align-items: center; gap: 2px; }
+    .kh-nav-link {
+      padding: 8px 13px; font-size: 0.82rem; font-weight: 600;
+      color: var(--muted); text-decoration: none; border-radius: 7px;
+      transition: color .15s, background .15s;
+    }
+    .kh-nav-link:hover { color: var(--navy); background: #f0f4f8; }
+    .kh-nav-active { color: var(--navy); }
+    .kh-nav-cta {
+      margin-left: 10px; padding: 9px 18px; border-radius: 8px;
+      background: var(--gold); color: #fff; font-size: 0.8rem;
+      font-weight: 700; text-decoration: none; white-space: nowrap;
+      transition: background .15s, transform .12s;
+    }
+    .kh-nav-cta:hover { background: var(--gold-dk); transform: translateY(-1px); }
+
+    /* ─── BREADCRUMB STRIP ────────────────────────── */
+    .rf-breadcrumb {
+      background: var(--navy); padding: 9px 24px;
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+    .rf-breadcrumb a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color .15s; }
+    .rf-breadcrumb a:hover { color: var(--gold); }
+    .rf-breadcrumb .sep { color: rgba(255,255,255,0.25); }
+    .rf-breadcrumb .cur { color: var(--gold); }
+
+    /* ─── HERO HEADER ─────────────────────────────── */
+    .rf-hero {
+      background: var(--navy);
+      padding: 40px 24px 36px;
+      text-align: center;
+    }
+    .rf-hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.68rem; font-weight: 800;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 14px;
+    }
+    .rf-hero-eyebrow::before, .rf-hero-eyebrow::after {
+      content: ""; display: block; width: 28px; height: 1px;
+      background: var(--gold-rim);
+    }
+    .rf-hero h1 {
+      font-family: "Libre Baskerville", Georgia, serif;
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      color: #fff; font-weight: 700; line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .rf-hero h1 em { font-style: italic; color: #e8c96a; }
+    .rf-hero-sub {
+      font-size: 0.9rem; color: rgba(255,255,255,0.6);
+      max-width: 560px; margin: 0 auto; line-height: 1.75;
+    }
+    .rf-hero-sub a { color: var(--gold); text-decoration: none; }
+    .rf-hero-sub a:hover { text-decoration: underline; }
+
+    /* ─── PHI NOTICE ──────────────────────────────── */
+    .rf-phi-wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+    .rf-phi {
+      display: flex; align-items: flex-start; gap: 10px;
+      background: #fffbeb; border: 1px solid #fcd34d;
+      border-left: 3px solid var(--gold);
+      border-radius: var(--r-sm);
+      padding: 12px 16px; margin: 20px 0 6px;
+      font-size: 0.78rem; color: #92400e; line-height: 1.6;
+    }
+    .rf-phi-icon { font-size: 1rem; flex-shrink: 0; }
+    .rf-phi strong { font-weight: 700; }
+
+    /* ─── ALERT ───────────────────────────────────── */
+    .rf-alert {
+      display: none; max-width: 860px; margin: 0 auto 4px;
+      padding: 13px 16px; border-radius: var(--r-sm);
+      font-size: 0.88rem; font-weight: 600; line-height: 1.5;
+    }
+    .rf-alert--ok  { display: block; background: #f0fdf4; border: 1px solid #86efac; color: var(--ok); }
+    .rf-alert--err { display: block; background: #fef2f2; border: 1px solid #fca5a5; color: var(--err); }
+
+    /* ─── FORM WRAPPER ────────────────────────────── */
+    .rf-form-wrap {
+      max-width: 860px; margin: 0 auto;
+      padding: 8px 20px 120px;
+    }
+
+    /* ─── STEP CARD (accordion) ───────────────────── */
+    details.rf-step {
+      background: var(--card-bg);
+      border: 1px solid var(--line);
+      border-radius: var(--r);
+      margin-bottom: 10px;
+      box-shadow: 0 1px 4px rgba(19,40,68,0.04);
+      transition: border-color .2s, box-shadow .2s;
+      overflow: hidden;
+    }
+    details.rf-step[open] {
+      border-color: var(--gold-rim);
+      box-shadow: 0 4px 28px rgba(201,162,58,0.12), 0 1px 0 var(--gold-ring);
+    }
+    details.rf-step > summary {
+      list-style: none; cursor: pointer;
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 20px; user-select: none;
+      transition: background .15s;
+    }
+    details.rf-step > summary:hover { background: #f8f9fb; }
+    details.rf-step > summary::-webkit-details-marker { display: none; }
+
+    .rf-step-num {
+      width: 30px; height: 30px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.73rem; font-weight: 800; flex-shrink: 0;
+      background: var(--page-bg); border: 1.5px solid var(--line);
+      color: var(--muted); transition: all .22s;
+    }
+    details.rf-step[open] .rf-step-num {
+      background: var(--navy); border-color: var(--navy);
+      color: #fff; box-shadow: 0 2px 10px rgba(19,40,68,0.25);
+    }
+    .rf-step-title {
+      font-size: 0.77rem; font-weight: 800;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--muted); flex: 1; transition: color .22s;
+    }
+    details.rf-step[open] .rf-step-title { color: var(--navy); }
+    .rf-step-chevron {
+      width: 18px; height: 18px; color: var(--line);
+      transition: transform .25s, color .22s; flex-shrink: 0;
+    }
+    details.rf-step[open] .rf-step-chevron { transform: rotate(180deg); color: var(--gold); }
+
+    .rf-step-body {
+      padding: 4px 22px 26px;
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+
+    /* ─── FORM INTERNALS ──────────────────────────── */
+    .rf-sub {
+      font-size: 0.68rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold-dk); margin: 20px 0 12px;
+    }
+    .rf-sub:first-child { margin-top: 4px; }
+    .rf-divider { border: none; border-top: 1px solid var(--line); margin: 20px 0; }
+
+    .rf-g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; }
+    .rf-g3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px 16px; }
+    .rf-g-full { grid-column: 1/-1; }
+
+    .rf-field { display: flex; flex-direction: column; gap: 6px; }
+    .rf-field label {
+      font-size: 0.67rem; font-weight: 700;
+      color: var(--navy-lt); letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .rf-req { color: var(--err); margin-left: 1px; }
+
+    .rf-input, .rf-select, .rf-textarea {
+      width: 100%;
+      background: #fff;
+      border: 1.5px solid var(--line);
+      border-radius: var(--r-sm);
+      padding: 10px 13px;
+      font-family: inherit;
+      font-size: 0.9rem; color: var(--ink);
+      transition: border-color .18s, box-shadow .18s;
+      outline: none;
+    }
+    .rf-input::placeholder, .rf-textarea::placeholder { color: #cbd5e1; }
+    .rf-select {
+      padding-right: 36px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%23132844' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      appearance: none; cursor: pointer;
+    }
+    .rf-select option { background: #fff; color: var(--ink); }
+    .rf-input:hover, .rf-select:hover, .rf-textarea:hover { border-color: #c4cfe0; }
+    .rf-input:focus, .rf-select:focus, .rf-textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px var(--gold-ring);
+    }
+    .rf-textarea { min-height: 120px; resize: vertical; }
+    .rf-hint { font-size: 0.72rem; color: var(--faint); line-height: 1.45; }
+    .rf-hint a { color: var(--gold-dk); text-decoration: none; }
+    .rf-hint a:hover { text-decoration: underline; }
+
+    /* ─── CUSTOM CHECKBOXES / RADIOS ──────────────── */
+    .rf-check-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 6px 10px;
+    }
+    .rf-choice {
+      display: flex; align-items: center; gap: 9px;
+      padding: 8px 11px; border-radius: var(--r-sm);
+      border: 1.5px solid var(--line); cursor: pointer;
+      transition: background .14s, border-color .14s;
+      font-size: 0.85rem; color: var(--muted); line-height: 1.35;
+    }
+    .rf-choice:hover { background: var(--gold-bg); border-color: var(--gold-rim); color: var(--ink); }
+    .rf-choice input[type="checkbox"],
+    .rf-choice input[type="radio"] {
+      appearance: none; -webkit-appearance: none;
+      width: 17px; height: 17px;
+      border: 2px solid #cbd5e1; border-radius: 4px;
+      flex-shrink: 0; cursor: pointer; position: relative;
+      transition: all .16s; background: #fff;
+    }
+    .rf-choice input[type="radio"] { border-radius: 50%; }
+    .rf-choice input[type="checkbox"]:checked,
+    .rf-choice input[type="radio"]:checked {
+      background: var(--navy); border-color: var(--navy);
+    }
+    .rf-choice input[type="checkbox"]:checked::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 14 11' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 5.5L5 9.5L13 1.5' stroke='%23fff' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/11px no-repeat;
+    }
+    .rf-choice input[type="radio"]:checked::after {
+      content: ""; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 6px; height: 6px; border-radius: 50%; background: #fff;
+    }
+    .rf-choice:has(input:checked) {
+      background: #eff4ff; border-color: rgba(19,40,68,0.35);
+      color: var(--ink);
+    }
+    .rf-choice input:checked ~ span { color: var(--navy); font-weight: 600; }
+
+    /* ─── SPLIT COLUMN ────────────────────────────── */
+    .rf-split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 16px; }
+    .rf-choice-col { display: flex; flex-direction: column; gap: 5px; }
+
+    /* ─── URGENCY ROW ─────────────────────────────── */
+    .rf-urgency-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .rf-urgency-row .rf-choice { flex: 1; min-width: 130px; justify-content: center; }
+
+    /* ─── FILE NOTE ───────────────────────────────── */
+    .rf-file-note {
+      background: #f8fafc; border: 1px solid var(--line);
+      border-radius: var(--r-sm); padding: 14px 16px; margin-top: 14px;
+    }
+    .rf-file-note-head {
+      font-size: 0.67rem; font-weight: 800; color: var(--navy-lt);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .rf-file-note ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .rf-file-note li {
+      font-size: 0.78rem; color: var(--faint); padding-left: 14px;
+      position: relative; line-height: 1.5;
+    }
+    .rf-file-note li::before { content: "·"; position: absolute; left: 3px; color: var(--gold-dk); }
+
+    /* ─── BOTTOM ACTION BAR ───────────────────────── */
+    .rf-action-bar {
+      position: sticky; bottom: 0; z-index: 50;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--gold-rim);
+      box-shadow: 0 -4px 24px rgba(19,40,68,0.1);
+      padding: 12px 20px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .rf-bar-left { display: flex; gap: 8px; flex-wrap: wrap; }
+    .rf-bar-btn {
+      padding: 8px 16px; border-radius: 999px;
+      font-family: inherit; font-size: 0.74rem; font-weight: 600;
+      letter-spacing: 0.04em; border: 1.5px solid var(--line);
+      background: #fff; color: var(--muted);
+      text-decoration: none; cursor: pointer;
+      transition: all .15s; white-space: nowrap;
+    }
+    .rf-bar-btn:hover { color: var(--navy); border-color: var(--navy); background: #f0f4f8; }
+    .rf-submit {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 26px; border-radius: 999px; border: none;
+      font-family: inherit; font-size: 0.82rem; font-weight: 800;
+      letter-spacing: 0.06em; cursor: pointer;
+      background: linear-gradient(135deg, #c9a23a, #e8c96a);
+      color: var(--navy);
+      box-shadow: 0 4px 20px rgba(201,162,58,0.38);
+      transition: all .18s;
+    }
+    .rf-submit:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(201,162,58,0.48);
+    }
+    .rf-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .rf-submit svg { width: 14px; height: 14px; }
+    .rf-bar-meta { font-size: 0.68rem; color: #94a3b8; font-style: italic; }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    .kh-footer { background: #0d1f38; padding: 48px 24px 28px; }
+    .kh-footer-inner { max-width: 1100px; margin: 0 auto; }
+    .kh-footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 32px; padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 20px;
+    }
+    .kh-footer img { height: 34px; filter: brightness(10); opacity: 0.85; margin-bottom: 14px; display: block; }
+    .kh-footer-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.4); line-height: 1.65; }
+    .kh-footer-col-h {
+      font-size: 0.66rem; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 12px;
+    }
+    .kh-footer-col a {
+      display: block; font-size: 0.82rem; color: rgba(255,255,255,0.5);
+      text-decoration: none; line-height: 2; transition: color .15s;
+    }
+    .kh-footer-col a:hover { color: var(--gold); }
+    .kh-footer-col span { display: block; font-size: 0.82rem; color: rgba(255,255,255,0.35); line-height: 2; }
+    .kh-footer-copy {
+      display: flex; justify-content: space-between; flex-wrap: wrap;
+      gap: 6px; font-size: 0.71rem; color: rgba(255,255,255,0.28);
+    }
+    .kh-footer-copy a { color: rgba(255,255,255,0.38); text-decoration: none; }
+    .kh-footer-copy a:hover { color: var(--gold); }
+
+    /* ─── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 640px) {
+      .rf-g2, .rf-g3, .rf-split { grid-template-columns: 1fr; }
+      .rf-check-grid { grid-template-columns: 1fr; }
+      .kh-footer-grid { grid-template-columns: 1fr 1fr; }
+      .kh-nav .kh-nav-link { display: none; }
+      .rf-form-wrap { padding: 8px 12px 120px; }
+      .rf-step-body { padding: 4px 14px 22px; }
+    }
+    @media (max-width: 480px) { .kh-footer-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="rf-body">
+
+<!-- ═══ HEADER ══════════════════════════════════════ -->
+<header class="kh-header">
+  <div class="kh-header-inner">
+    <a class="kh-logo" href="https://khannainstitute.com/" aria-label="Khanna Vision Institute">
+      <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/khannainstitute/Logo+2.png"
+           alt="Khanna Vision Institute" width="160" height="44" decoding="async">
+    </a>
+    <nav class="kh-nav" aria-label="Main navigation">
+      <a class="kh-nav-link" href="https://khannainstitute.com/">Home</a>
+      <a class="kh-nav-link" href="./for-physicians">For Physicians</a>
+      <a class="kh-nav-link kh-nav-active" href="./refer-a-patient.html">Referral Worksheet</a>
+      <a class="kh-nav-cta" href="tel:8052302126">(805) 230-2126</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══ BREADCRUMB ═══════════════════════════════════ -->
+<div class="rf-breadcrumb" aria-label="Breadcrumb">
+  <a href="https://khannainstitute.com/">Home</a>
+  <span class="sep">›</span>
+  <a href="./for-physicians">For Physicians</a>
+  <span class="sep">›</span>
+  <span class="cur">Referral Worksheet</span>
+</div>
+
+<!-- ═══ HERO ══════════════════════════════════════════ -->
+<div class="rf-hero">
+  <div class="rf-hero-eyebrow">For Referring Providers</div>
+  <h1>Physician Referral <em>Worksheet</em></h1>
+  <p class="rf-hero-sub">
+    Complete all sections below. Patient?
+    <a href="./book-consultation">Schedule online</a> or call
+    <a href="tel:8052302126">(805) 230-2126</a>.
+  </p>
+  </div>
+
+<div class="rf-phi-wrap">
+  <div class="rf-phi" role="note">
+    <span class="rf-phi-icon">⚠</span>
+    <span>
+      <strong>PHI Notice:</strong> Do not email identifiable records from a non-compliant client.
+      Pair this summary with secure fax, encrypted relay, your EHR tether, or direct upload workflow.
+    </span>
+  </div>
+      <div id="rf-msg" class="rf-alert" role="status" aria-live="polite"></div>
+</div>
+
+<!-- ═══ FORM ══════════════════════════════════════════ -->
+<div class="rf-form-wrap">
+      <form id="rf-form" action="/api/physician-referral/submit" method="post" novalidate>
+    <input type="text" name="companyWebsite" value=""
+      style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;"
+      tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <!-- ═══════════════════════════════════
+         STEP 1 · REFERRING PROVIDER
+    ═══════════════════════════════════ -->
+    <details class="rf-step" open>
+      <summary>
+        <span class="rf-step-num">1</span>
+        <span class="rf-step-title">Referring Provider Information</span>
+        <svg class="rf-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="rf-step-body">
+        <div class="rf-g2">
+            <div class="rf-field">
+            <label for="refNpi">Referring Doctor NPI #</label>
+            <input class="rf-input" id="refNpi" name="refNpi" type="text"
+                   inputmode="numeric" placeholder="10-digit NPI" autocomplete="off">
+            <span class="rf-hint"><a href="https://npiregistry.cms.hhs.gov/" target="_blank" rel="noopener">Search NPI Registry →</a></span>
+            </div>
+            <div class="rf-field" style="justify-content:flex-end;">
+            <label class="rf-choice" style="border:1.5px solid var(--line);margin-top:auto;">
+              <input type="checkbox" name="refNpiLetters" value="yes">
+              <span>NPI contains letters</span>
+              </label>
+            </div>
+
+            <div class="rf-field">
+            <label for="refDoctorName">Doctor Name <span class="rf-req">*</span></label>
+            <input class="rf-input" id="refDoctorName" name="refDoctorName" type="text" required>
+            </div>
+            <div class="rf-field">
+            <label for="refPractice">Practice / Group Name</label>
+            <input class="rf-input" id="refPractice" name="refPractice" type="text">
+            </div>
+
+            <div class="rf-field">
+            <label for="refCredentials">Credentials <span class="rf-req">*</span></label>
+            <select class="rf-select" id="refCredentials" name="refCredentials" required>
+                <option value="">Select</option>
+              <option>MD</option><option>DO</option><option>OD</option>
+              <option>PA</option><option>NP</option><option>Other</option>
+              </select>
+            </div>
+            <div class="rf-field">
+            <label for="refEmail">Office Email <span class="rf-req">*</span></label>
+            <input class="rf-input" id="refEmail" name="refEmail" type="email" required>
+            </div>
+
+            <div class="rf-field">
+            <label for="refPhone">Office Phone <span class="rf-req">*</span></label>
+            <input class="rf-input" id="refPhone" name="refPhone" type="tel" placeholder="(xxx) xxx-xxxx" required>
+            </div>
+            <div class="rf-field">
+            <label for="refFax">Office Fax</label>
+            <input class="rf-input" id="refFax" name="refFax" type="tel">
+            </div>
+
+          <div class="rf-field rf-g-full">
+            <label for="refAddress">Street Address</label>
+            <input class="rf-input" id="refAddress" name="refAddress" type="text">
+            </div>
+            <div class="rf-field">
+              <label for="refCity">City</label>
+            <input class="rf-input" id="refCity" name="refCity" type="text">
+            </div>
+            <div class="rf-field">
+              <label for="refStateZip">State &amp; ZIP</label>
+            <input class="rf-input" id="refStateZip" name="refStateZip" type="text" placeholder="CA 90210">
+          </div>
+            </div>
+          </div>
+        </details>
+
+    <!-- ═══════════════════════════════════
+         STEP 2 · PATIENT DEMOGRAPHICS
+    ═══════════════════════════════════ -->
+    <details class="rf-step" open>
+      <summary>
+        <span class="rf-step-num">2</span>
+        <span class="rf-step-title">Patient Demographics &amp; Contact</span>
+        <svg class="rf-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="rf-step-body">
+        <div class="rf-g2">
+            <div class="rf-field">
+            <label for="patientFirstName">First Name <span class="rf-req">*</span></label>
+            <input class="rf-input" id="patientFirstName" name="patientFirstName" type="text" required>
+            </div>
+            <div class="rf-field">
+            <label for="patientLastName">Last Name <span class="rf-req">*</span></label>
+            <input class="rf-input" id="patientLastName" name="patientLastName" type="text" required>
+            </div>
+            <div class="rf-field">
+            <label for="patientDob">Date of Birth <span class="rf-req">*</span></label>
+            <input class="rf-input" id="patientDob" name="patientDob" type="date" required>
+            </div>
+            <div class="rf-field">
+            <label for="patientGender">Gender</label>
+            <select class="rf-select" id="patientGender" name="patientGender">
+              <option value="">Select</option>
+              <option>Female</option><option>Male</option>
+              <option>Non-binary</option><option>Prefer not to say</option>
+            </select>
+            </div>
+            <div class="rf-field">
+            <label for="patientPhone">Phone <span class="rf-req">*</span></label>
+            <input class="rf-input" id="patientPhone" name="patientPhone" type="tel" required>
+            </div>
+            <div class="rf-field">
+            <label for="patientEmail">Email</label>
+            <input class="rf-input" id="patientEmail" name="patientEmail" type="email">
+          </div>
+          <div class="rf-field rf-g-full">
+            <label for="patientAddress">Street Address</label>
+            <input class="rf-input" id="patientAddress" name="patientAddress" type="text">
+            </div>
+            <div class="rf-field">
+              <label for="patientCity">City</label>
+            <input class="rf-input" id="patientCity" name="patientCity" type="text">
+            </div>
+            <div class="rf-field">
+            <label for="patientStateZip">State &amp; ZIP</label>
+            <input class="rf-input" id="patientStateZip" name="patientStateZip" type="text" placeholder="CA 90210">
+            </div>
+            <div class="rf-field">
+            <label for="interpreterNeeded">Interpreter Needed</label>
+            <select class="rf-select" id="interpreterNeeded" name="interpreterNeeded">
+              <option value="No">No</option><option value="Yes">Yes</option>
+              </select>
+            </div>
+          <div class="rf-field" id="rf-lang-wrap" hidden>
+            <label for="interpreterLanguage">Language</label>
+            <input class="rf-input" id="interpreterLanguage" name="interpreterLanguage" type="text" placeholder="e.g. Spanish">
+            </div>
+            </div>
+
+        <hr class="rf-divider">
+        <p class="rf-sub">Insurance (optional)</p>
+        <div class="rf-g3">
+            <div class="rf-field">
+            <label for="primaryInsurance">Primary Insurance</label>
+            <input class="rf-input" id="primaryInsurance" name="primaryInsurance" type="text">
+            </div>
+            <div class="rf-field">
+              <label for="primaryInsuranceId">Member ID</label>
+            <input class="rf-input" id="primaryInsuranceId" name="primaryInsuranceId" type="text">
+            </div>
+            <div class="rf-field">
+            <label for="primaryGroup">Group #</label>
+            <input class="rf-input" id="primaryGroup" name="primaryGroup" type="text">
+            </div>
+            <div class="rf-field">
+            <label for="secondaryInsurance">Secondary Insurance</label>
+            <input class="rf-input" id="secondaryInsurance" name="secondaryInsurance" type="text">
+            </div>
+            <div class="rf-field">
+            <label for="secondaryInsuranceId">Member ID</label>
+            <input class="rf-input" id="secondaryInsuranceId" name="secondaryInsuranceId" type="text">
+            </div>
+            <div class="rf-field">
+            <label for="secondaryGroup">Group #</label>
+            <input class="rf-input" id="secondaryGroup" name="secondaryGroup" type="text">
+          </div>
+            </div>
+          </div>
+        </details>
+
+    <!-- ═══════════════════════════════════
+         STEP 3 · CLINICAL PATHWAY
+    ═══════════════════════════════════ -->
+    <details class="rf-step" open>
+      <summary>
+        <span class="rf-step-num">3</span>
+        <span class="rf-step-title">Clinical Pathway &amp; Appointment</span>
+        <svg class="rf-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="rf-step-body">
+
+        <p class="rf-sub">Intended procedure / pathway <span class="rf-req">*</span></p>
+        <div class="rf-check-grid" role="group" aria-label="Consultation type">
+          <label class="rf-choice"><input type="checkbox" name="consultType" value="Cataract / Lens evaluation"><span>Cataract / Lens evaluation</span></label>
+          <label class="rf-choice"><input type="checkbox" name="consultType" value="Robotic Laser Cataract consult"><span>Robotic Laser Cataract consult</span></label>
+          <label class="rf-choice"><input type="checkbox" name="consultType" value="LASIK consult"><span>LASIK consult</span></label>
+          <label class="rf-choice"><input type="checkbox" name="consultType" value="SMILE consult"><span>SMILE consult</span></label>
+          <label class="rf-choice"><input type="checkbox" name="consultType" value="PRK / ASA consult"><span>PRK / ASA consult</span></label>
+          <label class="rf-choice"><input type="checkbox" name="consultType" value="EVO ICL / Implantable lens"><span>EVO ICL / Implantable lens</span></label>
+          <label class="rf-choice"><input type="checkbox" name="consultType" value="PIE / RLE — Presbyopia lens"><span>PIE / RLE — Presbyopia lens</span></label>
+          <label class="rf-choice"><input type="checkbox" name="consultType" value="Keratoconus / CTAK / CXL"><span>Keratoconus / CTAK / CXL</span></label>
+          <label class="rf-choice"><input type="checkbox" name="consultType" value="Cornea evaluation"><span>Cornea evaluation</span></label>
+          <label class="rf-choice"><input type="checkbox" name="consultType" value="Glaucoma evaluation"><span>Glaucoma evaluation</span></label>
+          <label class="rf-choice"><input type="checkbox" name="consultType" value="Dry eye evaluation"><span>Dry eye evaluation</span></label>
+          <label class="rf-choice"><input type="checkbox" name="consultType" value="Pterygium surgery"><span>Pterygium surgery</span></label>
+          <label class="rf-choice"><input type="checkbox" name="consultType" value="Chalazion treatment"><span>Chalazion treatment</span></label>
+          <label class="rf-choice"><input type="checkbox" name="consultType" value="Retina evaluation"><span>Retina evaluation</span></label>
+          <label class="rf-choice"><input type="checkbox" name="consultType" value="Oculoplastics evaluation"><span>Oculoplastics evaluation</span></label>
+          <label class="rf-choice"><input type="checkbox" name="consultType" value="Other / multi-focus consult"><span>Other / multi-focus consult</span></label>
+          </div>
+
+        <div class="rf-split">
+            <div>
+            <p class="rf-sub">Preferred provider <span class="rf-req">*</span></p>
+            <div class="rf-choice-col">
+              <label class="rf-choice"><input type="radio" name="preferredPhysician" value="No preference / first available" required><span>No preference / first available</span></label>
+              <label class="rf-choice"><input type="radio" name="preferredPhysician" value="Dr. Rajesh Khanna, MD"><span>Dr. Rajesh Khanna, MD</span></label>
+            </div>
+          </div>
+          <div>
+            <p class="rf-sub">Preferred location(s) <span class="rf-req">*</span></p>
+            <div class="rf-choice-col">
+              <label class="rf-choice"><input type="checkbox" name="preferredLocation" value="Any"><span>Any / either office</span></label>
+              <label class="rf-choice"><input type="checkbox" name="preferredLocation" value="Beverly Hills"><span>Beverly Hills</span></label>
+              <label class="rf-choice"><input type="checkbox" name="preferredLocation" value="Westlake Village"><span>Westlake Village</span></label>
+            </div>
+          </div>
+          </div>
+
+        <hr class="rf-divider">
+        <p class="rf-sub">
+          Urgent referral? <span class="rf-req">*</span>
+          <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--faint);font-size:0.72rem;">
+            — pain, severe redness, sudden vision loss, flashes, floaters, trauma
+          </span>
+        </p>
+        <div class="rf-urgency-row">
+          <label class="rf-choice"><input type="radio" name="urgentReferral" value="Yes" required><span>Yes — clinically urgent</span></label>
+          <label class="rf-choice"><input type="radio" name="urgentReferral" value="No"><span>No — routine consult</span></label>
+        </div>
+
+        <div class="rf-field" style="margin-top:18px;">
+          <label for="clinicalNotes">Clinical / scheduling notes</label>
+          <textarea class="rf-textarea" id="clinicalNotes" name="clinicalNotes" maxlength="1000"
+            placeholder="Prior ocular surgery, lens status, IOP, VA, allergies, current meds, relevant history, co-management asks…"></textarea>
+        </div>
+
+        <div class="rf-file-note">
+          <p class="rf-file-note-head">Attach topography / OCT / referral notes (reference only)</p>
+          <ul>
+            <li>Important information only — do not transmit PHI without encrypted relay</li>
+            <li>Accepted: PDF, JPG, PNG, TIFF — max 10 MB each</li>
+            <li>File names: letters, numbers, hyphens, underscores only — no spaces</li>
+          </ul>
+        </div>
+          </div>
+        </details>
+
+    <!-- ═══════════════════════════════════
+         STEP 4 · CO-MANAGEMENT
+    ═══════════════════════════════════ -->
+    <details class="rf-step" open>
+      <summary>
+        <span class="rf-step-num">4</span>
+        <span class="rf-step-title">Co-Management Preferences</span>
+        <svg class="rf-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </summary>
+      <div class="rf-step-body">
+        <p style="font-size:0.88rem;color:var(--muted);line-height:1.75;margin-bottom:18px;max-width:720px;">
+          If surgery is recommended, how would you like to collaborate on post-operative care?
+          Our team will confirm what is medically appropriate and will always respect your relationship with the patient.
+        </p>
+        <div class="rf-g2">
+          <div class="rf-field rf-g-full">
+            <label for="coManagePostOp">Desired post-op co-management</label>
+            <select class="rf-select" id="coManagePostOp" name="coManagePostOp">
+                <option value="">Select</option>
+              <option>Yes — I would like to co-manage post-op care</option>
+              <option>No — KVI to manage full post-op period</option>
+              <option>Discuss with surgeon</option>
+              <option>Not sure yet</option>
+              </select>
+            </div>
+          <div class="rf-field rf-g-full">
+            <label for="coManageNotes">Who should receive written clinical updates?</label>
+            <select class="rf-select" id="coManageNotes" name="coManageNotes">
+                <option value="">Select</option>
+              <option>Referring doctor only</option>
+              <option>Referring doctor + office manager</option>
+              <option>Office manager only</option>
+              <option>No updates needed</option>
+              </select>
+          </div>
+            </div>
+          </div>
+        </details>
+
+    <!-- ═══ ACTION BAR ═══════════════════════════════ -->
+    <div class="rf-action-bar">
+      <div class="rf-bar-left">
+        <a class="rf-bar-btn" href="./for-physicians">← Physician Hub</a>
+        <a class="rf-bar-btn" href="./book-consultation">Online Scheduler</a>
+        <button type="reset" class="rf-bar-btn">Reset Form</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <span class="rf-bar-meta">Khanna Vision Institute · Physician referral worksheet</span>
+        <button type="submit" class="rf-submit" id="rf-submit">
+          Submit Referral
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+        </div>
+      </form>
+</div>
+
+<!-- ═══ FOOTER ═══════════════════════════════════════ -->
+<footer class="kh-footer">
+  <div class="kh-footer-inner">
+    <div class="kh-footer-grid">
+      <div>
+        <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/khannainstitute/Logo+2.png" alt="KVI" height="34">
+        <p class="kh-footer-tagline">Precision vision care for Greater Los Angeles —<br>Beverly Hills &amp; Westlake Village.</p>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Physician Portal</p>
+        <a href="./for-physicians">Physician Hub</a>
+        <a href="./refer-a-patient.html">Refer a Patient</a>
+        <a href="./book-consultation">Online Scheduling</a>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Contact</p>
+        <a href="tel:8052302126">(805) 230-2126</a>
+        <a href="https://khannainstitute.com/contact/">Contact Us</a>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Locations</p>
+        <span>Beverly Hills</span>
+        <span>Westlake Village</span>
+      </div>
+    </div>
+    <div class="kh-footer-copy">
+      <p>© 2026 Khanna Vision Institute. All rights reserved.</p>
+      <p><a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Use</a> &nbsp;·&nbsp; <a href="#">HIPAA Notice</a></p>
+    </div>
+  </div>
+</footer>
+
+  <script>
+    (function () {
+    var form   = document.getElementById('rf-form');
+    var msg    = document.getElementById('rf-msg');
+      var submit = document.getElementById('rf-submit');
+      var interp = document.getElementById('interpreterNeeded');
+    var langWr = document.getElementById('rf-lang-wrap');
+
+    function syncInterp() {
+      if (!interp || !langWr) return;
+      langWr.hidden = interp.value !== 'Yes';
+    }
+    if (interp) { interp.addEventListener('change', syncInterp); syncInterp(); }
+
+    function flash(kind, text) {
+        msg.className = 'rf-alert rf-alert--' + kind;
+        msg.textContent = text;
+        msg.style.display = 'block';
+      msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      if (!form) return;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+      var errs = [];
+      if (!form.querySelector('[name="refDoctorName"]').value.trim()) errs.push('Doctor name is required.');
+      if (!form.querySelectorAll('input[name="consultType"]:checked').length) errs.push('Select at least one procedure / pathway.');
+      if (!form.querySelectorAll('input[name="preferredLocation"]:checked').length) errs.push('Select at least one preferred location.');
+      if (!form.querySelector('input[name="preferredPhysician"]:checked')) errs.push('Select a preferred provider.');
+      if (!form.querySelector('input[name="urgentReferral"]:checked')) errs.push('Indicate whether this is an urgent referral.');
+      if (errs.length) { flash('err', errs[0]); return; }
+
+        submit.disabled = true;
+        msg.style.display = 'none';
+
+        fetch('/api/physician-referral/submit', {
+          method: 'POST',
+        body: new URLSearchParams(new FormData(form)),
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          credentials: 'same-origin'
+        })
+      .then(function(r){ return r.text().then(function(t){ var d={}; try{d=JSON.parse(t);}catch(x){} return {ok:r.ok,data:d}; }); })
+      .then(function(res){
+            submit.disabled = false;
+            if (res.ok && res.data && res.data.success) {
+          form.reset(); syncInterp();
+          flash('ok', 'Referral submitted — our team will follow up at the contacts provided.');
+            } else {
+          flash('err', (res.data && res.data.message) || 'Could not submit. Please call (805) 230-2126.');
+            }
+          })
+      .catch(function(){ submit.disabled = false; flash('err', 'Network error. Please call (805) 230-2126.'); });
+      });
+    })();
+  </script>
+</body>
+</html>

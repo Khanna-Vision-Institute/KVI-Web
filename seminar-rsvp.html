@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSVP — Vision Seminar &amp; Webinar August 25th, 2026 | Khanna Vision Institute</title>
+  <meta name="description" content="RSVP for the Khanna Vision Institute Vision Seminar &amp; Webinar on Tuesday, August 25th, 2026 from 4:00–6:00 PM PST — in Westlake Village or online." />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #2a7a8c;
+      --navy2:  #1e6a7a;
+      --mint:   #a8e6cf;
+      --mint-bg:#e4f7ef;
+      --text:   #1a3a42;
+      --muted:  rgba(255,255,255,0.82);
+      --white:  #ffffff;
+      --radius: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #0d3d3a;
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(74,171,138,0.22);
+      padding: 0 40px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    nav .logo-wrap { display: flex; align-items: center; overflow: hidden; height: 80px; }
+    nav img { height: 100px; width: auto; display: block; object-fit: contain; }
+    nav a { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: var(--navy); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.2s; }
+    nav a:hover { opacity: 1; color: #1a8f70; }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 112px 24px 64px;
+      background: linear-gradient(160deg, #0f4a45 0%, #1e6a7a 40%, #0d5c4a 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .page::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168,230,207,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .page::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -80px;
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,106,122,0.35) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .split-shell {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1040px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 28px 80px rgba(0,0,0,0.35);
+    }
+
+    .split-info {
+      background: linear-gradient(165deg, #1a5c56 0%, #1e6a7a 45%, #155045 100%);
+      color: var(--white);
+      padding: 48px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+      border-right: 1px solid rgba(168,230,207,0.2);
+    }
+
+    .split-info .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mint);
+      opacity: 0.95;
+      margin-bottom: 20px;
+    }
+
+    .split-info h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4vw, 46px);
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .split-info .when {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 2.8vw, 30px);
+      font-weight: 600;
+      color: var(--mint);
+      margin-bottom: 24px;
+      line-height: 1.35;
+    }
+
+    .split-info .intro {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-weight: 400;
+    }
+
+    .split-info .intro strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .split-form {
+      background: linear-gradient(180deg, #eefaf4 0%, var(--mint-bg) 50%, #dff5ea 100%);
+      padding: 48px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .form-wrap { text-align: left; }
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--navy2);
+      margin-bottom: 8px;
+    }
+    .field input[type="text"],
+    .field input[type="email"],
+    .field select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(42,122,140,0.35);
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      background: var(--white);
+    }
+
+    .field-label-like {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--navy2);
+      margin-bottom: 8px;
+    }
+
+    .radio-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .radio-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid rgba(42,122,140,0.28);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      background: rgba(255,255,255,0.65);
+    }
+    .radio-opt:hover { border-color: rgba(26,143,112,0.45); background: rgba(255,255,255,0.9); }
+    .radio-opt input { margin-top: 3px; accent-color: #1a8f70; }
+    .radio-opt span { font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.4; }
+
+    .g-recaptcha { display: flex; justify-content: flex-start; margin: 8px 0 4px; transform-origin: 0 0; }
+
+    .msg {
+      display: none;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 18px;
+      text-align: left;
+    }
+    .msg.show { display: block; }
+    .msg.ok { background: rgba(26,143,112,0.15); color: #0d5c47; border: 1px solid rgba(26,143,112,0.35); }
+    .msg.err { background: rgba(186,26,26,0.08); color: #8b1a1a; border: 1px solid rgba(186,26,26,0.25); }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: flex-start;
+      margin-top: 12px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 26px;
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      transition: transform 0.18s, box-shadow 0.18s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #2a7a8c 0%, #1a8f70 100%);
+      color: var(--white);
+    }
+    .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(42,122,140,0.35); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn-secondary {
+      background: rgba(42,122,140,0.14);
+      color: var(--navy2);
+    }
+    .btn-secondary:hover { background: rgba(42,122,140,0.22); }
+
+    footer {
+      background: linear-gradient(135deg, #1e6a7a 0%, #1a8f70 100%);
+      color: rgba(255,255,255,0.65);
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 12.5px;
+    }
+    footer a { color: rgba(255,255,255,0.9); text-decoration: none; }
+
+    @media (max-width: 900px) {
+      .split-shell {
+        grid-template-columns: 1fr;
+        border-radius: 20px;
+      }
+      .split-info {
+        border-right: none;
+        border-bottom: 1px solid rgba(168,230,207,0.25);
+        padding: 40px 28px;
+      }
+      .split-form { padding: 40px 28px; }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .page { padding: 104px 16px 48px; }
+      .g-recaptcha { transform: scale(0.92); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://khannainstitute.com" class="logo-wrap">
+    <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/khannainstitute/Logo+2.png" alt="Khanna Vision Institute" />
+  </a>
+  <a href="https://khannainstitute.com" class="nav-link-text">← Back to Website</a>
+</nav>
+
+<main class="page">
+  <div class="split-shell">
+    <div class="split-info">
+      <p class="badge">Khanna Vision Institute</p>
+      <h1>Vision Seminar &amp; Webinar</h1>
+      <p class="when">Tuesday, August 25th, 2026<br />4:00–6:00 PM PST</p>
+      <p class="intro">
+        Join us in <strong>Westlake Village</strong> or <strong>online</strong> for an evening on LASIK, SMILE, PIE, and more. Submit your RSVP below — you’ll receive Zoom details for the webinar or directions for the in-person seminar in your confirmation email.
+      </p>
+    </div>
+
+    <div class="split-form">
+      <div id="rsvp-msg" class="msg" role="status"></div>
+
+      <form id="seminar-rsvp-form" class="form-wrap" novalidate>
+        <div class="field">
+          <label for="rsvp-first">First name</label>
+          <input id="rsvp-first" name="firstName" type="text" autocomplete="given-name" required />
+        </div>
+        <div class="field">
+          <label for="rsvp-last">Last name</label>
+          <input id="rsvp-last" name="lastName" type="text" autocomplete="family-name" required />
+        </div>
+        <div class="field">
+          <label for="rsvp-email">Email</label>
+          <input id="rsvp-email" name="email" type="email" autocomplete="email" required />
+        </div>
+
+        <div class="field">
+          <div class="field-label-like">How will you attend?</div>
+          <div class="radio-row">
+            <label class="radio-opt">
+              <input type="radio" name="eventType" value="seminar" checked />
+              <span><strong>Seminar</strong> — in person at our Westlake Village location</span>
+            </label>
+            <label class="radio-opt">
+              <input type="radio" name="eventType" value="webinar" />
+              <span><strong>Webinar</strong> — join online (Zoom link emailed after RSVP)</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="rsvp-guests">Number of guests</label>
+          <select id="rsvp-guests" name="numGuests">
+            <option value="0" selected>0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+
+        <div class="g-recaptcha" data-sitekey="6Lf0P20sAAAAAK_xE5Swnx5IaGRNkrEVRtTzZu5r"></div>
+
+        <div class="actions">
+          <button type="submit" class="btn btn-primary" id="rsvp-submit">Submit RSVP</button>
+          <a href="https://khannainstitute.com/" class="btn btn-secondary">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 Khanna Vision Institute · Your vision is our mission · <a href="https://khannainstitute.com">khannainstitute.com</a></p>
+</footer>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+(function () {
+  var form = document.getElementById('seminar-rsvp-form');
+  var msg = document.getElementById('rsvp-msg');
+  var submitBtn = document.getElementById('rsvp-submit');
+  if (!form) return;
+
+  function showMsg(text, ok) {
+    if (!msg) return;
+    msg.textContent = text;
+    msg.className = 'msg show ' + (ok ? 'ok' : 'err');
+  }
+
+  function hideMsg() {
+    if (!msg) return;
+    msg.className = 'msg';
+    msg.textContent = '';
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    hideMsg();
+
+    var first = document.getElementById('rsvp-first').value.trim();
+    var last = document.getElementById('rsvp-last').value.trim();
+    var email = document.getElementById('rsvp-email').value.trim();
+    var eventTypeEl = form.querySelector('input[name="eventType"]:checked');
+    var eventType = eventTypeEl ? eventTypeEl.value : 'seminar';
+    var numGuests = parseInt(document.getElementById('rsvp-guests').value, 10) || 0;
+
+    if (eventType === 'webinar') {
+      numGuests = 0;
+    }
+
+    var token = '';
+    try {
+      token = (window.grecaptcha && window.grecaptcha.getResponse) ? window.grecaptcha.getResponse() : '';
+    } catch (err) { token = ''; }
+
+    if (!token) {
+      showMsg('Please complete the reCAPTCHA.', false);
+      return;
+    }
+
+    submitBtn.disabled = true;
+
+    var url = (typeof window.SEMINAR_RSVP_SUBMIT_URL === 'string' && window.SEMINAR_RSVP_SUBMIT_URL)
+      ? window.SEMINAR_RSVP_SUBMIT_URL
+      : '/api/seminar-rsvp/submit';
+
+    try {
+      var res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({
+          firstName: first,
+          lastName: last,
+          email: email,
+          eventType: eventType,
+          numGuests: numGuests,
+          guests: [],
+          agree: true,
+          captchaToken: token
+        })
+      });
+      var raw = await res.text();
+      var out = null;
+      try { out = raw ? JSON.parse(raw) : null; } catch (p) { out = null; }
+
+      if (out && out.success) {
+        form.reset();
+        try { if (window.grecaptcha && window.grecaptcha.reset) window.grecaptcha.reset(); } catch (x) {}
+        showMsg(out.message || 'Thank you! Your RSVP has been received.', true);
+      } else {
+        showMsg((out && out.message) ? out.message : 'Something went wrong. Please try again or call us.', false);
+      }
+    } catch (err) {
+      showMsg('Network error — please check your connection and try again.', false);
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

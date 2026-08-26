@@ -1,0 +1,189 @@
+<!-- COMPLETE EMERGENCY CARE PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+    :root{
+      --bg:#0B0D12;--text:#E8ECEF;--muted:#A7B0B5;--card:#121520;--border:#232836;
+      --accent:#5EE1E6;--good:#12B76A;--warn:#F79009;--focus:#94A3FF
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1120px;margin:0 auto;padding:24px}
+    header.hero{border:1px solid var(--border);background:linear-gradient(180deg,#111522 0%, #0B0D12 60%);border-radius:24px;padding:28px;margin-bottom:18px}
+    .kicker{color:var(--accent);font-weight:800;letter-spacing:.04em;font-size:12px;text-transform:uppercase}
+    h1{font-size:clamp(28px,4vw,44px);line-height:1.05;margin:10px 0 12px}
+    p.lead{color:var(--muted);font-size:clamp(16px,2.2vw,18px)}
+    .grid{display:grid;gap:20px}
+    .cards{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 18px;border-radius:14px;border:1px solid transparent;font-weight:700}
+    .btn:focus{outline:3px solid var(--focus);outline-offset:2px}
+    .btn-primary{background:var(--accent);color:#0B0D12}
+    .btn-ghost{border-color:var(--border);background:transparent;color:var(--text)}
+    .pill{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted)}
+    .list{margin:10px 0 0;padding:0;list-style:none}
+    .list li{padding-left:22px;position:relative;margin:10px 0}
+    .list li:before{content:"✔";position:absolute;left:0;top:0;color:var(--good);font-weight:700}
+    .list.warn li:before{content:"!";color:var(--warn);font-weight:900}
+    .note{font-size:12px;color:var(--muted)}
+    nav.breadcrumb{font-size:12px;color:var(--muted);margin:6px 0 16px}
+    nav.breadcrumb a{color:var(--muted);text-decoration:underline}
+    .split{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+    @media (max-width:900px){.split{grid-template-columns:1fr}}
+    img{width:100%;height:auto;border-radius:16px;border:1px solid var(--border)}
+    footer{margin-top:32px;color:var(--muted);font-size:12px}
+    .faq{border-top:1px solid var(--border);margin-top:24px}
+    .faq details{border-bottom:1px solid var(--border)}
+    .faq summary{cursor:pointer;padding:16px;font-weight:700}
+    .faq .a{padding:0 16px 16px;color:var(--muted)}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+    .inline-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;background:#0D1A2B;border:1px solid var(--border);border-radius:8px;padding:2px 6px}
+  
+</style>
+
+<%- include('/partials/header') %>
+  <a class="sr-only" href="#main">Skip to content</a>
+  <div class="wrap" id="main">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> › <span>Emergency Care</span>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero split" role="banner" aria-label="Emergency care hero">
+      <div>
+        <div class="kicker">Khanna Vision Institute</div>
+        <h1>Emergency Eye Care & 24/7 Post-Op Support</h1>
+        <p class="lead">If you’re worried, contact us. Same-day urgent visits. After-hours hotline. Telehealth when you’re traveling.</p>
+        <div class="cta-row" role="group" aria-label="Emergency contact options">
+          <!-- Replace tel and hrefs with live endpoints -->
+          <a class="btn btn-primary" href="tel:+10000000000">Call After-Hours Hotline</a>
+          <a class="btn btn-ghost" href="/book">Book Same-Day Visit</a>
+          <a class="btn btn-ghost" href="/telehealth">Start Telehealth</a>
+        </div>
+        <p class="note">If you have a life-threatening emergency or chemical burn, call <span class="kbd">911</span> first.</p>
+      </div>
+      <div>
+        <img src="https://khannainstitute.com/assets/og/emergency-care.jpg" alt="Eye care team providing urgent assistance" loading="lazy" />
+      </div>
+    </header>
+
+    <!-- WHEN TO CALL -->
+    <section class="grid cards" aria-label="When to call">
+      <article class="card">
+        <span class="pill">Call Now</span>
+        <h2>Urgent Symptoms</h2>
+        <ul class="list warn">
+          <li>Severe or increasing eye pain</li>
+          <li>Sudden drop in vision or new blur</li>
+          <li>Flashes, many floaters, curtain-like shadow</li>
+          <li>Chemical exposure or significant trauma</li>
+          <li>Persistent redness with light sensitivity</li>
+        </ul>
+      </article>
+      <article class="card">
+        <span class="pill">Usually Normal</span>
+        <h2>Common Post-Op Sensations</h2>
+        <ul class="list">
+          <li>Mild dryness or gritty feeling</li>
+          <li>Light sensitivity for a short time</li>
+          <li>Halo or glare at night early on</li>
+          <li>Fluctuating vision during healing</li>
+        </ul>
+        <p class="note">If unsure, contact us. We will advise next steps.</p>
+      </article>
+      <article class="card">
+        <span class="pill">Included</span>
+        <h2>What You Get</h2>
+        <ul class="list">
+          <li>24/7 hotline access after procedures</li>
+          <li>Same-day urgent slots on clinic days</li>
+          <li>Tele-triage when you’re out of town</li>
+          <li>Post-op emergency checks typically included*</li>
+        </ul>
+        <p class="note">*External facility fees, meds, or unrelated issues may be separate.</p>
+      </article>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="card" aria-label="How emergency care works">
+      <h2>How It Works</h2>
+      <ol class="list">
+        <li><strong>Contact:</strong> Call the after-hours line or start telehealth.</li>
+        <li><strong>Triage:</strong> A clinician reviews symptoms and timing.</li>
+        <li><strong>Plan:</strong> Home care advice, Rx, or in-person exam same day.</li>
+        <li><strong>Follow-up:</strong> We check in and schedule re-exam as needed.</li>
+      </ol>
+      <div class="inline-cta">
+        <a class="btn btn-primary" href="tel:+10000000000">Call Now</a>
+        <a class="btn btn-ghost" href="/book">Book Urgent Visit</a>
+      </div>
+    </section>
+
+    <!-- INSURANCE / COSTS -->
+    <section class="card" aria-label="Insurance and costs">
+      <h2>Insurance & Costs</h2>
+      <ul class="list">
+        <li>Post-op emergency checks tied to your recent procedure are generally included in your post-op window.</li>
+        <li>Prescription meds, imaging, or outside ER/urgent-care fees are separate.</li>
+        <li>We accept HSA/FSA cards for eligible expenses.</li>
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq" aria-label="Frequently asked questions">
+      <h2>Emergency Care FAQs</h2>
+
+      <details>
+        <summary>Is the hotline truly 24/7?</summary>
+        <div class="a">Yes. After-hours calls are routed to on-call clinical support. If we miss you, we return calls promptly.</div>
+      </details>
+
+      <details>
+        <summary>Can non-patients use this service?</summary>
+        <div class="a">The 24/7 line is for our active or recent post-op patients. New patients can book urgent visits during clinic hours.</div>
+      </details>
+
+      <details>
+        <summary>Do I go to the ER or call you first?</summary>
+        <div class="a">For life-threatening issues or chemical burns, call 911 or go to the nearest ER first. Then notify us.</div>
+      </details>
+
+      <details>
+        <summary>Do you offer video calls?</summary>
+        <div class="a">Yes. Telehealth helps triage fast. Some conditions still require in-person exams to protect vision.</div>
+      </details>
+    </section>
+
+    <!-- CROSS-LINKS -->
+    <section class="grid cards" aria-label="Related pages">
+      <article class="card">
+        <h3>Financing Options</h3>
+        <p class="note">Soft check pre-qual. 0% APR options.</p>
+        <a class="btn btn-ghost" href="/financing">View Financing</a>
+      </article>
+      <article class="card">
+        <h3>Post-Op Guidelines</h3>
+        <p class="note">Simple do’s and don’ts after your procedure.</p>
+        <a class="btn btn-ghost" href="/post-op">Read Post-Op Guide</a>
+      </article>
+      <article class="card">
+        <h3>Book a Consultation</h3>
+        <p class="note">Get a plan tailored to your eyes.</p>
+        <a class="btn btn-ghost" href="/book">Book Now</a>
+      </article>
+    </section>
+
+  </div>
+
+  <!-- Event tracking placeholders -->
+  <script>
+    const track=(e,d={})=>{try{window.dataLayer=window.dataLayer||[];d.event=e;window.dataLayer.push(d);}catch(_){}}; 
+    document.querySelectorAll('a.btn').forEach(a=>a.addEventListener('click',()=>track('emergency_cta_click',{label:a.textContent.trim()})));
+  </script>
+
+  <%- include('/partials/footer') %>

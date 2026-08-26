@@ -1,0 +1,25 @@
+<%# Seminar promo banner below header on SMILE & PIE pages. Wrap in HTML comment to hide for future events. %>
+<div class="seminar-promo-banner" role="banner">
+  <div class="seminar-promo-inner">
+    <span class="seminar-promo-badge">UPCOMING EVENT</span>
+    <p class="seminar-promo-text">Join our <strong>Vision Seminar &amp; Webinar</strong> on <strong>Tuesday, August 25th, 2026</strong>, 4:00–6:00 PM PST — Westlake Village &amp; online — Learn about SMILE, PIE, LASIK, cataract treatments &amp; more from Dr. Khanna.</p>
+    <a href="/seminar-rsvp/" class="seminar-promo-cta">RSVP Now →</a>
+  </div>
+</div>
+<style>
+.seminar-promo-banner {
+  margin-top: 140px;
+  background: linear-gradient(135deg, #1e6a7a 0%, #2a7a8c 50%, #1a8f70 100%);
+  color: #fff;
+  padding: 14px 24px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+.seminar-promo-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.seminar-promo-badge { font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 4px; }
+.seminar-promo-text { margin: 0; font-size: 14px; line-height: 1.5; flex: 1; min-width: 200px; }
+.seminar-promo-text strong { color: #a8edcf; }
+.seminar-promo-cta { display: inline-block; background: #fff; color: #1e6a7a; font-weight: 600; padding: 8px 18px; border-radius: 8px; text-decoration: none; font-size: 13px; white-space: nowrap; transition: transform 0.2s, box-shadow 0.2s; }
+.seminar-promo-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+@media (max-width: 600px) { .seminar-promo-inner { flex-direction: column; gap: 10px; } .seminar-promo-text { text-align: center; } }
+</style>

@@ -1,0 +1,483 @@
+<!-- COMPLETE VIRTUAL CONSULTATION PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 16px 32px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+        
+        .main-content {
+            background: white;
+            padding: 80px 0;
+        }
+        
+        .section {
+            margin-bottom: 80px;
+        }
+        
+        .section h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .card h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .card p {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        .virtual-consult {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .virtual-consult h2 {
+            color: white;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .step {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .step-number {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        .step h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .step p {
+            opacity: 0.9;
+        }
+        
+        .testimonials {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+        
+        .testimonial {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .what-to-expect {
+            padding: 80px 0;
+        }
+        
+        .expectations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .expectation {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .expectation h3 {
+            color: #d63031;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .expectation p {
+            color: #2c3e50;
+            line-height: 1.7;
+        }
+        
+        .faq {
+            background: white;
+            padding: 80px 0;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 25px 0;
+        }
+        
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .faq-answer {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        .final-cta {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .final-cta h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+        
+        .locations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .location {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .location h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .location p {
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section h2 {
+                font-size: 2rem;
+            }
+        }
+    
+</style>
+
+<%- include('/partials/header') %>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>See Life Differently. Literally.</h1>
+            <p>Your journey to perfect vision starts with a conversation (no awkward small talk required)</p>
+            <a href="#virtual-consult" class="cta-button">Start Your Virtual Consult</a>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="main-content">
+        <div class="container">
+            <div class="section">
+                <h2>Why We're Not Your Parents' Eye Clinic</h2>
+                <div class="cards">
+                    <div class="card">
+                        <span class="card-icon">💻</span>
+                        <h3>Start From Your Couch</h3>
+                        <p>Virtual consults mean you can meet Dr. Khanna from literally anywhere. Your dorm room, your apartment, even that coffee shop you're always at. We get it—you're busy.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">🎯</span>
+                        <h3>Cutting-Edge Tech</h3>
+                        <p>We're talking LASIK, SMILE, EVO ICL, and presbyopic solutions. The latest tech, not whatever was popular when your parents got their procedures done in the 90s.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">✨</span>
+                        <h3>Straight Talk, No Cap</h3>
+                        <p>We explain everything in actual English. No confusing medical jargon unless you want it. You'll know exactly what's happening and why.</p>
+                    </div>
+                    <div class="card">
+                        <span class="card-icon">⚡</span>
+                        <h3>Fast AF Process</h3>
+                        <p>From first virtual consult to seeing 20/20, we keep things moving. Most people go from consultation to procedure in just a few weeks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Virtual Consult Process -->
+    <section class="virtual-consult" id="virtual-consult">
+        <div class="container">
+            <h2>Your Virtual Consult: What Actually Happens</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Book Online</h3>
+                    <p>Pick a time that works for you. We've got evening and weekend slots because we know 9-5 isn't everyone's vibe.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Fill Out Quick Forms</h3>
+                    <p>Takes like 5 minutes. Basic health stuff, what you're hoping to achieve, your vision goals. All secure and HIPAA-compliant.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Jump on Video</h3>
+                    <p>Meet Dr. Khanna via video chat. He'll walk you through what's possible, answer all your questions, and give you honest feedback.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Get Your Game Plan</h3>
+                    <p>If you're a candidate, we'll map out the next steps. If not, we'll tell you why and what other options might work better.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What to Expect on First Visit -->
+    <section class="what-to-expect">
+        <div class="container">
+            <h2>Your First IRL Visit: The Real Deal</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: #666; margin-bottom: 50px;">
+                After your virtual consult, here's what going down when you actually come see us
+            </p>
+            <div class="expectations">
+                <div class="expectation">
+                    <h3>🏢 The Space</h3>
+                    <p>Modern, clean, and nothing like those outdated clinics from the 2000s. We've got locations in Beverly Hills and Westlake Village—choose what's easiest for you.</p>
+                </div>
+                <div class="expectation">
+                    <h3>⏱️ Time Commitment</h3>
+                    <p>Plan for about 90-120 minutes for your comprehensive eye exam. We're thorough but efficient. Bring your phone—our WiFi is solid.</p>
+                </div>
+                <div class="expectation">
+                    <h3>🔬 The Testing</h3>
+                    <p>We'll do a full workup: measurements, corneal mapping, refraction tests—basically we're getting every data point about your eyes. It's painless, just bright lights and some high-tech equipment.</p>
+                </div>
+                <div class="expectation">
+                    <h3>💬 The Conversation</h3>
+                    <p>You'll meet with Dr. Khanna again. He'll review your results, show you actual images of YOUR eyes (pretty wild), and customize a treatment plan specifically for you.</p>
+                </div>
+                <div class="expectation">
+                    <h3>💰 Money Talk</h3>
+                    <p>We break down all the costs—no hidden fees or surprise bills. We also have financing options because we know student loans are already a thing.</p>
+                </div>
+                <div class="expectation">
+                    <h3>📱 What to Bring</h3>
+                    <p>ID, insurance card (if you have vision insurance), current glasses or contacts, and sunglasses for after (your eyes will be dilated).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>What People Actually Say</h2>
+            <div class="testimonial">
+                <p class="testimonial-text">"I was scared AF about LASIK but Dr. Khanna explained everything so clearly in the virtual consult. The whole process was way easier than I thought. Now I wake up and can just... see? Life changing."</p>
+                <p class="testimonial-author">— Sarah, 24, Content Creator</p>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial-text">"Best decision I made this year. No more dealing with contacts during long gaming sessions or worrying about glasses at festivals. The virtual consult made it so easy to get started."</p>
+                <p class="testimonial-author">— Marcus, 26, Software Engineer</p>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial-text">"I appreciated that Dr. Khanna didn't try to upsell me. He was honest about what would work best for my eyes specifically. The first visit was super thorough and I felt confident moving forward."</p>
+                <p class="testimonial-author">— Jenna, 23, Graduate Student</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container">
+            <h2>Questions You're Probably Thinking</h2>
+            <div class="faq-item">
+                <div class="faq-question">Is the virtual consult actually useful or just a sales pitch?</div>
+                <div class="faq-answer">It's legit. Dr. Khanna will tell you if you're NOT a good candidate too. We'd rather be honest upfront than waste your time. You'll get real medical advice, not a hard sell.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Do I have to pay for the virtual consult?</div>
+                <div class="faq-answer">Nope, it's completely free. No credit card needed to book. We just want to meet you and see if we can help.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How much does this all cost?</div>
+                <div class="faq-answer">Depends on the procedure, but we'll break it all down during your consult. LASIK typically ranges from $2,000-$3,500 per eye. We offer financing options and accept HSA/FSA.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Am I too young for vision correction?</div>
+                <div class="faq-answer">Generally you need to be 18+ with a stable prescription for at least a year. If you're younger or your prescription is still changing, we'll let you know when the time is right.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What if I'm scared of surgery?</div>
+                <div class="faq-answer">Valid. Most people are nervous at first. The procedures are quick (like 10-15 minutes per eye), you're awake but numbed, and you'll see results immediately. We'll walk you through every single step so there are no surprises.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Can I bring someone to my first visit?</div>
+                <div class="faq-answer">Absolutely! Bring your mom, your best friend, your partner—whoever makes you feel comfortable. Just note that since we dilate your eyes, you'll need someone to drive you home anyway.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Ready to Ditch the Glasses?</h2>
+            <p>Let's start with a quick virtual chat. Zero pressure, all answers.</p>
+            <a href="https://khannavision.com/contact" class="cta-button" style="background: white; color: #f5576c;">Book Your Free Virtual Consult</a>
+            
+            <div class="locations">
+                <div class="location">
+                    <h3>📍 Beverly Hills</h3>
+                    <p>9100 Wilshire Blvd, Suite 265E<br>Beverly Hills, CA 90212</p>
+                </div>
+                <div class="location">
+                    <h3>📍 Westlake Village</h3>
+                    <p>31824 Village Center Rd, Suite F<br>Westlake Village, CA 91361</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+    <%- include('/partials/footer') %>

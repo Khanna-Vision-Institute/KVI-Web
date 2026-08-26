@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procedure Guides — Vision Correction &amp; Eye Care | Khanna Vision Institute</title>
+    <meta name="description" content="Browse procedure guides for SMILE, LASIK, EVO ICL, PIE, cataract surgery, keratoconus treatments, and more—plus expert articles from Khanna Vision Institute.">
+    <link rel="canonical" href="https://khannainstitute.com/blog/procedure-guides/">
+    <meta property="og:title" content="Procedure Guides | Khanna Vision Institute">
+    <meta property="og:description" content="Trusted guides to laser vision correction, lens implants, and specialty eye care—with links to in-depth articles.">
+    <meta property="og:url" content="https://khannainstitute.com/blog/procedure-guides/">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Procedure Guides",
+          "description": "Hub for vision correction and eye care procedure guides and related educational articles.",
+          "url": "https://khannainstitute.com/blog/procedure-guides/"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://khannainstitute.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog & Education", "item": "https://khannainstitute.com/blog/latest/" },
+            { "@type": "ListItem", "position": 3, "name": "Procedure Guides", "item": "https://khannainstitute.com/blog/procedure-guides/" }
+          ]
+        }
+      ]
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --guides-top-pad: calc(env(safe-area-inset-top, 0px) + 9.75rem);
+            --navy: #1e3c72;
+            --navy-mid: #2a5298;
+            --text: #2c3e50;
+            --muted: #555;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            line-height: 1.75;
+            color: var(--text);
+            background: #f8f9fa;
+        }
+
+        .guides-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--guides-top-pad) 20px 80px;
+        }
+
+        .page-hero {
+            text-align: center;
+            margin-bottom: 48px;
+            padding: 56px 36px;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+            border-radius: 16px;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" opacity="0.1"><circle cx="200" cy="100" r="80" fill="white"/><circle cx="800" cy="200" r="120" fill="white"/><circle cx="1000" cy="300" r="60" fill="white"/></svg>');
+            pointer-events: none;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2rem, 4vw, 3.25rem);
+            font-weight: 700;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .page-hero p {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            margin: 0 auto 20px;
+        }
+
+        .hero-actions {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 8px;
+        }
+
+        .hero-actions a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            border-radius: 999px;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .hero-actions a:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero-primary {
+            background: #fff;
+            color: var(--navy);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section h2 {
+            font-size: 1.65rem;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--navy-mid);
+        }
+
+        .section > .section-intro {
+            color: var(--muted);
+            font-size: 1.05rem;
+            margin-bottom: 24px;
+            max-width: 800px;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .guide-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            border: 1px solid rgba(30, 60, 114, 0.08);
+            transition: box-shadow 0.25s, transform 0.25s;
+        }
+
+        .guide-card:hover {
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .guide-card h3 {
+            font-size: 1.35rem;
+            color: #1a1a1a;
+            line-height: 1.25;
+        }
+
+        .guide-card p {
+            color: var(--muted);
+            font-size: 0.98rem;
+            flex-grow: 1;
+        }
+
+        .guide-card .proc-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--navy);
+            text-decoration: none;
+        }
+
+        .guide-card .proc-link::after {
+            content: '→';
+            transition: transform 0.2s;
+        }
+
+        .guide-card .proc-link:hover::after {
+            transform: translateX(4px);
+        }
+
+        .related-label {
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        .related-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .related-list a {
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 0.9rem;
+            color: var(--navy-mid);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .related-list a:hover {
+            color: var(--navy);
+        }
+
+        .articles-panel {
+            background: #fff;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+            border: 1px solid rgba(30, 60, 114, 0.08);
+        }
+
+        .articles-panel h2 {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 16px;
+        }
+
+        .articles-panel ul {
+            list-style: none;
+            display: grid;
+            gap: 12px;
+        }
+
+        @media (min-width: 768px) {
+            .articles-panel ul {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .articles-panel li a {
+            display: block;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 0.95rem;
+            color: var(--navy);
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .articles-panel li a:hover {
+            color: var(--navy-mid);
+        }
+
+        @media (max-width: 1024px) {
+            :root {
+                --guides-top-pad: calc(env(safe-area-inset-top, 0px) + 8.75rem);
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --guides-top-pad: calc(env(safe-area-inset-top, 0px) + 9.5rem);
+            }
+
+            .guides-wrap {
+                padding: var(--guides-top-pad) 15px 60px;
+            }
+
+            .page-hero {
+                padding: 40px 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include('/partials/header') %>
+
+    <div class="guides-wrap">
+        <header class="page-hero">
+            <h1>Procedure guides</h1>
+            <p>Clear, specialist-written starting points for the treatments we offer—linking to full procedure pages and deeper reads from our blog.</p>
+            <div class="hero-actions">
+                <a class="hero-primary" href="/blog/latest/">Latest articles</a>
+                <a class="hero-secondary" href="/book-consultation/">Book a consultation</a>
+            </div>
+        </header>
+
+        <section class="section" aria-labelledby="laser-heading">
+            <h2 id="laser-heading">Laser vision correction</h2>
+            <p class="section-intro">Flapless SMILE, LASIK, surface treatments, and how options compare when you want to reduce or end dependence on glasses and contacts.</p>
+            <div class="guide-grid">
+                <article class="guide-card">
+                    <h3>SMILE laser</h3>
+                    <p>Minimally invasive laser correction for nearsightedness and astigmatism, often with a gentle recovery profile.</p>
+                    <a class="proc-link" href="/procedures/laser-vision/smile-laser/">SMILE procedure overview</a>
+                    <p class="related-label">Related reading</p>
+                    <ul class="related-list">
+                        <li><a href="/2022/07/smile-laser-eye-surgery">SMILE laser eye surgery</a></li>
+                        <li><a href="/2024/04/the-latest-fda-approved-vision-correction-smile">The latest FDA-approved vision correction: SMILE</a></li>
+                        <li><a href="/2024/04/see-the-world-differently-with-smile">See the world differently with SMILE</a></li>
+                    </ul>
+                </article>
+                <article class="guide-card">
+                    <h3>LASIK</h3>
+                    <p>Proven laser vision correction for many prescriptions; learn how candidacy and recovery typically work.</p>
+                    <a class="proc-link" href="/procedures/laser-vision/lasik/">LASIK procedure overview</a>
+                    <p class="related-label">Related reading</p>
+                    <ul class="related-list">
+                        <li><a href="/2024/02/is-lasik-the-right-solution-for-nearsightedness">Is LASIK the right solution for nearsightedness?</a></li>
+                        <li><a href="/2021/07/magnificent-six-leading-advantages-of-lasik-eye-surgery">Six leading advantages of LASIK</a></li>
+                        <li><a href="/2023/05/studies-show-lasik-better-than-contact-lens">Studies show LASIK vs. contact lenses</a></li>
+                    </ul>
+                </article>
+                <article class="guide-card">
+                    <h3>SuperLASIK &amp; ASA (surface)</h3>
+                    <p>Surface-based options when corneal anatomy or lifestyle makes flap-based LASIK less ideal.</p>
+                    <a class="proc-link" href="/procedures/laser-vision/superlasik/">SuperLASIK overview</a>
+                    <p class="related-label">Also see</p>
+                    <ul class="related-list">
+                        <li><a href="/procedures/laser-vision/asa/">Advanced surface ablation (ASA / LASEK)</a></li>
+                    </ul>
+                </article>
+                <article class="guide-card">
+                    <h3>Compare options</h3>
+                    <p>Side-by-side context for SMILE, LASIK, ICL, and presbyopia-correcting paths so you can ask better questions at consultation.</p>
+                    <a class="proc-link" href="/procedures/laser-vision/compare/">Compare all laser options</a>
+                    <p class="related-label">Related reading</p>
+                    <ul class="related-list">
+                        <li><a href="/2023/02/can-lasik-fix-presbyopia-sure-here-are-5-facts">Can LASIK fix presbyopia? Five facts</a></li>
+                        <li><a href="/2024/02/evo-icl-vs-lasik-pros-and-cons-of-each-procedure">EVO ICL vs LASIK: pros and cons</a></li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="lens-heading">
+            <h2 id="lens-heading">Lens-based solutions</h2>
+            <p class="section-intro">Implantable lenses and lens replacement approaches for higher prescriptions, presbyopia, and cataract-level changes—not everyone is a laser candidate.</p>
+            <div class="guide-grid">
+                <article class="guide-card">
+                    <h3>EVO ICL</h3>
+                    <p>A reversible, additive lens for many patients with nearsightedness and astigmatism who want excellent quality of vision.</p>
+                    <a class="proc-link" href="/procedures/lens-solutions/evo-icl/">EVO ICL overview</a>
+                    <p class="related-label">Related reading</p>
+                    <ul class="related-list">
+                        <li><a href="/2024/02/evo-icl-vs-lasik-pros-and-cons-of-each-procedure">EVO ICL vs LASIK: pros and cons</a></li>
+                    </ul>
+                </article>
+                <article class="guide-card">
+                    <h3>PIE (presbyopic implants)</h3>
+                    <p>Modern lens strategies to restore range of vision for patients dealing with presbyopia and cataract changes.</p>
+                    <a class="proc-link" href="/procedures/lens-solutions/pie/">PIE overview</a>
+                    <p class="related-label">Related reading</p>
+                    <ul class="related-list">
+                        <li><a href="/2020/11/in-7-minutes-get-young-again-new-eyes-with-pie">New eyes with PIE—in minutes</a></li>
+                    </ul>
+                </article>
+                <article class="guide-card">
+                    <h3>Robotic laser cataract surgery</h3>
+                    <p>Precision lens surgery planning and execution when it is time to address the cataract and upgrade vision.</p>
+                    <a class="proc-link" href="/procedures/lens-solutions/robotic-cataract-surgery/">Robotic cataract overview</a>
+                    <p class="related-label">Related reading</p>
+                    <ul class="related-list">
+                        <li><a href="/2024/10/guide-to-common-eye-surgeries-for-seniors">Guide to common eye surgeries for seniors</a></li>
+                    </ul>
+                </article>
+                <article class="guide-card">
+                    <h3>Which lens is right?</h3>
+                    <p>How we match lens technology to your goals, lifestyle, and eye measurements.</p>
+                    <a class="proc-link" href="/procedures/lens-solutions/which-lens-is-right/">Which lens is right for me?</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="specialty-heading">
+            <h2 id="specialty-heading">Specialty eye care</h2>
+            <p class="section-intro">Focused treatments for keratoconus, ocular surface disease, growths, and lid problems—beyond routine laser vision correction.</p>
+            <div class="guide-grid">
+                <article class="guide-card">
+                    <h3>CXL for keratoconus</h3>
+                    <p>Corneal cross-linking to strengthen the cornea and reduce progressive thinning in keratoconus.</p>
+                    <a class="proc-link" href="/procedures/specialty-treatments/cxl-keratoconus/">CXL overview</a>
+                </article>
+                <article class="guide-card">
+                    <h3>CTAK for keratoconus</h3>
+                    <p>Advanced keratoconus care pathway when topography and progression call for a tailored surgical plan.</p>
+                    <a class="proc-link" href="/procedures/specialty-treatments/ctak-keratoconus/">CTAK overview</a>
+                </article>
+                <article class="guide-card">
+                    <h3>Pterygium surgery</h3>
+                    <p>Removal and surface restoration when a growth affects comfort, cosmesis, or vision.</p>
+                    <a class="proc-link" href="/procedures/specialty-treatments/pterygium-surgery/">Pterygium overview</a>
+                </article>
+                <article class="guide-card">
+                    <h3>Dry eye solutions</h3>
+                    <p>Diagnostics and treatments that improve comfort and stable vision—especially before surgery.</p>
+                    <a class="proc-link" href="/procedures/specialty-treatments/dry-eye-solutions/">Dry eye overview</a>
+                </article>
+                <article class="guide-card">
+                    <h3>Chalazion treatment</h3>
+                    <p>When a stubborn lid bump needs more than warm compresses, we offer advanced in-office options.</p>
+                    <a class="proc-link" href="/procedures/specialty-treatments/chalazion-treatment/">Chalazion treatment overview</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="articles-panel" aria-labelledby="more-articles-heading">
+            <h2 id="more-articles-heading">More educational articles</h2>
+            <p class="section-intro" style="margin-bottom: 8px;">Popular reads from our blog—presbyopia, lens technology, and everyday eye care.</p>
+            <ul>
+                <li><a href="/2023/05/the-evolution-and-benefits-of-the-ic-8-small-aperture-intraocular-lens">IC-8 small aperture IOL: evolution and benefits</a></li>
+                <li><a href="/2020/08/3-innovative-eye-surgeries-fix-astigmatism-enhance-vision">Three surgeries that address astigmatism</a></li>
+                <li><a href="/2022/06/bakersfield-presbyopia-treatment-for-a-hairstylist">Presbyopia treatment patient story</a></li>
+                <li><a href="/2023/01/how-to-put-in-eye-drops-or-ointment">How to put in eye drops or ointment</a></li>
+                <li><a href="/2021/07/breakthrough-amblyopia-lazy-eye-treatment-for-adults">Amblyopia (lazy eye) treatment for adults</a></li>
+                <li><a href="/2023/06/ophthalmology-understanding-treating-medical-conditions-of-the-human-eye">Ophthalmology: understanding the medical eye</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <%- include('/partials/footer') %>
+</body>
+</html>

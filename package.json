@@ -1,0 +1,49 @@
+{
+  "name": "kvi-home",
+  "version": "1.0.0",
+  "description": "Khanna Vision Institute website prototype",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "setup": "node setup.js",
+    "test-zoho": "node test-zoho.js",
+    "monitor": "node kvi-monitoring-backend.js",
+    "monitor:dev": "nodemon kvi-monitoring-backend.js",
+    "deploy:pie": "bash scripts/deploy-pie-page.sh",
+    "deploy:smile-landing-h1": "bash scripts/deploy-smile-landing-dynamic-h1.sh",
+    "build-epioxa": "node scripts/build-epioxa-pages.mjs",
+    "sync:physician-portal": "node scripts/sync-physician-portal.js",
+    "build:referral-offices": "node scripts/build-referral-offices-manifest.js",
+    "import:od-master": "node scripts/import-od-master-to-referral-offices.js",
+    "sync:heritage-bitrix": "node scripts/sync-heritage-from-bitrix.js",
+    "sync:heritage-bitrix:probe": "node scripts/sync-heritage-from-bitrix.js --probe",
+    "referral:nginx-snippet": "node scripts/print-referral-clinic-nginx-snippet.js",
+    "verify:pie-autoresponder": "node scripts/verify-pie-autoresponder.js",
+    "clear:pie-autoresponder-queue": "node scripts/clear-pie-autoresponder-queue.js --apply",
+    "build:vapi-web": "esbuild node_modules/@vapi-ai/web/dist/vapi.js --bundle --format=iife --global-name=VapiWeb --platform=browser --outfile=public/js/vendor/vapi-web.bundle.js",
+    "provision:vapi-web": "node scripts/provision-vapi-web-assistants.js",
+    "provision:vapi-web:apply": "node scripts/provision-vapi-web-assistants.js --apply"
+  },
+  "dependencies": {
+    "@slack/web-api": "^7.12.0",
+    "@vapi-ai/web": "^2.5.2",
+    "axios": "^1.13.2",
+    "cheerio": "^1.1.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "http-proxy-middleware": "^3.0.3",
+    "mongodb": "^7.0.0",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^4.2.1",
+    "nodemailer": "^6.9.15",
+    "pg": "^8.11.3",
+    "twilio": "^4.19.0",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

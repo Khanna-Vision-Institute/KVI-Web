@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KVI Complete Automation Dashboard - All Cron Jobs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-name {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .logout-btn {
+            padding: 8px 16px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #cc0000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo h1 {
+            color: #0066cc;
+            font-size: 28px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0066cc;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .frequency-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .frequency-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .frequency-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .frequency-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .immediate { background: #ff4444; color: white; }
+        .hourly { background: #ff8800; color: white; }
+        .daily { background: #00aa00; color: white; }
+        .weekly { background: #0066cc; color: white; }
+        .monthly { background: #8833ff; color: white; }
+
+        .cron-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .cron-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cron-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .cron-card.running {
+            border-color: #00aa00;
+            background: linear-gradient(135deg, #f0fff4 0%, #ffffff 100%);
+        }
+
+        .cron-card.error {
+            border-color: #ff4444;
+            background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+        }
+
+        .cron-status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .status-active { background: #00aa00; }
+        .status-pending { background: #ffaa00; }
+        .status-error { background: #ff4444; }
+        .status-disabled { background: #999; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0,170,0,0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0,170,0,0); }
+            100% { box-shadow: 0 0 0 0 rgba(0,170,0,0); }
+        }
+
+        .cron-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .cron-description {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .cron-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        .cron-schedule {
+            font-size: 11px;
+            color: #999;
+            font-family: monospace;
+        }
+
+        .cron-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .action-btn {
+            padding: 4px 8px;
+            border: none;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .run-btn {
+            background: #0066cc;
+            color: white;
+        }
+
+        .run-btn:hover {
+            background: #0052a3;
+        }
+
+        .logs-btn {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .logs-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .alert-banner {
+            background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .alert-icon {
+            font-size: 24px;
+        }
+
+        .alert-content {
+            flex: 1;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .alert-message {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+
+        .control-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .control-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .pause-all {
+            background: #ff8800;
+            color: white;
+        }
+
+        .resume-all {
+            background: #00aa00;
+            color: white;
+        }
+
+        .test-all {
+            background: #0066cc;
+            color: white;
+        }
+
+        .control-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .system-health {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .health-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .health-value {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .health-label {
+            color: #666;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .success { color: #00aa00; }
+        .warning { color: #ff8800; }
+        .danger { color: #ff4444; }
+
+        .connection-status {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .connection-status.connected {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .connection-status.disconnected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        @media (max-width: 768px) {
+            .cron-grid {
+                grid-template-columns: 1fr;
+            }
+            .system-health {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .control-panel {
+                flex-direction: column;
+            }
+            .control-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <h1>🏥 KVI Automation Center</h1>
+            </div>
+            <div style="display: flex; align-items: center; gap: 30px;">
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="totalJobs">42</div>
+                    <div class="stat-label">Total Jobs</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="activeJobs">0</div>
+                    <div class="stat-label">Active</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="lastRun">--</div>
+                    <div class="stat-label">Last Run</div>
+                </div>
+                </div>
+                <div class="user-info">
+                    <span class="user-name" id="userName">Loading...</span>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Connection Status -->
+        <div class="connection-status disconnected" id="connectionStatus">
+            ⚠️ Not connected to backend. Please refresh the page or check server status.
+        </div>
+
+        <!-- Alert Banner (shows only when critical) -->
+        <div class="alert-banner" id="alertBanner" style="display: none;">
+            <div class="alert-icon">⚠️</div>
+            <div class="alert-content">
+                <div class="alert-title">Critical Alert</div>
+                <div class="alert-message" id="alertMessage">No alerts</div>
+            </div>
+        </div>
+
+        <!-- System Health Overview -->
+        <div class="system-health">
+            <div class="health-card">
+                <div class="health-label">System Uptime</div>
+                <div class="health-value success" id="uptime">--</div>
+            </div>
+            <div class="health-card">
+                <div class="health-label">Success Rate</div>
+                <div class="health-value success" id="successRate">--</div>
+            </div>
+            <div class="health-card">
+                <div class="health-label">Failed Jobs</div>
+                <div class="health-value warning" id="failedJobs">0</div>
+            </div>
+            <div class="health-card">
+                <div class="health-label">Storage Mode</div>
+                <div class="health-value" id="storageMode">--</div>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <button class="control-btn pause-all" onclick="pauseAll()">⏸ Pause All</button>
+            <button class="control-btn resume-all" onclick="resumeAll()">▶️ Resume All</button>
+            <button class="control-btn test-all" onclick="testAll()">🧪 Test All Systems</button>
+            <div style="margin-left: auto; display: flex; gap: 10px;">
+                <label style="display: flex; align-items: center; gap: 5px;">
+                    <input type="checkbox" id="autoRefresh" checked>
+                    <span>Auto-refresh (30s)</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- IMMEDIATE/REAL-TIME CRONS -->
+        <div class="frequency-section">
+            <div class="frequency-header">
+                <div class="frequency-title">
+                    <span class="frequency-badge immediate">Immediate</span>
+                    <span>Real-time & Critical Monitoring</span>
+                </div>
+            </div>
+            <div class="cron-grid" id="immediateJobs">
+                <!-- Jobs will be loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- HOURLY CRONS -->
+        <div class="frequency-section">
+            <div class="frequency-header">
+                <div class="frequency-title">
+                    <span class="frequency-badge hourly">Hourly</span>
+                    <span>Performance & Content Monitoring</span>
+                </div>
+            </div>
+            <div class="cron-grid" id="hourlyJobs">
+                <!-- Jobs will be loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- DAILY CRONS -->
+        <div class="frequency-section">
+            <div class="frequency-header">
+                <div class="frequency-title">
+                    <span class="frequency-badge daily">Daily</span>
+                    <span>SEO & Content Optimization</span>
+                </div>
+            </div>
+            <div class="cron-grid" id="dailyJobs">
+                <!-- Jobs will be loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- WEEKLY CRONS -->
+        <div class="frequency-section">
+            <div class="frequency-header">
+                <div class="frequency-title">
+                    <span class="frequency-badge weekly">Weekly</span>
+                    <span>Analytics & Reporting</span>
+                </div>
+            </div>
+            <div class="cron-grid" id="weeklyJobs">
+                <!-- Jobs will be loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- MONTHLY CRONS -->
+        <div class="frequency-section">
+            <div class="frequency-header">
+                <div class="frequency-title">
+                    <span class="frequency-badge monthly">Monthly</span>
+                    <span>Strategic Analysis & Optimization</span>
+                </div>
+            </div>
+            <div class="cron-grid" id="monthlyJobs">
+                <!-- Jobs will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = window.location.origin + '/api';
+        
+        // Check authentication on page load
+        async function checkAuth() {
+            try {
+                console.log('Checking authentication...');
+                console.log('Current cookies:', document.cookie);
+                console.log('API Base:', API_BASE);
+                
+                const response = await fetch(`${API_BASE}/auth/status`, {
+                    method: 'GET',
+                    credentials: 'include', // CRITICAL: Must include credentials
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    cache: 'no-cache'
+                });
+                
+                console.log('Auth check response status:', response.status);
+                console.log('Auth check response headers:', [...response.headers.entries()]);
+                
+                if (!response.ok) {
+                    console.error('Auth check failed with status:', response.status);
+                    if (response.status === 401) {
+                        console.error('Not authenticated (401), redirecting to login');
+                        console.error('Cookies available:', document.cookie);
+                        window.location.replace('/login');
+                        return false;
+                    }
+                }
+                
+                const data = await response.json();
+                console.log('Auth status data:', data);
+                
+                if (!data.authenticated) {
+                    // Not authenticated - redirect to login
+                    console.error('Not authenticated, redirecting to login');
+                    console.error('Cookies available:', document.cookie);
+                    window.location.replace('/login');
+                    return false;
+                }
+                
+                console.log('✅ Authentication verified, user:', data.username);
+                
+                // Update user info
+                if (data.username) {
+                    const userNameEl = document.getElementById('userName');
+                    if (userNameEl) {
+                        userNameEl.textContent = `Logged in as: ${data.username}`;
+                    }
+                }
+                
+                return true;
+            } catch (error) {
+                console.error('Auth check failed:', error);
+                // On network errors, wait a bit and retry once
+                console.log('Retrying auth check in 1 second...');
+                setTimeout(async () => {
+                    try {
+                        const retryResponse = await fetch(`${API_BASE}/auth/status`, {
+                            credentials: 'include'
+                        });
+                        const retryData = await retryResponse.json();
+                        if (!retryData.authenticated) {
+                            window.location.replace('/login');
+                        }
+                    } catch (retryError) {
+                        console.error('Retry also failed:', retryError);
+                        // Don't redirect on persistent network errors
+                    }
+                }, 1000);
+                return false;
+            }
+        }
+        
+        // Logout function
+        async function logout() {
+            try {
+                await fetch(`${API_BASE}/logout`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                window.location.href = '/login';
+            } catch (error) {
+                console.error('Logout failed:', error);
+                window.location.href = '/login';
+            }
+        }
+        
+        // Initialize dashboard when DOM is ready
+        async function initializeDashboard() {
+            console.log('🚀 Initializing dashboard...');
+            const isAuthenticated = await checkAuth();
+            console.log('✅ Auth check result:', isAuthenticated);
+            
+            if (!isAuthenticated) {
+                console.log('❌ Not authenticated, stopping initialization');
+                return;
+            }
+            
+            console.log('📊 Fetching initial data...');
+            try {
+                console.log('📥 Calling fetchJobStatuses...');
+                await fetchJobStatuses();
+                console.log('💚 Calling fetchSystemHealth...');
+                await fetchSystemHealth();
+                
+                if (autoRefreshCheckbox && autoRefreshCheckbox.checked) {
+                    console.log('🔄 Starting auto-refresh...');
+                    startAutoRefresh();
+                }
+                console.log('✅ Dashboard initialized successfully');
+            } catch (error) {
+                console.error('❌ Failed to initialize dashboard:', error);
+                updateConnectionStatus(false);
+            }
+        }
+        
+        // OLD CODE - REMOVED
+        // Check auth before proceeding
+        // checkAuth().then(authenticated => {
+        //     if (!authenticated) {
+        //         return; // Will redirect
+        //     }
+        //     
+        //     // Continue with dashboard initialization
+        //     initializeDashboard();
+        // });
+        
+        // Job definitions
+        const jobDefinitions = {
+            immediate: [
+                { name: '404 Error Detection', schedule: '*/5 * * * *', icon: '🚨' },
+                { name: 'Phone Number Validator', schedule: '*/15 * * * *', icon: '📞' },
+                { name: 'Form Submission Monitor', schedule: '*/10 * * * *', icon: '📝' },
+                { name: 'SSL Certificate Check', schedule: '*/30 * * * *', icon: '🔒' },
+                { name: 'Failed Login Monitor', schedule: '* * * * *', icon: '🚫' },
+                { name: 'API Rate Limit Monitor', schedule: '*/5 * * * *', icon: '🔗' }
+            ],
+            hourly: [
+                { name: 'Core Web Vitals', schedule: '0 * * * *', icon: '⚡' },
+                { name: 'Dead Link Scanner', schedule: '30 * * * *', icon: '🔍' },
+                { name: 'Conversion Funnel Analysis', schedule: '15 * * * *', icon: '📊' },
+                { name: 'Broken Image Detector', schedule: '45 * * * *', icon: '🖼️' },
+                { name: 'Incremental Backups', schedule: '0 * * * *', icon: '💾' },
+                { name: 'Abandoned Cart Recovery', schedule: '30 * * * *', icon: '📧' }
+            ],
+            daily: [
+                { name: 'Full Database Backup', schedule: '0 3 * * *', icon: '🗄️' },
+                { name: 'Sitemap Generation', schedule: '0 4 * * *', icon: '🗺️' },
+                { name: 'Schema Markup Validator', schedule: '0 5 * * *', icon: '📋' },
+                { name: 'Duplicate Content Scanner', schedule: '0 6 * * *', icon: '🔄' },
+                { name: 'GMB Ranking Check', schedule: '0 7 * * *', icon: '📈' },
+                { name: 'Internal Linking AI', schedule: '0 8 * * *', icon: '🔗' },
+                { name: 'Review Request Automation', schedule: '0 10 * * *', icon: '⭐' },
+                { name: 'Appointment Reminders', schedule: '0 9,15 * * *', icon: '📅' },
+                { name: 'Content Freshness Audit', schedule: '0 11 * * *', icon: '📝' },
+                { name: 'Competitor Price Monitor', schedule: '0 12 * * *', icon: '💰' }
+            ],
+            weekly: [
+                { name: 'Lead Source Attribution', schedule: '0 0 * * 1', icon: '📊' },
+                { name: 'SEO Performance Report', schedule: '0 0 * * 2', icon: '📈' },
+                { name: 'A/B Test Analysis', schedule: '0 0 * * 3', icon: '🎯' },
+                { name: 'Social Media Analytics', schedule: '0 0 * * 4', icon: '💬' },
+                { name: 'Birthday Campaigns', schedule: '0 0 * * 5', icon: '🎂' },
+                { name: 'HIPAA Compliance Audit', schedule: '0 0 * * 6', icon: '🔒' },
+                { name: 'Video Performance', schedule: '0 0 * * 0', icon: '🎬' },
+                { name: 'Email Campaign Analysis', schedule: '0 0 * * 1', icon: '📧' }
+            ],
+            monthly: [
+                { name: 'Full SEO Audit', schedule: '0 0 1 * *', icon: '📊' },
+                { name: 'Lead Nurture Optimization', schedule: '0 0 5 * *', icon: '🎯' },
+                { name: 'Content Gap Analysis', schedule: '0 0 10 * *', icon: '💡' },
+                { name: 'Competitor Analysis', schedule: '0 0 15 * *', icon: '🏆' },
+                { name: 'ROI Dashboard Update', schedule: '0 0 20 * *', icon: '📈' },
+                { name: 'AI Content Generation', schedule: '0 0 25 * *', icon: '🤖' },
+                { name: 'Design Asset Refresh', schedule: '0 0 28 * *', icon: '🎨' }
+            ]
+        };
+
+        let jobStatuses = new Map();
+        let refreshInterval;
+
+        // Fetch job statuses from API
+        async function fetchJobStatuses() {
+            try {
+                console.log('Fetching jobs from:', `${API_BASE}/jobs`);
+                console.log('Current cookies:', document.cookie);
+                
+                const response = await fetch(`${API_BASE}/jobs`, {
+                    method: 'GET',
+                    credentials: 'include', // CRITICAL: Send cookies
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    cache: 'no-cache'
+                });
+                
+                console.log('Response status:', response.status, response.statusText);
+                console.log('Response headers:', [...response.headers.entries()]);
+                
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        console.error('401 Unauthorized - Session cookie not being sent!');
+                        console.error('Current cookies:', document.cookie);
+                        console.log('Redirecting to login...');
+                        window.location.replace('/login');
+                        return;
+                    }
+                    const errorText = await response.text();
+                    console.error(`API error ${response.status}:`, errorText);
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const jobs = await response.json();
+                console.log('Jobs received:', jobs.length);
+                
+                if (!Array.isArray(jobs)) {
+                    console.error('Invalid response format:', jobs);
+                    updateConnectionStatus(false);
+                    return;
+                }
+                
+                jobStatuses.clear();
+                jobs.forEach(job => {
+                    jobStatuses.set(job.name, job);
+                });
+                
+                updateUI();
+                updateConnectionStatus(true);
+            } catch (error) {
+                console.error('Failed to fetch job statuses:', error);
+                // Only show connection error if it's not a 401 (auth will redirect)
+                if (error.message && !error.message.includes('401')) {
+                updateConnectionStatus(false);
+                }
+            }
+        }
+
+        // Fetch system health
+        async function fetchSystemHealth() {
+            try {
+                const response = await fetch(`${API_BASE}/health`, {
+                    credentials: 'include'
+                });
+                if (!response.ok && response.status === 401) {
+                    window.location.href = '/login';
+                    return;
+                }
+                const health = await response.json();
+                
+                document.getElementById('uptime').textContent = formatUptime(health.uptime);
+                document.getElementById('storageMode').textContent = health.storage === 'database' ? 'DB' : 'Memory';
+                
+                // Calculate success rate from history
+                const historyResponse = await fetch(`${API_BASE}/history`);
+                const history = await historyResponse.json();
+                const successCount = history.filter(j => j.status === 'success').length;
+                const successRate = history.length > 0 ? (successCount / history.length * 100).toFixed(1) : 0;
+                document.getElementById('successRate').textContent = `${successRate}%`;
+                
+                const failedCount = history.filter(j => j.status === 'error').length;
+                document.getElementById('failedJobs').textContent = failedCount;
+                
+            } catch (error) {
+                console.error('Failed to fetch health:', error);
+            }
+        }
+
+        function formatUptime(seconds) {
+            const days = Math.floor(seconds / 86400);
+            const hours = Math.floor((seconds % 86400) / 3600);
+            if (days > 0) return `${days}d ${hours}h`;
+            return `${hours}h`;
+        }
+
+        function updateConnectionStatus(connected) {
+            const statusEl = document.getElementById('connectionStatus');
+            if (connected) {
+                statusEl.className = 'connection-status connected';
+                statusEl.textContent = '✅ Connected to monitoring backend';
+            } else {
+                statusEl.className = 'connection-status disconnected';
+                statusEl.textContent = '⚠️ Not connected to backend. Please refresh the page or check server status.';
+            }
+        }
+
+        // Render job cards
+        function renderJobs() {
+            Object.keys(jobDefinitions).forEach(frequency => {
+                const container = document.getElementById(`${frequency}Jobs`);
+                container.innerHTML = '';
+                
+                jobDefinitions[frequency].forEach(job => {
+                    const status = jobStatuses.get(job.name) || { status: 'pending' };
+                    const card = createJobCard(job, status);
+                    container.appendChild(card);
+                });
+            });
+        }
+
+        function createJobCard(job, status) {
+            const card = document.createElement('div');
+            card.className = `cron-card ${status.status === 'success' ? 'running' : status.status === 'error' ? 'error' : ''}`;
+            
+            const statusClass = status.status === 'success' ? 'status-active' : 
+                              status.status === 'error' ? 'status-error' : 'status-pending';
+            
+            card.innerHTML = `
+                <div class="cron-status ${statusClass}"></div>
+                <div class="cron-name">${job.icon} ${job.name}</div>
+                <div class="cron-description">Last run: ${status.lastRun ? new Date(status.lastRun).toLocaleString() : 'Never'}</div>
+                <div class="cron-meta">
+                    <span class="cron-schedule">${job.schedule}</span>
+                    <div class="cron-actions">
+                        <button class="action-btn run-btn" data-job="${job.name.replace(/'/g, "\\'")}" data-action="run">Run</button>
+                        <button class="action-btn logs-btn" data-job="${job.name.replace(/'/g, "\\'")}" data-action="logs">Logs</button>
+                    </div>
+                </div>
+            `;
+            
+            // Add event listeners instead of inline handlers (CSP compliant)
+            const runBtn = card.querySelector('[data-action="run"]');
+            const logsBtn = card.querySelector('[data-action="logs"]');
+            
+            if (runBtn) {
+                runBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const jobName = runBtn.getAttribute('data-job');
+                    runJob(jobName, e);
+                });
+            }
+            
+            if (logsBtn) {
+                logsBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const jobName = logsBtn.getAttribute('data-job');
+                    viewLogs(jobName, e);
+                });
+            }
+            
+            return card;
+        }
+
+        function updateUI() {
+            renderJobs();
+            document.getElementById('activeJobs').textContent = Array.from(jobStatuses.values())
+                .filter(j => j.status === 'success').length;
+            
+            const lastRun = Array.from(jobStatuses.values())
+                .map(j => j.lastRun ? new Date(j.lastRun) : null)
+                .filter(d => d)
+                .sort((a, b) => b - a)[0];
+            
+            if (lastRun) {
+                const minutesAgo = Math.floor((Date.now() - lastRun) / 60000);
+                document.getElementById('lastRun').textContent = `${minutesAgo}m`;
+            }
+        }
+
+        // Control panel functions
+        async function pauseAll() {
+            try {
+                await fetch(`${API_BASE}/jobs/pause`, { 
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                alert('All jobs paused');
+            } catch (error) {
+                alert('Failed to pause jobs: ' + error.message);
+            }
+        }
+
+        async function resumeAll() {
+            try {
+                await fetch(`${API_BASE}/jobs/resume`, { 
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                alert('All jobs resumed');
+            } catch (error) {
+                alert('Failed to resume jobs: ' + error.message);
+            }
+        }
+
+        async function testAll() {
+            try {
+                const health = await fetch(`${API_BASE}/health`, {
+                    credentials: 'include'
+                }).then(r => r.json());
+                alert(`System Test Results:\n\n✅ Backend: Connected\n✅ Storage: ${health.storage}\n✅ Active Jobs: ${health.activeJobs}\n✅ Uptime: ${formatUptime(health.uptime)}`);
+            } catch (error) {
+                alert('System test failed: ' + error.message);
+            }
+        }
+
+        async function runJob(jobName, event) {
+            event.stopPropagation();
+            try {
+                const response = await fetch(`${API_BASE}/jobs/${encodeURIComponent(jobName)}/run`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+                if (!response.ok && response.status === 401) {
+                    window.location.href = '/login';
+                    return;
+                }
+                const result = await response.json();
+                alert(`Job "${jobName}" triggered manually`);
+                setTimeout(fetchJobStatuses, 1000);
+            } catch (error) {
+                alert('Failed to run job: ' + error.message);
+            }
+        }
+
+        async function viewLogs(jobName, event) {
+            event.stopPropagation();
+            try {
+                const response = await fetch(`${API_BASE}/history`, {
+                    credentials: 'include'
+                });
+                if (!response.ok && response.status === 401) {
+                    window.location.href = '/login';
+                    return;
+                }
+                const history = await response.json();
+                const jobHistory = history.filter(j => j.jobName === jobName).slice(0, 10);
+                
+                if (jobHistory.length === 0) {
+                    alert(`No logs found for: ${jobName}\n\nThis job hasn't run yet. Click "Run" to execute it manually.`);
+                    return;
+                }
+                
+                // Format logs in a more readable way
+                const logs = jobHistory.map((j, idx) => {
+                    const time = new Date(j.timestamp).toLocaleString();
+                    const status = j.status.toUpperCase();
+                    const duration = j.duration ? `${j.duration}ms` : 'N/A';
+                    
+                    let details = '';
+                    if (j.details) {
+                        // Format details nicely
+                        const detailKeys = Object.keys(j.details);
+                        if (detailKeys.length > 0) {
+                            details = '\n' + detailKeys.map(key => {
+                                const value = j.details[key];
+                                // Special handling for arrays (like URLs)
+                                if (Array.isArray(value) && value.length > 0) {
+                                    if (key === 'urls' || key === 'errors' || key === 'brokenImages') {
+                                        // Show first few items and count
+                                        const preview = value.slice(0, 5).join('\n    - ');
+                                        const more = value.length > 5 ? `\n    ... and ${value.length - 5} more` : '';
+                                        return `  ${key} (${value.length} items):\n    - ${preview}${more}`;
+                                    } else {
+                                    return `  ${key}: ${value.length} items`;
+                                    }
+                                } else if (typeof value === 'object' && value !== null) {
+                                    // For objects, show key-value pairs
+                                    if (key === 'rankings' || key === 'sources') {
+                                        return `  ${key}:\n    ${Object.entries(value).map(([k, v]) => `  ${k}: ${v}`).join('\n    ')}`;
+                                    } else {
+                                        return `  ${key}: ${JSON.stringify(value).substring(0, 200)}${JSON.stringify(value).length > 200 ? '...' : ''}`;
+                                    }
+                                } else {
+                                    return `  ${key}: ${value}`;
+                                }
+                            }).join('\n');
+                        }
+                    }
+                    
+                    return `[${idx + 1}] ${time}\n  Status: ${status}\n  Duration: ${duration}${details}`;
+                }).join('\n\n');
+                
+                // Show in a more readable format
+                const fullLog = `Logs for: ${jobName}\n\n${logs}\n\n\n(Showing last ${jobHistory.length} executions)`;
+                alert(fullLog);
+            } catch (error) {
+                alert('Failed to fetch logs: ' + error.message);
+            }
+        }
+
+        // Auto-refresh
+        const autoRefreshCheckbox = document.getElementById('autoRefresh');
+        
+        function startAutoRefresh() {
+            refreshInterval = setInterval(() => {
+                fetchJobStatuses();
+                fetchSystemHealth();
+            }, 30000);
+        }
+
+        function stopAutoRefresh() {
+            clearInterval(refreshInterval);
+        }
+
+        autoRefreshCheckbox.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                startAutoRefresh();
+            } else {
+                stopAutoRefresh();
+            }
+        });
+
+        // Make functions available globally BEFORE initialization
+        window.fetchJobStatuses = fetchJobStatuses;
+        window.fetchSystemHealth = fetchSystemHealth;
+        window.pauseAll = pauseAll;
+        window.resumeAll = resumeAll;
+        window.testAll = testAll;
+        window.runJob = runJob;
+        window.viewLogs = viewLogs;
+        window.logout = logout;
+
+        // Initialize when DOM is ready - check auth first
+        async function initializeDashboard() {
+            console.log('🚀 Initializing dashboard...');
+            const isAuthenticated = await checkAuth();
+            console.log('✅ Auth check result:', isAuthenticated);
+            
+            if (!isAuthenticated) {
+                console.log('❌ Not authenticated, stopping initialization');
+                return;
+            }
+            
+            console.log('📊 Fetching initial data...');
+            try {
+                console.log('📥 Calling fetchJobStatuses...');
+                await fetchJobStatuses();
+                console.log('💚 Calling fetchSystemHealth...');
+                await fetchSystemHealth();
+        
+                if (autoRefreshCheckbox && autoRefreshCheckbox.checked) {
+                    console.log('🔄 Starting auto-refresh...');
+            startAutoRefresh();
+                }
+                console.log('✅ Dashboard initialized successfully');
+            } catch (error) {
+                console.error('❌ Failed to initialize dashboard:', error);
+                updateConnectionStatus(false);
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeDashboard);
+        } else {
+            // DOM already loaded
+            initializeDashboard();
+        }
+    </script>
+</body>
+</html>
+

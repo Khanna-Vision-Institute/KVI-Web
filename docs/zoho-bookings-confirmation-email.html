@@ -1,0 +1,221 @@
+<!--
+  Khanna Vision Institute — Zoho Bookings customer confirmation email
+  Paste into: Zoho Bookings → Settings → Notifications → Booking confirmation → Edit HTML
+
+  Logo: https://khanna-media-bucket.s3.us-east-1.amazonaws.com/khannainstitute/Logo+2.png
+  Keep Zoho placeholders exactly as shown (%customername%, etc.)
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Appointment confirmation</title>
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+</head>
+<body style="margin:0;padding:0;background-color:#e8f4fc;width:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">
+
+  <!-- Preheader (hidden in body, some clients show in inbox preview) -->
+  <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#e8f4fc;">
+    Your Khanna Vision Institute appointment is confirmed — %appointmentfromdate% at %appointmentfromtime%
+  </div>
+
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#e8f4fc;background:linear-gradient(180deg,#d4eef9 0%,#f0f8ff 45%,#e8f4fc 100%);">
+    <tr>
+      <td align="center" style="padding:32px 16px 40px;">
+
+        <!-- Main card -->
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="max-width:600px;width:100%;border-collapse:separate;">
+
+          <!-- Gold accent bar -->
+          <tr>
+            <td style="height:4px;background-color:#c9922a;border-radius:12px 12px 0 0;font-size:0;line-height:4px;">&nbsp;</td>
+          </tr>
+
+          <!-- Header -->
+          <tr>
+            <td style="background-color:#ffffff;padding:28px 40px 24px;border-left:1px solid rgba(109,186,227,0.35);border-right:1px solid rgba(109,186,227,0.35);">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td align="center">
+                    <a href="https://khannainstitute.com/" target="_blank" style="text-decoration:none;">
+                      <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/khannainstitute/Logo+2.png" width="200" height="86" alt="Khanna Vision Institute" style="display:block;border:0;outline:none;text-decoration:none;max-width:200px;height:auto;margin:0 auto;">
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="padding-top:16px;">
+                    <p style="margin:0;font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#c9922a;">
+                      Appointment confirmed
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="background-color:#ffffff;padding:8px 40px 32px;border-left:1px solid rgba(109,186,227,0.35);border-right:1px solid rgba(109,186,227,0.35);">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+
+                <tr>
+                  <td style="font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:17px;line-height:1.5;color:#1a2a35;padding-bottom:20px;">
+                    Hi <strong style="color:#1a5070;">%customername%</strong>,
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.65;color:#3a5468;padding-bottom:24px;">
+                    Thank you for scheduling with <strong style="color:#1a2a35;">Khanna Vision Institute</strong>. Your visit is confirmed with the details below.
+                  </td>
+                </tr>
+
+                <!-- Appointment details card -->
+                <tr>
+                  <td style="padding-bottom:28px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#f4fafd;border:1px solid rgba(109,186,227,0.4);border-radius:10px;border-collapse:separate;">
+                      <tr>
+                        <td style="padding:22px 24px;">
+                          <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+
+                            <tr>
+                              <td style="font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6a8fa8;padding-bottom:4px;">
+                                Service
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:16px;font-weight:600;color:#1a5070;padding-bottom:16px;">
+                                %servicename%
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td style="font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6a8fa8;padding-bottom:4px;">
+                                Provider
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:15px;color:#1a2a35;padding-bottom:16px;">
+                                %staffname%
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                                  <tr>
+                                    <td width="50%" valign="top" style="padding-right:8px;">
+                                      <p style="margin:0 0 4px;font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6a8fa8;">Date</p>
+                                      <p style="margin:0;font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:15px;font-weight:600;color:#1a2a35;">%appointmentfromdate%</p>
+                                    </td>
+                                    <td width="50%" valign="top" style="padding-left:8px;">
+                                      <p style="margin:0 0 4px;font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6a8fa8;">Time</p>
+                                      <p style="margin:0;font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:15px;font-weight:600;color:#1a2a35;">%appointmentfromtime%</p>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+
+                            <!-- Optional: booking reference if Zoho sends %invoiceid% or booking number -->
+                            <tr>
+                              <td style="padding-top:16px;border-top:1px solid rgba(109,186,227,0.25);">
+                                <p style="margin:0;font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:12px;color:#6a8fa8;">
+                                  Confirmation&nbsp;#:&nbsp;<span style="color:#1a5070;font-weight:600;">%invoiceid%</span>
+                                </p>
+                              </td>
+                            </tr>
+
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- Meeting / location info (video link or address from Zoho) -->
+                <tr>
+                  <td style="font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:1.6;color:#3a5468;padding-bottom:24px;">
+                    %meetinginfo%
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:1.6;color:#3a5468;padding-bottom:28px;">
+                    Something amiss? You can always reschedule or cancel your appointment.
+                  </td>
+                </tr>
+
+                <!-- CTA button -->
+                <tr>
+                  <td align="center" style="padding-bottom:28px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td align="center" style="border-radius:999px;background-color:#c9922a;background:linear-gradient(135deg,#c9922a 0%,#e8b84b 100%);">
+                          <a href="https://khannainstitute.com/" target="_blank" style="display:inline-block;padding:14px 32px;font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:14px;font-weight:700;color:#ffffff;text-decoration:none;letter-spacing:0.02em;">
+                            Visit khannainstitute.com
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.5;color:#1a2a35;">
+                    See you soon,<br>
+                    <strong style="color:#1a5070;">Khanna Vision Institute</strong>
+                  </td>
+                </tr>
+
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color:#f8fcfe;padding:24px 40px 28px;border:1px solid rgba(109,186,227,0.35);border-top:none;border-radius:0 0 12px 12px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                  <td align="center" style="font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:13px;line-height:1.55;color:#3a5468;padding-bottom:12px;">
+                    <strong>Beverly Hills</strong> · 9100 Wilshire Blvd, Suite 265E<br>
+                    <strong>Westlake Village</strong> · 31824 Village Center Rd, Suite F<br>
+                    <a href="tel:8052302126" style="color:#1a5070;font-weight:600;text-decoration:none;">(805) 230-2126</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:11px;line-height:1.5;color:#6a8fa8;">
+                    Precision vision care · LASIK · SMILE · Cataract · Cornea
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+        </table>
+        <!-- /Main card -->
+
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="max-width:600px;width:100%;">
+          <tr>
+            <td align="center" style="padding:20px 16px 0;font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;font-size:10px;line-height:1.5;color:#6a8fa8;">
+              This message was sent regarding your scheduled appointment. Please do not reply to this automated email if you need clinical assistance—call our office instead.
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

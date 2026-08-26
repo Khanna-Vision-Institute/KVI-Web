@@ -1,0 +1,1211 @@
+<!-- COMPLETE SUPERLASIK PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #7c3aed;
+            --secondary: #ec4899;
+            --accent: #06b6d4;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --neon-glow: 0 0 20px rgba(124, 58, 237, 0.5);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        /* Hero Section - TikTok/Instagram Inspired */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 20px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><circle cx="200" cy="200" r="100" fill="rgba(255,255,255,0.05)"/><circle cx="1000" cy="600" r="150" fill="rgba(255,255,255,0.05)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 40px;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid white;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Social Proof Bar */
+        .social-proof {
+            background: var(--dark);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .proof-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .proof-icon {
+            font-size: 1.5rem;
+        }
+        
+        /* Section Base */
+        .section {
+            padding: 80px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 50px;
+        }
+        
+        /* Pain-Free Promise Section */
+        .pain-free-section {
+            background: var(--light);
+        }
+        
+        .pain-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .comparison-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .comparison-card.old {
+            border: 2px solid #ef4444;
+        }
+        
+        .comparison-card.new {
+            border: 2px solid #10b981;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.1);
+        }
+        
+        .card-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+        
+        .old .card-badge {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .new .card-badge {
+            background: #10b981;
+            color: white;
+        }
+        
+        .pain-level {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            font-size: 1.1rem;
+        }
+        
+        .pain-bar {
+            flex: 1;
+            height: 30px;
+            background: #e5e7eb;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .pain-fill {
+            height: 100%;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .old .pain-fill {
+            background: #ef4444;
+            width: 90%;
+        }
+        
+        .new .pain-fill {
+            background: #10b981;
+            width: 10%;
+        }
+        
+        /* Recovery Timeline - Instagram Story Style */
+        .timeline-section {
+            background: white;
+        }
+        
+        .recovery-timeline {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .timeline-day {
+            min-width: 200px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            padding: 25px;
+            color: white;
+            scroll-snap-align: start;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .timeline-day:hover {
+            transform: scale(1.05);
+        }
+        
+        .day-number {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        
+        .day-title {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .day-activities {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .selfie-ready {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            color: var(--primary);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        /* Tech Comparison */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .tech-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s;
+        }
+        
+        .tech-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.1);
+        }
+        
+        .tech-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .tech-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        /* Price Section - Clear and Transparent */
+        .price-section {
+            background: var(--gradient);
+            color: white;
+        }
+        
+        .price-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .price-card {
+            background: white;
+            color: var(--dark);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .price-card.featured {
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+        
+        .price-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--secondary);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .price-amount {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .price-per {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+        
+        .price-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .price-features li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .check-icon {
+            color: #10b981;
+            font-size: 1.2rem;
+        }
+        
+        /* Testimonials - TikTok Style */
+        .testimonial-section {
+            background: var(--light);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+        
+        .testimonial-info {
+            flex: 1;
+        }
+        
+        .testimonial-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-handle {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+        
+        .testimonial-rating {
+            color: #fbbf24;
+            font-size: 1.2rem;
+        }
+        
+        .testimonial-text {
+            line-height: 1.7;
+            color: #475569;
+        }
+        
+        .testimonial-date {
+            margin-top: 20px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            background: white;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--light);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            border-color: var(--primary);
+        }
+        
+        .faq-question {
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 25px 25px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 20px;
+        }
+        
+        .countdown {
+            display: inline-block;
+            background: var(--secondary);
+            padding: 10px 30px;
+            border-radius: 30px;
+            margin: 20px 0;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+        
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .section { padding: 60px 20px; }
+            .timeline-day { min-width: 160px; }
+            .price-cards { grid-template-columns: 1fr; }
+            .price-card.featured { transform: none; }
+        }
+        
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 1000;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    
+</style>
+
+<!-- NOW THE HTML CONTENT STARTS -->
+
+<!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🎯 NO FLAP • NO CUT • NO PAIN</div>
+            <h1>The Laser Vision Correction That Won't Interrupt Your Life</h1>
+            <p class="hero-subtitle">Advanced Surface Ablation with ZERO pain protocol - Back to posting selfies in 3 days 📸</p>
+            
+            <div class="hero-cta">
+                <a href="tel:3104821240" class="btn btn-primary">
+                    <span>📱</span>
+                    <span>Book Free Consult</span>
+                </a>
+                <a href="#pricing" class="btn btn-secondary">
+                    <span>💰</span>
+                    <span>See Pricing</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Social Proof Bar -->
+    <div class="social-proof">
+        <div class="proof-item">
+            <span class="proof-icon">⭐</span>
+            <span>4.9/5 on Google</span>
+        </div>
+        <div class="proof-item">
+            <span class="proof-icon">👁️</span>
+            <span>50,000+ Procedures</span>
+        </div>
+        <div class="proof-item">
+            <span class="proof-icon">⚡</span>
+            <span>Same Week Appointments</span>
+        </div>
+        <div class="proof-item">
+            <span class="proof-icon">💳</span>
+            <span>$89/mo Financing</span>
+        </div>
+    </div>
+    
+    <!-- Pain-Free Promise -->
+    <section class="section pain-free-section">
+        <div class="container">
+            <h2 class="section-title">We Killed The Pain Game 💀</h2>
+            <p class="section-subtitle">Old PRK was torture. Our SuperLASIK protocol = Netflix & chill recovery</p>
+            
+            <div class="pain-comparison">
+                <div class="comparison-card old">
+                    <span class="card-badge">Old PRK</span>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 20px;">Your Parents' Laser Surgery 😭</h3>
+                    
+                    <div class="pain-level">
+                        <span>Pain Level:</span>
+                        <div class="pain-bar">
+                            <div class="pain-fill">9/10 OUCH</div>
+                        </div>
+                    </div>
+                    
+                    <ul style="list-style: none; margin-top: 20px;">
+                        <li>❌ Mechanical scraping (medieval torture)</li>
+                        <li>❌ 4-5 days of severe pain</li>
+                        <li>❌ Prescription painkillers required</li>
+                        <li>❌ Corneal haze risk</li>
+                        <li>❌ 1-2 weeks off work/school</li>
+                        <li>❌ No selfies for weeks</li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-card new">
+                    <span class="card-badge">SuperLASIK 2025</span>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 20px;">The Glow-Up Method ✨</h3>
+                    
+                    <div class="pain-level">
+                        <span>Pain Level:</span>
+                        <div class="pain-bar">
+                            <div class="pain-fill">1/10 EZ</div>
+                        </div>
+                    </div>
+                    
+                    <ul style="list-style: none; margin-top: 20px;">
+                        <li>✅ Gentle alcohol solution (20% ethyl)</li>
+                        <li>✅ Bandage contact lens comfort shield</li>
+                        <li>✅ NSAID drops = inflammation blocked</li>
+                        <li>✅ Gabapentin = nerve pain eliminated</li>
+                        <li>✅ Back online in 3-5 days</li>
+                        <li>✅ Story-worthy recovery pics</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <div style="display: inline-block; background: #fef3c7; padding: 20px 40px; border-radius: 15px; border-left: 5px solid #f59e0b;">
+                    <p style="font-size: 1.2rem; font-weight: 600; color: #92400e;">
+                        🔬 Our Secret: Modern pharmacology + Dr. Khanna's protocol = You literally sleep through recovery
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Recovery Timeline -->
+    <section class="section timeline-section">
+        <div class="container">
+            <h2 class="section-title">Your Recovery Timeline 📅</h2>
+            <p class="section-subtitle">Swipe through your journey back to 20/20</p>
+            
+            <div class="recovery-timeline">
+                <div class="timeline-day">
+                    <span class="selfie-ready">📸 Sunglasses Selfie</span>
+                    <div class="day-number">Day 0</div>
+                    <div class="day-title">Surgery Day</div>
+                    <div class="day-activities">
+                        • 10-min procedure<br>
+                        • Bandage lens placed<br>
+                        • Uber home<br>
+                        • Start Netflix binge<br>
+                        • Take meds, sleep
+                    </div>
+                </div>
+                
+                <div class="timeline-day" style="background: linear-gradient(135deg, #ec4899, #f97316);">
+                    <div class="day-number">Day 1</div>
+                    <div class="day-title">Chill Mode</div>
+                    <div class="day-activities">
+                        • Wake up comfortable<br>
+                        • Quick check-up<br>
+                        • Light sensitivity<br>
+                        • Podcast/audiobook day<br>
+                        • Vision: 60-70%
+                    </div>
+                </div>
+                
+                <div class="timeline-day" style="background: linear-gradient(135deg, #10b981, #06b6d4);">
+                    <div class="day-number">Day 2</div>
+                    <div class="day-title">Improving Fast</div>
+                    <div class="day-activities">
+                        • Minimal discomfort<br>
+                        • Can use phone<br>
+                        • Watch shows<br>
+                        • Light computer use<br>
+                        • Vision: 70-80%
+                    </div>
+                </div>
+                
+                <div class="timeline-day" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">
+                    <span class="selfie-ready">📸 First Clear Selfie!</span>
+                    <div class="day-number">Day 3</div>
+                    <div class="day-title">Back Online</div>
+                    <div class="day-activities">
+                        • Return to work/school<br>
+                        • Drive (if cleared)<br>
+                        • Normal screen time<br>
+                        • Light makeup OK<br>
+                        • Vision: 80-90%
+                    </div>
+                </div>
+                
+                <div class="timeline-day" style="background: linear-gradient(135deg, #8b5cf6, #ec4899);">
+                    <span class="selfie-ready">📸 No Filter Needed</span>
+                    <div class="day-number">Day 5</div>
+                    <div class="day-title">Contact Lens Out</div>
+                    <div class="day-activities">
+                        • Bandage lens removed<br>
+                        • Eyes feel normal<br>
+                        • Full activities<br>
+                        • Gym/yoga OK<br>
+                        • Vision: 90-95%
+                    </div>
+                </div>
+                
+                <div class="timeline-day" style="background: linear-gradient(135deg, #f97316, #ef4444);">
+                    <span class="selfie-ready">📸 HD Ready</span>
+                    <div class="day-number">Week 2</div>
+                    <div class="day-title">Full Send</div>
+                    <div class="day-activities">
+                        • 20/20 achieved<br>
+                        • All restrictions lifted<br>
+                        • Swimming OK<br>
+                        • Contact sports OK<br>
+                        • Night vision great
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why Surface > LASIK -->
+    <section class="section" style="background: var(--light);">
+        <div class="container">
+            <h2 class="section-title">Why Athletes & Military Choose Surface 💪</h2>
+            <p class="section-subtitle">No flap = No weakness = Maximum safety</p>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">🛡️</div>
+                    <div class="tech-title">Zero Flap Risk</div>
+                    <p>No flap means nothing can dislodge. Perfect for MMA, basketball, military service, or just living your best life.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">💪</div>
+                    <div class="tech-title">Stronger Cornea</div>
+                    <p>Your cornea heals back to 100% strength. LASIK flaps never fully heal - they're always a weak point.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">🎯</div>
+                    <div class="tech-title">Better For Thin Corneas</div>
+                    <p>Saves 120 microns vs LASIK. If you were told "not a LASIK candidate," this is your solution.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">🌙</div>
+                    <div class="tech-title">Less Dry Eye</div>
+                    <p>No flap = fewer cut nerves = better tear production. Your eyes stay naturally moist.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">✨</div>
+                    <div class="tech-title">No Flap Complications</div>
+                    <p>Zero risk of striae, epithelial ingrowth, or flap displacement. Sleep without worry.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">🔬</div>
+                    <div class="tech-title">Same Visual Results</div>
+                    <p>95% achieve 20/20 or better - identical to LASIK. Just safer and stronger long-term.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section class="section price-section" id="pricing">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Transparent Pricing - No Hidden Fees 💯</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Invest in yourself. Split it into payments. Never buy contacts again.</p>
+            
+            <div class="price-cards">
+                <div class="price-card">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 20px;">Basic Package</h3>
+                    <div class="price-amount">$1,999</div>
+                    <div class="price-per">per eye</div>
+                    
+                    <ul class="price-features">
+                        <li><span class="check-icon">✅</span> SuperLASIK procedure</li>
+                        <li><span class="check-icon">✅</span> Wavefront optimization</li>
+                        <li><span class="check-icon">✅</span> All medications</li>
+                        <li><span class="check-icon">✅</span> 6 months follow-up</li>
+                        <li><span class="check-icon">✅</span> Enhancement warranty</li>
+                    </ul>
+                    
+                    <a href="#book" class="btn btn-primary" style="width: 100%;">Choose Basic</a>
+                </div>
+                
+                <div class="price-card featured">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 20px;">Premium Package</h3>
+                    <div class="price-amount">$2,499</div>
+                    <div class="price-per">per eye</div>
+                    
+                    <ul class="price-features">
+                        <li><span class="check-icon">✅</span> Everything in Basic</li>
+                        <li><span class="check-icon">✅</span> Custom wavefront</li>
+                        <li><span class="check-icon">✅</span> Contoura mapping</li>
+                        <li><span class="check-icon">✅</span> 2-year warranty</li>
+                        <li><span class="check-icon">✅</span> Priority scheduling</li>
+                        <li><span class="check-icon">✅</span> Dr. Khanna's cell</li>
+                    </ul>
+                    
+                    <a href="#book" class="btn btn-primary" style="width: 100%; background: var(--gradient);">Choose Premium</a>
+                </div>
+                
+                <div class="price-card">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 20px;">VIP Package</h3>
+                    <div class="price-amount">$2,999</div>
+                    <div class="price-per">per eye</div>
+                    
+                    <ul class="price-features">
+                        <li><span class="check-icon">✅</span> Everything in Premium</li>
+                        <li><span class="check-icon">✅</span> Topography-guided</li>
+                        <li><span class="check-icon">✅</span> Lifetime warranty</li>
+                        <li><span class="check-icon">✅</span> VIP recovery suite</li>
+                        <li><span class="check-icon">✅</span> Concierge service</li>
+                        <li><span class="check-icon">✅</span> Celebrity protocol</li>
+                    </ul>
+                    
+                    <a href="#book" class="btn btn-primary" style="width: 100%;">Choose VIP</a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <div style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: 20px; backdrop-filter: blur(10px); display: inline-block;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 20px;">💳 Financing Available</h3>
+                    <p style="font-size: 1.1rem; color: rgba(255,255,255,0.95);">
+                        0% APR for 24 months • As low as $89/month<br>
+                        HSA/FSA accepted • CareCredit approved
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="section testimonial-section">
+        <div class="container">
+            <h2 class="section-title">Real Reviews from Real Humans 🙌</h2>
+            <p class="section-subtitle">Check the receipts - these are actual patients</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="avatar">JM</div>
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Jake Martinez</div>
+                            <div class="testimonial-handle">@jake_sees_clear</div>
+                        </div>
+                        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Was scared AF about the pain because my friend had PRK 5 years ago and said it was hell. Dr. Khanna's protocol is DIFFERENT. Day 1 felt like mild allergies. Day 3 I was back at work. Day 5 playing basketball. This isn't your older brother's laser surgery fr"
+                    </p>
+                    <div class="testimonial-date">2 weeks ago • Age 24</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="avatar">ST</div>
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Sarah Thompson</div>
+                            <div class="testimonial-handle">@sarahcreates</div>
+                        </div>
+                        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Content creator here - was worried about downtime. The bandage contact lens is a GAME CHANGER. Posted stories day 2, filmed a sponsored post day 4. Zero pain with the gabapentin protocol. Also the financing made it possible - literally cheaper than my monthly contacts."
+                    </p>
+                    <div class="testimonial-date">1 month ago • Age 26</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="avatar">AD</div>
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Alex Dao</div>
+                            <div class="testimonial-handle">@alexdaoruns</div>
+                        </div>
+                        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Ultramarathon runner - needed something bombproof. No flap sold me instantly. The modern pain management is legit - took gabapentin preventatively and felt NOTHING. Back to training in 1 week. Now I can actually see the trail markers 😂"
+                    </p>
+                    <div class="testimonial-date">3 weeks ago • Age 28</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="avatar">MR</div>
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Maya Rodriguez</div>
+                            <div class="testimonial-handle">@maya.codes</div>
+                        </div>
+                        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Software engineer - did TONS of research. SuperLASIK > LASIK for long-term safety. The epikeratome is so gentle compared to old PRK scraping. Coded from home day 3. The NSAID drops are magic for inflammation. 20/15 vision now!"
+                    </p>
+                    <div class="testimonial-date">2 months ago • Age 25</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="avatar">CB</div>
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Chris Brown</div>
+                            <div class="testimonial-handle">@chrisbball</div>
+                        </div>
+                        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <p class="testimonial-text">
+                        "College athlete - coach recommended surface ablation. Zero regrets. The bandage lens kept me comfortable, gabapentin = no nerve pain, back to practice in 5 days. Hit a 3-pointer first game back. Dr. Khanna is the GOAT."
+                    </p>
+                    <div class="testimonial-date">6 weeks ago • Age 21</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="avatar">EL</div>
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Emma Liu</div>
+                            <div class="testimonial-handle">@emmastudies</div>
+                        </div>
+                        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Med student - understood the science behind the pain protocol. 20% ethyl alcohol is SO much gentler than mechanical debridement. The combo of bandage CL + NSAIDs + steroids + gabapentin = basically painless. Studied for boards during recovery lol"
+                    </p>
+                    <div class="testimonial-date">1 month ago • Age 23</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="section faq-section">
+        <div class="container">
+            <h2 class="section-title">Your Questions Answered 💬</h2>
+            <p class="section-subtitle">The stuff you're actually wondering about</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Why is this actually pain-free when old PRK hurt so bad?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Game-changing difference! Old PRK literally scraped your epithelium off mechanically (ouch). We use either gentle 20% ethyl alcohol that loosens cells painlessly OR an epikeratome that's like a soft brush. Plus our 2025 protocol: bandage contact lens protects nerves, NSAIDs block inflammation before it starts, gabapentin prevents nerve pain signals, and steroids accelerate healing. It's literally 90% less painful than 5 years ago.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is this really better than LASIK for active people?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>100% yes if you do contact sports, military, or just want maximum safety. LASIK creates a permanent flap that can dislodge even years later from trauma. SuperLASIK has NO flap - your cornea heals back to full strength. Navy SEALs, UFC fighters, and NBA players choose surface ablation for this reason. You can take a hit to the face and never worry.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How fast can I really get back to normal life?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Day 1: Netflix and chill. Day 2: Light phone/computer use. Day 3: Back to work/school (seriously). Day 5: Bandage lens out, full activities. Week 2: Gym, swimming, everything. The key is our preventive pain protocol - you're comfortable from the start, not suffering then recovering.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What medications do I actually take?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We give you the full comfort package: Gabapentin (300mg 3x/day) prevents nerve pain, NSAIDs drops 4x/day block inflammation, Steroid drops 4x/day speed healing, Antibiotic drops prevent infection, and Preservative-free tears as needed. Some people take Percocet the first night but most don't need it. Everything is included in your package price.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I afford this on a student/entry-level budget?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We have 0% financing for 24 months - that's literally $83/month for both eyes. Most people spend more on contacts and solutions. Plus you can use HSA/FSA pre-tax dollars which saves 30%. We also offer student discounts and military discounts. The consultation is free to discuss options.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What if I was told I'm not a LASIK candidate?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>This is probably perfect for you! SuperLASIK works for thin corneas (under 500 microns), high prescriptions (up to -12), dry eyes, and large pupils. We save 120 microns of tissue vs LASIK. Come in for a free eval - Dr. Khanna has solutions for cases other doctors reject.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Will I get corneal haze like old PRK?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nope! Haze was from old techniques and poor healing protocols. We use Mitomycin-C preventatively for 12 seconds which reduces haze risk to under 0.5%. Plus our steroid protocol and modern lasers create smoother ablations. We haven't seen significant haze in years.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Why does Dr. Khanna recommend this over LASIK?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>For young, active patients, it's simply safer long-term. No flap complications ever, stronger cornea, less dry eye, and identical visual results. Dr. Khanna has done 50,000+ procedures and says if his own kids needed surgery, he'd choose surface ablation. The 2-day difference in recovery is worth a lifetime of safety.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Final CTA -->
+    <section class="section cta-section" id="book">
+        <div class="container">
+            <h2 class="cta-title">Ready to Delete Your Contacts App? 🗑️</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px;">Join thousands who upgraded their vision the smart way</p>
+            
+            <div class="countdown">
+                🔥 November Special: $500 OFF Premium Package
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin: 40px 0; max-width: 800px; margin-left: auto; margin-right: auto;">
+                <div style="text-align: center;">
+                    <h3 style="margin-bottom: 15px;">📍 Beverly Hills</h3>
+                    <p>9735 Wilshire Blvd #330</p>
+                    <a href="tel:3104821240" class="btn btn-primary" style="margin-top: 15px; background: white; color: var(--dark);">
+                        (310) 482-1240
+                    </a>
+                </div>
+                <div style="text-align: center;">
+                    <h3 style="margin-bottom: 15px;">📍 Westlake Village</h3>
+                    <p>2625 Townsgate Rd #107</p>
+                    <a href="tel:8052302126" class="btn btn-primary" style="margin-top: 15px; background: white; color: var(--dark);">
+                        (805) 230-2126
+                    </a>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <p style="opacity: 0.9;">Or book online 24/7 at www.KhannaVision.com</p>
+                <p style="margin-top: 20px; font-size: 1.1rem;">
+                    ✅ Free consultation<br>
+                    ✅ Same week appointments<br>
+                    ✅ Evening & weekend slots<br>
+                    ✅ Virtual consults available
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Floating Action Button -->
+    <a href="tel:3104821240" class="fab">
+        📞
+    </a>
+    
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                const wasActive = parent.classList.contains('active');
+                
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+                
+                if (!wasActive) {
+                    parent.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        
+        // Add loading state to buttons
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.href && this.href.includes('tel:')) return;
+                if (this.href && this.href.includes('#')) return;
+                
+                this.innerHTML = '<span class="loading"></span> Loading...';
+                this.style.pointerEvents = 'none';
+            });
+        });
+    </script>

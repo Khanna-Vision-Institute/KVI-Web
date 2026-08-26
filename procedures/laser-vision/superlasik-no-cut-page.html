@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Meta Title -->
+    <% if (typeof pageData !== 'undefined' && pageData && pageData.metaTitle) { %>
+    <title><%= pageData.metaTitle %></title>
+    <% } else { %>
+    <title>SuperLASIK No-Cut Eye Surgery | Khanna Vision Institute</title>
+    <% } %>
+    
+    <!-- Meta Description -->
+    <% if (typeof pageData !== 'undefined' && pageData && pageData.metaDescription) { %>
+    <meta name="description" content="<%= pageData.metaDescription %>">
+    <% } else { %>
+    <meta name="description" content="Advanced SuperLASIK no-cut eye surgery. Pain-free, customized, quick recovery. Beverly Hills & Westlake Village.">
+    <% } %>
+    
+    <link rel="canonical" href="https://khannainstitute.com/procedures/laser-vision/superlasik/">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+</head>
+<body>
+    <%- include('/partials/header') %>
+    
+    <!-- Strapi Content -->
+    <% if (typeof pageData !== 'undefined' && pageData && pageData.content) { %>
+        <%- pageData.content %>
+    <% } %>
+
+    <%- include('/partials/footer') %>
+</body>
+</html>

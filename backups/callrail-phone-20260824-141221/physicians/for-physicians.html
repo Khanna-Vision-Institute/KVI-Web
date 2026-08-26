@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Physicians | Khanna Vision Institute</title>
+  <meta name="description" content="Refer or schedule patients with Khanna Vision Institute: streamlined digital referrals, direct scheduling, and clear communication for referring offices in Beverly Hills and Westlake Village.">
+  <link rel="canonical" href="https://khannainstitute.com/for-physicians/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/public/css/header.css">
+  <link rel="stylesheet" href="/public/css/footer.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MedicalWebPage",
+        "name": "For Physicians — Referrals & Scheduling",
+        "description": "Digital tools for referring and scheduling patients at Khanna Vision Institute.",
+        "url": "https://khannainstitute.com/for-physicians/"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://khannainstitute.com/" },
+          { "@type": "ListItem", "position": 2, "name": "For physicians", "item": "https://khannainstitute.com/for-physicians/" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --fp-navy: #132844;
+      --fp-navy-700: #1e3a5f;
+      --fp-blue: #2563eb;
+      --fp-blue-700: #1d4ed8;
+      --fp-gold: #c9a23a;
+      --fp-gold-600: #b8922f;
+      --fp-gold-tint: linear-gradient(145deg, #f7e6b8 0%, #e9cf82 40%, #d4b24a 100%);
+      --fp-ink: #0f172a;
+      --fp-muted: #475569;
+      --fp-line: #e2e8f0;
+      --fp-wash: #f6f8fc;
+    }
+    .fp-page {
+      font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+      color: var(--fp-ink);
+      background: var(--fp-wash);
+    }
+    .fp-loc-strip {
+      background: var(--fp-navy);
+      color: #fff;
+      text-align: center;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      font-weight: 700;
+      padding: 10px 14px;
+    }
+    .fp-loc-strip span { opacity: 0.85; }
+    .fp-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 22px 80px;
+    }
+    .fp-hero {
+      text-align: center;
+      padding: 36px 0 8px;
+    }
+    .fp-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fp-navy-700);
+      margin: 0 0 12px;
+    }
+    .fp-hero h1 {
+      font-family: "Libre Baskerville", Georgia, serif;
+      font-size: clamp(1.45rem, 4vw, 2.15rem);
+      line-height: 1.15;
+      margin: 0 0 16px;
+      color: var(--fp-navy-700);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .fp-lead {
+      margin: 0 auto;
+      max-width: 760px;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--fp-muted);
+    }
+    .fp-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 22px;
+    }
+    .fp-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: transform 0.15s, filter 0.15s;
+    }
+    .fp-chip:hover { transform: translateY(-1px); filter: brightness(1.03); }
+    .fp-chip--nav { background: var(--fp-navy); color: #fff; }
+    .fp-chip--call { background: var(--fp-blue); color: #fff; }
+    .fp-chip--gold { background: linear-gradient(180deg, #e8c86a 0%, var(--fp-gold) 100%); color: #1a1530; border-color: rgba(0,0,0,0.06); }
+
+    .fp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+      gap: 22px;
+      margin-top: 36px;
+    }
+    .fp-panel {
+      background: var(--fp-gold-tint);
+      border: 1px solid rgba(180, 140, 40, 0.45);
+      border-radius: 14px;
+      padding: 22px 20px 20px;
+      box-shadow: 0 16px 36px rgba(19, 40, 68, 0.12);
+    }
+    .fp-panel h2 {
+      margin: 0 0 12px;
+      font-size: 0.95rem;
+      line-height: 1.3;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--fp-navy);
+    }
+    .fp-panel p, .fp-panel li {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: #1e293b;
+    }
+    .fp-panel ul {
+      margin: 12px 0 0;
+      padding-left: 1.1rem;
+    }
+    .fp-panel li { margin-bottom: 6px; }
+    .fp-mini-form {
+      margin-top: 16px;
+      display: grid;
+      gap: 10px;
+    }
+    .fp-mini-form label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fp-navy-700);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .fp-mini-form select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(30, 58, 95, 0.35);
+      background: #fff;
+      font-size: 0.9rem;
+    }
+    .fp-progress {
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(30, 58, 95, 0.12);
+      margin-top: 16px;
+      overflow: hidden;
+    }
+    .fp-progress i {
+      display: block;
+      height: 100%;
+      width: 62%;
+      background: linear-gradient(90deg, var(--fp-blue), var(--fp-navy-700));
+    }
+    .fp-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      margin-top: 6px;
+      background: var(--fp-blue);
+      color: #fff;
+    }
+    .fp-btn:hover { background: var(--fp-blue-700); }
+    .fp-commit {
+      margin-top: 44px;
+      background: #fff;
+      border: 1px solid var(--fp-line);
+      border-radius: 16px;
+      padding: 28px 24px 30px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+    }
+    .fp-commit h2 {
+      font-family: "Libre Baskerville", Georgia, serif;
+      font-size: clamp(1.2rem, 2.8vw, 1.65rem);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--fp-navy-700);
+      margin: 0 0 14px;
+      line-height: 1.2;
+    }
+    .fp-commit p {
+      margin: 0 0 12px;
+      font-size: 0.96rem;
+      line-height: 1.65;
+      color: var(--fp-muted);
+    }
+    .fp-commit ul {
+      margin: 14px 0 20px;
+      padding-left: 1.15rem;
+      color: var(--fp-muted);
+      font-size: 0.94rem;
+      line-height: 1.55;
+    }
+    @media (max-width: 640px) {
+      .fp-shell { padding: 0 16px 64px; }
+    }
+  </style>
+</head>
+<body class="fp-page">
+  <%- include('/partials/header') %>
+  <%- include('/partials/seminar-banner') %>
+
+  <div class="fp-loc-strip" role="note" aria-label="Office locations">
+    <span>BEVERLY HILLS</span> · <span>WESTLAKE VILLAGE</span> · <span>SERVING GREATER LOS ANGELES</span>
+  </div>
+
+  <main>
+    <div class="fp-shell">
+      <header class="fp-hero">
+        <p class="fp-eyebrow">Referring providers</p>
+        <h1>Refer or schedule a patient using our digital tools</h1>
+        <p class="fp-lead">
+          Send a secure referral in minutes—or jump straight into scheduling. Our team is built for fast intake,
+          thoughtful communication back to your office, and a premium experience for your patients at Khanna Vision Institute.
+        </p>
+        <div class="fp-cta-row" aria-label="Quick contact">
+          <a class="fp-chip fp-chip--nav" href="sms:818-857-1735">Text: 818-857-1735</a>
+          <a class="fp-chip fp-chip--call" href="tel:310-997-4490">Call: (310) 997-4490</a>
+          <a class="fp-chip fp-chip--gold" href="/book-consultation/">Book appointment now</a>
+        </div>
+      </header>
+
+      <div class="fp-grid">
+        <section class="fp-panel" aria-labelledby="fp-sched-title">
+          <h2 id="fp-sched-title">Schedule online now — physician or patient</h2>
+          <p>Select a location and continue to our full scheduling experience. Same-day requests are reviewed quickly; urgent issues can be flagged on the referral form.</p>
+          <ul>
+            <li>Self-schedule a consultation in a few guided steps.</li>
+            <li>Choose Beverly Hills or Westlake Village.</li>
+            <li>Virtual or in-person options where applicable.</li>
+          </ul>
+          <div class="fp-mini-form">
+            <div>
+              <label for="fp-pref-loc">Preferred location</label>
+              <select id="fp-pref-loc" aria-label="Preferred location for scheduling">
+                <option value="">Select a location</option>
+                <option value="beverly-hills">Beverly Hills</option>
+                <option value="westlake">Westlake Village</option>
+                <option value="either">Either location</option>
+              </select>
+            </div>
+            <div>
+              <label for="fp-pref-prov">Provider preference</label>
+              <select id="fp-pref-prov" aria-label="Provider preference for scheduling">
+                <option value="">Select a provider</option>
+                <option value="first">First available</option>
+                <option value="khanna">Dr. Rajesh Khanna, MD</option>
+              </select>
+            </div>
+            <div>
+              <label for="fp-pref-speed">Timing</label>
+              <select id="fp-pref-speed" aria-label="Scheduling urgency">
+                <option value="">Select timing</option>
+                <option value="soon">Soonest available</option>
+                <option value="flex">I’m flexible</option>
+              </select>
+            </div>
+            <div class="fp-progress" aria-hidden="true"><i></i></div>
+            <a class="fp-btn" id="fp-continue-book" href="/book-consultation/">Continue to scheduling</a>
+          </div>
+        </section>
+
+        <section class="fp-panel" aria-labelledby="fp-ref-title">
+          <h2 id="fp-ref-title">Refer a patient using our digital referral form</h2>
+          <ul>
+            <li>No portal login required—submit and you&rsquo;re done.</li>
+            <li>Structured fields your coordinators can complete quickly.</li>
+            <li>Attach recent notes (when helpful) directly with the referral.</li>
+            <li>Urgent symptoms? Flag it so we can prioritize triage.</li>
+            <li>Our team coordinates follow-up back to your office.</li>
+          </ul>
+          <p style="margin-top:14px;font-weight:700;color:var(--fp-navy);">Better communication</p>
+          <ul>
+            <li>Appointment confirmation details routed to contacts you provide.</li>
+            <li>Clinical updates aligned to your co-management preferences.</li>
+            <li>Dedicated referral coordination during business hours.</li>
+            <li>Clear pathways for LASIK, SMILE, EVO ICL, PIE/RLE, cataract, cornea, and more.</li>
+          </ul>
+          <div style="margin-top:16px;">
+            <a class="fp-btn" href="/referrals/">Refer a patient</a>
+          </div>
+        </section>
+      </div>
+
+      <section class="fp-commit" aria-labelledby="fp-commit-h">
+        <h2 id="fp-commit-h">We are committed to helping your patients feel and see their best</h2>
+        <p>
+          Referring providers trust Khanna Vision Institute for advanced vision correction, lens solutions, cornea and keratoconus care, cataract surgery, and specialty treatments—delivered with concierge-level service and industry-leading technology.
+        </p>
+        <p>
+          Whether you&rsquo;re coordinating a second opinion, a surgical consult, or a collaborative co-management plan, we respect your relationship with the patient and prioritize timely, clear communication.
+        </p>
+        <ul>
+          <li>New patient scheduling support for referring offices</li>
+          <li>Referral coordination and triage for urgent symptoms</li>
+          <li>Transparent updates on consultation findings and next steps</li>
+          <li>Co-management pathways discussed up front when surgery is considered</li>
+        </ul>
+        <a class="fp-btn" href="/referrals/">Refer a patient now</a>
+      </section>
+    </div>
+  </main>
+
+  <%- include('/partials/footer') %>
+  <script>
+    (function () {
+      var cta = document.getElementById('fp-continue-book');
+      if (!cta) return;
+      cta.addEventListener('click', function (e) {
+        var loc = document.getElementById('fp-pref-loc');
+        var base = '/book-consultation/';
+        try {
+          var params = new URLSearchParams();
+          if (loc && loc.value) params.set('fp_loc', loc.value);
+          var q = params.toString();
+          if (q) {
+            e.preventDefault();
+            window.location.href = base + '?' + q;
+          }
+        } catch (err) {}
+      });
+    })();
+  </script>
+</body>
+</html>

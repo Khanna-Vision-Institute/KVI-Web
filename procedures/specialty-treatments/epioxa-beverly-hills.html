@@ -1,0 +1,915 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Epioxa Epi-On Cross-Linking in Beverly Hills | Khanna Vision Institute</title>
+  <meta name="description" content="FDA-approved Epioxa epi-on corneal cross-linking for keratoconus at our Beverly Hills office on Wilshire Boulevard. Dr. Rajesh Khanna, fellowship-trained corneal surgeon, 50,000+ procedures." />
+  <meta name="keywords" content="Epioxa Beverly Hills, Epioxa Los Angeles, epi-on cross-linking Beverly Hills, keratoconus Beverly Hills, Khanna Vision Institute Beverly Hills, corneal cross-linking Los Angeles, keratoconus Los Angeles" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="author" content="Khanna Vision Institute" />
+  <meta name="theme-color" content="#0f766e" />
+  <link rel="canonical" href="https://khannainstitute.com/procedures/specialty-treatments/epioxa-beverly-hills/" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Epioxa Epi-On Cross-Linking in Beverly Hills" />
+  <meta property="og:description" content="The first FDA-approved epi-on corneal cross-linking treatment for keratoconus, available at Khanna Vision Institute on Wilshire Boulevard." />
+  <meta property="og:url" content="https://khannainstitute.com/procedures/specialty-treatments/epioxa-beverly-hills/" />
+  <meta property="og:site_name" content="Khanna Vision Institute" />
+  <meta property="og:image" content="https://khannainstitute.com/wp-content/uploads/epioxa-keratoconus-beverly-hills.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Epioxa Epi-On Cross-Linking in Beverly Hills" />
+  <meta name="twitter:description" content="FDA-approved epi-on cross-linking for keratoconus. Beverly Hills patients age 13 and older." />
+  <meta name="twitter:image" content="https://khannainstitute.com/wp-content/uploads/epioxa-keratoconus-beverly-hills.jpg" />
+
+  <!-- Tailwind CDN. For production, compile Tailwind locally and remove this CDN script. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'],
+            display: ['Playfair Display', 'Georgia', 'serif']
+          },
+          colors: {
+            brand: {
+              50: '#ecfeff',
+              100: '#cffafe',
+              500: '#06b6d4',
+              600: '#0891b2',
+              700: '#0e7490',
+              900: '#164e63'
+            },
+            calm: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              600: '#0d9488',
+              700: '#0f766e',
+              900: '#134e4a'
+            },
+            gold: {
+              500: '#b8860b',
+              600: '#a07408'
+            }
+          },
+          boxShadow: {
+            soft: '0 18px 60px rgba(15, 118, 110, .12)',
+            lift: '0 24px 80px rgba(15, 23, 42, .14)'
+          },
+          animation: {
+            'fade-up': 'fadeUp .8s ease-out forwards',
+            'blink': 'blink 5s ease-in-out infinite',
+            'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
+            'shimmer': 'shimmer 8s linear infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'marquee': 'marquee 30s linear infinite'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Hero gradient — slightly more sophisticated/urban than the WLV variant */
+    .hero-pattern {
+      background-image:
+        radial-gradient(circle at 12% 8%, rgba(184, 134, 11, .08), transparent 35%),
+        radial-gradient(circle at 92% 14%, rgba(13, 148, 136, .16), transparent 32%),
+        radial-gradient(circle at 50% 100%, rgba(6, 182, 212, .12), transparent 50%),
+        linear-gradient(135deg, #fefdfb 0%, #f0fdfa 48%, #ecfeff 100%);
+    }
+    .glass-card { backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    .focus-ring:focus-visible { outline: 3px solid #06b6d4; outline-offset: 3px; }
+
+    /* Trust marquee */
+    .marquee-track { animation: marquee 30s linear infinite; }
+
+    /* Animations — all keyed to keyframes that respect prefers-reduced-motion */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes blink {
+      0%, 92%, 100% { transform: scaleY(1); }
+      94%, 96% { transform: scaleY(0.05); }
+    }
+    @keyframes pulseSoft {
+      0%, 100% { opacity: .9; }
+      50% { opacity: .55; }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* Initial state for scroll-triggered fade-ups */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);
+      will-change: opacity, transform;
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Stagger via inline data-delay rendered as transition-delay */
+    .reveal[data-delay="100"] { transition-delay: .1s; }
+    .reveal[data-delay="200"] { transition-delay: .2s; }
+    .reveal[data-delay="300"] { transition-delay: .3s; }
+    .reveal[data-delay="400"] { transition-delay: .4s; }
+
+    /* Card hover lift */
+    .card-lift {
+      transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1);
+    }
+    .card-lift:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 80px rgba(15, 23, 42, .14);
+    }
+
+    /* Shimmer accent on hero badge */
+    .badge-shimmer {
+      background: linear-gradient(110deg, #ffffff 0%, #ffffff 40%, #ecfeff 50%, #ffffff 60%, #ffffff 100%);
+      background-size: 200% 100%;
+      animation: shimmer 8s linear infinite;
+    }
+
+    /* Eye SVG breathing — only the lid path */
+    .eye-lid { transform-origin: center; animation: blink 5s ease-in-out infinite; }
+    .float-orbit { animation: float 6s ease-in-out infinite; }
+
+    /* Sticky mobile call button entrance */
+    @keyframes slideUp {
+      from { transform: translateY(120%); }
+      to   { transform: translateY(0); }
+    }
+    .sticky-call { animation: slideUp .6s cubic-bezier(.16,1,.3,1) .8s backwards; }
+
+    /* Reduced motion — kill all animation */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+
+  <!-- JSON-LD: WebPage + MedicalClinic + MedicalProcedure + FAQPage + BreadcrumbList + Person (Author) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://khannainstitute.com/procedures/specialty-treatments/epioxa-beverly-hills/#webpage",
+        "url": "https://khannainstitute.com/procedures/specialty-treatments/epioxa-beverly-hills/",
+        "name": "Epioxa Epi-On Cross-Linking in Beverly Hills | Khanna Vision Institute",
+        "description": "Patient guide to FDA-approved Epioxa epi-on corneal cross-linking for keratoconus at our Beverly Hills office, with Dr. Rajesh Khanna, fellowship-trained corneal surgeon.",
+        "inLanguage": "en-US",
+        "isPartOf": { "@id": "https://khannainstitute.com/#website" },
+        "about": { "@id": "https://khannainstitute.com/procedures/specialty-treatments/epioxa-beverly-hills/#procedure" },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://khannainstitute.com/wp-content/uploads/epioxa-keratoconus-beverly-hills.jpg"
+        },
+        "datePublished": "2026-04-29",
+        "dateModified": "2026-04-29",
+        "author": { "@id": "https://khannainstitute.com/#dr-khanna" },
+        "reviewedBy": { "@id": "https://khannainstitute.com/#dr-khanna" },
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": ["#answer-summary", "#faq"]
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://khannainstitute.com/#dr-khanna",
+        "name": "Rajesh Khanna, MD",
+        "jobTitle": "Refractive and Corneal Surgeon",
+        "worksFor": { "@id": "https://khannainstitute.com/#clinic" },
+        "alumniOf": [
+          { "@type": "EducationalOrganization", "name": "University of Cincinnati" },
+          { "@type": "EducationalOrganization", "name": "SUNY Downstate Medical Center" }
+        ],
+        "knowsAbout": ["Corneal cross-linking", "Keratoconus", "Refractive surgery", "SMILE", "LASIK", "EVO ICL", "PIE", "CTAK"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://khannainstitute.com/#website",
+        "url": "https://khannainstitute.com/",
+        "name": "Khanna Vision Institute",
+        "publisher": { "@id": "https://khannainstitute.com/#clinic" }
+      },
+      {
+        "@type": ["MedicalClinic", "LocalBusiness"],
+        "@id": "https://khannainstitute.com/#clinic",
+        "name": "Khanna Vision Institute — Beverly Hills",
+        "url": "https://khannainstitute.com/",
+        "telephone": "+1-805-230-2126",
+        "priceRange": "$$$",
+        "medicalSpecialty": ["Ophthalmology", "Cornea"],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "9100 Wilshire Blvd, Suite 265E",
+          "addressLocality": "Beverly Hills",
+          "addressRegion": "CA",
+          "postalCode": "90212",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 34.0654,
+          "longitude": -118.3957
+        },
+        "areaServed": [
+          { "@type": "City", "name": "Beverly Hills" },
+          { "@type": "City", "name": "Los Angeles" },
+          { "@type": "City", "name": "West Hollywood" },
+          { "@type": "City", "name": "Santa Monica" },
+          { "@type": "City", "name": "Brentwood" },
+          { "@type": "City", "name": "Bel Air" },
+          { "@type": "City", "name": "Westwood" },
+          { "@type": "City", "name": "Culver City" },
+          { "@type": "City", "name": "Hollywood" },
+          { "@type": "City", "name": "Century City" },
+          { "@type": "City", "name": "Mid-City" }
+        ],
+        "openingHoursSpecification": [{
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "08:00",
+          "closes": "17:00"
+        }]
+      },
+      {
+        "@type": "MedicalProcedure",
+        "@id": "https://khannainstitute.com/procedures/specialty-treatments/epioxa-beverly-hills/#procedure",
+        "name": "Epioxa Epi-On Corneal Cross-Linking",
+        "alternateName": ["Epi-on CXL", "Incision-Free Cross-Linking", "Epithelium-On Corneal Collagen Cross-Linking"],
+        "description": "FDA-approved corneal collagen cross-linking using oxygen-enriched topical riboflavin and UV light, designed for treatment of keratoconus without removal of the corneal epithelium.",
+        "procedureType": "https://schema.org/TherapeuticProcedure",
+        "indication": [
+          { "@type": "MedicalCondition", "name": "Keratoconus" }
+        ],
+        "performer": { "@id": "https://khannainstitute.com/#dr-khanna" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is Epioxa available at the Beverly Hills office?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Khanna Vision Institute offers Epioxa epi-on corneal cross-linking at our Beverly Hills location at 9100 Wilshire Boulevard, Suite 265E. Dr. Rajesh Khanna is among the early Southern California adopters of this FDA-approved treatment."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is the Beverly Hills office different from your Westlake Village location?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The treatment, equipment, and standard of care are identical. The Beverly Hills office serves patients from Los Angeles, Santa Monica, West Hollywood, Brentwood, Bel Air, Hollywood, and Century City. The Westlake Village office serves Ventura County and the Conejo Valley. Patients choose based on which is more convenient."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is there parking and concierge access at the Beverly Hills office?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The 9100 Wilshire Boulevard building offers valet and self-park options. Our team can coordinate scheduling and ground transportation for international and out-of-state patients."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Epioxa FDA approved?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Epioxa is FDA-approved for epithelium-on corneal collagen cross-linking to treat keratoconus in adults and pediatric patients age 13 and older."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What makes Dr. Khanna's experience relevant for Epioxa?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Dr. Rajesh Khanna is fellowship-trained in corneal and refractive surgery (University of Cincinnati), with 34+ years of clinical experience and over 50,000 eye procedures performed. He has been a Southern California Super Doctor for six consecutive years. While Epioxa is a new procedure, the surgeon's overall corneal expertise is what matters most."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will my insurance cover Epioxa?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Coverage is being established as the new permanent J-code (J2789) takes effect July 1, 2026. Our team verifies your specific benefits, supports prior authorization, and works with EpioxaCareConnect for benefit checks and copay assistance. For the portion not covered, Alpheon Credit financing is available."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://khannainstitute.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Keratoconus", "item": "https://khannainstitute.com/keratoconus/" },
+          { "@type": "ListItem", "position": 3, "name": "Epioxa Beverly Hills", "item": "https://khannainstitute.com/procedures/specialty-treatments/epioxa-beverly-hills/" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body class="bg-white font-sans text-slate-800 antialiased">
+
+  <!-- Skip to content for screen readers -->
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-calm-700 focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white">Skip to content</a>
+
+  <!-- Header / Nav -->
+  <header class="sticky top-0 z-40 border-b border-slate-100 bg-white/85 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8" aria-label="Primary">
+      <a href="https://khannainstitute.com/" class="flex items-center gap-3 focus-ring rounded-lg" aria-label="Khanna Vision Institute home">
+        <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/khannainstitute/Logo+2.png" alt="" width="200" height="56" class="h-10 w-auto object-contain sm:h-11" decoding="async" fetchpriority="high" />
+        <div class="flex flex-col justify-center border-l border-slate-200 pl-3">
+          <p class="text-sm font-black tracking-tight text-slate-950 sm:text-base">Khanna Vision Institute</p>
+          <p class="text-xs text-slate-500">Beverly Hills · Westlake Village</p>
+        </div>
+      </a>
+      <div class="hidden items-center gap-6 lg:flex">
+        <a href="#why" class="text-sm font-bold text-slate-700 hover:text-calm-700">Why Epioxa</a>
+        <a href="#comparison" class="text-sm font-bold text-slate-700 hover:text-calm-700">vs Traditional</a>
+        <a href="#dr-khanna" class="text-sm font-bold text-slate-700 hover:text-calm-700">About Dr. Khanna</a>
+        <a href="#insurance" class="text-sm font-bold text-slate-700 hover:text-calm-700">Insurance</a>
+        <a href="#faq" class="text-sm font-bold text-slate-700 hover:text-calm-700">FAQ</a>
+      </div>
+      <a href="#schedule" class="focus-ring rounded-full bg-calm-700 px-5 py-2.5 text-sm font-black uppercase tracking-wide text-white shadow-soft transition hover:bg-calm-900">Schedule</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero-pattern overflow-hidden border-b border-cyan-100">
+      <div class="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:py-20 lg:grid-cols-[1.02fr_.98fr] lg:items-center lg:px-8">
+        <div class="reveal">
+          <div class="badge-shimmer mb-6 inline-flex items-center gap-2 rounded-full border border-calm-200 px-4 py-2 text-sm font-bold text-calm-800 shadow-sm">
+            <span class="h-2.5 w-2.5 animate-pulse-soft rounded-full bg-calm-600"></span>
+            FDA-approved epi-on CXL · Now in Beverly Hills
+          </div>
+          <h1 class="max-w-4xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
+            Epioxa<sup class="text-2xl">™</sup> epi-on cross-linking for keratoconus on Wilshire Boulevard
+          </h1>
+          <p id="answer-summary" class="mt-6 max-w-2xl text-lg leading-8 text-slate-700 sm:text-xl">
+            <strong class="text-slate-950">Epioxa is the first FDA-approved epithelium-on, oxygen-enriched corneal cross-linking treatment for keratoconus.</strong> At Khanna Vision Institute in Beverly Hills, Dr. Rajesh Khanna offers Epioxa as part of a complete cornea care program — strengthening the cornea without removing its outer surface layer.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#schedule" class="focus-ring rounded-full bg-calm-700 px-7 py-4 text-center text-sm font-black uppercase tracking-wide text-white shadow-soft transition hover:bg-calm-900">Check candidacy</a>
+            <a href="tel:+18052302126" class="focus-ring rounded-full border border-calm-200 bg-white px-7 py-4 text-center text-sm font-black uppercase tracking-wide text-calm-800 shadow-sm transition hover:bg-calm-50">Call (805) 230-2126</a>
+          </div>
+          <p class="mt-5 max-w-xl text-sm leading-6 text-slate-600">
+            Serving Beverly Hills, West Hollywood, Santa Monica, Brentwood, Bel Air, Westwood, Culver City, Hollywood, and Century City. Patients also travel to us nationally and internationally.
+          </p>
+        </div>
+
+        <!-- Hero illustration with subtle blink + float -->
+        <div class="relative reveal" data-delay="200">
+          <div class="absolute -left-10 -top-10 h-40 w-40 rounded-full bg-brand-100 blur-3xl"></div>
+          <div class="absolute -bottom-10 -right-10 h-52 w-52 rounded-full bg-calm-100 blur-3xl"></div>
+          <div class="relative rounded-[2rem] border border-white/70 bg-white/75 p-6 shadow-soft glass-card">
+            <svg role="img" aria-labelledby="heroSvgTitle heroSvgDesc" viewBox="0 0 720 520" class="h-auto w-full rounded-[1.5rem]">
+              <title id="heroSvgTitle">Illustration of epi-on cross-linking for keratoconus</title>
+              <desc id="heroSvgDesc">Stylized eye with cornea, oxygen molecules, and UV light representing Epioxa cross-linking at our Beverly Hills office.</desc>
+              <defs>
+                <linearGradient id="eyeGrad" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#67e8f9"/>
+                  <stop offset="100%" stop-color="#0f766e"/>
+                </linearGradient>
+                <linearGradient id="coneGrad" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#fef3c7"/>
+                  <stop offset="100%" stop-color="#22d3ee"/>
+                </linearGradient>
+                <radialGradient id="iris">
+                  <stop offset="0%" stop-color="#0e7490"/>
+                  <stop offset="100%" stop-color="#083344"/>
+                </radialGradient>
+              </defs>
+              <rect width="720" height="520" rx="42" fill="#f8fafc"/>
+              <!-- Eye outline -->
+              <path d="M86 260c74-105 168-158 282-158s207 53 282 158c-75 105-169 158-282 158S160 365 86 260Z" fill="#ecfeff" stroke="#0f766e" stroke-width="12"/>
+              <!-- Iris with subtle blink animation on lid path -->
+              <circle cx="368" cy="260" r="126" fill="url(#eyeGrad)" opacity=".92"/>
+              <circle cx="368" cy="260" r="58" fill="url(#iris)"/>
+              <circle cx="348" cy="234" r="18" fill="#ffffff" opacity=".9"/>
+              <!-- Lid (animated blink) -->
+              <path class="eye-lid" d="M86 260c74-105 168-158 282-158s207 53 282 158" fill="#0f766e" opacity="0"/>
+              <!-- Cone overlay -->
+              <path d="M420 144c28 58 52 116 70 174 6 20-8 40-29 40H300c-21 0-35-20-29-40 18-58 42-116 70-174 13-27 55-27 68 0Z" fill="url(#coneGrad)" opacity=".7"/>
+              <!-- UV light box -->
+              <g class="float-orbit">
+                <path d="M477 64h84c16 0 28 13 28 28v58c0 16-12 28-28 28h-84c-16 0-28-12-28-28V92c0-15 12-28 28-28Z" fill="#ffffff" stroke="#06b6d4" stroke-width="8"/>
+                <path d="M487 122h72" stroke="#0f766e" stroke-width="10" stroke-linecap="round"/>
+                <path d="M506 93h20M541 93h20" stroke="#0f766e" stroke-width="10" stroke-linecap="round"/>
+              </g>
+              <!-- UV beam (dashed) -->
+              <path d="M518 178c-2 32-18 55-48 70" stroke="#22d3ee" stroke-width="8" stroke-dasharray="12 14" stroke-linecap="round" fill="none"/>
+              <!-- Oxygen bubbles, pulsing softly -->
+              <g class="animate-pulse-soft" fill="#0f766e">
+                <circle cx="150" cy="137" r="12"/>
+                <circle cx="187" cy="104" r="8"/>
+                <circle cx="620" cy="338" r="12"/>
+                <circle cx="585" cy="380" r="8"/>
+              </g>
+              <!-- Caption boxes -->
+              <g transform="translate(86 392)">
+                <rect width="236" height="78" rx="24" fill="#ffffff" stroke="#ccfbf1" stroke-width="4"/>
+                <text x="28" y="34" fill="#0f172a" font-family="Arial, sans-serif" font-size="20" font-weight="700">Epithelium stays on</text>
+                <text x="28" y="58" fill="#475569" font-family="Arial, sans-serif" font-size="16">No corneal scraping</text>
+              </g>
+              <g transform="translate(396 392)">
+                <rect width="236" height="78" rx="24" fill="#ffffff" stroke="#ccfbf1" stroke-width="4"/>
+                <text x="28" y="34" fill="#0f172a" font-family="Arial, sans-serif" font-size="20" font-weight="700">Oxygen + UV-A</text>
+                <text x="28" y="58" fill="#475569" font-family="Arial, sans-serif" font-size="16">Designed for efficient CXL</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust marquee -->
+    <section class="overflow-hidden border-y border-slate-100 bg-white py-5" aria-label="Trust signals">
+      <div class="relative">
+        <div class="marquee-track flex w-max gap-12 whitespace-nowrap px-6 text-sm font-bold uppercase tracking-[0.18em] text-slate-500">
+          <!-- Track repeated twice for seamless loop -->
+          <span>FDA-approved Epioxa™</span>
+          <span class="text-calm-700">·</span>
+          <span>Fellowship-trained corneal surgeon</span>
+          <span class="text-calm-700">·</span>
+          <span>50,000+ eye procedures</span>
+          <span class="text-calm-700">·</span>
+          <span>34+ years of practice</span>
+          <span class="text-calm-700">·</span>
+          <span>SoCal Super Doctor 2019–2024</span>
+          <span class="text-calm-700">·</span>
+          <span>Author · two ophthalmology books</span>
+          <span class="text-calm-700">·</span>
+
+          <span>FDA-approved Epioxa™</span>
+          <span class="text-calm-700">·</span>
+          <span>Fellowship-trained corneal surgeon</span>
+          <span class="text-calm-700">·</span>
+          <span>50,000+ eye procedures</span>
+          <span class="text-calm-700">·</span>
+          <span>34+ years of practice</span>
+          <span class="text-calm-700">·</span>
+          <span>SoCal Super Doctor 2019–2024</span>
+          <span class="text-calm-700">·</span>
+          <span>Author · two ophthalmology books</span>
+          <span class="text-calm-700">·</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick facts with count-up animation -->
+    <section class="bg-white py-10" aria-label="Epioxa quick facts">
+      <div class="mx-auto grid max-w-7xl gap-4 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
+        <div class="reveal card-lift rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-5">
+          <p class="text-3xl font-black text-calm-700">FDA</p>
+          <p class="mt-2 font-bold text-slate-950">Approved for keratoconus</p>
+          <p class="mt-1 text-sm leading-6 text-slate-600">Formal U.S. review for epi-on cross-linking in eligible patients age 13+.</p>
+        </div>
+        <div class="reveal card-lift rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-5" data-delay="100">
+          <p class="text-3xl font-black text-calm-700"><span data-count-to="50000">0</span>+</p>
+          <p class="mt-2 font-bold text-slate-950">Eye procedures by Dr. Khanna</p>
+          <p class="mt-1 text-sm leading-6 text-slate-600">Across 34+ years of corneal and refractive practice.</p>
+        </div>
+        <div class="reveal card-lift rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-5" data-delay="200">
+          <p class="text-3xl font-black text-calm-700">Epi-on</p>
+          <p class="mt-2 font-bold text-slate-950">Surface layer stays intact</p>
+          <p class="mt-1 text-sm leading-6 text-slate-600">No removal of the corneal epithelium during treatment.</p>
+        </div>
+        <div class="reveal card-lift rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-5" data-delay="300">
+          <p class="text-3xl font-black text-calm-700">J2789</p>
+          <p class="mt-2 font-bold text-slate-950">Reimbursement pathway</p>
+          <p class="mt-1 text-sm leading-6 text-slate-600">Permanent CMS J-code effective July 1, 2026.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Direct AEO answer block -->
+    <section class="py-14 sm:py-20">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal rounded-[2rem] border border-calm-200 bg-white p-6 shadow-soft sm:p-8">
+          <p class="text-sm font-black uppercase tracking-[0.24em] text-calm-700">In one paragraph</p>
+          <h2 class="mt-3 font-display text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">What is Epioxa, and why does it matter?</h2>
+          <p class="mt-5 leading-8 text-slate-700">
+            Epioxa is a corneal cross-linking treatment for keratoconus that does not require removing the cornea's outer surface layer (the epithelium). It uses oxygen-enriched topical riboflavin solutions activated by UV-A light to strengthen corneal collagen and slow disease progression. Because the epithelium stays intact, recovery is generally less painful and faster than traditional epithelium-off cross-linking. Epioxa was approved by the FDA in October 2025 and is now available in clinical practice. At Khanna Vision Institute in Beverly Hills, Dr. Rajesh Khanna offers Epioxa as one of the full range of keratoconus treatments — including traditional cross-linking and CTAK for vision restoration in advanced cases.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why this matters -->
+    <section id="why" class="bg-white py-16 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal max-w-3xl">
+          <p class="text-sm font-black uppercase tracking-[0.24em] text-calm-700">Why this matters</p>
+          <h2 class="mt-3 font-display text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">A new keratoconus option for active Angelenos</h2>
+          <p class="mt-5 text-lg leading-8 text-slate-700">
+            Keratoconus can disrupt work, screens, driving, sports, contact lenses, and confidence. For working professionals, performers, and students in Los Angeles, time off for recovery from a traditional cross-linking procedure can feel impossible. Epioxa is designed to help close that gap — same therapeutic goal, gentler recovery profile.
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-6 lg:grid-cols-3">
+          <article class="reveal card-lift rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-calm-100 text-calm-800">
+              <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/><path d="M12 22c5-2 8-6 8-12V5l-8-3-8 3v5c0 6 3 10 8 12Z"/></svg>
+            </div>
+            <h3 class="mt-5 text-xl font-black text-slate-950">FDA approval gives families confidence</h3>
+            <p class="mt-3 leading-7 text-slate-600">Epioxa has been formally reviewed and approved by the FDA as a treatment for keratoconus, giving patients an established option that does not depend on removing the epithelium.</p>
+          </article>
+          <article class="reveal card-lift rounded-[2rem] border border-slate-200 bg-slate-50 p-6" data-delay="100">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-100 text-brand-700">
+              <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12c4-7 12-7 16 0-4 7-12 7-16 0Z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <h3 class="mt-5 text-xl font-black text-slate-950">Less recovery downtime</h3>
+            <p class="mt-3 leading-7 text-slate-600">Because the surface layer of the cornea is preserved, most patients experience less surface-healing discomfort and a faster return to screens, work, and driving compared with epi-off treatment.</p>
+          </article>
+          <article class="reveal card-lift rounded-[2rem] border border-slate-200 bg-slate-50 p-6" data-delay="200">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-100 text-amber-700">
+              <svg viewBox="0 0 24 24" class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3v18"/><path d="m18 8-6-5-6 5"/><path d="M4 16h16"/></svg>
+            </div>
+            <h3 class="mt-5 text-xl font-black text-slate-950">Earlier action protects future options</h3>
+            <p class="mt-3 leading-7 text-slate-600">Cross-linking helps stop progression — it doesn't reverse damage. Acting earlier preserves the cornea before irregularities advance, keeping more long-term treatment options open.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Epi-on vs Epi-off comparison -->
+    <section id="comparison" class="py-16 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-10 lg:grid-cols-[.95fr_1.05fr] lg:items-center">
+          <div class="reveal">
+            <p class="text-sm font-black uppercase tracking-[0.24em] text-calm-700">Epi-on vs. epi-off</p>
+            <h2 class="mt-3 font-display text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">What sets Epioxa apart</h2>
+            <p class="mt-5 text-lg leading-8 text-slate-700">
+              Traditional epi-off corneal cross-linking requires removing the corneal epithelium so that riboflavin can penetrate the cornea. Epioxa is engineered to work with the epithelium left in place — combining specialized riboflavin formulations, oxygen enrichment, and UV-A activation to drive the cross-linking reaction without needing to remove the surface layer.
+            </p>
+            <div class="mt-8 rounded-3xl border border-calm-200 bg-calm-50 p-6">
+              <h3 class="font-black text-calm-900">Why Beverly Hills patients ask about epi-on</h3>
+              <p class="mt-2 leading-7 text-calm-900/80">For working professionals, performers, students, and active families, surface-layer healing time is a real consideration. Keeping the epithelium intact may shorten time away from screens, contacts, work, and travel. Candidacy is determined by a complete corneal exam.</p>
+            </div>
+          </div>
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div class="reveal card-lift rounded-[2rem] border border-slate-200 bg-white p-6 shadow-soft" data-delay="100">
+              <div class="mb-5 rounded-2xl bg-slate-100 p-4">
+                <svg role="img" aria-label="Traditional epi-off cross-linking" viewBox="0 0 300 190" class="h-auto w-full">
+                  <rect width="300" height="190" rx="24" fill="#f8fafc"/>
+                  <path d="M35 115c44-52 95-78 153-78 29 0 55 7 77 22" stroke="#64748b" stroke-width="10" stroke-linecap="round" fill="none"/>
+                  <path d="M54 119c44 32 92 48 144 48 33 0 62-7 88-21" stroke="#94a3b8" stroke-width="10" stroke-linecap="round" fill="none"/>
+                  <path d="M73 91h172" stroke="#ef4444" stroke-width="9" stroke-linecap="round" stroke-dasharray="16 14"/>
+                  <text x="72" y="48" fill="#334155" font-size="18" font-family="Arial" font-weight="700">Surface removed</text>
+                </svg>
+              </div>
+              <h3 class="text-xl font-black text-slate-950">Traditional epi-off</h3>
+              <ul class="mt-4 space-y-3 text-sm leading-6 text-slate-600">
+                <li class="flex gap-2"><span class="font-black text-slate-400">•</span> Epithelium is removed before treatment</li>
+                <li class="flex gap-2"><span class="font-black text-slate-400">•</span> Surface healing typically takes several days</li>
+                <li class="flex gap-2"><span class="font-black text-slate-400">•</span> Remains the right option for some clinical situations</li>
+              </ul>
+            </div>
+            <div class="reveal card-lift rounded-[2rem] border-2 border-calm-300 bg-white p-6 shadow-soft" data-delay="200">
+              <div class="mb-5 rounded-2xl bg-calm-50 p-4">
+                <svg role="img" aria-label="Epioxa epi-on cross-linking" viewBox="0 0 300 190" class="h-auto w-full">
+                  <rect width="300" height="190" rx="24" fill="#f0fdfa"/>
+                  <path d="M35 115c44-52 95-78 153-78 29 0 55 7 77 22" stroke="#0f766e" stroke-width="10" stroke-linecap="round" fill="none"/>
+                  <path d="M54 119c44 32 92 48 144 48 33 0 62-7 88-21" stroke="#22d3ee" stroke-width="10" stroke-linecap="round" fill="none"/>
+                  <path d="M82 88c36 16 79 17 130 1" stroke="#f59e0b" stroke-width="7" stroke-linecap="round"/>
+                  <circle cx="232" cy="53" r="8" fill="#06b6d4" class="animate-pulse-soft"/>
+                  <circle cx="255" cy="81" r="6" fill="#0f766e" class="animate-pulse-soft"/>
+                  <circle cx="218" cy="84" r="5" fill="#22d3ee" class="animate-pulse-soft"/>
+                  <text x="62" y="48" fill="#134e4a" font-size="18" font-family="Arial" font-weight="700">Surface stays intact</text>
+                </svg>
+              </div>
+              <h3 class="text-xl font-black text-slate-950">Epioxa epi-on</h3>
+              <ul class="mt-4 space-y-3 text-sm leading-6 text-slate-600">
+                <li class="flex gap-2"><span class="font-black text-calm-700">•</span> No removal of the epithelium</li>
+                <li class="flex gap-2"><span class="font-black text-calm-700">•</span> Designed for improved comfort and faster recovery</li>
+                <li class="flex gap-2"><span class="font-black text-calm-700">•</span> Uses oxygen enrichment and UV-A activation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Dr. Khanna — unique to BH page -->
+    <section id="dr-khanna" class="bg-gradient-to-br from-slate-50 to-calm-50 py-16 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+          <div class="reveal">
+            <p class="text-sm font-black uppercase tracking-[0.24em] text-calm-700">Experience matters</p>
+            <h2 class="mt-3 font-display text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">Why patients choose Dr. Khanna for Epioxa</h2>
+            <p class="mt-5 text-lg leading-8 text-slate-700">
+              Epioxa is a new procedure. Dr. Khanna is not. He brings 34+ years of corneal and refractive expertise to every Epioxa case, informed by his fellowship at the University of Cincinnati and over 50,000 procedures performed across his career.
+            </p>
+            <p class="mt-4 leading-8 text-slate-700">
+              When a procedure is genuinely new, the surgeon's depth in the surrounding specialty is what matters most. Cornea is Dr. Khanna's life's work — and he has performed corneal procedures on his own family members, including his mother and his wife. That speaks to his confidence in the standard of care he delivers.
+            </p>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="reveal card-lift rounded-3xl border border-slate-200 bg-white p-6 shadow-soft" data-delay="100">
+              <p class="font-display text-4xl font-black text-calm-700">34+</p>
+              <p class="mt-2 font-bold text-slate-950">Years of practice</p>
+              <p class="mt-1 text-sm leading-6 text-slate-600">In refractive and corneal surgery in Southern California.</p>
+            </div>
+            <div class="reveal card-lift rounded-3xl border border-slate-200 bg-white p-6 shadow-soft" data-delay="200">
+              <p class="font-display text-4xl font-black text-calm-700">50,000+</p>
+              <p class="mt-2 font-bold text-slate-950">Eye procedures</p>
+              <p class="mt-1 text-sm leading-6 text-slate-600">Across the breadth of cornea, lens, and refractive care.</p>
+            </div>
+            <div class="reveal card-lift rounded-3xl border border-slate-200 bg-white p-6 shadow-soft" data-delay="300">
+              <p class="font-display text-4xl font-black text-calm-700">6×</p>
+              <p class="mt-2 font-bold text-slate-950">Super Doctor</p>
+              <p class="mt-1 text-sm leading-6 text-slate-600">Named a Southern California Super Doctor 2019–2024.</p>
+            </div>
+            <div class="reveal card-lift rounded-3xl border border-slate-200 bg-white p-6 shadow-soft" data-delay="400">
+              <p class="font-display text-4xl font-black text-calm-700">2</p>
+              <p class="mt-2 font-bold text-slate-950">Books authored</p>
+              <p class="mt-1 text-sm leading-6 text-slate-600">On SMILE laser vision correction and presbyopic implant care.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Procedure steps -->
+    <section id="procedure" class="bg-slate-950 py-16 text-white sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal max-w-3xl">
+          <p class="text-sm font-black uppercase tracking-[0.24em] text-cyan-200">Treatment overview</p>
+          <h2 class="mt-3 font-display text-3xl font-black tracking-tight sm:text-4xl">Drops, oxygen, light — a streamlined epi-on process</h2>
+          <p class="mt-5 text-lg leading-8 text-slate-300">Every treatment plan is individualized after corneal mapping, pachymetry, refraction, eye health evaluation, and a discussion of risks and alternatives. Treatment occurs at our Beverly Hills office on Wilshire Boulevard.</p>
+        </div>
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          <article class="reveal card-lift rounded-[2rem] border border-white/10 bg-white/5 p-6">
+            <svg viewBox="0 0 120 90" class="mb-5 h-20 w-full" role="img" aria-label="Riboflavin drops">
+              <rect width="120" height="90" rx="18" fill="#0f172a"/>
+              <path d="M60 18c-8 18-16 28-16 40a16 16 0 1 0 32 0c0-12-8-22-16-40Z" fill="#fbbf24"/>
+            </svg>
+            <h3 class="text-xl font-black">Step 1 · Riboflavin drops</h3>
+            <p class="mt-3 text-slate-300 leading-7">A specialized riboflavin solution is applied directly to the eye. The epithelium remains in place — no scraping required.</p>
+          </article>
+          <article class="reveal card-lift rounded-[2rem] border border-white/10 bg-white/5 p-6" data-delay="100">
+            <svg viewBox="0 0 120 90" class="mb-5 h-20 w-full" role="img" aria-label="Oxygen enrichment">
+              <rect width="120" height="90" rx="18" fill="#0f172a"/>
+              <circle cx="38" cy="45" r="14" fill="#22d3ee"/>
+              <circle cx="62" cy="34" r="9" fill="#06b6d4"/>
+              <circle cx="76" cy="56" r="11" fill="#0f766e"/>
+              <circle cx="95" cy="40" r="6" fill="#67e8f9"/>
+            </svg>
+            <h3 class="text-xl font-black">Step 2 · Oxygen enrichment</h3>
+            <p class="mt-3 text-slate-300 leading-7">Supplemental oxygen drives the cross-linking chemistry — a key innovation that makes epi-on treatment possible.</p>
+          </article>
+          <article class="reveal card-lift rounded-[2rem] border border-white/10 bg-white/5 p-6" data-delay="200">
+            <svg viewBox="0 0 120 90" class="mb-5 h-20 w-full" role="img" aria-label="UV-A light">
+              <rect width="120" height="90" rx="18" fill="#0f172a"/>
+              <path d="M30 24h60a8 8 0 0 1 8 8v26a8 8 0 0 1-8 8H30a8 8 0 0 1-8-8V32a8 8 0 0 1 8-8Z" fill="#0e7490" opacity=".25"/>
+              <path d="m38 76 22-30 22 30" stroke="#67e8f9" stroke-width="6" stroke-linecap="round" fill="none"/>
+              <circle cx="60" cy="40" r="6" fill="#22d3ee"/>
+            </svg>
+            <h3 class="text-xl font-black">Step 3 · UV-A activation</h3>
+            <p class="mt-3 text-slate-300 leading-7">Ultraviolet-A light activates the riboflavin, triggering the cross-linking reaction that strengthens the corneal collagen.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Insurance section -->
+    <section id="insurance" class="py-16 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-10 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
+          <div class="reveal">
+            <p class="text-sm font-black uppercase tracking-[0.24em] text-calm-700">Insurance & cost support</p>
+            <h2 class="mt-3 font-display text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">We help you navigate coverage</h2>
+            <p class="mt-5 text-lg leading-8 text-slate-700">
+              Insurance coverage for Epioxa is being established as the new permanent CMS J-code (J2789) takes effect July 1, 2026. Our team verifies your specific benefits, supports prior authorization, and works with EpioxaCareConnect for benefit checks and copay assistance. For costs not covered by insurance, Alpheon Credit financing is available.
+            </p>
+            <ul class="mt-6 space-y-3 text-slate-700 leading-7">
+              <li class="flex gap-3"><span class="mt-1 inline-block h-2 w-2 rounded-full bg-calm-700"></span>Free benefit verification before your consultation</li>
+              <li class="flex gap-3"><span class="mt-1 inline-block h-2 w-2 rounded-full bg-calm-700"></span>Prior authorization support handled by our team</li>
+              <li class="flex gap-3"><span class="mt-1 inline-block h-2 w-2 rounded-full bg-calm-700"></span>EpioxaCareConnect copay-assistance program</li>
+              <li class="flex gap-3"><span class="mt-1 inline-block h-2 w-2 rounded-full bg-calm-700"></span>Alpheon Credit financing for any uncovered portion</li>
+            </ul>
+          </div>
+          <div class="reveal rounded-[2rem] border border-calm-200 bg-calm-50 p-6 shadow-soft sm:p-8" data-delay="200">
+            <p class="text-sm font-black uppercase tracking-[0.24em] text-calm-700">How we walk you through it</p>
+            <ol class="mt-5 space-y-4">
+              <li class="flex items-start gap-4 rounded-2xl bg-white p-4 shadow-sm">
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-calm-700 text-sm font-black text-white">1</span>
+                <div><p class="font-bold text-slate-950">Verify your keratoconus diagnosis</p><p class="mt-1 text-sm leading-6 text-slate-600">Corneal mapping and prior records review.</p></div>
+              </li>
+              <li class="flex items-start gap-4 rounded-2xl bg-white p-4 shadow-sm">
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-calm-700 text-sm font-black text-white">2</span>
+                <div><p class="font-bold text-slate-950">Check plan benefits</p><p class="mt-1 text-sm leading-6 text-slate-600">Including any prior-authorization rules.</p></div>
+              </li>
+              <li class="flex items-start gap-4 rounded-2xl bg-white p-4 shadow-sm">
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-calm-700 text-sm font-black text-white">3</span>
+                <div><p class="font-bold text-slate-950">Review options & schedule</p><p class="mt-1 text-sm leading-6 text-slate-600">Copay assistance, financing, and treatment date.</p></div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Safety -->
+    <section id="safety" class="py-16 sm:py-24">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal rounded-[2rem] border border-amber-200 bg-amber-50 p-6 shadow-soft sm:p-8">
+          <p class="text-sm font-black uppercase tracking-[0.24em] text-amber-800">Important safety information</p>
+          <h2 class="mt-3 font-display text-3xl font-black tracking-tight text-slate-950">A medical consultation is required</h2>
+          <p class="mt-5 leading-8 text-slate-700">
+            Reported Epioxa side effects include red eye, haze, light sensitivity, disruption of corneal surface cells, eye pain, eye irritation, watery eyes, eyelid swelling, fine white lines in the cornea, reduced sharpness of vision, dry eye, and eye inflammation.
+          </p>
+          <p class="mt-4 leading-8 text-slate-700">
+            Epioxa may not be appropriate for patients with certain allergies, certain post-cataract surgery lens situations, a history of herpetic keratitis, pregnancy, or other eye health concerns. Your Khanna Vision Institute evaluation will review risks, benefits, alternatives, and realistic expectations.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ — Beverly Hills specific -->
+    <section id="faq" class="bg-white py-16 sm:py-24">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <p class="text-sm font-black uppercase tracking-[0.24em] text-calm-700">FAQ</p>
+        <h2 class="mt-3 font-display text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">Common questions from Beverly Hills patients</h2>
+        <div class="mt-8 space-y-4">
+          <details class="reveal group rounded-3xl border border-slate-200 bg-slate-50 p-6 transition hover:border-calm-300">
+            <summary class="cursor-pointer list-none text-lg font-black text-slate-950 group-open:text-calm-700">Is Epioxa available at the Beverly Hills office?</summary>
+            <p class="mt-4 leading-7 text-slate-600">Yes. Khanna Vision Institute offers Epioxa epi-on corneal cross-linking at our Beverly Hills location at 9100 Wilshire Boulevard, Suite 265E. Dr. Rajesh Khanna is among the early Southern California adopters of this FDA-approved treatment.</p>
+          </details>
+          <details class="reveal group rounded-3xl border border-slate-200 bg-slate-50 p-6 transition hover:border-calm-300">
+            <summary class="cursor-pointer list-none text-lg font-black text-slate-950 group-open:text-calm-700">How is the Beverly Hills office different from your Westlake Village location?</summary>
+            <p class="mt-4 leading-7 text-slate-600">The treatment, equipment, and standard of care are identical. The Beverly Hills office serves patients from Los Angeles, Santa Monica, West Hollywood, Brentwood, Bel Air, Hollywood, Century City, and Mid-City. The Westlake Village office serves Ventura County and the Conejo Valley. Patients choose based on which is more convenient.</p>
+          </details>
+          <details class="reveal group rounded-3xl border border-slate-200 bg-slate-50 p-6 transition hover:border-calm-300">
+            <summary class="cursor-pointer list-none text-lg font-black text-slate-950 group-open:text-calm-700">Is there parking and concierge access at the Beverly Hills office?</summary>
+            <p class="mt-4 leading-7 text-slate-600">Yes. The 9100 Wilshire Boulevard building offers valet and self-park options. For international and out-of-state patients, our team helps coordinate scheduling, ground transportation, and lodging recommendations near the office.</p>
+          </details>
+          <details class="reveal group rounded-3xl border border-slate-200 bg-slate-50 p-6 transition hover:border-calm-300">
+            <summary class="cursor-pointer list-none text-lg font-black text-slate-950 group-open:text-calm-700">What makes Dr. Khanna's experience relevant for Epioxa?</summary>
+            <p class="mt-4 leading-7 text-slate-600">Dr. Rajesh Khanna is fellowship-trained in corneal and refractive surgery (University of Cincinnati), with 34+ years of clinical experience and over 50,000 eye procedures performed. He has been a Southern California Super Doctor for six consecutive years. While Epioxa is a new procedure, the surgeon's overall corneal expertise is what matters most — and Dr. Khanna brings that depth to every case.</p>
+          </details>
+          <details class="reveal group rounded-3xl border border-slate-200 bg-slate-50 p-6 transition hover:border-calm-300">
+            <summary class="cursor-pointer list-none text-lg font-black text-slate-950 group-open:text-calm-700">Is this better than epi-off cross-linking?</summary>
+            <p class="mt-4 leading-7 text-slate-600">It depends on the patient. The major advantage of epi-on is keeping the epithelium intact, which may improve comfort and recovery. Epi-off cross-linking remains a valuable option for some clinical situations. The right choice depends on corneal thickness, severity, age, health history, insurance, and physician judgment.</p>
+          </details>
+          <details class="reveal group rounded-3xl border border-slate-200 bg-slate-50 p-6 transition hover:border-calm-300">
+            <summary class="cursor-pointer list-none text-lg font-black text-slate-950 group-open:text-calm-700">Can Epioxa reverse my prescription?</summary>
+            <p class="mt-4 leading-7 text-slate-600">No. The goal of cross-linking is to stabilize the cornea and reduce the risk of worsening keratoconus. Vision correction may still require glasses, specialty contacts, scleral lenses, or — in advanced cases — vision-restoring procedures like CTAK.</p>
+          </details>
+          <details class="reveal group rounded-3xl border border-slate-200 bg-slate-50 p-6 transition hover:border-calm-300">
+            <summary class="cursor-pointer list-none text-lg font-black text-slate-950 group-open:text-calm-700">What if I'm not a candidate for Epioxa?</summary>
+            <p class="mt-4 leading-7 text-slate-600">Not every patient is right for Epioxa. If it isn't appropriate, Dr. Khanna will explain why and walk you through alternatives, which may include traditional epi-off cross-linking or CTAK for vision restoration. KVI offers the full range of keratoconus treatments, so your evaluation isn't limited to one option.</p>
+          </details>
+          <details class="reveal group rounded-3xl border border-slate-200 bg-slate-50 p-6 transition hover:border-calm-300">
+            <summary class="cursor-pointer list-none text-lg font-black text-slate-950 group-open:text-calm-700">Do you also see patients in Westlake Village?</summary>
+            <p class="mt-4 leading-7 text-slate-600">Yes — we also offer Epioxa at our <a class="font-semibold text-calm-700 underline underline-offset-4" href="https://khannainstitute.com/procedures/specialty-treatments/epioxa-westlake-village/">Westlake Village location</a>, serving Ventura County and the Conejo Valley.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="schedule" class="bg-slate-950 py-16 text-white sm:py-24">
+      <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_.9fr] lg:items-center lg:px-8">
+        <div class="reveal">
+          <p class="text-sm font-black uppercase tracking-[0.24em] text-cyan-200">Schedule a keratoconus evaluation</p>
+          <h2 class="mt-3 font-display text-3xl font-black tracking-tight sm:text-5xl">Find out whether Epioxa is right for you</h2>
+          <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-300">We will evaluate corneal shape, thickness, vision, risk factors, and insurance requirements before recommending a treatment plan. Same-week appointments often available.</p>
+        </div>
+        <div class="reveal rounded-[2rem] border border-white/10 bg-white/10 p-6 shadow-soft" data-delay="200">
+          <div class="rounded-3xl bg-white p-6 text-slate-800">
+            <h3 class="font-display text-2xl font-black text-slate-950">Khanna Vision Institute · Beverly Hills</h3>
+            <p class="mt-2 leading-7 text-slate-600">9100 Wilshire Blvd, Suite 265E<br />Beverly Hills, CA 90212</p>
+            <div class="mt-6 grid gap-3">
+              <a href="tel:+18052302126" class="focus-ring rounded-full bg-calm-700 px-6 py-4 text-center text-sm font-black uppercase tracking-wide text-white shadow-soft hover:bg-calm-900">Call (805) 230-2126</a>
+              <a href="sms:+18052302126" class="focus-ring rounded-full border border-slate-200 bg-white px-6 py-4 text-center text-sm font-black uppercase tracking-wide text-calm-700 hover:bg-calm-50">Text us a question</a>
+              <a href="https://khannainstitute.com/" class="focus-ring rounded-full border border-slate-200 bg-white px-6 py-4 text-center text-sm font-black uppercase tracking-wide text-slate-700 hover:bg-slate-50">Visit KhannaInstitute.com</a>
+            </div>
+            <p class="mt-5 text-xs leading-5 text-slate-500">Mon–Fri 8AM–5PM. For after-hours emergencies, follow the practice's emergency instructions. This page is educational and does not replace medical advice.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="bg-slate-100 py-10">
+      <div class="mx-auto max-w-7xl px-4 text-sm leading-6 text-slate-600 sm:px-6 lg:px-8">
+        <h2 class="text-base font-black text-slate-950">Sources reviewed</h2>
+        <p class="mt-2">Official Epioxa patient and professional materials, Glaukos FDA approval announcements, and Glaukos reimbursement / J-code updates were reviewed when preparing this page. Update this section and the page wording if product labeling, coverage, or reimbursement dates change.</p>
+        <ul class="mt-4 grid gap-2 sm:grid-cols-2">
+          <li><a class="font-semibold text-calm-700 underline underline-offset-4" href="https://www.epioxa.com/" target="_blank" rel="noopener">Epioxa patient information</a></li>
+          <li><a class="font-semibold text-calm-700 underline underline-offset-4" href="https://www.epioxa.com/hcp/" target="_blank" rel="noopener">Epioxa healthcare professional information</a></li>
+          <li><a class="font-semibold text-calm-700 underline underline-offset-4" href="https://investors.glaukos.com/news/news-details/2025/Glaukos-Announces-FDA-Approval-of-Epioxa/default.aspx" target="_blank" rel="noopener">Glaukos FDA approval announcement</a></li>
+          <li><a class="font-semibold text-calm-700 underline underline-offset-4" href="https://investors.glaukos.com/news/news-details/2026/Glaukos-Receives-Permanent-J-code-for-Epioxa/default.aspx" target="_blank" rel="noopener">Glaukos permanent J-code announcement</a></li>
+        </ul>
+        <p class="mt-6 text-xs">Last updated: April 29, 2026. Epioxa™, EpioxaCareConnect™, O₂n™, and Boost Goggles® are trademarks or registered trademarks of their respective owners. Khanna Vision Institute is not responsible for third-party program changes, payer rules, or copay-program eligibility decisions.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky mobile call button -->
+  <a href="tel:+18052302126" class="sticky-call fixed bottom-4 left-4 right-4 z-30 rounded-full bg-calm-700 px-6 py-4 text-center text-sm font-black uppercase tracking-wide text-white shadow-lift sm:hidden">
+    <span class="flex items-center justify-center gap-2">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+      Call (805) 230-2126
+    </span>
+  </a>
+
+  <footer class="bg-white py-8">
+    <div class="mx-auto flex max-w-7xl flex-col gap-4 px-4 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+      <p>© 2026 Khanna Vision Institute. All rights reserved.</p>
+      <div class="flex gap-5">
+        <a class="hover:text-calm-700" href="https://khannainstitute.com/">Home</a>
+        <a class="hover:text-calm-700" href="https://khannainstitute.com/procedures/specialty-treatments/epioxa-westlake-village/">Westlake Village</a>
+        <a class="hover:text-calm-700" href="#safety">Safety</a>
+        <a class="hover:text-calm-700" href="#schedule">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Animations: scroll-triggered reveal + count-up. Vanilla JS, no libraries. -->
+  <script>
+    (function() {
+      // Respect reduced motion
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Scroll-triggered reveal using IntersectionObserver
+      if ('IntersectionObserver' in window && !prefersReducedMotion) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      } else {
+        // Fallback: instantly show
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+      }
+
+      // Count-up animation for the 50,000+ stat
+      if (!prefersReducedMotion) {
+        const countEls = document.querySelectorAll('[data-count-to]');
+        const countObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              const target = parseInt(el.dataset.countTo, 10);
+              const duration = 1800;
+              const start = performance.now();
+              const startVal = 0;
+              const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+
+              function tick(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const value = Math.round(startVal + (target - startVal) * easeOut(progress));
+                el.textContent = value.toLocaleString('en-US');
+                if (progress < 1) requestAnimationFrame(tick);
+              }
+              requestAnimationFrame(tick);
+              countObserver.unobserve(el);
+            }
+          });
+        }, { threshold: 0.5 });
+
+        countEls.forEach(el => countObserver.observe(el));
+      } else {
+        // No animation: render final values directly
+        document.querySelectorAll('[data-count-to]').forEach(el => {
+          el.textContent = parseInt(el.dataset.countTo, 10).toLocaleString('en-US');
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>

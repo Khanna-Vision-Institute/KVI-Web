@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Khanna Vision Institute</title>
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .error-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin-top: 80px;
+        }
+
+        .error-content {
+            text-align: center;
+            color: white;
+            max-width: 700px;
+            width: 100%;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        .error-code {
+            font-size: 150px;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 20px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: bounce 1s ease-in-out;
+        }
+
+        .error-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .error-message {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.95);
+            color: #333;
+            outline: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            background: white;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+        }
+
+        .search-input::placeholder {
+            color: #999;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 20px;
+            pointer-events: none;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin-top: 10px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background: #f8f9fa;
+        }
+
+        .search-result-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .search-result-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .search-result-title {
+            color: #333;
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 3px;
+        }
+
+        .search-result-category {
+            color: #999;
+            font-size: 13px;
+        }
+
+        .no-results {
+            padding: 30px 20px;
+            text-align: center;
+            color: #999;
+        }
+
+        .no-results-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .helpful-links {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .helpful-links h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            text-align: left;
+        }
+
+        .link-item {
+            background: rgba(255,255,255,0.15);
+            padding: 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .link-item:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        .link-item a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .link-item a::before {
+            content: '→';
+            font-size: 18px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 100px;
+            }
+
+            .error-title {
+                font-size: 28px;
+            }
+
+            .error-message {
+                font-size: 16px;
+            }
+
+            .error-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+    
+    <div class="error-container">
+        <div class="error-content">
+            <div class="error-code">404</div>
+            <h1 class="error-title">Page Not Found</h1>
+            <p class="error-message">
+                Oops! The page you're looking for seems to have wandered off. 
+                Try searching below or explore our popular pages.
+            </p>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        id="pageSearch" 
+                        placeholder="Search for procedures, locations, or services..."
+                        autocomplete="off"
+                    >
+                    <span class="search-icon">🔍</span>
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+            </div>
+
+            <div class="error-actions">
+                <a href="/" class="btn btn-primary">Return Home</a>
+                <a href="/book-consultation/" class="btn btn-secondary">Book Consultation</a>
+            </div>
+
+            <div class="helpful-links">
+                <h3>Popular Pages</h3>
+                <div class="links-grid">
+                    <div class="link-item">
+                        <a href="/procedures/laser-vision/lasik/">LASIK Surgery</a>
+                    </div>
+                    <div class="link-item">
+                        <a href="/procedures/laser-vision/smile-laser/">SMILE Laser</a>
+                    </div>
+                    <div class="link-item">
+                        <a href="/procedures/lens-solutions/evo-icl/">EVO ICL</a>
+                    </div>
+                    <div class="link-item">
+                        <a href="/about/dr-khanna/biography/">About Dr. Khanna</a>
+                    </div>
+                    <div class="link-item">
+                        <a href="/pricing-financing/calculator/">Pricing & Financing</a>
+                    </div>
+                    <div class="link-item">
+                        <a href="/about/locations/westlake-village/">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Searchable pages database
+        var searchablePages = [
+            { title: 'LASIK', category: 'Laser Vision', url: '/procedures/laser-vision/lasik/', icon: '👁️', keywords: ['lasik', 'laser', 'vision', 'correction', 'surgery'] },
+            { title: 'SMILE Laser', category: 'Laser Vision', url: '/procedures/laser-vision/smile-laser/', icon: '👁️', keywords: ['smile', 'laser', 'vision', 'correction'] },
+            { title: 'SuperLASIK', category: 'Laser Vision', url: '/procedures/laser-vision/superlasik/', icon: '👁️', keywords: ['superlasik', 'super', 'lasik', 'laser'] },
+            { title: 'ASA / LASEK', category: 'Laser Vision', url: '/procedures/laser-vision/asa/', icon: '👁️', keywords: ['asa', 'lasek', 'surface', 'ablation'] },
+            { title: 'Compare Laser Options', category: 'Laser Vision', url: '/procedures/laser-vision/compare/', icon: '⚖️', keywords: ['compare', 'comparison', 'options'] },
+            { title: 'EVO ICL', category: 'Lens Solutions', url: '/procedures/lens-solutions/evo-icl/', icon: '👓', keywords: ['evo', 'icl', 'lens', 'implant', 'contact'] },
+            { title: 'PIE (Presbyopic Implants)', category: 'Lens Solutions', url: '/procedures/lens-solutions/pie/', icon: '👓', keywords: ['pie', 'presbyopia', 'reading', 'glasses', 'implant'] },
+            { title: 'Cataract Surgery', category: 'Lens Solutions', url: '/procedures/lens-solutions/robotic-cataract-surgery/', icon: '⚕️', keywords: ['cataract', 'surgery', 'robotic', 'lens'] },
+            { title: 'Which Lens is Right?', category: 'Lens Solutions', url: '/procedures/lens-solutions/which-lens-is-right/', icon: '❓', keywords: ['lens', 'right', 'which', 'choose'] },
+            { title: 'Beverly Hills Office', category: 'Locations', url: '/about/locations/beverly-hills/', icon: '📍', keywords: ['beverly', 'hills', 'location', 'office', 'address'] },
+            { title: 'Westlake Village Office', category: 'Locations', url: '/about/locations/westlake-village/', icon: '📍', keywords: ['westlake', 'village', 'location', 'office', 'address'] },
+            { title: 'Dr. Khanna Biography', category: 'About', url: '/about/dr-khanna/biography/', icon: '👨‍⚕️', keywords: ['doctor', 'khanna', 'bio', 'biography', 'about'] },
+            { title: 'Credentials & Awards', category: 'About', url: '/about/dr-khanna/credentials-awards/', icon: '🏆', keywords: ['credentials', 'awards', 'achievements'] },
+            { title: 'Books', category: 'About', url: '/about/dr-khanna/books/', icon: '📚', keywords: ['books', 'publications', 'author'] },
+            { title: 'Financing Calculator', category: 'Pricing', url: '/pricing-financing/calculator/', icon: '💰', keywords: ['finance', 'financing', 'calculator', 'cost', 'price', 'payment'] },
+            { title: 'Procedure Costs', category: 'Pricing', url: '/pricing-financing/procedure-costs/', icon: '💵', keywords: ['cost', 'price', 'pricing', 'how much'] },
+            { title: 'Financing Options', category: 'Pricing', url: '/patients/resources/financing-options/', icon: '💳', keywords: ['finance', 'payment', 'alphaeon', 'carecredit'] },
+            { title: 'FAQs', category: 'Resources', url: '/patients/resources/faqs/', icon: '❓', keywords: ['faq', 'questions', 'answers', 'help'] },
+            { title: 'Book Consultation', category: 'Contact', url: '/book-consultation/', icon: '📅', keywords: ['book', 'appointment', 'consultation', 'schedule'] },
+            { title: 'Virtual Consultation', category: 'Contact', url: '/contact/virtual-consultation/', icon: '💻', keywords: ['virtual', 'online', 'video', 'consultation'] },
+            { title: 'Emergency Care', category: 'Contact', url: '/contact/emergency-care/', icon: '🚨', keywords: ['emergency', 'urgent', 'care', 'help'] },
+            { title: 'Contact Us', category: 'Contact', url: '/about/locations/westlake-village/', icon: '📞', keywords: ['contact', 'phone', 'email', 'reach'] }
+        ];
+
+        var searchInput = document.getElementById('pageSearch');
+        var searchResults = document.getElementById('searchResults');
+
+        function searchPages(query) {
+            if (!query || query.length < 2) {
+                return [];
+            }
+
+            query = query.toLowerCase();
+            
+            var results = searchablePages.filter(function(page) {
+                if (page.title.toLowerCase().indexOf(query) !== -1) return true;
+                if (page.category.toLowerCase().indexOf(query) !== -1) return true;
+                for (var i = 0; i < page.keywords.length; i++) {
+                    if (page.keywords[i].indexOf(query) !== -1) return true;
+                }
+                return false;
+            });
+            
+            return results.slice(0, 8);
+        }
+
+        function displayResults(results) {
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="no-results">' +
+                    '<div class="no-results-icon">🔍</div>' +
+                    '<div><strong>No results found</strong></div>' +
+                    '<div>Try searching for LASIK, SMILE, EVO ICL, locations, or financing</div>' +
+                    '</div>';
+            } else {
+                var html = '';
+                for (var i = 0; i < results.length; i++) {
+                    var page = results[i];
+                    html += '<a href="' + page.url + '" class="search-result-item">' +
+                        '<div class="search-result-icon">' + page.icon + '</div>' +
+                        '<div class="search-result-content">' +
+                        '<div class="search-result-title">' + page.title + '</div>' +
+                        '<div class="search-result-category">' + page.category + '</div>' +
+                        '</div></a>';
+                }
+                searchResults.innerHTML = html;
+            }
+            searchResults.classList.add('active');
+        }
+
+        searchInput.addEventListener('input', function(e) {
+            var query = e.target.value;
+            
+            if (query.length < 2) {
+                searchResults.classList.remove('active');
+                return;
+            }
+            
+            var results = searchPages(query);
+            displayResults(results);
+        });
+
+        searchInput.addEventListener('focus', function(e) {
+            if (e.target.value.length >= 2) {
+                var results = searchPages(e.target.value);
+                displayResults(results);
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-box')) {
+                searchResults.classList.remove('active');
+            }
+        });
+
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                var firstResult = searchResults.querySelector('.search-result-item');
+                if (firstResult) {
+                    window.location.href = firstResult.getAttribute('href');
+                }
+            }
+        });
+    </script>
+
+    <%- include('partials/footer.ejs') %>
+</body>
+</html>

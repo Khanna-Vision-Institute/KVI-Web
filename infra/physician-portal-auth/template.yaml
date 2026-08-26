@@ -1,0 +1,143 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Cognito physicians user pool + HTTP API with JWT auth and GET /me (Lambda).
+
+Parameters:
+  StageName:
+    Type: String
+    Default: prod
+    Description: Deployment stage label (used in SAM stack outputs / API URLs).
+  WebsiteOriginPrimary:
+    Type: String
+    Default: https://khannainstitute.com
+  WebsiteOriginWWW:
+    Type: String
+    Default: https://www.khannainstitute.com
+
+Globals:
+  Function:
+    Timeout: 10
+    Runtime: nodejs20.x
+    Architectures:
+      - x86_64
+    Tracing: Active
+
+Resources:
+  PhysicianUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: kvi-physician-portal
+      AutoVerifiedAttributes:
+        - email
+      UsernameAttributes:
+        - email
+      AccountRecoverySetting:
+        RecoveryMechanisms:
+          - Name: verified_email
+            Priority: 1
+      EmailConfiguration:
+        EmailSendingAccount: COGNITO_DEFAULT
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 10
+          RequireLowercase: true
+          RequireNumbers: true
+          RequireSymbols: true
+          RequireUppercase: true
+          TemporaryPasswordValidityDays: 7
+      Schema:
+        - Mutable: true
+          Name: given_name
+          Required: false
+          AttributeDataType: String
+        - Mutable: true
+          Name: family_name
+          Required: false
+          AttributeDataType: String
+
+  PhysicianUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      ClientName: kvi-physician-portal-public
+      UserPoolId: !Ref PhysicianUserPool
+      GenerateSecret: false
+      PreventUserExistenceErrors: ENABLED
+      ExplicitAuthFlows:
+        # Custom browser form — initates InitiateAuth(USER_PASSWORD_AUTH) client-side against Cognito.
+        - ALLOW_USER_PASSWORD_AUTH
+        - ALLOW_REFRESH_TOKEN_AUTH
+      AllowedOAuthFlowsUserPoolClient: false
+      IdTokenValidity: 60
+      AccessTokenValidity: 60
+      RefreshTokenValidity: 30
+      TokenValidityUnits:
+        IdToken: minutes
+        AccessToken: minutes
+        RefreshToken: days
+      SupportedIdentityProviders:
+        - COGNITO
+
+  PhysicianHttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: !Ref StageName
+      CorsConfiguration:
+        AllowCredentials: false
+        AllowHeaders:
+          - authorization
+          - content-type
+        AllowMethods:
+          - OPTIONS
+          - GET
+        AllowOrigins:
+          - !Ref WebsiteOriginPrimary
+          - !Ref WebsiteOriginWWW
+      Auth:
+        Authorizers:
+          PhysicianJwtAuthorizer:
+            IdentitySource:
+              - $request.header.Authorization
+            JwtConfiguration:
+              Audience:
+                - !Ref PhysicianUserPoolClient
+              Issuer: !Sub https://cognito-idp.${AWS::Region}.amazonaws.com/${PhysicianUserPool}
+
+  MeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/me/
+      Handler: index.handler
+      MemorySize: 128
+      Environment:
+        Variables:
+          ALLOW_ORIGIN_PRIMARY: !Ref WebsiteOriginPrimary
+          ALLOW_ORIGIN_WWW: !Ref WebsiteOriginWWW
+      Events:
+        HttpMe:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref PhysicianHttpApi
+            Path: /me
+            Method: GET
+            Auth:
+              Authorizer: PhysicianJwtAuthorizer
+
+Outputs:
+  PhysicianUserPoolId:
+    Description: Cognito User Pool Id (paste into portal auth config).
+    Value: !Ref PhysicianUserPool
+    Export:
+      Name: !Sub '${AWS::StackName}-PhysicianUserPoolId'
+  PhysicianUserPoolClientId:
+    Description: Public app client Id (paste into portal auth config).
+    Value: !Ref PhysicianUserPoolClient
+    Export:
+      Name: !Sub '${AWS::StackName}-PhysicianUserPoolClientId'
+  PhysicianHttpApiUrl:
+    Description: HTTP API invoke URL prefix (without trailing slash).
+    Value: !Sub https://${PhysicianHttpApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${StageName}
+    Export:
+      Name: !Sub '${AWS::StackName}-PhysicianHttpApiUrl'
+  CognitoIssuer:
+    Description: JWT issuer URI (shown for debugging / other tools).
+    Value: !Sub https://cognito-idp.${AWS::Region}.amazonaws.com/${PhysicianUserPool}

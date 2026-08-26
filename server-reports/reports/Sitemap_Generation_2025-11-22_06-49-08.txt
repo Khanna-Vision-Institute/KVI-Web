@@ -1,0 +1,107 @@
+================================================================================
+JOB EXECUTION REPORT: Sitemap Generation
+================================================================================
+
+Execution Date: 11/22/2025, 6:49:08 AM
+Status: SUCCESS
+Duration: 3.44 seconds
+Mode: production
+Triggered By: API
+User: admin
+
+SITEMAP GENERATION REPORT
+--------------------------------------------------------------------------------
+
+Total Pages Discovered: 100
+Verified URLs: 81
+Sitemap Generated: Yes
+
+DISCOVERED AND VERIFIED URLs:
+--------------------------------------------------------------------------------
+1. /
+2. /khanna-booking.html
+3. /blog/latest
+4. /procedures/laser-vision/smile-laser/
+5. /procedures/laser-vision/lasik/
+6. /procedures/laser-vision/superlasik/
+7. /procedures/laser-vision/asa/
+8. /procedures/laser-vision/compare/
+9. /procedures/lens-solutions/evo-icl/
+10. /procedures/lens-solutions/pie/
+11. /procedures/lens-solutions/robotic-cataract-surgery/
+12. /procedures/lens-solutions/which-lens-is-right/
+13. /procedures/specialty-treatments/cxl-keratoconus/
+14. /procedures/specialty-treatments/ctak-keratoconus/
+15. /procedures/specialty-treatments/pterygium-surgery/
+16. /procedures/specialty-treatments/dry-eye-solutions/
+17. /procedures/specialty-treatments/chalazion-treatment/
+18. /tools/am-i-a-candidate/
+19. /tools/procedure-comparison/
+20. /book-consultation/
+21. /about/dr-khanna/biography/
+22. /about/dr-khanna/credentials-awards/
+23. /about/dr-khanna/books/
+24. /about/dr-khanna/media/
+25. /about/why-choose-us/technology/
+26. /about/why-choose-us/success-stories/
+27. /about/why-choose-us/celebrity-patients/
+28. /about/why-choose-us/gallery/
+29. /about/locations/beverly-hills/
+30. /about/locations/westlake-village/
+31. /patients/your-journey/first-visit-guide/
+32. /patients/your-journey/what-to-expect/
+33. /patients/your-journey/recovery-timeline/
+34. /patients/your-journey/post-op-care/
+35. /patients/resources/faqs/
+36. /patients/resources/insurance-info/
+37. /patients/resources/forms/
+38. /patients/results/testimonials/
+39. /patients/results/video-stories/
+40. /patients/results/reviews/
+41. /pricing-financing/procedure-costs/
+42. /pricing-financing/insurance-coverage/
+43. /patients/resources/financing-options/
+44. /pricing-financing/calculator/
+45. /pricing-financing/special-offers/
+46. /blog/latest/
+47. /blog/procedure-guides/
+48. /contact/schedule-consultation/
+49. /contact/virtual-consultation/
+50. /contact/forms/
+51. /contact/emergency-care/
+52. /khanna-gamified-forms
+53. /khanna-booking
+54. /blog/2025/11/thanksgiving-smile-laser-eye-surgery
+55. /blog/2020/08/3-innovative-eye-surgeries-fix-astigmatism-enhance-vision
+56. /blog/2020/11/in-7-minutes-get-young-again-new-eyes-with-pie
+57. /blog/2024/02/evo-icl-vs-lasik-pros-and-cons-of-each-procedure
+58. /blog/2023/06/ophthalmology-understanding-treating-medical-conditions-of-the-human-eye
+59. /blog/2023/05/studies-show-lasik-better-than-contact-lens
+60. /blog/2025/07/how-upper-eyelid-surgery-can-improve-your-vision
+61. /blog/2021/07/breakthrough-amblyopia-lazy-eye-treatment-for-adults
+62. /blog/2021/06/independence-day-lasik-special
+63. /blog/2023/01/how-to-put-in-eye-drops-or-ointment
+64. /blog/2024/04/see-the-world-differently-with-smile
+65. /blog/2022/06/bakersfield-presbyopia-treatment-for-a-hairstylist
+66. /blog/2025/09/guide-to-common-eye-surgeries-for-seniors
+67. /blog/2023/04/clear-vision-better-rides-lasik-advantages-for-snowboarders
+68. /blog/2024/04/the-latest-fda-approved-vision-correction-smile
+69. /blog/2023/05/the-evolution-and-benefits-of-the-ic-8-small-aperture-intraocular-lens
+70. /blog/2025/07/understanding-upper-blepharoplasty
+71. /blog/2021/07/magnificent-six-leading-advantages-of-lasik-eye-surgery
+72. /blog/2024/09/the-best-candidates-for-smile-eye-surgery-are-you-one-of-them-and-how-smile-laser-eye-surgery-boosted-professional-softball-career-of-jessica-schmidt
+73. /blog/2022/07/smile-laser-eye-surgery
+74. /blog/2024/02/is-lasik-the-right-solution-for-nearsightedness
+75. /blog/2023/02/can-lasik-fix-presbyopia-sure-here-are-5-facts
+76. /blog/2025/11/ctak-los-angeles
+77. /procedures/laser-vision/compare/pie-vs-evo-icl/
+78. /procedures/laser-vision/compare/presbyopic-iol/
+79. /book-consultation
+80. /patients/resources/faqs/lasik/
+81. /patients/resources/faqs/smile/
+
+
+================================================================================
+Report generated at: 11/22/2025, 6:49:08 AM
+Report file: Sitemap_Generation_2025-11-22_06-49-08.txt
+================================================================================

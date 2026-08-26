@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <% if (typeof pageData !== 'undefined' && pageData && pageData.metaTitle) { %>
+  <title><%= pageData.metaTitle %></title>
+  <% } else { %>
+  <title>Special Offers | Khanna Vision Institute</title>
+  <% } %>
+  <% if (typeof pageData !== 'undefined' && pageData && pageData.metaDescription) { %>
+  <meta name="description" content="<%= pageData.metaDescription %>">
+  <% } else { %>
+  <meta name="description" content="Special offers at Khanna Vision Institute — including our free vision seminar. Beverly Hills &amp; Westlake Village.">
+  <% } %>
+  <link rel="canonical" href="https://khannainstitute.com/pricing-financing/special-offers/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/public/css/header.css">
+  <link rel="stylesheet" href="/public/css/footer.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "name": "Special Offers",
+        "description": "Special offers and events at Khanna Vision Institute.",
+        "url": "https://khannainstitute.com/pricing-financing/special-offers/"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://khannainstitute.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Procedure costs", "item": "https://khannainstitute.com/pricing-financing/procedure-costs/" },
+          { "@type": "ListItem", "position": 3, "name": "Special offers", "item": "https://khannainstitute.com/pricing-financing/special-offers/" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --so-ink: #0f172a;
+      --so-muted: #475569;
+      --so-line: #e2e8f0;
+      --so-surface: #ffffff;
+      --so-wash: #f0fdf4;
+      --so-navy: #14532d;
+      --so-navy2: #166534;
+      --so-accent: #059669;
+      --so-gold: #ca8a04;
+    }
+    .so-page {
+      font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+      color: var(--so-ink);
+      background:
+        radial-gradient(900px 420px at 10% -5%, rgba(209, 250, 229, 0.75), transparent 52%),
+        radial-gradient(700px 380px at 95% 15%, rgba(254, 243, 199, 0.45), transparent 48%),
+        linear-gradient(180deg, var(--so-wash) 0%, #fff 40%, #f8fafc 100%);
+    }
+    .so-page h1, .so-page h2, .so-page h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .so-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 22px 80px;
+    }
+    .so-hero {
+      text-align: center;
+      padding: 28px 0 8px;
+    }
+    .so-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--so-navy2);
+      margin-bottom: 12px;
+    }
+    .so-hero h1 {
+      font-size: clamp(2rem, 4.5vw, 2.85rem);
+      line-height: 1.1;
+      margin: 0 0 12px;
+      color: var(--so-navy);
+    }
+    .so-lead {
+      margin: 0 auto;
+      font-size: 1.04rem;
+      line-height: 1.6;
+      color: var(--so-muted);
+      max-width: 520px;
+    }
+    .so-offer {
+      margin-top: 36px;
+      background: var(--so-surface);
+      border: 1px solid var(--so-line);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 20px 48px rgba(20, 83, 45, 0.1);
+    }
+    .so-offer-top {
+      background: linear-gradient(135deg, #14532d 0%, #166534 45%, #047857 100%);
+      color: #fff;
+      padding: 22px 24px;
+      text-align: center;
+    }
+    .so-offer-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    .so-offer-top h2 {
+      font-size: clamp(1.45rem, 3.5vw, 1.85rem);
+      margin: 0 0 10px;
+      color: #fff;
+    }
+    .so-offer-top p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.55;
+      opacity: 0.95;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .so-offer-body {
+      padding: 24px 24px 26px;
+    }
+    .so-offer-body ul {
+      margin: 0 0 20px;
+      padding-left: 1.2rem;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: var(--so-muted);
+    }
+    .so-offer-body li {
+      margin-bottom: 8px;
+    }
+    .so-offer-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .so-offer-cta a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      text-decoration: none;
+      transition: transform 0.2s, filter 0.2s;
+    }
+    .so-offer-cta a:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.03);
+    }
+    .so-offer-cta .so-btn-primary {
+      background: linear-gradient(135deg, #059669, #047857);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(5, 150, 105, 0.35);
+    }
+    .so-offer-cta .so-btn-secondary {
+      background: var(--so-surface);
+      color: var(--so-navy);
+      border: 2px solid var(--so-line);
+    }
+    .so-note {
+      margin-top: 22px;
+      font-size: 0.82rem;
+      color: var(--so-muted);
+      line-height: 1.5;
+      text-align: center;
+    }
+    .so-links {
+      margin-top: 40px;
+      padding-top: 28px;
+      border-top: 1px solid var(--so-line);
+    }
+    .so-links h2 {
+      font-size: 1.15rem;
+      text-align: center;
+      margin: 0 0 16px;
+      color: var(--so-ink);
+    }
+    .so-link-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .so-link-grid a {
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--so-accent);
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(5, 150, 105, 0.25);
+      background: rgba(255, 255, 255, 0.9);
+    }
+    .so-link-grid a:hover {
+      background: #fff;
+      border-color: var(--so-accent);
+    }
+    @media (max-width: 640px) {
+      .so-wrap { padding: 0 16px 64px; }
+      .so-hero { padding: 22px 0 4px; }
+      .so-offer-body { padding: 20px 18px 22px; }
+    }
+  </style>
+</head>
+<body class="so-page">
+  <%- include('/partials/header') %>
+  <%- include('/partials/seminar-banner') %>
+
+  <main>
+    <div class="so-wrap">
+      <header class="so-hero">
+        <p class="so-eyebrow">Pricing &amp; financing</p>
+        <h1>Special offers</h1>
+        <p class="so-lead">Ways to learn more and save—starting with our complimentary vision seminar. Check back as we add seasonal promotions.</p>
+      </header>
+
+      <% if (typeof pageData !== 'undefined' && pageData && pageData.content) { %>
+      <section aria-label="Additional content">
+        <%- pageData.content %>
+      </section>
+      <% } %>
+
+      <!-- When the seminar changes, update this block to match partials/seminar-banner.ejs -->
+      <article class="so-offer" aria-labelledby="seminar-offer-heading">
+        <div class="so-offer-top">
+          <span class="so-offer-badge">Current offer</span>
+          <h2 id="seminar-offer-heading">Free upcoming seminar</h2>
+          <p>Join our <strong style="color:#a7f3d0;">Vision Seminar</strong> — learn about SMILE, PIE, LASIK, cataract options, and more from Dr. Khanna. No cost to attend; RSVP to save your seat.</p>
+        </div>
+        <div class="so-offer-body">
+          <ul>
+            <li><strong>When:</strong> Tuesday, April 21, 2026 · 4:00&ndash;6:00 PM</li>
+            <li><strong>Where:</strong> Westlake Village office</li>
+            <li><strong>Includes:</strong> Education-focused session and time for questions—ideal if you&rsquo;re comparing procedures or candidacy.</li>
+          </ul>
+          <div class="so-offer-cta">
+            <a class="so-btn-primary" href="/seminar-rsvp/">RSVP free — reserve your spot</a>
+            <a class="so-btn-secondary" href="/about/locations/westlake-village/">Westlake directions</a>
+          </div>
+          <p class="so-note">Date and details may be updated for future events—confirm on the RSVP page or call the office.</p>
+        </div>
+      </article>
+
+      <nav class="so-links" aria-label="Related pricing pages">
+        <h2>More on pricing &amp; financing</h2>
+        <div class="so-link-grid">
+          <a href="/pricing-financing/procedure-costs/">Procedure costs</a>
+          <a href="/pricing-financing/calculator/" target="_blank" rel="noopener noreferrer">Financing calculator</a>
+          <a href="/patients/resources/financing-options/">Financing options</a>
+          <a href="/contact/schedule-consultation/">Book a consultation</a>
+        </div>
+      </nav>
+    </div>
+  </main>
+
+  <%- include('/partials/footer') %>
+</body>
+</html>

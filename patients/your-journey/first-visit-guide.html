@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <% if (typeof pageData !== 'undefined' && pageData && pageData.metaTitle) { %>
+  <title><%= pageData.metaTitle %></title>
+  <% } else { %>
+  <title>First Visit Guide | Khanna Vision Institute</title>
+  <% } %>
+  <% if (typeof pageData !== 'undefined' && pageData && pageData.metaDescription) { %>
+  <meta name="description" content="<%= pageData.metaDescription %>">
+  <% } else { %>
+  <meta name="description" content="Plan your first visit to Khanna Vision Institute: what to bring, how the day flows, and links to our Beverly Hills and Westlake Village offices.">
+  <% } %>
+  <link rel="canonical" href="https://khannainstitute.com/patients/your-journey/first-visit-guide/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/public/css/header.css">
+  <link rel="stylesheet" href="/public/css/footer.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "name": "First Visit Guide",
+        "description": "Guide to your first consultation at Khanna Vision Institute.",
+        "url": "https://khannainstitute.com/patients/your-journey/first-visit-guide/"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://khannainstitute.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Your journey", "item": "https://khannainstitute.com/patients/your-journey/what-to-expect/" },
+          { "@type": "ListItem", "position": 3, "name": "First visit guide", "item": "https://khannainstitute.com/patients/your-journey/first-visit-guide/" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --fvg-ink: #0f172a;
+      --fvg-muted: #475569;
+      --fvg-line: #e2e8f0;
+      --fvg-surface: #ffffff;
+      --fvg-wash: #f8fafc;
+      --fvg-navy: #1e3a5f;
+      --fvg-navy2: #2a5298;
+      --fvg-teal: #0d9488;
+      --fvg-teal-soft: rgba(13, 148, 136, 0.11);
+    }
+    .fvg-page {
+      font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+      color: var(--fvg-ink);
+      background:
+        radial-gradient(900px 400px at 15% -5%, rgba(224, 242, 254, 0.65), transparent 55%),
+        radial-gradient(700px 360px at 95% 8%, rgba(204, 251, 241, 0.4), transparent 50%),
+        linear-gradient(180deg, var(--fvg-wash) 0%, #fff 35%, var(--fvg-wash) 100%);
+    }
+    .fvg-page h1, .fvg-page h2, .fvg-page h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .fvg-wrap {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 22px 80px;
+    }
+    .fvg-hero {
+      text-align: center;
+      padding: 28px 0 8px;
+    }
+    .fvg-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fvg-navy2);
+      margin-bottom: 12px;
+    }
+    .fvg-hero h1 {
+      font-size: clamp(1.95rem, 4.2vw, 2.75rem);
+      line-height: 1.12;
+      margin: 0 0 14px;
+      color: var(--fvg-navy);
+    }
+    .fvg-lead {
+      margin: 0 auto;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--fvg-muted);
+      max-width: 560px;
+    }
+    .fvg-quick {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .fvg-pill {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--fvg-navy);
+      background: var(--fvg-surface);
+      border: 1px solid var(--fvg-line);
+      border-radius: 999px;
+      padding: 8px 16px;
+      box-shadow: 0 6px 20px rgba(30, 58, 95, 0.06);
+    }
+    .fvg-section {
+      margin-top: 40px;
+    }
+    .fvg-section h2 {
+      font-size: 1.35rem;
+      color: var(--fvg-navy);
+      margin: 0 0 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--fvg-line);
+    }
+    .fvg-section > p {
+      margin: 0 0 16px;
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: var(--fvg-muted);
+    }
+    .fvg-steps {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: fvg;
+    }
+    .fvg-steps li {
+      position: relative;
+      padding: 0 0 22px 52px;
+      border-left: 2px solid var(--fvg-line);
+      margin-left: 15px;
+    }
+    .fvg-steps li:last-child {
+      border-left-color: transparent;
+      padding-bottom: 0;
+    }
+    .fvg-steps li::before {
+      counter-increment: fvg;
+      content: counter(fvg);
+      position: absolute;
+      left: -17px;
+      top: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--fvg-navy), var(--fvg-navy2));
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(30, 58, 95, 0.2);
+    }
+    .fvg-steps h3 {
+      font-size: 1.05rem;
+      margin: 0 0 6px;
+      color: var(--fvg-ink);
+    }
+    .fvg-steps p {
+      margin: 0;
+      font-size: 0.93rem;
+      line-height: 1.55;
+      color: var(--fvg-muted);
+    }
+    .fvg-list {
+      margin: 8px 0 0;
+      padding-left: 1.15rem;
+      font-size: 0.93rem;
+      line-height: 1.55;
+      color: var(--fvg-muted);
+    }
+    .fvg-list li {
+      margin-bottom: 6px;
+    }
+    .fvg-locations {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    }
+    .fvg-loc {
+      background: var(--fvg-surface);
+      border: 1px solid var(--fvg-line);
+      border-radius: 16px;
+      padding: 1.2rem 1.15rem;
+      box-shadow: 0 10px 28px rgba(30, 58, 95, 0.07);
+    }
+    .fvg-loc h3 {
+      font-size: 1.05rem;
+      margin: 0 0 8px;
+      color: var(--fvg-navy);
+    }
+    .fvg-loc p {
+      margin: 0 0 10px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--fvg-muted);
+    }
+    .fvg-loc a {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--fvg-teal);
+      text-decoration: none;
+    }
+    .fvg-loc a:hover {
+      text-decoration: underline;
+    }
+    .fvg-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+      justify-content: center;
+    }
+    .fvg-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: filter 0.2s, transform 0.2s;
+    }
+    .fvg-btn:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+    .fvg-btn--primary {
+      background: linear-gradient(135deg, var(--fvg-navy), var(--fvg-navy2));
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(30, 58, 95, 0.22);
+    }
+    .fvg-btn--ghost {
+      background: var(--fvg-surface);
+      color: var(--fvg-navy);
+      border-color: var(--fvg-line);
+    }
+    .fvg-note {
+      margin-top: 28px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: var(--fvg-teal-soft);
+      border: 1px solid rgba(13, 148, 136, 0.2);
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: var(--fvg-muted);
+    }
+    .fvg-cta {
+      margin-top: 40px;
+      text-align: center;
+      padding: 36px 22px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--fvg-navy) 0%, #0f766e 50%, var(--fvg-navy2) 100%);
+      color: #fff;
+      box-shadow: 0 20px 48px rgba(30, 58, 95, 0.25);
+    }
+    .fvg-cta h2 {
+      color: #fff;
+      margin: 0 0 10px;
+      font-size: clamp(1.25rem, 2.8vw, 1.65rem);
+    }
+    .fvg-cta p {
+      margin: 0 0 18px;
+      opacity: 0.92;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .fvg-cta a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 26px;
+      border-radius: 999px;
+      font-weight: 700;
+      background: #fff;
+      color: var(--fvg-navy);
+      text-decoration: none;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
+    }
+    @media (max-width: 640px) {
+      .fvg-wrap { padding: 0 16px 64px; }
+      .fvg-hero { padding: 22px 0 4px; }
+      .fvg-steps li { padding-left: 46px; }
+    }
+  </style>
+</head>
+<body class="fvg-page">
+  <%- include('/partials/header') %>
+  <%- include('/partials/seminar-banner') %>
+
+  <main>
+    <div class="fvg-wrap">
+      <header class="fvg-hero">
+        <p class="fvg-eyebrow">Patients · Your journey</p>
+        <h1>Your first visit</h1>
+        <p class="fvg-lead">Whether you&rsquo;re exploring SMILE, LASIK, EVO ICL, PIE, or cataract care, your first appointment is about understanding your eyes—not rushing a decision. Here&rsquo;s how to prepare and what usually happens.</p>
+        <div class="fvg-quick" aria-label="At a glance">
+          <span class="fvg-pill">Allow ~1&ndash;2 hours if dilation may be needed</span>
+          <span class="fvg-pill">Two locations: Beverly Hills &amp; Westlake Village</span>
+        </div>
+      </header>
+
+      <% if (typeof pageData !== 'undefined' && pageData && pageData.content) { %>
+      <section class="fvg-section" aria-label="Additional content">
+        <%- pageData.content %>
+      </section>
+      <% } %>
+
+      <section class="fvg-section" aria-labelledby="flow-heading">
+        <h2 id="flow-heading">Typical visit flow</h2>
+        <p>Exact order can vary by location and your reason for visit; your team will guide you.</p>
+        <ol class="fvg-steps">
+          <li>
+            <h3>Before you arrive</h3>
+            <p>Complete any forms or requests sent by our office. If you wear contact lenses, ask whether we&rsquo;ve asked you to pause them before measurements—timing depends on lens type and what we&rsquo;re planning.</p>
+          </li>
+          <li>
+            <h3>Check-in</h3>
+            <p>We&rsquo;ll confirm your information, verify ID, and review basics like medications and health history.</p>
+          </li>
+          <li>
+            <h3>Diagnostics</h3>
+            <p>Advanced imaging and measurements help us map the cornea, lens, and ocular surface. This data drives candidacy and personalized planning—not a one-size-fits-all pitch.</p>
+          </li>
+          <li>
+            <h3>Doctor consultation</h3>
+            <p>You&rsquo;ll discuss goals, lifestyle, risks, benefits, and alternatives. We want you to leave with a clear understanding of whether you&rsquo;re a strong candidate and what sensible next steps look like.</p>
+          </li>
+          <li>
+            <h3>After the visit</h3>
+            <p>If dilation was used, bring sunglasses and expect temporary blur for near tasks. We&rsquo;ll outline follow-up, pricing or financing resources if you&rsquo;re ready, and how to reach us with questions.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="fvg-section" aria-labelledby="bring-heading">
+        <h2 id="bring-heading">What to bring</h2>
+        <ul class="fvg-list">
+          <li>Photo ID and your insurance or vision plan cards (if applicable—we&rsquo;ll explain what may or may not apply to elective vision correction).</li>
+          <li>A list of current medications and eye drops.</li>
+          <li>Your glasses and, if possible, your contact lens prescription or boxes.</li>
+          <li>Sunglasses for the ride home if eyes may be dilated.</li>
+          <li>Questions written down—easy to forget in the moment.</li>
+        </ul>
+      </section>
+
+      <section class="fvg-section" aria-labelledby="loc-heading">
+        <h2 id="loc-heading">Our offices</h2>
+        <p>Scheduling for <strong>both locations</strong> is available at <a href="tel:8052302126">(805) 230-2126</a>. Directions, parking, and suite details are on each location page—tap below for the office you&rsquo;re visiting.</p>
+        <div class="fvg-locations">
+          <div class="fvg-loc">
+            <h3>Beverly Hills</h3>
+            <p>Phone: <a href="tel:8052302126">(805) 230-2126</a></p>
+            <p><a href="/about/locations/beverly-hills/">Location &amp; directions →</a></p>
+          </div>
+          <div class="fvg-loc">
+            <h3>Westlake Village</h3>
+            <p>Phone: <a href="tel:8052302126">(805) 230-2126</a></p>
+            <p><a href="/about/locations/westlake-village/">Location &amp; directions →</a></p>
+          </div>
+        </div>
+      </section>
+
+      <p class="fvg-note">New patient or returning for a second opinion? Tell the scheduler your goals (e.g. freedom from readers, sports, night driving) so we can allocate the right testing time.</p>
+
+      <div class="fvg-links">
+        <a class="fvg-btn fvg-btn--primary" href="/contact/schedule-consultation/">Book a consultation</a>
+        <a class="fvg-btn fvg-btn--ghost" href="/patients/your-journey/what-to-expect/">What to expect</a>
+        <a class="fvg-btn fvg-btn--ghost" href="/patients/resources/faqs/">FAQs</a>
+        <a class="fvg-btn fvg-btn--ghost" href="/patients/resources/financing-options/">Financing</a>
+      </div>
+
+      <section class="fvg-cta" aria-labelledby="fvg-cta-h">
+        <h2 id="fvg-cta-h">Ready to get on the calendar?</h2>
+        <p>Choose Beverly Hills or Westlake Village and we&rsquo;ll help you prepare for a thorough, no-pressure first visit.</p>
+        <a href="/contact/schedule-consultation/">Schedule online</a>
+      </section>
+    </div>
+  </main>
+
+  <%- include('/partials/footer') %>
+</body>
+</html>

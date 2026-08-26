@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KVI Master SEO Report Dashboard</title>
+    <link rel="stylesheet" href="kvi-master-report.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="header-content">
+            <div class="header-left">
+                <h1>🏥 Khanna Vision Institute - Master SEO Report</h1>
+                <span class="last-update">Last Update: <span id="last-update-time">Never</span></span>
+            </div>
+            <div class="header-right">
+                <label class="auto-refresh">
+                    <input type="checkbox" id="auto-refresh-toggle" checked>
+                    <span>Auto-refresh (5m)</span>
+                </label>
+                <button id="master-refresh-btn" class="btn-refresh">🔄 Refresh Now</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Loading Overlay -->
+    <div id="master-loader" class="loading-overlay" style="display: none;">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Generating Master Report...</p>
+            <p class="loader-status">Analyzing 19 monitoring jobs across 547 pages</p>
+        </div>
+    </div>
+
+    <!-- Error Container -->
+    <div id="master-error" class="error-container" style="display: none;"></div>
+
+    <!-- Main Dashboard Container -->
+    <main class="dashboard-container">
+        
+        <!-- Master Health Score Section -->
+        <section id="master-health-score" class="health-score-section">
+            <!-- Rendered by JavaScript -->
+        </section>
+
+        <!-- SEO Categories Overview -->
+        <section id="seo-categories" class="seo-categories-section">
+            <!-- Rendered by JavaScript -->
+        </section>
+
+        <!-- Quick Stats Cards -->
+        <section class="quick-stats">
+            <div class="stat-card">
+                <div class="stat-icon">📄</div>
+                <div class="stat-details">
+                    <div class="stat-value" id="total-pages">547</div>
+                    <div class="stat-label">Total Pages</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⚠️</div>
+                <div class="stat-details">
+                    <div class="stat-value" id="total-issues">0</div>
+                    <div class="stat-label">Total Issues</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-details">
+                    <div class="stat-value" id="healthy-jobs">0</div>
+                    <div class="stat-label">Healthy Jobs</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-details">
+                    <div class="stat-value" id="overall-score">0%</div>
+                    <div class="stat-label">Overall Score</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- All Jobs Grid -->
+        <section class="jobs-section">
+            <h2>📋 All Monitoring Jobs Status</h2>
+            <div id="all-jobs-grid" class="jobs-grid">
+                <!-- Rendered by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Issues Panel -->
+        <section id="issues-panel" class="issues-section">
+            <!-- Rendered by JavaScript -->
+        </section>
+
+        <!-- Recommendations Panel -->
+        <section id="recommendations-panel" class="recommendations-section">
+            <!-- Rendered by JavaScript -->
+        </section>
+
+        <!-- Detailed Reports Tabs -->
+        <section class="detailed-reports">
+            <h2>📊 Detailed Analysis</h2>
+            
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('seo-technical', event)">Technical SEO</button>
+                <button class="tab-btn" onclick="showTab('seo-content', event)">Content SEO</button>
+                <button class="tab-btn" onclick="showTab('seo-links', event)">Link Analysis</button>
+                <button class="tab-btn" onclick="showTab('seo-performance', event)">Performance</button>
+                <button class="tab-btn" onclick="showTab('trends', event)">Trends</button>
+            </div>
+
+            <div id="tab-content" class="tab-content">
+                <!-- Technical SEO Tab -->
+                <div id="seo-technical" class="tab-pane active">
+                    <h3>Technical SEO Analysis</h3>
+                    <div class="technical-grid">
+                        <div class="tech-item">
+                            <h4>Schema Markup</h4>
+                            <div id="schema-chart-container">
+                                <canvas id="schema-chart"></canvas>
+                            </div>
+                            <div id="schema-details"></div>
+                        </div>
+                        <div class="tech-item">
+                            <h4>Canonical Tags</h4>
+                            <div id="canonical-details"></div>
+                        </div>
+                        <div class="tech-item">
+                            <h4>Robots Tags</h4>
+                            <div id="robots-details"></div>
+                        </div>
+                        <div class="tech-item">
+                            <h4>Sitemap Status</h4>
+                            <div id="sitemap-details"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content SEO Tab -->
+                <div id="seo-content" class="tab-pane">
+                    <h3>Content SEO Analysis</h3>
+                    <div class="content-grid">
+                        <div class="content-item">
+                            <h4>Meta Tags</h4>
+                            <div id="meta-details"></div>
+                        </div>
+                        <div class="content-item">
+                            <h4>OG Tags</h4>
+                            <div id="og-details"></div>
+                        </div>
+                        <div class="content-item">
+                            <h4>Image Alt Text</h4>
+                            <div id="alt-details"></div>
+                        </div>
+                        <div class="content-item">
+                            <h4>Content Quality</h4>
+                            <div id="content-quality-details"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Links Tab -->
+                <div id="seo-links" class="tab-pane">
+                    <h3>Link Analysis</h3>
+                    <div class="links-grid">
+                        <div class="links-item">
+                            <h4>Internal Links</h4>
+                            <canvas id="internal-links-chart"></canvas>
+                            <div id="internal-links-details"></div>
+                        </div>
+                        <div class="links-item">
+                            <h4>External Links</h4>
+                            <canvas id="external-links-chart"></canvas>
+                            <div id="external-links-details"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Tab -->
+                <div id="seo-performance" class="tab-pane">
+                    <h3>Performance Analysis</h3>
+                    <div class="performance-grid">
+                        <div class="perf-item">
+                            <h4>Core Web Vitals</h4>
+                            <canvas id="vitals-chart"></canvas>
+                            <div id="vitals-details"></div>
+                        </div>
+                        <div class="perf-item">
+                            <h4>404 Errors</h4>
+                            <div id="404-details"></div>
+                        </div>
+                        <div class="perf-item">
+                            <h4>Page Speed</h4>
+                            <div id="speed-details"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trends Tab -->
+                <div id="trends" class="tab-pane">
+                    <h3>Historical Trends (Last 7 Days)</h3>
+                    <canvas id="trends-chart"></canvas>
+                    <div id="trends-details"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Export Options -->
+        <section id="export-options" class="export-section">
+            <!-- Rendered by JavaScript -->
+        </section>
+
+        <!-- Quick Actions Panel -->
+        <section class="quick-actions">
+            <h2>⚡ Quick Actions</h2>
+            <div class="actions-grid">
+                <button class="action-btn" onclick="runAllHealthyJobs()">
+                    🔄 Run All Healthy Jobs
+                </button>
+                <button class="action-btn" onclick="fixAll404s()">
+                    🔧 Fix All 404 Errors
+                </button>
+                <button class="action-btn" onclick="generateAllSchemas()">
+                    📋 Generate Missing Schemas
+                </button>
+                <button class="action-btn" onclick="optimizeAllImages()">
+                    🖼️ Add Missing Alt Text
+                </button>
+                <button class="action-btn" onclick="createAllCanonicals()">
+                    🎯 Fix Canonical Tags
+                </button>
+                <button class="action-btn" onclick="expandThinContent()">
+                    📝 Expand Thin Content
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="dashboard-footer">
+        <div class="footer-content">
+            <p>© 2024 Khanna Vision Institute | Master SEO Dashboard v2.0</p>
+            <p>Monitoring 547 pages across 19 automated jobs</p>
+        </div>
+    </footer>
+
+    <!-- Modal for Job Details -->
+    <div id="job-details-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-job-title"></h2>
+            <div id="modal-job-content"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="kvi-master-report.js"></script>
+    <script>
+        // Tab switching
+        function showTab(tabId, event) {
+            document.querySelectorAll('.tab-pane').forEach(pane => {
+                pane.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            } else {
+                // Fallback: find the button by tab ID
+                const buttons = document.querySelectorAll('.tab-btn');
+                buttons.forEach(btn => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(tabId)) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+        }
+
+        // Quick Actions
+        async function runAllHealthyJobs() {
+            if (confirm('Run all healthy monitoring jobs now?')) {
+                try {
+                    const response = await fetch('/api/run-all-healthy', { method: 'POST' });
+                    if (response.ok) {
+                        alert('All healthy jobs started successfully');
+                        if (window.masterDashboard) {
+                            window.masterDashboard.refresh();
+                        }
+                    } else {
+                        alert('Feature requires backend setup');
+                    }
+                } catch (error) {
+                    alert('Feature requires backend setup');
+                }
+            }
+        }
+
+        async function fixAll404s() {
+            if (confirm('Create redirects for all 404 errors?')) {
+                try {
+                    const response = await fetch('/api/fix/404-redirects', { method: 'POST' });
+                    if (response.ok) {
+                        alert('Redirect creation initiated');
+                        if (window.masterDashboard) {
+                            window.masterDashboard.refresh();
+                        }
+                    } else {
+                        alert('Feature requires backend setup');
+                    }
+                } catch (error) {
+                    alert('Feature requires backend setup');
+                }
+            }
+        }
+
+        async function generateAllSchemas() {
+            if (confirm('Generate missing schema markup for all pages?')) {
+                try {
+                    const response = await fetch('/api/fix/generate-schemas', { method: 'POST' });
+                    if (response.ok) {
+                        alert('Schema generation started');
+                        if (window.masterDashboard) {
+                            window.masterDashboard.refresh();
+                        }
+                    } else {
+                        alert('Feature requires backend setup');
+                    }
+                } catch (error) {
+                    alert('Feature requires backend setup');
+                }
+            }
+        }
+
+        async function optimizeAllImages() {
+            if (confirm('Add alt text to all images missing it?')) {
+                try {
+                    const response = await fetch('/api/fix/add-alt-text', { method: 'POST' });
+                    if (response.ok) {
+                        alert('Alt text generation started');
+                        if (window.masterDashboard) {
+                            window.masterDashboard.refresh();
+                        }
+                    } else {
+                        alert('Feature requires backend setup');
+                    }
+                } catch (error) {
+                    alert('Feature requires backend setup');
+                }
+            }
+        }
+
+        async function createAllCanonicals() {
+            if (confirm('Fix canonical tags on all pages?')) {
+                try {
+                    const response = await fetch('/api/fix/canonical-tags', { method: 'POST' });
+                    if (response.ok) {
+                        alert('Canonical tag fixes initiated');
+                        if (window.masterDashboard) {
+                            window.masterDashboard.refresh();
+                        }
+                    } else {
+                        alert('Feature requires backend setup');
+                    }
+                } catch (error) {
+                    alert('Feature requires backend setup');
+                }
+            }
+        }
+
+        async function expandThinContent() {
+            if (confirm('Queue thin content pages for expansion?')) {
+                try {
+                    const response = await fetch('/api/fix/expand-content', { method: 'POST' });
+                    if (response.ok) {
+                        alert('Content expansion queue created');
+                        if (window.masterDashboard) {
+                            window.masterDashboard.refresh();
+                        }
+                    } else {
+                        alert('Feature requires backend setup');
+                    }
+                } catch (error) {
+                    alert('Feature requires backend setup');
+                }
+            }
+        }
+
+        // Modal functions
+        function closeModal() {
+            document.getElementById('job-details-modal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside (but not when clicking inside modal content)
+        window.onclick = function(event) {
+            const modal = document.getElementById('job-details-modal');
+            const modalContent = document.querySelector('.modal-content');
+            // Only close if clicking the backdrop, not the content
+            if (event.target == modal && !modalContent.contains(event.target)) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - Khanna Vision Institute</title>
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+    <link rel="stylesheet" href="/public/css/online-consult-form.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f7fafc;
+            min-height: 100vh;
+            padding: 140px 15px 40px;
+        }
+
+        .page-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 18px 35px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            max-width: 1200px;
+            margin: 0 auto 25px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .header-text h1 {
+            color: #1a202c;
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 2px;
+            letter-spacing: -0.3px;
+        }
+
+        .header-text p {
+            color: #718096;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav a {
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: #667eea;
+        }
+
+        .container {
+            max-width: 520px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .form-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 32px 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .form-header h2 {
+            font-size: 24px;
+            color: #1a202c;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .form-header p {
+            font-size: 13px;
+            color: #718096;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-feedback {
+            margin: 12px 0;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .form-feedback.success {
+            color: #2f855a;
+        }
+
+        .form-feedback.error {
+            color: #c53030;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 11px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.2s;
+            background: #fafafa;
+            color: #2d3748;
+            font-weight: 500;
+        }
+
+        input::placeholder {
+            color: #a0aec0;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234a5568' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 38px;
+            cursor: pointer;
+        }
+
+        .location-info {
+            background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%);
+            border-left: 3px solid #667eea;
+            padding: 10px 12px;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #5a67d8;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .date-time-section {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 14px;
+            background: #fafafa;
+        }
+
+        .date-picker-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 11px 14px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .date-picker-display:hover {
+            border-color: #667eea;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+        }
+
+        .date-picker-display span {
+            color: #a0aec0;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .date-picker-display.selected span {
+            color: #2d3748;
+        }
+
+        .calendar-icon {
+            font-size: 18px;
+        }
+
+        .calendar-container {
+            background: white;
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 10px;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .calendar-container.open {
+            display: block;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 0 4px;
+        }
+
+        .calendar-header button {
+            background: #f7fafc;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 6px 12px;
+            color: #4a5568;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .calendar-header button:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .calendar-month {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a202c;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: #718096;
+            padding: 6px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #cbd5e0;
+            font-weight: 600;
+        }
+
+        .calendar-day.available {
+            color: #2d3748;
+            background: #f7fafc;
+        }
+
+        .calendar-day.available:hover {
+            background: #e0e7ff;
+            color: #5a67d8;
+            transform: scale(1.05);
+        }
+
+        .calendar-day.highlighted {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(245, 87, 108, 0.3);
+        }
+
+        .calendar-day.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+        }
+
+        .calendar-day.disabled {
+            color: #e2e8f0;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.today {
+            border: 2px solid #667eea;
+        }
+
+        .time-selection {
+            display: none;
+            margin-top: 12px;
+        }
+
+        .time-selection.visible {
+            display: block;
+        }
+
+        .time-label {
+            font-size: 11px;
+            color: #4a5568;
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+        }
+
+        .time-slot {
+            padding: 9px 6px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 12px;
+        }
+
+        .time-slot:hover {
+            border-color: #667eea;
+            background: #e0e7ff;
+            color: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .time-slot.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .selected-datetime {
+            background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%);
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 12px;
+            color: #5a67d8;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+            font-size: 12px;
+        }
+
+        .selected-datetime.visible {
+            display: block;
+        }
+
+        .consent-box {
+            background: #f7fafc;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+            margin-bottom: 16px;
+        }
+
+        .consent-label {
+            display: flex;
+            align-items: start;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .consent-label input[type="checkbox"] {
+            margin-top: 2px;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            flex-shrink: 0;
+            accent-color: #667eea;
+        }
+
+        .consent-label span {
+            color: #4a5568;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .consent-label a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .consent-label a:hover {
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+                padding: 16px 20px;
+            }
+
+            .nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .form-card {
+                padding: 24px 20px;
+            }
+
+            .time-slots {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include('/partials/header') %>
+
+    <div class="page-wrap">
+        <div id="legacyBookingForm" style="display: none;">
+            <div class="container">
+                <div class="form-card">
+                    <div class="form-header">
+                        <h2>Book Your Appointment</h2>
+                        <p>Schedule your consultation with our vision experts</p>
+                    </div>
+
+                    <form id="bookingForm">
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Location</label>
+                            <select id="location" name="location" required>
+                                <option value="">Choose your preferred location</option>
+                                <option value="beverly-hills">Beverly Hills</option>
+                                <option value="westlake-village">Westlake Village</option>
+                            </select>
+                            <div id="locationInfo" class="location-info" style="display: none;"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Date & Time</label>
+                            <div class="date-time-section">
+                                <div class="date-picker-display" id="dateDisplay">
+                                    <span id="dateText">Select a date</span>
+                                    <span class="calendar-icon">📅</span>
+                                </div>
+
+                                <div class="calendar-container" id="calendarContainer">
+                                    <div class="calendar-header">
+                                        <button type="button" id="prevMonth">&lt;</button>
+                                        <div class="calendar-month" id="calendarMonth"></div>
+                                        <button type="button" id="nextMonth">&gt;</button>
+                                    </div>
+                                    <div class="calendar-grid" id="calendarGrid"></div>
+                                </div>
+
+                                <div class="time-selection" id="timeSelection">
+                                    <div class="time-label">Available Times</div>
+                                    <div class="time-slots" id="timeSlots"></div>
+                                </div>
+
+                                <div class="selected-datetime" id="selectedDatetime"></div>
+                            </div>
+                        </div>
+
+                        <div class="consent-box">
+                            <label class="consent-label">
+                                <input type="checkbox" id="consent" name="consent" required>
+                                <span>I consent to receive informational messages & alerts. Message frequency varies. Reply STOP to unsubscribe. <a href="#privacy">Privacy Policy</a></span>
+                            </label>
+                        </div>
+
+                        <div id="formFeedback" class="form-feedback" role="status" aria-live="polite"></div>
+
+                        <button type="submit" class="submit-btn">Confirm Appointment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <section class="online-consult">
+            <div class="zf-templateWidth">
+                <div class="zf-templateWrapper">
+                    <ul class="zf-tempHeadBdr">
+                        <li class="zf-tempHeadContBdr">
+                            <h2 class="zf-frmTitle">Online Consult Form</h2>
+                            <p class="zf-frmDesc">Share a few details and our team will reach out to schedule your consultation.</p>
+                        </li>
+                    </ul>
+
+                    <div class="zf-subContWrap">
+                        <form id="onlineConsultForm" novalidate>
+                            <div class="zf-tempFrmWrapper zf-date">
+                                <label class="zf-labelName">Preferred Consultation Date</label>
+                                <div class="zf-tempContDiv">
+                                    <span>
+                                        <input type="text" name="consultDate" placeholder="dd-MMM-yyyy">
+                                        <label>Example: 11-Nov-2025</label>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="zf-tempFrmWrapper zf-name gridName">
+                                <label class="zf-labelName">Name</label>
+                                <div class="zf-tempContDiv zf-twoType">
+                                    <div class="zf-nameWrapper">
+                                        <span>
+                                            <input type="text" name="firstName" placeholder="First Name" required>
+                                            <label>First Name</label>
+                                        </span>
+                                        <span>
+                                            <input type="text" name="lastName" placeholder="Last Name" required>
+                                            <label>Last Name</label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="zfgrid_Wrapper">
+                                <div class="zftwoColumn zfMultiColGrid">
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-date">
+                                            <label class="zf-labelName">Date of Birth</label>
+                                            <div class="zf-tempContDiv">
+                                                <span>
+                                                    <input type="text" name="dob" placeholder="dd-MMM-yyyy">
+                                                    <label>Example: 02-Feb-1988</label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">Age</label>
+                                            <div class="zf-tempContDiv">
+                                                <span>
+                                                    <input type="text" name="age" placeholder="Enter your age">
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="zf-tempFrmWrapper zf-address zf-addrlarge">
+                                <label class="zf-labelName">Address</label>
+                                <div class="zf-tempContDiv zf-address">
+                                    <div class="zf-addrCont">
+                                        <span class="zf-addresCols">
+                                            <input type="text" name="address1" placeholder="Street Address">
+                                            <label>Street Address</label>
+                                        </span>
+                                        <span class="zf-addresCols">
+                                            <input type="text" name="address2" placeholder="Address Line 2">
+                                            <label>Address Line 2</label>
+                                        </span>
+                                        <div class="address_row_3">
+                                            <span class="zf-addresCols">
+                                                <input type="text" name="city" placeholder="City">
+                                                <label>City</label>
+                                            </span>
+                                            <span class="zf-addresCols">
+                                                <input type="text" name="zip" placeholder="Postal / Zip Code">
+                                                <label>Postal / Zip Code</label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="zfgrid_Wrapper">
+                                <div class="zftwoColumn zfMultiColGrid">
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">Phone</label>
+                                            <div class="zf-tempContDiv">
+                                                <span>
+                                                    <input type="text" name="phone" placeholder="(555) 123-4567" required>
+                                                    <label>Number</label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">Email</label>
+                                            <div class="zf-tempContDiv">
+                                                <span>
+                                                    <input type="text" name="email" placeholder="you@example.com" required>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="zf-tempFrmWrapper zf-large">
+                                <label class="zf-labelName">What made you decide to have surgery now?</label>
+                                <div class="zf-tempContDiv">
+                                    <span>
+                                        <textarea name="reason" placeholder="Share your goals and questions..."></textarea>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="zf-tempFrmWrapper zf-oneColumns">
+                                <label class="zf-labelName">How did you hear about us?</label>
+                                <div class="zf-tempContDiv">
+                                    <span class="zf-multiAttType fullColWrap">
+                                        <input type="checkbox" id="referral_google" name="referralSources" value="Google Search / Online Review">
+                                        <label for="referral_google">Google Search / Online Review</label>
+                                    </span>
+                                    <span class="zf-multiAttType fullColWrap">
+                                        <input type="checkbox" id="referral_social" name="referralSources" value="Social Media">
+                                        <label for="referral_social">Social Media (TikTok, Instagram, Facebook, etc.)</label>
+                                    </span>
+                                    <span class="zf-multiAttType fullColWrap">
+                                        <input type="checkbox" id="referral_doctor" name="referralSources" value="Doctor Referral">
+                                        <label for="referral_doctor">My Doctor (Optometrist)</label>
+                                    </span>
+                                    <span class="zf-multiAttType fullColWrap">
+                                        <input type="checkbox" id="referral_friend" name="referralSources" value="Friend or Family">
+                                        <label for="referral_friend">Friend or Family</label>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div id="consultFeedback" class="form-feedback" role="status" aria-live="polite"></div>
+
+                            <div class="zf-fmFooter">
+                                <button class="zf-submitColor" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <%- include('/partials/footer') %>
+
+    <script src="/public/js/online-consult-form.js"></script>
+    <script>
+        const locationSchedule = {
+            'beverly-hills': {
+                name: 'Beverly Hills',
+                schedule: 'Monday & Thursday (8:00 AM - 4:00 PM)',
+                days: [1, 4],
+                hours: ['8am', '9am', '10am', '11am', '1pm', '2pm', '3pm', '4pm']
+            },
+            'westlake-village': {
+                name: 'Westlake Village',
+                schedule: 'Tuesday, Wednesday, Friday (8:00 AM - 4:00 PM)',
+                days: [2, 3, 5],
+                hours: ['8am', '9am', '10am', '11am', '1pm', '2pm', '3pm', '4pm']
+            }
+        };
+
+        let selectedLocation = null;
+        let selectedDate = null;
+        let selectedTime = null;
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+
+        const locationSelect = document.getElementById('location');
+        const locationInfo = document.getElementById('locationInfo');
+        const dateDisplay = document.getElementById('dateDisplay');
+        const dateText = document.getElementById('dateText');
+        const calendarContainer = document.getElementById('calendarContainer');
+        const calendarMonth = document.getElementById('calendarMonth');
+        const calendarGrid = document.getElementById('calendarGrid');
+        const timeSelection = document.getElementById('timeSelection');
+        const timeSlots = document.getElementById('timeSlots');
+        const selectedDatetime = document.getElementById('selectedDatetime');
+        const prevMonthBtn = document.getElementById('prevMonth');
+        const nextMonthBtn = document.getElementById('nextMonth');
+
+        locationSelect.addEventListener('change', (e) => {
+            selectedLocation = e.target.value;
+            if (selectedLocation) {
+                const schedule = locationSchedule[selectedLocation];
+                locationInfo.style.display = 'block';
+                locationInfo.innerHTML = `<strong>${schedule.name}</strong> - ${schedule.schedule}`;
+                selectedDate = null;
+                selectedTime = null;
+                dateText.textContent = 'Select a date';
+                dateDisplay.classList.remove('selected');
+                calendarContainer.classList.remove('open');
+                timeSelection.classList.remove('visible');
+                selectedDatetime.classList.remove('visible');
+                renderCalendar();
+            } else {
+                locationInfo.style.display = 'none';
+                calendarContainer.classList.remove('open');
+                timeSelection.classList.remove('visible');
+            }
+        });
+
+        dateDisplay.addEventListener('click', () => {
+            if (!selectedLocation) {
+                setFeedback('Select a location to see available dates.', 'error');
+                return;
+            }
+            calendarContainer.classList.toggle('open');
+        });
+
+        prevMonthBtn.addEventListener('click', () => {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            renderCalendar();
+        });
+
+        nextMonthBtn.addEventListener('click', () => {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            renderCalendar();
+        });
+
+        function renderCalendar() {
+            if (!selectedLocation) return;
+
+            const firstDay = new Date(currentYear, currentMonth, 1);
+            const lastDay = new Date(currentYear, currentMonth + 1, 0);
+            const daysInMonth = lastDay.getDate();
+            const startingDayOfWeek = firstDay.getDay();
+
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'];
+            calendarMonth.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+            calendarGrid.innerHTML = '';
+
+            const dayHeaders = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+            dayHeaders.forEach(day => {
+                const header = document.createElement('div');
+                header.className = 'calendar-day-header';
+                header.textContent = day;
+                calendarGrid.appendChild(header);
+            });
+
+            for (let i = 0; i < startingDayOfWeek; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day';
+                calendarGrid.appendChild(emptyDay);
+            }
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const schedule = locationSchedule[selectedLocation];
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(currentYear, currentMonth, day);
+                const dayOfWeek = date.getDay();
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+
+                const isPast = date < today;
+                const isAvailable = schedule.days.includes(dayOfWeek) && !isPast;
+
+                if (isPast) {
+                    dayElement.classList.add('disabled');
+                } else if (isAvailable) {
+                    dayElement.classList.add('available');
+                    
+                    const nextWeek = new Date(today);
+                    nextWeek.setDate(today.getDate() + 7);
+                    if (date <= nextWeek && date >= today) {
+                        dayElement.classList.add('highlighted');
+                    }
+
+                    dayElement.addEventListener('click', () => selectDate(date, day));
+                } else {
+                    dayElement.classList.add('disabled');
+                }
+
+                if (date.getTime() === today.getTime()) {
+                    dayElement.classList.add('today');
+                }
+
+                if (selectedDate && date.getTime() === selectedDate.getTime()) {
+                    dayElement.classList.add('selected');
+                }
+
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+
+        function selectDate(date, day) {
+            selectedDate = date;
+            selectedTime = null;
+            
+            const options = { weekday: 'long', month: 'short', day: 'numeric' };
+            dateText.textContent = date.toLocaleDateString('en-US', options);
+            dateDisplay.classList.add('selected');
+            
+            calendarContainer.classList.remove('open');
+            
+            renderCalendar();
+            renderTimeSlots();
+            
+            timeSelection.classList.add('visible');
+            selectedDatetime.classList.remove('visible');
+        }
+
+        function renderTimeSlots() {
+            const schedule = locationSchedule[selectedLocation];
+            timeSlots.innerHTML = '';
+
+            schedule.hours.forEach(time => {
+                const slot = document.createElement('div');
+                slot.className = 'time-slot';
+                slot.textContent = time;
+                slot.addEventListener('click', () => selectTime(slot, time));
+                timeSlots.appendChild(slot);
+            });
+        }
+
+        function selectTime(element, time) {
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                slot.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            selectedTime = time;
+
+            const options = { weekday: 'long', month: 'short', day: 'numeric' };
+            const dateStr = selectedDate.toLocaleDateString('en-US', options);
+            selectedDatetime.textContent = `✓ ${dateStr} at ${time}`;
+            selectedDatetime.classList.add('visible');
+        }
+
+        const bookingForm = document.getElementById('bookingForm');
+        const formFeedback = document.getElementById('formFeedback');
+
+        function setFeedback(message, type) {
+            formFeedback.textContent = message;
+            formFeedback.classList.remove('success', 'error');
+            if (type) {
+                formFeedback.classList.add(type);
+            }
+        }
+
+        bookingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!selectedLocation || !selectedDate || !selectedTime) {
+                setFeedback('Please choose a location, date, and time before confirming your appointment.', 'error');
+                return;
+            }
+
+            const schedule = locationSchedule[selectedLocation];
+            if (!schedule) {
+                setFeedback('Selected location is not available. Please choose another.', 'error');
+                return;
+            }
+
+            const formData = {
+                fullName: document.getElementById('fullName').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                location: schedule.name,
+                date: selectedDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
+                time: selectedTime,
+                consent: document.getElementById('consent').checked
+            };
+
+            if (!formData.fullName || !formData.email || !formData.phone) {
+                setFeedback('Please complete all required fields.', 'error');
+                return;
+            }
+
+            setFeedback('Saving your appointment...', null);
+
+            try {
+                const response = await fetch('/api/booking/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (!response.ok || !result.success) {
+                    throw new Error(result.message || 'Unable to save your appointment at the moment.');
+                }
+
+                setFeedback(`✓ Appointment Confirmed! ${formData.location} — ${formData.date} at ${formData.time}`, 'success');
+
+                bookingForm.reset();
+                selectedLocation = null;
+                selectedDate = null;
+                selectedTime = null;
+                locationSelect.value = '';
+                locationInfo.style.display = 'none';
+                dateText.textContent = 'Select a date';
+                dateDisplay.classList.remove('selected');
+                calendarContainer.classList.remove('open');
+                timeSelection.classList.remove('visible');
+                selectedDatetime.classList.remove('visible');
+                calendarGrid.innerHTML = '';
+            } catch (error) {
+                console.error('Booking submission failed:', error);
+                setFeedback(error.message || 'Something went wrong. Please try again.', 'error');
+            }
+        });
+
+        const todayDate = new Date();
+        currentMonth = todayDate.getMonth();
+        currentYear = todayDate.getFullYear();
+    </script>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', () => {
+            const headerInner = document.querySelector('.header-inner');
+            const toggleButton = document.querySelector('.menu-toggle');
+            if (toggleButton && headerInner) {
+                toggleButton.addEventListener('click', () => {
+                    const isOpen = headerInner.classList.toggle('is-open');
+                    toggleButton.setAttribute('aria-expanded', String(isOpen));
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!headerInner.contains(event.target) && headerInner.classList.contains('is-open')) {
+                        headerInner.classList.remove('is-open');
+                        toggleButton.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                document.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape' && headerInner.classList.contains('is-open')) {
+                        headerInner.classList.remove('is-open');
+                        toggleButton.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Vision Correction Pricing | Khanna Institute</title>
+    <style>
+        :root {
+            --primary-purple: #667eea;
+            --primary-pink: #764ba2;
+            --primary-blue: #1e3c72;
+            --primary-navy: #2a5298;
+            --success-green: #10b981;
+            --warning-yellow: #f59e0b;
+            --error-red: #ef4444;
+            --light-bg: #f3f4f6;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .calculator-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .calculator-header {
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .calculator-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .calculator-subtitle {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: white;
+            height: 100%;
+            border-radius: 4px;
+            width: 20%;
+            transition: width 0.3s ease;
+        }
+        
+        .calculator-body {
+            padding: 2rem;
+        }
+        
+        .step {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .step.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .step-title {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .step-description {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .option-card {
+            padding: 1.5rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .option-card:hover {
+            border-color: var(--primary-purple);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .option-card.selected {
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+            color: white;
+            border-color: transparent;
+        }
+        
+        .option-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .option-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .option-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-purple);
+        }
+        
+        .range-input {
+            width: 100%;
+            margin: 1rem 0;
+        }
+        
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-back {
+            background: white;
+            color: var(--text-dark);
+            border: 2px solid #e5e7eb;
+        }
+        
+        .btn-back:hover {
+            background: var(--light-bg);
+        }
+        
+        .btn-next {
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+            color: white;
+        }
+        
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-next:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* Results Section */
+        .results-section {
+            background: var(--light-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .price-display {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        
+        .price-label {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        
+        .price-amount {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .price-range {
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+        
+        .financing-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .financing-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .financing-months {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .financing-payment {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-purple);
+        }
+        
+        .factors-list {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .factor-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .factor-item:last-child {
+            border-bottom: none;
+        }
+        
+        .factor-icon {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .factor-impact {
+            margin-left: auto;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .impact-increase {
+            background: #fee2e2;
+            color: var(--error-red);
+        }
+        
+        .impact-decrease {
+            background: #dcfce7;
+            color: var(--success-green);
+        }
+        
+        .impact-neutral {
+            background: #fef3c7;
+            color: var(--warning-yellow);
+        }
+        
+        .disclaimer {
+            background: #fef3c7;
+            border-left: 4px solid var(--warning-yellow);
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .disclaimer-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .disclaimer-text {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .financing-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-header">
+            <h1 class="calculator-title">Get Your Personalized Vision Correction Quote</h1>
+            <p class="calculator-subtitle">Takes only 2 minutes • No obligation • Instant results</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </div>
+        
+        <div class="calculator-body">
+            <!-- Step 1: Age -->
+            <div class="step active" id="step1">
+                <h2 class="step-title">What's your age?</h2>
+                <p class="step-description">Your age helps us recommend the most suitable procedures</p>
+                
+                <div class="options-grid">
+                    <div class="option-card" onclick="selectAge('18-25')">
+                        <div class="option-icon">🎓</div>
+                        <div class="option-title">18-25</div>
+                        <div class="option-subtitle">College/Early Career</div>
+                    </div>
+                    <div class="option-card" onclick="selectAge('26-35')">
+                        <div class="option-icon">💼</div>
+                        <div class="option-title">26-35</div>
+                        <div class="option-subtitle">Young Professional</div>
+                    </div>
+                    <div class="option-card" onclick="selectAge('36-45')">
+                        <div class="option-icon">👨‍👩‍👧</div>
+                        <div class="option-title">36-45</div>
+                        <div class="option-subtitle">Established</div>
+                    </div>
+                    <div class="option-card" onclick="selectAge('46-55')">
+                        <div class="option-icon">👓</div>
+                        <div class="option-title">46-55</div>
+                        <div class="option-subtitle">Reading Glasses Age</div>
+                    </div>
+                    <div class="option-card" onclick="selectAge('56+')">
+                        <div class="option-icon">🏌️</div>
+                        <div class="option-title">56+</div>
+                        <div class="option-subtitle">Active Senior</div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <div></div>
+                    <button class="btn btn-next" onclick="nextStep()" id="nextBtn1" disabled>Next</button>
+                </div>
+            </div>
+            
+            <!-- Step 2: Prescription -->
+            <div class="step" id="step2">
+                <h2 class="step-title">What's your prescription range?</h2>
+                <p class="step-description">Don't know exactly? Choose the closest range</p>
+                
+                <div class="options-grid">
+                    <div class="option-card" onclick="selectPrescription('mild')">
+                        <div class="option-icon">👁️</div>
+                        <div class="option-title">Mild</div>
+                        <div class="option-subtitle">-1.00 to -3.00</div>
+                    </div>
+                    <div class="option-card" onclick="selectPrescription('moderate')">
+                        <div class="option-icon">👁️‍🗨️</div>
+                        <div class="option-title">Moderate</div>
+                        <div class="option-subtitle">-3.00 to -6.00</div>
+                    </div>
+                    <div class="option-card" onclick="selectPrescription('high')">
+                        <div class="option-icon">🔍</div>
+                        <div class="option-title">High</div>
+                        <div class="option-subtitle">-6.00 to -10.00</div>
+                    </div>
+                    <div class="option-card" onclick="selectPrescription('extreme')">
+                        <div class="option-icon">🔬</div>
+                        <div class="option-title">Extreme</div>
+                        <div class="option-subtitle">Above -10.00</div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Do you have astigmatism?</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="radio" name="astigmatism" value="none" id="astig-none">
+                            <label for="astig-none">None</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="radio" name="astigmatism" value="mild" id="astig-mild">
+                            <label for="astig-mild">Mild (< 2.00)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="radio" name="astigmatism" value="moderate" id="astig-mod">
+                            <label for="astig-mod">Moderate (2.00-4.00)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="radio" name="astigmatism" value="high" id="astig-high">
+                            <label for="astig-high">High (> 4.00)</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-back" onclick="previousStep()">Back</button>
+                    <button class="btn btn-next" onclick="nextStep()" id="nextBtn2" disabled>Next</button>
+                </div>
+            </div>
+            
+            <!-- Step 3: Conditions -->
+            <div class="step" id="step3">
+                <h2 class="step-title">Do you have any of these conditions?</h2>
+                <p class="step-description">Select all that apply (helps us provide accurate pricing)</p>
+                
+                <div class="checkbox-group" style="flex-direction: column;">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="dry-eyes" value="dry-eyes">
+                        <label for="dry-eyes">Dry Eyes</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="thin-corneas" value="thin-corneas">
+                        <label for="thin-corneas">Thin Corneas</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="presbyopia" value="presbyopia">
+                        <label for="presbyopia">Presbyopia (Need reading glasses)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="cataracts" value="cataracts">
+                        <label for="cataracts">Early Cataracts</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="keratoconus" value="keratoconus">
+                        <label for="keratoconus">Keratoconus</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="none" value="none">
+                        <label for="none">None of the above</label>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-back" onclick="previousStep()">Back</button>
+                    <button class="btn btn-next" onclick="nextStep()">Next</button>
+                </div>
+            </div>
+            
+            <!-- Step 4: Location & Insurance -->
+            <div class="step" id="step4">
+                <h2 class="step-title">Which location do you prefer?</h2>
+                <p class="step-description">We have different technologies at each location</p>
+                
+                <div class="options-grid">
+                    <div class="option-card" onclick="selectLocation('beverly-hills')">
+                        <div class="option-icon">🏙️</div>
+                        <div class="option-title">Beverly Hills</div>
+                        <div class="option-subtitle">Latest Technology</div>
+                    </div>
+                    <div class="option-card" onclick="selectLocation('westlake')">
+                        <div class="option-icon">🌳</div>
+                        <div class="option-title">Westlake Village</div>
+                        <div class="option-subtitle">Convenient Parking</div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Do you have vision insurance?</label>
+                    <select class="input-field" id="insurance-select" onchange="selectInsurance(this.value)">
+                        <option value="">Select your insurance</option>
+                        <option value="none">No Insurance / Self-Pay</option>
+                        <option value="vsp">VSP</option>
+                        <option value="eyemed">EyeMed</option>
+                        <option value="davis">Davis Vision</option>
+                        <option value="spectera">Spectera</option>
+                        <option value="blue-cross">Blue Cross Blue Shield</option>
+                        <option value="aetna">Aetna</option>
+                        <option value="united">UnitedHealthcare</option>
+                        <option value="cigna">Cigna</option>
+                        <option value="other">Other Insurance</option>
+                    </select>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-back" onclick="previousStep()">Back</button>
+                    <button class="btn btn-next" onclick="nextStep()" id="nextBtn4" disabled>Next</button>
+                </div>
+            </div>
+            
+            <!-- Step 5: Contact & Results -->
+            <div class="step" id="step5">
+                <h2 class="step-title">Get Your Personalized Quote</h2>
+                <p class="step-description">We'll email you a detailed quote with financing options</p>
+                
+                <div class="input-group">
+                    <label class="input-label">First Name</label>
+                    <input type="text" class="input-field" id="firstName" placeholder="John">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Last Name</label>
+                    <input type="text" class="input-field" id="lastName" placeholder="Doe">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Email</label>
+                    <input type="email" class="input-field" id="email" placeholder="john@example.com">
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Phone (Optional)</label>
+                    <input type="tel" class="input-field" id="phone" placeholder="(310) 555-0000">
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-back" onclick="previousStep()">Back</button>
+                    <button class="btn btn-next" onclick="calculatePrice()">Get My Quote</button>
+                </div>
+            </div>
+            
+            <!-- Results -->
+            <div class="step" id="results">
+                <h2 class="step-title">Your Personalized Vision Correction Quote</h2>
+                <p class="step-description">Based on your specific needs and conditions</p>
+                
+                <div class="price-display">
+                    <p class="price-label">Estimated Total Investment</p>
+                    <div class="price-amount" id="totalPrice">$4,400</div>
+                    <p class="price-range" id="priceRange">Range: $4,000 - $4,800</p>
+                </div>
+                
+                <div class="results-section">
+                    <h3 style="margin-bottom: 1rem;">Recommended Procedures</h3>
+                    <div id="recommendedProcedures"></div>
+                    
+                    <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Monthly Payment Options</h3>
+                    <div class="financing-options" id="financingOptions">
+                        <div class="financing-card">
+                            <div class="financing-months">24 months</div>
+                            <div class="financing-payment">$183/mo</div>
+                        </div>
+                        <div class="financing-card">
+                            <div class="financing-months">36 months</div>
+                            <div class="financing-payment">$122/mo</div>
+                        </div>
+                        <div class="financing-card">
+                            <div class="financing-months">48 months</div>
+                            <div class="financing-payment">$92/mo</div>
+                        </div>
+                        <div class="financing-card">
+                            <div class="financing-months">60 months</div>
+                            <div class="financing-payment">$73/mo</div>
+                        </div>
+                    </div>
+                    
+                    <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Pricing Factors</h3>
+                    <div class="factors-list" id="pricingFactors">
+                        <!-- Dynamically populated -->
+                    </div>
+                    
+                    <div class="disclaimer">
+                        <div class="disclaimer-title">⚠️ Important Information</div>
+                        <div class="disclaimer-text">
+                            This is an estimate based on the information provided. Final pricing will be determined after a comprehensive eye exam. Insurance benefits may reduce your out-of-pocket costs. HSA/FSA funds can be used for payment.
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button class="btn btn-next" style="width: auto;" onclick="scheduleConsultation()">
+                            Schedule Free Consultation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Pricing logic table
+        const pricingLogic = {
+            basePrices: {
+                lasik: {
+                    'beverly-hills': 2500,
+                    'westlake': 2000
+                },
+                smile: {
+                    'beverly-hills': 3200,
+                    'westlake': 2700
+                },
+                evoIcl: {
+                    'beverly-hills': 5000,
+                    'westlake': 4000
+                },
+                pie: {
+                    'beverly-hills': 7000,
+                    'westlake': 6000
+                }
+            },
+            
+            prescriptionMultipliers: {
+                mild: 0.9,      // Discount for easy cases
+                moderate: 1.0,  // Base price
+                high: 1.15,     // More complex
+                extreme: 1.3    // Most complex
+            },
+            
+            astigmatismAdders: {
+                none: 0,
+                mild: 200,
+                moderate: 400,
+                high: 600
+            },
+            
+            ageFactors: {
+                '18-25': {
+                    multiplier: 0.95,  // Young, healthy eyes
+                    procedures: ['lasik', 'smile', 'evoIcl']
+                },
+                '26-35': {
+                    multiplier: 1.0,
+                    procedures: ['lasik', 'smile', 'evoIcl']
+                },
+                '36-45': {
+                    multiplier: 1.05,
+                    procedures: ['lasik', 'smile', 'evoIcl', 'pie']
+                },
+                '46-55': {
+                    multiplier: 1.15,  // May need presbyopia treatment
+                    procedures: ['pie', 'evoIcl', 'smile']
+                },
+                '56+': {
+                    multiplier: 1.2,
+                    procedures: ['pie', 'evoIcl']
+                }
+            },
+            
+            conditionAdders: {
+                'dry-eyes': 300,        // Needs special treatment
+                'thin-corneas': 0,      // Requires ICL instead of LASIK
+                'presbyopia': 500,      // Needs multifocal treatment
+                'cataracts': 1000,      // More complex procedure
+                'keratoconus': 800      // Special treatment required
+            },
+            
+            insuranceDiscounts: {
+                'none': 0,
+                'vsp': 0.15,           // 15% discount
+                'eyemed': 0.12,        // 12% discount
+                'davis': 0.10,         // 10% discount
+                'spectera': 0.08,      // 8% discount
+                'blue-cross': 0.10,
+                'aetna': 0.12,
+                'united': 0.10,
+                'cigna': 0.08,
+                'other': 0.05          // 5% discount
+            }
+        };
+        
+        // User data storage
+        let userData = {
+            age: '',
+            prescription: '',
+            astigmatism: '',
+            conditions: [],
+            location: '',
+            insurance: '',
+            contact: {}
+        };
+        
+        let currentStep = 1;
+        const totalSteps = 5;
+        
+        function selectAge(age) {
+            userData.age = age;
+            document.querySelectorAll('#step1 .option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.target.closest('.option-card').classList.add('selected');
+            document.getElementById('nextBtn1').disabled = false;
+        }
+        
+        function selectPrescription(prescription) {
+            userData.prescription = prescription;
+            document.querySelectorAll('#step2 .option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.target.closest('.option-card').classList.add('selected');
+            checkStep2Completion();
+        }
+        
+        function checkStep2Completion() {
+            const astigmatism = document.querySelector('input[name="astigmatism"]:checked');
+            if (userData.prescription && astigmatism) {
+                userData.astigmatism = astigmatism.value;
+                document.getElementById('nextBtn2').disabled = false;
+            }
+        }
+        
+        // Add event listeners for astigmatism radio buttons
+        document.querySelectorAll('input[name="astigmatism"]').forEach(radio => {
+            radio.addEventListener('change', checkStep2Completion);
+        });
+        
+        function selectLocation(location) {
+            userData.location = location;
+            document.querySelectorAll('#step4 .option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.target.closest('.option-card').classList.add('selected');
+            checkStep4Completion();
+        }
+        
+        function selectInsurance(insurance) {
+            userData.insurance = insurance;
+            checkStep4Completion();
+        }
+        
+        function checkStep4Completion() {
+            if (userData.location && userData.insurance) {
+                document.getElementById('nextBtn4').disabled = false;
+            }
+        }
+        
+        function nextStep() {
+            if (currentStep === 3) {
+                // Collect conditions
+                userData.conditions = [];
+                document.querySelectorAll('#step3 input[type="checkbox"]:checked').forEach(checkbox => {
+                    userData.conditions.push(checkbox.value);
+                });
+            }
+            
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            currentStep++;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            updateProgressBar();
+        }
+        
+        function previousStep() {
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            currentStep--;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            updateProgressBar();
+        }
+        
+        function updateProgressBar() {
+            const progress = (currentStep / totalSteps) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+        
+        function calculatePrice() {
+            // Collect contact info
+            userData.contact = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value
+            };
+            
+            // Determine best procedure based on conditions
+            let recommendedProcedure = 'lasik';
+            let procedures = [];
+            
+            // Age-based recommendations
+            const ageData = pricingLogic.ageFactors[userData.age];
+            
+            // Condition-based logic
+            if (userData.conditions.includes('thin-corneas') || userData.prescription === 'extreme') {
+                recommendedProcedure = 'evoIcl';
+                procedures.push('EVO ICL (Best for your prescription/corneas)');
+            } else if (userData.conditions.includes('presbyopia') || userData.age === '46-55' || userData.age === '56+') {
+                recommendedProcedure = 'pie';
+                procedures.push('PIE - Presbyopic Implants (Reading vision solution)');
+            } else if (userData.conditions.includes('dry-eyes')) {
+                recommendedProcedure = 'smile';
+                procedures.push('SMILE (Less dry eye than LASIK)');
+            } else if (userData.prescription === 'mild' || userData.prescription === 'moderate') {
+                recommendedProcedure = 'smile';
+                procedures.push('SMILE (Minimally invasive)');
+                procedures.push('LASIK (Quick recovery)');
+            }
+            
+            // Calculate base price
+            let basePrice = pricingLogic.basePrices[recommendedProcedure][userData.location];
+            
+            // Apply prescription multiplier
+            basePrice *= pricingLogic.prescriptionMultipliers[userData.prescription];
+            
+            // Add astigmatism cost
+            basePrice += pricingLogic.astigmatismAdders[userData.astigmatism];
+            
+            // Apply age factor
+            basePrice *= ageData.multiplier;
+            
+            // Add condition costs
+            userData.conditions.forEach(condition => {
+                if (pricingLogic.conditionAdders[condition]) {
+                    basePrice += pricingLogic.conditionAdders[condition];
+                }
+            });
+            
+            // Calculate for both eyes
+            let totalPrice = basePrice * 2;
+            
+            // Apply insurance discount
+            const insuranceDiscount = pricingLogic.insuranceDiscounts[userData.insurance];
+            const discountAmount = totalPrice * insuranceDiscount;
+            totalPrice -= discountAmount;
+            
+            // Round to nearest $100
+            totalPrice = Math.round(totalPrice / 100) * 100;
+            
+            // Display results
+            displayResults(totalPrice, procedures, recommendedProcedure, discountAmount);
+        }
+        
+        function displayResults(totalPrice, procedures, recommendedProcedure, discountAmount) {
+            // Hide step 5 and show results
+            document.getElementById('step5').classList.remove('active');
+            document.getElementById('results').classList.add('active');
+            
+            // Update price display
+            document.getElementById('totalPrice').textContent = `$${totalPrice.toLocaleString()}`;
+            
+            // Calculate range (±10%)
+            const minPrice = Math.round(totalPrice * 0.9 / 100) * 100;
+            const maxPrice = Math.round(totalPrice * 1.1 / 100) * 100;
+            document.getElementById('priceRange').textContent = `Range: $${minPrice.toLocaleString()} - $${maxPrice.toLocaleString()}`;
+            
+            // Update financing options
+            const financingTerms = [24, 36, 48, 60];
+            const financingHTML = financingTerms.map(months => `
+                <div class="financing-card">
+                    <div class="financing-months">${months} months</div>
+                    <div class="financing-payment">$${Math.round(totalPrice / months)}/mo</div>
+                </div>
+            `).join('');
+            document.getElementById('financingOptions').innerHTML = financingHTML;
+            
+            // Display recommended procedures
+            const proceduresHTML = procedures.map(proc => `
+                <div style="padding: 0.5rem 0; border-bottom: 1px solid #e5e7eb;">
+                    ✓ ${proc}
+                </div>
+            `).join('');
+            document.getElementById('recommendedProcedures').innerHTML = proceduresHTML;
+            
+            // Display pricing factors
+            let factorsHTML = '';
+            
+            // Location factor
+            factorsHTML += `
+                <div class="factor-item">
+                    <span class="factor-icon">📍</span>
+                    <span>${userData.location === 'beverly-hills' ? 'Beverly Hills (Advanced Technology)' : 'Westlake Village'}</span>
+                    <span class="factor-impact ${userData.location === 'beverly-hills' ? 'impact-increase' : 'impact-neutral'}">
+                        ${userData.location === 'beverly-hills' ? '+10%' : 'Base'}
+                    </span>
+                </div>
+            `;
+            
+            // Age factor
+            const ageImpact = pricingLogic.ageFactors[userData.age].multiplier;
+            factorsHTML += `
+                <div class="factor-item">
+                    <span class="factor-icon">🎂</span>
+                    <span>Age: ${userData.age}</span>
+                    <span class="factor-impact ${ageImpact > 1 ? 'impact-increase' : ageImpact < 1 ? 'impact-decrease' : 'impact-neutral'}">
+                        ${ageImpact > 1 ? `+${Math.round((ageImpact - 1) * 100)}%` : ageImpact < 1 ? `-${Math.round((1 - ageImpact) * 100)}%` : 'Base'}
+                    </span>
+                </div>
+            `;
+            
+            // Prescription factor
+            factorsHTML += `
+                <div class="factor-item">
+                    <span class="factor-icon">👁️</span>
+                    <span>Prescription: ${userData.prescription}</span>
+                    <span class="factor-impact ${userData.prescription === 'high' || userData.prescription === 'extreme' ? 'impact-increase' : 'impact-neutral'}">
+                        ${userData.prescription === 'extreme' ? '+30%' : userData.prescription === 'high' ? '+15%' : 'Standard'}
+                    </span>
+                </div>
+            `;
+            
+            // Insurance discount
+            if (userData.insurance !== 'none' && discountAmount > 0) {
+                factorsHTML += `
+                    <div class="factor-item">
+                        <span class="factor-icon">🏥</span>
+                        <span>Insurance Discount</span>
+                        <span class="factor-impact impact-decrease">
+                            -$${Math.round(discountAmount).toLocaleString()}
+                        </span>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('pricingFactors').innerHTML = factorsHTML;
+            
+            // Update progress bar to 100%
+            document.getElementById('progressBar').style.width = '100%';
+            
+            // Send data to backend (placeholder)
+            console.log('User Data:', userData);
+            console.log('Calculated Price:', totalPrice);
+        }
+        
+        function scheduleConsultation() {
+            // Redirect to booking page or open calendar
+            alert('Redirecting to schedule your free consultation...');
+            // window.location.href = '/schedule';
+        }
+    </script>
+</body>
+</html>

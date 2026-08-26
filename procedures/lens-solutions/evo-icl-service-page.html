@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Meta Title -->
+    <% if (typeof pageData !== 'undefined' && pageData && pageData.metaTitle) { %>
+    <title><%= pageData.metaTitle %></title>
+    <% } else { %>
+    <title>EVO ICL: Reversible Vision Solution | Khanna Vision Institute</title>
+    <% } %>
+    
+    <!-- Meta Description -->
+    <% if (typeof pageData !== 'undefined' && pageData && pageData.metaDescription) { %>
+    <meta name="description" content="<%= pageData.metaDescription %>">
+    <% } else { %>
+    <meta name="description" content="Experience HD vision with EVO ICL. Reversible, no tissue removal, perfect for high prescriptions. Beverly Hills & Westlake Village.">
+    <% } %>
+    
+    <link rel="canonical" href="https://khannainstitute.com/procedures/lens-solutions/evo-icl/">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+    <!-- Trust-bar: only if old HTML still on server (hero padding is inline in partial) -->
+    <style>
+        .page-evo-icl .trust-bar,
+        .page-evo-icl section.trust-bar { display: none !important; }
+    </style>
+</head>
+<body class="page-evo-icl">
+    <%- include('/partials/header') %>
+    
+    <!-- Served from repo partial so updates deploy without Strapi DB edits -->
+    <%- include('/partials/evo-icl-page-content') %>
+
+    <%- include('/partials/footer') %>
+</body>
+</html>

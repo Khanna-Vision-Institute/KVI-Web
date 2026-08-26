@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khanna Vision - Level Up Your Vision | Next-Gen Eye Surgery</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap');
+        
+        :root {
+            --neon-purple: #9D4EDD;
+            --neon-pink: #FF006E;
+            --neon-blue: #3A86FF;
+            --neon-green: #06FFB4;
+            --neon-yellow: #FFB700;
+            --dark-bg: #0A0E27;
+            --darker-bg: #050714;
+            --white: #FFFFFF;
+            --cyber-red: #FF073A;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--dark-bg);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           ACHIEVEMENT SYSTEM
+        ============================================ */
+        .achievement-popup {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            box-shadow: 0 20px 60px rgba(157, 78, 221, 0.5);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        
+        .achievement-popup.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        
+        .achievement-icon {
+            font-size: 2rem;
+            animation: bounce 1s infinite;
+        }
+        
+        .achievement-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .achievement-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+        
+        .achievement-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Achievement Tracker */
+        .achievement-tracker {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 2px solid var(--neon-purple);
+            max-width: 200px;
+            z-index: 100;
+        }
+        
+        .achievement-progress {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: var(--neon-green);
+        }
+        
+        .achievement-list {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .achievement-badge {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            filter: grayscale(1) opacity(0.3);
+            transition: all 0.3s;
+        }
+        
+        .achievement-badge.unlocked {
+            filter: grayscale(0) opacity(1);
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* ============================================
+           SOUND CONTROL UI
+        ============================================ */
+        .sound-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--neon-purple);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .sound-control:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--neon-purple);
+        }
+        
+        .sound-control.muted {
+            border-color: var(--cyber-red);
+        }
+        
+        .sound-icon {
+            font-size: 1.5rem;
+        }
+        
+        /* ============================================
+           PARTICLE SYSTEM
+        ============================================ */
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        .particle {
+            position: absolute;
+            pointer-events: none;
+        }
+        
+        .particle-star {
+            width: 4px;
+            height: 4px;
+            background: var(--neon-yellow);
+            box-shadow: 0 0 10px var(--neon-yellow);
+            animation: particle-float 2s ease-out forwards;
+        }
+        
+        .particle-heart {
+            width: 20px;
+            height: 20px;
+            transform: rotate(-45deg);
+            animation: particle-heart-float 3s ease-out forwards;
+        }
+        
+        .particle-heart::before,
+        .particle-heart::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: var(--neon-pink);
+            border-radius: 50%;
+        }
+        
+        .particle-heart::before {
+            left: 10px;
+        }
+        
+        .particle-heart::after {
+            top: -10px;
+        }
+        
+        @keyframes particle-float {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(0);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes particle-heart-float {
+            0% {
+                transform: translateY(0) rotate(-45deg) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-200px) rotate(-45deg) scale(0);
+                opacity: 0;
+            }
+        }
+        
+        /* Confetti Particles */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: confetti-fall 3s ease-out forwards;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        /* ============================================
+           1. ENHANCED GLITCH HERO
+        ============================================ */
+        
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(ellipse at center, #0A0E27 0%, #050714 100%);
+            overflow: hidden;
+        }
+        
+        /* Animated Grid Background */
+        .cyber-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(157, 78, 221, 0.1) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(157, 78, 221, 0.1) 2px, transparent 2px);
+            background-size: 50px 50px;
+            animation: grid-move 10s linear infinite;
+        }
+        
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        /* Hero Content Container */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 2rem;
+            max-width: 1200px;
+        }
+        
+        /* Glitch Title */
+        .glitch-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+            color: var(--white);
+            animation: glitch-skew 1s infinite linear alternate-reverse;
+            cursor: pointer;
+        }
+        
+        .glitch-title::before,
+        .glitch-title::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch-title::before {
+            animation: glitch-1 0.3s infinite linear alternate-reverse;
+            color: var(--neon-blue);
+            z-index: -1;
+            mix-blend-mode: screen;
+        }
+        
+        .glitch-title::after {
+            animation: glitch-2 0.3s infinite linear alternate-reverse;
+            color: var(--neon-pink);
+            z-index: -2;
+            mix-blend-mode: screen;
+        }
+        
+        @keyframes glitch-skew {
+            0%, 100% { transform: skew(0deg); }
+            20% { transform: skew(0.5deg); }
+            40% { transform: skew(-0.5deg); }
+        }
+        
+        @keyframes glitch-1 {
+            0%, 100% { clip-path: inset(0 0 100% 0); }
+            25% { clip-path: inset(0 0 5% 0); }
+            50% { clip-path: inset(40% 0 40% 0); }
+            75% { clip-path: inset(0 0 65% 0); }
+        }
+        
+        @keyframes glitch-2 {
+            0%, 100% { clip-path: inset(100% 0 0 0); }
+            25% { clip-path: inset(10% 0 0 0); }
+            50% { clip-path: inset(40% 0 40% 0); }
+            75% { clip-path: inset(95% 0 0 0); }
+        }
+        
+        /* Hero Subtitle */
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin: 2rem 0;
+            opacity: 0.9;
+        }
+        
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .stat-item:hover {
+            transform: scale(1.1);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--neon-green);
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 20px var(--neon-green);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        /* CTA Buttons */
+        .hero-cta-container {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+        
+        .cyber-button {
+            position: relative;
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: transparent;
+            color: var(--neon-green);
+            border: 2px solid var(--neon-green);
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .cyber-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: var(--neon-green);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .cyber-button:hover {
+            color: var(--dark-bg);
+            box-shadow: 0 0 40px var(--neon-green);
+        }
+        
+        .cyber-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .cyber-button span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* ============================================
+           2. VISION SIMULATOR
+        ============================================ */
+        .vision-simulator {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            text-align: center;
+        }
+        
+        .simulator-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .vision-display {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(58, 134, 255, 0.3);
+        }
+        
+        .vision-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            filter: blur(10px);
+            transition: filter 0.5s ease;
+        }
+        
+        .vision-image.clear {
+            filter: blur(0);
+        }
+        
+        .prescription-slider {
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .slider {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 10px;
+            border-radius: 5px;
+            background: linear-gradient(90deg, var(--neon-pink) 0%, var(--neon-green) 100%);
+            outline: none;
+            cursor: pointer;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--white);
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--neon-purple);
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--white);
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--neon-purple);
+        }
+        
+        /* ============================================
+           3. TINDER-STYLE PROCEDURE SWIPER
+        ============================================ */
+        
+        .swiper-section {
+            min-height: 100vh;
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, var(--dark-bg) 0%, #0D1129 50%, var(--darker-bg) 100%);
+            position: relative;
+        }
+        
+        .swiper-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .swiper-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        /* Card Stack Container */
+        .card-stack {
+            position: relative;
+            max-width: 400px;
+            height: 600px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+        
+        /* Procedure Cards */
+        .procedure-card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            cursor: grab;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform-style: preserve-3d;
+            user-select: none;
+        }
+        
+        .procedure-card.dragging {
+            transition: none;
+            cursor: grabbing;
+        }
+        
+        .procedure-card.card-0 {
+            z-index: 4;
+            transform: scale(1) translateY(0);
+        }
+        
+        .procedure-card.card-1 {
+            z-index: 3;
+            transform: scale(0.95) translateY(20px);
+            opacity: 0.9;
+        }
+        
+        .procedure-card.card-2 {
+            z-index: 2;
+            transform: scale(0.9) translateY(40px);
+            opacity: 0.8;
+        }
+        
+        .procedure-card.card-3 {
+            z-index: 1;
+            transform: scale(0.85) translateY(60px);
+            opacity: 0.7;
+        }
+        
+        /* Card Gradients */
+        .card-gradient-smile {
+            background: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+        }
+        
+        .card-gradient-evo {
+            background: linear-gradient(135deg, #F093FB 0%, #F5576C 100%);
+        }
+        
+        .card-gradient-lasik {
+            background: linear-gradient(135deg, #4FACFE 0%, #00F2FE 100%);
+        }
+        
+        .card-gradient-pie {
+            background: linear-gradient(135deg, #43E97B 0%, #38F9D7 100%);
+        }
+        
+        /* Card Content */
+        .card-content {
+            height: 100%;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: white;
+        }
+        
+        .procedure-emoji {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .procedure-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        
+        .procedure-tagline {
+            font-size: 1rem;
+            text-align: center;
+            opacity: 0.9;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+        
+        .card-features {
+            list-style: none;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin: 0.8rem 0;
+            font-size: 1rem;
+        }
+        
+        .feature-icon {
+            margin-right: 0.8rem;
+            color: var(--neon-green);
+            font-size: 1.2rem;
+        }
+        
+        /* Card Price */
+        .card-price {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+        
+        .price-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--neon-yellow);
+            text-shadow: 0 0 20px var(--neon-yellow);
+        }
+        
+        /* Swipe Indicators */
+        .swipe-indicators {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .swipe-indicator {
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 900;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        
+        .like-indicator {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+        }
+        
+        .nope-indicator {
+            background: var(--cyber-red);
+            color: white;
+        }
+        
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .action-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid;
+            background: transparent;
+        }
+        
+        .btn-nope {
+            border-color: var(--cyber-red);
+            color: var(--cyber-red);
+        }
+        
+        .btn-nope:hover {
+            background: var(--cyber-red);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .btn-like {
+            border-color: var(--neon-green);
+            color: var(--neon-green);
+        }
+        
+        .btn-like:hover {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+            transform: scale(1.1);
+        }
+        
+        /* Match Modal */
+        .match-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .match-modal.active {
+            display: flex;
+        }
+        
+        .match-content {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            animation: pop-in 0.5s ease;
+        }
+        
+        @keyframes pop-in {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+        
+        .match-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .glitch-title {
+                font-size: clamp(2rem, 8vw, 4rem);
+            }
+            
+            .card-stack {
+                max-width: 90%;
+                height: 500px;
+            }
+            
+            .achievement-tracker {
+                bottom: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ACHIEVEMENT POPUP -->
+    <div class="achievement-popup" id="achievementPopup">
+        <div class="achievement-icon">🏆</div>
+        <div class="achievement-text">
+            <div class="achievement-title">Achievement Unlocked!</div>
+            <div class="achievement-desc" id="achievementDesc">First Steps</div>
+        </div>
+    </div>
+    
+    <!-- ACHIEVEMENT TRACKER -->
+    <div class="achievement-tracker">
+        <div class="achievement-progress">Achievements: <span id="achievementCount">0/8</span></div>
+        <div class="achievement-list">
+            <div class="achievement-badge" data-achievement="first-click" title="First Click">👆</div>
+            <div class="achievement-badge" data-achievement="first-swipe" title="First Swipe">👉</div>
+            <div class="achievement-badge" data-achievement="speed-swiper" title="Speed Swiper">⚡</div>
+            <div class="achievement-badge" data-achievement="perfect-vision" title="Perfect Vision">👁️</div>
+            <div class="achievement-badge" data-achievement="match-maker" title="Match Maker">💕</div>
+            <div class="achievement-badge" data-achievement="explorer" title="Explorer">🗺️</div>
+            <div class="achievement-badge" data-achievement="sound-master" title="Sound Master">🎵</div>
+            <div class="achievement-badge" data-achievement="combo-king" title="Combo King">🔥</div>
+        </div>
+    </div>
+    
+    <!-- SOUND CONTROL -->
+    <div class="sound-control" id="soundControl">
+        <span class="sound-icon">🔊</span>
+    </div>
+    
+    <!-- PARTICLE CONTAINER -->
+    <div class="particle-container" id="particleContainer"></div>
+    
+    <!-- SECTION 1: GLITCH HERO -->
+    <section class="hero-section">
+        <div class="cyber-grid"></div>
+        
+        <div class="hero-content">
+            <h1 class="glitch-title" data-text="LEVEL UP YOUR VISION" onclick="triggerGlitch()">
+                LEVEL UP YOUR VISION
+            </h1>
+            
+            <p class="hero-subtitle">No more glasses holding you back from greatness</p>
+            
+            <div class="stats-bar">
+                <div class="stat-item" onclick="statClick(event, 15000)">
+                    <div class="stat-number" data-target="15000">15,000</div>
+                    <div class="stat-label">Players Upgraded</div>
+                </div>
+                <div class="stat-item" onclick="statClick(event, 24)">
+                    <div class="stat-number" data-target="24">24</div>
+                    <div class="stat-label">Hour Recovery</div>
+                </div>
+                <div class="stat-item" onclick="statClick(event, 97)">
+                    <div class="stat-number" data-target="97">$97</div>
+                    <div class="stat-label">/Month</div>
+                </div>
+            </div>
+            
+            <div class="hero-cta-container">
+                <a href="#swiper" class="cyber-button" onclick="buttonClick()">
+                    <span>Choose Your Path</span>
+                </a>
+                <a href="#vision" class="cyber-button" onclick="buttonClick()">
+                    <span>Vision Simulator</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- SECTION 2: VISION SIMULATOR -->
+    <section class="vision-simulator" id="vision">
+        <h2 class="simulator-title">See The Difference</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.8;">Slide to experience your vision transformation</p>
+        
+        <div class="vision-display">
+            <div class="vision-image" id="visionImage">
+                CRYSTAL CLEAR GAMING 20/20
+            </div>
+        </div>
+        
+        <div class="prescription-slider">
+            <div class="slider-label">
+                <span>Before Surgery 🤓</span>
+                <span>After Surgery 😎</span>
+            </div>
+            <input type="range" class="slider" id="visionSlider" min="0" max="100" value="0" oninput="adjustVision(this.value)">
+        </div>
+    </section>
+    
+    <!-- SECTION 3: TINDER SWIPER -->
+    <section class="swiper-section" id="swiper">
+        <div class="swiper-header">
+            <h2 class="swiper-title">Match Your Perfect Procedure</h2>
+            <p>👈 Swipe left to pass | 👉 Swipe right to match</p>
+        </div>
+        
+        <div class="card-stack">
+            <div class="swipe-indicators">
+                <div class="nope-indicator swipe-indicator">NOPE</div>
+                <div class="like-indicator swipe-indicator">LIKE</div>
+            </div>
+            
+            <!-- Cards (in reverse order so first is on top) -->
+            <div class="procedure-card card-3 card-gradient-pie" data-procedure="pie">
+                <div class="card-content">
+                    <div class="procedure-emoji">🔮</div>
+                    <div class="procedure-name">PIE</div>
+                    <div class="procedure-tagline">Presbyopic Lens Implants</div>
+                    <ul class="card-features">
+                        <li class="feature-item">
+                            <span class="feature-icon">✨</span>
+                            <span>No more reading glasses</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✨</span>
+                            <span>Prevents cataracts</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✨</span>
+                            <span>All distances clear</span>
+                        </li>
+                    </ul>
+                    <div class="card-price">
+                        <div class="price-value">Custom</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="procedure-card card-2 card-gradient-lasik" data-procedure="lasik">
+                <div class="card-content">
+                    <div class="procedure-emoji">⚡</div>
+                    <div class="procedure-name">LASIK</div>
+                    <div class="procedure-tagline">The Classic Choice</div>
+                    <ul class="card-features">
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Most popular choice</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Quick results</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>24hr recovery</span>
+                        </li>
+                    </ul>
+                    <div class="card-price">
+                        <div class="price-value">$73/mo</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="procedure-card card-1 card-gradient-evo" data-procedure="evo">
+                <div class="card-content">
+                    <div class="procedure-emoji">💎</div>
+                    <div class="procedure-name">EVO ICL</div>
+                    <div class="procedure-tagline">The Premium Lens</div>
+                    <ul class="card-features">
+                        <li class="feature-item">
+                            <span class="feature-icon">💠</span>
+                            <span>HD Vision</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">💠</span>
+                            <span>100% Reversible</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">💠</span>
+                            <span>UV Protection</span>
+                        </li>
+                    </ul>
+                    <div class="card-price">
+                        <div class="price-value">$133/mo</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="procedure-card card-0 card-gradient-smile" data-procedure="smile">
+                <div class="card-content">
+                    <div class="procedure-emoji">🚀</div>
+                    <div class="procedure-name">SMILE</div>
+                    <div class="procedure-tagline">Next-Gen Laser Tech</div>
+                    <ul class="card-features">
+                        <li class="feature-item">
+                            <span class="feature-icon">🎯</span>
+                            <span>No flap = No fear</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🎮</span>
+                            <span>Back to gaming fast</span>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">💧</span>
+                            <span>Less dry eye</span>
+                        </li>
+                    </ul>
+                    <div class="card-price">
+                        <div class="price-value">$97/mo</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="action-btn btn-nope" onclick="swipeCard('left')">✕</button>
+            <button class="action-btn btn-like" onclick="swipeCard('right')">♥</button>
+        </div>
+    </section>
+    
+    <!-- MATCH MODAL -->
+    <div class="match-modal" id="matchModal">
+        <div class="match-content">
+            <h3 class="match-title">IT'S A MATCH!</h3>
+            <p>You and <span id="matchedProcedure">SMILE</span> are perfect for each other!</p>
+            <button onclick="closeMatch()" style="padding: 1rem 2rem; background: white; color: var(--neon-purple); border: none; border-radius: 50px; font-weight: 700; cursor: pointer; margin-top: 1rem;">Schedule Consultation</button>
+        </div>
+    </div>
+    
+    <script>
+        // ============================
+        // ACHIEVEMENT SYSTEM
+        // ============================
+        let achievements = {
+            'first-click': false,
+            'first-swipe': false,
+            'speed-swiper': false,
+            'perfect-vision': false,
+            'match-maker': false,
+            'explorer': false,
+            'sound-master': false,
+            'combo-king': false
+        };
+        
+        let achievementCount = 0;
+        let swipeCount = 0;
+        let comboCount = 0;
+        let lastSwipeTime = Date.now();
+        
+        function unlockAchievement(id, title, desc) {
+            if (achievements[id]) return;
+            
+            achievements[id] = true;
+            achievementCount++;
+            
+            // Update badge
+            const badge = document.querySelector(`[data-achievement="${id}"]`);
+            if (badge) {
+                badge.classList.add('unlocked');
+            }
+            
+            // Update counter
+            document.getElementById('achievementCount').textContent = `${achievementCount}/8`;
+            
+            // Show popup
+            const popup = document.getElementById('achievementPopup');
+            document.getElementById('achievementDesc').textContent = desc;
+            popup.classList.add('show');
+            
+            // Haptic feedback
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+            
+            // Play achievement sound
+            playAchievementSound();
+            
+            // Hide popup after 3 seconds
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 3000);
+            
+            // Create celebration particles
+            createConfetti();
+        }
+        
+        // ============================
+        // HAPTIC FEEDBACK SYSTEM
+        // ============================
+        function hapticFeedback(pattern = [50]) {
+            if (navigator.vibrate) {
+                navigator.vibrate(pattern);
+            }
+        }
+        
+        // ============================
+        // SOUND SYSTEM
+        // ============================
+        let soundEnabled = true;
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        document.getElementById('soundControl').addEventListener('click', function() {
+            soundEnabled = !soundEnabled;
+            this.classList.toggle('muted');
+            this.querySelector('.sound-icon').textContent = soundEnabled ? '🔊' : '🔇';
+            
+            if (soundEnabled) {
+                unlockAchievement('sound-master', 'Sound Master', 'Toggled sound effects');
+            }
+            
+            hapticFeedback([20]);
+        });
+        
+        function playSound(frequency, duration, type = 'sine') {
+            if (!soundEnabled) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = frequency;
+            oscillator.type = type;
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration);
+        }
+        
+        function playAchievementSound() {
+            const notes = [523, 659, 784, 1047];
+            notes.forEach((note, i) => {
+                setTimeout(() => playSound(note, 0.3), i * 100);
+            });
+        }
+        
+        // ============================
+        // PARTICLE SYSTEM
+        // ============================
+        function createParticle(x, y, type = 'star') {
+            const particle = document.createElement('div');
+            particle.className = `particle particle-${type}`;
+            particle.style.left = `${x}px`;
+            particle.style.top = `${y}px`;
+            
+            if (type === 'star') {
+                particle.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            }
+            
+            document.getElementById('particleContainer').appendChild(particle);
+            setTimeout(() => particle.remove(), 2000);
+        }
+        
+        function createConfetti() {
+            const colors = ['#FF006E', '#06FFB4', '#3A86FF', '#FFB700', '#9D4EDD'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = `${Math.random() * 100}%`;
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    document.getElementById('particleContainer').appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 20);
+            }
+        }
+        
+        // ============================
+        // GLITCH EFFECT
+        // ============================
+        function triggerGlitch() {
+            playSound(200, 0.1, 'sawtooth');
+            hapticFeedback([20, 10, 20]);
+            
+            if (!achievements['first-click']) {
+                unlockAchievement('first-click', 'First Click', 'Clicked the glitch title');
+            }
+        }
+        
+        // ============================
+        // STATS INTERACTION
+        // ============================
+        function statClick(event, value) {
+            const rect = event.currentTarget.getBoundingClientRect();
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    createParticle(
+                        rect.left + rect.width/2 + (Math.random() - 0.5) * 50,
+                        rect.top + rect.height/2 + (Math.random() - 0.5) * 50
+                    );
+                }, i * 20);
+            }
+            playSound(800, 0.1);
+            hapticFeedback([30]);
+        }
+        
+        // ============================
+        // BUTTON CLICKS
+        // ============================
+        function buttonClick() {
+            playSound(600, 0.1);
+            hapticFeedback([20]);
+            
+            if (!achievements['explorer']) {
+                if (document.querySelectorAll('.cyber-button:visited').length >= 1) {
+                    unlockAchievement('explorer', 'Explorer', 'Explored different sections');
+                }
+            }
+        }
+        
+        // ============================
+        // VISION SIMULATOR
+        // ============================
+        function adjustVision(value) {
+            const image = document.getElementById('visionImage');
+            const blur = 10 - (value / 10);
+            image.style.filter = `blur(${blur}px)`;
+            
+            if (value > 80) {
+                image.classList.add('clear');
+            } else {
+                image.classList.remove('clear');
+            }
+            
+            if (value == 100 && !achievements['perfect-vision']) {
+                unlockAchievement('perfect-vision', 'Perfect Vision', 'Achieved 20/20 in simulator');
+                hapticFeedback([50, 30, 50]);
+            }
+            
+            // Haptic tick
+            if (value % 10 === 0) {
+                hapticFeedback([10]);
+            }
+        }
+        
+        // ============================
+        // SWIPER FUNCTIONALITY
+        // ============================
+        let currentCardIndex = 0;
+        const cards = document.querySelectorAll('.procedure-card');
+        let isAnimating = false;
+        
+        // Touch/Mouse handling
+        let startX = null;
+        let currentX = null;
+        let cardBeingDragged = null;
+        
+        cards.forEach(card => {
+            card.addEventListener('mousedown', handleStart);
+            card.addEventListener('touchstart', handleStart, {passive: true});
+            card.addEventListener('mousemove', handleMove);
+            card.addEventListener('touchmove', handleMove, {passive: false});
+            card.addEventListener('mouseup', handleEnd);
+            card.addEventListener('touchend', handleEnd);
+            card.addEventListener('mouseleave', handleEnd);
+        });
+        
+        function handleStart(e) {
+            if (isAnimating) return;
+            if (!e.currentTarget.classList.contains('card-0')) return;
+            
+            cardBeingDragged = e.currentTarget;
+            const touch = e.touches ? e.touches[0] : e;
+            startX = touch.clientX;
+            currentX = startX;
+            cardBeingDragged.classList.add('dragging');
+            
+            hapticFeedback([20]);
+        }
+        
+        function handleMove(e) {
+            if (!startX || !cardBeingDragged) return;
+            
+            e.preventDefault();
+            const touch = e.touches ? e.touches[0] : e;
+            currentX = touch.clientX;
+            
+            const deltaX = currentX - startX;
+            const rotation = deltaX * 0.1;
+            
+            cardBeingDragged.style.transform = `translateX(${deltaX}px) rotate(${rotation}deg)`;
+            
+            // Update indicators
+            if (deltaX > 50) {
+                document.querySelector('.like-indicator').style.opacity = Math.min(1, deltaX / 150);
+                document.querySelector('.nope-indicator').style.opacity = 0;
+            } else if (deltaX < -50) {
+                document.querySelector('.nope-indicator').style.opacity = Math.min(1, Math.abs(deltaX) / 150);
+                document.querySelector('.like-indicator').style.opacity = 0;
+            } else {
+                document.querySelector('.like-indicator').style.opacity = 0;
+                document.querySelector('.nope-indicator').style.opacity = 0;
+            }
+        }
+        
+        function handleEnd() {
+            if (!startX || !cardBeingDragged) return;
+            
+            const deltaX = currentX - startX;
+            const threshold = 75;
+            
+            cardBeingDragged.classList.remove('dragging');
+            
+            if (Math.abs(deltaX) > threshold) {
+                animateCard(deltaX > 0 ? 'right' : 'left');
+            } else {
+                cardBeingDragged.style.transform = '';
+            }
+            
+            // Reset indicators
+            document.querySelector('.like-indicator').style.opacity = 0;
+            document.querySelector('.nope-indicator').style.opacity = 0;
+            
+            startX = null;
+            currentX = null;
+            cardBeingDragged = null;
+        }
+        
+        function animateCard(direction) {
+            if (isAnimating) return;
+            isAnimating = true;
+            
+            const card = cards[currentCardIndex];
+            
+            // Track swipes
+            swipeCount++;
+            
+            // Check for speed swiper achievement
+            const now = Date.now();
+            if (now - lastSwipeTime < 2000) {
+                comboCount++;
+                if (comboCount >= 3 && !achievements['speed-swiper']) {
+                    unlockAchievement('speed-swiper', 'Speed Swiper', 'Swiped 3 cards quickly');
+                }
+                if (comboCount >= 5 && !achievements['combo-king']) {
+                    unlockAchievement('combo-king', 'Combo King', '5x swipe combo!');
+                }
+            } else {
+                comboCount = 0;
+            }
+            lastSwipeTime = now;
+            
+            // First swipe achievement
+            if (!achievements['first-swipe']) {
+                unlockAchievement('first-swipe', 'First Swipe', 'Made your first swipe');
+            }
+            
+            if (direction === 'right') {
+                card.style.transform = 'translateX(150%) rotate(20deg)';
+                card.style.opacity = '0';
+                playSound(800, 0.2);
+                hapticFeedback([50, 30, 50]);
+                
+                // Create hearts
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        createParticle(
+                            window.innerWidth / 2 + (Math.random() - 0.5) * 100,
+                            window.innerHeight / 2 + (Math.random() - 0.5) * 100,
+                            'heart'
+                        );
+                    }, i * 50);
+                }
+                
+                showMatch(card.dataset.procedure);
+            } else {
+                card.style.transform = 'translateX(-150%) rotate(-20deg)';
+                card.style.opacity = '0';
+                playSound(400, 0.2, 'sawtooth');
+                hapticFeedback([30]);
+            }
+            
+            setTimeout(() => {
+                currentCardIndex++;
+                updateCards();
+                isAnimating = false;
+            }, 300);
+        }
+        
+        function updateCards() {
+            cards.forEach((card, index) => {
+                const position = index - currentCardIndex;
+                
+                if (position < 0) {
+                    card.style.display = 'none';
+                } else if (position === 0) {
+                    card.className = `procedure-card card-0 ${card.className.match(/card-gradient-\w+/)[0]}`;
+                    card.style.transform = '';
+                    card.style.opacity = '1';
+                } else if (position <= 3) {
+                    card.className = `procedure-card card-${position} ${card.className.match(/card-gradient-\w+/)[0]}`;
+                    card.style.display = 'block';
+                }
+            });
+        }
+        
+        function swipeCard(direction) {
+            animateCard(direction);
+        }
+        
+        function showMatch(procedure) {
+            document.getElementById('matchModal').classList.add('active');
+            document.getElementById('matchedProcedure').textContent = procedure.toUpperCase();
+            
+            if (!achievements['match-maker']) {
+                unlockAchievement('match-maker', 'Match Maker', 'Found your perfect procedure');
+            }
+            
+            createConfetti();
+            hapticFeedback([100, 50, 100, 50, 200]);
+        }
+        
+        function closeMatch() {
+            document.getElementById('matchModal').classList.remove('active');
+        }
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

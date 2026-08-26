@@ -1,0 +1,233 @@
+<!-- COMPLETE OUR TECHNOLOGY PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f_f_f_;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+            padding: 20px 0;
+        }
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: #1a1a1a; /* Dark, modern hero background */
+            color: #fff;
+            border-radius: 10px;
+        }
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+        .header p {
+            font-size: 1.25rem;
+            font-weight: 300;
+        }
+        .section {
+            background: #fff;
+            margin: 40px 0;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+        }
+        .section h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-top: 0;
+            border-bottom: 3px solid #007bff; /* Accent color */
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .section h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #007bff;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .tech-card {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 25px;
+            border: 1px solid #eee;
+        }
+        .tech-card p {
+            font-size: 1rem;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .cta-section {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(45deg, #007bff, #00c6ff); /* Engaging gradient */
+            color: #fff;
+            border-radius: 10px;
+        }
+        .cta-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+        .cta-button {
+            display: inline-block;
+            background: #fff;
+            color: #007bff;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px; /* Modern pill-shaped button */
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .cta-button.text {
+            background: #25D366; /* WhatsApp/Text green */
+            color: #fff;
+        }
+        .cta-button.text:hover {
+            background: #20b85a;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.5rem; }
+            .section h2 { font-size: 1.8rem; }
+        }
+    
+</style>
+
+<!-- NOW THE HTML CONTENT STARTS -->
+
+<div class="container">
+
+        <header class="header">
+            <h1>Your Future, In Focus.</h1>
+            <p>This isn't just technology. This is freedom.</p>
+            <p style="font-size: 1rem; opacity: 0.8;">(Scroll to see the tech that gets you there)</p>
+        </header>
+
+        <section class="section">
+            <h2>Ditch the Glasses & Contacts. (For Real)</h2>
+            <p>Tired of glasses fogging up? Lost another contact? Whether you're gaming, creating content, or just living, blurry should be optional. We get it. That's why we use the latest, minimally-invasive tech to get you to 20/20... or better.</p>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3>SMILE: The "No-Flap" Fix</h3>
+                    <p><strong>Perfect for:</strong> The fast-paced life.
+                    <br>As the latest and safest procedure, SMILE uses the advanced <strong>VisuMax laser from Carl Zeiss</strong> for a 10-minute, 'no-flap' procedure. It offers a super-quick recovery so you can get back to your life, fast.</p>
+                </div>
+                <div class="tech-card">
+                    <h3>LASIK & SUPERLASIK: The Gold Standard</h3>
+                    <p><strong>Perfect for:</strong> Proven, reliable results.
+                    <br>The OG of vision correction, modernized. We use 100% blade-free, all-laser tech. This means a precision flap made with the <strong>Intralase</strong> or <strong>VisuMax</strong> laser, followed by a custom treatment from the <strong>Visx</strong> or <strong>Allegretto 500 HD</strong> platform.</p>
+                </div>
+                 <div class="tech-card">
+                    <h3>EVO ICL: The Hi-Def Upgrade</h3>
+                    <p><strong>Perfect for:</strong> High prescriptions or thin corneas.
+                    <br>Think of it as a permanent, high-definition <strong>EVO ICL&trade;</strong> lens *inside* your eye. It's removable, offers UV protection, and delivers stunningly crisp, clear vision.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Beat Screen Strain & "Middle-Age" Vision.</h2>
+            <p>Stuck at a screen all day? Finding yourself holding menus at arm's length? That's not a life sentence. Your 40s and 50s are your prime—you shouldn't be fighting your own eyes to enjoy it. We have solutions for that.</p>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3>PIE (Presbyopic Implant): The "Reader-Delete"</h3>
+                    <p><strong>Perfect for:</strong> Ditching those annoying reading glasses.
+                    <br>This is the game-changer. We use premium, advanced-technology lenses like the <strong>Odyssey</strong>, <strong>Odyssey Toric</strong>, or <strong>PanOptix Pro</strong> to restore your full range of vision—near, far, and in-between. Read your texts *and* the street signs, no glasses required.
+                    </p>
+                    <div class="video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/UDb0eYQTxE8" 
+                            title="YouTube video player: Presbyopic Implant in Eye (PIE)" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+                <div class="tech-card">
+                <h3>Advanced Dry Eye Relief</h3>
+                    <p><strong>Perfect for:</strong> Screen-fatigued, irritated eyes.
+                    <br>Your eyes aren't supposed to feel like sandpaper. We go beyond basic drops with tech like <strong>LipiFlow®</strong> and <strong>IPL</strong> to treat the *source* of dry eye, giving you lasting, real relief.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>See Like You're 20 Again. (No, Really)</h2>
+            <p>Cataracts and cloudy vision? That's just a hardware problem, and we've got the upgrade. This isn't your grandfather's surgery. This is precise, customized, and designed to restore the "wow" to your vision, often making it better than it's been in decades.</p>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3>Laser Cataract Surgery</h3>
+                    <p><strong>Perfect for:</strong> Precision and reliability.
+                    <br>We use advanced femtosecond lasers—preferably the robotic <strong>Lensar&reg;</strong>, or the proven <strong>Catalys&reg;</strong> and <strong>Lensx&reg;</strong> systems—for a procedure that is bladeless, computer-controlled, and extraordinarily precise.</p>
+                </div>
+                <div class="tech-card">
+                    <h3>Light Adjustable Lens (LAL)</h3>
+                    <p><strong>Perfect for:</strong> The perfectionist.
+                    <br>This is the *only* lens you can "test drive" *after* surgery. We implant the <strong>Light Adjustable Lens&trade; (LAL)</strong>, you try it out in the real world, and then we use a special UV light to fine-tune and lock in your perfect, custom prescription.</p>
+                </div>
+                <div class="tech-card">
+                    <h3>Specialized Care</h3>
+                    <p><strong>Perfect for:</strong> Keratoconus, Pterygium & more.
+                    <br>We don't just do the common stuff. With treatments like <strong>CTAK</strong>, <strong>Corneal Cross-Linking</strong>, and no-stitch <strong>Pterygium surgery</strong>, we handle complex cases with the expertise and technology they deserve.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Ready for your upgrade?</h2>
+            <p style="font-weight: 300; max-width: 600px; margin: 0 auto 30px;">See which technology is the perfect fit for your eyes and your life. 
+            <br>Your consultation is the first step.</p>
+            
+            <a href="httpsm://khannainstitute.com/book-an-appointment/" class="cta-button">
+                Book Your Consult Online
+            </a>
+            
+            <a href="tel:3104821240" class="cta-button">
+                Call Us: (310) 482-1240
+            </a>
+
+            <a href="sms:81818571735" class="cta-button text">
+                Text Us: (818) 185-71735
+            </a>
+        </section>
+
+</div>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Chalazion Treatment - Khanna Institute</title>
+    <meta name="description" content="Tired of that stubborn eyelid bump? Discover our gentle, in-office heat and extraction procedure. No incisions, no stitches.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .text-teal-700 { color: #0d9488; }
+        .bg-teal-700 { background-color: #0d9488; }
+        .bg-teal-600 { background-color: #0f766e; }
+        .border-teal-700 { border-color: #0d9488; }
+        .bg-teal-50 { background-color: #f0fdfa; }
+        .text-teal-900 { color: #134e4a; }
+
+        /* Before/After Slider */
+        .ba-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .ba-slider img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .ba-resize {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .ba-resize img {
+            width: 100%; /* Will be overridden by JS */
+        }
+        .ba-handle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 4px;
+            height: 90%;
+            background-color: white;
+            opacity: 0.8;
+            cursor: ew-resize;
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ba-handle::after {
+            content: ' ';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 3px solid white;
+            border-radius: 50%;
+            background: rgba(13, 148, 136, 0.7); /* teal-700 with opacity */
+            box-shadow: 0 0 10px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        .ba-handle-arrows::before,
+        .ba-handle-arrows::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        .ba-handle-arrows::before {
+            left: -10px;
+            border-width: 8px 10px 8px 0;
+            border-color: transparent white transparent transparent;
+        }
+        .ba-handle-arrows::after {
+            right: -10px;
+            border-width: 8px 0 8px 10px;
+            border-color: transparent transparent transparent white;
+        }
+        
+        .ba-range {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: ew-resize;
+            z-index: 10;
+        }
+        .ba-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 100%;
+            width: 4px;
+            cursor: ew-resize;
+        }
+        .ba-range::-moz-range-thumb {
+            height: 100%;
+            width: 4px;
+            cursor: ew-resize;
+            border: none;
+            background: none;
+        }
+        .ba-range::-ms-thumb {
+            height: 100%;
+            width: 4px;
+            cursor: ew-resize;
+            border: none;
+            background: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-teal-700">Khanna Institute</div>
+            <a href="#consultation" class="bg-teal-700 text-white font-semibold px-6 py-2 rounded-lg hover:bg-teal-600 transition-colors">
+                Book Consultation
+            </a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-white py-16 md:py-24">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Hero Text -->
+                <div>
+                    <span class="text-teal-700 font-semibold uppercase">Advanced Chalazion Treatment</span>
+                    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-6 leading-tight">
+                        Tired of That Stubborn Eyelid Bump?
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8">
+                        Warm compresses not working? Discover our gentle, in-office procedure that provides immediate relief from chalazia. <strong class="text-teal-700">No incisions, no stitches, and no downtime.</strong>
+                    </p>
+                    <a href="#consultation" class="bg-teal-700 text-white font-bold text-lg px-10 py-4 rounded-lg hover:bg-teal-600 transition-colors">
+                        Book Your Free Consultation
+                    </a>
+                </div>
+
+                <!-- Before & After Slider -->
+                <div>
+                    <div id="ba-slider" class="ba-slider" data-img-width="1000">
+                        <img src="https://placehold.co/1000x700/e0e0e0/b0b0b0?text=BEFORE+(Stubborn+Chalazion)" alt="Eyelid with a chalazion before treatment">
+                        <div class="ba-resize" style="width: 50%;">
+                            <img src="https://placehold.co/1000x700/e0e0e0/b0b0b0?text=AFTER+(Clear,+Healthy+Eyelid)" alt="Clear eyelid after chalazion treatment" style="width: 1000px;">
+                        </div>
+                        <div class="ba-handle" style="left: 50%;">
+                            <div class="ba-handle-arrows"></div>
+                        </div>
+                        <input type="range" class="ba-range" min="0" max="100" value="50" aria-label="Before/After Slider">
+                    </div>
+                    <p class="text-center text-gray-600 mt-4 italic">Move the slider to see the transformation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem & Solution Section -->
+    <section class="py-16 md:py-24 bg-teal-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-teal-900 mb-4">
+                    Why Home Compresses Fail (And Ours Works)
+                </h2>
+                <p class="text-lg text-gray-700">
+                    A chalazion is a blockage of a deep oil gland in your eyelid. The oil inside has hardened, like cold butter. Your warm washcloth at home simply can't get hot enough for long enough to melt this stubborn blockage.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Old Way -->
+                <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
+                    <h3 class="text-2xl font-bold text-gray-500 mb-4">The "Old Way" (Scary & Outdated)</h3>
+                    <p class="text-gray-600 mb-4">
+                        The traditional method is "Incision & Drainage." This is a surgical procedure that involves:
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-700">
+                            <span class="text-red-500 font-bold mr-2">✕</span> A painful anesthetic injection in the eyelid.
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <span class="text-red-500 font-bold mr-2">✕</span> <strong class="font-semibold">Flipping the eyelid inside-out.</strong>
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <span class="text-red-500 font-bold mr-2">✕</span> <strong class="font-semibold">Using a scalpel</strong> to cut the eyelid open.
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <span class="text-red-500 font-bold mr-2">✕</span> Scraping out the contents, causing trauma.
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <span class="text-red-500 font-bold mr-2">✕</span> Risk of scarring and a long recovery.
+                        </li>
+                    </ul>
+                </div>
+                <!-- Our Way -->
+                <div class="bg-white p-8 rounded-lg shadow-lg border-2 border-teal-700">
+                    <h3 class="text-2xl font-bold text-teal-700 mb-4">Our "Modern Way" (Gentle & Effective)</h3>
+                    <p class="text-gray-600 mb-4">
+                        Our advanced **Thermal Expression Procedure** is non-surgical and designed for your comfort:
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-700">
+                            <span class="text-teal-700 font-bold mr-2">✔</span> Simple, painless numbing eye drops.
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <span class="text-teal-700 font-bold mr-2">✔</span> <strong class="font-semibold">Applying therapeutic heat</strong> to melt the blockage.
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <span class="text-teal-700 font-bold mr-2">✔</span> <strong class="font-semibold">Gently extracting</strong> the liquefied oil.
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <span class="text-teal-700 font-bold mr-2">✔</span> <strong class="text-teal-900 font-bold">No incisions. No stitches. No scars.</strong>
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <span class="text-teal-700 font-bold mr-2">✔</span> Immediate relief and you drive home.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Your 3-Step Path to a Clear Eyelid
+                </h2>
+                <p class="text-lg text-gray-700">
+                    Our entire process is designed to be quick, comfortable, and highly effective.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-teal-700 text-white text-3xl font-bold rounded-full flex items-center justify-center mx-auto mb-6">1</div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Therapeutic Heat</h3>
+                    <p class="text-gray-600">
+                        First, we apply precise, therapeutic heat directly to the blocked gland. This heat comfortably and safely liquefies the hard, trapped oil—something a home compress can't do.
+                    </p>
+                </div>
+                <!-- Step 2 -->
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-teal-700 text-white text-3xl font-bold rounded-full flex items-center justify-center mx-auto mb-6">2</div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Gentle Extraction</h3>
+                    <p class="text-gray-600">
+                        Once the blockage is fully melted, Dr. Khanna performs a gentle, manual extraction of the gland. This completely clears the contents without any cutting, removing the "lump" immediately.
+                    </p>
+                </div>
+                <!-- Step 3 -->
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-teal-700 text-white text-3xl font-bold rounded-full flex items-center justify-center mx-auto mb-6">3</div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Immediate Relief</h3>
+                    <p class="text-gray-600">
+                        The bump is instantly smaller, and the pressure is gone. The gland can now heal naturally. The entire in-office procedure is fast, and you can return to your day right after.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 md:py-24 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
+                    Frequently Asked Questions
+                </h2>
+                <div class="space-y-8">
+                    <div>
+                        <h4 class="text-xl font-semibold text-teal-900 mb-2">Does the procedure hurt?</h4>
+                        <p class="text-gray-700">
+                            No. We use powerful anesthetic (numbing) eye drops to ensure you are completely comfortable. Most patients report feeling only a sense of warmth and light pressure, but no pain.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold text-teal-900 mb-2">How long does the treatment take?</h4>
+                        <p class="text-gray-700">
+                            The entire in-office procedure is very quick, typically taking only 15-20 minutes from start to finish.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold text-teal-900 mb-2">Is there any downtime?</h4>
+                        <p class="text-gray-700">
+                            No. You can drive yourself home and return to work or your normal activities the same day. Your eyelid may be slightly red or swollen for a day or two, but this is minor.
+                        </a:
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold text-teal-900 mb-2">Will my chalazion come back?</h4>
+                        <p class="text-gray-700">
+                            While this procedure effectively clears the *current* blockage, chalazia are often a sign of an underlying condition called Meibomian Gland Dysfunction (MGD) or Blepharitis. We will also assess your overall eyelid health to create a plan to prevent new ones from forming.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold text-teal-900 mb-2">Is this covered by insurance?</h4>
+                        <p class="text-gray-700">
+                            In many cases, the evaluation and treatment of a chalazion is considered medically necessary and is covered by PPO insurance plans. Our team will verify your benefits for you during your consultation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="consultation" class="bg-teal-700 text-white py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                Stop Waiting for It to Go Away.
+            </h2>
+            <p class="text-xl text-teal-100 mb-10 max-w-2xl mx-auto">
+                Don't let a frustrating eyelid bump affect your confidence any longer. Schedule your free, no-obligation consultation to see if our advanced thermal treatment is right for you.
+            </p>
+            <a href="#" class="bg-white text-teal-700 font-bold text-lg px-10 py-4 rounded-lg hover:bg-gray-100 transition-colors">
+                Book My Free Consultation
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Khanna Institute. All rights reserved. Beverly Hills, CA.</p>
+            <p classs="text-sm mt-2">
+                Disclaimer: This website is for informational purposes only and does not constitute medical advice. Individual results may vary.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Before/After Slider Logic
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const slider = document.getElementById('ba-slider');
+            if (slider) {
+                const resize = slider.querySelector('.ba-resize');
+                const handle = slider.querySelector('.ba-handle');
+                const range = slider.querySelector('.ba-range');
+                const imgWidth = slider.getAttribute('data-img-width');
+                
+                if(resize) resize.style.width = '50%';
+                if(handle) handle.style.left = '50%';
+
+                const setSliderPosition = (percent) => {
+                    if(resize) resize.style.width = `${percent}%`;
+                    if(handle) handle.style.left = `${percent}%`;
+                };
+
+                const onInput = (e) => {
+                    setSliderPosition(e.target.value);
+                };
+
+                const onMove = (e) => {
+                    const rect = slider.getBoundingClientRect();
+                    let x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+                    if (x < 0) x = 0;
+                    if (x > rect.width) x = rect.width;
+                    const percent = (x / rect.width) * 100;
+                    if(range) range.value = percent;
+                    setSliderPosition(percent);
+                };
+
+                const onTouchStart = (e) => {
+                    slider.addEventListener('touchmove', onMove);
+                    document.addEventListener('touchend', onTouchEnd);
+                };
+
+                const onTouchEnd = () => {
+                    slider.removeEventListener('touchmove', onMove);
+                    document.removeEventListener('touchend', onTouchEnd);
+                };
+                
+                const onMouseDown = (e) => {
+                    document.addEventListener('mousemove', onMove);
+                    document.addEventListener('mouseup', onMouseUp);
+                };
+
+                const onMouseUp = () => {
+                    document.removeEventListener('mousemove', onMove);
+                    document.removeEventListener('mouseup', onMouseUp);
+                };
+                
+                if (range) {
+                    range.addEventListener('input', onInput);
+                }
+
+                // Mouse and Touch events
+                slider.addEventListener('mousedown', onMouseDown);
+                slider.addEventListener('touchstart', onTouchStart, { passive: true });
+
+                // Set image widths
+                const afterImg = resize.querySelector('img');
+                if (afterImg) {
+                    afterImg.style.width = `${imgWidth}px`;
+                }
+                
+                // Adjust for slider width on load and resize
+                const adjustWidth = () => {
+                    const sliderWidth = slider.getBoundingClientRect().width;
+                    const afterImg = resize.querySelector('img');
+                    if (afterImg) {
+                        afterImg.style.width = `${sliderWidth}px`;
+                    }
+                };
+                
+                window.addEventListener('resize', adjustWidth);
+                adjustWidth();
+            }
+        });
+    </script>
+
+</body>
+</html>

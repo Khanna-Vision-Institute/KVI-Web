@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Meta Title -->
+    <% if (typeof pageData !== 'undefined' && pageData && pageData.metaTitle) { %>
+    <title><%= pageData.metaTitle %></title>
+    <% } else if (typeof pageData !== 'undefined' && pageData && pageData.title) { %>
+    <title><%= pageData.title %> | Khanna Vision Institute</title>
+    <% } else { %>
+    <title>Khanna Vision Institute</title>
+    <% } %>
+    
+    <!-- Meta Description -->
+    <% if (typeof pageData !== 'undefined' && pageData && pageData.metaDescription) { %>
+    <meta name="description" content="<%= pageData.metaDescription %>">
+    <% } %>
+    
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+</head>
+<body>
+    <%- include('/partials/header') %>
+    
+    <!-- Strapi Content - Check both content and Content fields -->
+    <% if (typeof pageData !== 'undefined' && pageData) { %>
+        <% if (pageData.content && pageData.content.trim()) { %>
+            <%- pageData.content %>
+        <% } else if (pageData.Content && pageData.Content.trim()) { %>
+            <%- pageData.Content %>
+        <% } else { %>
+            <!-- Fallback if no content -->
+            <div style="padding: 140px 20px 60px; max-width: 1200px; margin: 0 auto;">
+                <% if (pageData.title) { %>
+                    <h1><%= pageData.title %></h1>
+                <% } %>
+                <p>Content coming soon...</p>
+            </div>
+        <% } %>
+    <% } %>
+
+    <%- include('/partials/footer') %>
+</body>
+</html>

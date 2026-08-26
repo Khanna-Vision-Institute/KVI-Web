@@ -1,0 +1,225 @@
+<!-- COMPLETE POST-OP CARE PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+        :root {
+            --primary-blue: #2563eb;
+            --accent-teal: #0891b2;
+            --dark-blue: #1e3a8a;
+            --light-gray: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --success-green: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--light-gray);
+        }
+
+        .wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 140px 20px 60px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 60px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .recovery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .recovery-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid var(--primary-blue);
+        }
+
+        .recovery-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .recovery-card h2 {
+            color: var(--dark-blue);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .recovery-card .description {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .recovery-card .features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .recovery-card .features li {
+            padding: 8px 0 8px 30px;
+            position: relative;
+            color: var(--text-dark);
+        }
+
+        .recovery-card .features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: var(--primary-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--dark-blue);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .recovery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .wrap {
+                padding: 120px 20px 40px;
+            }
+        }
+    
+</style>
+
+<!-- NOW THE HTML CONTENT STARTS -->
+
+<!-- Navigation Header -->
+    
+
+    <div class="wrap">
+        <div class="hero">
+            <h1>Recovery Timeline & Post-Op Care</h1>
+            <p>Find detailed recovery guides for your specific procedure. Learn what to expect, eye drop schedules, activity timelines, and when to call your doctor.</p>
+        </div>
+
+        <div class="recovery-grid">
+            <article class="recovery-card">
+                <h2>After LASIK Eye Surgery</h2>
+                <p class="description">Complete recovery guide for LASIK patients including normal symptoms, yellow-cap combo eye drops, preservative-free artificial tears, and activity timelines for driving, work, gym, swimming, and sports.</p>
+                <ul class="features">
+                    <li>Normal symptoms explained</li>
+                    <li>Eye drop schedule</li>
+                    <li>Activity timeline</li>
+                    <li>When to call your doctor</li>
+                </ul>
+                <a href="/patients/your-journey/recovery/lasik/" class="btn">View LASIK Recovery Guide</a>
+            </article>
+
+            <article class="recovery-card">
+                <h2>After SMILE Laser Eye Surgery</h2>
+                <p class="description">Recovery guide for SMILE patients with faster healing timelines. Learn about normal symptoms, eye drops, and when you can safely return to driving, work, gym, swimming, and contact sports.</p>
+                <ul class="features">
+                    <li>Faster recovery timeline</li>
+                    <li>Eye drop instructions</li>
+                    <li>Activity guidelines</li>
+                    <li>FAQ section</li>
+                </ul>
+                <a href="/patients/your-journey/recovery/smile/" class="btn">View SMILE Recovery Guide</a>
+            </article>
+
+            <article class="recovery-card">
+                <h2>After Cataract Surgery</h2>
+                <p class="description">Step-by-step recovery guide after cataract surgery including normal symptoms, pain control, eye drop schedule, activity restrictions, and when to call Khanna Vision Institute for help.</p>
+                <ul class="features">
+                    <li>First day expectations</li>
+                    <li>Eye drop taper schedule</li>
+                    <li>Do's and don'ts</li>
+                    <li>Emergency contact info</li>
+                </ul>
+                <a href="/patients/your-journey/recovery/cataract/" class="btn">View Cataract Recovery Guide</a>
+            </article>
+
+            <article class="recovery-card">
+                <h2>After Epi-off Corneal Cross-Linking (CXL)</h2>
+                <p class="description">Recovery timeline for epi-off CXL including normal symptoms, pain control, eye drop schedule, bandage contact lens care, and activity guidelines for work, exercise, makeup, and swimming.</p>
+                <ul class="features">
+                    <li>Pain management</li>
+                    <li>Bandage lens care</li>
+                    <li>Activity timeline</li>
+                    <li>Recovery FAQs</li>
+                </ul>
+                <a href="/patients/your-journey/recovery/cxl/" class="btn">View CXL Recovery Guide</a>
+            </article>
+
+            <article class="recovery-card">
+                <h2>After Pterygium Surgery</h2>
+                <p class="description">Post-operative recovery timeline and eye drop instructions for cosmetic pterygium removal. Learn about normal symptoms, ointment schedule, recovery milestones, and important do's and don'ts.</p>
+                <ul class="features">
+                    <li>Eye drop & ointment schedule</li>
+                    <li>Recovery timeline</li>
+                    <li>Do's and don'ts</li>
+                    <li>When to call your doctor</li>
+                </ul>
+                <a href="/patients/your-journey/recovery/pterygium/" class="btn">View Pterygium Recovery Guide</a>
+            </article>
+        </div>
+    </div>
+
+    <!-- Footer -->

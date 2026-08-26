@@ -1,0 +1,2350 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Refer a Patient | Doctor Referral Worksheet | Khanna Vision Institute</title>
+  <meta name="description" content="Doctor referral worksheet for Khanna Vision Institute — Beverly Hills and Westlake Village.">
+  <link rel="canonical" href="https://khannainstitute.com/referrals/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Libre+Baskerville:ital,wght@0,700;1,700&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/Doctorportal/physician-portal-brochure.css?v=20260526referhead">
+  <style>
+    .rf-recaptcha-shell { margin: 8px 0 4px; }
+    .rf-recaptcha-shell > .rf-sub { margin: 0 0 10px; font-size: 0.94rem; }
+    .rf-action-bar.rf-action-bar--center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .rf-action-bar.rf-action-bar--schedule {
+      gap: 16px;
+    }
+    button.rf-schedule-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 32px;
+      min-height: 56px;
+      border-radius: 999px;
+      border: 1px solid rgba(109,186,227,0.45) !important;
+      background: linear-gradient(135deg, #6dbae3 0%, #52aadc 100%) !important;
+      color: #fff !important;
+      font-family: "Montserrat", "DM Sans", system-ui, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(109,186,227,0.45);
+      transition: all 0.25s;
+      white-space: nowrap;
+    }
+    button.rf-schedule-cta:hover {
+      background: linear-gradient(135deg, #7fcce8 0%, #69b8dc 100%) !important;
+      border-color: rgba(109,186,227,0.65) !important;
+      box-shadow: 0 10px 32px rgba(109,186,227,0.55);
+      transform: translateY(-2px);
+    }
+    body.kvi-brochure #rf-form #rf-submit.rf-submit {
+      padding: 16px 40px;
+      min-height: 56px;
+      font-size: 0.95rem;
+      letter-spacing: 0.065em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    @media (max-width: 640px) {
+      .rf-action-bar.rf-action-bar--center.rf-action-bar--schedule {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: min(340px, 100%);
+        margin-left: auto;
+        margin-right: auto;
+      }
+      body.kvi-brochure #rf-form #rf-submit.rf-submit {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: none;
+        padding: 15px 28px;
+      }
+      .rf-action-bar.rf-action-bar--schedule .rf-schedule-cta {
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: center;
+      }
+    }
+
+    .rf-zoho-schedule-panel {
+      margin-top: 28px;
+      padding: 22px 20px 24px;
+      border-radius: 16px;
+      border: 1px solid rgba(109, 186, 227, 0.38);
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 10px 36px rgba(109, 186, 227, 0.16);
+    }
+    .rf-zoho-schedule-panel[hidden] {
+      display: none !important;
+    }
+    .rf-zoho-schedule-panel__head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+    .rf-zoho-schedule-panel__title {
+      font-family: "Playfair Display", "Libre Baskerville", Georgia, serif;
+      font-size: 1.28rem;
+      font-weight: 600;
+      color: #1a5070;
+      margin: 0 0 4px;
+    }
+    .rf-zoho-schedule-panel__lead {
+      margin: 0;
+      font-size: 0.88rem;
+      color: #5a6b7d;
+      line-height: 1.5;
+      max-width: 52ch;
+    }
+    .rf-zoho-schedule-close {
+      flex-shrink: 0;
+      border: 1px solid rgba(109, 186, 227, 0.45);
+      background: #fff;
+      color: #1a5070;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .rf-zoho-schedule-close:hover {
+      background: rgba(109, 186, 227, 0.12);
+    }
+    .rf-schedule-patient-bar {
+      margin: 12px 0 16px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: rgba(109, 186, 227, 0.12);
+      border: 1px solid rgba(109, 186, 227, 0.28);
+      font-size: 0.9rem;
+      color: #1a5070;
+      line-height: 1.5;
+    }
+    .rf-schedule-patient-bar strong {
+      font-weight: 700;
+    }
+    .rf-kvi-schedule-ui {
+      margin-top: 8px;
+    }
+    .rf-schedule-date-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .rf-schedule-date-row label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #1a5070;
+    }
+    .rf-schedule-date-row input[type="date"] {
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(109, 186, 227, 0.45);
+      font-size: 0.95rem;
+      min-width: 168px;
+    }
+    .rf-schedule-slots-hint {
+      margin: 0 0 10px;
+      font-size: 0.86rem;
+      color: #5a6b7d;
+    }
+    .rf-schedule-slots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 44px;
+    }
+    .rf-schedule-slot {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(109, 186, 227, 0.45);
+      background: #fff;
+      color: #1a5070;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .rf-schedule-slot:hover {
+      background: rgba(109, 186, 227, 0.14);
+    }
+    .rf-schedule-slot.is-selected {
+      background: linear-gradient(135deg, #6dbae3 0%, #52aadc 100%);
+      border-color: transparent;
+      color: #fff;
+    }
+    .rf-schedule-slot:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+    .rf-schedule-confirm {
+      margin-top: 18px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #6dbae3 0%, #52aadc 100%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(109, 186, 227, 0.4);
+    }
+    .rf-schedule-confirm:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    .rf-schedule-status {
+      margin: 12px 0 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .rf-schedule-status--ok { color: #1a6b42; }
+    .rf-schedule-status--err { color: #b42318; }
+    .rf-zoho-embed-fallback {
+      margin-top: 20px;
+      border-top: 1px solid rgba(109, 186, 227, 0.22);
+      padding-top: 12px;
+    }
+    .rf-zoho-embed-fallback summary {
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #5a6b7d;
+    }
+    #rf-zoho-inline-container {
+      margin-top: 14px;
+      min-height: 480px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(109, 186, 227, 0.22);
+      background: #fff;
+    }
+    .rf-zoho-schedule-loading {
+      margin: 0;
+      padding: 24px 12px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #5a6b7d;
+    }
+    .kh-header-inner--worksheet {
+      justify-content: flex-start;
+      align-items: center;
+      gap: 14px;
+    }
+    .kh-header-clinic {
+      flex: 1 1 auto;
+      min-width: 0;
+      margin: 0 auto;
+      text-align: center;
+      max-width: min(740px, 58vw);
+    }
+    .kh-header-clinic__name {
+      font-family: "Playfair Display", "Libre Baskerville", Georgia, serif;
+      font-weight: 600;
+      font-size: clamp(1.08rem, 2.08vw + 0.52rem, 1.68rem);
+      line-height: 1.26;
+      color: var(--kv-gold-rich);
+      letter-spacing: 0.03em;
+      text-transform: none;
+      margin: 0 auto 10px;
+      max-width: 38rem;
+      text-wrap: balance;
+    }
+    .kh-header-clinic__meta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: clamp(0.78rem, 0.85vw + 0.55rem, 0.93rem);
+      line-height: 1.45;
+      color: rgba(230, 232, 240, 0.82);
+      font-weight: 500;
+    }
+    .kh-header-clinic__addr {
+      max-width: 38rem;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+    .kh-header-clinic__phone {
+      margin: 0;
+    }
+    .kh-header-clinic__phone a {
+      color: rgba(244, 230, 200, 0.95);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+      padding-bottom: 1px;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+    .kh-header-clinic__phone a:hover {
+      color: var(--kv-gold-rich);
+      border-bottom-color: rgba(212, 175, 55, 0.75);
+    }
+    .kh-header-clinic__divider {
+      width: min(160px, 40%);
+      height: 1px;
+      margin: 2px auto 8px;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.35), transparent);
+      border: none;
+    }
+    .kh-header-clinic.kh-header-clinic--empty {
+      display: none !important;
+    }
+    body.kvi-brochure.page-referral-worksheet .kh-header-inner {
+      min-height: 120px;
+    }
+    body.page-referral-worksheet.rf-worksheet--referring .kh-header-inner {
+      min-height: 132px;
+    }
+    body.kvi-brochure.page-referral-worksheet .kh-logo img {
+      height: 86px;
+      width: auto;
+      max-width: min(280px, 52vw);
+    }
+    @media (max-width: 640px) {
+      body.kvi-brochure.page-referral-worksheet .kh-logo img {
+        height: clamp(88px, 22vw, 104px);
+        max-width: min(92vw, 380px);
+      }
+      body.kvi-brochure.page-referral-worksheet .kh-header-inner {
+        min-height: 0;
+      }
+    }
+    body.kvi-brochure .kh-logo {
+      flex: 0 0 auto;
+    }
+    body.kvi-brochure .kh-header-inner--worksheet .kh-nav {
+      flex: 0 0 auto;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+    @media (max-width: 900px) {
+      .kh-header-clinic {
+        max-width: min(560px, 82vw);
+      }
+      .kh-header-clinic__name {
+        font-size: clamp(1rem, 1.75vw + 0.52rem, 1.36rem);
+      }
+    }
+    @media (max-width: 640px) {
+      .kh-header-inner--worksheet {
+        flex-wrap: wrap;
+      }
+      .kh-header-inner--worksheet .kh-logo {
+        order: 1;
+      }
+      .kh-header-inner--worksheet .kh-nav {
+        order: 2;
+        margin-left: 0;
+        width: auto;
+      }
+      .kh-header-inner--worksheet .kh-header-clinic {
+        order: 3;
+        flex: 1 1 100%;
+        max-width: none;
+        text-align: center;
+        padding: 6px 12px 12px;
+      }
+      .kh-header-clinic__name {
+        font-size: clamp(0.92rem, 1.4vw + 0.55rem, 1.14rem);
+        margin-bottom: 8px;
+      }
+      .kh-header-clinic__meta {
+        font-size: 0.8rem;
+        gap: 5px;
+      }
+    }
+
+    /** Smaller page title when a referring practice is shown in the header (was ~ sized like old clinic strip). */
+    body.page-referral-worksheet.rf-worksheet--referring .rf-hero {
+      margin-top: 4px;
+      margin-bottom: 6px;
+    }
+    body.page-referral-worksheet.rf-worksheet--referring .rf-hero h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(0.92rem, 1.05vw + 0.62rem, 1.14rem);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      line-height: 1.3;
+      margin: 0 0 10px;
+    }
+    body.page-referral-worksheet.rf-worksheet--referring .rf-hero h1 em {
+      font-style: italic;
+      font-weight: 600;
+    }
+    body.page-referral-worksheet.rf-worksheet--referring .rf-hero .kv-rule {
+      margin-top: 6px;
+    }
+    body.kvi-brochure #rf-form .rf-upload-cell--shared-care {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: stretch;
+    }
+    body.kvi-brochure #rf-form .rf-upload-cell--shared-care .rf-field--special-under-shared > label:first-of-type:not(.rf-choice) {
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    /* ── refer-a-patient-restyled.html aesthetic (scoped) ───────────────────── */
+    :root {
+      --wr-sky:           #6dbae3;
+      --wr-sky-light:     #a6e0ff;
+      --wr-sky-pale:      #d6f0ff;
+      --wr-gold:          #c9922a;
+      --wr-gold-light:    #e8b84b;
+      --wr-gold-shine:    #f5d07a;
+      --wr-text-dark:     #1a2a35;
+      --wr-text-mid:      #3a5468;
+      --wr-text-light:    #6a8fa8;
+      --wr-border:        rgba(109,186,227,0.25);
+      --wr-border-strong: rgba(109,186,227,0.45);
+      --wr-glass:         rgba(255,255,255,0.62);
+      --wr-glass-strong:  rgba(255,255,255,0.78);
+    }
+    /* ── Page ── */
+    body.kvi-brochure.page-referral-worksheet {
+      font-family: "DM Sans", system-ui, sans-serif;
+      background: linear-gradient(135deg, #c8ecfa 0%, #e8f6ff 30%, #f0f8ff 55%, #d4eef9 80%, #b8e0f5 100%);
+      background-attachment: fixed;
+      color: var(--wr-text-dark);
+      position: relative;
+      overflow-x: hidden;
+    }
+    body.kvi-brochure.page-referral-worksheet::before {
+      content: '';
+      position: fixed; top: -120px; right: -120px;
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(166,224,255,0.55) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none; z-index: 0;
+    }
+    body.kvi-brochure.page-referral-worksheet::after {
+      content: '';
+      position: fixed; bottom: -100px; left: -100px;
+      width: 440px; height: 440px;
+      background: radial-gradient(circle, rgba(109,186,227,0.35) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── Layout ── */
+    body.page-referral-worksheet .rf-page--wide {
+      max-width: 820px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative; z-index: 1;
+    }
+
+    /* ── Hero ── */
+    body.page-referral-worksheet .rf-hero {
+      text-align: center;
+      padding: 36px 20px 28px;
+    }
+    body.page-referral-worksheet .rf-hero-eyebrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--wr-gold);
+      margin-bottom: 0;
+    }
+    body.page-referral-worksheet .rf-hero-eyebrow::before,
+    body.page-referral-worksheet .rf-hero-eyebrow::after {
+      content: '';
+      width: 40px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--wr-gold-light));
+    }
+    body.page-referral-worksheet .rf-hero-eyebrow::after {
+      background: linear-gradient(90deg, var(--wr-gold-light), transparent);
+    }
+    body.page-referral-worksheet .rf-hero h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.2rem, 4.5vw, 3rem);
+      font-weight: 600;
+      color: var(--wr-text-dark);
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      text-transform: none;
+      text-shadow: none;
+    }
+    body.page-referral-worksheet .rf-hero h1 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--wr-gold) 0%, var(--wr-gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    body.page-referral-worksheet .rf-hero .kv-rule {
+      width: 60px; height: 3px;
+      margin: 16px auto 0;
+      background: linear-gradient(90deg, var(--wr-sky), var(--wr-gold-light));
+      border-radius: 2px;
+      border: none;
+    }
+    body.page-referral-worksheet .rf-hero .kv-rule::before,
+    body.page-referral-worksheet .rf-hero .kv-rule::after {
+      display: none !important;
+      content: none !important;
+    }
+
+    /* ── Alert ── */
+    body.page-referral-worksheet .rf-form-wrap > #rf-msg.rf-alert {
+      padding: 14px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(109,186,227,0.4);
+      background: rgba(255,255,255,0.78);
+      color: #1a4362;
+      backdrop-filter: blur(8px);
+      line-height: 1.5;
+    }
+    body.page-referral-worksheet .rf-form-wrap > #rf-msg.rf-alert--ok {
+      border-color: rgba(109,186,227,0.55);
+      color: #1a4a2e;
+      background: rgba(220,255,235,0.72);
+    }
+    body.page-referral-worksheet .rf-form-wrap > #rf-msg.rf-alert--err {
+      border-color: rgba(220,80,80,0.4);
+      color: #6b1e1e;
+      background: rgba(255,235,235,0.72);
+    }
+
+    /* ── Cards ── */
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-simple-card {
+      background: var(--wr-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.75);
+      border-radius: 16px;
+      box-shadow:
+        0 8px 32px rgba(109,186,227,0.18),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+      padding: 32px 36px;
+      margin-bottom: 24px;
+      transition: box-shadow 0.3s;
+    }
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-simple-card:hover {
+      box-shadow:
+        0 12px 48px rgba(109,186,227,0.24),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    /* Card heading — icon box + serif uppercase */
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-simple-h {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--wr-text-dark);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-shadow: none;
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--wr-border);
+    }
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-simple-h::before {
+      display: none;
+    }
+
+    /* Column sub-headers */
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-simple-h-sub {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--wr-gold-light);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      display: block;
+      border-bottom: 1px solid rgba(201,146,42,0.25);
+    }
+
+    /* Field labels */
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-field > label:first-of-type:not(.rf-choice),
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-sub {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--wr-gold);
+    }
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-req { color: var(--wr-gold); }
+
+    /* Preferred location sub-label — gold */
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-preferred-block .rf-sub {
+      color: var(--wr-gold);
+      margin-bottom: 10px;
+    }
+
+    /* Muted note — gold left bar */
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-muted-note {
+      font-size: 11.5px;
+      color: var(--wr-text-light);
+      padding: 10px 14px;
+      background: rgba(201,146,42,0.06);
+      border-left: 3px solid var(--wr-gold-light);
+      border-radius: 0 6px 6px 0;
+      margin-top: 8px;
+      line-height: 1.55;
+    }
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-muted-note em {
+      font-style: italic; color: var(--wr-gold);
+    }
+
+    /* Captcha — no gold bar on "Verify you are human." */
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-recaptcha-shell .rf-sub {
+      padding-bottom: 14px;
+      background: none;
+      border-left: none;
+      border-radius: 0;
+      margin-top: 0;
+      font-size: 12.5px;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--wr-text-light);
+    }
+
+    /* ── Inputs / selects / textareas ── */
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-input,
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-select,
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-textarea {
+      background: var(--wr-glass-strong);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid var(--wr-border-strong);
+      border-radius: 10px;
+      color: var(--wr-text-dark);
+      font-size: 14px;
+      font-family: "DM Sans", system-ui, sans-serif;
+      box-shadow: inset 0 2px 6px rgba(109,186,227,0.06);
+    }
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-input::placeholder,
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-textarea::placeholder {
+      color: var(--wr-text-light);
+    }
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-input:focus,
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-select:focus,
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-textarea:focus {
+      border-color: var(--wr-sky);
+      box-shadow: 0 0 0 3px rgba(109,186,227,0.18), inset 0 2px 6px rgba(109,186,227,0.06);
+      background: rgba(255,255,255,0.92);
+    }
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236dbae3' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    /* ── Location chips → pill ── */
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-choice-row .rf-choice {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--wr-glass-strong);
+      border: 1.5px solid var(--wr-border-strong);
+      border-radius: 30px;
+      padding: 10px 18px;
+      color: var(--wr-text-mid);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.22s;
+    }
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-choice-row .rf-choice:hover {
+      background: rgba(109,186,227,0.12);
+      border-color: var(--wr-sky);
+      color: var(--wr-sky);
+    }
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-choice-row .rf-choice:has(input:checked) {
+      background: linear-gradient(135deg, rgba(109,186,227,0.18), rgba(166,224,255,0.22));
+      border-color: rgba(109,186,227,0.75);
+      color: #2f6f98;
+      box-shadow: 0 3px 12px rgba(109,186,227,0.22);
+    }
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-choice-row .rf-choice input[type="checkbox"] {
+      width: 14px; height: 14px;
+      accent-color: var(--wr-sky);
+      color-scheme: light;
+      cursor: pointer;
+    }
+
+    /* ── Diagnosis / procedure / clinical → rectangular check items ── */
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-choice-stack .rf-choice,
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-check-grid .rf-choice {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      background: var(--wr-glass-strong);
+      border: 1px solid var(--wr-border);
+      border-radius: 8px;
+      color: var(--wr-text-mid);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 8px;
+      user-select: none;
+    }
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-choice-stack .rf-choice:hover,
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-check-grid .rf-choice:hover {
+      background: rgba(109,186,227,0.1);
+      border-color: rgba(109,186,227,0.4);
+      color: var(--wr-text-dark);
+    }
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-choice-stack .rf-choice:has(input:checked),
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-check-grid .rf-choice:has(input:checked) {
+      background: linear-gradient(135deg, rgba(109,186,227,0.15), rgba(166,224,255,0.22));
+      border-color: var(--wr-sky);
+      color: #1a5070;
+      box-shadow: 0 2px 10px rgba(109,186,227,0.18);
+    }
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-choice-stack .rf-choice input[type="checkbox"],
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-check-grid .rf-choice input[type="checkbox"] {
+      width: 17px; height: 17px; flex-shrink: 0;
+      accent-color: var(--wr-sky);
+      color-scheme: light;
+      cursor: pointer;
+    }
+
+    /* ── Checkbox base appearance overrides (beats physician-portal-brochure.css) ── */
+    .kvi-brochure .rf-choice input[type="checkbox"],
+    .kvi-brochure .rf-choice input[type="radio"] {
+      background-color: #ffffff !important;
+      border-color: rgba(109,186,227,0.5) !important;
+      color-scheme: light !important;
+    }
+    .kvi-brochure .rf-choice input[type="checkbox"]:checked,
+    .kvi-brochure .rf-choice input[type="radio"]:checked {
+      background-color: var(--wr-sky, #6dbae3) !important;
+      border-color: var(--wr-sky, #6dbae3) !important;
+      accent-color: var(--wr-sky, #6dbae3) !important;
+    }
+    .kvi-brochure .rf-choice input:checked ~ span {
+      color: #1a5070 !important;
+    }
+
+    /* ── Upload zones ── */
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-upload-cell {
+      border: 2px dashed rgba(109,186,227,0.42);
+      border-radius: 10px;
+      padding: 18px 16px;
+      background: rgba(166,224,255,0.08);
+      transition: all 0.25s;
+    }
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-upload-cell:hover {
+      border-color: var(--wr-sky);
+      background: rgba(109,186,227,0.1);
+    }
+
+    /* File input — sky blue button */
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-file-input {
+      width: 100%;
+      font-size: 13px;
+      color: var(--wr-text-mid);
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      padding: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-file-input::file-selector-button {
+      background: linear-gradient(135deg, var(--wr-sky) 0%, #52aadc 100%);
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      margin-right: 10px;
+      transition: all 0.2s;
+      box-shadow: 0 3px 10px rgba(109,186,227,0.35);
+    }
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-file-input::file-selector-button:hover {
+      background: linear-gradient(135deg, #7fcce8 0%, #69b8dc 100%);
+      box-shadow: 0 5px 16px rgba(109,186,227,0.5);
+    }
+
+    /* Clinical data label */
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-sub--clinical-cap {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--wr-gold);
+      margin-bottom: 10px;
+    }
+
+    /* Hint / file formats */
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-hint-inline,
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-file-formats,
+    body.kvi-brochure.page-referral-worksheet #rf-form .rf-file-formats--inline {
+      font-size: 10.5px;
+      color: var(--wr-text-light);
+      margin-top: 6px;
+      line-height: 1.5;
+      display: block;
+    }
+
+    /* ── Action bar ── */
+    body.kvi-brochure.page-referral-worksheet .rf-action-bar.rf-action-bar--schedule {
+      background: var(--wr-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.75);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(109,186,227,0.18);
+      padding: 24px 36px;
+    }
+
+    /* Submit — gold pill */
+    body.kvi-brochure #rf-form #rf-submit.rf-submit {
+      background: linear-gradient(135deg, var(--wr-gold) 0%, var(--wr-gold-light) 60%, var(--wr-gold-shine) 100%);
+      border: none;
+      color: #fff;
+      box-shadow: 0 6px 24px rgba(201,146,42,0.4);
+      transition: all 0.25s;
+    }
+    body.kvi-brochure #rf-form #rf-submit.rf-submit:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(201,146,42,0.5);
+      filter: none;
+    }
+
+    /* Schedule — sky blue (override also applied in functional block above) */
+
+    /* ── PHI notice ── */
+    body.kvi-brochure.page-referral-worksheet .rf-phi--footer {
+      background: linear-gradient(135deg, rgba(201,146,42,0.1), rgba(232,184,75,0.08));
+      border: 1px solid rgba(201,146,42,0.3);
+      border-left: 4px solid var(--wr-gold);
+      border-radius: 10px;
+      color: var(--wr-text-mid);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    body.kvi-brochure.page-referral-worksheet .rf-phi--footer .rf-phi-icon {
+      color: var(--wr-gold);
+      font-size: 16px;
+    }
+    body.kvi-brochure.page-referral-worksheet .rf-phi--footer strong {
+      color: var(--wr-gold);
+      font-weight: 700;
+    }
+
+    /* ── Header ── */
+    body.kvi-brochure.page-referral-worksheet .kh-header {
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--wr-border);
+      box-shadow: 0 2px 20px rgba(109,186,227,0.12);
+    }
+    body.kvi-brochure.page-referral-worksheet .kh-header-inner {
+      min-height: 96px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+    @media (max-width: 640px) {
+      body.kvi-brochure.page-referral-worksheet .kh-header-inner {
+        min-height: 0;
+      }
+    }
+
+    /* Clinic name in header */
+    .kh-header-clinic__name {
+      font-family: "Cormorant Garamond", "Playfair Display", serif;
+      font-size: clamp(1.34rem, 2vw, 1.85rem);
+      color: var(--wr-gold);
+      text-shadow: none;
+      margin-bottom: 6px;
+    }
+    .kh-header-clinic__meta,
+    .kh-header-clinic__phone a {
+      color: var(--wr-text-mid);
+    }
+    .kh-header-clinic__divider {
+      background: linear-gradient(90deg, transparent, rgba(201,146,42,0.35), transparent);
+    }
+
+    /* Nav */
+    body.kvi-brochure.page-referral-worksheet .kh-nav-link {
+      color: var(--wr-text-mid);
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 8px;
+    }
+    body.kvi-brochure.page-referral-worksheet .kh-nav-link:hover {
+      background: rgba(166,224,255,0.42);
+      color: var(--wr-sky);
+    }
+    body.kvi-brochure.page-referral-worksheet .kh-nav-active {
+      background: linear-gradient(135deg, var(--wr-sky) 0%, var(--wr-sky-light) 100%);
+      color: #fff;
+      box-shadow: 0 3px 12px rgba(109,186,227,0.35);
+    }
+    body.kvi-brochure.page-referral-worksheet .kh-nav-cta {
+      background: linear-gradient(135deg, var(--wr-sky) 0%, #52aadc 100%);
+      border-color: rgba(109,186,227,0.45);
+      color: #fff;
+    }
+
+    /* ── Footer ── */
+    body.kvi-brochure.page-referral-worksheet .kh-footer {
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-top: 1px solid var(--wr-border);
+      color: var(--wr-text-mid);
+    }
+    body.kvi-brochure.page-referral-worksheet .kh-footer img {
+      filter: none;
+      opacity: 0.9;
+    }
+    body.kvi-brochure.page-referral-worksheet .kh-footer-tagline,
+    body.kvi-brochure.page-referral-worksheet .kh-footer-copy p {
+      color: var(--wr-text-light);
+    }
+    body.kvi-brochure.page-referral-worksheet .kh-footer-col-h {
+      color: var(--wr-text-mid);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    body.kvi-brochure.page-referral-worksheet .kh-footer-col span {
+      color: var(--wr-text-light);
+    }
+    body.kvi-brochure.page-referral-worksheet .kh-footer a {
+      color: var(--wr-sky);
+    }
+    body.kvi-brochure.page-referral-worksheet .kh-footer a:hover {
+      color: #2f6f98;
+    }
+
+    /* Logo */
+    body.kvi-brochure.page-referral-worksheet .kh-logo img {
+      height: 86px;
+      width: auto;
+      max-width: min(280px, 52vw);
+    }
+  </style>
+</head>
+<body class="kvi-brochure page-referral-worksheet">
+
+<header class="kh-header">
+  <div class="kh-header-inner kh-header-inner--worksheet">
+    <a class="kh-logo" href="https://khannainstitute.com/" aria-label="Khanna Vision Institute">
+      <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/khannainstitute/Logo+2.png"
+           alt="Khanna Vision Institute" decoding="async">
+    </a>
+    <div class="kh-header-clinic kh-header-clinic--empty" id="kh-header-clinic" aria-live="polite"></div>
+    <nav class="kh-nav" aria-label="Main navigation">
+      <a class="kh-nav-link" href="https://khannainstitute.com/">Home</a>
+      <a class="kh-nav-link" href="/Doctorportal/for-physicians">For doctors</a>
+      <a class="kh-nav-link kh-nav-active" href="/Doctorportal/refer-a-patient">Referral Worksheet</a>
+      <a class="kh-nav-cta" href="tel:8052302126">(805) 230-2126</a>
+    </nav>
+  </div>
+</header>
+
+<main class="kv-main-pad rf-refer-main">
+<div class="rf-page rf-page--wide">
+
+<div class="rf-hero">
+  <div class="rf-hero-eyebrow">Doctor Referral Worksheet</div>
+</div>
+
+<div class="rf-form-wrap">
+  <div id="rf-msg" class="rf-alert" role="status" aria-live="polite"></div>
+  <form id="rf-form" action="/api/physician-referral/submit" method="post" enctype="multipart/form-data" novalidate>
+    <input type="text" name="companyWebsite" value=""
+      style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;"
+      tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <input type="hidden" name="referringOfficeSlug" id="referringOfficeSlug" value="">
+    <input type="hidden" name="referringUrlKey" id="referringUrlKey" value="">
+
+    <input type="hidden" id="referringDoctorName" name="referringDoctorName" value="">
+    <input type="hidden" id="referringDoctorPractice" name="referringDoctorPractice" value="">
+    <input type="hidden" id="referringDoctorPhone" name="referringDoctorPhone" value="">
+    <input type="hidden" id="referringDoctorAddress" name="referringDoctorAddress" value="">
+
+    <section class="rf-simple-card" aria-labelledby="rf-patient-h">
+      <h2 class="rf-simple-h" id="rf-patient-h" data-icon="🧑‍⚕️">Patient Details</h2>
+      <div class="rf-field rf-g-full">
+        <label for="patientName">Patient name <span class="rf-req">*</span></label>
+        <input class="rf-input" id="patientName" name="patientName" type="text" autocomplete="name" required>
+      </div>
+      <div class="rf-field-pair" role="group" aria-label="Date of birth or age and phone">
+        <div class="rf-field">
+          <label for="patientDobAge">DOB / age</label>
+          <input class="rf-input" id="patientDobAge" name="patientDobAge" type="text" placeholder="e.g. 03/14/1985 or 39">
+        </div>
+        <div class="rf-field">
+          <label for="patientPhone">Phone <span class="rf-req">*</span></label>
+          <input class="rf-input" id="patientPhone" name="patientPhone" type="tel" autocomplete="tel" required>
+        </div>
+      </div>
+      <div class="rf-field rf-g-full">
+        <label for="patientEmail">Email <span class="rf-req">*</span></label>
+        <input class="rf-input" id="patientEmail" name="patientEmail" type="email" autocomplete="email" required>
+      </div>
+      <div class="rf-preferred-block">
+        <p class="rf-sub">Preferred location <span class="rf-req">*</span></p>
+        <div class="rf-choice-row" role="group" aria-label="Preferred location">
+          <label class="rf-choice"><input type="checkbox" name="preferredLocation" value="Beverly Hills"><span>Beverly Hills</span></label>
+          <label class="rf-choice"><input type="checkbox" name="preferredLocation" value="Westlake Village"><span>Westlake Village</span></label>
+          <label class="rf-choice"><input type="checkbox" name="preferredLocation" value="First available"><span>First available</span></label>
+        </div>
+      </div>
+    </section>
+
+    <section class="rf-simple-card" aria-labelledby="rf-clinical-h">
+      <h2 class="rf-simple-h" id="rf-clinical-h" data-icon="🔬">Diagnosis &amp; Suggested Procedure</h2>
+      <div class="rf-dx-proc">
+        <div>
+          <h3 class="rf-simple-h-sub">Diagnosis</h3>
+          <div class="rf-choice-stack">
+            <label class="rf-choice"><input type="checkbox" name="diagnosis" value="Myopia"><span>Myopia</span></label>
+            <label class="rf-choice"><input type="checkbox" name="diagnosis" value="Hyperopia"><span>Hyperopia</span></label>
+            <label class="rf-choice"><input type="checkbox" name="diagnosis" value="Astigmatism"><span>Astigmatism</span></label>
+            <label class="rf-choice"><input type="checkbox" name="diagnosis" value="Presbyopia"><span>Presbyopia</span></label>
+            <label class="rf-choice"><input type="checkbox" name="diagnosis" value="Keratoconus"><span>Keratoconus</span></label>
+            <label class="rf-choice"><input type="checkbox" name="diagnosis" value="Post LASIK ectasia"><span>Post LASIK ectasia</span></label>
+            <label class="rf-choice"><input type="checkbox" name="diagnosis" value="Cataract"><span>Cataract</span></label>
+            <label class="rf-choice"><input type="checkbox" name="diagnosis" value="Pterygium"><span>Pterygium</span></label>
+          </div>
+        </div>
+        <div>
+          <h3 class="rf-simple-h-sub">Suggested procedure</h3>
+          <div class="rf-choice-stack">
+            <label class="rf-choice"><input type="checkbox" name="procedure" value="SMILE Laser"><span>SMILE Laser</span></label>
+            <label class="rf-choice"><input type="checkbox" name="procedure" value="LASIK / custom corneal laser"><span>LASIK / custom corneal laser</span></label>
+            <label class="rf-choice"><input type="checkbox" name="procedure" value="EVO ICL"><span>EVO ICL</span></label>
+            <label class="rf-choice"><input type="checkbox" name="procedure" value="PIE / presbyopic implant in eye"><span>PIE / presbyopic implant in eye</span></label>
+            <label class="rf-choice"><input type="checkbox" name="procedure" value="Keratoconus evaluation (EpiOXA)"><span>Keratoconus evaluation (EpiOXA)</span></label>
+            <label class="rf-choice"><input type="checkbox" name="procedure" value="CTAK"><span>CTAK</span></label>
+            <label class="rf-choice"><input type="checkbox" name="procedure" value="Cosmetic pterygium"><span>Cosmetic pterygium</span></label>
+            <label class="rf-choice"><input type="checkbox" name="procedure" value="Robotic laser cataract surgery"><span>Robotic laser cataract surgery</span></label>
+            <label class="rf-choice"><input type="checkbox" name="procedure" value="Second opinion / complex candidacy"><span>Second opinion / complex candidacy</span></label>
+          </div>
+        </div>
+      </div>
+      <p class="rf-muted-note">Select at least one item under diagnosis <em>or</em> suggested procedure.</p>
+    </section>
+
+    <section class="rf-simple-card" aria-labelledby="rf-upload-h">
+      <h2 class="rf-simple-h" id="rf-upload-h" data-icon="📁">Uploads, Shared Care &amp; Clinical Data</h2>
+
+      <div class="rf-upload-pair">
+        <div class="rf-upload-cell rf-upload-cell--insurance rf-upload-ins-col">
+          <div class="rf-field">
+            <label for="uploadInsurance">Upload insurance</label>
+            <input class="rf-file-input" id="uploadInsurance" name="uploadInsurance" type="file"
+              accept=".png,.jpg,.jpeg,.bmp,.mp4,.webm,.mov,.pdf,.doc,.docx,image/png,image/jpeg,image/bmp,video/mp4,video/webm,video/quicktime,application/pdf">
+          </div>
+          <p class="rf-file-formats rf-file-formats--inline">Supported file formats: png, jpg, jpeg, bmp, mp4, webm, mov, pdf, doc, and docx.</p>
+        </div>
+        <div class="rf-upload-cell rf-upload-cell--chart">
+          <div class="rf-field">
+            <label for="uploadClinicalChart">Upload clinical chart <span class="rf-hint-inline">(multiple files allowed)</span></label>
+            <input class="rf-file-input" id="uploadClinicalChart" name="uploadClinicalChart" type="file" multiple
+              accept=".png,.jpg,.jpeg,.bmp,.mp4,.webm,.mov,.pdf,.doc,.docx,image/png,image/jpeg,image/bmp,video/mp4,video/webm,video/quicktime,application/pdf">
+          </div>
+        </div>
+        <div class="rf-upload-cell rf-upload-cell--shared-care">
+          <div class="rf-field rf-field--shared-care">
+            <label for="sharedCare">Shared care</label>
+            <div class="rf-select-wrap">
+              <select class="rf-select" id="sharedCare" name="sharedCare">
+                <option value="">Select an option</option>
+                <option value="comanage">I will comanage as soon as medically appropriate</option>
+                <option value="kvi-postop">KVI do post op &amp; return for general eye care</option>
+              </select>
+            </div>
+          </div>
+          <div class="rf-field rf-field--special-under-shared rf-g-full">
+            <label for="specialInstructions">Special instructions</label>
+            <textarea class="rf-textarea rf-textarea--short" id="specialInstructions" name="specialInstructions" maxlength="2000"
+              placeholder="Timing preferences, urgency context, language needs…"></textarea>
+          </div>
+        </div>
+        <div class="rf-upload-cell rf-upload-cell--clinical-data rf-clinical-bundle">
+          <p class="rf-sub rf-sub--clinical-cap">Clinical data available</p>
+          <div class="rf-check-grid rf-check-grid--clinical">
+            <label class="rf-choice"><input type="checkbox" name="clinicalData" value="Manifest / cycloplegic refraction"><span>Manifest / cycloplegic refraction</span></label>
+            <label class="rf-choice"><input type="checkbox" name="clinicalData" value="Topography / tomography"><span>Topography / tomography</span></label>
+            <label class="rf-choice"><input type="checkbox" name="clinicalData" value="OCT"><span>OCT</span></label>
+            <label class="rf-choice"><input type="checkbox" name="clinicalData" value="Pachymetry"><span>Pachymetry</span></label>
+            <label class="rf-choice"><input type="checkbox" name="clinicalData" value="Pentacam"><span>Pentacam</span></label>
+            <label class="rf-choice"><input type="checkbox" name="clinicalData" value="Corneal mapping"><span>Corneal mapping</span></label>
+            <label class="rf-choice"><input type="checkbox" name="clinicalData" value="Photos"><span>Photos</span></label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rf-simple-card" aria-labelledby="rf-submit-h">
+      <h2 class="rf-simple-h" id="rf-submit-h" data-icon="👨‍⚕️">Doctor Name &amp; Submitter</h2>
+      <div class="rf-g2">
+        <div class="rf-field">
+          <label for="preferredDoctor">Doctor name <span class="rf-req">*</span></label>
+          <div class="rf-select-wrap" id="preferredDoctorControlWrap">
+            <input class="rf-input" id="preferredDoctor" name="preferredDoctor" type="text" required
+              placeholder="Enter referring doctor name" autocomplete="name">
+          </div>
+        </div>
+        <div class="rf-field">
+          <label for="submittedBy">Who is submitting</label>
+          <input class="rf-input" id="submittedBy" name="submittedBy" type="text" placeholder="Staff name &amp; role (optional)">
+        </div>
+      </div>
+    </section>
+
+    <section class="rf-simple-card" aria-labelledby="rf-captcha-h">
+      <h2 class="sr-only" id="rf-captcha-h">Spam protection</h2>
+      <div class="rf-recaptcha-shell">
+        <p class="rf-sub">Verify you are human.</p>
+        <div class="g-recaptcha" data-sitekey="6Lf0P20sAAAAAK_xE5Swnx5IaGRNkrEVRtTzZu5r" id="physician-ref-recaptcha-el"></div>
+      </div>
+    </section>
+
+    <div class="rf-action-bar rf-action-bar--center rf-action-bar--schedule">
+      <button type="submit" class="rf-submit" id="rf-submit">Submit</button>
+      <button type="button" class="rf-schedule-cta" id="rf-schedule-cta">Schedule now</button>
+    </div>
+  </form>
+
+  <section
+    id="rf-zoho-schedule-panel"
+    class="rf-zoho-schedule-panel"
+    hidden
+    aria-labelledby="rf-zoho-schedule-title"
+    data-zoho-embed-url="https://superlasik35.zohobookings.com/portal-embed#/4942730000000051385"
+    data-zoho-param-name="patient_name"
+    data-zoho-param-email="patient_email"
+    data-zoho-param-phone="patient_phone"
+  >
+    <div class="rf-zoho-schedule-panel__head">
+      <div>
+        <h2 class="rf-zoho-schedule-panel__title" id="rf-zoho-schedule-title">Book appointment</h2>
+        <p class="rf-zoho-schedule-panel__lead" id="rf-zoho-schedule-lead">
+          Pick a date and time below. Patient name, email, and phone from the worksheet are used automatically. Complete the CAPTCHA on the worksheet before you confirm.
+        </p>
+      </div>
+      <button type="button" class="rf-zoho-schedule-close" id="rf-zoho-schedule-close" aria-label="Close scheduler">
+        Close
+      </button>
+    </div>
+    <div class="rf-schedule-patient-bar" id="rf-schedule-patient-bar" hidden aria-live="polite"></div>
+    <div class="rf-kvi-schedule-ui" id="rf-kvi-schedule-ui">
+      <div class="rf-schedule-date-row">
+        <label for="rf-schedule-date">Appointment date (Pacific)</label>
+        <input type="date" id="rf-schedule-date" name="rfScheduleDate" aria-describedby="rf-schedule-slots-hint">
+      </div>
+      <p class="rf-schedule-slots-hint" id="rf-schedule-slots-hint">Choose a date to see open times.</p>
+      <div class="rf-schedule-slots" id="rf-schedule-slots" role="listbox" aria-label="Available appointment times"></div>
+      <button type="button" class="rf-schedule-confirm" id="rf-schedule-confirm" disabled>Confirm appointment</button>
+      <p class="rf-schedule-status" id="rf-schedule-status" hidden></p>
+    </div>
+    <details class="rf-zoho-embed-fallback" id="rf-zoho-embed-fallback">
+      <summary>Open full Zoho calendar instead (may ask for contact details again)</summary>
+      <p class="rf-zoho-schedule-loading" id="rf-zoho-schedule-loading" hidden>Loading scheduler…</p>
+      <div id="rf-zoho-inline-container" aria-label="Zoho Bookings inline scheduler"></div>
+    </details>
+  </section>
+
+  <div class="rf-phi rf-phi--footer" role="note">
+    <span class="rf-phi-icon">⚠</span>
+    <span>
+      <strong>PHI Notice:</strong> Do not email identifiable records from a non-compliant client.
+      Pair this summary with secure fax, encrypted relay, your EHR tether, or direct upload workflow.
+    </span>
+  </div>
+</div>
+
+</div>
+</main>
+
+<footer class="kh-footer">
+  <div class="kh-footer-inner">
+    <div class="kh-footer-grid">
+      <div>
+        <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/khannainstitute/Logo+2.png" alt="Khanna Vision Institute">
+        <p class="kh-footer-tagline">Precision vision care for Greater Los Angeles —<br>Beverly Hills & Westlake Village.</p>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Doctors portal</p>
+        <a href="/Doctorportal/for-physicians">Doctors hub</a>
+        <a href="/Doctorportal/refer-a-patient">Refer a Patient</a>
+        <a href="/Doctorportal/book-consultation">Online Scheduling</a>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Contact</p>
+        <a href="tel:8052302126">(805) 230-2126</a>
+        <a href="https://khannainstitute.com/contact/">Contact Us</a>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Locations</p>
+        <span>Beverly Hills</span>
+        <span>Westlake Village</span>
+      </div>
+    </div>
+    <div class="kh-footer-copy">
+      <p>© 2026 Khanna Vision Institute. All rights reserved.</p>
+      <p><a href="#">Privacy Policy</a>  ·  <a href="#">Terms of Use</a>  ·  <a href="#">HIPAA Notice</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+(function () {
+  var REFERRAL_DRAFT_KEY = 'kvi_referral_worksheet_draft_v1';
+
+  function lineFromRaw(rb, idx) {
+    if (!rb) return '';
+    var ls = String(rb).split(/\r?\n/).map(function (s) { return s.trim(); }).filter(Boolean);
+    return ls[idx] || '';
+  }
+
+  function buildFullAddressPhy(o) {
+    var line = (o.addressLine && String(o.addressLine).trim()) || '';
+    var street = (o.addressStreet && String(o.addressStreet).trim()) || lineFromRaw(o.rawBlock, 2) || '';
+    var tail = (o.stateOrZip && String(o.stateOrZip).trim()) || '';
+    if (line) return line;
+    var parts = [];
+    if (street) parts.push(street);
+    if (tail) parts.push(tail);
+    return parts.join(', ');
+  }
+
+  function getInputValue(formEl, selector) {
+    var el = formEl.querySelector(selector);
+    return el ? String(el.value || '').trim() : '';
+  }
+
+  function joinChecked(formEl, nameAttr) {
+    var out = [];
+    formEl.querySelectorAll('input[name="' + nameAttr + '"]:checked').forEach(function (c) {
+      if (c && c.value) out.push(String(c.value).trim());
+    });
+    return out.join('|');
+  }
+
+  function appendIfPresent(fd, key, maybe) {
+    if (maybe !== undefined && maybe !== null && String(maybe).length) fd.append(key, maybe);
+    else fd.append(key, '');
+  }
+
+  function resetRecaptcha() {
+    try {
+      if (window.grecaptcha && typeof window.grecaptcha.reset === 'function') {
+        window.grecaptcha.reset();
+      }
+    } catch (xr) {}
+  }
+
+  function getRecaptchaResponse() {
+    try {
+      return window.grecaptcha && window.grecaptcha.getResponse ? window.grecaptcha.getResponse() : '';
+    } catch (xc) {
+      return '';
+    }
+  }
+
+  function digitsOnly(s) {
+    return String(s || '').replace(/\D/g, '');
+  }
+
+  function isUsPhone10(s) {
+    var d = digitsOnly(s);
+    if (d.length === 11 && d.charAt(0) === '1') d = d.slice(1);
+    return d.length === 10;
+  }
+
+  function getOfficeRefFromUrl() {
+    try {
+      var qp = new URLSearchParams(location.search).get('ref');
+      if (qp && qp.trim()) return qp.trim();
+
+      var path = location.pathname || '';
+      var mLink = path.match(/\/Doctorportal\/link\/([^/]+)\/?$/i);
+      if (mLink && mLink[1]) {
+        return decodeURIComponent(mLink[1]).replace(/\.html$/i, '');
+      }
+
+      var parts = path.split('/').filter(Boolean);
+      if (!parts.length) return '';
+      var last = parts[parts.length - 1] || '';
+      var low = String(last).toLowerCase().replace(/\.html$/i, '');
+      if (low === 'refer-a-patient' || low === 'link') return '';
+      return last;
+    } catch (x) {
+      return '';
+    }
+  }
+
+  var refKeyFromUrl = getOfficeRefFromUrl();
+  var form = document.getElementById('rf-form');
+  var headerClinic = document.getElementById('kh-header-clinic');
+  var preferredDoctorControlWrap = document.getElementById('preferredDoctorControlWrap');
+  var preferredDoctorEl = document.getElementById('preferredDoctor');
+  if (preferredDoctorEl && preferredDoctorEl.tagName !== 'SELECT') {
+    preferredDoctorEl = null;
+  }
+
+  /** @type {Record<string, *>} */
+  var physicianBySlug = {};
+  /** Practice / clinic title last shown in `#kh-header-clinic` while personalized. */
+  var headerPracticeTitleStored = '';
+  /** Last physician list from clinic payload (for fallback address/phone before a row is chosen). */
+  var lastClinicPhysicianList = null;
+
+  function telHrefFromDisplay(phoneDisp) {
+    var d = digitsOnly(phoneDisp || '');
+    if (d.length === 11 && d.charAt(0) === '1') d = d.slice(1);
+    if (d.length !== 10) return '';
+    return 'tel:+1' + d;
+  }
+
+  function getSelectedPartnerPhysician() {
+    if (!preferredDoctorEl || !form) return null;
+    if (form.getAttribute('data-refer-personalized') !== '1') return null;
+    var opt = preferredDoctorEl.options[preferredDoctorEl.selectedIndex];
+    if (!opt) return null;
+    var val = String(preferredDoctorEl.value || '').trim();
+    if (!val) return null;
+    var slug = opt.getAttribute('data-office-slug');
+    if (slug && physicianBySlug[slug]) return physicianBySlug[slug];
+    return null;
+  }
+
+  function headerMetaPhysicianFallback() {
+    var sel = getSelectedPartnerPhysician();
+    if (sel) return sel;
+    if (lastClinicPhysicianList && lastClinicPhysicianList.length) return lastClinicPhysicianList[0];
+    return null;
+  }
+
+  function clearHeaderClinicBlock() {
+    headerPracticeTitleStored = '';
+    lastClinicPhysicianList = null;
+    document.body.classList.remove('rf-worksheet--referring');
+    if (!headerClinic) return;
+    headerClinic.innerHTML = '';
+    headerClinic.classList.add('kh-header-clinic--empty');
+    headerClinic.setAttribute('aria-hidden', 'true');
+  }
+
+  function renderHeaderClinicBlock(practiceTitle, phy) {
+    practiceTitle = String(practiceTitle || '').trim();
+    var p = phy || null;
+    var addr = p ? String(buildFullAddressPhy(p) || '').trim() : '';
+    var phone = p ? String(p.phone || '').trim() : '';
+
+    if (!practiceTitle && !addr && !phone) {
+      clearHeaderClinicBlock();
+      return;
+    }
+
+    if (!headerClinic) return;
+
+    if (practiceTitle) headerPracticeTitleStored = practiceTitle;
+
+    headerClinic.innerHTML = '';
+    headerClinic.classList.remove('kh-header-clinic--empty');
+    headerClinic.removeAttribute('aria-hidden');
+
+    var nameEl = document.createElement('div');
+    nameEl.className = 'kh-header-clinic__name';
+    nameEl.textContent = practiceTitle || 'Referring practice';
+    headerClinic.appendChild(nameEl);
+
+    if (addr || phone) {
+      var rule = document.createElement('div');
+      rule.className = 'kh-header-clinic__divider';
+      rule.setAttribute('aria-hidden', 'true');
+      headerClinic.appendChild(rule);
+
+      var meta = document.createElement('div');
+      meta.className = 'kh-header-clinic__meta';
+      if (addr) {
+        var a = document.createElement('div');
+        a.className = 'kh-header-clinic__addr';
+        a.textContent = addr;
+        meta.appendChild(a);
+      }
+      if (phone) {
+        var pwrap = document.createElement('div');
+        pwrap.className = 'kh-header-clinic__phone';
+        var href = telHrefFromDisplay(phone);
+        if (href) {
+          var link = document.createElement('a');
+          link.href = href;
+          link.textContent = phone;
+          pwrap.appendChild(link);
+        } else {
+          var span = document.createElement('span');
+          span.textContent = phone;
+          pwrap.appendChild(span);
+        }
+        meta.appendChild(pwrap);
+      }
+      headerClinic.appendChild(meta);
+    }
+
+    document.body.classList.add('rf-worksheet--referring');
+  }
+
+  function syncReferringPartnerHeader() {
+    if (!form || form.getAttribute('data-refer-personalized') !== '1') {
+      clearHeaderClinicBlock();
+      return;
+    }
+    var practiceTitle =
+      String(headerPracticeTitleStored || getInputValue(form, '[name="referringDoctorPractice"]') || '').trim();
+    renderHeaderClinicBlock(practiceTitle, headerMetaPhysicianFallback());
+  }
+
+  function setHidden(id, v) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var nextVal = v !== undefined && v !== null ? String(v).trim() : '';
+    el.value = nextVal;
+  }
+
+  function applyHiddenReferringContacts(p) {
+    var slugEl = document.getElementById('referringOfficeSlug');
+    if (!p) {
+      setHidden('referringDoctorName', '');
+      setHidden('referringDoctorPhone', '');
+      setHidden('referringDoctorAddress', '');
+      if (slugEl) slugEl.value = '';
+      return;
+    }
+
+    setHidden('referringDoctorName', p.doctorName || '');
+    setHidden('referringDoctorPhone', p.phone || '');
+    setHidden('referringDoctorAddress', buildFullAddressPhy(p));
+
+    if (slugEl) {
+      if (p.slug) slugEl.value = String(p.slug).trim();
+      else slugEl.value = '';
+    }
+  }
+
+  function ensurePreferredDoctorSelect() {
+    if (!preferredDoctorControlWrap) return null;
+    var existing = document.getElementById('preferredDoctor');
+    if (existing && existing.tagName === 'SELECT') {
+      preferredDoctorEl = existing;
+      return existing;
+    }
+    var sel = document.createElement('select');
+    sel.className = 'rf-select';
+    sel.id = 'preferredDoctor';
+    sel.name = 'preferredDoctor';
+    sel.required = true;
+    preferredDoctorControlWrap.innerHTML = '';
+    preferredDoctorControlWrap.appendChild(sel);
+    preferredDoctorEl = sel;
+    sel.addEventListener('change', onPreferredDoctorChange);
+    return sel;
+  }
+
+  function restoreGenericDoctorField() {
+    if (!preferredDoctorControlWrap) return;
+    if (form) form.removeAttribute('data-refer-personalized');
+    physicianBySlug = {};
+    applyHiddenReferringContacts(null);
+    clearHeaderClinicBlock();
+
+    var inp = document.createElement('input');
+    inp.className = 'rf-input';
+    inp.type = 'text';
+    inp.id = 'preferredDoctor';
+    inp.name = 'preferredDoctor';
+    inp.required = true;
+    inp.placeholder = 'Enter referring doctor name';
+    inp.setAttribute('autocomplete', 'name');
+    inp.value = '';
+
+    preferredDoctorControlWrap.innerHTML = '';
+    preferredDoctorControlWrap.appendChild(inp);
+    preferredDoctorEl = null;
+  }
+
+  function rebuildPartnerDoctorDropdown(physicianList, preselectDoctorName) {
+    var selectEl = ensurePreferredDoctorSelect();
+    if (!selectEl || !physicianList || !physicianList.length) return false;
+
+    physicianBySlug = {};
+    selectEl.innerHTML = '';
+
+    var validPhysicians = [];
+    for (var i = 0; i < physicianList.length; i++) {
+      var row = physicianList[i];
+      if (!row || typeof row !== 'object') continue;
+      var nm = String(row.doctorName || '').trim();
+      if (!nm) continue;
+      validPhysicians.push(row);
+    }
+    if (!validPhysicians.length) return false;
+
+    var singleDoctor = validPhysicians.length === 1;
+    var want = String(preselectDoctorName || '').trim();
+    if (!want && singleDoctor) want = String(validPhysicians[0].doctorName || '').trim();
+
+    if (!singleDoctor) {
+      var optEmpty = document.createElement('option');
+      optEmpty.value = '';
+      optEmpty.textContent = 'Select';
+      selectEl.appendChild(optEmpty);
+    }
+
+    for (var j = 0; j < validPhysicians.length; j++) {
+      var p = validPhysicians[j];
+      var name = String(p.doctorName || '').trim();
+      var slug = String(p.slug || '').trim();
+      var opt = document.createElement('option');
+      opt.value = name;
+      opt.textContent = name;
+      if (slug) {
+        opt.setAttribute('data-office-slug', slug);
+        physicianBySlug[slug] = p;
+      }
+      selectEl.appendChild(opt);
+    }
+
+    if (want) {
+      for (var k = 0; k < selectEl.options.length; k++) {
+        if (String(selectEl.options[k].value).trim() === want) {
+          selectEl.selectedIndex = k;
+          break;
+        }
+      }
+    }
+
+    selectEl.dispatchEvent(new Event('change', { bubbles: true }));
+    return true;
+  }
+
+  function onPreferredDoctorChange() {
+    if (!preferredDoctorEl || !form) return;
+    if (form.getAttribute('data-refer-personalized') !== '1') return;
+
+    var opt = preferredDoctorEl.options[preferredDoctorEl.selectedIndex];
+    var val = String(preferredDoctorEl.value || '').trim();
+
+    if (!val) {
+      applyHiddenReferringContacts(null);
+      syncReferringPartnerHeader();
+      return;
+    }
+
+    var slug = opt && opt.getAttribute('data-office-slug');
+
+    if (slug && physicianBySlug[slug]) {
+      var row = physicianBySlug[slug];
+      applyHiddenReferringContacts({
+        doctorName: row.doctorName,
+        phone: row.phone,
+        addressLine: row.addressLine,
+        rawBlock: row.rawBlock,
+        addressStreet: row.addressStreet,
+        stateOrZip: row.stateOrZip,
+        slug: slug
+      });
+      syncReferringPartnerHeader();
+      return;
+    }
+
+    applyHiddenReferringContacts(null);
+    syncReferringPartnerHeader();
+  }
+
+  function applyPersonalizedClinic(payload, preselectDoctorName) {
+    if (!payload || !payload.clinic || !payload.clinic.physicians) return;
+    var c = payload.clinic;
+    var list = Array.isArray(c.physicians) ? c.physicians : [];
+    lastClinicPhysicianList = list;
+
+    var urlKeyEl = document.getElementById('referringUrlKey');
+    if (urlKeyEl) urlKeyEl.value = refKeyFromUrl || '';
+
+    if (form) form.setAttribute('data-refer-personalized', '1');
+
+    headerPracticeTitleStored = String(c.practiceName || '').trim();
+    setHidden('referringDoctorPractice', c.practiceName || '');
+
+    rebuildPartnerDoctorDropdown(list, preselectDoctorName || '');
+    syncReferringPartnerHeader();
+  }
+
+  function applyPersonalizedOffice(payload) {
+    if (!payload || !payload.office) return;
+    var o = payload.office;
+
+    var list = [{
+      slug: o.slug || '',
+      doctorName: o.doctorName || '',
+      practiceName: o.practiceName || '',
+      phone: o.phone || '',
+      addressLine: o.addressLine || '',
+      rawBlock: o.rawBlock || '',
+      addressStreet: o.addressStreet || '',
+      city: o.city || '',
+      stateOrZip: o.stateOrZip || ''
+    }];
+
+    if (form) form.setAttribute('data-refer-personalized', '1');
+
+    var urlKeyEl = document.getElementById('referringUrlKey');
+    if (urlKeyEl) urlKeyEl.value = refKeyFromUrl || '';
+
+    headerPracticeTitleStored = String(o.practiceName || '').trim();
+    lastClinicPhysicianList = null;
+    setHidden('referringDoctorPractice', o.practiceName || '');
+
+    rebuildPartnerDoctorDropdown(list, o.doctorName || '');
+    syncReferringPartnerHeader();
+  }
+
+  if (preferredDoctorEl) preferredDoctorEl.addEventListener('change', onPreferredDoctorChange);
+
+  function collectReferralWorksheetDraft(formEl) {
+    if (!formEl) return null;
+    try {
+      var sharedCareEl = formEl.querySelector('[name="sharedCare"]');
+      return {
+        collectedAt: new Date().toISOString(),
+        worksheetPath: typeof location !== 'undefined' ? String(location.pathname + location.search || '') : '',
+        personalized: formEl.getAttribute('data-refer-personalized') === '1',
+        referringUrlKey: getInputValue(formEl, '[name="referringUrlKey"]'),
+        referringOfficeSlug: getInputValue(formEl, '[name="referringOfficeSlug"]'),
+        referringDoctorPractice: getInputValue(formEl, '[name="referringDoctorPractice"]'),
+        referringDoctorName: getInputValue(formEl, '[name="referringDoctorName"]'),
+        referringDoctorPhone: getInputValue(formEl, '[name="referringDoctorPhone"]'),
+        referringDoctorAddress: getInputValue(formEl, '[name="referringDoctorAddress"]'),
+        patientName: getInputValue(formEl, '[name="patientName"]'),
+        patientDobAge: getInputValue(formEl, '[name="patientDobAge"]'),
+        patientPhone: getInputValue(formEl, '[name="patientPhone"]'),
+        patientEmail: getInputValue(formEl, '[name="patientEmail"]'),
+        preferredLocationJoined: joinChecked(formEl, 'preferredLocation'),
+        diagnosisJoined: joinChecked(formEl, 'diagnosis'),
+        procedureJoined: joinChecked(formEl, 'procedure'),
+        clinicalDataJoined: joinChecked(formEl, 'clinicalData'),
+        sharedCare: sharedCareEl ? String(sharedCareEl.value || '').trim() : '',
+        specialInstructions: getInputValue(formEl, '[name="specialInstructions"]'),
+        preferredDoctor: getInputValue(formEl, '[name="preferredDoctor"]'),
+        submittedBy: getInputValue(formEl, '[name="submittedBy"]'),
+        uploadsNote:
+          'Worksheet file uploads are not carried when you tap “Schedule now.” On the booking page, re-attach under Patient contact → Clinical documents (or submit the full worksheet from the referral form).'
+      };
+    } catch (er) {
+      return null;
+    }
+  }
+
+  var ZOHO_BOOKINGS_EMBED_SCRIPT = 'https://bookings.nimbuspop.com/assets/embed.js';
+  var ZOHO_BOOKINGS_EMBED_HEIGHT = '600px';
+
+  function saveReferralDraftForSchedule() {
+    var fSnap = document.getElementById('rf-form');
+    var snap = collectReferralWorksheetDraft(fSnap);
+    if (!snap) return;
+    try {
+      var ser = JSON.stringify(snap);
+      if (ser.length > 120000) ser = ser.slice(0, 120000);
+      sessionStorage.setItem(REFERRAL_DRAFT_KEY, ser);
+    } catch (ignore) {}
+  }
+
+  /** Patient block on worksheet → Zoho Bookings URL prefill */
+  function getReferralPatientPrefill() {
+    var f = document.getElementById('rf-form');
+    if (!f) return { name: '', email: '', phone: '' };
+    return {
+      name: getInputValue(f, '[name="patientName"]'),
+      email: getInputValue(f, '[name="patientEmail"]'),
+      phone: formatPhoneForZohoEmbed(getInputValue(f, '[name="patientPhone"]'))
+    };
+  }
+
+  function formatPhoneForZohoEmbed(raw) {
+    var d = digitsOnly(raw);
+    if (d.length === 11 && d.charAt(0) === '1') d = d.slice(1);
+    if (d.length === 10) return '+1' + d;
+    return String(raw || '').trim();
+  }
+
+  function getZohoPrefillParamKeys(panel) {
+    return {
+      name: String(panel.getAttribute('data-zoho-param-name') || 'Name').trim() || 'Name',
+      email: String(panel.getAttribute('data-zoho-param-email') || 'Email').trim() || 'Email',
+      phone: String(panel.getAttribute('data-zoho-param-phone') || 'Contact Number').trim() || 'Contact Number'
+    };
+  }
+
+  /** Zoho portal embed uses #/serviceId?field=value — param keys must match booking form field names in Zoho */
+  function buildZohoEmbedUrlWithPrefill(baseUrl, prefill, paramKeys) {
+    var url = String(baseUrl || '').trim();
+    if (!url) return '';
+
+    var params = new URLSearchParams();
+    function setPrefill(key, val) {
+      if (key && val) params.set(key, val);
+    }
+    if (prefill.name) {
+      setPrefill(paramKeys.name, prefill.name);
+      if (paramKeys.name !== 'name') setPrefill('name', prefill.name);
+    }
+    if (prefill.email) {
+      setPrefill(paramKeys.email, prefill.email);
+      if (paramKeys.email !== 'email') setPrefill('email', prefill.email);
+    }
+    if (prefill.phone) {
+      setPrefill(paramKeys.phone, prefill.phone);
+      if (paramKeys.phone !== 'phone') setPrefill('phone', prefill.phone);
+      if (paramKeys.phone !== 'phone_number') setPrefill('phone_number', prefill.phone);
+    }
+
+    var qs = params.toString().replace(/\+/g, '%20');
+    if (!qs) return url;
+
+    if (url.indexOf('?') >= 0) return url + '&' + qs;
+    return url + '?' + qs;
+  }
+
+  function validatePatientFieldsForSchedule(formEl) {
+    var errs = [];
+    if (!formEl) return ['Worksheet not found.'];
+    var pn = formEl.querySelector('[name="patientName"]');
+    if (!pn || !String(pn.value || '').trim()) errs.push('Patient name is required before scheduling.');
+    if (!isUsPhone10(getInputValue(formEl, '[name="patientPhone"]'))) {
+      errs.push('A valid 10-digit US patient phone is required before scheduling.');
+    }
+    if (!String(getInputValue(formEl, '[name="patientEmail"]') || '').trim()) {
+      errs.push('Patient email is required before scheduling.');
+    }
+    return errs;
+  }
+
+  function renderSchedulePatientBar(prefill) {
+    var bar = document.getElementById('rf-schedule-patient-bar');
+    if (!bar) return;
+    bar.hidden = false;
+    bar.textContent = '';
+    var strong = document.createElement('strong');
+    strong.textContent = 'Booking for: ';
+    bar.appendChild(strong);
+    bar.appendChild(
+      document.createTextNode(
+        String(prefill.name || '') + ' · ' + String(prefill.email || '') + ' · ' + String(prefill.phone || '')
+      )
+    );
+  }
+
+  function setScheduleStatus(kind, text) {
+    var el = document.getElementById('rf-schedule-status');
+    if (!el) return;
+    if (!text) {
+      el.hidden = true;
+      el.textContent = '';
+      el.className = 'rf-schedule-status';
+      return;
+    }
+    el.hidden = false;
+    el.textContent = text;
+    el.className = 'rf-schedule-status rf-schedule-status--' + (kind === 'ok' ? 'ok' : 'err');
+  }
+
+  function pacificTodayIso() {
+    try {
+      var parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/Los_Angeles',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      }).formatToParts(new Date());
+      var y = '';
+      var m = '';
+      var d = '';
+      parts.forEach(function (p) {
+        if (p.type === 'year') y = p.value;
+        if (p.type === 'month') m = p.value;
+        if (p.type === 'day') d = p.value;
+      });
+      if (y && m && d) return y + '-' + m + '-' + d;
+    } catch (ignore) {}
+    return '';
+  }
+
+  var scheduleSelectedSlot = '';
+  var scheduleSlotsLoading = false;
+
+  function clearScheduleSlots(message) {
+    var wrap = document.getElementById('rf-schedule-slots');
+    var confirmBtn = document.getElementById('rf-schedule-confirm');
+    scheduleSelectedSlot = '';
+    if (confirmBtn) confirmBtn.disabled = true;
+    if (!wrap) return;
+    wrap.innerHTML = '';
+    if (message) {
+      var p = document.createElement('p');
+      p.className = 'rf-schedule-slots-hint';
+      p.textContent = message;
+      wrap.appendChild(p);
+    }
+  }
+
+  function loadReferralAvailableSlots(dateIso) {
+    var formEl = document.getElementById('rf-form');
+    if (!formEl || scheduleSlotsLoading) return;
+    scheduleSlotsLoading = true;
+    clearScheduleSlots('');
+    setScheduleStatus('', '');
+
+    var qs = new URLSearchParams();
+    qs.set('date', dateIso);
+    qs.set('preferredLocationJoined', joinChecked(formEl, 'preferredLocation'));
+
+    fetch('/api/physician-referral/zoho-available-slots?' + qs.toString(), {
+      method: 'GET',
+      credentials: 'same-origin',
+      headers: { Accept: 'application/json' }
+    })
+      .then(function (r) {
+        return r.json().catch(function () {
+          return {};
+        });
+      })
+      .then(function (body) {
+        scheduleSlotsLoading = false;
+        var wrap = document.getElementById('rf-schedule-slots');
+        if (!wrap) return;
+        wrap.innerHTML = '';
+
+        if (!body || !body.ok || !body.slots || !body.slots.length) {
+          clearScheduleSlots(
+            (body && body.message) || 'No open times on this date. Try another day or call (805) 230-2126.'
+          );
+          return;
+        }
+
+        body.slots.forEach(function (slot) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'rf-schedule-slot';
+          btn.textContent = slot;
+          btn.setAttribute('data-slot', slot);
+          btn.addEventListener('click', function () {
+            scheduleSelectedSlot = slot;
+            wrap.querySelectorAll('.rf-schedule-slot').forEach(function (b) {
+              b.classList.toggle('is-selected', b === btn);
+            });
+            var confirmBtn = document.getElementById('rf-schedule-confirm');
+            if (confirmBtn) confirmBtn.disabled = false;
+          });
+          wrap.appendChild(btn);
+        });
+      })
+      .catch(function () {
+        scheduleSlotsLoading = false;
+        clearScheduleSlots('Could not load times. Please try again.');
+      });
+  }
+
+  function appendReferralWorksheetToFormData(fd, formEl) {
+    if (!fd || !formEl) return;
+    appendIfPresent(fd, 'companyWebsite', formEl.querySelector('[name="companyWebsite"]')
+      ? formEl.querySelector('[name="companyWebsite"]').value : '');
+    fd.append('referringOfficeSlug', getInputValue(formEl, '[name="referringOfficeSlug"]'));
+    fd.append('referringUrlKey', getInputValue(formEl, '[name="referringUrlKey"]'));
+    fd.append('referringDoctorName', getInputValue(formEl, '[name="referringDoctorName"]'));
+    fd.append('referringDoctorPractice', getInputValue(formEl, '[name="referringDoctorPractice"]'));
+    fd.append('referringDoctorPhone', getInputValue(formEl, '[name="referringDoctorPhone"]'));
+    fd.append('referringDoctorAddress', getInputValue(formEl, '[name="referringDoctorAddress"]'));
+    fd.append('patientName', getInputValue(formEl, '[name="patientName"]'));
+    fd.append('patientDobAge', getInputValue(formEl, '[name="patientDobAge"]'));
+    fd.append('patientPhone', getInputValue(formEl, '[name="patientPhone"]'));
+    fd.append('patientEmail', getInputValue(formEl, '[name="patientEmail"]'));
+    fd.append('preferredLocationJoined', joinChecked(formEl, 'preferredLocation'));
+    fd.append('diagnosisJoined', joinChecked(formEl, 'diagnosis'));
+    fd.append('procedureJoined', joinChecked(formEl, 'procedure'));
+    fd.append('clinicalDataJoined', joinChecked(formEl, 'clinicalData'));
+    fd.append('sharedCare', getInputValue(formEl, '[name="sharedCare"]'));
+    fd.append('specialInstructions', getInputValue(formEl, '[name="specialInstructions"]'));
+    fd.append('preferredDoctor', getInputValue(formEl, '[name="preferredDoctor"]'));
+    fd.append('submittedBy', getInputValue(formEl, '[name="submittedBy"]'));
+
+    var uploadInsurance = document.getElementById('uploadInsurance');
+    if (uploadInsurance && uploadInsurance.files && uploadInsurance.files[0]) {
+      fd.append('uploadInsurance', uploadInsurance.files[0], uploadInsurance.files[0].name);
+    }
+    var uploadClinicalChart = document.getElementById('uploadClinicalChart');
+    if (uploadClinicalChart && uploadClinicalChart.files && uploadClinicalChart.files.length) {
+      for (var fi = 0; fi < uploadClinicalChart.files.length; fi++) {
+        var fObj = uploadClinicalChart.files[fi];
+        fd.append('uploadClinicalChart', fObj, fObj.name);
+      }
+    }
+  }
+
+  function confirmReferralAppointment() {
+    var formEl = document.getElementById('rf-form');
+    var dateEl = document.getElementById('rf-schedule-date');
+    var confirmBtn = document.getElementById('rf-schedule-confirm');
+    if (!formEl || !dateEl) return;
+
+    var errs = validatePatientFieldsForSchedule(formEl);
+    if (errs.length) {
+      setScheduleStatus('err', errs[0]);
+      return;
+    }
+    if (!dateEl.value || !scheduleSelectedSlot) {
+      setScheduleStatus('err', 'Choose a date and time.');
+      return;
+    }
+
+    var captchaResp = getRecaptchaResponse();
+    if (!captchaResp) {
+      setScheduleStatus('err', 'Please complete the CAPTCHA verification on the worksheet before confirming.');
+      var captchaSection = document.getElementById('physician-ref-recaptcha-el');
+      if (captchaSection && captchaSection.scrollIntoView) {
+        captchaSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+
+    var fd = new FormData();
+    appendReferralWorksheetToFormData(fd, formEl);
+    fd.append('date', dateEl.value);
+    fd.append('time', scheduleSelectedSlot);
+    fd.append('recaptchaToken', captchaResp);
+
+    if (confirmBtn) confirmBtn.disabled = true;
+    setScheduleStatus('', 'Booking…');
+
+    fetch('/api/physician-referral/zoho-book-appointment', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { Accept: 'application/json' },
+      body: fd
+    })
+      .then(function (r) {
+        return r.json().catch(function () {
+          return {};
+        });
+      })
+      .then(function (body) {
+        if (confirmBtn) confirmBtn.disabled = false;
+        if (body && body.ok) {
+          resetRecaptcha();
+          setScheduleStatus(
+            'ok',
+            (body.message || 'Appointment booked.') +
+              ' Staff have been emailed with worksheet details and your selected date/time.'
+          );
+          return;
+        }
+        resetRecaptcha();
+        setScheduleStatus('err', (body && body.message) || 'Could not book. Please call (805) 230-2126.');
+      })
+      .catch(function () {
+        if (confirmBtn) confirmBtn.disabled = false;
+        resetRecaptcha();
+        setScheduleStatus('err', 'Could not book. Please try again or call (805) 230-2126.');
+      });
+  }
+
+  function initKviSchedulePanel() {
+    var panel = document.getElementById('rf-zoho-schedule-panel');
+    var formEl = document.getElementById('rf-form');
+    if (!panel || !formEl) return;
+
+    var errs = validatePatientFieldsForSchedule(formEl);
+    if (errs.length) {
+      var msg = document.getElementById('rf-msg');
+      if (msg) {
+        msg.className = 'rf-alert rf-alert--err';
+        msg.textContent = errs[0];
+        msg.style.display = 'block';
+        msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+
+    var prefill = getReferralPatientPrefill();
+    renderSchedulePatientBar(prefill);
+    setScheduleStatus('', '');
+
+    var dateEl = document.getElementById('rf-schedule-date');
+    if (dateEl) {
+      var minD = pacificTodayIso();
+      if (minD) dateEl.min = minD;
+      if (!dateEl.value && minD) dateEl.value = minD;
+      if (dateEl.value) loadReferralAvailableSlots(dateEl.value);
+      else clearScheduleSlots('Choose a date to see open times.');
+    }
+
+    panel.hidden = false;
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function loadZohoBookingsScript(onReady, onError) {
+    if (typeof Bookings !== 'undefined' && typeof Bookings.inlineEmbed === 'function') {
+      onReady();
+      return;
+    }
+    var existing = document.querySelector('script[data-kvi-zoho-bookings-embed]');
+    if (existing) {
+      if (existing.getAttribute('data-kvi-loaded') === '1') {
+        onReady();
+      } else {
+        existing.addEventListener('load', onReady, { once: true });
+        existing.addEventListener('error', onError, { once: true });
+      }
+      return;
+    }
+    var s = document.createElement('script');
+    s.src = ZOHO_BOOKINGS_EMBED_SCRIPT;
+    s.async = true;
+    s.setAttribute('data-kvi-zoho-bookings-embed', '1');
+    s.onload = function () {
+      s.setAttribute('data-kvi-loaded', '1');
+      onReady();
+    };
+    s.onerror = onError;
+    document.body.appendChild(s);
+  }
+
+  function initZohoInlineEmbed() {
+    var panel = document.getElementById('rf-zoho-schedule-panel');
+    var container = document.getElementById('rf-zoho-inline-container');
+    var loadingEl = document.getElementById('rf-zoho-schedule-loading');
+    if (!panel || !container) return;
+
+    var baseUrl = String(panel.getAttribute('data-zoho-embed-url') || '').trim();
+    if (!baseUrl) return;
+
+    var prefill = getReferralPatientPrefill();
+    var paramKeys = getZohoPrefillParamKeys(panel);
+    var embedUrl = buildZohoEmbedUrlWithPrefill(baseUrl, prefill, paramKeys);
+
+    function hideLoading() {
+      if (loadingEl) loadingEl.hidden = true;
+    }
+
+    function showLoading() {
+      if (loadingEl) loadingEl.hidden = false;
+    }
+
+    function runEmbed() {
+      if (typeof Bookings === 'undefined' || typeof Bookings.inlineEmbed !== 'function') {
+        hideLoading();
+        container.innerHTML =
+          '<p class="rf-zoho-schedule-loading" style="display:block">Scheduler could not load. Please refresh or call (805) 230-2126.</p>';
+        return;
+      }
+      container.innerHTML = '';
+      hideLoading();
+      Bookings.inlineEmbed({
+        url: embedUrl,
+        parent: '#rf-zoho-inline-container',
+        height: ZOHO_BOOKINGS_EMBED_HEIGHT
+      });
+    }
+
+    showLoading();
+    panel.hidden = false;
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    loadZohoBookingsScript(runEmbed, function () {
+      hideLoading();
+      container.innerHTML =
+        '<p class="rf-zoho-schedule-loading" style="display:block">Scheduler script blocked or unavailable. Please try again later.</p>';
+    });
+  }
+
+  function closeZohoSchedulePanel() {
+    var panel = document.getElementById('rf-zoho-schedule-panel');
+    if (panel) panel.hidden = true;
+  }
+
+  var scheduleDateEl = document.getElementById('rf-schedule-date');
+  if (scheduleDateEl) {
+    scheduleDateEl.addEventListener('change', function () {
+      if (scheduleDateEl.value) loadReferralAvailableSlots(scheduleDateEl.value);
+      else clearScheduleSlots('Choose a date to see open times.');
+    });
+  }
+
+  var scheduleConfirmBtn = document.getElementById('rf-schedule-confirm');
+  if (scheduleConfirmBtn) {
+    scheduleConfirmBtn.addEventListener('click', confirmReferralAppointment);
+  }
+
+  var zohoFallbackDetails = document.getElementById('rf-zoho-embed-fallback');
+  if (zohoFallbackDetails) {
+    zohoFallbackDetails.addEventListener('toggle', function () {
+      if (zohoFallbackDetails.open) initZohoInlineEmbed();
+    });
+  }
+
+  var scheduleBtn = document.getElementById('rf-schedule-cta');
+  if (scheduleBtn) {
+    scheduleBtn.addEventListener('click', function () {
+      saveReferralDraftForSchedule();
+      initKviSchedulePanel();
+    });
+  }
+
+  var scheduleCloseBtn = document.getElementById('rf-zoho-schedule-close');
+  if (scheduleCloseBtn) {
+    scheduleCloseBtn.addEventListener('click', closeZohoSchedulePanel);
+  }
+
+  function hydrateFromUrlKey() {
+    if (!refKeyFromUrl) return;
+
+    fetch('/api/referral-clinic/' + encodeURIComponent(refKeyFromUrl), {
+      method: 'GET',
+      credentials: 'same-origin',
+      headers: { Accept: 'application/json' }
+    })
+      .then(function (r) { return r.json().catch(function () { return {}; }); })
+      .then(function (body) {
+        if (body && body.ok && body.clinic) {
+          applyPersonalizedClinic(body, '');
+          return null;
+        }
+        return fetch('/api/referral-office/' + encodeURIComponent(refKeyFromUrl), {
+          method: 'GET',
+          credentials: 'same-origin',
+          headers: { Accept: 'application/json' }
+        })
+          .then(function (r2) { return r2.json().catch(function () { return {}; }); })
+          .then(function (body2) {
+            if (!(body2 && body2.ok && body2.office)) {
+              restoreGenericDoctorField();
+              return;
+            }
+            var o = body2.office;
+            var ck = o.practiceClinicKey;
+            if (ck && String(ck).trim()) {
+              return fetch('/api/referral-clinic/' + encodeURIComponent(String(ck).trim()), {
+                method: 'GET',
+                credentials: 'same-origin',
+                headers: { Accept: 'application/json' }
+              })
+                .then(function (r3) { return r3.json().catch(function () { return {}; }); })
+                .then(function (body3) {
+                  if (body3 && body3.ok && body3.clinic) {
+                    applyPersonalizedClinic(body3, o.doctorName || '');
+                  } else {
+                    applyPersonalizedOffice(body2);
+                  }
+                });
+            }
+            applyPersonalizedOffice(body2);
+          });
+      })
+      .catch(function () {
+        restoreGenericDoctorField();
+      });
+  }
+
+  if (refKeyFromUrl) {
+    hydrateFromUrlKey();
+  } else {
+    restoreGenericDoctorField();
+  }
+
+  form = document.getElementById('rf-form');
+  var msg = document.getElementById('rf-msg');
+  var submit = document.getElementById('rf-submit');
+
+  function flash(kind, text) {
+    msg.className = 'rf-alert rf-alert--' + kind;
+    msg.textContent = text;
+    msg.style.display = 'block';
+    msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  if (!form) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var errs = [];
+    var pn = form.querySelector('[name="patientName"]');
+    if (!pn || !pn.value.trim()) errs.push('Patient name is required.');
+    if (!isUsPhone10(form.querySelector('[name="patientPhone"]').value)) errs.push('Phone must include a valid 10-digit US number.');
+    if (!form.querySelector('[name="patientEmail"]').value.trim()) errs.push('Email is required.');
+    if (!form.querySelectorAll('input[name="preferredLocation"]:checked').length) errs.push('Select at least one preferred location.');
+    var dx = form.querySelectorAll('input[name="diagnosis"]:checked').length;
+    var proc = form.querySelectorAll('input[name="procedure"]:checked').length;
+    if (!dx && !proc) errs.push('Select at least one diagnosis or suggested procedure.');
+    var docNameEl = form.querySelector('[name="preferredDoctor"]');
+    if (!docNameEl || !String(docNameEl.value || '').trim()) {
+      errs.push(
+        form.getAttribute('data-refer-personalized') === '1'
+          ? 'Select a doctor.'
+          : 'Doctor name is required.'
+      );
+    }
+
+    var personalized = form.getAttribute('data-refer-personalized') === '1';
+    if (personalized) {
+      var rphone = form.querySelector('[name="referringDoctorPhone"]');
+      if (!rphone || !isUsPhone10(rphone.value)) {
+        errs.push('Referring practice phone is missing or invalid — please pick a referring doctor.');
+      }
+    }
+
+    if (errs.length) { flash('err', errs[0]); return; }
+
+    var captchaResp = '';
+    try {
+      captchaResp = window.grecaptcha && window.grecaptcha.getResponse ? window.grecaptcha.getResponse() : '';
+    } catch (xc) {
+      captchaResp = '';
+    }
+
+    if (!captchaResp) {
+      flash('err', 'Please complete the CAPTCHA verification.');
+      return;
+    }
+
+    submit.disabled = true;
+    msg.style.display = 'none';
+
+    var fd = new FormData();
+    appendIfPresent(fd, 'companyWebsite', form.querySelector('[name="companyWebsite"]')
+      ? form.querySelector('[name="companyWebsite"]').value : '');
+    fd.append('referringOfficeSlug', getInputValue(form, '[name="referringOfficeSlug"]'));
+    fd.append('referringUrlKey', getInputValue(form, '[name="referringUrlKey"]'));
+    fd.append('referringDoctorName', getInputValue(form, '[name="referringDoctorName"]'));
+    fd.append('referringDoctorPractice', getInputValue(form, '[name="referringDoctorPractice"]'));
+    fd.append('referringDoctorPhone', getInputValue(form, '[name="referringDoctorPhone"]'));
+    fd.append('referringDoctorAddress', getInputValue(form, '[name="referringDoctorAddress"]'));
+
+    fd.append('patientName', getInputValue(form, '[name="patientName"]'));
+    fd.append('patientDobAge', getInputValue(form, '[name="patientDobAge"]'));
+    fd.append('patientPhone', getInputValue(form, '[name="patientPhone"]'));
+    fd.append('patientEmail', getInputValue(form, '[name="patientEmail"]'));
+
+    fd.append('preferredLocationJoined', joinChecked(form, 'preferredLocation'));
+    fd.append('diagnosisJoined', joinChecked(form, 'diagnosis'));
+    fd.append('procedureJoined', joinChecked(form, 'procedure'));
+    fd.append('clinicalDataJoined', joinChecked(form, 'clinicalData'));
+
+    fd.append('sharedCare', getInputValue(form, '[name="sharedCare"]'));
+    fd.append('specialInstructions', getInputValue(form, '[name="specialInstructions"]'));
+    fd.append('preferredDoctor', getInputValue(form, '[name="preferredDoctor"]'));
+    fd.append('submittedBy', getInputValue(form, '[name="submittedBy"]'));
+
+    fd.append('recaptchaToken', captchaResp);
+
+    var uploadInsurance = document.getElementById('uploadInsurance');
+    if (uploadInsurance && uploadInsurance.files && uploadInsurance.files[0]) {
+      fd.append('uploadInsurance', uploadInsurance.files[0], uploadInsurance.files[0].name);
+    }
+    var uploadClinicalChart = document.getElementById('uploadClinicalChart');
+    if (uploadClinicalChart && uploadClinicalChart.files && uploadClinicalChart.files.length) {
+      for (var fi = 0; fi < uploadClinicalChart.files.length; fi++) {
+        var fObj = uploadClinicalChart.files[fi];
+        fd.append('uploadClinicalChart', fObj, fObj.name);
+      }
+    }
+
+    fetch('/api/physician-referral/submit', {
+      method: 'POST',
+      body: fd,
+      headers: { 'Accept': 'application/json' },
+      credentials: 'same-origin'
+    })
+    .then(function (r) { return r.text().then(function (t) { var d = {}; try { d = JSON.parse(t); } catch (x) {} return { ok: r.ok, data: d }; }); })
+    .then(function (res) {
+      submit.disabled = false;
+      if (res.ok && res.data && res.data.success) {
+        form.reset();
+
+        physicianBySlug = {};
+
+        form.removeAttribute('data-refer-personalized');
+        resetRecaptcha();
+
+        clearHeaderClinicBlock();
+        setHidden('referringDoctorName', '');
+        setHidden('referringDoctorPractice', '');
+        setHidden('referringDoctorPhone', '');
+        setHidden('referringDoctorAddress', '');
+
+        var slugElReset = document.getElementById('referringOfficeSlug');
+        if (slugElReset) slugElReset.value = '';
+        var urlKeyReset = document.getElementById('referringUrlKey');
+        if (urlKeyReset) urlKeyReset.value = '';
+
+        if (refKeyFromUrl) hydrateFromUrlKey();
+        else restoreGenericDoctorSelect();
+
+        flash('ok', (res.data.message) || 'Referral submitted — our team will follow up at the contacts provided.');
+      } else {
+        flash('err', (res.data && res.data.message) || 'Could not submit. Please call (805) 230-2126.');
+        resetRecaptcha();
+      }
+    })
+    .catch(function () {
+      submit.disabled = false;
+      flash('err', 'Network error. Please call (805) 230-2126.');
+      resetRecaptcha();
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

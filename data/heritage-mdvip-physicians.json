@@ -1,0 +1,306 @@
+{
+  "scraped_at": "2026-06-04T12:00:00.000Z",
+  "source": "MDVIP CA directory listing pages (phones taken from on-page listings in directory cards, June 2026)",
+  "source_pages": [
+    "https://www.mdvip.com/physicians-directory/ca/agoura-hills",
+    "https://www.mdvip.com/physicians-directory/ca/beverly-hills",
+    "https://www.mdvip.com/physicians-directory/ca/los-angeles",
+    "https://www.mdvip.com/physicians-directory/ca/pasadena",
+    "https://www.mdvip.com/physicians-directory/ca/rancho-cucamonga",
+    "https://www.mdvip.com/physicians-directory/ca/sherman-oaks",
+    "https://www.mdvip.com/physicians-directory/ca/tarzana",
+    "https://www.mdvip.com/physicians-directory/ca/thousand-oaks",
+    "https://www.mdvip.com/physicians-directory/ca/west-hills"
+  ],
+  "note": "Named physicians only. Phones match MDVIP directory cards where shown; blank if not listed on card. Re-run: node scripts/scrape-mdvip-physicians.js --merge",
+  "physicians": [
+    {
+      "slug": "heritage-md-david-m-filsoof-beverly-hills",
+      "doctor_name": "David M. Filsoof, MD",
+      "practice_name": "Beverly Hills",
+      "address_line": "9301 Wilshire Boulevard Suite 507, Beverly Hills, CA",
+      "phone": "(310) 424-5750",
+      "specialty": "Cardiology, Internal Medicine",
+      "directory_hub": "Beverly Hills"
+    },
+    {
+      "slug": "heritage-md-sam-setareh-beverly-hills",
+      "doctor_name": "Sam Setareh, MD, MS, FACC",
+      "practice_name": "Beverly Hills",
+      "address_line": "9301 Wilshire Boulevard Suite 507, Beverly Hills, CA",
+      "phone": "(310) 424-5750",
+      "specialty": "Cardiology, Internal Medicine",
+      "directory_hub": "Beverly Hills"
+    },
+    {
+      "slug": "heritage-md-aslan-pirouz-west-hollywood",
+      "doctor_name": "Aslan Pirouz, MD",
+      "practice_name": "West Hollywood",
+      "address_line": "8737 Beverly Boulevard Suite 301, West Hollywood, CA",
+      "phone": "(310) 553-3189",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Beverly Hills"
+    },
+    {
+      "slug": "heritage-md-nicole-cheung-los-angeles",
+      "doctor_name": "Nicole Cheung, DO",
+      "practice_name": "Los Angeles",
+      "address_line": "11620 Wilshire Boulevard Suite 710, Los Angeles, CA",
+      "phone": "(310) 906-4030",
+      "specialty": "Family Medicine",
+      "directory_hub": "Los Angeles"
+    },
+    {
+      "slug": "heritage-md-dimitri-m-peros-los-angeles",
+      "doctor_name": "Dimitri M. Peros, MD",
+      "practice_name": "Los Angeles",
+      "address_line": "11620 Wilshire Boulevard Suite 710, Los Angeles, CA",
+      "phone": "(310) 445-5999",
+      "specialty": "Family Medicine, Sports Medicine",
+      "directory_hub": "Los Angeles"
+    },
+    {
+      "slug": "heritage-md-roger-m-kass-los-angeles",
+      "doctor_name": "Roger M. Kass, MD",
+      "practice_name": "Los Angeles",
+      "address_line": "11620 Wilshire Boulevard Suite 710, Los Angeles, CA",
+      "phone": "(310) 478-4300",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Los Angeles"
+    },
+    {
+      "slug": "heritage-md-edward-h-lee-santa-monica",
+      "doctor_name": "Edward H. Lee, MD, FACP",
+      "practice_name": "Santa Monica",
+      "address_line": "2001 Santa Monica Boulevard Suite 1260W, Santa Monica, CA",
+      "phone": "(310) 315-0100",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Los Angeles"
+    },
+    {
+      "slug": "heritage-md-matt-bloom-los-angeles",
+      "doctor_name": "Matt Bloom, DO, MS",
+      "practice_name": "Los Angeles",
+      "address_line": "11620 Wilshire Boulevard Suite 710, Los Angeles, CA",
+      "phone": "(310) 231-3000",
+      "specialty": "Family Medicine",
+      "directory_hub": "Los Angeles"
+    },
+    {
+      "slug": "heritage-md-zora-hakimi-santa-monica",
+      "doctor_name": "Zora Hakimi, MD, MS, FACP",
+      "practice_name": "Santa Monica",
+      "address_line": "2001 Santa Monica Boulevard Suite 1260W, Santa Monica, CA",
+      "phone": "(310) 315-0100",
+      "specialty": "Cardiology, Internal Medicine",
+      "directory_hub": "Los Angeles"
+    },
+    {
+      "slug": "heritage-md-donald-s-henderson-los-angeles",
+      "doctor_name": "Donald S. Henderson, MD",
+      "practice_name": "Los Angeles",
+      "address_line": "11620 Wilshire Boulevard Suite 710, Los Angeles, CA",
+      "phone": "(310) 478-4300",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Los Angeles"
+    },
+    {
+      "slug": "heritage-md-steven-a-post-los-angeles",
+      "doctor_name": "Steven A. Post, MD",
+      "practice_name": "Los Angeles",
+      "address_line": "11620 Wilshire Boulevard Suite 710, Los Angeles, CA",
+      "phone": "(310) 478-4300",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Los Angeles"
+    },
+    {
+      "slug": "heritage-md-alan-p-price-los-angeles",
+      "doctor_name": "Alan P. Price, MD",
+      "practice_name": "Los Angeles",
+      "address_line": "11620 Wilshire Boulevard Suite 710, Los Angeles, CA",
+      "phone": "(310) 478-4300",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Los Angeles"
+    },
+    {
+      "slug": "heritage-md-alan-j-waldman-santa-monica",
+      "doctor_name": "Alan J. Waldman, MD",
+      "practice_name": "Santa Monica",
+      "address_line": "2001 Santa Monica Boulevard Suite 1260W, Santa Monica, CA",
+      "phone": "(310) 315-0100",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Los Angeles"
+    },
+    {
+      "slug": "heritage-md-mridu-garg-los-angeles",
+      "doctor_name": "Mridu Garg, MD",
+      "practice_name": "Los Angeles",
+      "address_line": "11620 Wilshire Boulevard Suite 710, Los Angeles, CA",
+      "phone": "",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Los Angeles"
+    },
+    {
+      "slug": "heritage-md-saman-lashkari-los-angeles",
+      "doctor_name": "Saman Lashkari, MD",
+      "practice_name": "Los Angeles",
+      "address_line": "11620 Wilshire Boulevard Suite 710, Los Angeles, CA",
+      "phone": "",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Los Angeles"
+    },
+    {
+      "slug": "heritage-md-marina-manvelyan-pasadena",
+      "doctor_name": "Marina Manvelyan, MD",
+      "practice_name": "Pasadena",
+      "address_line": "2544 East Washington Boulevard Suite C, Pasadena, CA",
+      "phone": "(626) 798-1108",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Pasadena"
+    },
+    {
+      "slug": "heritage-md-kristin-karlyn-pasadena",
+      "doctor_name": "Kristin Karlyn, MD",
+      "practice_name": "Pasadena",
+      "address_line": "301 South Fair Oaks Avenue Suite 208, Pasadena, CA",
+      "phone": "",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Pasadena"
+    },
+    {
+      "slug": "heritage-md-john-a-fagan-rancho-cucamonga",
+      "doctor_name": "John A. Fagan, MD",
+      "practice_name": "Rancho Cucamonga",
+      "address_line": "10787 Laurel Street, Rancho Cucamonga, CA",
+      "phone": "(909) 727-5005",
+      "specialty": "Family Medicine",
+      "directory_hub": "Rancho Cucamonga"
+    },
+    {
+      "slug": "heritage-md-steven-a-drell-sherman-oaks",
+      "doctor_name": "Steven A. Drell, MD",
+      "practice_name": "Sherman Oaks",
+      "address_line": "13320 Riverside Drive Suite 100, Sherman Oaks, CA",
+      "phone": "(818) 784-9905",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Sherman Oaks"
+    },
+    {
+      "slug": "heritage-md-gerald-m-kovar-tarzana",
+      "doctor_name": "Gerald M. Kovar, MD",
+      "practice_name": "Tarzana",
+      "address_line": "18401 Burbank Boulevard Suite 112, Tarzana, CA",
+      "phone": "(818) 774-9225",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Tarzana"
+    },
+    {
+      "slug": "heritage-md-saman-lashkari-tarzana",
+      "doctor_name": "Saman Lashkari, MD",
+      "practice_name": "Tarzana",
+      "address_line": "18840 Ventura Boulevard Suite 207, Tarzana, CA",
+      "phone": "",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Tarzana"
+    },
+    {
+      "slug": "heritage-md-jessica-adkins-thousand-oaks",
+      "doctor_name": "Jessica Adkins, MD, FACP",
+      "practice_name": "Thousand Oaks",
+      "address_line": "2100 Lynn Road Suite 100, Thousand Oaks, CA",
+      "phone": "(805) 494-1121",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Thousand Oaks"
+    },
+    {
+      "slug": "heritage-md-irina-feldman-westlake-village",
+      "doctor_name": "Irina Feldman, MD, FAAFM",
+      "practice_name": "Westlake Village",
+      "address_line": "1220 La Venta Drive Suite 202, Westlake Village, CA",
+      "phone": "(805) 371-1100",
+      "specialty": "Family Medicine",
+      "directory_hub": "Thousand Oaks"
+    },
+    {
+      "slug": "heritage-md-hema-v-nathan-westlake-village",
+      "doctor_name": "Hema V. Nathan, MD",
+      "practice_name": "Westlake Village",
+      "address_line": "1220 La Venta Drive Suite 202, Westlake Village, CA",
+      "phone": "(805) 371-1100",
+      "specialty": "Family Medicine",
+      "directory_hub": "Thousand Oaks"
+    },
+    {
+      "slug": "heritage-md-jonathan-peterson-thousand-oaks",
+      "doctor_name": "Jonathan Peterson, MD",
+      "practice_name": "Thousand Oaks",
+      "address_line": "2100 Lynn Road Suite 100, Thousand Oaks, CA",
+      "phone": "(805) 494-1121",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Thousand Oaks"
+    },
+    {
+      "slug": "heritage-md-jennifer-young-westlake-village",
+      "doctor_name": "Jennifer Young, DO",
+      "practice_name": "Westlake Village",
+      "address_line": "1220 La Venta Drive Suite 202, Westlake Village, CA",
+      "phone": "(805) 371-1100",
+      "specialty": "Family Medicine",
+      "directory_hub": "Thousand Oaks"
+    },
+    {
+      "slug": "heritage-md-linda-m-gerrits-thousand-oaks",
+      "doctor_name": "Linda M. Gerrits, MD",
+      "practice_name": "Thousand Oaks",
+      "address_line": "2100 Lynn Road Suite 100, Thousand Oaks, CA",
+      "phone": "(805) 494-1121",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Thousand Oaks"
+    },
+    {
+      "slug": "heritage-md-ronnie-bemby-thousand-oaks",
+      "doctor_name": "Ronnie Bemby, DO",
+      "practice_name": "Thousand Oaks",
+      "address_line": "2100 Lynn Road Suite 100, Thousand Oaks, CA",
+      "phone": "(805) 494-1121",
+      "specialty": "Family Medicine",
+      "directory_hub": "Thousand Oaks"
+    },
+    {
+      "slug": "heritage-md-peter-margolis-fullerton",
+      "doctor_name": "Peter Margolis, MD",
+      "practice_name": "Fullerton",
+      "address_line": "1120 South Raymond Avenue Suite 100, Fullerton, CA",
+      "phone": "(714) 738-4444",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Thousand Oaks"
+    },
+    {
+      "slug": "heritage-md-francoise-merloet-thousand-oaks",
+      "doctor_name": "Francoise Merloet, MD, FACP",
+      "practice_name": "Thousand Oaks",
+      "address_line": "2100 Lynn Road Suite 100, Thousand Oaks, CA",
+      "phone": "(805) 494-1121",
+      "specialty": "Internal Medicine",
+      "directory_hub": "Thousand Oaks"
+    },
+    {
+      "slug": "heritage-md-gary-h-nudell-west-hills",
+      "doctor_name": "Gary H. Nudell, MD",
+      "practice_name": "West Hills",
+      "address_line": "7345 Medical Center Drive Suite 160, West Hills, CA",
+      "phone": "(818) 676-4806",
+      "specialty": "Internal Medicine",
+      "directory_hub": "West Hills"
+    },
+    {
+      "slug": "heritage-md-marc-i-lavin-west-hills",
+      "doctor_name": "Marc I. Lavin, MD, FACP",
+      "practice_name": "West Hills",
+      "address_line": "7345 Medical Center Drive Suite 160, West Hills, CA",
+      "phone": "(818) 676-4805",
+      "specialty": "Internal Medicine",
+      "directory_hub": "West Hills"
+    }
+  ]
+}

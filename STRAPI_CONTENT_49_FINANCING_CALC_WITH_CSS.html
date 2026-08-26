@@ -1,0 +1,764 @@
+<!-- COMPLETE FINANCING CALCULATOR PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-navy: #1E3A5F;
+            --accent-teal: #00D4D4;
+            --light-gray: #F7F8FA;
+            --text-gray: #4A5568;
+            --white: #FFFFFF;
+            --success-green: #48BB78;
+            --warning-yellow: #F6E05E;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #2A4A70 100%);
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        .calculator-header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header-title {
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .header-subtitle {
+            font-size: 20px;
+            color: var(--accent-teal);
+            margin-bottom: 30px;
+        }
+        
+        .trust-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+        
+        /* Main Calculator Container */
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        /* Left Panel - Calculator */
+        .calculator-panel {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .panel-title {
+            font-size: 28px;
+            color: var(--primary-navy);
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        
+        /* Procedure Selection */
+        .procedure-selector {
+            margin-bottom: 30px;
+        }
+        
+        .selector-label {
+            font-weight: 600;
+            color: var(--text-gray);
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .procedure-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .procedure-option {
+            border: 2px solid #E2E8F0;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .procedure-option:hover {
+            border-color: var(--accent-teal);
+        }
+        
+        .procedure-option.selected {
+            background: var(--primary-navy);
+            color: white;
+            border-color: var(--primary-navy);
+        }
+        
+        .procedure-option.selected .procedure-price {
+            color: var(--accent-teal);
+        }
+        
+        .procedure-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .procedure-price {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+        
+        /* Eye Selection */
+        .eye-selector {
+            margin-bottom: 30px;
+        }
+        
+        .eye-options {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .eye-option {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #E2E8F0;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .eye-option:hover {
+            border-color: var(--accent-teal);
+        }
+        
+        .eye-option.selected {
+            background: var(--accent-teal);
+            color: white;
+            border-color: var(--accent-teal);
+        }
+        
+        /* Slider Controls */
+        .slider-control {
+            margin-bottom: 30px;
+        }
+        
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .slider-value {
+            font-size: 24px;
+            color: var(--primary-navy);
+            font-weight: bold;
+        }
+        
+        .slider-input {
+            width: 100%;
+            height: 8px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .slider-input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,212,212,0.3);
+        }
+        
+        .slider-input::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,212,212,0.3);
+        }
+        
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+        
+        /* APR Options */
+        .apr-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .apr-option {
+            padding: 10px;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .apr-option:hover {
+            border-color: var(--accent-teal);
+        }
+        
+        .apr-option.selected {
+            background: var(--accent-teal);
+            color: white;
+            border-color: var(--accent-teal);
+        }
+        
+        .apr-option.promotional {
+            position: relative;
+        }
+        
+        .apr-option.promotional::after {
+            content: 'BEST';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--success-green);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        
+        /* Right Panel - Results */
+        .results-panel {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .monthly-payment {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--primary-navy), #2A4A70);
+            border-radius: 15px;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .payment-label {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .payment-amount {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .payment-amount small {
+            font-size: 20px;
+            opacity: 0.8;
+        }
+        
+        .payment-term {
+            color: var(--accent-teal);
+            font-size: 14px;
+        }
+        
+        /* Cost Breakdown */
+        .cost-breakdown {
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .breakdown-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--primary-navy);
+        }
+        
+        .breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        
+        .breakdown-row:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            color: var(--primary-navy);
+            font-size: 18px;
+            padding-top: 15px;
+        }
+        
+        /* Savings Calculator */
+        .savings-section {
+            background: #F0FFF4;
+            border: 2px solid var(--success-green);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .savings-title {
+            color: var(--success-green);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .savings-amount {
+            font-size: 28px;
+            color: var(--success-green);
+            font-weight: bold;
+        }
+        
+        .savings-description {
+            color: var(--text-gray);
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        /* CTA Buttons */
+        .cta-button {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+        
+        .cta-primary {
+            background: var(--accent-teal);
+            color: white;
+        }
+        
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,212,212,0.3);
+        }
+        
+        .cta-secondary {
+            background: white;
+            color: var(--primary-navy);
+            border: 2px solid var(--primary-navy);
+        }
+        
+        .cta-secondary:hover {
+            background: var(--primary-navy);
+            color: white;
+        }
+        
+        /* Insurance Section */
+        .insurance-section {
+            background: var(--light-gray);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .insurance-logos {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .insurance-logo {
+            width: 100px;
+            height: 50px;
+            background: white;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--text-gray);
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .calculator-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .procedure-options {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .header-title {
+                font-size: 28px;
+            }
+            
+            .payment-amount {
+                font-size: 36px;
+            }
+            
+            .apr-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    
+</style>
+
+<!-- Navigation Header -->
+    <%- include('/partials/header') %>
+    
+    <!-- Calculator Header -->
+    <div class="calculator-header">
+        <h1 class="header-title">Vision Correction Financing Calculator</h1>
+        <p class="header-subtitle">See your affordable monthly payment options</p>
+        <div class="trust-row">
+            <div class="trust-item">
+                <span>✓</span>
+                <span>0% APR Available</span>
+            </div>
+            <div class="trust-item">
+                <span>✓</span>
+                <span>HSA/FSA Eligible</span>
+            </div>
+            <div class="trust-item">
+                <span>✓</span>
+                <span>Instant Approval</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Calculator -->
+    <div class="calculator-container">
+        <!-- Left Panel - Calculator Controls -->
+        <div class="calculator-panel">
+            <h2 class="panel-title">Calculate Your Investment</h2>
+            
+            <!-- Procedure Selection -->
+            <div class="procedure-selector">
+                <label class="selector-label">1. Select Your Procedure</label>
+                <div class="procedure-options">
+                    <div class="procedure-option selected" data-price="2400">
+                        <div class="procedure-name">LASIK</div>
+                        <div class="procedure-price">$2,400-3,200/eye</div>
+                    </div>
+                    <div class="procedure-option" data-price="2800">
+                        <div class="procedure-name">SMILE</div>
+                        <div class="procedure-price">$2,800-3,500/eye</div>
+                    </div>
+                    <div class="procedure-option" data-price="4000">
+                        <div class="procedure-name">EVO ICL</div>
+                        <div class="procedure-price">$4,000-5,000/eye</div>
+                    </div>
+                    <div class="procedure-option" data-price="5000">
+                        <div class="procedure-name">PIE</div>
+                        <div class="procedure-price">$5,000-6,500/eye</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Eye Selection -->
+            <div class="eye-selector">
+                <label class="selector-label">2. Number of Eyes</label>
+                <div class="eye-options">
+                    <div class="eye-option" data-eyes="1">
+                        <span>One Eye</span>
+                    </div>
+                    <div class="eye-option selected" data-eyes="2">
+                        <span>Both Eyes</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Down Payment Slider -->
+            <div class="slider-control">
+                <div class="slider-header">
+                    <label class="selector-label">3. Down Payment</label>
+                    <span class="slider-value" id="downPaymentValue">$0</span>
+                </div>
+                <input type="range" class="slider-input" id="downPaymentSlider" 
+                       min="0" max="2000" step="100" value="0">
+                <div class="slider-labels">
+                    <span>$0</span>
+                    <span>$1,000</span>
+                    <span>$2,000</span>
+                </div>
+            </div>
+            
+            <!-- Term Length Slider -->
+            <div class="slider-control">
+                <div class="slider-header">
+                    <label class="selector-label">4. Financing Term</label>
+                    <span class="slider-value" id="termValue">24 months</span>
+                </div>
+                <input type="range" class="slider-input" id="termSlider" 
+                       min="6" max="60" step="6" value="24">
+                <div class="slider-labels">
+                    <span>6 mo</span>
+                    <span>24 mo</span>
+                    <span>48 mo</span>
+                    <span>60 mo</span>
+                </div>
+            </div>
+            
+            <!-- APR Options -->
+            <div class="apr-selector">
+                <label class="selector-label">5. Financing Option</label>
+                <div class="apr-options">
+                    <div class="apr-option promotional selected" data-apr="0">
+                        <strong>0% APR</strong><br>
+                        <small>12-24 mo</small>
+                    </div>
+                    <div class="apr-option" data-apr="9.99">
+                        <strong>9.99% APR</strong><br>
+                        <small>Up to 48 mo</small>
+                    </div>
+                    <div class="apr-option" data-apr="14.99">
+                        <strong>14.99% APR</strong><br>
+                        <small>Up to 60 mo</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Panel - Results -->
+        <div class="results-panel">
+            <h2 class="panel-title">Your Personalized Quote</h2>
+            
+            <!-- Monthly Payment Display -->
+            <div class="monthly-payment">
+                <div class="payment-label">Estimated Monthly Payment</div>
+                <div class="payment-amount">
+                    $<span id="monthlyPayment">200</span><small>/month</small>
+                </div>
+                <div class="payment-term">for <span id="paymentTerm">24</span> months at 0% APR</div>
+            </div>
+            
+            <!-- Cost Breakdown -->
+            <div class="cost-breakdown">
+                <div class="breakdown-title">Cost Breakdown</div>
+                <div class="breakdown-row">
+                    <span>Procedure Cost</span>
+                    <span id="procedureCost">$4,800</span>
+                </div>
+                <div class="breakdown-row">
+                    <span>Down Payment</span>
+                    <span id="downPaymentAmount">-$0</span>
+                </div>
+                <div class="breakdown-row">
+                    <span>Amount Financed</span>
+                    <span id="financedAmount">$4,800</span>
+                </div>
+                <div class="breakdown-row">
+                    <span>Total Interest</span>
+                    <span id="totalInterest">$0</span>
+                </div>
+                <div class="breakdown-row">
+                    <span>Total Cost</span>
+                    <span id="totalCost">$4,800</span>
+                </div>
+            </div>
+            
+            <!-- Savings Comparison -->
+            <div class="savings-section">
+                <div class="savings-title">💰 Lifetime Savings vs Contacts/Glasses</div>
+                <div class="savings-amount">$24,500</div>
+                <div class="savings-description">
+                    Average savings over 20 years compared to glasses and contacts
+                </div>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <button class="cta-button cta-primary">Apply for Financing Now</button>
+            <button class="cta-button cta-secondary">Schedule Free Consultation</button>
+            
+            <p style="text-align: center; font-size: 14px; color: var(--text-gray); margin-top: 20px;">
+                ✓ No impact to credit score for pre-qualification<br>
+                ✓ Instant decision in 60 seconds
+            </p>
+        </div>
+    </div>
+    
+    <!-- Insurance Section -->
+    <div class="insurance-section">
+        <h3 style="font-size: 24px; color: var(--primary-navy); margin-bottom: 15px;">
+            Additional Payment Options
+        </h3>
+        <p style="color: var(--text-gray); margin-bottom: 20px;">
+            We accept HSA, FSA, and work with multiple financing partners
+        </p>
+        <div class="insurance-logos">
+            <div class="insurance-logo">CareCredit</div>
+            <div class="insurance-logo">Alphaeon</div>
+            <div class="insurance-logo">HSA/FSA</div>
+            <div class="insurance-logo">Flex Pay</div>
+        </div>
+        <p style="margin-top: 20px;">
+            <strong>Questions?</strong> Call our financing specialists: 
+            <a href="tel:3104821240" style="color: var(--accent-teal); text-decoration: none; font-weight: bold;">
+                (310) 482-1240
+            </a>
+        </p>
+    </div>
+    
+    <script>
+        // Calculator Variables
+        let selectedProcedure = 2400;
+        let selectedEyes = 2;
+        let downPayment = 0;
+        let term = 24;
+        let apr = 0;
+        
+        // Procedure Selection
+        document.querySelectorAll('.procedure-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.procedure-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedProcedure = parseInt(this.dataset.price);
+                calculatePayment();
+            });
+        });
+        
+        // Eye Selection
+        document.querySelectorAll('.eye-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.eye-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedEyes = parseInt(this.dataset.eyes);
+                calculatePayment();
+            });
+        });
+        
+        // APR Selection
+        document.querySelectorAll('.apr-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.apr-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                apr = parseFloat(this.dataset.apr);
+                calculatePayment();
+            });
+        });
+        
+        // Down Payment Slider
+        const downPaymentSlider = document.getElementById('downPaymentSlider');
+        const downPaymentValue = document.getElementById('downPaymentValue');
+        
+        downPaymentSlider.addEventListener('input', function() {
+            downPayment = parseInt(this.value);
+            downPaymentValue.textContent = '$' + downPayment.toLocaleString();
+            calculatePayment();
+        });
+        
+        // Term Slider
+        const termSlider = document.getElementById('termSlider');
+        const termValue = document.getElementById('termValue');
+        
+        termSlider.addEventListener('input', function() {
+            term = parseInt(this.value);
+            termValue.textContent = term + ' months';
+            calculatePayment();
+            
+            // Auto-adjust APR options based on term
+            if (term <= 24 && apr === 0) {
+                // Keep 0% APR
+            } else if (term > 24 && apr === 0) {
+                // Switch to 9.99% APR
+                document.querySelector('[data-apr="0"]').classList.remove('selected');
+                document.querySelector('[data-apr="9.99"]').classList.add('selected');
+                apr = 9.99;
+            }
+        });
+        
+        // Calculate Payment Function
+        function calculatePayment() {
+            // Calculate total procedure cost
+            const procedureCost = selectedProcedure * selectedEyes;
+            const amountFinanced = procedureCost - downPayment;
+            
+            // Calculate monthly payment
+            let monthlyPayment;
+            let totalInterest = 0;
+            
+            if (apr === 0) {
+                monthlyPayment = amountFinanced / term;
+            } else {
+                const monthlyRate = (apr / 100) / 12;
+                monthlyPayment = amountFinanced * (monthlyRate * Math.pow(1 + monthlyRate, term)) / 
+                                 (Math.pow(1 + monthlyRate, term) - 1);
+                totalInterest = (monthlyPayment * term) - amountFinanced;
+            }
+            
+            const totalCost = procedureCost + totalInterest;
+            
+            // Update Display
+            document.getElementById('monthlyPayment').textContent = Math.round(monthlyPayment);
+            document.getElementById('paymentTerm').textContent = term;
+            document.getElementById('procedureCost').textContent = '$' + procedureCost.toLocaleString();
+            document.getElementById('downPaymentAmount').textContent = '-$' + downPayment.toLocaleString();
+            document.getElementById('financedAmount').textContent = '$' + amountFinanced.toLocaleString();
+            document.getElementById('totalInterest').textContent = '$' + Math.round(totalInterest).toLocaleString();
+            document.getElementById('totalCost').textContent = '$' + Math.round(totalCost).toLocaleString();
+            
+            // Update APR display
+            const aprDisplay = document.querySelector('.payment-term');
+            aprDisplay.innerHTML = `for <span>${term}</span> months at ${apr}% APR`;
+            
+            // Calculate savings (example calculation)
+            const annualContactsCost = 500; // Average annual cost of contacts/glasses
+            const yearsSavings = 20;
+            const lifetimeSavings = (annualContactsCost * yearsSavings) - totalCost;
+            document.querySelector('.savings-amount').textContent = '$' + Math.max(0, lifetimeSavings).toLocaleString();
+        }
+        
+        // Initial calculation
+        calculatePayment();
+    </script>
+    
+    <!-- Footer -->
+    <%- include('/partials/footer') %>

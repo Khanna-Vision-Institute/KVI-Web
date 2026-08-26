@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Consultation - Khanna Vision Institute</title>
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+
+        .form-container {
+            margin-top: 140px;
+            padding: 30px 20px 60px;
+        }
+
+        /* Import Zoho form styles with prefix to avoid conflicts */
+        .zf-templateWidth {
+            margin: 0 auto;	
+            max-width: 1000px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .zf-templateWrapper {
+            background: #fff;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .zf-tempHeadBdr {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .zf-tempHeadContBdr {
+            background: linear-gradient(135deg, #14b8a6 0%, #3b82f6 100%);
+            border-bottom: none;
+            margin: 0;
+            padding: 40px 40px 48px;
+            border-radius: 0;
+        }
+
+        .zf-tempHeadContBdr .zf-frmTitle {
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            font-size: 40px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+
+        .zf-tempHeadContBdr .zf-frmDesc {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 19px;
+            font-weight: 400;
+            margin: 0;
+            padding-top: 12px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .zf-subContWrap {
+            padding: 32px 0 16px 0;
+        }
+
+        .zf-tempFrmWrapper {
+            padding: 16px 40px 16px 40px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .zf-tempFrmWrapper .zf-labelName {
+            font-weight: 600;
+            font-size: 14px;
+            color: #374151;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .zf-tempContDiv input[type="text"],
+        .zf-tempContDiv input[type="date"],
+        .zf-tempContDiv textarea,
+        .zf-tempContDiv select {
+            background: #fff;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 15px;
+            color: #374151;
+            height: 48px;
+            transition: all 0.2s ease;
+            width: 100%;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .zf-tempContDiv input[type="date"] {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            cursor: pointer;
+        }
+
+        .zf-tempContDiv input[readonly] {
+            background: #f9fafb;
+            color: #6b7280;
+            cursor: not-allowed;
+        }
+
+        .zf-tempContDiv textarea {
+            min-height: 100px;
+            height: 100px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            padding: 12px 16px;
+            resize: none;
+        }
+
+        .zf-tempContDiv input:focus,
+        .zf-tempContDiv textarea:focus,
+        .zf-tempContDiv select:focus {
+            border: 2px solid #14b8a6;
+            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+        }
+
+        .zf-tempContDiv input:hover:not(:focus):not([readonly]),
+        .zf-tempContDiv textarea:hover:not(:focus),
+        .zf-tempContDiv select:hover:not(:focus) {
+            border-color: #14b8a6;
+        }
+
+        .zf-tempContDiv input::placeholder,
+        .zf-tempContDiv textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        .zf-tempContDiv input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .zf-errorMessage {
+            font: 15px Arial, Helvetica, sans-serif;
+            color: #f41033;
+            padding-top: 10px;
+        }
+
+        .zf-clearBoth {
+            clear: both;
+        }
+
+        .zfgrid_Wrapper {
+            padding: 0 40px 0 40px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .zftwoColumn {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .zftwoColumn .zfCol {
+            flex: 1 1;
+            overflow-x: hidden;
+            max-width: calc(50% - 12px);
+            min-width: 280px;
+        }
+
+        .zf-fmFooter {
+            margin: 0;
+            padding: 24px 40px 48px 40px;
+            text-align: center;
+        }
+
+        .zf-submitColor {
+            font-size: 18px;
+            font-weight: 600;
+            padding: 16px 64px;
+            color: #fff;
+            border: none;
+            background: linear-gradient(135deg, #14b8a6 0%, #3b82f6 100%);
+            border-radius: 12px;
+            min-width: 200px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+        }
+
+        .zf-submitColor:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(20, 184, 166, 0.4);
+        }
+
+        .zf-submitColor:active {
+            transform: translateY(0) scale(1);
+        }
+
+        .zf-form-sBox {
+            padding: 12px 16px;
+            background: #fff;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            height: 48px;
+            transition: all 0.2s ease;
+            color: #374151;
+            width: 100%;
+        }
+
+        .zf-form-sBox:focus {
+            border: 2px solid #14b8a6;
+            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+            outline: none;
+        }
+
+        .zf-form-sBox:hover:not(:focus) {
+            border-color: #14b8a6;
+        }
+
+        .zf-nameWrapper span {
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .zf-nameWrapper span label {
+            display: block;
+            font-size: 13px;
+            color: #252c3e;
+            opacity: .8;
+            padding: 8px 0 0 0;
+        }
+
+        .zf-addrCont span {
+            display: block;
+            padding-top: 15px;
+        }
+
+        .zf-addrCont span:first-child {
+            padding-top: 0;
+        }
+
+        .zf-addrCont span label {
+            display: block;
+            font-size: 13px;
+            color: #252c3e;
+            opacity: .8;
+            padding: 8px 0 0 0;
+        }
+
+        .address_row_3 {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .address_row_3 span {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .zf-mSelect select {
+            display: none;
+        }
+
+        .multi-select {
+            position: relative;
+        }
+
+        .multi-select__toggle {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 400;
+            color: #374151;
+            background: #fff;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            min-height: 48px;
+            height: auto;
+            transition: all 0.2s ease;
+        }
+
+        .multi-select__toggle:hover:not(.is-open) {
+            border-color: #14b8a6;
+        }
+
+        .multi-select__toggle:focus-visible,
+        .multi-select__toggle.is-open {
+            border: 2px solid #14b8a6;
+            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+            outline: none;
+        }
+
+        .multi-select__toggle span {
+            flex: 1 1 auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .multi-select__chevron {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            transform: rotate(0deg);
+            transition: transform 0.2s ease;
+            color: #6b7280;
+        }
+
+        .multi-select__toggle.is-open .multi-select__chevron {
+            transform: rotate(180deg);
+            color: #14b8a6;
+        }
+
+        .multi-select__options {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: calc(100% + 8px);
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            padding: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 50;
+            display: none;
+        }
+
+        .multi-select__options.is-open {
+            display: block;
+        }
+
+        .multi-select__option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.15s ease;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .multi-select__option:hover {
+            background: rgba(20, 184, 166, 0.08);
+        }
+
+        .multi-select__checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #d1d5db;
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+            flex-shrink: 0;
+        }
+
+        .multi-select__checkbox.is-checked {
+            border-color: #14b8a6;
+            background: #14b8a6;
+            color: #fff;
+        }
+
+        .multi-select__checkbox.is-checked::after {
+            content: '✓';
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .multi-select__search {
+            position: sticky;
+            top: 0;
+            background: #fff;
+            padding-bottom: 8px;
+            z-index: 1;
+        }
+
+        .multi-select__search input {
+            width: 100%;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .multi-select__search input:focus {
+            outline: none;
+            border-color: #14b8a6;
+            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 20px 15px 40px;
+            }
+
+            .zf-templateWidth {
+                max-width: 100%;
+            }
+
+            .zf-tempHeadContBdr {
+                padding: 32px 24px 40px;
+            }
+
+            .zf-tempHeadContBdr .zf-frmTitle {
+                font-size: 28px;
+            }
+
+            .zf-tempHeadContBdr .zf-frmDesc {
+                font-size: 16px;
+            }
+
+            .zf-tempFrmWrapper,
+            .zfgrid_Wrapper {
+                padding: 16px 24px;
+            }
+
+            .zftwoColumn {
+                gap: 16px;
+            }
+
+            .zftwoColumn .zfCol {
+                max-width: 100%;
+                min-width: 100%;
+            }
+
+            .zf-fmFooter {
+                padding: 24px 24px 40px 24px;
+            }
+
+            .zf-submitColor {
+                width: 100%;
+                padding: 14px 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include('/partials/header') %>
+
+    <div class="form-container">
+        <div class="zf-templateWidth">
+            <form action='https://forms.zohopublic.com/iayezcom/form/OnlineConsultForm/formperma/mHCnCI2ajavYS6HWVa5knNO9uIMFxw3CsxOw0yEJQBw/htmlRecords/submit' 
+                  name='form' 
+                  method='POST' 
+                  accept-charset='UTF-8' 
+                  enctype='multipart/form-data' 
+                  id='form'>
+                
+                <input type="hidden" name="zf_referrer_name" value="">
+                <input type="hidden" name="zf_redirect_url" value="">
+                <input type="hidden" name="zc_gad" value="">
+                
+                <div class="zf-templateWrapper">
+                    <ul class="zf-tempHeadBdr">
+                        <li class="zf-tempHeadContBdr">
+                            <h2 class="zf-frmTitle">Schedule Your Consultation</h2>
+                            <p class="zf-frmDesc">Share a few details and our team will reach out to confirm your appointment</p>
+                            <div class="zf-clearBoth"></div>
+                        </li>
+                    </ul>
+
+                    <div class="zf-subContWrap">
+                        <ul>	
+                            <div class="zfgrid_Wrapper">
+                                <div class="zftwoColumn zfMultiColGrid">
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-date">
+                                            <label class="zf-labelName">Preferred Booking Date</label>
+                                            <div class="zf-tempContDiv">
+                                                <span>
+                                                    <input type="date" name="Date" id="bookingDate" value="" />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="zfCol">  
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">Location</label>
+                                            <div class="zf-tempContDiv">
+                                                <select class="zf-form-sBox" name="Dropdown">
+                                                    <option selected="true" value="-Select-">-Select-</option>
+                                                    <option value="Beverly Hills">Beverly Hills</option>
+                                                    <option value="Westlake Village">Westlake Village</option>
+                                                    <option value="Online">Online</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="zf-tempFrmWrapper zf-name zf-namelarge">
+                                <label class="zf-labelName">Name</label>
+                                <div class="zf-tempContDiv zf-twoType">
+                                    <div class="zf-nameWrapper">
+                                        <span>
+                                            <input type="text" maxlength="255" name="Name_First" placeholder="First Name" required />
+                                            <label>First Name</label>
+                                        </span>
+                                        <span>
+                                            <input type="text" maxlength="255" name="Name_Last" placeholder="Last Name" required />
+                                            <label>Last Name</label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="zfgrid_Wrapper">
+                                <div class="zftwoColumn zfMultiColGrid">
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-date">
+                                            <label class="zf-labelName">Date of Birth</label>
+                                            <div class="zf-tempContDiv">
+                                                <span>
+                                                    <input type="date" name="Date1" id="dob" value="" />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">Age</label>
+                                            <div class="zf-tempContDiv">
+                                                <span>
+                                                    <input type="text" name="Age" id="age" readonly placeholder="Calculated from DOB" />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="zfgrid_Wrapper">
+                                <div class="zftwoColumn zfMultiColGrid">
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">Phone</label>
+                                            <div class="zf-tempContDiv">
+                                                <span>
+                                                    <input type="text" name="PhoneNumber_countrycode" maxlength="20" value="" placeholder="(555) 123-4567" required />
+                                                    <label>Number</label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">Email</label>
+                                            <div class="zf-tempContDiv">
+                                                <span>
+                                                    <input type="text" name="Email" value="" maxlength="255" placeholder="you@example.com" required />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="zf-tempFrmWrapper zf-address zf-addrlarge">
+                                <label class="zf-labelName">Address</label>
+                                <div class="zf-tempContDiv zf-address">
+                                    <div class="zf-addrCont">
+                                        <span class="zf-addresCols">
+                                            <input type="text" maxlength="255" name="Address_AddressLine1" placeholder="Street Address" />
+                                            <label>Street Address</label>
+                                        </span>
+                                        <span class="zf-addresCols">
+                                            <input type="text" maxlength="255" name="Address_AddressLine2" placeholder="Address Line 2" />
+                                            <label>Address Line 2</label>
+                                        </span>
+                                        <div class="address_row_3">
+                                            <span class="zf-addresCols">
+                                                <input type="text" maxlength="255" name="Address_City" placeholder="City" />
+                                                <label>City</label>
+                                            </span>
+                                            <span class="zf-addresCols">
+                                                <input type="text" maxlength="255" name="Address_ZipCode" placeholder="Postal / Zip Code" />
+                                                <label>Postal / Zip Code</label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="zfgrid_Wrapper">
+                                <div class="zftwoColumn zfMultiColGrid">
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">How Did You Hear About Us?</label>
+                                            <div class="zf-tempContDiv zf-mSelect">
+                                                <select name="Checkbox" multiple="multiple">
+                                                    <option value="Google Search, Online Review">Google Search, Online Review</option>
+                                                    <option value="Social Media (TikTok, Instagram, Facebook, etc.)">Social Media (TikTok, Instagram, Facebook, etc.)</option>
+                                                    <option value="My Doctor (Optometrist)">My Doctor (Optometrist)</option>
+                                                    <option value="Friend or Family">Friend or Family</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">What made you decide to have surgery now?</label>
+                                            <div class="zf-tempContDiv">
+                                                <span>
+                                                    <textarea name="MultiLine" maxlength="65535" placeholder="Share your goals and questions..."></textarea>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="zfgrid_Wrapper">
+                                <div class="zftwoColumn zfMultiColGrid">
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">Procedure Interested In</label>
+                                            <div class="zf-tempContDiv zf-mSelect">
+                                                <select name="MultipleChoice4" multiple="multiple">
+                                                    <option value="SMILE Laser Vision Correction">SMILE Laser Vision Correction</option>
+                                                    <option value="Lasik (or Superlasik)">Lasik (or Superlasik)</option>
+                                                    <option value="EVO ICL (Implantable Collamer lens)">EVO ICL (Implantable Collamer lens)</option>
+                                                    <option value="PIE (Presbyopia Implant in Eye)">PIE (Presbyopia Implant in Eye)</option>
+                                                    <option value="CXL (Cornea Collagen CrossLinking) for Keratoconus">CXL (Cornea Collagen CrossLinking) for Keratoconus</option>
+                                                    <option value="Cosmetic Pterygium Procedure">Cosmetic Pterygium Procedure</option>
+                                                    <option value="I'm not sure / Recommendation">I'm not sure / Recommendation</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">Hobbies &amp; Activities (Check all that apply)</label>
+                                            <div class="zf-tempContDiv zf-mSelect">
+                                                <select name="MultipleChoice2" multiple="multiple">
+                                                    <option value="Contact Sports (Boxing, Wrestling, Martial Arts)">Contact Sports (Boxing, Wrestling, Martial Arts)</option>
+                                                    <option value="Water Sports (Swimming, Surfing)">Water Sports (Swimming, Surfing)</option>
+                                                    <option value="Outdoor (Hiking, Biking, Walking)">Outdoor (Hiking, Biking, Walking)</option>
+                                                    <option value="Indoor (Reading, Sewing, Knitting)">Indoor (Reading, Sewing, Knitting)</option>
+                                                    <option value="Do you live alone ?">Do you live alone ?</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="zfgrid_Wrapper">
+                                <div class="zftwoColumn zfMultiColGrid">
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">Current Method of Vision Correction</label>
+                                            <div class="zf-tempContDiv zf-mSelect">
+                                                <select name="MultipleChoice3" multiple="multiple">
+                                                    <option value="Glasses for Distance">Glasses for Distance</option>
+                                                    <option value="Reading Glasses">Reading Glasses</option>
+                                                    <option value="Bifocals">Bifocals</option>
+                                                    <option value="Soft Contacts">Soft Contacts</option>
+                                                    <option value="Soft Toric Contacts">Soft Toric Contacts</option>
+                                                    <option value="Hard or RGP">Hard or RGP</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">Previous Surgery</label>
+                                            <div class="zf-tempContDiv">
+                                                <select class="zf-form-sBox" name="Dropdown2">
+                                                    <option selected="true" value="-Select-">-Select-</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="zfgrid_Wrapper">
+                                <div class="zftwoColumn zfMultiColGrid">
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">Type</label>
+                                            <div class="zf-tempContDiv">
+                                                <select class="zf-form-sBox" name="Dropdown3">
+                                                    <option selected="true" value="-Select-">-Select-</option>
+                                                    <option value="Lasik">Lasik</option>
+                                                    <option value="PRK">PRK</option>
+                                                    <option value="RK">RK</option>
+                                                    <option value="CK">CK</option>
+                                                    <option value="Pterygium">Pterygium</option>
+                                                    <option value="Cataract">Cataract</option>
+                                                    <option value="Retina">Retina</option>
+                                                    <option value="Eyelid">Eyelid</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="zfCol">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="zfgrid_Wrapper">
+                                <div class="zftwoColumn zfMultiColGrid">
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">Medical Disease?</label>
+                                            <div class="zf-tempContDiv zf-mSelect">
+                                                <select name="MultipleChoice" multiple="multiple">
+                                                    <option value="Diabetes">Diabetes</option>
+                                                    <option value="Hypertension">Hypertension</option>
+                                                    <option value="Thyroid">Thyroid</option>
+                                                    <option value="Arthritis">Arthritis</option>
+                                                    <option value="Acne or Skin Disease">Acne or Skin Disease</option>
+                                                    <option value="None">None</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">Medications</label>
+                                            <div class="zf-tempContDiv zf-mSelect">
+                                                <select name="MultipleChoice1" multiple="multiple">
+                                                    <option value="Antihypertensive">Antihypertensive</option>
+                                                    <option value="For Diabetes">For Diabetes</option>
+                                                    <option value="For Thyroid">For Thyroid</option>
+                                                    <option value="Accutane">Accutane</option>
+                                                    <option value="None">None</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="zfgrid_Wrapper">
+                                <div class="zftwoColumn zfMultiColGrid">
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-small">
+                                            <label class="zf-labelName">Are you interested in financing?</label>
+                                            <div class="zf-tempContDiv">
+                                                <select class="zf-form-sBox" name="Radio">
+                                                    <option selected="true" value="-Select-">-Select-</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">Financing Option</label>
+                                            <div class="zf-tempContDiv">
+                                                <select class="zf-form-sBox" name="Dropdown1">
+                                                    <option selected="true" value="-Select-">-Select-</option>
+                                                    <option value="Alpheon">Alpheon</option>
+                                                    <option value="Care Credit">Care Credit</option>
+                                                    <option value="HSA/ FSA">HSA/ FSA</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </ul>
+                    </div>
+                    
+                    <ul>
+                        <li class="zf-fmFooter">
+                            <button class="zf-submitColor" type="submit">Submit Consultation Request</button>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <%- include('/partials/footer') %>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const multiSelects = document.querySelectorAll('.zf-mSelect select[multiple]');
+            const activeMenus = new Set();
+
+            const closeAllMenus = (except = null) => {
+                activeMenus.forEach((menu) => {
+                    if (menu !== except) {
+                        menu.options.classList.remove('is-open');
+                        menu.toggle.classList.remove('is-open');
+                    }
+                });
+            };
+
+            multiSelects.forEach((select, index) => {
+                const wrapper = select.parentElement;
+                const container = document.createElement('div');
+                container.className = 'multi-select';
+
+                const toggle = document.createElement('button');
+                toggle.type = 'button';
+                toggle.className = 'multi-select__toggle';
+                toggle.setAttribute('aria-haspopup', 'listbox');
+                toggle.setAttribute('aria-expanded', 'false');
+
+                const labelSpan = document.createElement('span');
+                labelSpan.textContent = 'Select...';
+
+                const chevron = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                chevron.setAttribute('viewBox', '0 0 12 12');
+                chevron.classList.add('multi-select__chevron');
+                chevron.innerHTML = '<path fill="currentColor" d="M6 9L1 4h10z" />';
+
+                toggle.appendChild(labelSpan);
+                toggle.appendChild(chevron);
+
+                const panel = document.createElement('div');
+                panel.className = 'multi-select__options';
+                panel.setAttribute('role', 'listbox');
+                panel.setAttribute('aria-multiselectable', 'true');
+
+                const searchWrapper = document.createElement('div');
+                searchWrapper.className = 'multi-select__search';
+
+                const searchInput = document.createElement('input');
+                searchInput.type = 'text';
+                searchInput.placeholder = 'Search...';
+                searchInput.setAttribute('aria-label', 'Search options');
+
+                searchWrapper.appendChild(searchInput);
+                panel.appendChild(searchWrapper);
+
+                const optionsFragment = document.createDocumentFragment();
+
+                const optionElements = Array.from(select.options).map((option, optionIndex) => {
+                    const optionId = `${select.name.replace(/[^a-z0-9]/gi, '_')}_${index}_${optionIndex}`;
+                    const optionRow = document.createElement('div');
+                    optionRow.className = 'multi-select__option';
+                    optionRow.setAttribute('role', 'option');
+                    optionRow.dataset.value = option.value;
+                    optionRow.id = optionId;
+
+                    const checkbox = document.createElement('span');
+                    checkbox.className = 'multi-select__checkbox';
+                    checkbox.setAttribute('aria-hidden', 'true');
+
+                    const label = document.createElement('span');
+                    label.textContent = option.textContent;
+
+                    optionRow.appendChild(checkbox);
+                    optionRow.appendChild(label);
+
+                    if (option.selected) {
+                        checkbox.classList.add('is-checked');
+                        optionRow.setAttribute('aria-selected', 'true');
+                    } else {
+                        optionRow.setAttribute('aria-selected', 'false');
+                    }
+
+                    optionRow.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        const isSelected = option.selected;
+                        option.selected = !isSelected;
+                        optionRow.setAttribute('aria-selected', String(!isSelected));
+                        checkbox.classList.toggle('is-checked', !isSelected);
+                        updateLabel();
+                    });
+
+                    return optionRow;
+                });
+
+                optionElements.forEach((el) => optionsFragment.appendChild(el));
+                panel.appendChild(optionsFragment);
+
+                const updateLabel = () => {
+                    const selectedOptions = Array.from(select.selectedOptions);
+                    if (selectedOptions.length === 0) {
+                        labelSpan.textContent = 'Select...';
+                    } else if (selectedOptions.length === 1) {
+                        labelSpan.textContent = selectedOptions[0].textContent;
+                    } else if (selectedOptions.length <= 3) {
+                        labelSpan.textContent = selectedOptions.map((opt) => opt.textContent).join(', ');
+                    } else {
+                        labelSpan.textContent = `${selectedOptions.length} selected`;
+                    }
+                };
+
+                updateLabel();
+
+                toggle.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    const currentlyOpen = panel.classList.contains('is-open');
+                    
+                    if (currentlyOpen) {
+                        // Close this menu
+                        panel.classList.remove('is-open');
+                        toggle.classList.remove('is-open');
+                        toggle.setAttribute('aria-expanded', 'false');
+                        activeMenus.delete({ options: panel, toggle });
+                    } else {
+                        // Close all other menus first
+                        closeAllMenus({ options: panel, toggle });
+                        // Open this menu
+                        panel.classList.add('is-open');
+                        toggle.classList.add('is-open');
+                        toggle.setAttribute('aria-expanded', 'true');
+                        activeMenus.add({ options: panel, toggle });
+                        searchInput.value = '';
+                        optionElements.forEach((optionEl) => optionEl.style.display = '');
+                        searchInput.focus({ preventScroll: true });
+                    }
+                });
+
+                searchInput.addEventListener('input', () => {
+                    const term = searchInput.value.trim().toLowerCase();
+                    optionElements.forEach((optionEl) => {
+                        const matches = optionEl.textContent.toLowerCase().includes(term);
+                        optionEl.style.display = matches ? '' : 'none';
+                    });
+                });
+
+                container.appendChild(toggle);
+                container.appendChild(panel);
+
+                wrapper.appendChild(container);
+
+                select.dataset.multiSelectEnhanced = 'true';
+            });
+
+            document.addEventListener('click', () => {
+                closeAllMenus();
+            });
+        });
+
+        // Age calculation from Date of Birth
+        const dobInput = document.getElementById('dob');
+        const ageInput = document.getElementById('age');
+
+        if (dobInput && ageInput) {
+            dobInput.addEventListener('change', function() {
+                const dob = new Date(this.value);
+                if (!this.value || isNaN(dob.getTime())) {
+                    ageInput.value = '';
+                    return;
+                }
+
+                const today = new Date();
+                let age = today.getFullYear() - dob.getFullYear();
+                const monthDiff = today.getMonth() - dob.getMonth();
+                
+                // Adjust if birthday hasn't occurred this year
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                    age--;
+                }
+
+                ageInput.value = age >= 0 ? age : '';
+            });
+        }
+
+        // Set minimum date for booking date (today)
+        const bookingDateInput = document.getElementById('bookingDate');
+        if (bookingDateInput) {
+            const today = new Date().toISOString().split('T')[0];
+            bookingDateInput.setAttribute('min', today);
+        }
+    </script>
+</body>
+</html>
+

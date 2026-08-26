@@ -1,0 +1,89 @@
+================================================================================
+JOB EXECUTION REPORT: 404 Error Detection
+================================================================================
+
+Execution Date: 11/22/2025, 7:00:07 AM
+Status: SUCCESS
+Duration: 7.32 seconds
+Mode: production
+
+404 ERROR DETECTION REPORT
+--------------------------------------------------------------------------------
+
+Total Pages Discovered: 91
+Pages Checked: 50
+404 Errors Found: 11
+
+404 ERRORS FOUND (with detailed analysis):
+--------------------------------------------------------------------------------
+1. URL: /procedures
+   Status: 404
+   Issue: This page returns a 404 (Not Found) status, meaning the page does not exist.
+   Impact: Users trying to access this URL will see an error page. This harms SEO and user experience.
+   Recommended Fix: Create a 301 redirect from this URL to a relevant existing page, or create the missing content if it's important.
+
+2. URL: /procedures/cataract-surgery/
+   Status: 404
+   Issue: This page returns a 404 (Not Found) status, meaning the page does not exist.
+   Impact: Users trying to access this URL will see an error page. This harms SEO and user experience.
+   Recommended Fix: Create a 301 redirect from this URL to a relevant existing page, or create the missing content if it's important.
+
+3. URL: /about-us
+   Status: 404
+   Issue: This page returns a 404 (Not Found) status, meaning the page does not exist.
+   Impact: Users trying to access this URL will see an error page. This harms SEO and user experience.
+   Recommended Fix: Create a 301 redirect from this URL to a relevant existing page, or create the missing content if it's important.
+
+4. URL: /locations
+   Status: 404
+   Issue: This page returns a 404 (Not Found) status, meaning the page does not exist.
+   Impact: Users trying to access this URL will see an error page. This harms SEO and user experience.
+   Recommended Fix: Create a 301 redirect from this URL to a relevant existing page, or create the missing content if it's important.
+
+5. URL: /contact
+   Status: 404
+   Issue: This page returns a 404 (Not Found) status, meaning the page does not exist.
+   Impact: Users trying to access this URL will see an error page. This harms SEO and user experience.
+   Recommended Fix: Create a 301 redirect from this URL to a relevant existing page, or create the missing content if it's important.
+
+6. URL: /procedures/laser-vision
+   Status: 404
+   Issue: This page returns a 404 (Not Found) status, meaning the page does not exist.
+   Impact: Users trying to access this URL will see an error page. This harms SEO and user experience.
+   Recommended Fix: Create a 301 redirect from this URL to a relevant existing page, or create the missing content if it's important.
+
+7. URL: /procedures/cataract-surgery
+   Status: 404
+   Issue: This page returns a 404 (Not Found) status, meaning the page does not exist.
+   Impact: Users trying to access this URL will see an error page. This harms SEO and user experience.
+   Recommended Fix: Create a 301 redirect from this URL to a relevant existing page, or create the missing content if it's important.
+
+8. URL: /procedures/retina
+   Status: 404
+   Issue: This page returns a 404 (Not Found) status, meaning the page does not exist.
+   Impact: Users trying to access this URL will see an error page. This harms SEO and user experience.
+   Recommended Fix: Create a 301 redirect from this URL to a relevant existing page, or create the missing content if it's important.
+
+9. URL: /procedures/cornea
+   Status: 404
+   Issue: This page returns a 404 (Not Found) status, meaning the page does not exist.
+   Impact: Users trying to access this URL will see an error page. This harms SEO and user experience.
+   Recommended Fix: Create a 301 redirect from this URL to a relevant existing page, or create the missing content if it's important.
+
+10. URL: /procedures/specialty-treatments
+   Status: 404
+   Issue: This page returns a 404 (Not Found) status, meaning the page does not exist.
+   Impact: Users trying to access this URL will see an error page. This harms SEO and user experience.
+   Recommended Fix: Create a 301 redirect from this URL to a relevant existing page, or create the missing content if it's important.
+
+11. URL: /blog
+   Status: 404
+   Issue: This page returns a 404 (Not Found) status, meaning the page does not exist.
+   Impact: Users trying to access this URL will see an error page. This harms SEO and user experience.
+   Recommended Fix: Create a 301 redirect from this URL to a relevant existing page, or create the missing content if it's important.
+
+
+================================================================================
+Report generated at: 11/22/2025, 7:00:07 AM
+Report file: 404_Error_Detection_2025-11-22_07-00-07.txt
+================================================================================

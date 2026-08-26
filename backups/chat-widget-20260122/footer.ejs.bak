@@ -1,0 +1,53 @@
+<%- include('/partials/booking-widget') %>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Locations</h3>
+            <ul>
+                <li><strong>Beverly Hills</strong></li>
+                <li>9100 Wilshire Blvd #265E</li>
+                <li>Beverly Hills, CA 90212</li>
+                <li style="margin-top: 1rem;"><strong>Westlake Village</strong></li>
+                <li>31824 Village Center Rd F</li>
+                <li>Westlake Village, CA 91361</li>
+                <li style="margin-top: 1rem;"><strong>Phone:</strong> <a href="tel:310-997-4490">(310) 997-4490</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Procedures</h3>
+            <ul>
+                <li><a href="/procedures/laser-vision/smile-laser/">SMILE Laser</a></li>
+                <li><a href="/procedures/laser-vision/lasik/">LASIK</a></li>
+                <li><a href="/procedures/laser-vision/superlasik/">SuperLASIK</a></li>
+                <li><a href="/procedures/lens-solutions/evo-icl/">EVO ICL</a></li>
+                <li><a href="/procedures/lens-solutions/pie/">Presbyopic Implants (PIE)</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="/about/why-choose-us/technology/">Our Technology</a></li>
+                <li><a href="/patients/resources/financing-options/">Financing Options</a></li>
+                <li><a href="/contact/virtual-consultation/">Virtual Consultation</a></li>
+                <li><a href="/contact/emergency-care/">Emergency Care</a></li>
+                <li><a href="/tools/am-i-a-candidate/">Vision Quiz</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Connect</h3>
+            <ul>
+                <li><a href="/book-consultation/">Book Consultation</a></li>
+                <li><a href="/contact/virtual-consultation/">Virtual Consult</a></li>
+                <li><a href="/about/locations/beverly-hills/">Beverly Hills</a></li>
+                <li><a href="/about/locations/westlake-village/">Westlake Village</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 Khanna Vision Institute. Your vision is our mission. | <a href="/privacy" style="color: inherit;">Privacy Policy</a></p>
+    </div>
+</footer>
+
+<script src="/public/js/header.js"></script>
+<script type="text/javascript" src="//cdn.callrail.com/companies/338313285/6c91af4b028c9b9ab984/12/swap.js"></script>

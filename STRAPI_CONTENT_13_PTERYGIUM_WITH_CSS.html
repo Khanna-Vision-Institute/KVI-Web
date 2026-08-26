@@ -1,0 +1,115 @@
+<!-- COMPLETE PTERYGIUM SURGERY PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .cta-button {
+            @apply px-8 py-4 bg-teal-600 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-teal-700 transition-all duration-300 ease-in-out transform hover:-translate-y-0.5;
+        }
+        .secondary-button {
+            @apply px-6 py-3 bg-white text-teal-700 border border-teal-600 font-semibold rounded-lg hover:bg-teal-50 transition-all;
+        }
+        .card {
+            @apply bg-white p-6 rounded-xl shadow-lg;
+        }
+        
+        /* B&A Slider */
+        .ba-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+        .ba-slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+        }
+        #ba-resize {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 50%;
+            overflow: hidden;
+        }
+        #ba-handle {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #fff;
+            cursor: ew-resize;
+            transform: translateX(-2px);
+        }
+        #ba-handle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            border: 2px solid #0d9488;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) translateX(2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0d9488;
+            font-weight: bold;
+        }
+        #ba-handle::before {
+            content: '\2194'; /* Left-right arrow */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            color: #0d9488;
+            z-index: 10;
+        }
+
+        /* FAQ Accordion */
+        .faq-question {
+            cursor: pointer;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+            transition: max-height 0.4s ease-in;
+        }
+        .faq-item.open .faq-arrow {
+            transform: rotate(180deg);
+        }
+        .faq-arrow {
+            transition: transform 0.3s;
+        }
+        
+        /* Sticky Nav */
+        #sticky-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 50;
+            transition: box-shadow 0.3s;
+        }
+        #sticky-nav.scrolled {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+    
+</style>
+
+<!-- NOW THE HTML CONTENT STARTS -->
+

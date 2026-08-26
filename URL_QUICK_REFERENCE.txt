@@ -1,0 +1,113 @@
+╔═══════════════════════════════════════════════════════════════════╗
+║                                                                   ║
+║              📍 STRAPI URL STRUCTURE - QUICK REFERENCE             ║
+║                                                                   ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+📝 BLOG POSTS
+═════════════
+
+URL Format:
+   https://khannainstitute.com/YYYY/MM/slug
+
+Generated From:
+   • Date Field → YYYY (year) and MM (month)
+   • Slug Field → slug (final part)
+
+Example:
+   Date: 2025-11-20
+   Slug: lasik-vs-smile
+   URL:  https://khannainstitute.com/2025/11/lasik-vs-smile
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📄 PAGES
+════════
+
+URL Format:
+   https://khannainstitute.com/[ROUTE_PATH]
+
+Route is FIXED (defined in server.js)
+Maps to Strapi slug internally
+
+Examples:
+   Route: /procedures/laser-vision/lasik/
+   Maps to: lasik-eye-surgery (Strapi slug)
+   URL:    https://khannainstitute.com/procedures/laser-vision/lasik/
+
+   Route: /about/dr-khanna/biography/
+   Maps to: dr-khanna-biography (Strapi slug)
+   URL:    https://khannainstitute.com/about/dr-khanna/biography/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 KEY DIFFERENCES
+═════════════════
+
+BLOG POSTS:
+   ✅ URL is DYNAMIC (generated from date + slug)
+   ✅ You control the slug
+   ✅ Date determines year/month in URL
+   ✅ Can create unlimited new posts
+
+PAGES:
+   ✅ URL is FIXED (predefined route)
+   ✅ Route must be added to server.js
+   ✅ Slug is internal (not in URL)
+   ✅ Limited to routes in server.js
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 COMMON URL PATTERNS
+══════════════════════
+
+Procedures:
+   /procedures/laser-vision/[procedure-name]/
+   /procedures/lens-solutions/[procedure-name]/
+   /procedures/specialty-treatments/[treatment-name]/
+
+About:
+   /about/dr-khanna/[page-name]/
+   /about/why-choose-us/[page-name]/
+   /about/locations/[location-name]/
+
+Patient Resources:
+   /patients/your-journey/[page-name]/
+   /patients/resources/faqs/[faq-name]/
+   /patients/resources/[resource-name]/
+
+Pricing & Contact:
+   /pricing-financing/[page-name]/
+   /contact/[page-name]/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  IMPORTANT RULES
+═══════════════════
+
+For Blog Posts:
+   • Date field is REQUIRED
+   • Slug must be URL-friendly (lowercase, hyphens)
+   • Format: YYYY-MM-DD for date
+   • Each slug must be unique
+
+For Pages:
+   • Route must exist in server.js
+   • Slug in Strapi must match server.js
+   • Route path is what users see
+   • Can't change URL in Strapi (must update server.js)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📖 FULL GUIDE
+═════════════
+
+See: STRAPI_URL_STRUCTURE_GUIDE.md
+
+Contains:
+   • Complete URL reference table
+   • All 50 page routes and slugs
+   • Step-by-step examples
+   • Troubleshooting tips
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <% if (typeof pageData !== 'undefined' && pageData && pageData.metaTitle) { %>
+  <title><%= pageData.metaTitle %></title>
+  <% } else { %>
+  <title>Financing Calculator | Khanna Vision Institute</title>
+  <% } %>
+
+  <% if (typeof pageData !== 'undefined' && pageData && pageData.metaDescription) { %>
+  <meta name="description" content="<%= pageData.metaDescription %>">
+  <% } else { %>
+  <meta name="description" content="Estimate monthly payments and explore 0% financing options for vision correction.">
+  <% } %>
+
+  <link rel="canonical" href="https://khannainstitute.com/pricing-financing/calculator/">
+  <link rel="stylesheet" href="/public/css/header.css">
+  <link rel="stylesheet" href="/public/css/footer.css">
+</head>
+<body>
+  <%- include('/partials/header') %>
+
+  <% if (typeof pageData !== 'undefined' && pageData && pageData.content) { %>
+    <%- pageData.content %>
+  <% } %>
+
+  <%- include('/partials/footer') %>
+</body>
+</html>

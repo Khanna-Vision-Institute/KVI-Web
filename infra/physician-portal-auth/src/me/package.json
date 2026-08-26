@@ -1,0 +1,7 @@
+{
+  "name": "kvi-physician-me",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "KVI physician-portal Lambda /me (no runtime npm deps)."
+}

@@ -1,0 +1,1340 @@
+<!-- COMPLETE CTAK KERATOCONUS PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #8b5cf6;
+            --secondary: #ec4899;
+            --accent: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #111827;
+            --light: #f9fafb;
+            --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-success: linear-gradient(135deg, #667eea 0%, #10b981 100%);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient-hero);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" opacity="0.05"><circle cx="100" cy="100" r="50" fill="white"/><circle cx="300" cy="200" r="80" fill="white"/><circle cx="900" cy="600" r="120" fill="white"/></svg>');
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            color: white;
+        }
+        
+        .breakthrough-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 10px 25px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.4); }
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 900;
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid white;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Sections */
+        .section {
+            padding: 80px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Problem/Solution Section */
+        .problem-section {
+            background: linear-gradient(to bottom, #f9fafb, white);
+        }
+        
+        .solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+        
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .scenario-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .scenario-card.before {
+            border-left: 5px solid var(--danger);
+        }
+        
+        .scenario-card.after {
+            border-left: 5px solid var(--accent);
+        }
+        
+        .scenario-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .before .scenario-title {
+            color: var(--danger);
+        }
+        
+        .after .scenario-title {
+            color: var(--accent);
+        }
+        
+        .scenario-list {
+            list-style: none;
+        }
+        
+        .scenario-list li {
+            padding: 10px 0;
+            display: flex;
+            align-items: start;
+            gap: 10px;
+        }
+        
+        /* CTAK vs Others Comparison */
+        .comparison-section {
+            background: white;
+        }
+        
+        .comparison-table {
+            overflow-x: auto;
+            margin-top: 50px;
+        }
+        
+        .comparison-table table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th {
+            background: var(--gradient-hero);
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr:hover {
+            background: #f9fafb;
+        }
+        
+        .check {
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+        
+        .cross {
+            color: var(--danger);
+            font-size: 1.5rem;
+        }
+        
+        /* Process Timeline — center rail + alternating cards so numbers never overlap text */
+        .process-section {
+            background: #f9fafb;
+        }
+        
+        .process-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 16px;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            transform: translateX(-50%);
+            z-index: 0;
+            border-radius: 3px;
+        }
+        
+        .timeline-step {
+            display: grid;
+            grid-template-columns: 1fr 72px 1fr;
+            align-items: center;
+            margin: 32px 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .timeline-step:nth-child(2n+2) .step-content {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        
+        .timeline-step:nth-child(2n+3) .step-content {
+            grid-column: 3;
+            grid-row: 1;
+        }
+        
+        .step-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-number {
+            grid-column: 2;
+            grid-row: 1;
+            position: relative;
+            justify-self: center;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--primary);
+            z-index: 2;
+            flex-shrink: 0;
+        }
+        
+        /* Technology Showcase */
+        .tech-section {
+            background: white;
+        }
+        
+        .tech-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .tech-card {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #f9fafb, white);
+            border-radius: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tech-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: var(--gradient-success);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+        
+        .tech-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        /* Results Section */
+        .results-section {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .result-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient-success);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .result-label {
+            font-size: 1.1rem;
+            color: #6b7280;
+            margin-top: 10px;
+        }
+        
+        /* Testimonials */
+        .testimonial-section {
+            background: white;
+        }
+        
+        .testimonial-carousel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .testimonial-card {
+            background: #f9fafb;
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 30px;
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.2;
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-hero);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        
+        .testimonial-info {
+            flex: 1;
+        }
+        
+        .testimonial-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-detail {
+            color: #6b7280;
+            font-size: 0.95rem;
+        }
+        
+        .testimonial-text {
+            line-height: 1.8;
+            color: #4b5563;
+        }
+        
+        .testimonial-result {
+            margin-top: 20px;
+            padding: 10px;
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-radius: 10px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            background: #f9fafb;
+        }
+        
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-question {
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: #f9fafb;
+        }
+        
+        .faq-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 25px 25px;
+        }
+        
+        /* Pricing Section */
+        .pricing-section {
+            background: white;
+        }
+        
+        .pricing-box {
+            max-width: 800px;
+            margin: 60px auto;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 30px;
+            padding: 60px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 20px 60px rgba(139, 92, 246, 0.3);
+        }
+        
+        .price-tag {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        
+        .price-details {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        .price-includes {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .price-includes h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .price-includes ul {
+            list-style: none;
+            text-align: left;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .price-includes li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-hero);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 20px;
+        }
+        
+        .urgency-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 30px;
+            border-radius: 50px;
+            margin: 30px 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .solution-grid { grid-template-columns: 1fr; }
+            .before-after { grid-template-columns: 1fr; }
+            .timeline-line { display: none; }
+            .timeline-step {
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .timeline-step .step-number {
+                order: -1;
+                align-self: center;
+                margin-bottom: 14px;
+            }
+            .timeline-step .step-content {
+                grid-column: 1 / -1;
+                width: 100%;
+            }
+            .comparison-table { overflow-x: scroll; }
+            .testimonial-carousel { grid-template-columns: 1fr; }
+        }
+        
+        /* Floating CTA */
+        .floating-cta {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--gradient-success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+            font-weight: 600;
+            z-index: 10050;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    
+</style>
+
+<!-- NOW THE HTML CONTENT STARTS -->
+
+<!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="breakthrough-badge">🚀 Revolutionary KC Treatment 2025</div>
+            
+            <h1>Finally: Fix Your <span class="highlight">Keratoconus</span><br>Without a Transplant</h1>
+            
+            <p class="hero-subtitle">
+                CTAK adds custom tissue to reshape your cornea in 20 minutes.<br>
+                No transplant. No rejection. Just better vision in 3 days.
+            </p>
+            
+            <div class="cta-group">
+                <a href="tel:8052302126" class="btn btn-primary">
+                    📞 Book Free Evaluation
+                </a>
+                <a href="#how-it-works" class="btn btn-secondary">
+                    🔬 See How It Works
+                </a>
+            </div>
+            
+            <p style="margin-top: 30px; font-size: 0.95rem; opacity: 0.9;">
+                ✓ FDA Clinical Trial Success &nbsp; ✓ Insurance Accepted &nbsp; ✓ Same Week Consults
+            </p>
+        </div>
+    </section>
+    
+    <!-- Problem/Solution Section -->
+    <section class="section problem-section">
+        <div class="container">
+            <h2 class="section-title">You're Stuck in the <span style="color: var(--danger);">Keratoconus Gap</span></h2>
+            <p class="section-subtitle">
+                Too advanced for crosslinking. Not ready for a transplant. Until now, you had no good options.
+            </p>
+            
+            <div class="solution-grid">
+                <div>
+                    <h3 style="font-size: 1.8rem; margin-bottom: 30px; color: var(--primary);">
+                        The Treatment Gap Crisis
+                    </h3>
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 25px;">
+                        <strong>Mild KC?</strong> You get crosslinking - it stops progression but doesn't improve vision.<br><br>
+                        <strong>Severe KC?</strong> You need a corneal transplant - major surgery with long recovery and rejection risk.<br><br>
+                        <strong style="color: var(--danger);">Moderate KC?</strong> You're told to "wait and see" while your vision gets worse. Maybe try hard contacts that hurt. Maybe get Intacs that barely help.
+                    </p>
+                    <div style="background: linear-gradient(135deg, #fef3c7, #fed7aa); padding: 25px; border-radius: 15px; border-left: 5px solid var(--warning);">
+                        <p style="font-weight: 600; color: #92400e;">
+                            🎯 CTAK fills this gap perfectly - improving vision WITHOUT the risks of transplant surgery
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="before-after">
+                    <div class="scenario-card before">
+                        <div class="scenario-title">
+                            <span>😔</span>
+                            <span>Without CTAK</span>
+                        </div>
+                        <ul class="scenario-list">
+                            <li>
+                                <span>❌</span>
+                                <span>Thick hard contacts all day</span>
+                            </li>
+                            <li>
+                                <span>❌</span>
+                                <span>Can't drive at night</span>
+                            </li>
+                            <li>
+                                <span>❌</span>
+                                <span>Halos and ghosting</span>
+                            </li>
+                            <li>
+                                <span>❌</span>
+                                <span>Getting worse yearly</span>
+                            </li>
+                            <li>
+                                <span>❌</span>
+                                <span>Transplant inevitable</span>
+                            </li>
+                            <li>
+                                <span>❌</span>
+                                <span>Career limitations</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="scenario-card after">
+                        <div class="scenario-title">
+                            <span>🎉</span>
+                            <span>After CTAK</span>
+                        </div>
+                        <ul class="scenario-list">
+                            <li>
+                                <span>✅</span>
+                                <span>Regular glasses work</span>
+                            </li>
+                            <li>
+                                <span>✅</span>
+                                <span>Drive day and night</span>
+                            </li>
+                            <li>
+                                <span>✅</span>
+                                <span>Clear, single vision</span>
+                            </li>
+                            <li>
+                                <span>✅</span>
+                                <span>Stable for years</span>
+                            </li>
+                            <li>
+                                <span>✅</span>
+                                <span>Transplant avoided</span>
+                            </li>
+                            <li>
+                                <span>✅</span>
+                                <span>Live without limits</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Technology Section -->
+    <section class="section tech-section" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">The Science: <span style="color: var(--primary);">Custom Tissue Engineering</span></h2>
+            <p class="section-subtitle">
+                We literally 3D print living tissue to perfectly reshape YOUR unique cornea
+            </p>
+            
+            <div class="tech-features">
+                <div class="tech-card">
+                    <div class="tech-icon">🗺️</div>
+                    <div class="tech-title">3D Corneal Mapping</div>
+                    <p>Advanced topography creates a precise map of your cornea's peaks and valleys - like Google Earth for your eye.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">🤖</div>
+                    <div class="tech-title">AI Tissue Design</div>
+                    <p>Software calculates the exact tissue shape needed to flatten your cone and normalize your cornea.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">⚡</div>
+                    <div class="tech-title">Laser Precision Cutting</div>
+                    <p>Femtosecond laser cuts donor tissue to your EXACT specifications - width, length, angle, thickness.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">☢️</div>
+                    <div class="tech-title">Gamma Sterilization</div>
+                    <p>Tissue is gamma-irradiated: removes all cells and DNA, leaving pure collagen. Zero rejection risk.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">🔬</div>
+                    <div class="tech-title">Laser Channel Creation</div>
+                    <p>Femtosecond laser creates a precise pocket in your cornea - no cutting, no stitches needed.</p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">🎯</div>
+                    <div class="tech-title">Perfect Placement</div>
+                    <p>Custom tissue inserted to reshape cornea from cone to normal curve. Your body integrates it naturally.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Comparison Section -->
+    <section class="section comparison-section">
+        <div class="container">
+            <h2 class="section-title">CTAK Beats <span style="color: var(--primary);">Everything Else</span></h2>
+            <p class="section-subtitle">
+                Why settle for outdated treatments when custom tissue technology exists?
+            </p>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Treatment</th>
+                            <th>CTAK</th>
+                            <th>Intacs</th>
+                            <th>Transplant</th>
+                            <th>Hard Contacts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Vision Improvement</strong></td>
+                            <td><span class="check">✅</span> 2-3 lines</td>
+                            <td>❓ 1-2 lines</td>
+                            <td><span class="check">✅</span> 4-5 lines</td>
+                            <td>➖ Correction only</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Recovery Time</strong></td>
+                            <td><span class="check">✅</span> 3-7 days</td>
+                            <td>⚠️ 2-4 weeks</td>
+                            <td><span class="cross">❌</span> 6-12 months</td>
+                            <td>➖ Daily struggle</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rejection Risk</strong></td>
+                            <td><span class="check">✅</span> None</td>
+                            <td><span class="check">✅</span> None</td>
+                            <td><span class="cross">❌</span> 20% risk</td>
+                            <td>➖ N/A</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Custom to Your Eye</strong></td>
+                            <td><span class="check">✅</span> 100% custom</td>
+                            <td><span class="cross">❌</span> Fixed sizes</td>
+                            <td>➖ Generic donor</td>
+                            <td>⚠️ Semi-custom</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reversible</strong></td>
+                            <td><span class="check">✅</span> Yes</td>
+                            <td><span class="check">✅</span> Yes</td>
+                            <td><span class="cross">❌</span> No</td>
+                            <td><span class="check">✅</span> Yes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Works for Severe KC</strong></td>
+                            <td><span class="check">✅</span> Yes</td>
+                            <td><span class="cross">❌</span> Limited</td>
+                            <td><span class="check">✅</span> Yes</td>
+                            <td>⚠️ Difficult fit</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Natural Tissue</strong></td>
+                            <td><span class="check">✅</span> Human collagen</td>
+                            <td><span class="cross">❌</span> Plastic</td>
+                            <td><span class="check">✅</span> Full cornea</td>
+                            <td><span class="cross">❌</span> Synthetic</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Daily Comfort</strong></td>
+                            <td><span class="check">✅</span> Normal eye</td>
+                            <td>⚠️ Some awareness</td>
+                            <td><span class="check">✅</span> Normal eye</td>
+                            <td><span class="cross">❌</span> Uncomfortable</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Process Timeline -->
+    <section class="section process-section">
+        <div class="container">
+            <h2 class="section-title">Your CTAK Journey: <span style="color: var(--primary);">Consultation to Clear Vision</span></h2>
+            <p class="section-subtitle">
+                20-minute procedure. 3-day recovery. Lifetime of better vision.
+            </p>
+            
+            <div class="process-timeline">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 style="color: var(--primary); margin-bottom: 15px;">Advanced Corneal Mapping</h3>
+                        <p>3D topography captures thousands of data points. We see exactly where your cone is and how to fix it. Takes 10 minutes, completely painless.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 style="color: var(--primary); margin-bottom: 15px;">Custom Tissue Creation</h3>
+                        <p>Your map goes to the lab. Femtosecond laser cuts donor tissue to YOUR exact specs. Gamma radiation makes it 100% safe. Ready in 3-5 days.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 style="color: var(--primary); margin-bottom: 15px;">20-Minute Procedure</h3>
+                        <p>Light sedation, numbing drops. Laser creates tiny channel. Custom tissue inserted. No stitches. You're done before your Uber driver gets bored.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 style="color: var(--primary); margin-bottom: 15px;">Rapid Recovery</h3>
+                        <p>Day 1: Rest at home. Day 3: Back to work. Week 1: Clear vision emerging. Month 1: Wow moments daily. Month 3: Forget you had KC.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Results Section -->
+    <section class="section results-section">
+        <div class="container">
+            <h2 class="section-title">CTAK Results <span style="color: var(--accent);">By The Numbers</span></h2>
+            <p class="section-subtitle">
+                Clinical trial data that proves this works
+            </p>
+            
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="result-number">95%</div>
+                    <div class="result-label">Patient Satisfaction</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-number">2-3</div>
+                    <div class="result-label">Lines Vision Improvement</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-number">6-8D</div>
+                    <div class="result-label">Corneal Flattening</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-number">3-7</div>
+                    <div class="result-label">Days to Recovery</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-number">0%</div>
+                    <div class="result-label">Rejection Rate</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-number">80%</div>
+                    <div class="result-label">Avoid Transplant</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="section testimonial-section">
+        <div class="container">
+            <h2 class="section-title">Real Patients. <span style="color: var(--primary);">Real Results.</span></h2>
+            <p class="section-subtitle">
+                These KC warriors got their lives back with CTAK
+            </p>
+            
+            <div class="testimonial-carousel">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">MR</div>
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Marcus Rodriguez</div>
+                            <div class="testimonial-detail">28, Software Developer</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Diagnosed with KC at 22. Tried Intacs - barely helped. Hard contacts were torture. 
+                        Was told transplant was my only option until I found CTAK. 
+                        The custom tissue completely reshaped my cornea. 
+                        Coding without triple vision is life-changing. Best decision ever."
+                    </p>
+                    <div class="testimonial-result">
+                        📈 20/80 → 20/25 vision
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">ST</div>
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">Sarah Thompson</div>
+                            <div class="testimonial-detail">34, Photographer</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "My KC was destroying my career - couldn't focus my camera properly. 
+                        CTAK literally saved my profession. The 3D mapping was fascinating, 
+                        seeing exactly how they'd fix my cone. Recovery was nothing - worked from home 
+                        for 3 days, back shooting weddings in a week."
+                    </p>
+                    <div class="testimonial-result">
+                        📈 3 lines improvement, no more halos
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">JK</div>
+                        <div class="testimonial-info">
+                            <div class="testimonial-name">James Kim</div>
+                            <div class="testimonial-detail">24, Med Student</div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Failed Intacs removal led me to CTAK. As a future doctor, I researched everything. 
+                        The gamma-irradiated tissue = zero rejection risk sold me. 
+                        The precision is insane - custom cut to 0.01mm accuracy. 
+                        Can finally see the board clearly in lectures!"
+                    </p>
+                    <div class="testimonial-result">
+                        📈 Avoided corneal transplant
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="section faq-section">
+        <div class="container">
+            <h2 class="section-title">Everything You're <span style="color: var(--primary);">Wondering About CTAK</span></h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How is CTAK different from Intacs or ring segments?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Intacs are plastic rings in fixed sizes - like buying shoes that "sort of" fit. 
+                        CTAK uses actual human corneal tissue custom-cut to YOUR exact corneal shape. 
+                        It's biocompatible (your body accepts it as natural tissue), 
+                        completely customizable, and provides better visual outcomes. 
+                        Many patients who failed with Intacs see great results with CTAK.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is there really no rejection risk?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Correct! The tissue is gamma-irradiated, which removes ALL donor cells and DNA. 
+                        What's left is pure collagen structure - like scaffolding. 
+                        Your immune system doesn't recognize it as foreign because there's nothing to reject. 
+                        This is completely different from a transplant which uses living tissue.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can CTAK help if I have severe keratoconus?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! CTAK works for mild, moderate, AND severe KC. 
+                        The tissue is custom-designed to address YOUR specific cone shape and severity. 
+                        Even very steep corneas (50-80 diopters) can be treated. 
+                        The only cases that might not qualify are those with dense central scarring 
+                        that already need a transplant.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How long do the results last?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The tissue becomes a permanent part of your cornea - your body integrates it completely. 
+                        Clinical trials show stable results at 5+ years and counting. 
+                        Unlike contacts that you struggle with daily or Intacs that can shift, 
+                        CTAK reshapes your cornea permanently. Most patients never need another procedure.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What's recovery actually like? Be honest.
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Day 1: Eyes feel scratchy, light sensitive. Netflix and chill. 
+                        Day 2-3: Improving quickly, can use phone/computer. 
+                        Day 4-7: Back to work/school, vision getting clearer daily. 
+                        Week 2: Basically normal, might still use drops. 
+                        Month 1: Vision stabilizing, seeing improvements. 
+                        It's WAY easier than transplant recovery (6-12 months) or dealing with hard contacts forever.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Will I still need glasses or contacts after?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Most patients can wear regular glasses or soft contacts after CTAK - 
+                        that's the whole point! No more rigid gas permeable torture devices. 
+                        Your prescription will be much lower and your cornea regular enough 
+                        for standard correction. Some patients even qualify for LASIK later.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is this FDA approved? Is it experimental?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>CTAK has been in FDA clinical trials since 2016 with excellent results. 
+                        It's performed at major eye centers including Bascom Palmer (ranked #1 in the US). 
+                        Published studies show consistent success rates. 
+                        While newer than transplants, it's well-studied and proven effective. 
+                        Dr. Khanna has extensive experience with the procedure.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What if it doesn't work? Is it reversible?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, CTAK is reversible! The tissue can be removed or adjusted if needed. 
+                        This is a huge advantage over transplants (irreversible) or letting KC progress (also irreversible). 
+                        That said, success rates are over 95%, and most patients see significant improvement. 
+                        If you eventually need a transplant, CTAK doesn't prevent that option.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section class="section pricing-section">
+        <div class="container">
+            <h2 class="section-title">Investment in <span style="color: var(--primary);">Your Vision Freedom</span></h2>
+            <p class="section-subtitle">
+                Compare: Transplant costs $15,000-25,000. CTAK costs a fraction with better recovery.
+            </p>
+            
+            <div class="pricing-box">
+                <div class="price-tag">$7,000</div>
+                <div class="price-details">Per eye • Insurance often covers partial</div>
+                
+                <a href="tel:8052302126" class="btn btn-primary" style="background: white; color: var(--primary); margin: 30px 0;">
+                    📞 Check Your Coverage
+                </a>
+                
+                <div class="price-includes">
+                    <h3>Your CTAK Package Includes:</h3>
+                    <ul>
+                        <li>
+                            <span>✅</span>
+                            <span>Advanced 3D corneal mapping</span>
+                        </li>
+                        <li>
+                            <span>✅</span>
+                            <span>Custom tissue design & creation</span>
+                        </li>
+                        <li>
+                            <span>✅</span>
+                            <span>Femtosecond laser procedure</span>
+                        </li>
+                        <li>
+                            <span>✅</span>
+                            <span>Post-op medications</span>
+                        </li>
+                        <li>
+                            <span>✅</span>
+                            <span>Enhancement if needed</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <p style="margin-top: 30px; font-size: 1.1rem;">
+                    💳 Financing available • 0% APR options<br>
+                    HSA/FSA accepted • CareCredit approved
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="section cta-section">
+        <div class="container">
+            <h2 class="cta-title">Stop Letting Keratoconus Control Your Life</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 30px; opacity: 0.95;">
+                Every month you wait = more vision lost to the cone
+            </p>
+            
+            <div class="urgency-badge">
+                ⚠️ Limited appointments available for November 2024
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin: 60px auto; max-width: 800px; text-align: left;">
+                <div>
+                    <h3 style="margin-bottom: 20px; font-size: 1.5rem;">📍 Beverly Hills</h3>
+                    <p style="margin-bottom: 20px; opacity: 0.9;">
+                        9100 Wilshire Blvd #265E<br>
+                        Beverly Hills, CA 90212
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 style="margin-bottom: 20px; font-size: 1.5rem;">📍 Westlake Village</h3>
+                    <p style="margin-bottom: 20px; opacity: 0.9;">
+                        31824 Village Center Rd F<br>
+                        Westlake Village, CA 91361
+                    </p>
+                </div>
+            </div>
+            
+            <p style="margin-top: 8px; font-size: 1.2rem; font-weight: 600;">
+                Phone: <a href="tel:8052302126" style="color: white; text-decoration: underline;">(805) 230-2126</a>
+            </p>
+            
+            <div style="margin-top: 50px;">
+                <p style="font-size: 1.1rem; line-height: 1.8; opacity: 0.9;">
+                    ✅ Free CTAK evaluation<br>
+                    ✅ Insurance verification<br>
+                    ✅ Same-week appointments<br>
+                    ✅ Second opinions welcome
+                </p>
+            </div>
+            
+            <p style="margin-top: 40px; font-size: 1.2rem; font-weight: 600;">
+                "Don't wait for a transplant when tissue addition can save your vision now"<br>
+                - Dr. Rajesh Khanna
+            </p>
+        </div>
+    </section>
+    
+    <!-- Floating CTA -->
+    <a href="tel:8052302126" class="floating-cta">
+        📞 Save Your Vision
+    </a>
+    
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                const wasActive = parent.classList.contains('active');
+                
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+                
+                if (!wasActive) {
+                    parent.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>

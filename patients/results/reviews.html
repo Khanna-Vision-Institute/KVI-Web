@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Reviews &amp; Testimonials | Khanna Vision Institute</title>
+  <meta name="description" content="Real patient stories, video testimonials, and Yelp reviews for SMILE, LASIK, EVO ICL, and more at Khanna Vision Institute in Beverly Hills &amp; Westlake Village.">
+  <link rel="canonical" href="https://khannainstitute.com/patients/results/reviews/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/public/css/header.css">
+  <link rel="stylesheet" href="/public/css/footer.css">
+  <style>
+    :root {
+      --ink: #0f172a;
+      --muted: #475569;
+      --line: #e2e8f0;
+      --surface: #ffffff;
+      --wash: #f1f5f9;
+      --glow: #e0f2fe;
+      --navy: #1e3c72;
+      --navy2: #2a5298;
+      --gold: #c9a227;
+      --yelp: #ff1a1a;
+    }
+    .tm-page {
+      font-family: "DM Sans", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 500px at 10% -10%, rgba(224, 242, 254, 0.65), transparent 55%),
+        radial-gradient(900px 420px at 100% 0%, rgba(254, 243, 199, 0.35), transparent 50%),
+        linear-gradient(180deg, var(--wash) 0%, #f8fafc 35%, var(--wash) 100%);
+    }
+    .tm-page h1, .tm-page h2, .tm-page h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .tm-wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 22px 72px;
+    }
+    .tm-hero {
+      text-align: center;
+      padding: 28px 0 40px;
+    }
+    .tm-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--navy2);
+      margin-bottom: 12px;
+    }
+    .tm-hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3.1rem);
+      line-height: 1.12;
+      margin: 0 0 14px;
+      background: linear-gradient(120deg, var(--navy) 0%, #0c4a6e 55%, var(--navy2) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .tm-lead {
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 1.08rem;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+    .tm-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+      max-width: 820px;
+      margin: 32px auto 0;
+    }
+    .tm-stat {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px 16px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(30, 60, 114, 0.06);
+    }
+    .tm-stat strong {
+      display: block;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.55rem;
+      color: var(--navy);
+    }
+    .tm-stat span {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .tm-section {
+      margin-top: 48px;
+    }
+    .tm-section-head {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .tm-section-head h2 {
+      font-size: clamp(1.6rem, 3vw, 2.15rem);
+      margin: 0 0 8px;
+      color: var(--navy);
+    }
+    .tm-section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .tm-yelp-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--yelp);
+      text-decoration: none;
+      border-bottom: 2px solid rgba(255, 26, 26, 0.25);
+    }
+    .tm-yelp-link:hover { border-bottom-color: var(--yelp); }
+    /* Full-width band like smile-la-landing-page-2026 (bg-slate-50) */
+    .tm-yelp-band {
+      background: rgba(248, 250, 252, 0.92);
+      padding: 3rem 0 2.75rem;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(226, 232, 240, 0.95);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.95);
+    }
+    .tm-yelp-band-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 22px;
+    }
+    .tm-yelp-wrap {
+      position: relative;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    @media (max-width: 640px) {
+      .tm-yelp-wrap { padding: 0 40px; }
+    }
+    .tm-yelp-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .tm-yelp-btn:hover { background: #fff; transform: translateY(-50%) scale(1.04); }
+    .tm-yelp-btn:active { transform: translateY(-50%) scale(0.98); }
+    .tm-yelp-btn--prev { left: 0; }
+    .tm-yelp-btn--next { right: 0; }
+    .tm-yelp-track {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 8px 4px 16px;
+      touch-action: pan-x;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .tm-yelp-track::-webkit-scrollbar { display: none; }
+    /* Card size matches SMILE landing (~26rem); Yelp widgets.js expands content inside */
+    .tm-yelp-slide {
+      flex: 0 0 min(100%, 26rem);
+      scroll-snap-align: center;
+      background: #fff;
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      border-radius: 1rem;
+      padding: 1rem 1.15rem;
+      min-height: 140px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    @media (min-width: 640px) {
+      .tm-yelp-slide {
+        min-height: 160px;
+        padding: 1.15rem 1.25rem;
+      }
+    }
+    .tm-yelp-slide .yelp-review {
+      text-align: left;
+      font-size: 0.875rem;
+      line-height: 1.55;
+      color: var(--ink);
+      width: 100%;
+    }
+    @media (min-width: 640px) {
+      .tm-yelp-slide .yelp-review { font-size: 1rem; }
+    }
+    .tm-yelp-slide .yelp-review a {
+      color: #005ea3;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .tm-yelp-slide iframe {
+      max-width: 100%;
+      border: 0;
+    }
+    .tm-yelp-hint {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .tm-videos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+      gap: 22px;
+    }
+    .tm-video {
+      background: var(--surface);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 40px rgba(30, 60, 114, 0.08);
+    }
+    .tm-video .ratio {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #0f172a;
+    }
+    .tm-video iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .tm-video figcaption {
+      padding: 14px 16px 16px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .tm-cta {
+      margin-top: 48px;
+      text-align: center;
+      padding: 36px 24px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      color: #fff;
+      box-shadow: 0 20px 50px rgba(30, 60, 114, 0.25);
+    }
+    .tm-cta h2 {
+      color: #fff;
+      margin: 0 0 10px;
+      font-size: clamp(1.45rem, 3vw, 2rem);
+    }
+    .tm-cta p {
+      margin: 0 0 20px;
+      opacity: 0.92;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .tm-cta a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 26px;
+      border-radius: 999px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fbbf24, var(--gold));
+      color: #1a1508;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+    .tm-cta a:hover { filter: brightness(1.05); }
+  </style>
+</head>
+<body class="tm-page">
+  <%- include('/partials/header') %>
+  <%- include('/partials/seminar-banner') %>
+
+  <main>
+    <div class="tm-wrap">
+    <header class="tm-hero">
+      <p class="tm-eyebrow">Patient results</p>
+      <h1>Stories worth seeing</h1>
+      <p class="tm-lead">Hear from real patients across Los Angeles — from Yelp to video — who chose Khanna Vision Institute for life-changing vision correction.</p>
+      <div class="tm-stats" aria-label="Highlights">
+        <div class="tm-stat"><strong>20,000+</strong><span>procedures performed</span></div>
+        <div class="tm-stat"><strong>2</strong><span>locations: Beverly Hills &amp; Westlake</span></div>
+        <div class="tm-stat"><strong>5★</strong><span>experience-focused care</span></div>
+      </div>
+    </header>
+
+    <section class="tm-section" aria-labelledby="videos-heading">
+      <div class="tm-section-head">
+        <h2 id="videos-heading">Patient videos</h2>
+        <p>Short stories — straight from our patients on YouTube.</p>
+      </div>
+      <div class="tm-videos">
+        <figure class="tm-video">
+          <div class="ratio">
+            <iframe src="https://www.youtube.com/embed/Fm5cIhJ3ors" title="Khanna Vision patient testimonial on YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <figcaption>Patient experience at Khanna Vision Institute</figcaption>
+        </figure>
+        <figure class="tm-video">
+          <div class="ratio">
+            <iframe src="https://www.youtube.com/embed/eUrmHNwvaJ0" title="Khanna Vision patient testimonial on YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <figcaption>Vision correction journey — patient perspective</figcaption>
+        </figure>
+        <figure class="tm-video">
+          <div class="ratio">
+            <iframe src="https://www.youtube.com/embed/KmuPCuJN6Q0" title="Khanna Vision patient testimonial on YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <figcaption>Life after LASIK / SMILE — testimonial</figcaption>
+        </figure>
+        <figure class="tm-video">
+          <div class="ratio">
+            <iframe src="https://www.youtube.com/embed/bIHNYgfbL18" title="Khanna Vision patient testimonial on YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <figcaption>See what patients say about Dr. Khanna</figcaption>
+        </figure>
+        <figure class="tm-video">
+          <div class="ratio">
+            <iframe src="https://www.youtube.com/embed/SZR_WQW6FqU" title="Khanna Vision patient testimonial on YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <figcaption>More patient stories from our practice</figcaption>
+        </figure>
+      </div>
+    </section>
+    </div>
+
+    <section class="tm-yelp-band tm-section" aria-labelledby="yelp-heading">
+      <div class="tm-yelp-band-inner">
+      <div class="tm-section-head">
+        <h2 id="yelp-heading">Yelp reviews</h2>
+        <p>Westlake Village — reviews from real Yelp users.</p>
+        <a class="tm-yelp-link" href="https://www.yelp.com/biz/khanna-vision-institute-westlake-village" target="_blank" rel="noopener noreferrer">See all reviews on Yelp →</a>
+      </div>
+      <div id="tm-yelp-slider-wrap" class="tm-yelp-wrap">
+        <button type="button" id="tm-yelp-prev" class="tm-yelp-btn tm-yelp-btn--prev" aria-label="Previous review">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" id="tm-yelp-next" class="tm-yelp-btn tm-yelp-btn--next" aria-label="Next review">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div id="tm-yelp-slider" class="tm-yelp-track">
+          <div class="tm-yelp-slide">
+            <span class="yelp-review" data-review-id="TM7kJown79He0KygYkbWRQ" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=RdI3b1ealP45rcnn3d_-sA" rel="nofollow noopener">Charles S.</a>'s <a href="https://www.yelp.com/biz/khanna-vision-institute-westlake-village?hrid=TM7kJown79He0KygYkbWRQ" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/rPj1KpJCEbX73WzlmSQoDw" rel="nofollow noopener">Khanna Vision Institute</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a></span>
+          </div>
+          <div class="tm-yelp-slide">
+            <span class="yelp-review" data-review-id="6rCnBMTsnkURGVp3J4JYMQ" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=bs_yqhYfobK1zYsiZY3fZA" rel="nofollow noopener">Cindy P.</a>'s <a href="https://www.yelp.com/biz/khanna-vision-institute-westlake-village?hrid=6rCnBMTsnkURGVp3J4JYMQ" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/rPj1KpJCEbX73WzlmSQoDw" rel="nofollow noopener">Khanna Vision Institute</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a></span>
+          </div>
+          <div class="tm-yelp-slide">
+            <span class="yelp-review" data-review-id="V97RokF8yMCHkMHojYa8HA" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=BvoUnl7vuSAD-5TJpEUSaA" rel="nofollow noopener">Jenny S.</a>'s <a href="https://www.yelp.com/biz/khanna-vision-institute-westlake-village?hrid=V97RokF8yMCHkMHojYa8HA" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/rPj1KpJCEbX73WzlmSQoDw" rel="nofollow noopener">Khanna Vision Institute</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a></span>
+          </div>
+          <div class="tm-yelp-slide">
+            <span class="yelp-review" data-review-id="13ddtdJRcJRhJrDTd_Lvyw" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=8B24skXXGid4QBci5e68Hg" rel="nofollow noopener">Richard M.</a>'s <a href="https://www.yelp.com/biz/khanna-vision-institute-westlake-village?hrid=13ddtdJRcJRhJrDTd_Lvyw" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/rPj1KpJCEbX73WzlmSQoDw" rel="nofollow noopener">Khanna Vision Institute</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a></span>
+          </div>
+          <div class="tm-yelp-slide">
+            <span class="yelp-review" data-review-id="X7SJ9A9k51evWtWdPB12Rw" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=Cp1q0w1vDprN8Mdevk0nDw" rel="nofollow noopener">Robyn N.</a>'s <a href="https://www.yelp.com/biz/khanna-vision-institute-westlake-village?hrid=X7SJ9A9k51evWtWdPB12Rw" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/rPj1KpJCEbX73WzlmSQoDw" rel="nofollow noopener">Khanna Vision Institute</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a></span>
+          </div>
+          <div class="tm-yelp-slide">
+            <span class="yelp-review" data-review-id="8fhUun95xzEsgLhHHncdXw" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=wsmbCF6hEebFVIR2W9gxLA" rel="nofollow noopener">Heidi T.</a>'s <a href="https://www.yelp.com/biz/khanna-vision-institute-westlake-village?hrid=8fhUun95xzEsgLhHHncdXw" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/rPj1KpJCEbX73WzlmSQoDw" rel="nofollow noopener">Khanna Vision Institute</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a></span>
+          </div>
+          <div class="tm-yelp-slide">
+            <span class="yelp-review" data-review-id="vniT0b_72ZF7Emc4sa-Z0w" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=_hm_tUHCJycOIrjwKPFw2w" rel="nofollow noopener">Marilyn M.</a>'s <a href="https://www.yelp.com/biz/khanna-vision-institute-westlake-village?hrid=vniT0b_72ZF7Emc4sa-Z0w" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/rPj1KpJCEbX73WzlmSQoDw" rel="nofollow noopener">Khanna Vision Institute</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a></span>
+          </div>
+          <div class="tm-yelp-slide">
+            <span class="yelp-review" data-review-id="VX0aR5-xH_4nW2PIMm-1dA" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=LWt6nxngITA3mlyaQjczVg" rel="nofollow noopener">J C.</a>'s <a href="https://www.yelp.com/biz/khanna-vision-institute-westlake-village?hrid=VX0aR5-xH_4nW2PIMm-1dA" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/rPj1KpJCEbX73WzlmSQoDw" rel="nofollow noopener">Khanna Vision Institute</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a></span>
+          </div>
+          <div class="tm-yelp-slide">
+            <span class="yelp-review" data-review-id="Ig45DwzXm2j5vdgDO4BP4w" data-hostname="www.yelp.com">Read <a href="https://www.yelp.com/user_details?userid=cpAj1wTIGIFmlyO1PcehNg" rel="nofollow noopener">Scott H.</a>'s <a href="https://www.yelp.com/biz/khanna-vision-institute-westlake-village?hrid=Ig45DwzXm2j5vdgDO4BP4w" rel="nofollow noopener">review</a> of <a href="https://www.yelp.com/biz/rPj1KpJCEbX73WzlmSQoDw" rel="nofollow noopener">Khanna Vision Institute</a> on <a href="https://www.yelp.com" rel="nofollow noopener">Yelp</a></span>
+          </div>
+        </div>
+        <p class="tm-yelp-hint">Swipe on mobile · Arrows on desktop · Auto-advances every 2s (pauses on hover)</p>
+      </div>
+      </div>
+    </section>
+
+    <div class="tm-wrap">
+    <section class="tm-cta" aria-label="Book a consultation">
+      <h2>Ready for your own success story?</h2>
+      <p>Schedule a consultation at Beverly Hills or Westlake Village and find out which procedure is right for you.</p>
+      <a href="/contact/schedule-consultation/">Book consultation</a>
+    </section>
+    </div>
+  </main>
+
+  <%- include('/partials/footer') %>
+
+  <script>
+    (function initTestimonialsYelpSlider() {
+      var track = document.getElementById('tm-yelp-slider');
+      var prev = document.getElementById('tm-yelp-prev');
+      var next = document.getElementById('tm-yelp-next');
+      var wrap = document.getElementById('tm-yelp-slider-wrap');
+      if (!track) return;
+
+      function firstSlide() {
+        return track.querySelector('.tm-yelp-slide');
+      }
+
+      function trackGapPx() {
+        var g = getComputedStyle(track).gap || getComputedStyle(track).columnGap;
+        var n = parseFloat(g);
+        return Number.isFinite(n) ? n : 18;
+      }
+
+      function stepSize() {
+        var slide = firstSlide();
+        return slide ? slide.offsetWidth + trackGapPx() : 320;
+      }
+
+      function goNext() {
+        var max = Math.max(0, track.scrollWidth - track.clientWidth - 2);
+        if (max <= 0) return;
+        if (track.scrollLeft >= max - 2) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: stepSize(), behavior: 'smooth' });
+        }
+      }
+
+      function goPrev() {
+        var max = Math.max(0, track.scrollWidth - track.clientWidth - 2);
+        if (track.scrollLeft <= 2) {
+          track.scrollTo({ left: max, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: -stepSize(), behavior: 'smooth' });
+        }
+      }
+
+      var autoTimer = null;
+      var resumeTimer = null;
+      var zoneHover = false;
+
+      function stopAuto() {
+        if (autoTimer) {
+          clearInterval(autoTimer);
+          autoTimer = null;
+        }
+      }
+
+      function clearResume() {
+        if (resumeTimer) {
+          clearTimeout(resumeTimer);
+          resumeTimer = null;
+        }
+      }
+
+      function startAuto() {
+        if (zoneHover || document.hidden) return;
+        stopAuto();
+        clearResume();
+        autoTimer = setInterval(goNext, 2000);
+      }
+
+      function pauseAutoBriefly(ms) {
+        stopAuto();
+        clearResume();
+        resumeTimer = setTimeout(function () {
+          if (!zoneHover && !document.hidden) startAuto();
+        }, ms || 5000);
+      }
+
+      if (prev) prev.addEventListener('click', function () { goPrev(); pauseAutoBriefly(5000); });
+      if (next) next.addEventListener('click', function () { goNext(); pauseAutoBriefly(5000); });
+
+      var zone = wrap || track;
+      zone.addEventListener('mouseenter', function () { zoneHover = true; stopAuto(); });
+      zone.addEventListener('mouseleave', function () { zoneHover = false; startAuto(); });
+      zone.addEventListener('touchstart', function () { pauseAutoBriefly(6000); }, { passive: true });
+      zone.addEventListener('wheel', function () { pauseAutoBriefly(5000); }, { passive: true });
+
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) stopAuto();
+        else startAuto();
+      });
+
+      startAuto();
+    })();
+  </script>
+  <!-- Yelp review embeds: transforms .yelp-review spans into official widgets (same as smile-la-landing-page-2026) -->
+  <script src="https://www.yelp.com/embed/widgets.js" async></script>
+</body>
+</html>

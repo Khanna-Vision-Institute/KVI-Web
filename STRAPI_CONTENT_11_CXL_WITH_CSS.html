@@ -1,0 +1,1291 @@
+<!-- COMPLETE CXL KERATOCONUS PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #5b21b6;
+            --secondary: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --dark: #111827;
+            --light: #f9fafb;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --emergency: #dc2626;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+        }
+        
+        /* Emergency Banner */
+        .emergency-banner {
+            background: var(--emergency);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: pulse-red 2s infinite;
+        }
+        
+        @keyframes pulse-red {
+            0%, 100% { background: var(--emergency); }
+            50% { background: #b91c1c; }
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid var(--danger);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            animation: shake 2s infinite;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+            20%, 40%, 60%, 80% { transform: translateX(2px); }
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+            max-width: 600px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(245, 158, 11, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        /* Section Base */
+        .section {
+            padding: 80px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #6b7280;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* What is Keratoconus Section */
+        .kc-info {
+            background: var(--light);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+        
+        .info-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .info-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        /* Timeline Section */
+        .timeline-section {
+            background: white;
+        }
+        
+        .progression-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 50px auto;
+        }
+        
+        .timeline-track {
+            height: 4px;
+            background: linear-gradient(90deg, var(--success) 0%, var(--secondary) 50%, var(--danger) 100%);
+            border-radius: 2px;
+            position: relative;
+            margin: 40px 0;
+        }
+        
+        .timeline-stages {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .stage-card {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .stage-card.current {
+            border-color: var(--secondary);
+            background: #fef3c7;
+        }
+        
+        .stage-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .stage-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        /* CXL Process */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+        
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        /* Insurance Section */
+        .insurance-section {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: white;
+        }
+        
+        .insurance-card {
+            background: white;
+            color: var(--dark);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+        
+        .insurance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .insurance-item {
+            padding: 15px;
+            background: var(--light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .check {
+            color: var(--success);
+            font-size: 1.5rem;
+        }
+        
+        /* Comparison Section */
+        .comparison-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 50px 0;
+        }
+        
+        .comparison-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            background: var(--gradient);
+            color: white;
+            font-weight: 700;
+        }
+        
+        .comparison-header > div {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .comparison-row:nth-child(even) {
+            background: var(--light);
+        }
+        
+        .comparison-row > div {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .comparison-row > div:not(:first-child) {
+            justify-content: center;
+        }
+        
+        /* Recovery Timeline */
+        .recovery-cards {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .recovery-card {
+            min-width: 250px;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            scroll-snap-align: start;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .recovery-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .recovery-day {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .recovery-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .recovery-activities {
+            color: #6b7280;
+            line-height: 1.8;
+        }
+        
+        /* Success Stories */
+        .testimonials {
+            background: var(--light);
+        }
+        
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .story-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .story-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        
+        .story-info {
+            flex: 1;
+        }
+        
+        .story-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .story-details {
+            color: #6b7280;
+        }
+        
+        .story-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .story-text {
+            line-height: 1.7;
+            color: #4b5563;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            background: white;
+        }
+        
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--light);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .faq-question {
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 25px 25px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .countdown {
+            display: inline-block;
+            background: var(--danger);
+            padding: 10px 30px;
+            border-radius: 30px;
+            margin: 20px 0;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .section { padding: 60px 20px; }
+            .comparison-header, .comparison-row {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .story-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* Floating CTA */
+        .floating-cta {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--emergency);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.5);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    
+</style>
+
+<!-- NOW THE HTML CONTENT STARTS -->
+
+<!-- Emergency Banner -->
+    <div class="emergency-banner">
+        ⚠️ KERATOCONUS IS PROGRESSIVE - Every day without treatment = more vision loss
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>🚨</span>
+                <span>TIME-SENSITIVE CONDITION</span>
+            </div>
+            
+            <h1>Your Vision Is Getting Worse.<br>CXL Stops It Today.</h1>
+            
+            <p class="hero-subtitle">
+                FDA-approved corneal cross-linking freezes keratoconus in its tracks. 
+                Save your career, your license, your future - while you still can.
+            </p>
+            
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-number">96%</div>
+                    <div class="stat-label">Progression Stopped</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">30min</div>
+                    <div class="stat-label">Treatment Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3-5</div>
+                    <div class="stat-label">Days Recovery</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Insurance Coverage</div>
+                </div>
+            </div>
+            
+            <div class="hero-cta">
+                <a href="tel:3104821240" class="btn btn-primary">
+                    <span>📞</span>
+                    <span>Emergency Consultation</span>
+                </a>
+                <a href="#insurance" class="btn btn-secondary">
+                    <span>💰</span>
+                    <span>Check Insurance Coverage</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- What is Keratoconus -->
+    <section class="section kc-info">
+        <div class="container">
+            <h2 class="section-title">Your Cornea Is Literally Changing Shape 👁️</h2>
+            <p class="section-subtitle">
+                Keratoconus makes your cornea thin and bulge into a cone. 
+                Glasses stop working. Contacts become painful. Without CXL, you could need a corneal transplant.
+            </p>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">😰</div>
+                    <h3 class="info-title">The Scary Reality</h3>
+                    <p>Your cornea is 30% weaker than normal and getting worse. Most people don't realize until it's advanced. If you're here, you caught it in time.</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon">📉</div>
+                    <h3 class="info-title">What You're Experiencing</h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>👓 Prescription changes every few months</li>
+                        <li>🌟 Halos and starbursts at night</li>
+                        <li>😣 Headaches from eye strain</li>
+                        <li>📱 Blurry screens even with glasses</li>
+                        <li>🚗 Scary night driving</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon">⏰</div>
+                    <h3 class="info-title">Why NOW Matters</h3>
+                    <p>Keratoconus progresses fastest in your 20s. CXL works best on younger corneas. Wait too long = worse vision forever + possible transplant.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Progression Timeline -->
+    <section class="section timeline-section">
+        <div class="container">
+            <h2 class="section-title">Where Are You On This Timeline? ⏱️</h2>
+            <p class="section-subtitle">Most people get diagnosed at Stage 2. CXL works at any stage but earlier = better.</p>
+            
+            <div class="progression-timeline">
+                <div class="timeline-track"></div>
+                
+                <div class="timeline-stages">
+                    <div class="stage-card">
+                        <div class="stage-icon">😊</div>
+                        <h3 class="stage-title">Stage 1: Early</h3>
+                        <p>Slight vision changes, glasses still work, perfect time for CXL</p>
+                        <p style="color: var(--success); font-weight: 600; margin-top: 10px;">BEST OUTCOME</p>
+                    </div>
+                    
+                    <div class="stage-card current">
+                        <div class="stage-icon">😟</div>
+                        <h3 class="stage-title">Stage 2: Moderate</h3>
+                        <p>Glasses barely help, considering contacts, CXL still very effective</p>
+                        <p style="color: var(--secondary); font-weight: 600; margin-top: 10px;">YOU'RE PROBABLY HERE</p>
+                    </div>
+                    
+                    <div class="stage-card">
+                        <div class="stage-icon">😰</div>
+                        <h3 class="stage-title">Stage 3-4: Advanced</h3>
+                        <p>Special contacts required, scarring visible, transplant risk</p>
+                        <p style="color: var(--danger); font-weight: 600; margin-top: 10px;">DON'T WAIT</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CXL Process -->
+    <section class="section" style="background: white;">
+        <div class="container">
+            <h2 class="section-title">CXL: The 30-Minute Save 💪</h2>
+            <p class="section-subtitle">One treatment. Lifetime protection. Here's exactly what happens:</p>
+            
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Prep (10 min)</h3>
+                    <p>Numbing drops, you feel nothing. Epithelium removed or loosened.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Vitamin Drops (10 min)</h3>
+                    <p>Riboflavin (B2) soaks into cornea. Turns your eye yellow temporarily.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">UV Light (10 min)</h3>
+                    <p>Controlled UV activates riboflavin. Creates new collagen bonds. Cornea becomes 300% stronger.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Bandage Lens</h3>
+                    <p>Protective contact placed. Go home. Sleep. Heal. Vision saved.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <div style="display: inline-block; background: #dcfce7; padding: 25px 40px; border-radius: 15px; border-left: 5px solid var(--success);">
+                    <p style="font-size: 1.2rem; font-weight: 600; color: #166534;">
+                        🎯 Success Rate: 96% of patients STOP progressing completely
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Insurance Section -->
+    <section class="section insurance-section" id="insurance">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Insurance Covers CXL! 🎉</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.95);">
+                Keratoconus is a medical condition. CXL is FDA-approved treatment. Most plans cover 80-100%.
+            </p>
+            
+            <div class="insurance-card">
+                <h3 style="font-size: 1.8rem; text-align: center; margin-bottom: 30px;">Coverage Breakdown</h3>
+                
+                <div class="insurance-grid">
+                    <div class="insurance-item">
+                        <span class="check">✅</span>
+                        <span>Blue Cross Blue Shield</span>
+                    </div>
+                    <div class="insurance-item">
+                        <span class="check">✅</span>
+                        <span>Aetna</span>
+                    </div>
+                    <div class="insurance-item">
+                        <span class="check">✅</span>
+                        <span>Cigna</span>
+                    </div>
+                    <div class="insurance-item">
+                        <span class="check">✅</span>
+                        <span>United Healthcare</span>
+                    </div>
+                    <div class="insurance-item">
+                        <span class="check">✅</span>
+                        <span>Kaiser (with referral)</span>
+                    </div>
+                    <div class="insurance-item">
+                        <span class="check">✅</span>
+                        <span>Medicare</span>
+                    </div>
+                </div>
+                
+                <div style="background: var(--light); padding: 25px; border-radius: 10px; margin-top: 30px;">
+                    <h4 style="margin-bottom: 15px;">Typical Out-of-Pocket:</h4>
+                    <ul style="line-height: 2;">
+                        <li>✨ <strong>With Insurance:</strong> $500-1,500 (deductible/copay)</li>
+                        <li>✨ <strong>Without Insurance:</strong> $3,000-4,000 per eye</li>
+                        <li>✨ <strong>Payment Plans:</strong> 0% financing available</li>
+                        <li>✨ <strong>HSA/FSA:</strong> Always eligible</li>
+                    </ul>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <p style="font-size: 1.1rem; margin-bottom: 20px;">
+                        <strong>We handle ALL insurance paperwork. Get pre-authorized in 24-48 hours.</strong>
+                    </p>
+                    <a href="tel:3104821240" class="btn btn-primary" style="font-size: 1.2rem;">
+                        Verify My Coverage Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Comparison Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">CXL vs Other Options 🆚</h2>
+            <p class="section-subtitle">Spoiler: There's really only one good choice</p>
+            
+            <div class="comparison-table">
+                <div class="comparison-header">
+                    <div>Treatment Option</div>
+                    <div>CXL ✅</div>
+                    <div>Do Nothing ❌</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div>Stops Progression</div>
+                    <div><span class="check">✅</span> 96% success</div>
+                    <div><span style="color: var(--danger);">❌</span> Gets worse</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div>Vision Outcome</div>
+                    <div><span class="check">✅</span> Stabilizes/improves</div>
+                    <div><span style="color: var(--danger);">❌</span> Deteriorates</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div>Long-term Cost</div>
+                    <div><span class="check">✅</span> One-time treatment</div>
+                    <div><span style="color: var(--danger);">❌</span> Transplant $25,000+</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div>Career Impact</div>
+                    <div><span class="check">✅</span> Keep working</div>
+                    <div><span style="color: var(--danger);">❌</span> May lose license</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div>Quality of Life</div>
+                    <div><span class="check">✅</span> Normal activities</div>
+                    <div><span style="color: var(--danger);">❌</span> Limited lifestyle</div>
+                </div>
+                
+                <div class="comparison-row">
+                    <div>Future Options</div>
+                    <div><span class="check">✅</span> All doors open</div>
+                    <div><span style="color: var(--danger);">❌</span> Limited choices</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Recovery Timeline -->
+    <section class="section" style="background: var(--light);">
+        <div class="container">
+            <h2 class="section-title">Recovery: Easier Than You Think 😌</h2>
+            <p class="section-subtitle">Back to life in less than a week</p>
+            
+            <div class="recovery-cards">
+                <div class="recovery-card">
+                    <div class="recovery-day">Day 0</div>
+                    <div class="recovery-title">Treatment Day</div>
+                    <div class="recovery-activities">
+                        • 30-minute procedure<br>
+                        • Bandage contact placed<br>
+                        • Mild discomfort (3/10)<br>
+                        • Go home and rest<br>
+                        • Start drops
+                    </div>
+                </div>
+                
+                <div class="recovery-card">
+                    <div class="recovery-day">Day 1-2</div>
+                    <div class="recovery-title">Healing Phase</div>
+                    <div class="recovery-activities">
+                        • Light sensitivity<br>
+                        • Tearing normal<br>
+                        • Rest at home<br>
+                        • Pain meds if needed<br>
+                        • Vision: Blurry
+                    </div>
+                </div>
+                
+                <div class="recovery-card">
+                    <div class="recovery-day">Day 3-4</div>
+                    <div class="recovery-title">Turning Point</div>
+                    <div class="recovery-activities">
+                        • Comfort improves<br>
+                        • Light work okay<br>
+                        • Can use screens<br>
+                        • Vision clearing<br>
+                        • Follow-up visit
+                    </div>
+                </div>
+                
+                <div class="recovery-card" style="border-color: var(--success);">
+                    <div class="recovery-day">Day 5-7</div>
+                    <div class="recovery-title">Back to Normal</div>
+                    <div class="recovery-activities">
+                        • Contact lens removed<br>
+                        • Return to work/school<br>
+                        • Drive when cleared<br>
+                        • Vision stabilizing<br>
+                        • Celebrate! 🎉
+                    </div>
+                </div>
+                
+                <div class="recovery-card">
+                    <div class="recovery-day">Month 1</div>
+                    <div class="recovery-title">Strengthening</div>
+                    <div class="recovery-activities">
+                        • Vision improving<br>
+                        • Cornea strengthening<br>
+                        • All activities okay<br>
+                        • May update glasses<br>
+                        • Progress check
+                    </div>
+                </div>
+                
+                <div class="recovery-card">
+                    <div class="recovery-day">Month 3-6</div>
+                    <div class="recovery-title">Final Results</div>
+                    <div class="recovery-activities">
+                        • Maximum strength<br>
+                        • Vision stable<br>
+                        • Progression STOPPED<br>
+                        • Future secured<br>
+                        • Annual monitoring
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Success Stories -->
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section-title">Real Patients. Real Relief. 🙌</h2>
+            <p class="section-subtitle">Young professionals who saved their vision with CXL</p>
+            
+            <div class="story-grid">
+                <div class="story-card">
+                    <span class="story-badge">PILOT</span>
+                    <div class="story-header">
+                        <div class="avatar">MT</div>
+                        <div class="story-info">
+                            <div class="story-name">Marcus Thompson</div>
+                            <div class="story-details">Age 24 • Commercial Pilot</div>
+                        </div>
+                    </div>
+                    <p class="story-text">
+                        "My medical was at risk. Keratoconus meant losing my career before it started. Dr. Khanna fast-tracked my CXL, insurance covered everything. 6 months later: 20/20 vision, passed my medical, flying 737s. Don't wait like I almost did."
+                    </p>
+                </div>
+                
+                <div class="story-card">
+                    <span class="story-badge">DESIGNER</span>
+                    <div class="story-header">
+                        <div class="avatar">AL</div>
+                        <div class="story-info">
+                            <div class="story-name">Ashley Liu</div>
+                            <div class="story-details">Age 26 • UX Designer</div>
+                        </div>
+                    </div>
+                    <p class="story-text">
+                        "Screens were becoming impossible even with new glasses every 3 months. CXL stopped the progression completely. Recovery was honestly easy - worked from home for a week. My vision actually IMPROVED. Best decision ever."
+                    </p>
+                </div>
+                
+                <div class="story-card">
+                    <span class="story-badge">STUDENT</span>
+                    <div class="story-header">
+                        <div class="avatar">JR</div>
+                        <div class="story-info">
+                            <div class="story-name">Jordan Rodriguez</div>
+                            <div class="story-details">Age 22 • Pre-Med UCLA</div>
+                        </div>
+                    </div>
+                    <p class="story-text">
+                        "Diagnosed at 20, terrified about medical school. Dr. Khanna explained everything, handled my student insurance, did both eyes. Back in class in 5 days. MCAT score went up after CXL - no more headaches from eye strain!"
+                    </p>
+                </div>
+                
+                <div class="story-card">
+                    <span class="story-badge">ENGINEER</span>
+                    <div class="story-header">
+                        <div class="avatar">DK</div>
+                        <div class="story-info">
+                            <div class="story-name">David Kim</div>
+                            <div class="story-details">Age 28 • Software Engineer</div>
+                        </div>
+                    </div>
+                    <p class="story-text">
+                        "Family history of KC, watched my brother get a transplant. Got CXL the week after diagnosis. Mild discomfort for 2 days vs potential transplant? No brainer. Coded from bed during recovery lol. Vision stable 2 years now."
+                    </p>
+                </div>
+                
+                <div class="story-card">
+                    <span class="story-badge">NURSE</span>
+                    <div class="story-header">
+                        <div class="avatar">SC</div>
+                        <div class="story-info">
+                            <div class="story-name">Sarah Chen</div>
+                            <div class="story-details">Age 25 • ICU Nurse</div>
+                        </div>
+                    </div>
+                    <p class="story-text">
+                        "12-hour shifts were killing my eyes. Scleral lenses helped but KC kept progressing. CXL was covered by hospital insurance. Used PTO for recovery week. Now I can actually see medication labels clearly. Game changer."
+                    </p>
+                </div>
+                
+                <div class="story-card">
+                    <span class="story-badge">ATHLETE</span>
+                    <div class="story-header">
+                        <div class="avatar">TB</div>
+                        <div class="story-info">
+                            <div class="story-name">Tyler Brooks</div>
+                            <div class="story-details">Age 23 • D1 Basketball</div>
+                        </div>
+                    </div>
+                    <p class="story-text">
+                        "Depth perception was getting worse, affecting my game. Coach connected me with Dr. Khanna. Had CXL during summer break, back on court in 2 weeks. Junior year was my best season. Protect your vision while you can!"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="section faq">
+        <div class="container">
+            <h2 class="section-title">Your Burning Questions 🔥</h2>
+            <p class="section-subtitle">Everything you're stressed about - answered</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Does CXL hurt? Be real with me.
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Real talk: Days 1-2 feel like having sand in your eye (annoying but manageable with pain meds). Day 3 gets way better. Day 5 you're basically normal. Nothing compared to living with worsening vision forever. We give you numbing drops, pain meds, and Dr. Khanna's cell if you need reassurance.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Will insurance really cover this?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>YES! Keratoconus is a medical disease, not cosmetic. CXL is FDA-approved treatment. Most insurance covers 80-100% after deductible. We handle ALL paperwork, get pre-authorization, and can tell you exact costs before treatment. Payment plans available for any out-of-pocket.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I wait a few months to decide?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Honestly? Bad idea. Keratoconus progresses fastest in your 20s. Every month = more corneal damage that CAN'T be reversed. CXL stops progression but doesn't undo existing damage. Earlier treatment = better vision saved. We can get you in this week.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Will my vision be perfect after CXL?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>CXL's job is to STOP progression - mission accomplished in 96% of cases. Bonus: 30% of patients actually see improvement! You'll still need glasses/contacts but your prescription stops changing. Some patients later get ICL or other procedures once stable.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What's the difference between epi-on and epi-off?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Epi-off (epithelium removed) is gold standard - deeper penetration, stronger cross-linking, FDA-approved. Recovery is 5-7 days. Epi-on (epithelium stays) has easier recovery but less effective. Dr. Khanna recommends epi-off for maximum protection. Short recovery worth lifetime of stable vision.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I do both eyes at once?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Dr. Khanna typically does one eye at a time (2-4 weeks apart) so you can function during recovery. Some patients with mild KC do both together if they have good support at home. We'll discuss what's best for your lifestyle and KC severity.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I know if it worked?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Corneal mapping at 3, 6, and 12 months shows if progression stopped (it will). Your prescription stabilizing is the biggest sign. No more frequent glasses changes! Most patients say the peace of mind alone is worth it - knowing your vision is protected.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Why Dr. Khanna for CXL?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>50,000+ procedures, pioneered CXL in LA, treats more keratoconus than anyone in Beverly Hills. He gets the urgency - same week appointments, handles insurance fast, gives you his cell. Plus he's done CXL on pilots, surgeons, athletes who can't afford mistakes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="section cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2 style="font-size: 2.5rem; margin-bottom: 20px;">
+                    Your Vision Is Worth Saving 👁️
+                </h2>
+                
+                <div class="countdown">
+                    ⏰ Emergency appointments available THIS WEEK
+                </div>
+                
+                <p style="font-size: 1.2rem; margin: 30px 0;">
+                    Every day you wait = irreversible corneal changes.<br>
+                    CXL can stop it. Insurance covers it. We handle everything.
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin: 40px 0;">
+                    <div>
+                        <h3>📍 Beverly Hills</h3>
+                        <p>9735 Wilshire Blvd #330</p>
+                        <a href="tel:3104821240" class="btn btn-primary" style="margin-top: 15px;">
+                            (310) 482-1240
+                        </a>
+                    </div>
+                    <div>
+                        <h3>📍 Westlake Village</h3>
+                        <p>2625 Townsgate Rd #107</p>
+                        <a href="tel:8052302126" class="btn btn-primary" style="margin-top: 15px;">
+                            (805) 230-2126
+                        </a>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.3);">
+                    <p style="font-size: 1.1rem;">
+                        ✅ Free keratoconus evaluation<br>
+                        ✅ Insurance verification in 24-48 hours<br>
+                        ✅ Same-week treatment available<br>
+                        ✅ Payment plans if needed
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Floating CTA -->
+    <a href="tel:3104821240" class="floating-cta">
+        <span>🚨</span>
+        <span>Get Emergency Consult</span>
+    </a>
+    
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                const wasActive = parent.classList.contains('active');
+                
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+                
+                if (!wasActive) {
+                    parent.classList.add('active');
+                }
+            });
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>

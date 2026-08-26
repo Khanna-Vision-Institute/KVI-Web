@@ -1,0 +1,118 @@
+{
+  "enrollments": [
+    {
+      "id": "58f5cae0ce2c8ee1",
+      "status": "cancelled",
+      "enrolledAt": "2026-06-23T15:27:01.103Z",
+      "email": "kapil@khannavision.com",
+      "lead": {
+        "fullName": "Kapil",
+        "email": "kapil@khannavision.com",
+        "phone": "+18059061634",
+        "location": "Westlake Village",
+        "smileVariant": "a"
+      },
+      "variant": "a",
+      "jobs": [
+        {
+          "id": "e8f78f7272aa0a83",
+          "type": "sms_day0",
+          "dueAt": "2026-06-23T20:00:00.000Z",
+          "status": "skipped",
+          "attempts": 0,
+          "detail": "test_reschedule",
+          "completedAt": "2026-06-23T15:27:47.099Z"
+        },
+        {
+          "id": "bf86cd773b7b4210",
+          "type": "sms_day1",
+          "dueAt": "2026-06-24T20:00:00.000Z",
+          "status": "skipped",
+          "attempts": 0,
+          "detail": "test_reschedule",
+          "completedAt": "2026-06-23T15:27:47.099Z"
+        },
+        {
+          "id": "4eb5dd8f44cab16b",
+          "type": "sms_day3",
+          "dueAt": "2026-06-26T20:00:00.000Z",
+          "status": "skipped",
+          "attempts": 0,
+          "detail": "test_reschedule",
+          "completedAt": "2026-06-23T15:27:47.099Z"
+        },
+        {
+          "id": "7f60e6ab072c406d",
+          "type": "email_day5",
+          "dueAt": "2026-06-28T20:00:00.000Z",
+          "status": "skipped",
+          "attempts": 0,
+          "detail": "test_reschedule",
+          "completedAt": "2026-06-23T15:27:47.099Z"
+        },
+        {
+          "id": "99ad62b66121c99d",
+          "type": "call_day7",
+          "dueAt": "2026-06-30T20:00:00.000Z",
+          "status": "skipped",
+          "attempts": 0,
+          "detail": "test_reschedule",
+          "completedAt": "2026-06-23T15:27:47.099Z"
+        }
+      ],
+      "cancelledAt": "2026-06-23T15:27:47.099Z",
+      "cancelReason": "test_reschedule"
+    },
+    {
+      "id": "6b30f3b0e06e0168",
+      "status": "active",
+      "enrolledAt": "2026-06-23T15:27:47.102Z",
+      "email": "kapil@khannavision.com",
+      "lead": {
+        "fullName": "Kapil",
+        "email": "kapil@khannavision.com",
+        "phone": "+18059061634",
+        "location": "Westlake Village",
+        "smileVariant": "a"
+      },
+      "variant": "a",
+      "jobs": [
+        {
+          "id": "38adb0399d2db200",
+          "type": "sms_day0",
+          "dueAt": "2026-06-23T18:00:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "0b6720ef2f764df7",
+          "type": "sms_day1",
+          "dueAt": "2026-06-23T18:05:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "3fef512b252d0e9e",
+          "type": "sms_day3",
+          "dueAt": "2026-06-23T18:10:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "1fe049164e12d2dc",
+          "type": "email_day5",
+          "dueAt": "2026-06-23T18:15:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        },
+        {
+          "id": "b43acb48cbb70021",
+          "type": "call_day7",
+          "dueAt": "2026-06-23T18:20:00.000Z",
+          "status": "pending",
+          "attempts": 0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,537 @@
+<!-- COMPLETE WHAT TO EXPECT PTERYGIUM PAGE FOR STRAPI - WITH FULL CSS -->
+<!-- Copy EVERYTHING and paste into Strapi's "Content" field -->
+
+<style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            padding-top: 140px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 40px rgba(0,0,0,0.3);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        .intro-card {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 3px solid #2196f3;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .intro-card h2 {
+            color: #1565c0;
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            border: none;
+        }
+
+        .intro-card p {
+            font-size: 1.2em;
+            color: #0d47a1;
+        }
+
+        .card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .card h3 {
+            color: #2c5364;
+            font-size: 1.9em;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .card h3::before {
+            content: '✓ ';
+            color: #4caf50;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        ul {
+            margin: 15px 0 15px 25px;
+        }
+
+        ul li {
+            margin: 12px 0;
+            line-height: 1.8;
+            padding-left: 10px;
+        }
+
+        ul li::marker {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .tear-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f5f7fa;
+            border-radius: 8px;
+            list-style: none;
+        }
+
+        .tear-list li {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            font-weight: 600;
+            color: #2c5364;
+        }
+
+        .drops-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .drop-card {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            border: 3px solid #fbc02d;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(251,192,45,0.2);
+        }
+
+        .drop-card:hover {
+            transform: scale(1.03);
+        }
+
+        .drop-icon {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+        }
+
+        .drop-card h4 {
+            color: #f57f17;
+            margin: 15px 0;
+            font-size: 1.5em;
+        }
+
+        .drop-card p {
+            color: #e65100;
+            font-weight: 600;
+            line-height: 1.7;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+            border: 3px solid #4caf50;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .highlight-box h3 {
+            color: #1b5e20;
+            margin-bottom: 20px;
+            border: none;
+        }
+
+        .highlight-box h3::before {
+            content: '🎒 ';
+            margin-right: 10px;
+        }
+
+        .highlight-box ul li {
+            font-size: 1.1em;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .important-note {
+            background: #fff3e0;
+            border-left: 6px solid #ff9800;
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-radius: 5px;
+        }
+
+        .important-note strong {
+            color: #e65100;
+            font-size: 1.1em;
+        }
+
+        .checklist-section {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border: 3px solid #9c27b0;
+            border-radius: 12px;
+            padding: 35px;
+            margin: 30px 0;
+        }
+
+        .checklist-section h3 {
+            color: #6a1b9a;
+            margin-bottom: 25px;
+            border: none;
+            text-align: center;
+            font-size: 2em;
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .checklist-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .checklist-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .checklist-item .icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .checklist-item h4 {
+            color: #6a1b9a;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .checklist-item p {
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #2c5364 0%, #203a43 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .contact-section h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .phone-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .phone-card {
+            background: white;
+            color: #333;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .phone-card h4 {
+            color: #2c5364;
+            margin-bottom: 15px;
+        }
+
+        .phone-button {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .phone-button:hover {
+            background: #45a049;
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: #0f2027;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .timeline-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .card {
+                padding: 25px;
+            }
+
+            .tear-list {
+                grid-template-columns: 1fr;
+            }
+
+            .checklist-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    
+</style>
+
+<!-- NOW THE HTML CONTENT STARTS -->
+
+<!-- Navigation Header -->
+    
+
+    <div class="container">
+        <header>
+            <h1>Cosmetic Pterygium Removal</h1>
+            <p class="subtitle">Pre-operative checklist to get you ready for surgery</p>
+        </header>
+
+        <div class="content">
+            <section class="intro-card">
+                <h2>Pre-Op Instructions</h2>
+                <p>These steps help ensure a smooth, safe cosmetic pterygium procedure and the best possible outcome.</p>
+            </section>
+
+            <section class="card">
+                <h3>Contact Lenses</h3>
+                <ul>
+                    <li><strong>Soft contact lenses:</strong> Stop wearing them <strong>3-7 days</strong> before surgery.</li>
+                    <li><strong>Gas permeable / hard lenses:</strong> Stop wearing them <strong>3-4 weeks</strong> before surgery (your doctor will confirm your exact timing).</li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h3>No Scents or Fragrances</h3>
+                <div class="important-note">
+                    <strong>⚠️ Important:</strong> On the day of surgery, do <strong>not</strong> use perfume, cologne, aftershave, scented lotions, or hairspray. Fragrances can interfere with the laser and affect results.
+                </div>
+            </section>
+
+            <section class="card">
+                <h3>Makeup & Skin Care</h3>
+                <ul>
+                    <li>Remove all eye and facial makeup at least <strong>24 hours</strong> before surgery.</li>
+                    <li>Best practice: avoid eye makeup for <strong>3 days</strong> before surgery.</li>
+                    <li>Make sure there is <strong>no mascara or eyeliner residue</strong> along the lashes or lids.</li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h3>Food, Medications, and Habits</h3>
+                <ul>
+                    <li>Have a <strong>light meal</strong> on the day of your procedure.</li>
+                    <li>Take your regular medications as instructed by your doctor.</li>
+                    <li><strong>No smoking</strong> on the day of surgery.</li>
+                    <li><strong>No alcohol</strong> on the day of surgery.</li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h3>Transportation</h3>
+                <ul>
+                    <li>Arrange for a responsible adult to drive you <strong>to and from the surgery center</strong>.</li>
+                    <li>You may also need a driver for your <strong>1-day post-op visit</strong>.</li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h3>Artificial Tears (Preservative-Free)</h3>
+                <p style="font-size: 1.1em; margin-bottom: 20px;">Please purchase a <strong>1-month supply</strong> of preservative-free artificial tears before surgery, such as:</p>
+                
+                <ul class="tear-list">
+                    <li>Refresh Plus</li>
+                    <li>Systane</li>
+                    <li>Blink</li>
+                    <li>Optive</li>
+                </ul>
+
+                <div class="drops-grid">
+                    <div class="drop-card">
+                        <div class="drop-icon">💧</div>
+                        <h4>Preservative-Free Tears</h4>
+                        <p>Use as needed for comfort after surgery, especially during the first few weeks.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h3>Antibiotic Ointment (Maxitrol or Equivalent)</h3>
+                <p style="font-size: 1.1em; margin-bottom: 20px;">Unless your doctor changes the plan, follow these general guidelines:</p>
+                <ul>
+                    <li>Apply to the <strong>operated eye(s)</strong> <strong>3 times per day</strong>.</li>
+                    <li><strong>Start 1 day before surgery.</strong></li>
+                    <li>Continue for <strong>5 days after surgery</strong> (or as directed).</li>
+                </ul>
+
+                <div class="drops-grid">
+                    <div class="drop-card">
+                        <div class="drop-icon">🧴</div>
+                        <h4>Antibiotic Ointment</h4>
+                        <p>3×/day — start 1 day before surgery, continue for 5 days after.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="highlight-box">
+                <h3>What to Bring on Surgery Day</h3>
+                <ul>
+                    <li>All prescribed <strong>eye drops and ointments</strong>.</li>
+                    <li>A pair of <strong>dark sunglasses</strong> for the ride home.</li>
+                    <li>Your arranged <strong>driver</strong>.</li>
+                </ul>
+            </section>
+
+            <section class="checklist-section">
+                <h3>📋 Your Pre-Surgery Checklist</h3>
+                <div class="checklist-grid">
+                    <div class="checklist-item">
+                        <div class="icon">👓</div>
+                        <h4>Stop Contacts</h4>
+                        <p>3-7 days before (soft)<br>3-4 weeks before (hard)</p>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="icon">🚫</div>
+                        <h4>No Fragrances</h4>
+                        <p>No perfume, cologne, or scented products on surgery day</p>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="icon">💄</div>
+                        <h4>No Makeup</h4>
+                        <p>Remove 24 hours before<br>(Best: 3 days before)</p>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="icon">🍽️</div>
+                        <h4>Light Meal</h4>
+                        <p>Eat light, no smoking or alcohol on surgery day</p>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="icon">🚗</div>
+                        <h4>Arrange Driver</h4>
+                        <p>Need ride to/from surgery and 1-day follow-up</p>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="icon">💧</div>
+                        <h4>Buy Drops</h4>
+                        <p>1-month supply of preservative-free tears</p>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="icon">🧴</div>
+                        <h4>Start Ointment</h4>
+                        <p>Begin antibiotic ointment 1 day before surgery</p>
+                    </div>
+                    <div class="checklist-item">
+                        <div class="icon">🕶️</div>
+                        <h4>Pack Sunglasses</h4>
+                        <p>Bring dark sunglasses for the ride home</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="contact-section">
+                <h3>Questions About Your Upcoming Surgery?</h3>
+                <p style="font-size: 1.2em;">Our team is here to help you prepare</p>
+
+                <div class="phone-grid">
+                    <div class="phone-card">
+                        <h4>Beverly Hills Location</h4>
+                        <p>9100 Wilshire Blvd #265E<br>
+                        Beverly Hills, CA 90212</p>
+                        <a href="tel:310-482-1240" class="phone-button">📞 (310) 482-1240</a>
+                    </div>
+
+                    <div class="phone-card">
+                        <h4>Westlake Village Location</h4>
+                        <p>31824 Village Center Rd F<br>
+                        Westlake Village, CA 91361</p>
+                        <a href="tel:805-230-2126" class="phone-button">📞 (805) 230-2126</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->

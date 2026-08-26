@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Latest FDA-Approved Vision Correction: SMILE | Khanna Vision Institute</title>
+    <meta name="description" content="Discover the future of vision correction with SMILE, the latest FDA-approved procedure at Khanna Vision Institute Beverly Hills. Minimally invasive, fast recovery, board-certified surgeon.">
+    <meta property="og:title" content="The Latest FDA-Approved Vision Correction: SMILE | Khanna Vision Institute">
+    <meta property="og:description" content="Say goodbye to glasses and contacts. SMILE at Khanna Vision Institute — Beverly Hills' premier destination for safe, advanced vision correction.">
+    <meta property="og:image" content="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/khannainstitute/Logo+2.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --accent: #85d0dd;
+            --accent-dark: #3a9fb0;
+            --accent-light: #d6f0f5;
+            --accent-text: #0d4d57;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            color: #0d2233;
+            background: #fff;
+            line-height: 1.65;
+        }
+
+        /* ── HERO ── */
+        .smile-hero {
+            background: #85d0dd;
+            display: flex;
+            align-items: stretch;
+            min-height: 240px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 142px;
+        }
+
+        @media (max-width: 1024px) {
+            .smile-hero { margin-top: 80px; }
+        }
+
+        .hero-gif-wrap {
+            flex: 0 0 auto;
+            width: 45%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .hero-gif-wrap img {
+            width: 320px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .hero-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 36px 48px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: clamp(24px, 3.2vw, 42px);
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: -0.3px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.38);
+            display: inline-block;
+            padding: 20px 28px;
+            border-radius: 12px;
+        }
+
+        /* ── FDA BADGE STRIP ── */
+        .fda-strip {
+            background: var(--accent-dark);
+            color: #fff;
+            text-align: center;
+            padding: 12px 24px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .fda-strip span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .fda-pill {
+            background: #fff;
+            color: var(--accent-dark);
+            font-weight: 800;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 50px;
+        }
+
+        /* ── INTRO ── */
+        .smile-intro {
+            background: var(--accent-light);
+            border-bottom: 1px solid #b2e4ec;
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        .smile-intro h2 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: clamp(20px, 3vw, 28px);
+            font-weight: 400;
+            color: var(--accent-text);
+            margin-bottom: 12px;
+        }
+
+        .smile-intro p {
+            font-size: 15px;
+            color: #2d6472;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.75;
+        }
+
+        /* ── MAIN LAYOUT ── */
+        .smile-main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 64px 24px 88px;
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 52px;
+            align-items: start;
+        }
+
+        /* ── LEFT CONTENT ── */
+        .smile-content h3 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 26px;
+            font-weight: 400;
+            color: var(--accent-text);
+            margin: 40px 0 14px;
+            line-height: 1.2;
+        }
+
+        .smile-content h3:first-child { margin-top: 0; }
+
+        .smile-content p {
+            font-size: 15.5px;
+            color: #334155;
+            margin-bottom: 14px;
+            line-height: 1.78;
+        }
+
+        /* Testimonial — horizontal card */
+        .testimonial {
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 36px 0;
+            display: flex;
+            flex-direction: row;
+            box-shadow: 0 8px 36px rgba(58,159,176,0.18);
+            min-height: 260px;
+            border: 1.5px solid #b2e4ec;
+        }
+
+        .testimonial-body {
+            flex: 1;
+            background: linear-gradient(145deg, var(--accent-text), var(--accent-dark));
+            padding: 36px 32px;
+            color: #fff;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .testimonial-body::before {
+            content: '\201C';
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 110px;
+            color: rgba(255,255,255,0.1);
+            position: absolute;
+            top: -12px;
+            left: 16px;
+            line-height: 1;
+        }
+
+        .testimonial-body blockquote {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 19px;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-body cite {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            opacity: 0.78;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .testimonial-body cite::before {
+            content: '';
+            display: inline-block;
+            width: 28px;
+            height: 2px;
+            background: rgba(255,255,255,0.5);
+        }
+
+        /* Benefits */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .benefit-card {
+            background: var(--accent-light);
+            border: 1.5px solid #b2e4ec;
+            border-radius: 16px;
+            padding: 28px 20px;
+            text-align: center;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 36px rgba(58,159,176,0.18);
+        }
+
+        .benefit-icon {
+            font-size: 38px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .benefit-card h4 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 15px;
+            color: var(--accent-text);
+            font-weight: 400;
+            line-height: 1.35;
+        }
+
+        /* Closing trust line */
+        .trust-line {
+            background: var(--accent-light);
+            border: 1.5px solid #b2e4ec;
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin: 32px 0;
+            text-align: center;
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 20px;
+            font-style: italic;
+            color: var(--accent-text);
+        }
+
+        /* Stats */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: #b2e4ec;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 40px 0 0;
+        }
+
+        .stat-box {
+            background: var(--accent-light);
+            padding: 24px 16px;
+            text-align: center;
+        }
+
+        .stat-box .number {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 32px;
+            color: var(--accent-dark);
+            display: block;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .stat-box .label {
+            font-size: 12px;
+            color: #2d6472;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+        }
+
+        /* CTA strip */
+        .cta-strip {
+            background: linear-gradient(135deg, var(--accent-text), var(--accent-dark));
+            border-radius: 20px;
+            padding: 36px 40px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .cta-strip h3 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+
+        .cta-strip p {
+            font-size: 14px;
+            opacity: 0.85;
+            color: #fff;
+            margin: 0;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: #fff;
+            color: var(--accent-text);
+            font-weight: 700;
+            font-size: 14px;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: all 0.22s ease;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .cta-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        /* ── SIDEBAR ── */
+        .smile-sidebar {
+            position: sticky;
+            top: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Dr. Khanna card */
+        .doctor-card {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(58,159,176,0.15);
+            border: 1.5px solid #b2e4ec;
+        }
+
+        .doctor-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+        }
+
+        .doctor-caption {
+            background: linear-gradient(135deg, var(--accent-text), var(--accent-dark));
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .doctor-caption strong {
+            display: block;
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 19px;
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+
+        .doctor-caption span {
+            font-size: 12px;
+            opacity: 0.75;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        /* Beverly Hills badge */
+        .bh-badge {
+            background: var(--accent-light);
+            border: 1.5px solid #b2e4ec;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .bh-badge .bh-icon { font-size: 32px; margin-bottom: 8px; display: block; }
+
+        .bh-badge h4 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 17px;
+            color: var(--accent-text);
+            font-weight: 400;
+            margin-bottom: 6px;
+        }
+
+        .bh-badge p {
+            font-size: 13px;
+            color: #2d6472;
+            margin: 0;
+        }
+
+        .book-sidebar-btn {
+            display: block;
+            background: linear-gradient(135deg, var(--accent-text), var(--accent-dark));
+            color: #fff;
+            text-align: center;
+            font-weight: 700;
+            font-size: 15px;
+            padding: 16px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.22s ease;
+            box-shadow: 0 4px 18px rgba(58,159,176,0.35);
+            letter-spacing: 0.02em;
+        }
+
+        .book-sidebar-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(58,159,176,0.45);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .smile-hero { flex-direction: column; min-height: auto; }
+
+            .hero-gif-wrap {
+                width: 100%;
+                padding: 20px 20px 0;
+                justify-content: center;
+            }
+
+            .hero-gif-wrap img { width: 240px; }
+
+            .hero-text {
+                width: 100%;
+                padding: 20px 20px 28px;
+                text-align: center;
+            }
+
+            .hero-text h1 { font-size: clamp(22px, 6vw, 30px); padding: 16px 20px; }
+
+            .smile-main {
+                grid-template-columns: 1fr;
+                padding: 40px 16px 60px;
+                gap: 40px;
+            }
+
+            .smile-sidebar { position: static; }
+            .benefits-grid { grid-template-columns: 1fr; }
+
+            .testimonial { flex-direction: column; }
+            .testimonial-img-wrap { flex: none; width: 100%; }
+            .testimonial-img { min-height: 240px; height: 240px; }
+
+            .cta-strip {
+                flex-direction: column;
+                text-align: center;
+                padding: 28px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<%- include('/partials/header') %>
+
+<!-- ── HERO BANNER ── -->
+<section class="smile-hero">
+    <div class="hero-gif-wrap">
+        <img src="https://i.ibb.co/cX6vCLZz/surf.gif" alt="SMILE vision correction — surf the wave of clear vision" loading="eager">
+    </div>
+    <div class="hero-text">
+        <h1>The Latest FDA-Approved Vision Correction: SMILE</h1>
+    </div>
+</section>
+
+<!-- ── FDA BADGE STRIP ── -->
+<div class="fda-strip">
+    <span><span class="fda-pill">FDA Approved</span> SMILE is the most advanced laser vision correction approved by the FDA</span>
+    <span>·</span>
+    <span>Beverly Hills & Westlake Village</span>
+</div>
+
+<!-- ── INTRO ── -->
+<div class="smile-intro">
+    <h2>Beverly Hills' Premier Destination for Safe, Advanced SMILE Procedures</h2>
+    <p>Discover the future of vision correction with SMILE, the latest FDA-approved procedure offered at Khanna Vision Institute. Say goodbye to glasses and contact lenses as this cutting-edge technology provides a minimally invasive solution for clearer, sharper vision.</p>
+</div>
+
+<!-- ── MAIN CONTENT + SIDEBAR ── -->
+<div class="smile-main">
+
+    <!-- LEFT: Content -->
+    <div class="smile-content">
+
+        <h3>The Pinnacle of Safe, Advanced Eye Care</h3>
+        <p>Discover the epitome of safe and advanced SMILE procedures at Khanna Vision Institute — the premier destination in Beverly Hills for transforming your vision. Experience cutting-edge technology and personalized care from a team of experts dedicated to helping you achieve optimal eye health and visual clarity.</p>
+        <p>Unlike traditional LASIK, SMILE requires no flap creation. A precise femtosecond laser creates a tiny 2–4mm incision through which the corneal tissue is gently removed — preserving more corneal nerves, reducing dry-eye risk, and enabling a remarkably fast recovery.</p>
+
+        <!-- Testimonial — quote only -->
+        <div class="testimonial">
+            <div class="testimonial-body" style="border-radius: 20px;">
+                <blockquote>"Absolutely thrilled with my vision after SMILE surgery by Dr. Khanna! The procedure was so quick and comfortable — I was seeing clearly by the very next morning."</blockquote>
+                <cite>Jennifer, SMILE Patient</cite>
+            </div>
+        </div>
+
+        <h3>Benefits of SMILE Surgery at Khanna Vision Institute</h3>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <span class="benefit-icon">✨</span>
+                <h4>Focus On Quality of Life Improvements</h4>
+            </div>
+            <div class="benefit-card">
+                <span class="benefit-icon">💪</span>
+                <h4>Clear Vision = Improved Confidence</h4>
+            </div>
+            <div class="benefit-card">
+                <span class="benefit-icon">🏄</span>
+                <h4>More Active Lifestyle</h4>
+            </div>
+        </div>
+
+        <h3>The Future of Vision Correction, Available Today</h3>
+        <p>Experience the future of vision correction with SMILE, the latest FDA-approved procedure offered by Dr. Khanna. Say goodbye to glasses and contacts as this cutting-edge technology reshapes your cornea with precision and minimal discomfort. If you are looking for SMILE Surgery from a Board Certified Surgeon, you can find it at Khanna Vision Institute.</p>
+
+        <!-- Trust line -->
+        <div class="trust-line">
+            "Khanna Vision Institute — The Epitome of Trusted Vision Care!"
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-row">
+            <div class="stat-box">
+                <span class="number">25K+</span>
+                <span class="label">Procedures Performed</span>
+            </div>
+            <div class="stat-box">
+                <span class="number">FDA</span>
+                <span class="label">Approved Procedure</span>
+            </div>
+            <div class="stat-box">
+                <span class="number">99%</span>
+                <span class="label">Patient Satisfaction</span>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-strip">
+            <div>
+                <h3>Ready to Experience FDA-Approved SMILE?</h3>
+                <p>Schedule your free consultation at our Beverly Hills or Westlake Village office.</p>
+            </div>
+            <a href="/khanna-booking" class="cta-btn">Book Free Consultation →</a>
+        </div>
+
+    </div>
+
+    <!-- RIGHT: Sidebar -->
+    <div class="smile-sidebar">
+
+        <div class="doctor-card">
+            <img src="https://i.ibb.co/Qv61ZWRz/Z50-3428-64201-opt.jpg" alt="Dr. Rajesh Khanna — Board Certified Ophthalmologist, Beverly Hills">
+            <div class="doctor-caption">
+                <strong>Dr. Rajesh Khanna</strong>
+                <span>Beverly Hills · Westlake Village</span>
+            </div>
+        </div>
+
+        <div class="bh-badge">
+            <span class="bh-icon">🏆</span>
+            <h4>Beverly Hills' Premier SMILE Surgeon</h4>
+            <p>Board Certified · Pioneer of SMILE in the US · Author of the definitive SMILE textbook</p>
+        </div>
+
+        <a href="/khanna-booking" class="book-sidebar-btn">Schedule Free Consultation →</a>
+
+    </div>
+
+</div>
+
+<%- include('/partials/footer') %>
+
+<script src="/public/js/guru-chat-embed.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "khanna-growthops-v1",
+  "version": "1.0.0",
+  "description": "Khanna GrowthOps v1 — internal growth intelligence, drafts, and approval queue (non-patient-facing)",
+  "private": true,
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node src/server.js",
+    "start": "node src/server.js",
+    "job:daily": "node src/jobs/runDailyBrief.js",
+    "seed": "node src/storage/seed.js",
+    "auth:google": "node scripts/auth-google.js",
+    "list:google": "node scripts/list-google-assets.js",
+    "auth:zoho": "node scripts/auth-zoho.js",
+    "test:integrations": "node scripts/test-integrations.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^4.19.2",
+    "node-cron": "^4.2.1"
+  }
+}

@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Consultation - Khanna Vision Institute</title>
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+
+        .form-container {
+            margin-top: 140px;
+            padding: 30px 20px 60px;
+        }
+
+        .zf-templateWidth {
+            margin: 0 auto;	
+            max-width: 1000px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .zf-templateWrapper {
+            background: #fff;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            border-radius: 16px;
+            overflow: visible;
+        }
+
+        .zf-tempHeadBdr {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .zf-tempHeadContBdr {
+            background: linear-gradient(135deg, #14b8a6 0%, #3b82f6 100%);
+            border-bottom: none;
+            margin: 0;
+            padding: 40px 40px 48px;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .zf-tempHeadContBdr .zf-frmTitle {
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            font-size: 40px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+
+        .zf-tempHeadContBdr .zf-frmDesc {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 19px;
+            font-weight: 400;
+            margin: 0;
+            padding-top: 12px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .zf-subContWrap {
+            padding: 32px 0 16px 0;
+        }
+
+        .zf-tempFrmWrapper {
+            padding: 16px 40px 16px 40px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .zf-tempFrmWrapper .zf-labelName {
+            font-weight: 600;
+            font-size: 14px;
+            color: #374151;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .required-asterisk {
+            color: #ef4444;
+            margin-left: 2px;
+        }
+
+        .location-info {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 6px;
+        }
+
+        .zf-tempContDiv input[type="text"],
+        .zf-tempContDiv input[type="tel"],
+        .zf-tempContDiv input[type="email"],
+        .zf-tempContDiv input[type="date"],
+        .zf-tempContDiv input[type="number"],
+        .zf-tempContDiv textarea,
+        .zf-tempContDiv select {
+            background: #fff;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            color: #374151;
+            height: 48px;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .zf-tempContDiv input[type="date"] {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            cursor: pointer;
+        }
+
+        .zf-tempContDiv input[readonly] {
+            background: #f9fafb;
+            color: #6b7280;
+            cursor: not-allowed;
+        }
+
+        .zf-tempContDiv textarea {
+            min-height: 100px;
+            height: 100px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            padding: 12px 16px;
+            resize: none;
+        }
+
+        .zf-tempContDiv input:focus,
+        .zf-tempContDiv textarea:focus,
+        .zf-tempContDiv select:focus {
+            border: 2px solid #14b8a6;
+            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+        }
+
+        .zf-tempContDiv input:hover:not(:focus):not([readonly]),
+        .zf-tempContDiv textarea:hover:not(:focus),
+        .zf-tempContDiv select:hover:not(:focus) {
+            border-color: #14b8a6;
+        }
+
+        .zf-tempContDiv input::placeholder,
+        .zf-tempContDiv textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        .zf-tempContDiv span {
+            display: block;
+            width: 100%;
+        }
+
+        .zf-tempContDiv span input {
+            width: 100%;
+        }
+
+        .zf-errorMessage {
+            font: 15px Arial, Helvetica, sans-serif;
+            color: #f41033;
+            padding-top: 10px;
+        }
+
+        .zf-clearBoth {
+            clear: both;
+        }
+
+        .zfgrid_Wrapper {
+            padding: 0 40px 0 40px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .zftwoColumn {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .zftwoColumn .zfCol {
+            flex: 1 1;
+            overflow-x: visible;
+            max-width: calc(50% - 12px);
+            min-width: 280px;
+        }
+
+        .zf-fmFooter {
+            margin: 0;
+            padding: 24px 40px 48px 40px;
+            text-align: center;
+        }
+
+        .zf-submitColor {
+            font-size: 18px;
+            font-weight: 600;
+            padding: 16px 64px;
+            color: #fff;
+            border: none;
+            background: linear-gradient(135deg, #14b8a6 0%, #3b82f6 100%);
+            border-radius: 12px;
+            min-width: 200px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+        }
+
+        .zf-submitColor:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(20, 184, 166, 0.4);
+        }
+
+        .zf-submitColor:active {
+            transform: translateY(0) scale(1);
+        }
+
+        .zf-form-sBox {
+            padding: 12px 16px;
+            background: #fff;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            height: 48px;
+            transition: all 0.2s ease;
+            color: #374151;
+            width: 100%;
+        }
+
+        .zf-form-sBox:focus {
+            border: 2px solid #14b8a6;
+            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+            outline: none;
+        }
+
+        .zf-form-sBox:hover:not(:focus) {
+            border-color: #14b8a6;
+        }
+
+        .zf-nameWrapper span {
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .zf-nameWrapper span label {
+            display: block;
+            font-size: 13px;
+            color: #252c3e;
+            opacity: .8;
+            padding: 8px 0 0 0;
+        }
+
+        .zf-addrCont span {
+            display: block;
+            padding-top: 15px;
+        }
+
+        .zf-addrCont span:first-child {
+            padding-top: 0;
+        }
+
+        .zf-addrCont span label {
+            display: block;
+            font-size: 13px;
+            color: #252c3e;
+            opacity: .8;
+            padding: 8px 0 0 0;
+        }
+
+        .address_row_3 {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .address_row_3 span {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .zf-mSelect select {
+            display: none;
+        }
+
+        /* Custom Calendar Styles */
+        .custom-calendar-wrapper {
+            position: relative;
+        }
+
+        .calendar-input {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .calendar-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            color: #9ca3af;
+            pointer-events: none;
+        }
+
+        .calendar-input input {
+            padding-left: 44px !important;
+            cursor: pointer;
+        }
+
+        .custom-calendar {
+            position: absolute;
+            z-index: 100;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            padding: 24px;
+            width: 100%;
+            max-width: 420px;
+            display: none;
+        }
+
+        .custom-calendar.show {
+            display: block;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-header button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .calendar-header button:hover {
+            background: #f3f4f6;
+        }
+
+        .calendar-month-year {
+            font-weight: 600;
+            font-size: 16px;
+            color: #111827;
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .calendar-weekday {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            padding: 8px 0;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: none;
+            padding: 12px;
+            min-height: 44px;
+        }
+
+        .calendar-day.empty {
+            cursor: default;
+        }
+
+        .calendar-day.past {
+            color: #d1d5db;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.unavailable {
+            color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.available {
+            background: #d1fae5;
+            color: #065f46;
+            font-weight: 500;
+        }
+
+        .calendar-day.available:hover {
+            background: #a7f3d0;
+        }
+
+        .calendar-day.selected {
+            background: #14b8a6;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(20, 184, 166, 0.4);
+            transform: scale(1.05);
+        }
+
+        /* Time Slots */
+        .time-slots-wrapper {
+            margin-top: 24px;
+            display: none;
+        }
+
+        .time-slots-wrapper.show {
+            display: block;
+        }
+
+        .time-slots-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #374151;
+            margin-bottom: 12px;
+        }
+
+        .clock-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .time-slot {
+            padding: 12px 16px;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            font-size: 14px;
+            color: #374151;
+            text-align: center;
+        }
+
+        .time-slot:hover {
+            border-color: #14b8a6;
+            background: #f0fdfa;
+        }
+
+        .time-slot.selected {
+            background: #14b8a6;
+            border-color: #14b8a6;
+            color: white;
+            box-shadow: 0 2px 8px rgba(20, 184, 166, 0.3);
+        }
+
+        /* Multi-select Styles */
+        .multi-select {
+            position: relative;
+        }
+
+        .multi-select__toggle {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 400;
+            color: #374151;
+            background: #fff;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            min-height: 48px;
+            height: auto;
+            transition: all 0.2s ease;
+        }
+
+        .multi-select__toggle:hover:not(.is-open) {
+            border-color: #14b8a6;
+        }
+
+        .multi-select__toggle:focus-visible,
+        .multi-select__toggle.is-open {
+            border: 2px solid #14b8a6;
+            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+            outline: none;
+        }
+
+        .multi-select__toggle span {
+            flex: 1 1 auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .multi-select__chevron {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            transform: rotate(0deg);
+            transition: transform 0.2s ease;
+            color: #6b7280;
+        }
+
+        .multi-select__toggle.is-open .multi-select__chevron {
+            transform: rotate(180deg);
+            color: #14b8a6;
+        }
+
+        .multi-select__options {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: calc(100% + 8px);
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            padding: 16px;
+            max-height: 450px;
+            overflow-y: auto;
+            z-index: 50;
+            display: none;
+            min-width: 100%;
+        }
+
+        .multi-select__options.is-open {
+            display: block;
+        }
+
+        .multi-select__option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.15s ease;
+            font-size: 15px;
+            color: #374151;
+            line-height: 1.4;
+        }
+
+        .multi-select__option:hover {
+            background: rgba(20, 184, 166, 0.08);
+        }
+
+        .multi-select__checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #d1d5db;
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+            flex-shrink: 0;
+        }
+
+        .multi-select__checkbox.is-checked {
+            border-color: #14b8a6;
+            background: #14b8a6;
+            color: #fff;
+        }
+
+        .multi-select__checkbox.is-checked::after {
+            content: '✓';
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .multi-select__search {
+            position: sticky;
+            top: 0;
+            background: #fff;
+            padding-bottom: 14px;
+            z-index: 1;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .multi-select__search input {
+            width: 100%;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 15px;
+            transition: all 0.2s ease;
+        }
+
+        .multi-select__search input:focus {
+            outline: none;
+            border-color: #14b8a6;
+            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 20px 15px 40px;
+            }
+
+            .zf-templateWidth {
+                max-width: 100%;
+            }
+
+            .zf-tempHeadContBdr {
+                padding: 32px 24px 40px;
+            }
+
+            .zf-tempHeadContBdr .zf-frmTitle {
+                font-size: 28px;
+            }
+
+            .zf-tempHeadContBdr .zf-frmDesc {
+                font-size: 16px;
+            }
+
+            .zf-tempFrmWrapper,
+            .zfgrid_Wrapper {
+                padding: 16px 24px;
+            }
+
+            .zftwoColumn {
+                gap: 16px;
+            }
+
+            .zftwoColumn .zfCol {
+                max-width: 100%;
+                min-width: 100%;
+            }
+
+            .zf-fmFooter {
+                padding: 24px 24px 40px 24px;
+            }
+
+            .zf-submitColor {
+                width: 100%;
+                padding: 14px 32px;
+            }
+
+            .time-slots {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .custom-calendar {
+                left: 0;
+                right: 0;
+                max-width: 100%;
+                padding: 20px;
+            }
+
+            .calendar-days {
+                gap: 6px;
+            }
+
+            .calendar-day {
+                font-size: 14px;
+                padding: 10px;
+                min-height: 40px;
+            }
+
+            .multi-select__options {
+                max-height: 350px;
+                padding: 12px;
+            }
+
+            .multi-select__option {
+                padding: 12px 10px;
+                font-size: 14px;
+            }
+        }
+
+        /* Success Modal Overlay */
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .success-overlay.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .success-modal {
+            background: white;
+            border-radius: 20px;
+            padding: 48px 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease-out;
+            position: relative;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            animation: scaleIn 0.5s ease-out 0.2s both;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: white;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .success-modal h2 {
+            font-size: 28px;
+            color: #1a202c;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .success-modal p {
+            font-size: 16px;
+            color: #4a5568;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .success-modal .close-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .success-modal .close-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <%- include('/partials/header') %>
+
+    <!-- Success Modal -->
+    <div class="success-overlay" id="success-overlay">
+        <div class="success-modal">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+            <h2>Booking Confirmed!</h2>
+            <p>Thank you for scheduling your consultation. We've received your request and will contact you within 24 hours to confirm your appointment.</p>
+            <button class="close-btn" onclick="closeSuccessModal()">Got It</button>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <div class="zf-templateWidth">
+            <form action='/api/booking/submit' 
+                  name='form' 
+                  method='POST' 
+                  accept-charset='UTF-8' 
+                  id='form'>
+                
+                <input type="hidden" name="fullName" id="hidden-full-name" value="">
+                <input type="hidden" name="date" id="hidden-booking-date" value="">
+                <input type="hidden" name="time" id="hidden-booking-time" value="">
+                
+                <div class="zf-templateWrapper">
+                    <ul class="zf-tempHeadBdr">
+                        <li class="zf-tempHeadContBdr">
+                            <h2 class="zf-frmTitle">Schedule Your Consultation</h2>
+                            <p class="zf-frmDesc">Share a few details and our team will reach out to confirm your appointment</p>
+                            <div class="zf-clearBoth"></div>
+                        </li>
+                    </ul>
+
+                    <div class="zf-subContWrap">
+                        <ul>	
+                            <div class="zfgrid_Wrapper">
+                                <div class="zftwoColumn zfMultiColGrid">
+                                    <div class="zfCol">  
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">
+                                                Location <span class="required-asterisk">*</span>
+                                            </label>
+                                            <div class="zf-tempContDiv">
+                                                <select class="zf-form-sBox" name="location" id="location-select" required>
+                                                    <option value="">Select Location</option>
+                                                    <option value="Beverly Hills">Beverly Hills</option>
+                                                    <option value="Westlake Village">Westlake Village</option>
+                                                    <option value="Online">Online</option>
+                                                </select>
+                                                <p class="location-info" id="location-info"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-date">
+                                            <label class="zf-labelName">
+                                                Preferred Date <span class="required-asterisk">*</span>
+                                            </label>
+                                            <div class="zf-tempContDiv custom-calendar-wrapper">
+                                                <div class="calendar-input">
+                                                    <svg class="calendar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                                    </svg>
+                                                    <input type="text" id="date-display" readonly placeholder="Select a date" required />
+                                                </div>
+                                                <div class="custom-calendar" id="custom-calendar">
+                                                    <div class="calendar-header">
+                                                        <button type="button" id="prev-month">
+                                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                <polyline points="15 18 9 12 15 6"></polyline>
+                                                            </svg>
+                                                        </button>
+                                                        <span class="calendar-month-year" id="calendar-month-year"></span>
+                                                        <button type="button" id="next-month">
+                                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                <polyline points="9 18 15 12 9 6"></polyline>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                    <div class="calendar-weekdays">
+                                                        <div class="calendar-weekday">Su</div>
+                                                        <div class="calendar-weekday">Mo</div>
+                                                        <div class="calendar-weekday">Tu</div>
+                                                        <div class="calendar-weekday">We</div>
+                                                        <div class="calendar-weekday">Th</div>
+                                                        <div class="calendar-weekday">Fr</div>
+                                                        <div class="calendar-weekday">Sa</div>
+                                                    </div>
+                                                    <div class="calendar-days" id="calendar-days"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Time Slots -->
+                            <div class="zf-tempFrmWrapper time-slots-wrapper" id="time-slots-wrapper">
+                                <label class="time-slots-label">
+                                    <svg class="clock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                    Select Time <span class="required-asterisk">*</span>
+                                </label>
+                                <div class="time-slots" id="time-slots"></div>
+                            </div>
+
+                            <div class="zf-tempFrmWrapper zf-name zf-namelarge">
+                                <label class="zf-labelName">Name <span class="required-asterisk">*</span></label>
+                                <div class="zf-tempContDiv zf-twoType">
+                                    <div class="zf-nameWrapper">
+                                        <span>
+                                            <input type="text" maxlength="255" name="firstName" placeholder="First Name" required />
+                                            <label>First Name</label>
+                                        </span>
+                                        <span>
+                                            <input type="text" maxlength="255" name="lastName" placeholder="Last Name" required />
+                                            <label>Last Name</label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="zfgrid_Wrapper">
+                                <div class="zftwoColumn zfMultiColGrid">
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">
+                                                Age <span class="required-asterisk">*</span>
+                                            </label>
+                                            <div class="zf-tempContDiv">
+                                                <span>
+                                                    <input type="number" name="age" id="age" min="1" max="120" placeholder="Enter your age" required />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="zfCol">
+                                        <div class="zf-tempFrmWrapper zf-large">
+                                            <label class="zf-labelName">
+                                                Phone <span class="required-asterisk">*</span>
+                                            </label>
+                                            <div class="zf-tempContDiv">
+                                                <span>
+                                                    <input type="tel" name="phone" maxlength="20" value="" placeholder="(555) 123-4567" required />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="zf-tempFrmWrapper zf-large">
+                                <label class="zf-labelName">
+                                    Email <span class="required-asterisk">*</span>
+                                </label>
+                                <div class="zf-tempContDiv">
+                                    <span>
+                                        <input type="email" name="email" value="" maxlength="255" placeholder="you@example.com" required />
+                                    </span>
+                                </div>
+                            </div>
+
+                        </ul>
+                    </div>
+                    
+                    <ul>
+                        <li class="zf-fmFooter">
+                            <button class="zf-submitColor" type="submit">Submit Consultation Request</button>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <%- include('/partials/footer') %>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // State
+            let selectedLocation = '';
+            let selectedDate = null;
+            let selectedTime = '';
+            let currentMonth = new Date();
+
+            const locationSelect = document.getElementById('location-select');
+            const locationInfo = document.getElementById('location-info');
+            const dateDisplay = document.getElementById('date-display');
+            const hiddenBookingDateInput = document.getElementById('hidden-booking-date');
+            const hiddenBookingTimeInput = document.getElementById('hidden-booking-time');
+            const calendar = document.getElementById('custom-calendar');
+            const calendarDays = document.getElementById('calendar-days');
+            const calendarMonthYear = document.getElementById('calendar-month-year');
+            const prevMonthBtn = document.getElementById('prev-month');
+            const nextMonthBtn = document.getElementById('next-month');
+            const timeSlotsWrapper = document.getElementById('time-slots-wrapper');
+            const timeSlotsContainer = document.getElementById('time-slots');
+
+
+            // Available times
+            const availableTimes = ['8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM'];
+
+            // Check if date is available based on location
+            function isDateAvailable(date) {
+                if (!selectedLocation || selectedLocation === 'Online') return false;
+                
+                const dayOfWeek = date.getDay();
+                
+                if (selectedLocation === 'Beverly Hills') {
+                    return dayOfWeek === 1 || dayOfWeek === 4; // Monday & Thursday
+                } else if (selectedLocation === 'Westlake Village') {
+                    return dayOfWeek === 2 || dayOfWeek === 3 || dayOfWeek === 5; // Tue, Wed, Fri
+                }
+                
+                return false;
+            }
+
+            // Render calendar
+            function renderCalendar() {
+                const year = currentMonth.getFullYear();
+                const month = currentMonth.getMonth();
+                const firstDay = new Date(year, month, 1);
+                const lastDay = new Date(year, month + 1, 0);
+                const daysInMonth = lastDay.getDate();
+                const startingDayOfWeek = firstDay.getDay();
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                calendarMonthYear.textContent = currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+                calendarDays.innerHTML = '';
+
+                // Empty cells for days before month starts
+                for (let i = 0; i < startingDayOfWeek; i++) {
+                    const emptyDay = document.createElement('button');
+                    emptyDay.type = 'button';
+                    emptyDay.className = 'calendar-day empty';
+                    emptyDay.disabled = true;
+                    calendarDays.appendChild(emptyDay);
+                }
+
+                // Days of the month
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const date = new Date(year, month, day);
+                    const isAvailable = isDateAvailable(date);
+                    const isPast = date < today;
+                    const isSelected = selectedDate && selectedDate.toDateString() === date.toDateString();
+
+                    const dayButton = document.createElement('button');
+                    dayButton.type = 'button';
+                    dayButton.textContent = day;
+                    dayButton.className = 'calendar-day';
+
+                    if (isSelected) {
+                        dayButton.classList.add('selected');
+                    } else if (isPast) {
+                        dayButton.classList.add('past');
+                        dayButton.disabled = true;
+                    } else if (isAvailable) {
+                        dayButton.classList.add('available');
+                    } else {
+                        dayButton.classList.add('unavailable');
+                        dayButton.disabled = true;
+                    }
+
+                    if (isAvailable && !isPast) {
+                        dayButton.addEventListener('click', () => selectDate(date));
+                    }
+
+                    calendarDays.appendChild(dayButton);
+                }
+            }
+
+            // Select date
+            function selectDate(date) {
+                selectedDate = date;
+                selectedTime = '';
+                
+                // Format date for display
+                const formattedDate = date.toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                dateDisplay.value = formattedDate;
+                
+                // Format for hidden input (MM/DD/YYYY for Zoho)
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                const year = date.getFullYear();
+                hiddenBookingDateInput.value = `${month}/${day}/${year}`;
+                
+                calendar.classList.remove('show');
+                renderCalendar();
+                renderTimeSlots();
+            }
+
+            // Render time slots
+            function renderTimeSlots() {
+                if (!selectedDate) {
+                    timeSlotsWrapper.classList.remove('show');
+                    return;
+                }
+
+                timeSlotsWrapper.classList.add('show');
+                timeSlotsContainer.innerHTML = '';
+
+                availableTimes.forEach(time => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'time-slot';
+                    button.textContent = time;
+                    
+                    if (selectedTime === time) {
+                        button.classList.add('selected');
+                    }
+
+                    button.addEventListener('click', () => {
+                        selectedTime = time;
+                        hiddenBookingTimeInput.value = time;
+                        renderTimeSlots();
+                    });
+
+                    timeSlotsContainer.appendChild(button);
+                });
+            }
+
+            // Location change handler
+            locationSelect.addEventListener('change', (e) => {
+                selectedLocation = e.target.value;
+                selectedDate = null;
+                selectedTime = '';
+                dateDisplay.value = '';
+                hiddenBookingDateInput.value = '';
+                timeSlotsWrapper.classList.remove('show');
+
+                if (selectedLocation === 'Beverly Hills') {
+                    locationInfo.textContent = 'Available: Mon & Thu, 8 AM - 4 PM';
+                } else if (selectedLocation === 'Westlake Village') {
+                    locationInfo.textContent = 'Available: Tue, Wed & Fri, 8 AM - 4 PM';
+                } else if (selectedLocation === 'Online') {
+                    locationInfo.textContent = 'Online consultations available anytime';
+                } else {
+                    locationInfo.textContent = '';
+                }
+
+                renderCalendar();
+            });
+
+            // Calendar toggle
+            dateDisplay.addEventListener('click', () => {
+                if (selectedLocation && selectedLocation !== 'Online') {
+                    calendar.classList.toggle('show');
+                }
+            });
+
+            // Month navigation
+            prevMonthBtn.addEventListener('click', () => {
+                currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1);
+                renderCalendar();
+            });
+
+            nextMonthBtn.addEventListener('click', () => {
+                currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1);
+                renderCalendar();
+            });
+
+            // Close calendar when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!calendar.contains(e.target) && e.target !== dateDisplay) {
+                    calendar.classList.remove('show');
+                }
+            });
+
+            // Initialize calendar
+            renderCalendar();
+
+            // Form submission handler
+            const form = document.getElementById('form');
+            if (form) {
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const firstName = document.querySelector('input[name="firstName"]')?.value.trim() || '';
+                    const lastName = document.querySelector('input[name="lastName"]')?.value.trim() || '';
+                    const fullName = `${firstName} ${lastName}`.trim();
+                    const age = document.querySelector('input[name="age"]')?.value || '';
+                    const email = document.querySelector('input[name="email"]')?.value || '';
+                    const phone = document.querySelector('input[name="phone"]')?.value || '';
+                    const location = document.querySelector('select[name="location"]')?.value || '';
+                    const date = document.getElementById('hidden-booking-date')?.value || '';
+                    const time = document.getElementById('hidden-booking-time')?.value || '';
+                    
+                    // Validate required fields
+                    if (!fullName || !age || !email || !phone || !location || !date || !time) {
+                        alert('Please fill in all required fields: Name, Age, Email, Phone, Location, Date, and Time');
+                        return;
+                    }
+                    
+                    // Collect form data - only the required fields
+                    const formData = {
+                        fullName,
+                        age,
+                        email,
+                        phone,
+                        location,
+                        date,
+                        time
+                    };
+                    
+                    // Show loading state
+                    const submitButton = this.querySelector('button[type="submit"]');
+                    const originalButtonText = submitButton?.textContent || '';
+                    if (submitButton) {
+                        submitButton.disabled = true;
+                        submitButton.textContent = 'Submitting...';
+                    }
+                    
+                    try {
+                        // Submit via fetch
+                        const response = await fetch('/api/booking/submit', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(formData)
+                        });
+                        
+                        const result = await response.json();
+                        
+                        if (result.success) {
+                            // Show success modal
+                            showSuccessModal();
+                            
+                            // Reset form
+                            form.reset();
+                            selectedDate = null;
+                            selectedTime = '';
+                            dateDisplay.value = '';
+                            hiddenBookingDateInput.value = '';
+                            hiddenBookingTimeInput.value = '';
+                            timeSlotsWrapper.classList.remove('show');
+                            
+                            // Reset button
+                            if (submitButton) {
+                                submitButton.disabled = false;
+                                submitButton.textContent = originalButtonText;
+                            }
+                        } else {
+                            alert('Error: ' + (result.message || 'Failed to submit booking'));
+                            if (submitButton) {
+                                submitButton.disabled = false;
+                                submitButton.textContent = originalButtonText;
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Submission error:', error);
+                        alert('An error occurred while submitting the form. Please try again.');
+                        if (submitButton) {
+                            submitButton.disabled = false;
+                            submitButton.textContent = originalButtonText;
+                        }
+                    }
+                });
+            }
+        });
+
+        // Success modal functions
+        function showSuccessModal() {
+            document.getElementById('success-overlay').classList.add('show');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('success-overlay').classList.remove('show');
+        }
+
+        // Close modal on overlay click
+        document.getElementById('success-overlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeSuccessModal();
+            }
+        });
+    </script>
+</body>
+</html>
+

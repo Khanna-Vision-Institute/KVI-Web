@@ -1,0 +1,721 @@
+/* Doctors portal hub — scoped to body#kvi-physician-hub (for-physicians.html only) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body#kvi-physician-hub {
+  --c-bg: #060a10;
+  --c-surface: #0d1520;
+  --c-surface-2: #111c2a;
+  --c-navy: #1e4d63;
+  --c-navy-bright: #2a6a87;
+  --c-gold: #d4af37;
+  --c-gold-dim: rgba(212, 175, 55, 0.18);
+  --c-gold-glow: rgba(212, 175, 55, 0.06);
+  --c-teal: #2dd4bf;
+  --c-teal-dim: rgba(45, 212, 191, 0.12);
+  --c-text: #e5e9f2;
+  --c-muted: #7d8fa3;
+  --c-border: rgba(212, 175, 55, 0.14);
+  --c-border-dim: rgba(255, 255, 255, 0.06);
+
+  --space-xs: 0.375rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 2rem;
+  --space-xl: 3.5rem;
+  --space-2xl: 5.5rem;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  --shell: min(1220px, 100%);
+  --shell-pad: clamp(1.25rem, 5vw, 3rem);
+
+  --font-serif: "Playfair Display", "Libre Baskerville", Georgia, serif;
+  --font-sans: "DM Sans", "Montserrat", system-ui, sans-serif;
+
+  font-family: var(--font-sans);
+  background: var(--c-bg);
+  color: var(--c-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body#kvi-physician-hub a {
+  color: var(--c-teal);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+body#kvi-physician-hub a:hover {
+  color: #fff;
+}
+body#kvi-physician-hub *:focus-visible {
+  outline: 2px solid var(--c-teal);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+body#kvi-physician-hub::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(45, 212, 191, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 212, 191, 0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+body#kvi-physician-hub > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+body#kvi-physician-hub .kh-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(6, 10, 16, 0.88);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border-bottom: 1px solid var(--c-border);
+}
+body#kvi-physician-hub .kh-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 0.65rem var(--shell-pad);
+  flex-wrap: wrap;
+}
+body#kvi-physician-hub .kh-logo img {
+  height: clamp(92px, 14vw, 124px);
+  width: auto;
+  max-width: min(380px, 62vw);
+  display: block;
+}
+
+body#kvi-physician-hub .fp-hub-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+body#kvi-physician-hub .fp-hub-header-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--c-gold);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--c-gold-dim);
+  border-radius: 999px;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+body#kvi-physician-hub .fp-hub-header-phone:hover {
+  background: var(--c-gold-dim);
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+}
+body#kvi-physician-hub .fp-hub-ico-phone {
+  flex-shrink: 0;
+}
+
+body#kvi-physician-hub .fp-hub-header-links {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  flex-wrap: wrap;
+}
+body#kvi-physician-hub .fp-hub-header-links__a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  color: var(--c-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+  transition:
+    color 0.2s,
+    background 0.2s;
+  white-space: nowrap;
+}
+body#kvi-physician-hub .fp-hub-header-links__a:hover,
+body#kvi-physician-hub .fp-hub-header-links__a.fp-hub-active {
+  color: var(--c-text);
+  background: var(--c-border-dim);
+}
+body#kvi-physician-hub .fp-hub-header-links__a.fp-hub-active {
+  color: var(--c-teal);
+}
+
+/* Hero */
+body#kvi-physician-hub .fp-hub-banner {
+  background: var(--c-bg);
+  border-bottom: 1px solid var(--c-border);
+  position: relative;
+}
+body#kvi-physician-hub .fp-hub-banner-slab {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 0 var(--shell-pad);
+  position: relative;
+}
+body#kvi-physician-hub .fp-hub-banner-row {
+  display: grid;
+  grid-template-columns: 42% 1fr;
+  align-items: stretch;
+  min-height: 320px;
+}
+body#kvi-physician-hub .fp-hub-banner-copy {
+  position: relative;
+  z-index: 2;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-right: none;
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+  padding: 2.2rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-top: 2rem;
+  margin-bottom: 0;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.35);
+}
+body#kvi-physician-hub .fp-hub-banner-copy::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  width: 3px;
+  background: var(--c-gold);
+  border-radius: 2px;
+}
+body#kvi-physician-hub .fp-hub-banner-kicker {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-teal);
+  margin-bottom: 0.1rem;
+}
+body#kvi-physician-hub .fp-hub-banner-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--c-gold);
+}
+body#kvi-physician-hub .fp-hub-banner-lead {
+  font-size: 0.82rem;
+  color: var(--c-muted);
+  line-height: 1.55;
+  margin-top: 0.25rem;
+}
+
+body#kvi-physician-hub .fp-hub-banner-photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  min-height: 280px;
+}
+body#kvi-physician-hub .fp-hub-banner-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  body#kvi-physician-hub .fp-hub-banner-row {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+  body#kvi-physician-hub .fp-hub-banner-photo {
+    order: -1;
+    min-height: 220px;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+  }
+  body#kvi-physician-hub .fp-hub-banner-copy {
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    border-right: 1px solid var(--c-border);
+    border-top: none;
+    margin-top: 0;
+    box-shadow: none;
+  }
+}
+
+/* HIPAA strip */
+body#kvi-physician-hub .fp-hub-strip-mini {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: 0.8rem 1.2rem;
+  font-size: 0.76rem;
+  color: var(--c-muted);
+  line-height: 1.5;
+  margin-bottom: var(--space-xl);
+}
+body#kvi-physician-hub .fp-hub-strip-mini::before {
+  content: "🔒";
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+body#kvi-physician-hub .fp-hub-strip-mini a {
+  color: var(--c-gold);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Main */
+body#kvi-physician-hub .fp-hub-main {
+  padding: var(--space-xl) var(--shell-pad);
+}
+body#kvi-physician-hub .fp-hub-shell {
+  max-width: var(--shell);
+  margin: 0 auto;
+}
+
+body#kvi-physician-hub .fp-hub-grid-head {
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+body#kvi-physician-hub .fp-hub-grid-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--c-text);
+  position: relative;
+  padding-bottom: 0.6rem;
+}
+body#kvi-physician-hub .fp-hub-grid-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 48px;
+  height: 2px;
+  background: var(--c-gold);
+  border-radius: 2px;
+}
+body#kvi-physician-hub .fp-hub-grid-sub {
+  font-size: 0.82rem;
+  color: var(--c-muted);
+  max-width: 38ch;
+  text-align: right;
+}
+@media (max-width: 560px) {
+  body#kvi-physician-hub .fp-hub-grid-sub {
+    text-align: left;
+  }
+}
+
+/* Card grid — equal height within each row, height comes from tallest card (no tall empty floor) */
+body#kvi-physician-hub .fp-hub-card-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(248px, 100%), 1fr));
+  gap: var(--space-md);
+  align-items: stretch;
+}
+
+/* Referral pair first; balanced 3-column desktop grid for seven tiles */
+@media (min-width: 900px) {
+  body#kvi-physician-hub .fp-hub-card-grid--referrals-first {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  body#kvi-physician-hub .fp-hub-card-grid--referrals-first > li.fp-hub-card--referral {
+    grid-column: span 1;
+  }
+  body#kvi-physician-hub .fp-hub-card-grid--referrals-first > li:last-child {
+    grid-column: 2;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 899px) {
+  body#kvi-physician-hub .fp-hub-card-grid--referrals-first {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  body#kvi-physician-hub .fp-hub-card-grid--referrals-first > li.fp-hub-card--referral {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 480px) {
+  body#kvi-physician-hub .fp-hub-card-grid {
+    grid-template-columns: 1fr;
+  }
+  body#kvi-physician-hub .fp-hub-card-grid--referrals-first > li:last-child {
+    grid-column: auto;
+  }
+}
+
+body#kvi-physician-hub .fp-hub-card-grid > li {
+  display: flex;
+  min-height: 0;
+}
+
+body#kvi-physician-hub .fp-hub-task-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  align-self: stretch;
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  gap: var(--space-sm);
+  padding: 1.25rem 1.25rem 1.9rem;
+  background: linear-gradient(135deg, #141f2e 0%, #0f1a26 100%);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-left: 3px solid var(--c-gold);
+  border-radius: var(--radius-md);
+  color: var(--c-text);
+  text-decoration: none;
+  position: relative;
+  box-sizing: border-box;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    border-color 0.2s,
+    background 0.2s;
+  overflow: hidden;
+}
+body#kvi-physician-hub .fp-hub-task-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--c-gold-glow);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+body#kvi-physician-hub .fp-hub-task-card:hover {
+  transform: translateY(-3px);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--c-gold);
+  border-left-width: 3px;
+  border-left-color: var(--c-gold);
+  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.14);
+  color: var(--c-text);
+}
+body#kvi-physician-hub .fp-hub-task-card:hover::before {
+  opacity: 1;
+}
+
+body#kvi-physician-hub .fp-hub-task-ico {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.12);
+  color: var(--c-gold);
+  flex-shrink: 0;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+body#kvi-physician-hub .fp-hub-task-ico svg {
+  width: 22px;
+  height: 22px;
+}
+body#kvi-physician-hub .fp-hub-task-card:hover .fp-hub-task-ico {
+  background: rgba(212, 175, 55, 0.22);
+  color: var(--c-gold);
+}
+
+body#kvi-physician-hub .fp-hub-task-label {
+  flex: 0 0 auto;
+  font-size: 0.94rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--c-gold);
+}
+body#kvi-physician-hub .fp-hub-task-hint {
+  flex: 0 0 auto;
+  font-size: 0.75rem;
+  color: var(--c-muted);
+  line-height: 1.45;
+  margin-top: auto;
+  padding-right: 1.75rem;
+}
+
+body#kvi-physician-hub .fp-hub-task-card::after {
+  content: "→";
+  position: absolute;
+  bottom: 1rem;
+  right: 1.1rem;
+  font-size: 0.8rem;
+  color: var(--c-muted);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity 0.18s,
+    transform 0.18s;
+}
+body#kvi-physician-hub .fp-hub-task-card:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Locations */
+body#kvi-physician-hub .fp-locs--hub {
+  background: var(--c-surface);
+  border-top: 1px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
+}
+body#kvi-physician-hub .fp-locs-inner {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 0.9rem var(--shell-pad);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+body#kvi-physician-hub .fp-loc-item--hub {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  color: var(--c-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  padding: 0.25rem 0.65rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+}
+body#kvi-physician-hub .fp-loc-item--hub::before {
+  content: "◎";
+  font-size: 0.7em;
+  color: var(--c-teal);
+}
+body#kvi-physician-hub .fp-loc-item--hub:hover {
+  color: var(--c-teal);
+  border-color: var(--c-teal-dim);
+}
+
+/* Footer */
+body#kvi-physician-hub .kh-footer--hub {
+  background: var(--c-surface);
+  border-top: 1px solid var(--c-border);
+  padding: var(--space-xl) 0 var(--space-lg);
+}
+body#kvi-physician-hub .kh-footer-inner {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: 0 var(--shell-pad);
+}
+body#kvi-physician-hub .fp-hub-call-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  padding: var(--space-md) var(--space-lg);
+  background: linear-gradient(90deg, var(--c-gold-dim), transparent);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-xl);
+}
+body#kvi-physician-hub .fp-hub-call-kicker {
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+body#kvi-physician-hub .fp-hub-call-num {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--c-gold);
+  letter-spacing: 0.02em;
+}
+body#kvi-physician-hub .fp-hub-call-num:hover {
+  color: #fff;
+}
+
+body#kvi-physician-hub .kh-footer-grid--hub-top {
+  display: grid;
+  grid-template-columns: 1.6fr repeat(4, 1fr);
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+@media (max-width: 900px) {
+  body#kvi-physician-hub .kh-footer-grid--hub-top {
+    grid-template-columns: 1fr 1fr;
+  }
+  body#kvi-physician-hub .fp-hub-brand {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 480px) {
+  body#kvi-physician-hub .kh-footer-grid--hub-top {
+    grid-template-columns: 1fr;
+  }
+}
+
+body#kvi-physician-hub .fp-hub-brand img {
+  height: 40px;
+  width: auto;
+  margin-bottom: var(--space-sm);
+  opacity: 0.85;
+  filter: brightness(1.1);
+}
+body#kvi-physician-hub .kh-footer-tagline {
+  font-size: 0.76rem;
+  color: var(--c-muted);
+  line-height: 1.5;
+}
+body#kvi-physician-hub .kh-footer-col-h {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: 0.65rem;
+}
+body#kvi-physician-hub .kh-footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+body#kvi-physician-hub .kh-footer-col a {
+  font-size: 0.78rem;
+  color: var(--c-muted);
+  transition: color 0.18s;
+  line-height: 1.4;
+}
+body#kvi-physician-hub .kh-footer-col a:hover {
+  color: var(--c-text);
+}
+
+body#kvi-physician-hub .fp-hub-touch {
+  border-top: 1px solid var(--c-border-dim);
+  padding-top: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+body#kvi-physician-hub .fp-hub-touch-title {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+  margin-bottom: 0.5rem;
+}
+body#kvi-physician-hub .fp-hub-touch-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+body#kvi-physician-hub .fp-hub-touch-links a {
+  font-size: 0.78rem;
+  color: var(--c-muted);
+}
+body#kvi-physician-hub .fp-hub-social-note {
+  font-size: 0.72rem;
+  color: var(--c-muted);
+  opacity: 0.6;
+}
+
+body#kvi-physician-hub .kh-footer-copy {
+  border-top: 1px solid var(--c-border-dim);
+  padding-top: var(--space-md);
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--c-muted);
+  opacity: 0.7;
+}
+body#kvi-physician-hub .kh-footer-copy a {
+  color: var(--c-muted);
+}
+body#kvi-physician-hub .kh-footer-copy a:hover {
+  color: var(--c-text);
+}
+
+@keyframes kvi-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+body#kvi-physician-hub .fp-hub-banner-copy {
+  animation: kvi-fadeUp 0.55s ease both;
+}
+body#kvi-physician-hub .fp-hub-banner-photo {
+  animation: kvi-fadeUp 0.55s 0.12s ease both;
+}
+body#kvi-physician-hub .fp-hub-card-grid li {
+  animation: kvi-fadeUp 0.4s ease both;
+}
+body#kvi-physician-hub .fp-hub-card-grid li:nth-child(1) {
+  animation-delay: 0.05s;
+}
+body#kvi-physician-hub .fp-hub-card-grid li:nth-child(2) {
+  animation-delay: 0.1s;
+}
+body#kvi-physician-hub .fp-hub-card-grid li:nth-child(3) {
+  animation-delay: 0.15s;
+}
+body#kvi-physician-hub .fp-hub-card-grid li:nth-child(4) {
+  animation-delay: 0.2s;
+}
+body#kvi-physician-hub .fp-hub-card-grid li:nth-child(5) {
+  animation-delay: 0.25s;
+}
+body#kvi-physician-hub .fp-hub-card-grid li:nth-child(6) {
+  animation-delay: 0.3s;
+}
+body#kvi-physician-hub .fp-hub-card-grid li:nth-child(7) {
+  animation-delay: 0.35s;
+}
+body#kvi-physician-hub .fp-hub-card-grid li:nth-child(8) {
+  animation-delay: 0.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body#kvi-physician-hub * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

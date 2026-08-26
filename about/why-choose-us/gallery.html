@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <% if (typeof pageData !== 'undefined' && pageData && pageData.metaTitle) { %>
+  <title><%= pageData.metaTitle %></title>
+  <% } else { %>
+  <title>Results Gallery | Khanna Vision Institute</title>
+  <% } %>
+  <% if (typeof pageData !== 'undefined' && pageData && pageData.metaDescription) { %>
+  <meta name="description" content="<%= pageData.metaDescription %>">
+  <% } else { %>
+  <meta name="description" content="Explore outcomes at Khanna Vision Institute — patient stories, video testimonials, and procedure guides. Clinical before &amp; after photos coming soon. Beverly Hills &amp; Westlake Village.">
+  <% } %>
+  <link rel="canonical" href="https://khannainstitute.com/about/why-choose-us/gallery/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/public/css/header.css">
+  <link rel="stylesheet" href="/public/css/footer.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "name": "Results Gallery",
+        "description": "Patient outcomes and visual stories at Khanna Vision Institute; clinical photo gallery in preparation.",
+        "url": "https://khannainstitute.com/about/why-choose-us/gallery/"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://khannainstitute.com/" },
+          { "@type": "ListItem", "position": 2, "name": "About", "item": "https://khannainstitute.com/about/dr-khanna/biography/" },
+          { "@type": "ListItem", "position": 3, "name": "Gallery", "item": "https://khannainstitute.com/about/why-choose-us/gallery/" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --gl-ink: #0f172a;
+      --gl-muted: #475569;
+      --gl-line: #e2e8f0;
+      --gl-surface: #ffffff;
+      --gl-wash: #f0f9ff;
+      --gl-navy: #1e3a5f;
+      --gl-navy2: #2a5298;
+      --gl-teal: #0d9488;
+      --gl-teal-soft: rgba(13, 148, 136, 0.12);
+    }
+    .gl-page {
+      font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+      color: var(--gl-ink);
+      background:
+        radial-gradient(1000px 440px at 0% 0%, rgba(224, 242, 254, 0.7), transparent 55%),
+        radial-gradient(800px 400px at 100% 10%, rgba(204, 251, 241, 0.45), transparent 50%),
+        linear-gradient(180deg, var(--gl-wash) 0%, #f8fafc 42%, #f1f5f9 100%);
+    }
+    .gl-page h1, .gl-page h2, .gl-page h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .gl-wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 22px 80px;
+    }
+    .gl-hero {
+      text-align: center;
+      padding: 28px 0 12px;
+    }
+    .gl-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gl-navy2);
+      margin-bottom: 12px;
+    }
+    .gl-hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      line-height: 1.1;
+      margin: 0 0 14px;
+      background: linear-gradient(120deg, var(--gl-navy) 0%, #0f766e 45%, var(--gl-navy2) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .gl-lead {
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 1.06rem;
+      line-height: 1.65;
+      color: var(--gl-muted);
+    }
+    .gl-stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 14px;
+      margin-top: 26px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .gl-stat {
+      background: var(--gl-surface);
+      border: 1px solid var(--gl-line);
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gl-navy);
+      box-shadow: 0 8px 24px rgba(30, 58, 95, 0.06);
+    }
+    .gl-section {
+      margin-top: 44px;
+      scroll-margin-top: 88px;
+    }
+    .gl-section-head {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .gl-section-head h2 {
+      font-size: clamp(1.45rem, 3vw, 1.9rem);
+      margin: 0 0 8px;
+      color: var(--gl-navy);
+    }
+    .gl-section-head p {
+      margin: 0 auto;
+      font-size: 0.98rem;
+      color: var(--gl-muted);
+      max-width: 560px;
+      line-height: 1.55;
+    }
+    .gl-banner {
+      margin-top: 36px;
+      padding: 26px 24px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 253, 250, 0.9) 100%);
+      border: 1px solid var(--gl-line);
+      box-shadow: 0 14px 40px rgba(30, 58, 95, 0.08);
+      text-align: center;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .gl-banner h2 {
+      font-size: 1.2rem;
+      margin: 0 0 10px;
+      color: var(--gl-navy);
+    }
+    .gl-banner p {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--gl-muted);
+      line-height: 1.6;
+    }
+    .gl-hub-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    }
+    .gl-hub-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 1.35rem 1.3rem;
+      background: var(--gl-surface);
+      border: 1px solid var(--gl-line);
+      border-radius: 18px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 12px 32px rgba(30, 58, 95, 0.07);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s;
+      position: relative;
+      min-height: 140px;
+    }
+    .gl-hub-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 44px rgba(30, 58, 95, 0.11);
+      border-color: rgba(13, 148, 136, 0.35);
+    }
+    .gl-hub-card h3 {
+      font-size: 1.12rem;
+      margin: 0;
+      color: var(--gl-navy);
+    }
+    .gl-hub-card p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--gl-muted);
+      flex: 1;
+    }
+    .gl-hub-card .gl-hub-go {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gl-teal);
+      letter-spacing: 0.04em;
+    }
+    .gl-proc-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .gl-proc-grid a {
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--gl-navy2);
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--gl-line);
+      background: rgba(255, 255, 255, 0.9);
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .gl-proc-grid a:hover {
+      background: #fff;
+      border-color: var(--gl-teal);
+      transform: translateY(-1px);
+    }
+    .gl-note {
+      margin-top: 36px;
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--gl-line);
+      font-size: 0.84rem;
+      color: var(--gl-muted);
+      line-height: 1.55;
+      text-align: center;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .gl-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 32px;
+    }
+    .gl-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: filter 0.2s, transform 0.2s;
+    }
+    .gl-btn:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+    .gl-btn--primary {
+      background: linear-gradient(135deg, var(--gl-navy), var(--gl-navy2));
+      color: #fff;
+      box-shadow: 0 8px 22px rgba(30, 58, 95, 0.25);
+    }
+    .gl-btn--ghost {
+      background: var(--gl-surface);
+      color: var(--gl-navy);
+      border-color: var(--gl-line);
+    }
+    .gl-cta {
+      margin-top: 48px;
+      text-align: center;
+      padding: 40px 26px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--gl-navy) 0%, #134e4a 50%, var(--gl-navy2) 100%);
+      color: #fff;
+      box-shadow: 0 24px 56px rgba(30, 58, 95, 0.28);
+    }
+    .gl-cta h2 {
+      color: #fff;
+      margin: 0 0 12px;
+      font-size: clamp(1.35rem, 3vw, 1.85rem);
+    }
+    .gl-cta p {
+      margin: 0 0 22px;
+      opacity: 0.92;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+    .gl-cta a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #5eead4, #2dd4bf);
+      color: #042f2e;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    }
+    @media (max-width: 640px) {
+      .gl-wrap { padding: 0 16px 64px; }
+      .gl-hero { padding: 22px 0 8px; }
+    }
+  </style>
+</head>
+<body class="gl-page">
+  <%- include('/partials/header') %>
+  <%- include('/partials/seminar-banner') %>
+
+  <main>
+    <div class="gl-wrap">
+      <header class="gl-hero">
+        <p class="gl-eyebrow">Why choose us</p>
+        <h1>Results gallery</h1>
+        <p class="gl-lead">We&rsquo;re building a curated <strong>before &amp; after</strong> photo library with proper patient consent and consistent photography—so when it goes live, it will be trustworthy. Until then, explore real outcomes through <strong>stories, video, and reviews</strong>—or dive into procedure pages to see how we think about results.</p>
+        <div class="gl-stats" aria-label="Highlights">
+          <span class="gl-stat">25,000+ vision procedures</span>
+          <span class="gl-stat">Beverly Hills &amp; Westlake Village</span>
+          <span class="gl-stat">Diagnostics-first planning</span>
+        </div>
+      </header>
+
+      <% if (typeof pageData !== 'undefined' && pageData && pageData.content) { %>
+      <section class="gl-section" aria-label="Additional content">
+        <%- pageData.content %>
+      </section>
+      <% } %>
+
+      <div class="gl-banner" role="status" aria-live="polite">
+        <h2>Before &amp; after photos — coming soon</h2>
+        <p>We&rsquo;re preparing a small set of real patient examples—shared only with permission and shown with honest context. Check back soon, or explore stories and videos below.</p>
+      </div>
+
+      <section class="gl-section" aria-labelledby="hub-heading">
+        <div class="gl-section-head">
+          <h2 id="hub-heading">See outcomes today</h2>
+          <p>These pages feature real voices and journeys—not empty placeholders.</p>
+        </div>
+        <div class="gl-hub-grid">
+          <a class="gl-hub-card" href="/about/why-choose-us/success-stories/">
+            <h3>Patient success stories</h3>
+            <p>Representative experiences across SMILE, LASIK, ICL, PIE, and more—written for clarity and privacy.</p>
+            <span class="gl-hub-go">Read stories →</span>
+          </a>
+          <a class="gl-hub-card" href="/about/why-choose-us/celebrity-patients/">
+            <h3>Celebrity patient videos</h3>
+            <p>Playlist and featured clips from public figures who&rsquo;ve shared their Khanna Vision journey.</p>
+            <span class="gl-hub-go">Watch videos →</span>
+          </a>
+          <a class="gl-hub-card" href="/patients/results/reviews/">
+            <h3>Reviews &amp; testimonials</h3>
+            <p>What patients say about care, communication, and life after vision correction.</p>
+            <span class="gl-hub-go">See reviews →</span>
+          </a>
+          <a class="gl-hub-card" href="/about/why-choose-us/technology/">
+            <h3>Our technology</h3>
+            <p>The lasers, diagnostics, and lens platforms behind predictable, personalized plans.</p>
+            <span class="gl-hub-go">Explore tech →</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="gl-section" aria-labelledby="proc-heading">
+        <div class="gl-section-head">
+          <h2 id="proc-heading">Browse by procedure</h2>
+          <p>Each hub explains candidacy, recovery, and what &ldquo;great vision&rdquo; can mean for your goals.</p>
+        </div>
+        <nav class="gl-proc-grid" aria-label="Procedure pages">
+          <a href="/procedures/laser-vision/smile-laser/">SMILE</a>
+          <a href="/procedures/laser-vision/lasik/">LASIK</a>
+          <a href="/procedures/lens-solutions/evo-icl/">EVO ICL</a>
+          <a href="/procedures/lens-solutions/pie/">PIE</a>
+          <a href="/procedures/lens-solutions/robotic-cataract-surgery/">Laser cataract</a>
+          <a href="/contact/schedule-consultation/">Book consultation</a>
+        </nav>
+      </section>
+
+      <p class="gl-note">Individual results vary. Nothing on this page is a guarantee of a specific acuity or aesthetic outcome. The only way to know what fits your eyes is a consultation with diagnostic testing.</p>
+
+      <div class="gl-links">
+        <a class="gl-btn gl-btn--primary" href="/contact/schedule-consultation/">Book a consultation</a>
+        <a class="gl-btn gl-btn--ghost" href="/about/dr-khanna/media/">Media &amp; press</a>
+      </div>
+
+      <section class="gl-cta" aria-labelledby="gl-cta-heading">
+        <h2 id="gl-cta-heading">When the photo gallery is ready</h2>
+        <p>We&rsquo;ll publish it here first. If you&rsquo;d like to be notified—or to discuss whether your case could be shared (with full consent)—ask our team at your next visit.</p>
+        <a href="/contact/schedule-consultation/">Schedule your visit</a>
+      </section>
+    </div>
+  </main>
+
+  <%- include('/partials/footer') %>
+</body>
+</html>

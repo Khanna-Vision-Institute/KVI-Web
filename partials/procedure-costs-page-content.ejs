@@ -1,0 +1,1020 @@
+<!-- Procedure costs: premium visual layer (scoped — matches site shell) -->
+<div id="procedure-costs-root">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+    #procedure-costs-root {
+      --pc-ink: #0f172a;
+      --pc-ink-soft: #1e293b;
+      --pc-muted: #64748b;
+      --pc-muted2: #94a3b8;
+      --pc-line: rgba(148, 163, 184, 0.35);
+      --pc-line-strong: rgba(148, 163, 184, 0.55);
+      --pc-brand: #7a0026;
+      --pc-brand2: #9f1239;
+      --pc-teal: #0f766e;
+      --pc-teal2: #14b8a6;
+      --pc-gold: #b45309;
+      --pc-card: rgba(255, 255, 255, 0.78);
+      --pc-card-solid: #ffffff;
+      --pc-violet: #6366f1;
+      --pc-violet2: #8b5cf6;
+      --pc-sky: #0ea5e9;
+      --pc-sky2: #0284c7;
+      --pc-shadow: 0 22px 50px rgba(15, 23, 42, 0.08);
+      --pc-shadow-hover: 0 28px 60px rgba(15, 23, 42, 0.12);
+      --pc-radius-xl: 24px;
+      --pc-radius-lg: 18px;
+      --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+    }
+
+    #procedure-costs-root * { box-sizing: border-box; }
+
+    #procedure-costs-root {
+      margin: 0;
+      min-height: 50vh;
+      color: var(--pc-ink);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.65;
+      padding: clamp(132px, 18vw, 188px) 16px clamp(56px, 8vw, 88px);
+      position: relative;
+      isolation: isolate;
+      background-color: #dde6f0;
+      background-image:
+        radial-gradient(ellipse 110% 75% at 12% 8%, rgba(122, 0, 38, 0.14), transparent 52%),
+        radial-gradient(ellipse 85% 58% at 92% 5%, rgba(15, 118, 110, 0.15), transparent 48%),
+        radial-gradient(ellipse 75% 55% at 50% 100%, rgba(180, 83, 9, 0.11), transparent 46%),
+        radial-gradient(ellipse 55% 45% at 78% 42%, rgba(99, 102, 241, 0.09), transparent 52%),
+        linear-gradient(170deg, rgba(248, 250, 252, 0.5) 0%, transparent 42%);
+    }
+
+    #procedure-costs-root::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.52;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+
+    #procedure-costs-root header.hero,
+    #procedure-costs-root main.pc-main {
+      width: min(1100px, 100%);
+      margin-inline: auto;
+      padding: 0 6px;
+    }
+
+    #procedure-costs-root header.hero {
+      padding-bottom: 12px;
+    }
+
+    #procedure-costs-root .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(26px, 4vw, 38px);
+      border-radius: var(--pc-radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      background:
+        radial-gradient(ellipse 55% 45% at 0% 100%, rgba(122, 0, 38, 0.07) 0%, transparent 72%),
+        linear-gradient(145deg,
+          rgba(255, 246, 248, 0.94) 0%,
+          rgba(236, 253, 247, 0.88) 38%,
+          rgba(239, 246, 255, 0.9) 68%,
+          rgba(254, 252, 248, 0.92) 100%);
+      box-shadow:
+        var(--pc-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85),
+        inset 0 0 80px rgba(122, 0, 38, 0.04),
+        inset 0 0 100px rgba(20, 184, 166, 0.05);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: grid;
+      gap: 14px;
+    }
+
+    #procedure-costs-root .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--pc-brand), var(--pc-gold), var(--pc-teal2));
+      opacity: 0.92;
+    }
+
+    #procedure-costs-root .hero::after {
+      content: '';
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      right: -140px;
+      top: -180px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(20, 184, 166, 0.22) 0%, transparent 55%),
+        radial-gradient(circle at 70% 60%, rgba(180, 83, 9, 0.12) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    #procedure-costs-root .hero .row {
+      position: relative;
+      z-index: 1;
+    }
+
+    #procedure-costs-root .hero .kicker,
+    #procedure-costs-root .hero h1,
+    #procedure-costs-root .hero p {
+      position: relative;
+      z-index: 1;
+    }
+
+    #procedure-costs-root .kicker {
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--pc-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #procedure-costs-root .kicker::before {
+      content: '';
+      width: 28px;
+      height: 2px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--pc-brand), var(--pc-teal));
+    }
+
+    #procedure-costs-root .hero h1 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.8vw, 2.85rem);
+      font-weight: 600;
+      line-height: 1.14;
+      letter-spacing: -0.02em;
+      color: var(--pc-ink);
+    }
+
+    #procedure-costs-root .hero p {
+      margin: 0;
+      max-width: 52ch;
+      color: var(--pc-muted);
+      font-size: 1.06rem;
+      line-height: 1.62;
+    }
+
+    #procedure-costs-root .row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    #procedure-costs-root .btn {
+      appearance: none;
+      border-radius: 999px;
+      padding: 13px 22px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      font-family: inherit;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition:
+        transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.22s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    #procedure-costs-root .btn.brand {
+      color: #fff;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--pc-brand) 0%, var(--pc-brand2) 55%, #881337 100%);
+      box-shadow: 0 10px 28px rgba(122, 0, 38, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    }
+
+    #procedure-costs-root .btn.brand:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px rgba(122, 0, 38, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    }
+
+    #procedure-costs-root .btn.ghost {
+      background: linear-gradient(135deg, rgba(236, 253, 247, 0.75), rgba(255, 255, 255, 0.7));
+      border-color: rgba(20, 184, 166, 0.22);
+      color: var(--pc-ink-soft);
+      box-shadow: 0 2px 14px rgba(15, 118, 110, 0.08);
+    }
+
+    #procedure-costs-root .btn.ghost:hover {
+      background: linear-gradient(135deg, rgba(220, 252, 239, 0.95), rgba(255, 255, 255, 0.88));
+      border-color: rgba(20, 184, 166, 0.35);
+      transform: translateY(-1px);
+    }
+
+    #procedure-costs-root .btn:focus-visible,
+    #procedure-costs-root #switch:focus-visible {
+      outline: 3px solid rgba(20, 184, 166, 0.45);
+      outline-offset: 3px;
+    }
+
+    #procedure-costs-root .tag {
+      border: 1px solid rgba(20, 184, 166, 0.22);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #115e59;
+      background: linear-gradient(135deg, rgba(204, 251, 241, 0.55), rgba(255, 255, 255, 0.7));
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        0 2px 12px rgba(15, 118, 110, 0.08);
+    }
+
+    #procedure-costs-root .toggle {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-shrink: 0;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255, 237, 240, 0.55), rgba(236, 254, 255, 0.5), rgba(238, 242, 255, 0.45));
+      border: 1px solid rgba(122, 0, 38, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    }
+
+    #procedure-costs-root .toggle .meta {
+      font-weight: 600;
+      color: #334155;
+      font-size: 13px;
+    }
+
+    #procedure-costs-root #switch {
+      position: relative;
+      width: 52px;
+      height: 30px;
+      background: linear-gradient(180deg, rgba(226, 232, 240, 0.95), rgba(241, 245, 249, 0.85));
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      border-radius: 999px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+
+    #procedure-costs-root #switch .dot {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #fff, #f8fafc);
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15);
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    #procedure-costs-root #switch.on {
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.35), rgba(15, 118, 110, 0.25));
+      border-color: rgba(20, 184, 166, 0.45);
+    }
+
+    #procedure-costs-root #switch.on .dot {
+      transform: translateX(22px);
+      background: linear-gradient(135deg, var(--pc-brand), #881337);
+      box-shadow: 0 2px 12px rgba(122, 0, 38, 0.35);
+    }
+
+    /* Section titles */
+    #procedure-costs-root .section-title {
+      margin: clamp(28px, 5vw, 40px) 0 18px;
+      padding-left: 18px;
+      position: relative;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(1.45rem, 3vw, 1.85rem);
+      letter-spacing: -0.02em;
+      color: var(--pc-ink);
+    }
+
+    #procedure-costs-root .section-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.12em;
+      bottom: 0.12em;
+      width: 4px;
+      border-radius: 4px;
+      background: linear-gradient(180deg, var(--pc-brand), var(--pc-teal2), var(--pc-gold));
+      box-shadow: 0 2px 8px rgba(122, 0, 38, 0.2);
+    }
+
+    #procedure-costs-root .section-title span {
+      display: block;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.88rem;
+      letter-spacing: 0;
+      color: var(--pc-muted);
+      margin-top: 6px;
+    }
+
+    /* Price grid cards */
+    #procedure-costs-root .grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(262px, 1fr));
+    }
+
+    #procedure-costs-root .grid .card.procedure-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: var(--pc-radius-lg);
+      background:
+        radial-gradient(120% 80% at 100% -20%, rgba(20, 184, 166, 0.12), transparent 55%),
+        linear-gradient(165deg, rgba(255, 255, 255, 0.92), rgba(236, 253, 246, 0.48));
+      padding: 22px 22px 20px;
+      box-shadow:
+        var(--pc-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition:
+        transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.35s ease,
+        border-color 0.28s ease;
+    }
+
+    #procedure-costs-root .grid .card.procedure-card:nth-child(6n + 2) {
+      background:
+        radial-gradient(120% 85% at 0% -15%, rgba(159, 18, 57, 0.12), transparent 52%),
+        linear-gradient(168deg, rgba(255, 255, 255, 0.92), rgba(255, 241, 242, 0.55));
+      border-color: rgba(159, 18, 57, 0.12);
+    }
+    #procedure-costs-root .grid .card.procedure-card:nth-child(6n + 3) {
+      background:
+        radial-gradient(100% 70% at 100% 0%, rgba(99, 102, 241, 0.13), transparent 50%),
+        linear-gradient(168deg, rgba(255, 255, 255, 0.92), rgba(238, 242, 255, 0.55));
+      border-color: rgba(99, 102, 241, 0.15);
+    }
+    #procedure-costs-root .grid .card.procedure-card:nth-child(6n + 4) {
+      background:
+        radial-gradient(110% 75% at 0% 100%, rgba(217, 119, 6, 0.12), transparent 50%),
+        linear-gradient(168deg, rgba(255, 255, 255, 0.92), rgba(254, 252, 232, 0.55));
+      border-color: rgba(217, 119, 6, 0.14);
+    }
+    #procedure-costs-root .grid .card.procedure-card:nth-child(6n + 5) {
+      background:
+        radial-gradient(100% 70% at 100% 100%, rgba(14, 165, 233, 0.12), transparent 50%),
+        linear-gradient(168deg, rgba(255, 255, 255, 0.92), rgba(236, 254, 255, 0.55));
+      border-color: rgba(14, 165, 233, 0.16);
+    }
+    #procedure-costs-root .grid .card.procedure-card:nth-child(6n) {
+      background:
+        radial-gradient(100% 70% at 0% 0%, rgba(5, 150, 105, 0.14), transparent 50%),
+        linear-gradient(168deg, rgba(255, 255, 255, 0.92), rgba(209, 250, 229, 0.45));
+      border-color: rgba(5, 150, 105, 0.12);
+    }
+
+    #procedure-costs-root .grid .card.procedure-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--pc-teal), var(--pc-teal2));
+      opacity: 0.55;
+      transition: opacity 0.28s ease;
+    }
+
+    #procedure-costs-root .grid .card.procedure-card:nth-child(6n + 2)::before { background: linear-gradient(90deg, var(--pc-brand), var(--pc-brand2)); }
+    #procedure-costs-root .grid .card.procedure-card:nth-child(6n + 3)::before { background: linear-gradient(90deg, var(--pc-violet), var(--pc-violet2)); }
+    #procedure-costs-root .grid .card.procedure-card:nth-child(6n + 4)::before { background: linear-gradient(90deg, var(--pc-gold), #d97706); }
+    #procedure-costs-root .grid .card.procedure-card:nth-child(6n + 5)::before { background: linear-gradient(90deg, var(--pc-sky), var(--pc-sky2)); }
+    #procedure-costs-root .grid .card.procedure-card:nth-child(6n)::before { background: linear-gradient(90deg, #059669, var(--pc-teal2)); }
+
+    @media (hover: hover) {
+      #procedure-costs-root .grid .card.procedure-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--pc-shadow-hover);
+        border-color: rgba(20, 184, 166, 0.32);
+      }
+      #procedure-costs-root .grid .card.procedure-card:hover::before {
+        opacity: 1;
+      }
+    }
+
+    #procedure-costs-root .grid .card.procedure-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--pc-ink);
+      letter-spacing: -0.01em;
+    }
+
+    #procedure-costs-root .price {
+      font-size: clamp(1.35rem, 2.5vw, 1.55rem);
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      color: var(--pc-ink);
+      line-height: 1.35;
+      padding: 14px 0 4px;
+      border-top: 1px dashed var(--pc-line);
+      border-bottom: 1px dashed var(--pc-line);
+      margin-bottom: 8px;
+    }
+
+    #procedure-costs-root .price .meta {
+      display: block;
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--pc-muted);
+      line-height: 1.45;
+    }
+
+    #procedure-costs-root .bullets {
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+      color: var(--pc-muted);
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+
+    #procedure-costs-root .bullets li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 8px;
+    }
+
+    #procedure-costs-root .bullets li:last-child {
+      margin-bottom: 0;
+    }
+
+    #procedure-costs-root .bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pc-teal2), var(--pc-teal));
+      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.18);
+    }
+
+    #procedure-costs-root .procedure-card:nth-child(6n + 2) .bullets li::before {
+      background: linear-gradient(135deg, var(--pc-brand2), var(--pc-brand));
+      box-shadow: 0 0 0 3px rgba(159, 18, 57, 0.15);
+    }
+    #procedure-costs-root .procedure-card:nth-child(6n + 3) .bullets li::before {
+      background: linear-gradient(135deg, var(--pc-violet), var(--pc-violet2));
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.16);
+    }
+    #procedure-costs-root .procedure-card:nth-child(6n + 4) .bullets li::before {
+      background: linear-gradient(135deg, #d97706, var(--pc-gold));
+      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.14);
+    }
+    #procedure-costs-root .procedure-card:nth-child(6n + 5) .bullets li::before {
+      background: linear-gradient(135deg, var(--pc-sky), var(--pc-sky2));
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.14);
+    }
+    #procedure-costs-root .procedure-card:nth-child(6n) .bullets li::before {
+      background: linear-gradient(135deg, #059669, var(--pc-teal2));
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.14);
+    }
+
+    #procedure-costs-root .footnote {
+      margin-top: 22px;
+      font-size: 13.5px;
+      color: #475569;
+      max-width: 72ch;
+      line-height: 1.6;
+      padding: 14px 16px 14px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(180, 83, 9, 0.18);
+      border-left: 3px solid var(--pc-gold);
+      background: linear-gradient(115deg, rgba(255, 251, 235, 0.75), rgba(236, 253, 246, 0.45), rgba(238, 242, 255, 0.4));
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    #procedure-costs-root .meta { color: var(--pc-muted); font-size: 14px; }
+    #procedure-costs-root .accent { color: var(--pc-teal); font-weight: 600; }
+
+    /* Lower sections (Financing block) */
+    #procedure-costs-root main .card.section-card {
+      margin-top: 18px;
+      border-radius: var(--pc-radius-xl);
+      border: 1px solid rgba(15, 118, 110, 0.2);
+      background:
+        radial-gradient(90% 60% at 0% 0%, rgba(20, 184, 166, 0.14), transparent 55%),
+        radial-gradient(70% 50% at 100% 100%, rgba(122, 0, 38, 0.08), transparent 50%),
+        linear-gradient(152deg, rgba(255, 255, 255, 0.88), rgba(204, 251, 241, 0.38), rgba(248, 250, 252, 0.85));
+      padding: clamp(22px, 3vw, 30px);
+      box-shadow: var(--pc-shadow), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #procedure-costs-root main .card.section-card::before {
+      content: '';
+      position: absolute;
+      bottom: -40%;
+      left: -20%;
+      width: 65%;
+      height: 85%;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #procedure-costs-root main .card.section-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    #procedure-costs-root main.pc-main > section.section-card:last-of-type {
+      border-color: rgba(99, 102, 241, 0.22);
+      background:
+        radial-gradient(85% 55% at 100% -10%, rgba(99, 102, 241, 0.12), transparent 52%),
+        radial-gradient(60% 45% at 0% 100%, rgba(122, 0, 38, 0.06), transparent 50%),
+        linear-gradient(155deg, rgba(255, 255, 255, 0.9), rgba(237, 233, 254, 0.42), rgba(241, 245, 249, 0.88));
+    }
+
+    #procedure-costs-root main.pc-main > section.section-card:last-of-type::before {
+      background: radial-gradient(circle, rgba(20, 184, 166, 0.1) 0%, transparent 70%);
+      left: auto;
+      right: -15%;
+    }
+
+    #procedure-costs-root .section-card h2 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.42rem;
+      margin: 0 0 6px;
+      color: var(--pc-ink);
+    }
+
+    #procedure-costs-root .section-card > h2 + .meta {
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    #procedure-costs-root .fin {
+      display: flex;
+      gap: clamp(18px, 4vw, 36px);
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    #procedure-costs-root .qr {
+      width: min(164px, 42vw);
+      text-align: center;
+      padding: 16px;
+      border-radius: 18px;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.88), rgba(236, 254, 255, 0.55));
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      box-shadow:
+        0 8px 26px rgba(14, 165, 233, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    #procedure-costs-root .fin .qr:nth-child(2) {
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.88), rgba(255, 241, 242, 0.5));
+      border-color: rgba(159, 18, 57, 0.18);
+      box-shadow:
+        0 8px 26px rgba(159, 18, 57, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    }
+
+    @media (hover: hover) {
+      #procedure-costs-root .qr:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 36px rgba(15, 23, 42, 0.1);
+      }
+    }
+
+    #procedure-costs-root .qr img {
+      width: 100%;
+      max-width: 140px;
+      height: auto;
+      aspect-ratio: 1;
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: #fff;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    #procedure-costs-root .qr figcaption {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--pc-muted);
+    }
+
+    #procedure-costs-root .fin-disclaimer {
+      flex: 1;
+      min-width: 200px;
+      align-self: center;
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--pc-muted);
+      padding: 8px 0;
+    }
+
+    /* FAQ accordion */
+    #procedure-costs-root details.pc-faq {
+      border-radius: 14px;
+      background: linear-gradient(100deg, rgba(255, 255, 255, 0.72), rgba(236, 254, 255, 0.35));
+      border: 1px solid rgba(20, 184, 166, 0.2);
+      padding: 0 16px;
+      margin-bottom: 10px;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    #procedure-costs-root details.pc-faq:nth-of-type(odd) {
+      background: linear-gradient(100deg, rgba(255, 255, 255, 0.72), rgba(255, 237, 240, 0.35));
+      border-color: rgba(122, 0, 38, 0.12);
+    }
+
+    #procedure-costs-root details.pc-faq[open] {
+      background: linear-gradient(100deg, rgba(255, 255, 255, 0.94), rgba(204, 251, 241, 0.55));
+      border-color: rgba(20, 184, 166, 0.35);
+    }
+
+    #procedure-costs-root details.pc-faq:nth-of-type(odd)[open] {
+      background: linear-gradient(100deg, rgba(255, 255, 255, 0.94), rgba(254, 243, 244, 0.55));
+      border-color: rgba(159, 18, 57, 0.22);
+    }
+
+    #procedure-costs-root details.pc-faq:nth-of-type(odd) summary::after {
+      color: var(--pc-brand2);
+    }
+
+    #procedure-costs-root details.pc-faq summary {
+      cursor: pointer;
+      padding: 16px 0;
+      font-weight: 600;
+      color: var(--pc-ink);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    #procedure-costs-root details.pc-faq summary::-webkit-details-marker {
+      display: none;
+    }
+
+    #procedure-costs-root details.pc-faq summary::after {
+      content: '+';
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--pc-teal);
+      line-height: 1;
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    #procedure-costs-root details.pc-faq[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    #procedure-costs-root details.pc-faq .faq-body {
+      padding: 0 0 18px;
+      margin-top: -4px;
+    }
+
+    #procedure-costs-root a:not(.btn)[href^="http"] {
+      color: #0d9488;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Modal */
+    #procedure-costs-root .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      background: rgba(15, 23, 42, 0.48);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 10050;
+      padding: 24px;
+    }
+
+    #procedure-costs-root .sheet {
+      width: min(500px, 100%);
+      background:
+        radial-gradient(100% 80% at 100% -20%, rgba(20, 184, 166, 0.12), transparent 55%),
+        radial-gradient(80% 60% at 0% 100%, rgba(122, 0, 38, 0.06), transparent 50%),
+        linear-gradient(180deg, rgba(255, 252, 250, 0.98) 0%, rgba(236, 253, 246, 0.35), rgba(248, 250, 252, 0.96) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 22px;
+      padding: 26px;
+      box-shadow:
+        0 32px 64px rgba(15, 23, 42, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+      position: relative;
+      overflow: hidden;
+      animation: pcSheetIn 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes pcSheetIn {
+      from {
+        opacity: 0;
+        transform: translateY(22px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    #procedure-costs-root .sheet::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--pc-brand), var(--pc-teal));
+    }
+
+    #procedure-costs-root .sheet .sheet-head {
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    #procedure-costs-root .sheet h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.42rem;
+      color: var(--pc-ink);
+    }
+
+    #procedure-costs-root .sheet form {
+      display: grid;
+      gap: 14px;
+    }
+
+    #procedure-costs-root .sheet input {
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--pc-line-strong);
+      background: rgba(248, 250, 252, 0.9);
+      color: var(--pc-ink);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    #procedure-costs-root .sheet input:focus {
+      outline: none;
+      border-color: rgba(20, 184, 166, 0.6);
+      box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.12);
+    }
+
+    #procedure-costs-root #headline {
+      scroll-margin-top: 120px;
+    }
+
+    #procedure-costs-root .procedure-costs-toggle {
+      margin-left: auto;
+    }
+
+    @media (max-width: 720px) {
+      #procedure-costs-root .procedure-costs-toggle {
+        margin-left: 0;
+        width: 100%;
+        justify-content: space-between;
+        padding-top: 12px;
+        margin-top: 6px;
+        border-top: 1px dashed var(--pc-line);
+      }
+      #procedure-costs-root .row {
+        gap: 10px;
+      }
+      #procedure-costs-root .btn {
+        width: 100%;
+      }
+      #procedure-costs-root .tag {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #procedure-costs-root .btn,
+      #procedure-costs-root #switch .dot,
+      #procedure-costs-root .grid .card.procedure-card,
+      #procedure-costs-root .sheet {
+        transition: none !important;
+        animation: none !important;
+      }
+      #procedure-costs-root .btn:hover,
+      #procedure-costs-root .grid .card.procedure-card:hover {
+        transform: none;
+      }
+      #procedure-costs-root details.pc-faq summary::after {
+        transition: none;
+      }
+    }
+</style>
+
+<header class="hero">
+    <span class="kicker">Transparent ranges · 0% promo examples</span>
+    <h1>Pricing that feels straightforward</h1>
+    <p>Explore example monthly ranges for 24 months at 0% APR (qualified applicants). Use the toggle to switch to estimated full per‑eye totals—no surprises hidden in tiny print.</p>
+    <div class="row">
+      <button type="button" class="btn brand" id="openGuide">Get the 2025 price guide · PDF</button>
+      <a class="btn ghost" href="/contact/schedule-consultation/">Book a consult</a>
+      <span class="tag">Westlake Village · Beverly Hills</span>
+      <div class="toggle procedure-costs-toggle">
+        <span class="meta">Show full per‑eye total</span>
+        <div class="switch" id="switch" role="switch" aria-checked="false" tabindex="0" aria-label="Toggle full price versus monthly"><div class="dot"></div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="pc-main">
+    <section aria-labelledby="headline" id="prices">
+      <h2 id="headline" class="section-title">
+        Procedures at a glance
+        <span>Ranges are illustrative; your consult personalizes numbers to your clinical plan.</span>
+      </h2>
+      <div class="grid" id="cards"></div>
+      <p class="footnote">Location, technology, anesthesia, lens choice, and add‑ons can shift final quotes. Insurance may apply when a procedure is medically necessary.</p>
+    </section>
+
+    <section class="card section-card" aria-labelledby="fin">
+      <h2 id="fin">Financing that fits vision goals</h2>
+      <p class="meta">Trusted partners • apply in minutes • terms set by lender</p>
+      <div class="fin">
+        <figure class="qr">
+          <img alt="Apply for financing with Alphaeon Credit (QR)"
+               src="https://i.ibb.co/rKs50v2m/alpheaon-qr-code1.png" loading="lazy" decoding="async" />
+          <figcaption>Alphaeon Credit · 0% promo up to 24 mo*</figcaption>
+        </figure>
+        <figure class="qr">
+          <img alt="Apply for financing with CareCredit (QR)"
+               src="https://i.ibb.co/CXkMSCs/qr-code.png" loading="lazy" decoding="async" />
+          <figcaption>CareCredit · 0% promo up to 24 mo*</figcaption>
+        </figure>
+        <div class="fin-disclaimer">
+          * For qualified applicants only. Terms, fees, and approval are determined by the lender—not Khanna Vision Institute. Example ranges on this page are educational, not a credit offer or guarantee.
+        </div>
+      </div>
+    </section>
+
+    <section class="card section-card" aria-labelledby="faqs" style="margin-top: 18px">
+      <h2 id="faqs">Questions we hear often</h2>
+      <p class="meta" style="margin:0 0 16px">Straight answers · no gimmicks</p>
+      <details class="pc-faq">
+        <summary>Do you match teaser pricing?</summary>
+        <div class="faq-body meta">We avoid bait‑and‑switch advertising. After diagnostics on comparable plans and technology, we’ll walk you through an apples‑to‑apples explanation.</div>
+      </details>
+      <details class="pc-faq">
+        <summary>Is 0% financing guaranteed?</summary>
+        <div class="faq-body meta">No. Approval and terms are solely between you and the lender; we guide you through the application and paperwork.</div>
+      </details>
+      <details class="pc-faq">
+        <summary>Can I use HSA or FSA?</summary>
+        <div class="faq-body meta">Yes—many patients do. Our team can help split balances across eligible payment methods.</div>
+      </details>
+    </section>
+  </main>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="sheet">
+      <div class="row sheet-head">
+        <h3 id="sheetTitle">Get the 2025 price guide</h3>
+        <span class="tag">PDF · 2 pages</span>
+      </div>
+      <form id="leadForm">
+        <input name="full_name" placeholder="Full name" autocomplete="name" required />
+        <input type="email" name="email" placeholder="Email" autocomplete="email" required />
+        <input name="phone" placeholder="Phone (optional)" autocomplete="tel" />
+        <button class="btn brand" type="submit">Email me the guide</button>
+        <div class="meta">By submitting, you agree to be contacted about your vision correction options.</div>
+      </form>
+      <div id="success" style="display:none">
+        <p class="accent" style="margin:0 0 12px">Thank you — your download is ready.</p>
+        <p style="margin:0"><a class="btn ghost" href="/assets/downloads/khanna-2025-price-guide.pdf" target="_blank" rel="noopener">Download PDF</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const data = [
+      { id: 'smile', name: 'SMILE', low: 2400, high: 3600, per: 'eye',
+        bullets: ['Dry-eye friendly for many', 'Back to most activities in 24–72 hours'] },
+      { id: 'lasik', name: 'LASIK / Surface', low: 2400, high: 3408, per: 'eye',
+        bullets: ['Technique and facility affect price', 'Enhancement policy reviewed at consult'] },
+      { id: 'evo', name: 'EVO ICL', low: 4000, high: 6000, per: 'eye',
+        bullets: ['Great for high prescriptions or thin corneas', 'Range reflects anesthesia/facility'] },
+      { id: 'pie', name: 'PIE / LAL', low: 6912, high: 9912, per: 'eye',
+        bullets: ['Advanced lens options tailored to goals', 'Warranty options available'] },
+      { id: 'ctak', name: 'CTAK', low: 4992, high: 7992, per: 'eye',
+        bullets: ['Transepithelial topography-guided plan', 'Medical necessity reviewed case-by-case'] },
+      { id: 'cxl', name: 'CXL (Cross-linking)', low: 7488, high: 9888, per: 'eye',
+        bullets: ['Stabilizes keratoconus/progression', 'Insurance rules may apply'] },
+    ];
+
+    const $ = (id) => document.getElementById(id);
+    const cards = $('cards');
+    const switcher = $('switch');
+    let showFull = false;
+
+    function money(n) {
+      return '$' + Math.round(n).toLocaleString();
+    }
+    function monthlyString(low, high) {
+      const L = low / 24;
+      const H = high / 24;
+      return L === H ? money(L) + '/mo' : money(L) + '–' + money(H) + '/mo';
+    }
+    function fullString(low, high, per) {
+      return low === high
+        ? money(low) + ' <span class="meta">per ' + per + '</span>'
+                        : money(low) + '–' + money(high) + ' <span class="meta">per ' + per + '</span>';
+    }
+    function render() {
+      cards.innerHTML = '';
+      data.forEach((d) => {
+        const el = document.createElement('article');
+        el.className = 'card procedure-card';
+        el.setAttribute('data-procedure', d.id);
+        const priceHTML = showFull
+          ? fullString(d.low, d.high, d.per)
+          : monthlyString(d.low, d.high) + ' <span class="meta">per ' + d.per + ' @ 24 mo 0%</span>';
+        el.innerHTML =
+          '<h3>' + d.name + '</h3>' +
+          '<div class="price">' + priceHTML + '</div>' +
+          '<ul class="bullets">' + d.bullets.map((b) => '<li>' + b + '</li>').join('') + '</ul>';
+        cards.appendChild(el);
+      });
+    }
+    render();
+
+    function syncSwitchAria() {
+      switcher.setAttribute('aria-checked', showFull ? 'true' : 'false');
+    }
+    syncSwitchAria();
+    switcher.addEventListener('click', () => {
+      showFull = !showFull;
+      switcher.classList.toggle('on', showFull);
+      syncSwitchAria();
+      render();
+    });
+    switcher.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        switcher.click();
+      }
+    });
+
+    const modal = $('modal');
+    const openGuide = $('openGuide');
+    function openModal() {
+      modal.style.display = 'grid';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    openGuide.onclick = openModal;
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.style.display === 'grid') closeModal();
+    });
+
+    $('leadForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      e.target.style.display = 'none';
+      $('success').style.display = 'block';
+    });
+  </script>
+</div>

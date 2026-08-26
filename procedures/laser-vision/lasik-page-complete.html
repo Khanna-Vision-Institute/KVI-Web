@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Meta Title (60 characters) -->
+    <% if (typeof pageData !== 'undefined' && pageData && pageData.metaTitle) { %>
+    <title><%= pageData.metaTitle %></title>
+    <% } else { %>
+    <title>LASIK Eye Surgery Beverly Hills & Westlake Village | Dr. Khanna</title>
+    <% } %>
+    
+    <!-- Meta Description (155 characters) -->
+    <% if (typeof pageData !== 'undefined' && pageData && pageData.metaDescription) { %>
+    <meta name="description" content="<%= pageData.metaDescription %>">
+    <% } else { %>
+    <meta name="description" content="Top-rated LASIK surgery in Beverly Hills & Westlake Village. Celebrity-trusted Dr. Khanna. 25,000+ procedures. Free consultation. 0% financing available.">
+    <% } %>
+    
+    <!-- Canonical Tag -->
+    <link rel="canonical" href="https://khannainstitute.com/procedures/laser-vision/lasik/">
+    
+    <!-- Hreflang Tags -->
+    <link rel="alternate" hreflang="en-US" href="https://khannainstitute.com/procedures/laser-vision/lasik/">
+    <link rel="alternate" hreflang="x-default" href="https://khannainstitute.com/procedures/laser-vision/lasik/">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="LASIK Eye Surgery Beverly Hills & Westlake Village | Celebrity Eye Surgeon">
+    <meta property="og:description" content="Transform your vision with Dr. Khanna's advanced LASIK. Trusted by Brenda Song, Corbin Bleu & thousands more.">
+    <meta property="og:image" content="https://khannainstitute.com/images/dr-khanna-lasik-surgery.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://khannainstitute.com/procedures/laser-vision/lasik/">
+    <meta property="og:site_name" content="Khanna Vision Institute">
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LASIK Beverly Hills & Westlake Village | Dr. Khanna">
+    <meta name="twitter:description" content="Celebrity-trusted LASIK surgery. 25,000+ successful procedures. Free consultation.">
+    <meta name="twitter:image" content="https://khannainstitute.com/images/lasik-hero.jpg">
+    
+    <!-- Meta Robots -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+    
+</head>
+<body>
+    <%- include('/partials/header') %>
+    <!-- Body from partials/lasik-page-content.ejs (not Strapi) -->
+    <%- include('/partials/lasik-page-content') %>
+
+    <%- include('/partials/footer') %>
+
+</body>
+</html>

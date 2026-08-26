@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Am I a Candidate for LASIK or SMILE? Free Vision Quiz | Khanna Institute</title>
+    <meta name="description" content="Take our 60-second quiz to find out if you're a candidate for LASIK, SMILE, or EVO ICL. Get personalized vision correction recommendations from Dr. Khanna.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-navy: #1E3A5F;
+            --accent-teal: #00D4D4;
+            --light-gray: #F7F8FA;
+            --text-gray: #4A5568;
+            --white: #FFFFFF;
+            --success-green: #48BB78;
+            --warning-yellow: #F6E05E;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #2A4A70 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .quiz-header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .quiz-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .quiz-subhead {
+            font-size: 18px;
+            opacity: 0.9;
+            color: var(--accent-teal);
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            max-width: 600px;
+            margin: 30px auto;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 5px;
+        }
+        
+        .progress-bar {
+            background: var(--accent-teal);
+            height: 10px;
+            border-radius: 15px;
+            width: 10%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            text-align: center;
+            color: white;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        /* Quiz Container */
+        .quiz-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            min-height: 400px;
+        }
+        
+        .question-section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .question-section.active {
+            display: block;
+        }
+        
+        .question-number {
+            color: var(--accent-teal);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .question-title {
+            font-size: 24px;
+            color: var(--primary-navy);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        /* Answer Options */
+        .answer-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .answer-option {
+            background: var(--light-gray);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .answer-option:hover {
+            border-color: var(--accent-teal);
+            transform: translateX(5px);
+        }
+        
+        .answer-option.selected {
+            background: var(--primary-navy);
+            color: white;
+            border-color: var(--primary-navy);
+        }
+        
+        .answer-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .answer-text {
+            flex: 1;
+        }
+        
+        /* Range Slider Question */
+        .range-container {
+            margin: 30px 0;
+        }
+        
+        .range-slider {
+            width: 100%;
+            height: 6px;
+            background: var(--light-gray);
+            outline: none;
+            -webkit-appearance: none;
+            border-radius: 3px;
+        }
+        
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 25px;
+            height: 25px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            color: var(--text-gray);
+        }
+        
+        .range-value {
+            text-align: center;
+            font-size: 32px;
+            color: var(--primary-navy);
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        /* Navigation Buttons */
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 20px;
+        }
+        
+        .nav-button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        .back-button {
+            background: var(--light-gray);
+            color: var(--primary-navy);
+        }
+        
+        .back-button:hover {
+            background: #E2E8F0;
+        }
+        
+        .next-button {
+            background: var(--accent-teal);
+            color: white;
+            flex: 1;
+        }
+        
+        .next-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,212,212,0.3);
+        }
+        
+        .next-button:disabled {
+            background: #CBD5E0;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Results Section */
+        .results-section {
+            display: none;
+            text-align: center;
+        }
+        
+        .results-header {
+            margin-bottom: 30px;
+        }
+        
+        .results-title {
+            font-size: 32px;
+            color: var(--primary-navy);
+            margin-bottom: 10px;
+        }
+        
+        .candidacy-score {
+            display: inline-block;
+            background: var(--success-green);
+            color: white;
+            padding: 10px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .procedure-recommendations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .procedure-card {
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .procedure-card.recommended {
+            background: var(--primary-navy);
+            color: white;
+        }
+        
+        .procedure-card.recommended::after {
+            content: "BEST MATCH";
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: var(--accent-teal);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        
+        .procedure-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .procedure-match {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            background: var(--light-gray);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .form-title {
+            font-size: 24px;
+            color: var(--primary-navy);
+            margin-bottom: 20px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .form-label {
+            color: var(--text-gray);
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .form-input {
+            padding: 12px;
+            border: 1px solid #CBD5E0;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-teal);
+        }
+        
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            background: var(--accent-teal);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,212,212,0.3);
+        }
+        
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .trust-badge {
+            text-align: center;
+            color: var(--text-gray);
+        }
+        
+        .trust-badge-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-navy);
+        }
+        
+        .trust-badge-text {
+            font-size: 12px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .quiz-container {
+                padding: 20px;
+            }
+            
+            .question-title {
+                font-size: 20px;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .procedure-recommendations {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Quiz Header -->
+    <div class="quiz-header">
+        <h1>Are You a Candidate for Vision Correction?</h1>
+        <p class="quiz-subhead">Get personalized recommendations in 60 seconds</p>
+    </div>
+    
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+        <div class="progress-text" id="progressText">Question 1 of 10</div>
+    </div>
+    
+    <!-- Quiz Container -->
+    <div class="quiz-container">
+        <!-- Question 1: Age -->
+        <div class="question-section active" data-question="1">
+            <div class="question-number">QUESTION 1</div>
+            <h2 class="question-title">What's your age?</h2>
+            <div class="answer-options">
+                <div class="answer-option" data-value="18-25">
+                    <div class="answer-icon">👤</div>
+                    <div class="answer-text">
+                        <strong>18-25 years</strong><br>
+                        <small>Young adult vision</small>
+                    </div>
+                </div>
+                <div class="answer-option" data-value="26-35">
+                    <div class="answer-icon">👥</div>
+                    <div class="answer-text">
+                        <strong>26-35 years</strong><br>
+                        <small>Prime candidate age</small>
+                    </div>
+                </div>
+                <div class="answer-option" data-value="36-45">
+                    <div class="answer-icon">👨</div>
+                    <div class="answer-text">
+                        <strong>36-45 years</strong><br>
+                        <small>Pre-presbyopia</small>
+                    </div>
+                </div>
+                <div class="answer-option" data-value="46+">
+                    <div class="answer-icon">👴</div>
+                    <div class="answer-text">
+                        <strong>46+ years</strong><br>
+                        <small>Presbyopia consideration</small>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-navigation">
+                <button class="nav-button back-button" style="visibility: hidden;">Back</button>
+                <button class="nav-button next-button" onclick="nextQuestion()" disabled>Continue</button>
+            </div>
+        </div>
+        
+        <!-- Question 2: Prescription Type -->
+        <div class="question-section" data-question="2">
+            <div class="question-number">QUESTION 2</div>
+            <h2 class="question-title">What type of vision correction do you currently use?</h2>
+            <div class="answer-options">
+                <div class="answer-option" data-value="glasses">
+                    <div class="answer-icon">👓</div>
+                    <div class="answer-text">
+                        <strong>Glasses only</strong><br>
+                        <small>Full-time or part-time</small>
+                    </div>
+                </div>
+                <div class="answer-option" data-value="contacts">
+                    <div class="answer-icon">👁️</div>
+                    <div class="answer-text">
+                        <strong>Contact lenses</strong><br>
+                        <small>Daily or extended wear</small>
+                    </div>
+                </div>
+                <div class="answer-option" data-value="both">
+                    <div class="answer-icon">🔄</div>
+                    <div class="answer-text">
+                        <strong>Both glasses and contacts</strong><br>
+                        <small>Alternating use</small>
+                    </div>
+                </div>
+                <div class="answer-option" data-value="readers">
+                    <div class="answer-icon">📖</div>
+                    <div class="answer-text">
+                        <strong>Reading glasses only</strong><br>
+                        <small>For near vision</small>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-navigation">
+                <button class="nav-button back-button" onclick="previousQuestion()">Back</button>
+                <button class="nav-button next-button" onclick="nextQuestion()" disabled>Continue</button>
+            </div>
+        </div>
+        
+        <!-- Question 3: Prescription Strength -->
+        <div class="question-section" data-question="3">
+            <div class="question-number">QUESTION 3</div>
+            <h2 class="question-title">What's your approximate prescription strength?</h2>
+            <div class="range-container">
+                <div class="range-value" id="prescriptionValue">-3.00</div>
+                <input type="range" class="range-slider" id="prescriptionRange" 
+                       min="-10" max="5" step="0.25" value="-3">
+                <div class="range-labels">
+                    <span>-10.00<br><small>High Myopia</small></span>
+                    <span>0<br><small>No correction</small></span>
+                    <span>+5.00<br><small>Hyperopia</small></span>
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--text-gray); margin-top: 20px;">
+                Move the slider to match your prescription<br>
+                <small>(Check your glasses or contact lens box)</small>
+            </p>
+            <div class="quiz-navigation">
+                <button class="nav-button back-button" onclick="previousQuestion()">Back</button>
+                <button class="nav-button next-button" onclick="nextQuestion()">Continue</button>
+            </div>
+        </div>
+        
+        <!-- Question 4: Astigmatism -->
+        <div class="question-section" data-question="4">
+            <div class="question-number">QUESTION 4</div>
+            <h2 class="question-title">Do you have astigmatism?</h2>
+            <div class="answer-options">
+                <div class="answer-option" data-value="none">
+                    <div class="answer-icon">✅</div>
+                    <div class="answer-text">
+                        <strong>No astigmatism</strong><br>
+                        <small>Clear corneal shape</small>
+                    </div>
+                </div>
+                <div class="answer-option" data-value="mild">
+                    <div class="answer-icon">🔍</div>
+                    <div class="answer-text">
+                        <strong>Mild astigmatism</strong><br>
+                        <small>Less than -2.00 cylinder</small>
+                    </div>
+                </div>
+                <div class="answer-option" data-value="moderate">
+                    <div class="answer-icon">👁️</div>
+                    <div class="answer-text">
+                        <strong>Moderate astigmatism</strong><br>
+                        <small>-2.00 to -4.00 cylinder</small>
+                    </div>
+                </div>
+                <div class="answer-option" data-value="unsure">
+                    <div class="answer-icon">❓</div>
+                    <div class="answer-text">
+                        <strong>Not sure</strong><br>
+                        <small>Need to check prescription</small>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-navigation">
+                <button class="nav-button back-button" onclick="previousQuestion()">Back</button>
+                <button class="nav-button next-button" onclick="nextQuestion()" disabled>Continue</button>
+            </div>
+        </div>
+        
+        <!-- Question 5: Lifestyle -->
+        <div class="question-section" data-question="5">
+            <div class="question-number">QUESTION 5</div>
+            <h2 class="question-title">Which best describes your lifestyle?</h2>
+            <div class="answer-options">
+                <div class="answer-option" data-value="active">
+                    <div class="answer-icon">🏃</div>
+                    <div class="answer-text">
+                        <strong>Very active</strong><br>
+                        <small>Sports, outdoor activities</small>
+                    </div>
+                </div>
+                <div class="answer-option" data-value="moderate">
+                    <div class="answer-icon">🚶</div>
+                    <div class="answer-text">
+                        <strong>Moderately active</strong><br>
+                        <small>Regular exercise, some sports</small>
+                    </div>
+                </div>
+                <div class="answer-option" data-value="office">
+                    <div class="answer-icon">💼</div>
+                    <div class="answer-text">
+                        <strong>Office/Computer work</strong><br>
+                        <small>Mostly indoor activities</small>
+                    </div>
+                </div>
+                <div class="answer-option" data-value="mixed">
+                    <div class="answer-icon">🔄</div>
+                    <div class="answer-text">
+                        <strong>Mixed lifestyle</strong><br>
+                        <small>Balance of activities</small>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-navigation">
+                <button class="nav-button back-button" onclick="previousQuestion()">Back</button>
+                <button class="nav-button next-button" onclick="nextQuestion()" disabled>Continue</button>
+            </div>
+        </div>
+        
+        <!-- Results Section -->
+        <div class="results-section" id="resultsSection">
+            <div class="results-header">
+                <h2 class="results-title">Great News! You're a Candidate!</h2>
+                <div class="candidacy-score">95% Match Score</div>
+            </div>
+            
+            <p style="font-size: 18px; color: var(--text-gray); margin-bottom: 30px;">
+                Based on your responses, here are your recommended procedures:
+            </p>
+            
+            <div class="procedure-recommendations">
+                <div class="procedure-card recommended">
+                    <div class="procedure-name">SMILE</div>
+                    <div class="procedure-match">Best match for your active lifestyle</div>
+                </div>
+                <div class="procedure-card">
+                    <div class="procedure-name">LASIK</div>
+                    <div class="procedure-match">Quick recovery option</div>
+                </div>
+                <div class="procedure-card">
+                    <div class="procedure-name">EVO ICL</div>
+                    <div class="procedure-match">Reversible alternative</div>
+                </div>
+            </div>
+            
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h3 class="form-title">Get Your Personalized Report & Schedule Free Consultation</h3>
+                <form id="consultationForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">First Name *</label>
+                            <input type="text" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Last Name *</label>
+                            <input type="text" class="form-input" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">Email *</label>
+                            <input type="email" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone *</label>
+                            <input type="tel" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Preferred Location</label>
+                            <select class="form-input">
+                                <option>Beverly Hills</option>
+                                <option>Westlake Village</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-button">Get My Free Report & Book Consultation</button>
+                </form>
+            </div>
+            
+            <!-- Trust Badges -->
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <div class="trust-badge-number">50,000+</div>
+                    <div class="trust-badge-text">Procedures Performed</div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-number">20+</div>
+                    <div class="trust-badge-text">Years Experience</div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-number">98%</div>
+                    <div class="trust-badge-text">Success Rate</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 5;
+        let answers = {};
+        
+        // Handle answer selection
+        document.querySelectorAll('.answer-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const section = this.closest('.question-section');
+                section.querySelectorAll('.answer-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+                
+                const nextBtn = section.querySelector('.next-button');
+                if (nextBtn) nextBtn.disabled = false;
+                
+                // Store answer
+                const questionNum = section.dataset.question;
+                answers[questionNum] = this.dataset.value;
+            });
+        });
+        
+        // Handle prescription range
+        const prescriptionRange = document.getElementById('prescriptionRange');
+        const prescriptionValue = document.getElementById('prescriptionValue');
+        
+        if (prescriptionRange) {
+            prescriptionRange.addEventListener('input', function() {
+                const value = parseFloat(this.value);
+                prescriptionValue.textContent = (value > 0 ? '+' : '') + value.toFixed(2);
+                answers[3] = value;
+            });
+        }
+        
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                // Hide current question
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.remove('active');
+                
+                // Show next question
+                currentQuestion++;
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.add('active');
+                
+                // Update progress
+                updateProgress();
+            } else {
+                // Show results
+                showResults();
+            }
+        }
+        
+        function previousQuestion() {
+            if (currentQuestion > 1) {
+                // Hide current question
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.remove('active');
+                
+                // Show previous question
+                currentQuestion--;
+                document.querySelector(`[data-question="${currentQuestion}"]`).classList.add('active');
+                
+                // Update progress
+                updateProgress();
+            }
+        }
+        
+        function updateProgress() {
+            const progress = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `Question ${currentQuestion} of ${totalQuestions}`;
+        }
+        
+        function showResults() {
+            // Hide all questions
+            document.querySelectorAll('.question-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Hide progress bar
+            document.querySelector('.progress-container').style.display = 'none';
+            
+            // Show results
+            document.getElementById('resultsSection').style.display = 'block';
+            
+            // Customize results based on answers
+            customizeResults();
+        }
+        
+        function customizeResults() {
+            // This would be more sophisticated in production
+            const age = answers[1];
+            const prescription = answers[3] || -3;
+            const lifestyle = answers[5];
+            
+            // Adjust recommendations based on answers
+            if (lifestyle === 'active') {
+                // Recommend SMILE for active lifestyle
+                document.querySelector('.procedure-card').classList.add('recommended');
+            }
+            
+            if (Math.abs(prescription) > 6) {
+                // Recommend ICL for high prescriptions
+                // Update recommendation logic
+            }
+        }
+        
+        // Form submission
+        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In production, this would submit to your backend
+            alert('Thank you! We will contact you within 24 hours to schedule your consultation.');
+        });
+    </script>
+</body>
+</html>

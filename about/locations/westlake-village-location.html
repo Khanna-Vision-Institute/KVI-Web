@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <% if (typeof pageData !== 'undefined' && pageData && pageData.metaTitle) { %>
+    <title><%= pageData.metaTitle %></title>
+    <% } else { %>
+    <title>Westlake Village Location | Khanna Vision Institute</title>
+    <% } %>
+    
+    <% if (typeof pageData !== 'undefined' && pageData && pageData.metaDescription) { %>
+    <meta name="description" content="<%= pageData.metaDescription %>">
+    <% } else { %>
+    <meta name="description" content="Visit our Westlake Village location. Convenient Ventura County location with free parking.">
+    <% } %>
+    
+    <link rel="canonical" href="https://khannainstitute.com/about/locations/westlake-village/">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalClinic",
+      "name": "Khanna Vision Institute - Westlake Village",
+      "url": "https://khannainstitute.com/about/locations/westlake-village/",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "31824 Village Center Rd Suite F",
+        "addressLocality": "Westlake Village",
+        "addressRegion": "CA",
+        "postalCode": "91361",
+        "addressCountry": "US"
+      }
+    }
+    </script>
+</head>
+<body>
+    <%- include('/partials/header') %>
+    
+    <!-- Strapi Content (addresses normalized to match site-wide canonical format) -->
+    <% if (typeof pageData !== 'undefined' && pageData && pageData.content) { %>
+        <%- include('/partials/location-cms-address-normalize', { html: pageData.content, site: 'westlake' }) %>
+    <% } %>
+
+    <%- include('/partials/footer') %>
+</body>
+</html>

@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en-US" class="lensar-page">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <% if (typeof pageData !== 'undefined' && pageData && pageData.metaTitle) { %>
+    <title><%= pageData.metaTitle %></title>
+    <% } else { %>
+    <title>Robotic Cataract Surgery | LENSAR Laser | Khanna Vision Institute</title>
+    <% } %>
+
+    <% if (typeof pageData !== 'undefined' && pageData && pageData.metaDescription) { %>
+    <meta name="description" content="<%= pageData.metaDescription %>">
+    <% } else { %>
+    <meta name="description" content="State-of-the-art robotic cataract surgery with LENSAR laser. Bladeless, precise, faster recovery. Beverly Hills & Westlake Village.">
+    <% } %>
+
+    <link rel="canonical" href="https://khannainstitute.com/procedures/lens-solutions/robotic-cataract-surgery/">
+    <link rel="stylesheet" href="/public/css/header.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+    <style>
+        /* Clear fixed site header — Strapi hero was tucking under nav */
+        body.lensar-page .lensar-cms-content section:has(> h1),
+        body.lensar-page .lensar-cms-content div:has(> h1):not(.lensar-cms-content) {
+            padding-top: clamp(148px, 21vw, 210px) !important;
+            scroll-margin-top: 120px;
+        }
+
+        body.lensar-page .lensar-cms-content > *:first-child:not(:has(h1)) + section:has(h1),
+        body.lensar-page .lensar-cms-content > *:first-child:not(:has(h1)) + div:has(h1) {
+            padding-top: clamp(148px, 21vw, 210px) !important;
+        }
+
+        @media (max-width: 768px) {
+            body.lensar-page .lensar-cms-content section:has(> h1),
+            body.lensar-page .lensar-cms-content div:has(> h1):not(.lensar-cms-content) {
+                padding-top: clamp(128px, 24vw, 168px) !important;
+            }
+        }
+
+        /* LENSAR installment plans — horizontal comparison (unique to this page) */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+        .lensar-pricing {
+            --lensar-deep: #041824;
+            --lensar-navy: #0c3d52;
+            --lensar-teal: #0d9488;
+            --lensar-cyan: #22d3ee;
+            --lensar-gold: #e8b84a;
+            --lensar-gold-light: #fff4d6;
+            position: relative;
+            padding: 100px 20px 108px;
+            font-family: 'Outfit', 'Helvetica Neue', sans-serif;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .lensar-pricing__bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(145deg, #020f18 0%, #0a2a3d 32%, #0f4c5c 58%, #134e4a 82%, #042f2e 100%);
+            z-index: 0;
+        }
+
+        .lensar-pricing__bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 50% 42% at 8% 15%, rgba(34, 211, 238, 0.22), transparent 55%),
+                radial-gradient(ellipse 48% 38% at 95% 85%, rgba(232, 184, 74, 0.16), transparent 52%),
+                linear-gradient(rgba(34, 211, 238, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 211, 238, 0.04) 1px, transparent 1px);
+            background-size: auto, auto, 48px 48px, 48px 48px;
+            mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, black 10%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .lensar-pricing__scanline {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(34, 211, 238, 0.03) 50%, transparent 100%);
+            background-size: 100% 4px;
+            animation: lensarScan 8s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
+        }
+
+        @keyframes lensarScan {
+            0% { background-position: 0 -100%; }
+            100% { background-position: 0 100%; }
+        }
+
+        .lensar-pricing__orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .lensar-pricing__orb--1 {
+            width: 420px;
+            height: 420px;
+            top: -8%;
+            right: 5%;
+            background: rgba(34, 211, 238, 0.28);
+            animation: lensarFloat 14s ease-in-out infinite;
+        }
+
+        .lensar-pricing__orb--2 {
+            width: 360px;
+            height: 360px;
+            bottom: -5%;
+            left: -6%;
+            background: rgba(13, 148, 136, 0.35);
+            animation: lensarFloat 11s ease-in-out infinite reverse;
+        }
+
+        @keyframes lensarFloat {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(12px, -16px); }
+        }
+
+        .lensar-pricing .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .lensar-pricing__header {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 44px;
+            color: #fff;
+        }
+
+        .lensar-pricing__eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--lensar-cyan);
+            border: 1px solid rgba(34, 211, 238, 0.35);
+            background: rgba(34, 211, 238, 0.08);
+            padding: 10px 22px;
+            border-radius: 999px;
+            margin-bottom: 18px;
+        }
+
+        .lensar-pricing__eyebrow::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--lensar-cyan);
+            box-shadow: 0 0 14px var(--lensar-cyan);
+        }
+
+        .lensar-pricing__header h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+        }
+
+        .lensar-pricing__header h2 em {
+            font-style: italic;
+            color: #a5f3fc;
+        }
+
+        .lensar-pricing__header h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            margin: 20px auto 0;
+            border-radius: 2px;
+            background: linear-gradient(90deg, transparent, var(--lensar-cyan), var(--lensar-gold), transparent);
+        }
+
+        .lensar-pricing__lede {
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: rgba(255, 255, 255, 0.86);
+            margin-top: 18px;
+        }
+
+        .lensar-pricing__matrix-wrap {
+            position: relative;
+            padding: 3px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.55), rgba(255, 255, 255, 0.2), rgba(232, 184, 74, 0.45));
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.35), 0 0 60px rgba(34, 211, 238, 0.12);
+            animation: lensarMatrixIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+        }
+
+        @keyframes lensarMatrixIn {
+            from { opacity: 0; transform: translateY(28px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lensar-pricing__matrix {
+            background: rgba(255, 255, 255, 0.985);
+            border-radius: 26px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+        }
+
+        .lensar-pricing__row {
+            display: grid;
+            grid-template-columns: minmax(160px, 1.2fr) repeat(3, 1fr);
+            align-items: stretch;
+            border-bottom: 1px solid rgba(12, 61, 82, 0.08);
+        }
+
+        .lensar-pricing__row:last-child {
+            border-bottom: none;
+        }
+
+        .lensar-pricing__row--headers {
+            background: linear-gradient(180deg, #f0fdfa 0%, #fff 55%, #f8fafc 100%);
+            border-bottom: 2px solid rgba(13, 148, 136, 0.15);
+        }
+
+        .lensar-pricing__row--feature:nth-child(even) {
+            background: rgba(13, 148, 136, 0.03);
+        }
+
+        @media (min-width: 901px) {
+            .lensar-pricing__row--feature > .lensar-pricing__cell:last-child {
+                background: linear-gradient(90deg, rgba(240, 253, 250, 0.5) 0%, rgba(255, 251, 235, 0.55) 100%);
+            }
+        }
+
+        .lensar-pricing__corner-label {
+            padding: 22px 20px;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #64748b;
+            display: flex;
+            align-items: flex-end;
+            border-right: 1px solid rgba(12, 61, 82, 0.08);
+        }
+
+        .lensar-pricing__feature-label {
+            padding: 16px 20px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--lensar-navy);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-right: 1px solid rgba(12, 61, 82, 0.08);
+        }
+
+        .lensar-pricing__feature-label::before {
+            content: '';
+            flex-shrink: 0;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--lensar-cyan), var(--lensar-teal));
+            box-shadow: 0 0 8px rgba(34, 211, 238, 0.5);
+        }
+
+        .lensar-pricing__cell {
+            padding: 16px 16px;
+            font-size: 0.88rem;
+            line-height: 1.45;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-right: 1px solid rgba(12, 61, 82, 0.06);
+        }
+
+        .lensar-pricing__cell:last-child {
+            border-right: none;
+        }
+
+        .lensar-pricing__cell--muted {
+            color: #b8c4ce;
+            font-weight: 500;
+        }
+
+        .lensar-pricing__cell--yes {
+            font-weight: 600;
+            color: #0f5c52;
+        }
+
+        .lensar-pricing__plan-head {
+            position: relative;
+            padding: 32px 14px 26px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            min-height: 220px;
+        }
+
+        .lensar-pricing__plan-head--silver {
+            background: linear-gradient(180deg, #f8fafc 0%, #fff 100%);
+        }
+
+        .lensar-pricing__plan-head--gold {
+            background: linear-gradient(180deg, #f0fdfa 0%, #fff 100%);
+        }
+
+        .lensar-pricing__plan-head--platinum {
+            background: linear-gradient(180deg, #ecfeff 0%, #f0fdfa 40%, #fffbeb 100%);
+            position: relative;
+        }
+
+        .lensar-pricing__plan-head--platinum::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(34, 211, 238, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .lensar-pricing__ribbon {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            font-size: 0.58rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--lensar-deep);
+            white-space: nowrap;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #cffafe 0%, #22d3ee 40%, #e8b84a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 8px 28px rgba(34, 211, 238, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        }
+
+        .lensar-pricing__ribbon-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--lensar-deep);
+        }
+
+        .lensar-pricing__tier {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            text-transform: none;
+            margin-bottom: 12px;
+        }
+
+        .lensar-pricing__plan-head--silver .lensar-pricing__tier { color: #94a3b8; }
+        .lensar-pricing__plan-head--gold .lensar-pricing__tier { color: #0d9488; }
+        .lensar-pricing__plan-head--platinum .lensar-pricing__tier { color: #0c4a6e; }
+
+        .lensar-pricing__plan-name { display: none; }
+
+        .lensar-pricing__surgery-price {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 2px;
+        }
+
+        .lensar-pricing__currency {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--lensar-navy);
+            margin-top: 8px;
+        }
+
+        .lensar-pricing__amount {
+            font-size: 2.65rem;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            background: linear-gradient(165deg, var(--lensar-deep) 0%, var(--lensar-teal) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .lensar-pricing__plan-head--platinum .lensar-pricing__amount {
+            background: linear-gradient(165deg, #042f2e 0%, #0d9488 45%, #0891b2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .lensar-pricing__per-eye {
+            font-size: 0.76rem;
+            color: #64748b;
+            margin-top: 6px;
+            font-weight: 600;
+        }
+
+        .lensar-pricing__addon {
+            margin-top: 12px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: rgba(13, 148, 136, 0.08);
+            border: 1px dashed rgba(13, 148, 136, 0.25);
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .lensar-pricing__addon-label {
+            display: block;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+
+        .lensar-pricing__addon-price {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--lensar-teal);
+        }
+
+        .lensar-pricing__addon-note {
+            font-size: 0.68rem;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        .lensar-pricing__check {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 9px;
+            background: linear-gradient(145deg, #ccfbf1, #99f6e4);
+            color: #0f766e;
+            font-size: 0.8rem;
+            font-weight: 800;
+            box-shadow: 0 2px 10px rgba(13, 148, 136, 0.2);
+        }
+
+        .lensar-pricing__footnote {
+            max-width: 100%;
+            margin: 40px 0 0;
+            padding: 26px 30px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(34, 211, 238, 0.25);
+            backdrop-filter: blur(16px);
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 0.93rem;
+            line-height: 1.75;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+        }
+
+        .lensar-pricing__footnote strong {
+            color: #a5f3fc;
+        }
+
+        @media (min-width: 901px) {
+            .lensar-pricing__feature-cols {
+                display: contents;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .lensar-pricing__orb,
+            .lensar-pricing__matrix-wrap,
+            .lensar-pricing__scanline {
+                animation: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .lensar-pricing__matrix {
+                border-radius: 20px;
+            }
+
+            .lensar-pricing__row {
+                grid-template-columns: 1fr;
+            }
+
+            .lensar-pricing__corner-label,
+            .lensar-pricing__feature-label {
+                border-right: none;
+                border-bottom: 1px solid rgba(12, 61, 82, 0.08);
+                background: #f0fdfa;
+                padding: 12px 16px;
+            }
+
+            .lensar-pricing__row--headers {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .lensar-pricing__corner-label {
+                display: none;
+            }
+
+            .lensar-pricing__plan-head {
+                min-height: auto;
+                border-bottom: 1px solid rgba(12, 61, 82, 0.1);
+            }
+
+            .lensar-pricing__row--feature {
+                display: block;
+            }
+
+            .lensar-pricing__feature-cols {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .lensar-pricing__row--feature .lensar-pricing__cell {
+                border-right: 1px solid rgba(12, 61, 82, 0.06);
+                padding: 12px 6px;
+                font-size: 0.78rem;
+            }
+
+            .lensar-pricing__row--feature .lensar-pricing__cell::before {
+                content: attr(data-tier);
+                display: block;
+                font-size: 0.58rem;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                color: var(--lensar-navy);
+                margin-bottom: 6px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .lensar-pricing__feature-cols {
+                grid-template-columns: 1fr;
+            }
+
+            .lensar-pricing__row--feature .lensar-pricing__cell {
+                border-right: none;
+                border-bottom: 1px solid rgba(12, 61, 82, 0.06);
+            }
+        }
+    </style>
+</head>
+<body class="lensar-page">
+    <%- include('/partials/header') %>
+
+    <div class="lensar-cms-content">
+    <% if (typeof pageData !== 'undefined' && pageData && pageData.content) { %>
+        <%- pageData.content %>
+    <% } %>
+    </div>
+
+    <section class="lensar-pricing" id="lensar-pricing" aria-labelledby="lensar-pricing-heading">
+        <div class="lensar-pricing__bg" aria-hidden="true"></div>
+        <div class="lensar-pricing__scanline" aria-hidden="true"></div>
+        <div class="lensar-pricing__orb lensar-pricing__orb--1" aria-hidden="true"></div>
+        <div class="lensar-pricing__orb lensar-pricing__orb--2" aria-hidden="true"></div>
+
+        <div class="container">
+            <header class="lensar-pricing__header">
+                <p class="lensar-pricing__eyebrow">LENSAR · Eyehance · Toric</p>
+                <h2 id="lensar-pricing-heading">Your <em>Investment</em> in Crystal-Clear Vision</h2>
+                <p class="lensar-pricing__lede">Compare Silver, Gold, and Platinum side by side — robotic laser cataract surgery with the follow-up care and lens enhancements that match your goals.</p>
+            </header>
+
+            <div class="lensar-pricing__matrix-wrap">
+            <div class="lensar-pricing__matrix" role="table" aria-label="LENSAR installment plan comparison">
+                <div class="lensar-pricing__row lensar-pricing__row--headers" role="row">
+                    <div class="lensar-pricing__corner-label" role="columnheader">Plan</div>
+                    <div class="lensar-pricing__plan-head lensar-pricing__plan-head--silver" role="columnheader">
+                        <p class="lensar-pricing__tier">Silver</p>
+                        <div class="lensar-pricing__surgery-price" aria-label="3900 dollars per eye">
+                            <span class="lensar-pricing__currency">$</span>
+                            <span class="lensar-pricing__amount">3,900</span>
+                        </div>
+                        <p class="lensar-pricing__per-eye">surgery per eye</p>
+                        <div class="lensar-pricing__addon">
+                            <span class="lensar-pricing__addon-label">Toric · LENSAR · Eyehance</span>
+                            <span class="lensar-pricing__addon-price">$163/mo</span>
+                            <span class="lensar-pricing__addon-note">× 24 months</span>
+                        </div>
+                    </div>
+                    <div class="lensar-pricing__plan-head lensar-pricing__plan-head--gold" role="columnheader">
+                        <p class="lensar-pricing__tier">Gold</p>
+                        <div class="lensar-pricing__surgery-price" aria-label="5400 dollars per eye">
+                            <span class="lensar-pricing__currency">$</span>
+                            <span class="lensar-pricing__amount">5,400</span>
+                        </div>
+                        <p class="lensar-pricing__per-eye">surgery per eye</p>
+                        <div class="lensar-pricing__addon">
+                            <span class="lensar-pricing__addon-label">Toric · LENSAR · Eyehance</span>
+                            <span class="lensar-pricing__addon-price">$225/mo</span>
+                            <span class="lensar-pricing__addon-note">× 24 months</span>
+                        </div>
+                    </div>
+                    <div class="lensar-pricing__plan-head lensar-pricing__plan-head--platinum" role="columnheader">
+                        <span class="lensar-pricing__ribbon"><span class="lensar-pricing__ribbon-dot" aria-hidden="true"></span> Five-year vision confidence</span>
+                        <p class="lensar-pricing__tier">Platinum</p>
+                        <div class="lensar-pricing__surgery-price" aria-label="6900 dollars per eye">
+                            <span class="lensar-pricing__currency">$</span>
+                            <span class="lensar-pricing__amount">6,900</span>
+                        </div>
+                        <p class="lensar-pricing__per-eye">surgery per eye</p>
+                        <div class="lensar-pricing__addon">
+                            <span class="lensar-pricing__addon-label">Toric · LENSAR · Eyehance</span>
+                            <span class="lensar-pricing__addon-price">$288/mo</span>
+                            <span class="lensar-pricing__addon-note">× 24 months</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lensar-pricing__row lensar-pricing__row--feature" role="row">
+                    <div class="lensar-pricing__feature-label" role="rowheader">Post-op care</div>
+                    <div class="lensar-pricing__feature-cols">
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Silver" role="cell">3 months</div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Gold" role="cell">12 months</div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Platinum" role="cell">24 months</div>
+                    </div>
+                </div>
+
+                <div class="lensar-pricing__row lensar-pricing__row--feature" role="row">
+                    <div class="lensar-pricing__feature-label" role="rowheader">Warranty</div>
+                    <div class="lensar-pricing__feature-cols">
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Silver" role="cell">3 months</div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Gold" role="cell">1 year</div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Platinum" role="cell">5 years</div>
+                    </div>
+                </div>
+
+                <div class="lensar-pricing__row lensar-pricing__row--feature" role="row">
+                    <div class="lensar-pricing__feature-label" role="rowheader">Fine tuning</div>
+                    <div class="lensar-pricing__feature-cols">
+                        <div class="lensar-pricing__cell lensar-pricing__cell--muted" data-tier="Silver" role="cell">—</div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Gold" role="cell">LASIK / SMILE</div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Platinum" role="cell">LASIK / SMILE</div>
+                    </div>
+                </div>
+
+                <div class="lensar-pricing__row lensar-pricing__row--feature" role="row">
+                    <div class="lensar-pricing__feature-label" role="rowheader">YAG laser</div>
+                    <div class="lensar-pricing__feature-cols">
+                        <div class="lensar-pricing__cell lensar-pricing__cell--muted" data-tier="Silver" role="cell">—</div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Gold" role="cell"><span class="lensar-pricing__check" aria-hidden="true">✓</span></div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Platinum" role="cell"><span class="lensar-pricing__check" aria-hidden="true">✓</span></div>
+                    </div>
+                </div>
+
+                <div class="lensar-pricing__row lensar-pricing__row--feature" role="row">
+                    <div class="lensar-pricing__feature-label" role="rowheader">Dry eye treatment</div>
+                    <div class="lensar-pricing__feature-cols">
+                        <div class="lensar-pricing__cell lensar-pricing__cell--muted" data-tier="Silver" role="cell">—</div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Gold" role="cell">HELLO &amp; punctal plugs</div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Platinum" role="cell">HELLO &amp; punctal plugs</div>
+                    </div>
+                </div>
+
+                <div class="lensar-pricing__row lensar-pricing__row--feature" role="row">
+                    <div class="lensar-pricing__feature-label" role="rowheader">Medications &amp; drops</div>
+                    <div class="lensar-pricing__feature-cols">
+                        <div class="lensar-pricing__cell lensar-pricing__cell--muted" data-tier="Silver" role="cell">—</div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Gold" role="cell">Rx drops</div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Platinum" role="cell">Rx drops &amp; ointments</div>
+                    </div>
+                </div>
+
+                <div class="lensar-pricing__row lensar-pricing__row--feature" role="row">
+                    <div class="lensar-pricing__feature-label" role="rowheader">Pre-op drops</div>
+                    <div class="lensar-pricing__feature-cols">
+                        <div class="lensar-pricing__cell lensar-pricing__cell--muted" data-tier="Silver" role="cell">—</div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Gold" role="cell">Combo drops</div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Platinum" role="cell">Combo drops</div>
+                    </div>
+                </div>
+
+                <div class="lensar-pricing__row lensar-pricing__row--feature" role="row">
+                    <div class="lensar-pricing__feature-label" role="rowheader">Sunglasses</div>
+                    <div class="lensar-pricing__feature-cols">
+                        <div class="lensar-pricing__cell lensar-pricing__cell--muted" data-tier="Silver" role="cell">—</div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Gold" role="cell">Regular</div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Platinum" role="cell">Designer</div>
+                    </div>
+                </div>
+
+                <div class="lensar-pricing__row lensar-pricing__row--feature" role="row">
+                    <div class="lensar-pricing__feature-label" role="rowheader">Concierge</div>
+                    <div class="lensar-pricing__feature-cols">
+                        <div class="lensar-pricing__cell lensar-pricing__cell--muted" data-tier="Silver" role="cell">—</div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--muted" data-tier="Gold" role="cell">—</div>
+                        <div class="lensar-pricing__cell lensar-pricing__cell--yes" data-tier="Platinum" role="cell">Uber &amp; hotel stay</div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <aside class="lensar-pricing__footnote">
+                <strong>Optometric comanagement special:</strong> $246 per eye per month for 24 months when your optometrist performs post-op management. Your OD bills for and provides follow-up care; Khanna Vision Institute includes a <strong>1-year enhancement warranty</strong> with KVI.
+            </aside>
+        </div>
+    </section>
+
+    <script>
+    (function () {
+        var cms = document.querySelector('.lensar-cms-content');
+        var pricing = document.getElementById('lensar-pricing');
+        if (cms && pricing) {
+            var anchors = cms.querySelectorAll('h2, h3');
+            var insertBefore = null;
+            anchors.forEach(function (h) {
+                if (/Why Trust Dr\. Khanna|Don't Live Another Day/i.test((h.textContent || '').trim())) {
+                    insertBefore = h.closest('section') || h;
+                }
+            });
+            if (insertBefore && insertBefore.parentNode) {
+                insertBefore.parentNode.insertBefore(pricing, insertBefore);
+            }
+        }
+
+        /* Hide legacy Strapi pricing so only the new matrix shows */
+        if (!cms) return;
+        cms.querySelectorAll('h2, h3').forEach(function (h) {
+            var t = (h.textContent || '').trim();
+            if (!/Investment in a Lifetime|LENSAR Precision Package/i.test(t)) return;
+            var block = h.closest('section') || h.parentElement;
+            if (block) block.setAttribute('hidden', 'hidden');
+            else {
+                h.setAttribute('hidden', 'hidden');
+                var n = h.nextElementSibling;
+                while (n && !/^H[12]$/.test(n.tagName)) {
+                    n.setAttribute('hidden', 'hidden');
+                    n = n.nextElementSibling;
+                }
+            }
+        });
+    })();
+    </script>
+
+    <%- include('/partials/footer') %>
+</body>
+</html>
