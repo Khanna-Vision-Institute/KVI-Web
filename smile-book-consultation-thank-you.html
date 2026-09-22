@@ -14,16 +14,6 @@
       gtag('config', 'G-Q0TGBPVS92');
     </script>
 
-    <!-- Google Ads SMILE Lead Conversion -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16512183014"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-16512183014');
-      gtag('event', 'conversion', {'send_to': 'AW-16512183014/d1J1CK2xzqscEObVz8E9'});
-    </script>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
@@ -38,6 +28,7 @@
             -webkit-text-fill-color: transparent;
         }
     </style>
+  <script src="/public/js/consult-conversion.js"></script>
 </head>
 <body class="antialiased">
 
@@ -79,5 +70,8 @@
             <p>Beverly Hills | Westlake Village</p>
         </div>
     </footer>
+  <script>
+    if (window.KviConsultConversion) window.KviConsultConversion.reportSuccess('smile');
+  </script>
 </body>
 </html>
