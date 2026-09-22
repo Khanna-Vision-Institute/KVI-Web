@@ -32,3 +32,20 @@ Official references:
 - https://support.google.com/analytics/answer/7201382
 - https://support.google.com/analytics/answer/12966437
 - https://support.google.com/analytics/answer/9356034
+
+## Authenticated GA4 findings (2026-09-22)
+
+Read-only inspection after Raj completed sign-in confirmed:
+
+- Property `280092671` has web stream `2710321930`, measurement ID `G-Q0TGBPVS92`, and active data collection in the past 48 hours. The website destination is correct.
+- `generate_lead` is already starred as a key event, but shows **No stream data detected** in the last 28 days. No additional key-event toggle is needed for that name.
+- Recent events include `click`, `first_time_phone_call`, `first_visit`, `page_view`, `repeat_phone_call`, `scroll`, `session_start`, `user_engagement` and `view_search_results`. The two phone-call events are not starred as key events; their provider meaning and quality must be checked before treating them as conversions.
+- Automatic enhanced-measurement form interactions are off. This explains missing automatic `form_start`/`form_submit` events but does not by itself explain or fix the explicitly sent `generate_lead` event. Do not equate turning on automatic form interactions with successful submission tracking.
+- Two custom rules exist: `generate_lead` and `ads_conversion_Book_appointment_1`. **Both match `event_name equals page_view` AND `page_location contains thank-you`.** Neither has stream data in the displayed 28-day window.
+- Two Google Ads links are completed: Khanna Vision `509-001-5659` and `811-555-5501`. Link presence does not verify the active advertising account or conversion action ownership.
+
+### Additional deployment blocker: existing thank-you rules
+
+The JavaScript patch alone does not eliminate false or duplicate GA4 conversions while those page-view-derived rules remain active. Before rollout, inventory which Ads actions import each key event and identify the current ad account. Coordinate disabling/removing/replacing the two generic thank-you-page rules with the explicit successful-submission measurement, preserving any required historical reporting. Obtain action-time confirmation before any irreversible deletion. Do not change either rule blindly or count native Ads and imported GA4 actions as primary for the same lead.
+
+No GA4 or Ads setting was changed during inspection. Live successful-submission delivery remains unverified, and a zero reported lead count is not proof that the practice received no leads.
