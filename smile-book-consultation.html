@@ -26,7 +26,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        /* Date & time picker — same logic as /contact/schedule-consultation/, dark theme */
+        /* Date & time picker — same logic as /book-consultation/, dark theme */
         .sbc-dt * { box-sizing: border-box; }
         .sbc-dt .sbc-form-label {
             display: block;
@@ -226,6 +226,7 @@
         }
         .sbc-dt .sbc-selected-datetime.visible { display: block; }
     </style>
+  <script src="/public/js/consult-conversion.js"></script>
 </head>
 <body class="antialiased">
 
@@ -692,6 +693,7 @@
   var form = document.getElementById('smile-book-consult-form');
   if (!form) return;
   form.addEventListener('submit', async function (e) {
+    if (window.KviConsultConversion) window.KviConsultConversion.reset('smile');
     e.preventDefault();
     var msg = document.getElementById('smile-book-consult-msg');
     var sched = window.__sbcGetScheduling ? window.__sbcGetScheduling() : {};
@@ -761,7 +763,8 @@
           msg.classList.remove('hidden', 'text-green-400');
           msg.classList.add('text-red-400');
         }
-      } else if (out.success) {
+      } else if (res.ok && out.success === true) {
+        if (window.KviConsultConversion) window.KviConsultConversion.recordSuccess('smile');
         try { if (window.grecaptcha && window.grecaptcha.reset) window.grecaptcha.reset(); } catch (x) {}
         var next = (out.redirectUrl && typeof out.redirectUrl === 'string') ? out.redirectUrl : '/smile-book-consultation-thank-you/';
         window.location.href = next;
