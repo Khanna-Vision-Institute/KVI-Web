@@ -49,3 +49,52 @@ Read-only inspection after Raj completed sign-in confirmed:
 The JavaScript patch alone does not eliminate false or duplicate GA4 conversions while those page-view-derived rules remain active. Before rollout, inventory which Ads actions import each key event and identify the current ad account. Coordinate disabling/removing/replacing the two generic thank-you-page rules with the explicit successful-submission measurement, preserving any required historical reporting. Obtain action-time confirmation before any irreversible deletion. Do not change either rule blindly or count native Ads and imported GA4 actions as primary for the same lead.
 
 No GA4 or Ads setting was changed during inspection. Live successful-submission delivery remains unverified, and a zero reported lead count is not proof that the practice received no leads.
+
+## Live-source and Google Ads follow-up (2026-09-22)
+
+Fresh HTTP reads compared all four public HTML responses with repository base
+`f66ab31c49d726e1ccc042a806ed1470e52d8c36`. VIP form, VIP thank-you and SMILE
+thank-you matched byte for byte. The SMILE form differed only in a CSS comment
+referring to `/book-consultation/`; this newer comment is preserved in this PR.
+This confirms the proposed HTML changes fit the observed pages, but does not
+prove which server directory or backend revision is currently serving them.
+
+Run the read-only preflight against the actual serving directory before deployment:
+
+```sh
+node scripts/check-consult-conversion-target.cjs /absolute/live/site/root
+```
+
+It checks the four observed SHA-256 baselines and stops if the new helper already
+exists. A mismatch requires a fresh comparison and preservation of newer edits,
+not replacing the expected hashes blindly. The checker was verified to pass on
+the downloaded baseline and reject the repaired files. The four conversion tests
+also pass. These are offline checks; no live booking was submitted.
+
+Authenticated Google Ads inspection confirmed account `811-555-5501`:
+
+- `SMILE Google Ads Lead` is an enabled Website primary action under Submit lead
+  forms, counts One, uses a 90-day click-through window, and reports Needs
+  attention. Its displayed event snippet is exactly
+  `AW-16512183014/d1J1CK2xzqscEObVz8E9`, matching this repair. Conversion type ID
+  `7607654573` is a different identifier and must not replace the AW destination.
+- `PIE Google Ads Lead` is also an enabled Website primary action, counts One,
+  uses a 90-day click-through window, and reports Needs attention. Its individual
+  event snippet still needs verification against the existing VIP label.
+- Both displayed zero attributed conversions for Aug 23–Sep 21, 2026. That is
+  not a count of all website requests. This inspection does not establish that
+  all campaigns are active or that the other linked account is unused.
+
+Existing deployment scripts use direct SSH/SCP to the website host and restart
+PM2. No authenticated connection to that host is available in this task. A
+deployment operator must confirm the serving directory, take a backup of the
+four HTML files, run the baseline check and conversion tests, and stage the helper
+plus four repaired pages together. Do not run the broad legacy deployment scripts:
+they may overwrite unrelated backend/email changes from the old repository snapshot.
+
+Coordinate the GA4 thank-you-rule changes with this release and verify both Ads
+labels and any imported equivalents first. Preserve the existing primary-action
+settings until duplicate measurement has been checked. Then use one expressly
+approved staff-owned test contact per form and inspect DebugView/Tag Assistant.
+No production files, GA4 rules, Ads settings, budgets or bidding were changed in
+this follow-up.
