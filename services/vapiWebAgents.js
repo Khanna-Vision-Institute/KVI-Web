@@ -44,7 +44,7 @@ FINANCING:
 CONTACT:
 - Office phone: (310) 482-1240
 - Schedule online: khannainstitute.com/contact/schedule-consultation/
-- Locations: Beverly Hills (9100 Wilshire Blvd) and Westlake Village (31824 Village Center Rd F)
+- Locations: Beverly Hills (9100 Wilshire Boulevard, Suite 265E) and Westlake Village (31824 Village Center Road, Suite F)
 - NEVER use (310) 997-4490 — outdated CallRail tracking number
 
 DR. KHANNA: Board-certified ophthalmologist, 30+ years experience, 25,000+ procedures.

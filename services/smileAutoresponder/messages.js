@@ -140,7 +140,7 @@ HSA/FSA accepted
 WESTLAKE VILLAGE:
 Ventura County (Thousand Oaks, Simi, Camarillo, Moorpark, Oxnard) — we're right here. No LA traffic. Free parking.
 
-31824 Village Center Rd #F, Westlake Village, CA 91361
+31824 Village Center Rd, Suite F, Westlake Village, CA 91361
 
 WATCH THESE:
 → Welcome + parking: ${LINKS.welcome}
