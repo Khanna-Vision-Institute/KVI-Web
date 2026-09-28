@@ -157,7 +157,7 @@ const blogContent = `
 
 <p>Choosing an experienced surgeon matters as much as choosing the right technology.</p>
 
-<p><strong>Dr. Rajesh Khanna</strong> is a board-certified ophthalmologist with decades of experience in refractive and cataract surgery. He was among the early adopters of modern vision correction techniques in California, and his institute is equipped with the <strong>latest ZEISS VisuMax laser system</strong> for SMILE.</p>
+<p><strong>Dr. Rajesh Khanna</strong> is a board-certified ophthalmologist with decades of experience in refractive and cataract surgery. He was among the early-adopter surgeons of modern vision correction techniques in California, and his institute is equipped with the <strong>latest ZEISS VisuMax laser system</strong> for SMILE.</p>
 
 <p>At Khanna Vision Institute, the focus is always on:</p>
 
