@@ -9,12 +9,20 @@ const zohoBookingsService = require('../services/zohoBookingsService');
 const ALLOW_EXT = /\.(png|jpg|jpeg|bmp|mp4|webm|mov|pdf|doc|docx)$/i;
 
 /** Same pairing as booking / seminar / physician referral worksheets */
+// No hard-coded fallback: the reCAPTCHA v2 secret must come from the environment.
 const RECAPTCHA_SECRET_KEY =
   process.env.RECAPTCHA_SECRET_KEY ||
   process.env.RECAPTCHA_V2_SECRET_KEY ||
-  '6Lf0P20sAAAAANP3mOsaj7QZ6bsl79cw_g49wnWn';
+  '';
+if (!RECAPTCHA_SECRET_KEY) {
+  console.error('[recaptcha] RECAPTCHA_SECRET_KEY is not set; form submissions that require reCAPTCHA will be rejected.');
+}
 
 async function verifyRecaptchaV2(token) {
+  if (!RECAPTCHA_SECRET_KEY) {
+    console.error('[recaptcha] RECAPTCHA_SECRET_KEY is not set; cannot verify reCAPTCHA.');
+    return false;
+  }
   try {
     const response = await axios.post(
       'https://www.google.com/recaptcha/api/siteverify',

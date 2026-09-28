@@ -23,6 +23,7 @@ const kviVoiceWebRoutes = require('./routes/kviVoiceWeb');
 const { getPageBySlug } = require('./services/pages');
 const { getAllBlogs } = require('./services/mongodb');
 const legacyWordPressRedirects = require('./legacy-wordpress-redirects');
+const { seoHeadMiddleware } = require('./middleware/seoHead');
 const { loadReferralOfficesRegistry, normalizeSlugKey, practiceNameToClinicKey } = require('./services/referralOffices');
 const { createHeritageBitrixSyncRouter } = require('./routes/heritageBitrixSync');
 
@@ -40,6 +41,9 @@ app.set('view engine', 'html');
 app.set('views', path.join(__dirname));
 app.set("view cache", false);
 
+// Site-wide phone config for EJS templates (header/footer call link). See config/phone.js.
+app.locals.sitePhone = require('./config/phone');
+
 // Guru proxy MUST be before body parsing so the raw request body is forwarded
 const GURU_SERVER = process.env.GURU_SERVER_URL || 'http://ec2-100-28-122-42.compute-1.amazonaws.com:8000';
 app.use('/api/guru', createProxyMiddleware({
@@ -55,6 +59,9 @@ app.use('/api/guru', createProxyMiddleware({
 
 app.use(express.json({ limit: '200kb' }));
 app.use(express.urlencoded({ extended: true, limit: '200kb' }));
+
+// Serve-time robots meta + canonical tags (reproduces live behaviour; see middleware/seoHead.js)
+app.use(seoHeadMiddleware);
 
 /**
  * Physician portal — same-origin `/me` proxy.
@@ -275,6 +282,23 @@ const renderView = (viewPath, res, next) => {
     }
     res.send(html);
   });
+};
+
+/**
+ * 301 to a fixed target while keeping the request's query string (gclid, gbraid, wbraid,
+ * utm_*, fbclid, …). Before this, every table-driven redirect dropped the query string,
+ * so ad clicks landing on an old URL lost their click ID (gclid-loss bug). If the target
+ * already has a query, the params are appended with "&"; a #fragment stays at the end.
+ */
+const redirectPreservingQuery = (req, res, toPath, status = 301) => {
+  const qIndex = req.originalUrl.indexOf('?');
+  const incoming = qIndex === -1 ? '' : req.originalUrl.slice(qIndex + 1);
+  if (!incoming) return res.redirect(status, toPath);
+  const hashIndex = toPath.indexOf('#');
+  const base = hashIndex === -1 ? toPath : toPath.slice(0, hashIndex);
+  const hash = hashIndex === -1 ? '' : toPath.slice(hashIndex);
+  const joined = base + (base.includes('?') ? '&' : '?') + incoming + hash;
+  return res.redirect(status, joined);
 };
 
 app.use('/api/vision-quest', visionQuestRoutes);
@@ -668,215 +692,118 @@ app.get(['/gentle-blade-free-vision-correction', '/gentle-blade-free-vision-corr
 // ============================================
 
 /**
- * sitemap-index.xml — references static + blog sitemaps
+ * Sitemaps — reproduce the live layout hand-deployed around Sep 23–24, 2026:
+ *   /sitemap.xml            static sitemap INDEX (./sitemap.xml, live Last-Modified Sep 23, 2026 11:03 PM PT)
+ *   /main-pages-sitemap.xml generated from data/sitemap-main-pages.js (live uses res.send: content-hash ETag)
+ *   /blog-sitemap.xml       see below (snapshot by default)
+ *   /sitemap-index.xml      301 → /sitemap.xml          (live)
+ *   /sitemap-blog-pages.xml 301 → /blog-sitemap.xml     (live)
+ * The previous generated routes (/sitemap-index.xml index, /sitemap.xml urlset of ~70 URLs,
+ * /sitemap-blog-pages.xml) are retired because live no longer serves them.
  */
-app.get('/sitemap-index.xml', (req, res) => {
-  const base = `https://khannainstitute.com`;
-  const today = new Date().toISOString().split('T')[0];
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap>
-    <loc>${base}/sitemap.xml</loc>
-    <lastmod>${today}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>${base}/sitemap-blog-pages.xml</loc>
-    <lastmod>${today}</lastmod>
-  </sitemap>
-</sitemapindex>`;
-  res.set('Content-Type', 'application/xml').send(xml);
+const SITEMAP_INDEX_FILE = path.join(__dirname, 'sitemap.xml');
+const BLOG_SITEMAP_SNAPSHOT_FILE = path.join(__dirname, 'data', 'blog-sitemap.snapshot.xml');
+const { MAIN_PAGES, MAIN_PAGES_LASTMOD, MAIN_PAGES_CHANGEFREQ } = require('./data/sitemap-main-pages');
+
+const sitemapRedirects = {
+  '/sitemap-index.xml': '/sitemap.xml',
+  '/sitemap-blog-pages.xml': '/blog-sitemap.xml',
+};
+Object.entries(sitemapRedirects).forEach(([fromPath, toPath]) => {
+  app.get(fromPath, (req, res) => redirectPreservingQuery(req, res, toPath));
 });
 
-/**
- * sitemap.xml — all static / procedure / patient pages
- */
 app.get('/sitemap.xml', (req, res) => {
+  res.set('Content-Type', 'application/xml');
+  res.sendFile(SITEMAP_INDEX_FILE);
+});
+
+app.get('/main-pages-sitemap.xml', (req, res) => {
   const base = 'https://khannainstitute.com';
-  const today = new Date().toISOString().split('T')[0];
-
-  // [url, priority, changefreq]
-  const pages = [
-    ['/', '1.0', 'weekly'],
-
-    // Procedures – Laser Vision
-    ['/procedures/laser-vision/smile-laser/', '0.9', 'monthly'],
-    ['/procedures/laser-vision/lasik/', '0.9', 'monthly'],
-    ['/procedures/laser-vision/superlasik/', '0.8', 'monthly'],
-    ['/procedures/laser-vision/asa/', '0.8', 'monthly'],
-    ['/procedures/laser-vision/compare/', '0.7', 'monthly'],
-    ['/procedures/laser-vision/compare/pie-vs-evo-icl/', '0.7', 'monthly'],
-    ['/procedures/laser-vision/compare/presbyopic-iol/', '0.7', 'monthly'],
-
-    // Procedures – Lens Solutions
-    ['/procedures/lens-solutions/evo-icl/', '0.9', 'monthly'],
-    ['/procedures/lens-solutions/pie/', '0.9', 'monthly'],
-    ['/procedures/lens-solutions/robotic-cataract-surgery/', '0.8', 'monthly'],
-    ['/procedures/lens-solutions/which-lens-is-right/', '0.7', 'monthly'],
-
-    // Procedures – Specialty Treatments
-    ['/procedures/specialty-treatments/cxl-keratoconus/', '0.8', 'monthly'],
-    ['/procedures/specialty-treatments/ctak-keratoconus/', '0.8', 'monthly'],
-    ['/procedures/specialty-treatments/epioxa-westlake-village/', '0.8', 'monthly'],
-    ['/procedures/specialty-treatments/epioxa-beverly-hills/', '0.8', 'monthly'],
-    ['/procedures/specialty-treatments/pterygium-surgery/', '0.8', 'monthly'],
-    ['/procedures/specialty-treatments/dry-eye-solutions/', '0.8', 'monthly'],
-    ['/procedures/specialty-treatments/chalazion-treatment/', '0.7', 'monthly'],
-
-    // Landing pages
-    ['/smile-la-landing-page-2026', '0.85', 'weekly'],
-
-    // Blog & education
-    ['/blog/procedure-guides/', '0.8', 'weekly'],
-
-    // About – Dr. Khanna
-    ['/about/dr-khanna/biography/', '0.8', 'monthly'],
-    ['/about/dr-khanna/credentials-awards/', '0.7', 'monthly'],
-    ['/about/dr-khanna/books/', '0.7', 'monthly'],
-    ['/about/dr-khanna/media/', '0.7', 'monthly'],
-
-    // About – Why Choose Us
-    ['/about/why-choose-us/technology/', '0.7', 'monthly'],
-    ['/about/why-choose-us/success-stories/', '0.7', 'monthly'],
-    ['/about/why-choose-us/celebrity-patients/', '0.7', 'monthly'],
-    ['/about/why-choose-us/gallery/', '0.6', 'monthly'],
-
-    // About – Locations
-    ['/about/locations/beverly-hills/', '0.8', 'monthly'],
-    ['/about/locations/westlake-village/', '0.8', 'monthly'],
-
-    // Patients – Your Journey
-    ['/patients/your-journey/first-visit-guide/', '0.7', 'monthly'],
-    ['/patients/your-journey/what-to-expect/', '0.7', 'monthly'],
-    ['/patients/your-journey/what-to-expect/lasik/', '0.7', 'monthly'],
-    ['/patients/your-journey/what-to-expect/smile/', '0.7', 'monthly'],
-    ['/patients/your-journey/what-to-expect/cataract/', '0.7', 'monthly'],
-    ['/patients/your-journey/what-to-expect/cxl/', '0.7', 'monthly'],
-    ['/patients/your-journey/what-to-expect/pterygium/', '0.7', 'monthly'],
-    ['/patients/your-journey/recovery-timeline/', '0.7', 'monthly'],
-    ['/patients/your-journey/post-op-care/', '0.7', 'monthly'],
-    ['/patients/your-journey/recovery/lasik/', '0.7', 'monthly'],
-    ['/patients/your-journey/recovery/smile/', '0.7', 'monthly'],
-    ['/patients/your-journey/recovery/cataract/', '0.6', 'monthly'],
-    ['/patients/your-journey/recovery/cxl/', '0.6', 'monthly'],
-    ['/patients/your-journey/recovery/pterygium/', '0.6', 'monthly'],
-
-    // Patients – Resources
-    ['/patients/resources/faqs/', '0.7', 'monthly'],
-    ['/patients/resources/faqs/smile/', '0.7', 'monthly'],
-    ['/patients/resources/faqs/lasik/', '0.7', 'monthly'],
-    ['/patients/resources/faqs/cxl/', '0.6', 'monthly'],
-    ['/patients/resources/faqs/ctak/', '0.6', 'monthly'],
-    ['/patients/resources/faqs/pterygium-surgery/', '0.6', 'monthly'],
-    ['/patients/resources/faqs/robotic-laser-cataract/', '0.6', 'monthly'],
-    ['/patients/resources/faqs/yag-vitreolysis/', '0.6', 'monthly'],
-    ['/patients/resources/financing-options/', '0.7', 'monthly'],
-
-    // Patients – Results
-    ['/patients/results/reviews/', '0.7', 'monthly'],
-
-    // Pricing & Financing
-    ['/pricing-financing/procedure-costs/', '0.8', 'monthly'],
-    ['/pricing-financing/calculator/', '0.7', 'monthly'],
-    ['/pricing-financing/special-offers/', '0.7', 'monthly'],
-
-    // Contact (canonical booking URL; /book-consultation/ is 301'd and not listed)
-    ['/contact/schedule-consultation/', '0.9', 'weekly'],
-    ['/contact/virtual-consultation/', '0.7', 'monthly'],
-    ['/contact/emergency-care/', '0.6', 'monthly'],
-
-    // Legal
-    ['/privacy/', '0.3', 'yearly'],
-  ];
-
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
-  pages.forEach(([url, priority, changefreq]) => {
+  MAIN_PAGES.forEach(([url, priority]) => {
     xml += `  <url>\n`;
     xml += `    <loc>${base}${url}</loc>\n`;
-    xml += `    <lastmod>${today}</lastmod>\n`;
-    xml += `    <changefreq>${changefreq}</changefreq>\n`;
+    xml += `    <lastmod>${MAIN_PAGES_LASTMOD}</lastmod>\n`;
+    xml += `    <changefreq>${MAIN_PAGES_CHANGEFREQ}</changefreq>\n`;
     xml += `    <priority>${priority}</priority>\n`;
     xml += `  </url>\n`;
   });
-  xml += `</urlset>`;
-
+  xml += `</urlset>\n`;
   res.set('Content-Type', 'application/xml').send(xml);
 });
 
 /**
- * robots.txt
+ * robots.txt — static file at the project root (./robots.txt), reproduced byte-for-byte from the
+ * live site (hand-deployed Sep 23, 2026, 11:03 PM PT). Served with sendFile so Last-Modified /
+ * weak size-mtime ETag / Accept-Ranges match live. Content-Type set explicitly to match live
+ * ("text/plain; charset=utf-8").
+ *
+ * SEO NOTE (behaviour intentionally unchanged): every named bot (Googlebot, Bingbot, GPTBot, …)
+ * has its own "Allow: /" group, and a crawler obeys only the most specific group that matches it.
+ * So the Disallow lines under "User-agent: *" (utm_ / refineParams) do NOT apply to those bots.
+ * Recommended fix (needs owner sign-off): repeat the three Disallow lines inside every named
+ * group, or drop the named groups and keep one "User-agent: *" group. See
+ * /workspace/reports/seo/rebuild-best-of-both.md.
  */
+const ROBOTS_TXT_FILE = path.join(__dirname, 'robots.txt');
 app.get('/robots.txt', (req, res) => {
-  const txt = `User-agent: *
-Allow: /
-
-Sitemap: https://khannainstitute.com/sitemap-index.xml
-`;
-  res.set('Content-Type', 'text/plain').send(txt);
+  res.set('Content-Type', 'text/plain');
+  res.sendFile(ROBOTS_TXT_FILE);
 });
 
 /**
- * Generate sitemap-blog-pages.xml
- * Automatically fetches all blog posts from /blog/latest/ and generates XML sitemap
- * 
- * This sitemap is dynamically generated on each request, so:
- * - New blog posts added to Strapi or MongoDB will automatically appear
- * - No manual updates needed
- * - Always reflects the current state of all published blog posts
- * 
- * Blog URLs format: /YYYY/MM/slug (e.g., /2025/11/lasik-vs-smile)
+ * blog-sitemap.xml
+ *
+ * Live generates this per request (content-hash ETag): 142 posts from Strapi blog-posts + MongoDB,
+ * newest first, <changefreq>weekly</changefreq>, <priority>0.6</priority>, and <lastmod> = the
+ * server-local calendar date of publishedAt (falling back to "today" when a Mongo post has none).
+ * The exact live code could not be recovered: 6 of the 142 posts exist only in MongoDB (not
+ * reachable from outside), and live de-duplicates one slug in a way the repo's getAllBlogs()
+ * does not. So by default this route serves a byte-exact snapshot of the live output
+ * (data/blog-sitemap.snapshot.xml, fetched Sep 26, 2026). Set BLOG_SITEMAP_SOURCE=dynamic to
+ * generate from getAllBlogs() with the live formatting instead (unverified against live; falls
+ * back to the snapshot on any data-source error). Refresh the snapshot when posts are added.
  */
-app.get('/sitemap-blog-pages.xml', async (req, res) => {
+const formatLocalYmd = (d) => {
+  const dt = d instanceof Date ? d : new Date(d);
+  const y = dt.getFullYear();
+  const m = String(dt.getMonth() + 1).padStart(2, '0');
+  const day = String(dt.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+};
+
+const sendBlogSitemapSnapshot = (res) => {
+  const xml = fs.readFileSync(BLOG_SITEMAP_SNAPSHOT_FILE, 'utf8');
+  res.set('Content-Type', 'application/xml').send(xml);
+};
+
+app.get('/blog-sitemap.xml', async (req, res) => {
+  if (String(process.env.BLOG_SITEMAP_SOURCE || '').toLowerCase() !== 'dynamic') {
+    return sendBlogSitemapSnapshot(res);
+  }
   try {
-    // Fetch all blog posts (from both Strapi and MongoDB)
-    // This automatically includes all published posts from both sources
     const blogs = await getAllBlogs();
-    
-    // Set XML content type
-    res.set('Content-Type', 'application/xml');
-    
-    // Generate XML sitemap
+    const seen = new Set();
     let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-    
-    // Base URL - always use https for production
-    const host = req.get('host') || 'khannainstitute.com';
-    const baseUrl = `https://${host}`;
-    
-    // Add each blog post to sitemap
-    blogs.forEach(blog => {
-      // Blog posts use format: /YYYY/MM/slug
-      // The slug already contains the full path (year/month/slug) from transformStrapiBlog
+    blogs.forEach((blog) => {
       const blogUrl = blog.slug.startsWith('/') ? blog.slug : `/${blog.slug}`;
-      const fullUrl = `${baseUrl}${blogUrl}`;
-      
-      // Get last modified date (use publishedAt or date field)
-      const lastMod = blog.publishedAt || blog.date || new Date();
-      const lastModDate = new Date(lastMod).toISOString().split('T')[0];
-      
-      // Determine priority (newer posts get higher priority)
-      const postDate = new Date(lastMod);
-      const daysSincePost = (Date.now() - postDate.getTime()) / (1000 * 60 * 60 * 24);
-      let priority = '0.7'; // Default
-      if (daysSincePost < 30) priority = '0.9'; // Recent posts
-      else if (daysSincePost < 90) priority = '0.8'; // Recent-ish posts
-      
+      if (seen.has(blogUrl)) return;
+      seen.add(blogUrl);
       xml += '  <url>\n';
-      xml += `    <loc>${fullUrl}</loc>\n`;
-      xml += `    <lastmod>${lastModDate}</lastmod>\n`;
-      xml += `    <changefreq>monthly</changefreq>\n`;
-      xml += `    <priority>${priority}</priority>\n`;
+      xml += `    <loc>https://khannainstitute.com${blogUrl}</loc>\n`;
+      xml += `    <lastmod>${formatLocalYmd(blog.publishedAt || new Date())}</lastmod>\n`;
+      xml += '    <changefreq>weekly</changefreq>\n';
+      xml += '    <priority>0.6</priority>\n';
       xml += '  </url>\n';
     });
-    
     xml += '</urlset>';
-    
-    res.send(xml);
+    res.set('Content-Type', 'application/xml').send(xml);
   } catch (error) {
-    console.error('Error generating blog sitemap:', error);
-    res.status(500).set('Content-Type', 'application/xml').send(
-      '<?xml version="1.0" encoding="UTF-8"?>\n<error>Failed to generate sitemap</error>'
-    );
+    console.error('Error generating blog sitemap (serving snapshot):', error.message || error);
+    sendBlogSitemapSnapshot(res);
   }
 });
 
@@ -1528,14 +1455,19 @@ const routeMap = {
   '/': 'index.html',
   
   // CRON DASHBOARD
-  '/cron-dashboard': 'cron-dashboard.html',
+  // Live serves the 'coming soon' page here (file absent on the server); kept that way so the
+  // internal cron dashboard is not public. File cron-dashboard.html is kept in the repo.
+  '/cron-dashboard': 'coming-soon.html',
   
   // MASTER SEO REPORT
   '/master-report': 'kvi-master-report.html',
   '/master.html': 'kvi-master-report.html',
   
   // PROCEDURES - Laser Vision
-  '/procedures/laser-vision/smile-laser/': 'procedures/laser-vision/smile-page-complete.html',
+  // Live since ~Sep 23, 2026: canonical SMILE URL (same template + Strapi slug as /test/smile-laser/)
+  '/procedures/laser-vision/smile/': 'procedures/laser-vision/smile-page-complete.html',
+  // Live since ~Sep 23, 2026: SMILE Pro page (template rebuilt from live output; no repo copy existed)
+  '/procedures/laser-vision/smile-pro-eye-surgery/': 'procedures/laser-vision/smile-pro-eye-surgery.html',
   '/procedures/laser-vision/lasik/': 'procedures/laser-vision/lasik-page-complete.html',
   '/procedures/laser-vision/superlasik/': 'procedures/laser-vision/superlasik-no-cut-page.html',
   '/procedures/laser-vision/asa/': 'procedures/laser-vision/asa_procedure_page_gen_z.html',
@@ -1640,12 +1572,15 @@ const routeMap = {
 
   // Legal
   '/privacy/': 'privacy.html',
+  '/terms/': 'terms.html',
+  '/data-deletion/': 'data-deletion.html',
 
   // Legacy routes (keep for backward compatibility)
   '/khanna-gamified-forms': 'khanna-gamified-forms.html',
   '/schedule-consultation': 'khanna-booking.html',
   '/khanna-booking': 'khanna-booking.html',
-  '/booking-success': 'booking-success.html',
+  // Live serves 'coming soon' here too (booking-success.html lists an unapproved phone number).
+  '/booking-success': 'coming-soon.html',
 };
 
 // Strapi page slugs mapping (URL path -> Strapi slug)
@@ -1655,7 +1590,7 @@ const strapiPageSlugs = {
   '/test/smile-laser/': 'test-smile-laser-eye-surgery',
   
   // Production URLs - NOW LIVE with Strapi! (First 6)
-  '/procedures/laser-vision/smile-laser/': 'test-smile-laser-eye-surgery',
+  '/procedures/laser-vision/smile/': 'test-smile-laser-eye-surgery',
   // '/procedures/laser-vision/lasik/': 'lasik-eye-surgery', // body: partials/lasik-page-content.ejs (not Strapi)
   // '/procedures/lens-solutions/evo-icl/': 'evo-icl-surgery', // body: partials/evo-icl-page-content.ejs (not Strapi)
   '/procedures/lens-solutions/robotic-cataract-surgery/': 'robotic-cataract-surgery',
@@ -1668,7 +1603,7 @@ const strapiPageSlugs = {
   '/procedures/laser-vision/compare/pie-vs-evo-icl/': 'pie-vs-evo-icl-comparison',
   '/procedures/laser-vision/compare/presbyopic-iol/': 'presbyopic-iol-comparison',
   '/procedures/lens-solutions/which-lens-is-right/': 'which-lens-is-right',
-  '/procedures/specialty-treatments/cxl-keratoconus/': 'cxl-keratoconus-treatment',
+  // '/procedures/specialty-treatments/cxl-keratoconus/': 'cxl-keratoconus-treatment', // body: full template rebuilt from live Sep 26, 2026 (public Strapi entry still has the old 9735 Wilshire / 2625 Townsgate addresses)
   // '/procedures/specialty-treatments/ctak-keratoconus/': 'ctak-keratoconus-treatment', // body: partials/ctak-keratoconus-page-content.ejs (not Strapi)
   // '/procedures/specialty-treatments/pterygium-surgery/': 'pterygium-surgery', // body: partials/pterygium-surgery-page-content.ejs (not Strapi)
   '/procedures/specialty-treatments/dry-eye-solutions/': 'dry-eye-solutions',
@@ -1727,24 +1662,91 @@ const permanentRedirects = {
   '/patients/resources/forms/': '/contact/schedule-consultation/',
   // Duplicate booking URL → canonical schedule page (GSC indexing fix)
   '/book-consultation/': '/contact/schedule-consultation/',
+  // Live since ~Sep 23, 2026: SMILE moved from /smile-laser/ to /smile/ (slash and no-slash both 301)
+  '/procedures/laser-vision/smile-laser/': '/procedures/laser-vision/smile/',
+  // Live: short SMILE Pro URL
+  '/smile-pro-eye-surgery/': '/procedures/laser-vision/smile-pro-eye-surgery/',
+  // Staging-informed (DEVIATION from live, Sep 26, 2026): old WordPress short URLs.
+  // Staging: /financing/ -> financing page and /news/ = editorial index. Live today sends
+  // /financing to the homepage and 404s /news/. Drop these two lines to match live exactly.
+  '/financing/': '/patients/resources/financing-options/',
+  '/news/': '/blog/latest/',
 };
+// DEVIATION from live: live serves an old SMILE copy with 200 at the site-root
+// /smile-page-complete.html (canonical /smile-laser-eye-surgery/, which itself 301s to /smile/).
+// That file isn't in the repo; this 301s it to the current SMILE page instead (query kept).
+// Only the .html URL is covered (Express also matches '.html/'); extension-less
+// /smile-page-complete(/) stays 404 here (200 on live).
+app.get('/smile-page-complete.html', (req, res) => redirectPreservingQuery(req, res, '/procedures/laser-vision/smile/'));
 Object.entries(permanentRedirects).forEach(([fromPath, toPath]) => {
-  app.get(fromPath, (req, res) => res.redirect(301, toPath));
+  app.get(fromPath, (req, res) => redirectPreservingQuery(req, res, toPath));
   if (fromPath !== '/' && fromPath.endsWith('/')) {
-    app.get(fromPath.slice(0, -1), (req, res) => res.redirect(301, toPath));
+    app.get(fromPath.slice(0, -1), (req, res) => redirectPreservingQuery(req, res, toPath));
   }
+});
+
+// Black Friday 2025 city pages (black-friday/*.html). Live (checked Sep 26, 2026) 301s exactly
+// these 34 '/black-friday/black-friday-smile-eye-surgery-<city>.html' URLs to '/' (relative
+// Location, case-insensitive, trailing slash also matched). The other 6 files in the folder
+// (calabasas, mission-viejo, moorpark, pasadena, santa-clarita, thousand-oaks), every
+// extension-less variant and any other /black-friday/ path return the site 404 page on live.
+// It is an explicit list, not a prefix rule: /black-friday/foo.html is 404 on live, not 301.
+// The query string is kept (branch-wide gclid fix; live drops it).
+// The templates stay in the repo but are unreachable.
+const blackFridayRedirectCities = [
+  'agoura-hills',
+  'anaheim',
+  'bakersfield',
+  'beverly-hills',
+  'burbank',
+  'camarillo',
+  'corona',
+  'costa-mesa',
+  'laguna-beach',
+  'lancaster',
+  'long-beach',
+  'los-angeles',
+  'manhattan-beach',
+  'moreno-valley',
+  'murrieta',
+  'newbury-park',
+  'newport-beach',
+  'northridge',
+  'ontario',
+  'oxnard',
+  'palmdale',
+  'rancho-cucamonga',
+  'riverside',
+  'san-bernardino',
+  'santa-ana',
+  'santa-monica',
+  'simi-valley',
+  'temecula',
+  'torrance',
+  'valencia',
+  'ventura',
+  'west-hollywood',
+  'westlake-village',
+  'woodland-hills'
+];
+blackFridayRedirectCities.forEach((city) => {
+  app.get(`/black-friday/black-friday-smile-eye-surgery-${city}.html`, (req, res) => redirectPreservingQuery(req, res, '/'));
+});
+app.get(/^\/black-friday(\/|$)/i, (req, res) => {
+  res.status(404);
+  renderView('404.html', res, () => res.status(404).send('Page not found'));
 });
 
 /** Old WordPress / marketing URLs — register before routeMap */
 function registerLegacy301Routes(redirects) {
   Object.entries(redirects).forEach(([fromPath, toPath]) => {
     if (fromPath.includes('.')) {
-      app.get(fromPath, (req, res) => res.redirect(301, toPath));
+      app.get(fromPath, (req, res) => redirectPreservingQuery(req, res, toPath));
       return;
     }
     const base = fromPath.replace(/\/$/, '');
-    app.get(base, (req, res) => res.redirect(301, toPath));
-    app.get(`${base}/`, (req, res) => res.redirect(301, toPath));
+    app.get(base, (req, res) => redirectPreservingQuery(req, res, toPath));
+    app.get(`${base}/`, (req, res) => redirectPreservingQuery(req, res, toPath));
   });
 }
 registerLegacy301Routes(legacyWordPressRedirects);
@@ -1828,8 +1830,8 @@ const redirectMap = {
   '/smile-book-consultation-thank-you.html/': '/smile-book-consultation-thank-you/',
 
   // Procedures - Laser Vision
-  '/procedures/laser-vision/smile-page-complete.html': '/procedures/laser-vision/smile-laser/',
-  '/procedures/laser-vision/smile-page-complete': '/procedures/laser-vision/smile-laser/',
+  '/procedures/laser-vision/smile-page-complete.html': '/procedures/laser-vision/smile/',
+  '/procedures/laser-vision/smile-page-complete': '/procedures/laser-vision/smile/',
   '/procedures/laser-vision/lasik-page-complete.html': '/procedures/laser-vision/lasik/',
   '/procedures/laser-vision/lasik-page-complete': '/procedures/laser-vision/lasik/',
   '/procedures/laser-vision/superlasik-no-cut-page.html': '/procedures/laser-vision/superlasik/',
@@ -1903,7 +1905,7 @@ const redirectMap = {
 // Register redirects
 Object.entries(redirectMap).forEach(([oldUrl, newUrl]) => {
   app.get(oldUrl, (req, res) => {
-    res.redirect(301, newUrl);
+    redirectPreservingQuery(req, res, newUrl);
   });
 });
 

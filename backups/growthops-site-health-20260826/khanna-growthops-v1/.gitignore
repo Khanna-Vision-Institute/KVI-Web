@@ -1,7 +1,0 @@
-node_modules/
-.env
-data/store.json
-data/*.log
-.DS_Store
-dist/
-*.pem

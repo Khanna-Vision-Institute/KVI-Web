@@ -26,7 +26,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        /* Date & time picker — same logic as /contact/schedule-consultation/, dark theme */
+        /* Date & time picker — same logic as /book-consultation/, dark theme */
         .sbc-dt * { box-sizing: border-box; }
         .sbc-dt .sbc-form-label {
             display: block;
@@ -226,6 +226,7 @@
         }
         .sbc-dt .sbc-selected-datetime.visible { display: block; }
     </style>
+  <script src="/public/js/consult-conversion.js"></script>
 </head>
 <body class="antialiased">
 
@@ -268,7 +269,7 @@
                 <ul class="space-y-3 text-gray-400 text-sm">
                     <li class="flex gap-2"><span class="text-cyan-400 font-bold">✓</span> Zeiss VisuMax SMILE expertise</li>
                     <li class="flex gap-2"><span class="text-cyan-400 font-bold">✓</span> Financing options available</li>
-                    <li class="flex gap-2"><span class="text-cyan-400 font-bold">✓</span> Call or text <a href="tel:8188571735" class="text-white hover:underline underline-offset-2">818 857 1735</a></li>
+                    <li class="flex gap-2"><span class="text-cyan-400 font-bold">✓</span> Call <a href="tel:+13104821240" class="text-white hover:underline underline-offset-2">(310) 482-1240</a> or <a href="sms:+13104821240" class="text-white hover:underline underline-offset-2">text us</a></li>
                 </ul>
             </div>
 
@@ -357,7 +358,7 @@
         <div class="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
             <p class="mb-2 font-bold text-gray-400">Khanna Vision Institute</p>
             <p>Beverly Hills | Westlake Village</p>
-            <p class="mt-4">Call or text: <a href="tel:8188571735" class="text-gray-400 hover:text-white underline underline-offset-2">818 857 1735</a></p>
+            <p class="mt-4">Call: <a href="tel:+13104821240" class="text-gray-400 hover:text-white underline underline-offset-2">(310) 482-1240</a> · <a href="sms:+13104821240" class="text-gray-400 hover:text-white underline underline-offset-2">Text us</a></p>
             <p class="mt-4"><a href="/smile-cost/" class="text-blue-400 hover:text-blue-300">← Back to SMILE cost</a></p>
         </div>
     </footer>
@@ -692,6 +693,7 @@
   var form = document.getElementById('smile-book-consult-form');
   if (!form) return;
   form.addEventListener('submit', async function (e) {
+    if (window.KviConsultConversion) window.KviConsultConversion.reset('smile');
     e.preventDefault();
     var msg = document.getElementById('smile-book-consult-msg');
     var sched = window.__sbcGetScheduling ? window.__sbcGetScheduling() : {};
@@ -757,11 +759,12 @@
       try { out = raw ? JSON.parse(raw) : null; } catch (parseErr) { out = null; }
       if (!out || typeof out !== 'object') {
         if (msg) {
-          msg.textContent = 'We could not reach the server (error ' + res.status + '). Please try again or call 818 857 1735.';
+          msg.textContent = 'We could not reach the server (error ' + res.status + '). Please try again or call (310) 482-1240.';
           msg.classList.remove('hidden', 'text-green-400');
           msg.classList.add('text-red-400');
         }
-      } else if (out.success) {
+      } else if (res.ok && out.success === true) {
+        if (window.KviConsultConversion) window.KviConsultConversion.recordSuccess('smile');
         try { if (window.grecaptcha && window.grecaptcha.reset) window.grecaptcha.reset(); } catch (x) {}
         var next = (out.redirectUrl && typeof out.redirectUrl === 'string') ? out.redirectUrl : '/smile-book-consultation-thank-you/';
         window.location.href = next;
@@ -775,7 +778,7 @@
       }
     } catch (err) {
       if (msg) {
-        msg.textContent = 'Network error — check your connection and try again, or call 818 857 1735.';
+        msg.textContent = 'Network error — check your connection and try again, or call (310) 482-1240.';
         msg.classList.remove('hidden', 'text-green-400');
         msg.classList.add('text-red-400');
       }

@@ -18,10 +18,12 @@
             <a href="/" class="logo-area" aria-label="Khanna Vision Institute">
                 <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/khannainstitute/Logo+2.png" alt="Khanna Vision Institute logo" width="200" height="56" decoding="async" fetchpriority="high">
             </a>
+            <!-- Seminar / webinar invite — restore when next event is scheduled
             <a href="/seminar-rsvp/" class="header-rsvp-mobile" aria-label="RSVP for webinar or seminar Tuesday August 25th, 2026, 4 to 6 PM Pacific">
                 <span class="header-rsvp-label">You're invited</span>
                 <span class="header-rsvp-action">Webinar/Seminar August 25 · RSVP →</span>
             </a>
+            -->
         </div>
 
         <nav class="nav-primary" aria-label="Main navigation">
@@ -37,7 +39,8 @@
                             <div class="mega-column">
                                 <h4>Laser Vision</h4>
                                 <ul>
-                                    <li><a href="/procedures/laser-vision/smile-laser/">SMILE Laser</a></li>
+                                    <li><a href="/procedures/laser-vision/smile/">SMILE</a></li>
+                                    <li><a href="/procedures/laser-vision/smile-pro-eye-surgery/">SMILE Pro</a></li>
                                     <li><a href="/procedures/laser-vision/lasik/">LASIK</a></li>
                                     <li><a href="/procedures/laser-vision/superlasik/">SuperLASIK</a></li>
                                     <li><a href="/procedures/laser-vision/asa/">Advanced Surface Ablation (ASA / LASEK)</a></li>
@@ -182,13 +185,14 @@
         </nav>
 
         <div class="header-contact">
-            <a href="tel:310-677-0760" class="header-phone" aria-label="Call us at (310) 677-0760">
+            <%# Header call link: href and text come from config/phone.js (HEADER_FOOTER_TEL / HEADER_FOOTER_DISPLAY). %>
+            <a href="<%= sitePhone.HEADER_FOOTER_TEL_HREF %>" class="header-phone" aria-label="Call us at <%= sitePhone.HEADER_FOOTER_DISPLAY %>">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M22 16.92v3.02a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3.02a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <span>(310) 677-0760</span>
+                <span><%= sitePhone.HEADER_FOOTER_DISPLAY %></span>
             </a>
-            <a href="sms:818-857-1735" class="header-text" aria-label="Text us">
+            <a href="sms:+13104821240" class="header-text" aria-label="Text us">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>

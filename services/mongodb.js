@@ -7,11 +7,16 @@ let db = null;
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017';
 const MONGODB_DB = process.env.MONGODB_DB || 'blog';
 const MONGODB_USER = process.env.MONGODB_USER || 'bloguser';
-const MONGODB_PASS = process.env.MONGODB_PASS || '@dmKh@nna@2520';
+// No hard-coded fallback password: MONGODB_PASS must come from the environment.
+const MONGODB_PASS = process.env.MONGODB_PASS;
 
 async function connect() {
   if (db) {
     return db;
+  }
+
+  if (!MONGODB_PASS) {
+    throw new Error('MONGODB_PASS is not set; MongoDB (legacy blog posts) unavailable.');
   }
 
   try {

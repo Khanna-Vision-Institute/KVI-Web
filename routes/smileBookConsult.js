@@ -8,16 +8,24 @@ const {
 const zohoService = require('../services/zohoService');
 const zohoBookingsService = require('../services/zohoBookingsService');
 
+// No hard-coded fallback: the reCAPTCHA v2 secret must come from the environment.
 const RECAPTCHA_SECRET_KEY =
   process.env.RECAPTCHA_SECRET_KEY ||
   process.env.RECAPTCHA_V2_SECRET_KEY ||
-  '6Lf0P20sAAAAANP3mOsaj7QZ6bsl79cw_g49wnWn';
+  '';
+if (!RECAPTCHA_SECRET_KEY) {
+  console.error('[recaptcha] RECAPTCHA_SECRET_KEY is not set; form submissions that require reCAPTCHA will be rejected.');
+}
 
 const RATE_WINDOW_MS = 15 * 60 * 1000;
 const RATE_MAX_REQUESTS = 20;
 const rateStore = new Map();
 
 async function verifyRecaptchaV2(token) {
+  if (!RECAPTCHA_SECRET_KEY) {
+    console.error('[recaptcha] RECAPTCHA_SECRET_KEY is not set; cannot verify reCAPTCHA.');
+    return false;
+  }
   try {
     const response = await axios.post(
       'https://www.google.com/recaptcha/api/siteverify',
@@ -349,8 +357,8 @@ router.post('/submit', rateLimitSubmit, async (req, res) => {
     const errMsg = String(error.message || '');
     const hint =
       errMsg.includes('SMTP credentials are not fully configured') || errMsg.includes('SMTP')
-        ? 'We could not send your request by email right now. Please call 818 857 1735 or try again later.'
-        : 'Unable to submit. Please try again or call 818 857 1735.';
+        ? 'We could not send your request by email right now. Please call (310) 482-1240 or try again later.'
+        : 'Unable to submit. Please try again or call (310) 482-1240.';
     return res.status(500).json({
       success: false,
       message: hint

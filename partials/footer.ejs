@@ -9,13 +9,14 @@
                 <li>31824 Village Center Rd Suite F, Westlake Village, CA 91361, United States</li>
                 <li style="margin-top: 1rem;"><strong>Beverly Hills</strong></li>
                 <li>9100 Wilshire Blvd Suite 265E, Beverly Hills, CA 90212, United States</li>
-                <li style="margin-top: 1rem;"><strong>Phone:</strong> <a href="tel:310-677-0760">(310) 677-0760</a></li>
+                <li style="margin-top: 1rem;"><strong>Phone:</strong> <%# Footer call link: see config/phone.js (HEADER_FOOTER_TEL). %><a href="<%= sitePhone.HEADER_FOOTER_TEL_HREF %>"><%= sitePhone.HEADER_FOOTER_DISPLAY %></a></li>
             </ul>
         </div>
         <div class="footer-section">
             <h3>Procedures</h3>
             <ul>
-                <li><a href="/procedures/laser-vision/smile-laser/">SMILE Laser</a></li>
+                <li><a href="/procedures/laser-vision/smile/">SMILE</a></li>
+                <li><a href="/procedures/laser-vision/smile-pro-eye-surgery/">SMILE Pro</a></li>
                 <li><a href="/procedures/laser-vision/lasik/">LASIK</a></li>
                 <li><a href="/procedures/laser-vision/superlasik/">SuperLASIK</a></li>
                 <li><a href="/procedures/lens-solutions/evo-icl/">EVO ICL</a></li>
@@ -43,11 +44,15 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2026 Khanna Vision Institute. Your vision is our mission. | <a href="/privacy" style="color: inherit;">Privacy Policy</a></p>
+        <p>&copy; 2026 Khanna Vision Institute. Your vision is our mission. | <a href="/privacy" style="color: inherit;">Privacy Policy</a> | <a href="/terms/" style="color: inherit;">Terms</a> | <a href="/data-deletion/" style="color: inherit;">Data deletion</a></p>
     </div>
 </footer>
 
 <script src="/public/js/header.js" defer></script>
+<%# CallRail swap.js: drafted but DISABLED. Renders only if config/phone.js CALLRAIL_SWAP_ENABLED is true.
+    Before enabling, CallRail swap targets must change from (310) 997-4490 to (310) 482-1240 (needs Khanna's approval). %>
+<% if (sitePhone.CALLRAIL_SWAP_ENABLED) { %><script async src="<%= sitePhone.CALLRAIL_SWAP_SRC %>"></script>
+<% } %>
 
 <!-- Guru AI Chat Widget: load after first paint / idle to reduce main-thread work on mobile -->
 <script>

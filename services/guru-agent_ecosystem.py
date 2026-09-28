@@ -21,7 +21,7 @@ BRANDI_WELCOME = (
 JILL_HUMAN_MSG = (
     "I'll get you to a real person on our team. "
     "For the fastest help, call Khanna Vision Institute at (805) 230-2126 "
-    "or text (818) 857-1735. If you were told to reach Jill, mention that and the front desk will route you."
+    "or (310) 482-1240. If you were told to reach Jill, mention that and the front desk will route you."
 )
 
 JILL_MINOR_MSG = (

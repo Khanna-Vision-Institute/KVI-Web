@@ -42,7 +42,7 @@ FINANCING:
 - Compare lifetime contact-lens cost vs one-time procedure investment when helpful
 
 CONTACT:
-- Office phone: (310) 677-0760
+- Office phone: (310) 482-1240
 - Schedule online: khannainstitute.com/contact/schedule-consultation/
 - Locations: Beverly Hills (9100 Wilshire Blvd) and Westlake Village (31824 Village Center Rd F)
 - NEVER use (310) 997-4490 — outdated CallRail tracking number

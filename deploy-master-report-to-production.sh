@@ -273,7 +273,12 @@ app.get('/login', (req, res) => {
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const adminUser = process.env.ADMIN_USER || 'admin';
-    const adminPassword = process.env.ADMIN_PASSWORD || 'KVI2024Secure!ChangeMe';
+    const adminPassword = process.env.ADMIN_PASSWORD;
+    if (!adminPassword) {
+        // No hard-coded fallback: refuse logins until ADMIN_PASSWORD is configured.
+        console.error('ADMIN_PASSWORD is not set; login disabled.');
+        return res.status(503).json({ success: false, message: 'Login is not configured' });
+    }
     
     if (username === adminUser && password === adminPassword) {
         req.session.authenticated = true;
