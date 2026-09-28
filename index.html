@@ -195,6 +195,27 @@
             background: #e6f7f2;
         }
 
+        /* Awards strip (partials/awards-strip.ejs): first row of the hero grid, spanning both paths, pushed just below
+           the fixed header so it is always above the fold. --kvi-hero-offset is set by the small script after the hero
+           (header height minus the hero's own top offset); the px values are fallbacks. */
+        .hero {
+            grid-template-rows: auto 1fr;
+        }
+        .hero > .kvi-awards {
+            grid-column: 1 / -1;
+            order: -1;
+            align-self: start;
+            margin-top: var(--kvi-hero-offset, 100px);
+        }
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-rows: auto;
+            }
+            .hero > .kvi-awards {
+                margin-top: var(--kvi-hero-offset, 140px);
+            }
+        }
+
         /* Hero Section - Split Path */
         .hero {
             margin-top: 0;
@@ -840,7 +861,25 @@
             <a href="/khanna-booking" class="path-cta gen-x-cta">Schedule Free Consultation</a>
             <a href="/about/why-choose-us/celebrity-patients/" class="path-cta secondary-cta">Watch Patient Stories</a>
         </div>
+
+        <!-- Awards strip (above the fold): partials/awards-strip.ejs -->
+        <%- include('/partials/awards-strip', { awardsVariant: 'compact', awardsLink: true }) %>
     </section>
+    <script>
+    (function () {
+        /* Keep the hero awards strip just below the fixed header (header height varies by viewport). */
+        function kviHeroOffset() {
+            var header = document.querySelector('.main-header');
+            var hero = document.querySelector('.hero');
+            if (!header || !hero) return;
+            var overlap = Math.max(0, Math.round(header.offsetHeight - hero.offsetTop));
+            hero.style.setProperty('--kvi-hero-offset', overlap + 'px');
+        }
+        kviHeroOffset();
+        window.addEventListener('load', kviHeroOffset);
+        window.addEventListener('resize', kviHeroOffset);
+    })();
+    </script>
 
     <!-- Vision Seminar & Webinar strip (below hero) — restore when next event is scheduled
     <div class="home-rsvp-strip">

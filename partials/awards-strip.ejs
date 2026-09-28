@@ -1,0 +1,115 @@
+<%
+/*
+ * Awards strip — Dr. Rajesh Khanna's award badges (Phase 4 "awards and gallery").
+ * Used by: index.html (home, above the fold), about/dr-khanna/credentials-awards.html (top of page,
+ * renders with or without Strapi content) and about/why-trust-khanna.html.
+ *
+ * Usage: include('/partials/awards-strip', { awardsVariant: 'compact' or 'full', awardsLink: true or false,
+ *          awardsTitle: 'heading text', awardsClearHeader: true to sit just below the fixed site header })
+ *   compact = one-line trust bar (home hero); full = larger badges with captions.
+ *
+ * Images: /public/images/awards/*.webp with PNG fallback, max 300px tall (see public/images/awards/README.md).
+ * Captions use only what the staging awards page and the badge artwork state. Years/issuers still to be
+ * confirmed by KVI are listed in public/images/awards/README.md.
+ *
+ * Rising Star Award: the original badge file is not available (staging media is missing it), so it is shown
+ * as a text badge until KVI supplies the image. Replace the text tile with a <picture> when the file arrives.
+ */
+var kviVariant = (typeof awardsVariant !== 'undefined' && awardsVariant === 'compact') ? 'compact' : 'full';
+var kviShowLink = (typeof awardsLink !== 'undefined') ? !!awardsLink : true;
+var kviTitle = (typeof awardsTitle !== 'undefined' && awardsTitle) ? awardsTitle : 'Awards & Recognition';
+var kviClearHeader = (typeof awardsClearHeader !== 'undefined') ? !!awardsClearHeader : false;
+var kviAwards = [
+  { file: 'readers-choice-award', w: 300, h: 300, name: "Readers' Choice Award",
+    alt: "Daily News Readers' Best 2009 Readers' Choice award badge for Dr. Rajesh Khanna" },
+  { file: null, name: 'Rising Star Award',
+    alt: 'Rising Star Award for Rajesh Khanna, MD' },
+  { file: 'newsweek-top-15-showcase', w: 300, h: 250, name: 'Newsweek Showcase: 15 Leaders in Laser Eye Surgery',
+    alt: 'Newsweek Showcase badge: 15 Leaders in Laser Eye Surgery, recognizing SMILE laser eye surgeon Dr. Rajesh Khanna' },
+  { file: 'southern-california-top-lasik-surgeon', w: 322, h: 300, name: 'Southern California Top LASIK Surgeon',
+    alt: 'Southern California Top Doctors and Rising Stars 2020 badge for Rajesh Khanna, MD, Southern California top LASIK surgeon' },
+  { file: 'super-doctors-rajesh-khanna', w: 383, h: 300, name: 'Super Doctors, Southern California',
+    alt: 'Super Doctors Southern California 2023 badge for Rajesh Khanna, MD, SMILE laser vision correction specialist' }
+];
+%>
+<style>
+  .kvi-awards { background: #ffffff; border-bottom: 1px solid rgba(0,0,0,0.08); font-family: inherit; }
+  .kvi-awards__inner { max-width: 1200px; margin: 0 auto; padding: 0.75rem 1.25rem; display: flex; align-items: center; justify-content: center; gap: 1.25rem; flex-wrap: wrap; }
+  .kvi-awards__label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #1e3c72; white-space: nowrap; }
+  .kvi-awards__list { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; }
+  .kvi-awards__item { margin: 0; text-align: center; }
+  .kvi-awards__item img { display: block; width: auto; height: 64px; max-width: 100%; }
+  .kvi-awards__text-badge { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 64px; min-width: 96px; padding: 0 0.6rem; border: 2px solid #1e3c72; border-radius: 10px; color: #1e3c72; font-weight: 800; font-size: 0.78rem; line-height: 1.15; text-transform: uppercase; letter-spacing: 0.04em; background: #f5f8ff; }
+  .kvi-awards__text-badge small { font-weight: 600; font-size: 0.66rem; text-transform: none; letter-spacing: 0; color: #334; margin-top: 2px; }
+  .kvi-awards__more { font-size: 0.85rem; font-weight: 700; color: #0066cc; text-decoration: none; white-space: nowrap; }
+  .kvi-awards__more:hover { text-decoration: underline; }
+  .kvi-awards__caption { display: none; }
+  /* full variant: bigger badges with captions */
+  .kvi-awards--full { background: #f8f9fa; border-bottom: 0; }
+  .kvi-awards--full .kvi-awards__inner { flex-direction: column; padding: 2rem 1.25rem; gap: 1rem; }
+  .kvi-awards--full .kvi-awards__label { font-size: 1.4rem; letter-spacing: 0; text-transform: none; color: #1e3c72; }
+  .kvi-awards--full .kvi-awards__list { gap: 1.5rem; align-items: flex-start; }
+  .kvi-awards--full .kvi-awards__item { width: 170px; }
+  .kvi-awards--full .kvi-awards__item img { height: 130px; margin: 0 auto; object-fit: contain; }
+  .kvi-awards--full .kvi-awards__text-badge { height: 130px; width: 130px; margin: 0 auto; font-size: 0.95rem; border-radius: 50%; }
+  .kvi-awards--full .kvi-awards__caption { display: block; font-size: 0.85rem; font-weight: 600; color: #2c3e50; margin-top: 0.5rem; line-height: 1.3; }
+  /* sits just below the fixed .main-header; --kvi-header-h is measured by the script below (px value is a fallback) */
+  .kvi-awards--clear-header { padding-top: var(--kvi-header-h, 142px); }
+  @media (max-width: 768px) {
+    .kvi-awards--clear-header { padding-top: var(--kvi-header-h, 280px); }
+    .kvi-awards__inner { gap: 0.5rem; padding: 0.5rem 0.75rem; }
+    .kvi-awards__list { gap: 0.5rem; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; justify-content: flex-start; }
+    .kvi-awards__item img, .kvi-awards__text-badge { height: 44px; }
+    .kvi-awards__text-badge { min-width: 76px; font-size: 0.62rem; }
+    .kvi-awards__text-badge small { display: none; }
+    .kvi-awards--full .kvi-awards__list { flex-wrap: wrap; justify-content: center; overflow: visible; }
+    .kvi-awards--full .kvi-awards__inner { padding: 1.25rem 0.75rem; }
+    .kvi-awards--full .kvi-awards__label { font-size: 1.15rem; }
+    .kvi-awards--full .kvi-awards__list { gap: 0.75rem 0.5rem; }
+    .kvi-awards--full .kvi-awards__item { width: 30%; max-width: 120px; }
+    .kvi-awards--full .kvi-awards__item img { height: 72px; }
+    .kvi-awards--full .kvi-awards__text-badge { height: 72px; width: 72px; min-width: 0; font-size: 0.6rem; }
+    .kvi-awards--full .kvi-awards__caption { font-size: 0.72rem; }
+  }
+</style>
+<section class="kvi-awards kvi-awards--<%= kviVariant %><%= kviClearHeader ? ' kvi-awards--clear-header' : '' %>" aria-label="Awards and recognition for Dr. Rajesh Khanna">
+  <div class="kvi-awards__inner">
+    <% if (kviVariant === 'full') { %>
+    <h2 class="kvi-awards__label"><%= kviTitle %></h2>
+    <% } else { %>
+    <span class="kvi-awards__label">Award-Winning Surgeon</span>
+    <% } %>
+    <ul class="kvi-awards__list">
+      <% kviAwards.forEach(function (a) { %>
+      <li class="kvi-awards__item">
+        <% if (a.file) { %>
+        <picture>
+          <source srcset="/public/images/awards/<%= a.file %>.webp" type="image/webp">
+          <img src="/public/images/awards/<%= a.file %>.png" alt="<%= a.alt %>" width="<%= a.w %>" height="<%= a.h %>" loading="<%= kviVariant === 'compact' ? 'eager' : 'lazy' %>" decoding="async">
+        </picture>
+        <% } else { %>
+        <!-- TODO(KVI): replace with the original Rising Star badge image when supplied -->
+        <span class="kvi-awards__text-badge" role="img" aria-label="<%= a.alt %>">Rising Star<small>Award</small></span>
+        <% } %>
+        <span class="kvi-awards__caption"><%= a.name %></span>
+      </li>
+      <% }); %>
+    </ul>
+    <% if (kviShowLink) { %>
+    <a class="kvi-awards__more" href="/about/dr-khanna/credentials-awards/">See credentials &amp; awards &rarr;</a>
+    <% } %>
+  </div>
+</section>
+<% if (kviClearHeader) { %>
+<script>
+(function () {
+  function kviHeaderH() {
+    var h = document.querySelector('.main-header');
+    if (h) document.documentElement.style.setProperty('--kvi-header-h', h.offsetHeight + 'px');
+  }
+  kviHeaderH();
+  window.addEventListener('load', kviHeaderH);
+  window.addEventListener('resize', kviHeaderH);
+})();
+</script>
+<% } %>
