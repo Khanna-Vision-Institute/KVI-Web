@@ -1504,6 +1504,7 @@ const routeMap = {
   '/about/dr-khanna/credentials-awards/': 'about/dr-khanna/credentials-awards.html',
   '/about/dr-khanna/books/': 'about/dr-khanna/books.html',
   '/about/dr-khanna/media/': 'about/dr-khanna/media.html',
+  '/about/why-trust-khanna/': 'about/why-trust-khanna.html', // static template (no Strapi slug): trust hub, plan item G10
   
   // ABOUT - Why Choose Us
   '/about/why-choose-us/technology/': 'about/why-choose-us/Our technology.html',

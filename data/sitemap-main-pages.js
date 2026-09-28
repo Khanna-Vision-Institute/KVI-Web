@@ -1,14 +1,14 @@
 /**
  * Main-pages sitemap data (served at /main-pages-sitemap.xml by server.js).
  * Reconstructed from the live https://khannainstitute.com/main-pages-sitemap.xml (fetched Sep 26, 2026):
- * 54 URLs, every <lastmod> 2026-09-23 and <changefreq> weekly. Order and priorities match live.
+ * 54 URLs, every <lastmod> 2026-09-23 (review branch: +/about/why-trust-khanna/ on Sep 28, 2026 -> 55 URLs, lastmod 2026-09-28) and <changefreq> weekly. Order and priorities match live.
  * Live generates this with res.send() (content-hash ETag, no Last-Modified), so it is generated here too.
  *
  * To publish a page: add [path, priority] below and bump MAIN_PAGES_LASTMOD.
  * NOTE: live lists some URLs that 301 or canonicalize elsewhere (insurance-info, insurance-coverage,
  * /contact/forms/, /khanna-booking, /privacy + /privacy/). Kept for parity; see the rebuild report.
  */
-const MAIN_PAGES_LASTMOD = '2026-09-23';
+const MAIN_PAGES_LASTMOD = '2026-09-28';
 const MAIN_PAGES_CHANGEFREQ = 'weekly';
 
 // [path, priority]
@@ -38,6 +38,7 @@ const MAIN_PAGES = [
   ['/about/dr-khanna/credentials-awards/', '0.8'],
   ['/about/dr-khanna/books/', '0.8'],
   ['/about/dr-khanna/media/', '0.8'],
+  ['/about/why-trust-khanna/', '0.8'],
   ['/about/why-choose-us/technology/', '0.6'],
   ['/about/why-choose-us/success-stories/', '0.6'],
   ['/about/why-choose-us/celebrity-patients/', '0.6'],
