@@ -49,10 +49,6 @@
 </footer>
 
 <script src="/public/js/header.js" defer></script>
-<%# CallRail swap.js: drafted but DISABLED. Renders only if config/phone.js CALLRAIL_SWAP_ENABLED is true.
-    Before enabling, CallRail swap targets must change from (310) 997-4490 to (310) 482-1240 (needs Khanna's approval). %>
-<% if (sitePhone.CALLRAIL_SWAP_ENABLED) { %><script async src="<%= sitePhone.CALLRAIL_SWAP_SRC %>"></script>
-<% } %>
 
 <!-- Guru AI Chat Widget: load after first paint / idle to reduce main-thread work on mobile -->
 <script>

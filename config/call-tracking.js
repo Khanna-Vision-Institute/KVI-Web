@@ -1,5 +1,5 @@
 /**
- * In-house call tracking: website dynamic number swap (replaces CallRail swap.js).
+ * In-house call tracking: website dynamic number swap.
  *
  * STATUS: STAGED, SWAP OFF. KVI_CALLTRACKER_ENABLED must stay false until:
  *   1. every pool number below reaches the tracker (Twilio) - forwarded or ported from Weave
@@ -20,7 +20,6 @@
  *     This includes (310) 677-0760 (the old header number): it comes back ONLY as pool slot 1.
  *
  * Mode 'href' keeps the visible text (office main) and swaps only the tel: link.
- * Do not enable together with CALLRAIL_SWAP_ENABLED (config/phone.js).
  */
 const KVI_CALLTRACKER_ENABLED = false;
 const KVI_CALLTRACKER_ORIGIN = 'https://calls.khannainstitute.com'; // placeholder host (decision D8)

@@ -39,17 +39,16 @@ test('office mains and (818) 857-1735 are never in the pool', () => {
   assert.ok(!ct.SWAP_TARGETS.includes(HIDDEN));
 });
 
-test('swap stays OFF (in-house and CallRail)', () => {
+test('in-house swap stays OFF; config/phone.js has no CallRail/Black Friday constants', () => {
   assert.equal(ct.KVI_CALLTRACKER_ENABLED, false);
-  assert.equal(phone.CALLRAIL_SWAP_ENABLED, false);
+  assert.deepEqual(Object.keys(phone).sort(), ['HEADER_FOOTER_DISPLAY', 'HEADER_FOOTER_TEL', 'HEADER_FOOTER_TEL_HREF']);
   assert.equal(tracking.clientConfig(ct).swap.enabled, false);
 });
 
-// Files allowed to contain pool numbers (config, this test, the retired script, docs). Never a served template.
+// Files allowed to contain pool numbers (config, this test, docs). Never a served template.
 const POOL_NUMBER_ALLOWLIST = new Set([
   'config/call-tracking.js',
   'test/tracking.test.js',
-  'scripts/deploy-callrail-phone-replace.sh',
   'docs/TRACKING-CHANGE-NOTE-2026-09-28.md',
   'REVIEW-NOTES.md', // reviewer notes (not served)
 ]);
@@ -192,4 +191,50 @@ test('every page with its own GA4 snippet also loads the tracking tags', () => {
     .filter((o) => !/include\(\s*['"]\/partials\/tracking-tags['"]/.test(fs.readFileSync(path.join(ROOT, o.file), 'utf8')))
     .map((o) => o.file);
   assert.deepEqual(missing, []);
+});
+
+// ---------------------------------------------------------------- CallRail leftovers (removed Sep 28, 2026)
+// The ONLY allowed mention is the Vapi voice-agent instruction "NEVER use (310) 997-4490 ...".
+const VAPI_INSTRUCTION = /NEVER use \(310\) 997-4490 — outdated CallRail tracking number/;
+const CALLRAIL_DOC_ALLOWLIST = new Set(['test/tracking.test.js', 'docs/TRACKING-CHANGE-NOTE-2026-09-28.md', 'REVIEW-NOTES.md']);
+const CALLRAIL_RES = [
+  ['CallRail name/script', /callrail/i],
+  ['CALLRAIL_SWAP_* / BLACK_FRIDAY_* constant', /CALLRAIL_SWAP|BLACK_FRIDAY_(TEL|DISPLAY)/],
+  ['former CallRail number (805) 222-7974', numberPattern('+18052227974')],
+  ['former CallRail swap target (310) 997-4490', numberPattern('+13109974490')],
+];
+test('no CallRail script or number anywhere except the Vapi "never use" instruction', () => {
+  const hits = [];
+  for (const abs of walk(ROOT)) {
+    const rel = path.relative(ROOT, abs).split(path.sep).join('/');
+    if (CALLRAIL_DOC_ALLOWLIST.has(rel)) continue;
+    if (fs.statSync(abs).size > 5 * 1024 * 1024) continue;
+    fs.readFileSync(abs, 'utf8').split('\n').forEach((line, i) => {
+      if (rel === 'services/vapiWebAgents.js' && VAPI_INSTRUCTION.test(line)) return;
+      for (const [what, re] of CALLRAIL_RES) if (re.test(line)) hits.push(`${rel}:${i + 1} ${what}`);
+    });
+  }
+  assert.deepEqual(hits, [], hits.join('\n'));
+  assert.match(fs.readFileSync(path.join(ROOT, 'services/vapiWebAgents.js'), 'utf8'), VAPI_INSTRUCTION, 'keep the Vapi instruction');
+  assert.ok(!fs.existsSync(path.join(ROOT, 'scripts/deploy-callrail-phone-replace.sh')));
+});
+test('Black Friday pages dial and show only (805) 230-2126 / (310) 482-1240', () => {
+  const dir = path.join(ROOT, 'black-friday');
+  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.html'))) {
+    const src = fs.readFileSync(path.join(dir, f), 'utf8');
+    const tels = [...src.matchAll(/href="tel:([^"]+)"/g)].map((m) => m[1]);
+    tels.forEach((t) => assert.ok(['+18052302126', '+13104821240'].includes(t), `${f}: unexpected tel:${t}`));
+  }
+});
+test('no sms: link to (818) 857-1735 and no sms: link to a pool number', () => {
+  const bad = [];
+  for (const abs of walk(ROOT)) {
+    const rel = path.relative(ROOT, abs).split(path.sep).join('/');
+    const src = fs.readFileSync(abs, 'utf8');
+    for (const m of src.matchAll(/sms:([+\d\-(). ]{7,})/gi)) {
+      const d = m[1].replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '');
+      if (d === '8188571735' || ct.WEBSITE_SWAP_POOL.some((n) => n.endsWith(d))) bad.push(`${rel}: sms:${m[1]}`);
+    }
+  }
+  assert.deepEqual(bad, [], bad.join('\n'));
 });

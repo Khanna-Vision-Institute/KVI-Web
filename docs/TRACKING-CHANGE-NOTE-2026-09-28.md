@@ -43,12 +43,12 @@ Settled Sep 28, 2026 (`/workspace/reports/call-tracking/number-allocation-2026-0
 | 4 | (818) 293-1955 | 9 | (818) 230-5325 |
 | 5 | (818) 465-9340 | 10 | (818) 239-7069 |
 
-- `KVI_CALLTRACKER_ENABLED = false`. `public/js/kvi-swap.js` is only rendered when it is true (and never together with CallRail).
+- `KVI_CALLTRACKER_ENABLED = false`. `public/js/kvi-swap.js` is only rendered when it is true.
 - The office mains **(310) 482-1240** and **(805) 230-2126** are swap **targets** and stay in the HTML. **(818) 857-1735** is never pooled and never swapped.
 - Only tracked visitors (gclid/gbraid/wbraid/fbclid/msclkid/utm_*) get a pool number. Organic visitors keep the office mains. One number per visitor, held 30 min. Mode `href`: only the dial link changes and the visible text stays the office main.
 - The swap script accepts only one of these 10 numbers from the tracker, so a main number or the 818 line can never be swapped in.
-- **(310) 677-0760 appears only as pool slot 1**, and only in a tracked visitor's dial link. It is not displayed as a static number anywhere. `scripts/deploy-callrail-phone-replace.sh`, which would have put it back in the header/footer as a static number, is retired (it exits immediately).
-- **Tests** (`npm run test:tracking`, 13 tests, all pass) assert:
+- **(310) 677-0760 appears only as pool slot 1**, and only in a tracked visitor's dial link. It is not displayed as a static number anywhere (the old deploy script that would have put it back in the header/footer is deleted; see section 6).
+- **Tests** (`npm run test:tracking`, 16 tests, all pass) assert:
   - exactly 10 unique E.164 pool numbers, matching the settled list;
   - neither office main nor +18188571735 is in the pool;
   - the swap is off;
@@ -57,13 +57,28 @@ Settled Sep 28, 2026 (`/workspace/reports/call-tracking/number-allocation-2026-0
   - VIP/SMILE still fire in `legacy`, stop in `off`, and are unchanged with no config;
   - tel/sms clicks send GA4 only unless a label is allowed;
   - phone_call has the 60 s minimum and flag gating;
-  - GA4 is on every page.
+  - GA4 is on every page;
+  - no CallRail script or number anywhere (section 6), Black Friday pages dial only the office mains, and no `sms:` link goes to (818) 857-1735 or a pool number.
 
 ## 5. Before the swap goes on
 1. All 10 numbers are Weave-hosted. Each must reach the tracker (Twilio): forward or port from Weave (confirm with Sam/Weave).
 2. Re-route (310) 677-0760 from 131 Inglewood (Trish) to the call center.
 3. Host the tracker on HTTPS (`KVI_CALLTRACKER_ORIGIN` is a placeholder) and align the local prototype (`/workspace/calltracker`, which still has the old CallRail numbers in a 4+2 split) to this single 10-number pool. Until then `kvi-swap.js` would reject its numbers.
 4. Get Khanna's approval, then set `KVI_CALLTRACKER_ENABLED = true`.
+
+## 6. CallRail leftovers removed (Khanna approved, Sep 28, 2026)
+- `config/phone.js`: removed the disabled `CALLRAIL_SWAP_ENABLED` / `CALLRAIL_SWAP_SRC` block and its comments, and the `BLACK_FRIDAY_TEL` / `BLACK_FRIDAY_DISPLAY` constants. Only `HEADER_FOOTER_*` is left.
+- `partials/footer.ejs`: removed the matching CallRail `swap.js` block. `partials/tracking-tags.ejs` no longer checks the CallRail flag.
+- `black-friday/*.html` (all 40 city pages): the masked link that dialed the CallRail number **+1 805-222-7974** behind the visible text "(805) 230-2126" now dials and shows **(805) 230-2126 / +18052302126**. Searched the whole branch for `BLACK_FRIDAY_*`, `8052227974`, `805-222-7974`, `(805) 222-7974`, `805.222.7974` and `222-7974`: nothing left. (These pages currently 301 to the home page.)
+- `scripts/deploy-callrail-phone-replace.sh`: deleted.
+- Kept: the Vapi voice-agent instruction in `services/vapiWebAgents.js`, "NEVER use (310) 997-4490 — outdated CallRail tracking number". The tests allow that one line and nothing else.
+- Checks on the branch:
+  - no `sms:` link to (818) 857-1735 (all 13 `sms:` links go to +13104821240);
+  - no static (310) 677-0760.
+- (818) 857-1735 is still linked in 6 Strapi paste files (10 `tel:` links; the number itself is not shown as text):
+  - "Surgery patient line": `STRAPI_CONTENT_29_EXPECT_CATARACT_WITH_CSS.html:260`, `_32_RECOVERY_LASIK:401`, `_33_RECOVERY_SMILE:401`, `_34_RECOVERY_CATARACT:282`, `_35_RECOVERY_CXL:383`
+  - "After-hours line": `_29:261`, `_34:284`, `_35:384`, `STRAPI_CONTENT_52_EMERGENCY_CARE_WITH_CSS.html:64` and `:122`
+  - Left unchanged pending Khanna's call on whether the hidden line may be linked there.
 
 ## Files
 New: `config/tracking.js`, `config/call-tracking.js`, `partials/tracking-tags.ejs`, `public/js/kvi-tracking.js`, `public/js/kvi-swap.js`, `services/callConversion.js`, `scripts/check-ga4-tag.js`, `test/tracking.test.js`, this note.
@@ -73,5 +88,6 @@ Changed:
 - `public/js/consult-conversion.js`: honors the flag, same labels
 - the 4 form handlers (`partials/booking-widget.ejs`, `partials/booking-consult-main.ejs`, `public/js/online-consult-form.js`, `smile-la-landing-page-2026.html`)
 - the 9 standalone pages and the 11 newly tagged pages
-- `scripts/deploy-callrail-phone-replace.sh`: retired
+- `scripts/deploy-callrail-phone-replace.sh`: deleted (section 6)
+- `config/phone.js`, `partials/footer.ejs`, `black-friday/*.html` (40 pages): CallRail leftovers removed (section 6)
 - `package.json`: `test:tracking`, `check:ga4`

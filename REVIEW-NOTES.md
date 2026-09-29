@@ -36,3 +36,4 @@ Forms, booking, the Guru chat (`/api/guru`), CMS-driven blog and MongoDB feature
   - GA4 `G-Q0TGBPVS92` is on every page, checked by `npm run check:ga4`.
   - 10-slot website swap pool in `config/call-tracking.js`, swap off. The office mains and (818) 857-1735 are never pooled, and (310) 677-0760 is used only as a pool number.
   - Tests: `npm run test:tracking`.
+- **CallRail leftovers removed:** the disabled CallRail swap block (`config/phone.js`, `partials/footer.ejs`), the Black Friday tracking number (the 40 pages now dial (805) 230-2126), and `scripts/deploy-callrail-phone-replace.sh`. The Vapi "never use (310) 997-4490" instruction is kept. See section 6 of the change note.

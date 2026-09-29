@@ -1,4 +1,4 @@
-/* KVI in-house call tracker: dynamic number swap (replaces CallRail swap.js).
+/* KVI in-house call tracker: dynamic number swap.
  * STAGED, OFF: rendered by partials/tracking-tags.ejs ONLY when config/call-tracking.js
  * KVI_CALLTRACKER_ENABLED is true. Reads its settings from window.KVI_TRACKING.swap.
  *

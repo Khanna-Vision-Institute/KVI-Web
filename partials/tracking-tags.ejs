@@ -5,5 +5,5 @@
 <% var _kviCt = (typeof siteCallTracking !== 'undefined') ? siteCallTracking : null; %>
 <% if (typeof siteTracking !== 'undefined') { %><script>window.KVI_TRACKING = <%- siteTracking.clientConfigJson(_kviCt) %>;</script>
 <% } %><script src="/public/js/kvi-tracking.js" defer></script>
-<% if (_kviCt && _kviCt.KVI_CALLTRACKER_ENABLED === true && !(typeof sitePhone !== 'undefined' && sitePhone.CALLRAIL_SWAP_ENABLED)) { %><script src="<%= _kviCt.KVI_CALLTRACKER_SRC %>" defer></script>
+<% if (_kviCt && _kviCt.KVI_CALLTRACKER_ENABLED === true) { %><script src="<%= _kviCt.KVI_CALLTRACKER_SRC %>" defer></script>
 <% } %>
