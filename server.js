@@ -1630,8 +1630,7 @@ const routeMap = {
   // PROCEDURES - Specialty Treatments
   '/procedures/specialty-treatments/cxl-keratoconus/': 'procedures/specialty-treatments/cxl-keratoconus-page.html',
   '/procedures/specialty-treatments/ctak-keratoconus/': 'procedures/specialty-treatments/ctak-keratoconus-page.html',
-  '/procedures/specialty-treatments/epioxa-westlake-village/': 'procedures/specialty-treatments/epioxa-westlake-village.html',
-  '/procedures/specialty-treatments/epioxa-beverly-hills/': 'procedures/specialty-treatments/epioxa-beverly-hills.html',
+  '/procedures/specialty-treatments/epioxa/': 'procedures/specialty-treatments/epioxa-beverly-hills.html',
   '/procedures/specialty-treatments/pterygium-surgery/': 'procedures/specialty-treatments/Cosmetic Pterygium Surgery Restore Your Bright, Clear, Healthy-Looking Eyes.html',
   '/procedures/specialty-treatments/dry-eye-solutions/': 'procedures/specialty-treatments/hello-dry-eye-treatment.html',
   '/procedures/specialty-treatments/chalazion-treatment/': 'procedures/specialty-treatments/Advanced Chalazion Treatment.html',
@@ -1799,6 +1798,8 @@ const permanentRedirects = {
   // SMILE Pro canonical path under laser-vision procedures
   '/smile-pro-eye-surgery/': '/procedures/laser-vision/smile-pro-eye-surgery/',
   '/procedures/laser-vision/smile-laser/': '/procedures/laser-vision/smile/',
+  '/procedures/specialty-treatments/epioxa-westlake-village/': '/procedures/specialty-treatments/epioxa/',
+  '/procedures/specialty-treatments/epioxa-beverly-hills/': '/procedures/specialty-treatments/epioxa/',
 };
 // DEVIATION from live: live serves an old SMILE copy with 200 at the site-root
 // /smile-page-complete.html (canonical /smile-laser-eye-surgery/, which itself 301s to /smile/).
@@ -1964,10 +1965,10 @@ const redirectMap = {
   '/procedures/specialty-treatments/cxl-keratoconus-page': '/procedures/specialty-treatments/cxl-keratoconus/',
   '/procedures/specialty-treatments/ctak-keratoconus-page.html': '/procedures/specialty-treatments/ctak-keratoconus/',
   '/procedures/specialty-treatments/ctak-keratoconus-page': '/procedures/specialty-treatments/ctak-keratoconus/',
-  '/procedures/specialty-treatments/epioxa-westlake-village.html': '/procedures/specialty-treatments/epioxa-westlake-village/',
-  '/procedures/specialty-treatments/epioxa-westlake-village': '/procedures/specialty-treatments/epioxa-westlake-village/',
-  '/procedures/specialty-treatments/epioxa-beverly-hills.html': '/procedures/specialty-treatments/epioxa-beverly-hills/',
-  '/procedures/specialty-treatments/epioxa-beverly-hills': '/procedures/specialty-treatments/epioxa-beverly-hills/',
+  '/procedures/specialty-treatments/epioxa-westlake-village.html': '/procedures/specialty-treatments/epioxa/',
+  '/procedures/specialty-treatments/epioxa-westlake-village': '/procedures/specialty-treatments/epioxa/',
+  '/procedures/specialty-treatments/epioxa-beverly-hills.html': '/procedures/specialty-treatments/epioxa/',
+  '/procedures/specialty-treatments/epioxa-beverly-hills': '/procedures/specialty-treatments/epioxa/',
   '/procedures/specialty-treatments/Cosmetic Pterygium Surgery Restore Your Bright, Clear, Healthy-Looking Eyes.html': '/procedures/specialty-treatments/pterygium-surgery/',
   '/procedures/specialty-treatments/hello-dry-eye-treatment.html': '/procedures/specialty-treatments/dry-eye-solutions/',
   '/procedures/specialty-treatments/hello-dry-eye-treatment': '/procedures/specialty-treatments/dry-eye-solutions/',

@@ -22,8 +22,6 @@ var kviClearHeader = (typeof awardsClearHeader !== 'undefined') ? !!awardsClearH
 var kviAwards = [
   { file: 'readers-choice-award', w: 300, h: 300, name: "Readers' Choice Award",
     alt: "Daily News Readers' Best 2009 Readers' Choice award badge for Dr. Rajesh Khanna" },
-  { file: null, name: 'Rising Star Award',
-    alt: 'Rising Star Award for Rajesh Khanna, MD' },
   { file: 'newsweek-top-15-showcase', w: 300, h: 250, name: 'Newsweek Showcase: 15 Leaders in Laser Eye Surgery',
     alt: 'Newsweek Showcase badge: 15 Leaders in Laser Eye Surgery, recognizing SMILE laser eye surgeon Dr. Rajesh Khanna' },
   { file: 'southern-california-top-lasik-surgeon', w: 322, h: 300, name: 'Southern California Top LASIK Surgeon',
@@ -38,9 +36,9 @@ var kviAwards = [
   .kvi-awards__label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #1e3c72; white-space: nowrap; }
   .kvi-awards__list { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; }
   .kvi-awards__item { margin: 0; text-align: center; }
-  .kvi-awards__item img { display: block; width: auto; height: 64px; max-width: 100%; }
-  .kvi-awards__text-badge { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 64px; min-width: 96px; padding: 0 0.6rem; border: 2px solid #1e3c72; border-radius: 10px; color: #1e3c72; font-weight: 800; font-size: 0.78rem; line-height: 1.15; text-transform: uppercase; letter-spacing: 0.04em; background: #f5f8ff; }
-  .kvi-awards__text-badge small { font-weight: 600; font-size: 0.66rem; text-transform: none; letter-spacing: 0; color: #334; margin-top: 2px; }
+  .kvi-awards__item img { display: block; width: auto; height: 120px; max-width: 100%; }
+  .kvi-awards__text-badge { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 120px; min-width: 120px; padding: 0 0.75rem; border: 2px solid #1e3c72; border-radius: 12px; color: #1e3c72; font-weight: 800; font-size: 1.15rem; line-height: 1.15; text-transform: uppercase; letter-spacing: 0.03em; background: #f5f8ff; }
+  .kvi-awards__text-badge small { font-weight: 600; font-size: 0.95rem; text-transform: none; letter-spacing: 0; color: #334; margin-top: 4px; }
   .kvi-awards__more { font-size: 0.85rem; font-weight: 700; color: #0066cc; text-decoration: none; white-space: nowrap; }
   .kvi-awards__more:hover { text-decoration: underline; }
   .kvi-awards__caption { display: none; }
@@ -59,9 +57,9 @@ var kviAwards = [
     .kvi-awards--clear-header { padding-top: var(--kvi-header-h, 280px); }
     .kvi-awards__inner { gap: 0.5rem; padding: 0.5rem 0.75rem; }
     .kvi-awards__list { gap: 0.5rem; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; justify-content: flex-start; }
-    .kvi-awards__item img, .kvi-awards__text-badge { height: 44px; }
-    .kvi-awards__text-badge { min-width: 76px; font-size: 0.62rem; }
-    .kvi-awards__text-badge small { display: none; }
+    .kvi-awards__item img, .kvi-awards__text-badge { height: 84px; }
+    .kvi-awards__text-badge { min-width: 96px; font-size: 0.9rem; }
+    .kvi-awards__text-badge small { display: block; font-size: 0.75rem; }
     .kvi-awards--full .kvi-awards__list { flex-wrap: wrap; justify-content: center; overflow: visible; }
     .kvi-awards--full .kvi-awards__inner { padding: 1.25rem 0.75rem; }
     .kvi-awards--full .kvi-awards__label { font-size: 1.15rem; }

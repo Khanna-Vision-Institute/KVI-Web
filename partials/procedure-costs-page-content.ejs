@@ -934,10 +934,10 @@
         bullets: ['Great for high prescriptions or thin corneas', 'Range reflects anesthesia/facility'] },
       { id: 'pie', name: 'PIE / LAL', low: 6912, high: 9912, per: 'eye',
         bullets: ['Advanced lens options tailored to goals', 'Warranty options available'] },
-      { id: 'ctak', name: 'CTAK', low: 4992, high: 7992, per: 'eye',
+      { id: 'ctak', name: 'C-TAC (CTAK)', fixedMonthly: '$333/mo', fixedFull: '$8,000',
         bullets: ['Transepithelial topography-guided plan', 'Medical necessity reviewed case-by-case'] },
-      { id: 'cxl', name: 'CXL (Cross-linking)', low: 7488, high: 9888, per: 'eye',
-        bullets: ['Stabilizes keratoconus/progression', 'Insurance rules may apply'] },
+      { id: 'cxl', name: 'CXL (Cross-linking)', discontinued: true,
+        bullets: ['No longer offered', 'See Epioxa, insurance approval only'] },
     ];
 
     const $ = (id) => document.getElementById(id);
@@ -964,9 +964,18 @@
         const el = document.createElement('article');
         el.className = 'card procedure-card';
         el.setAttribute('data-procedure', d.id);
-        const priceHTML = showFull
-          ? fullString(d.low, d.high, d.per)
-          : monthlyString(d.low, d.high) + ' <span class="meta">per ' + d.per + ' @ 24 mo 0%</span>';
+        let priceHTML;
+        if (d.discontinued) {
+          priceHTML = 'No longer offered. <a href="/procedures/specialty-treatments/epioxa/">Epioxa</a>';
+        } else if (d.fixedMonthly) {
+          priceHTML = showFull
+            ? 'Full price ' + d.fixedFull
+            : d.fixedMonthly + ' <span class="meta">for 24 months</span>';
+        } else {
+          priceHTML = showFull
+            ? fullString(d.low, d.high, d.per)
+            : monthlyString(d.low, d.high) + ' <span class="meta">per ' + d.per + ' @ 24 mo 0%</span>';
+        }
         el.innerHTML =
           '<h3>' + d.name + '</h3>' +
           '<div class="price">' + priceHTML + '</div>' +
