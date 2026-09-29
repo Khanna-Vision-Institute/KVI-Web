@@ -5,6 +5,12 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-Q0TGBPVS92');
+<% var _kviAdsId = (typeof siteTracking !== 'undefined' && typeof siteTracking.clientConfig === 'function')
+     ? (siteTracking.clientConfig(typeof siteCallTracking !== 'undefined' ? siteCallTracking : null).adsId || '')
+     : ''; %>
+<% if (_kviAdsId) { %>
+  gtag('config','<%- _kviAdsId %>');
+<% } %>
 </script>
 <%- include('/partials/tracking-tags') %>
 

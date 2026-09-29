@@ -375,6 +375,25 @@ const renderView = (viewPath, res, next) => {
   });
 };
 
+// Header-less local content (PIE, SMILE, other STRAPI_CONTENT fragments) has no partials/header.
+// Prepend the tag block only when the rendered HTML does not already contain gtag/js or KVI_TRACKING.
+// Do not add the visual site header. Pages that include partials/header are left unchanged.
+const renderLocalContent = (viewPath, res, next) => {
+  res.render(viewPath, (err, html) => {
+    if (err) {
+      if (err.message && err.message.includes('Failed to lookup view')) {
+        return next();
+      }
+      return next(err);
+    }
+    const tracking = app.locals.siteTracking;
+    if (tracking && typeof tracking.pageAlreadyTagged === 'function' && !tracking.pageAlreadyTagged(html)) {
+      html = tracking.fragmentTrackingBlock(app.locals.siteCallTracking) + html;
+    }
+    res.send(html);
+  });
+};
+
 /**
  * 301 to a fixed target while keeping the request's query string (gclid, gbraid, wbraid,
  * utm_*, fbclid, …). Before this, every table-driven redirect dropped the query string,
@@ -955,7 +974,7 @@ app.get('/test/smile-laser/', async (req, res, next) => {
     console.error('Error loading test page:', error.message);
   }
   // Strapi unreachable or unpublished: serve the corrected local copy.
-  return renderView('COMPLETE_SMILE_PAGE_CONTENT_FOR_STRAPI.html', res, next);
+  return renderLocalContent('COMPLETE_SMILE_PAGE_CONTENT_FOR_STRAPI.html', res, next);
 });
 
 // ============================================
@@ -1872,7 +1891,7 @@ Object.entries(routeMap).forEach(([url, filePath]) => {
     
     if (localPageContent[url]) {
       // Corrected local copy (STRAPI_CONTENT_*) instead of a live Strapi fetch.
-      return renderView(localPageContent[url], res, next);
+      return renderLocalContent(localPageContent[url], res, next);
     }
     
     // Fallback: render static file
@@ -1893,7 +1912,7 @@ Object.entries(routeMap).forEach(([url, filePath]) => {
       // Check if this route has a Strapi page
       
       if (localPageContent[url]) {
-        return renderView(localPageContent[url], res, next);
+        return renderLocalContent(localPageContent[url], res, next);
       }
       
       // Fallback: render static file

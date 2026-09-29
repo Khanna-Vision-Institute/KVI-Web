@@ -130,6 +130,85 @@ test('ADS_TAGS_ENABLED values', () => {
   // 'all' exposes only filled labels; sms_click has none, so it never sends
   assert.deepEqual(tracking.clientConfig(ct, 'all').ads.staged, { phone_click: 'AW-16512183014/VZUiCOPo64kdEObVz8E9', generate_lead: 'AW-16512183014/_7tKCObo64kdEObVz8E9' });
   assert.deepEqual(tracking.clientConfig(ct, 'legacy').ads.staged, {});
+  // AW tag id is exposed only for legacy/all, never for off, and staged labels stay out of legacy.
+  assert.equal(tracking.googleAdsTagId('legacy'), 'AW-16512183014');
+  assert.equal(tracking.googleAdsTagId('all'), 'AW-16512183014');
+  assert.equal(tracking.googleAdsTagId('off'), null);
+  assert.equal(tracking.clientConfig(ct, 'legacy').adsId, 'AW-16512183014');
+  assert.equal(tracking.clientConfig(ct, 'all').adsId, 'AW-16512183014');
+  assert.equal(tracking.clientConfig(ct, 'off').adsId, undefined);
+  const legacyHtml = renderTags(ct);
+  assert.ok(!legacyHtml.includes('VZUiCOPo64kdEObVz8E9'));
+  assert.ok(!legacyHtml.includes('_7tKCObo64kdEObVz8E9'));
+});
+
+test('legacy lead label maps the booking menu only (smile, else pie/vip)', () => {
+  const legacy = tracking.clientConfig(ct, 'legacy').ads.legacy;
+  const smile = 'AW-16512183014/d1J1CK2xzqscEObVz8E9';
+  const vip = 'AW-16512183014/qFoZCJal6qscEObVz8E9';
+  assert.equal(tracking.legacyLeadSendTo('SMILE', legacy), smile);
+  assert.equal(tracking.legacyLeadSendTo('smile', legacy), smile);
+  assert.equal(tracking.legacyLeadSendTo('PIE', legacy), vip);
+  assert.equal(tracking.legacyLeadSendTo('pie', legacy), vip);
+  assert.equal(tracking.legacyLeadSendTo('VIP', legacy), vip);
+  assert.equal(tracking.legacyLeadSendTo('vip consult', legacy), vip);
+  // smile wins if both words are present
+  assert.equal(tracking.legacyLeadSendTo('SMILE or PIE', legacy), smile);
+  for (const proc of ['LASIK', 'SuperLASIK', 'EVO ICL', 'Laser cataract surgery', 'Cosmetic outcome pterygium', 'CXL / CTAK', 'Other', '', '   ']) {
+    assert.equal(tracking.legacyLeadSendTo(proc, legacy), null, proc);
+  }
+  assert.equal(tracking.legacyLeadSendTo('SMILE', {}), null);
+  assert.equal(tracking.legacyLeadSendTo('SMILE', tracking.clientConfig(ct, 'off').ads.legacy), null);
+});
+
+test('header configs the AW tag from clientConfig.adsId only when legacy/all', () => {
+  const header = fs.readFileSync(path.join(ROOT, 'partials/header.ejs'), 'utf8');
+  assert.match(header, /gtag\(\s*'config'\s*,\s*'G-Q0TGBPVS92'\s*\)/);
+  assert.match(header, /siteTracking\.clientConfig/);
+  assert.match(header, /gtag\('config','<%- _kviAdsId %>'\)/);
+  assert.ok(!header.includes('VZUiCOPo64kdEObVz8E9'));
+  assert.ok(!header.includes('_7tKCObo64kdEObVz8E9'));
+  const html = ejs.render(header, { siteTracking: tracking, siteCallTracking: ct, sitePhone: phone }, {
+    filename: path.join(ROOT, 'partials/header.ejs'),
+    root: ROOT,
+  });
+  assert.match(html, /gtag\('config','AW-16512183014'\)/);
+  assert.match(html, /gtag\(\s*'config'\s*,\s*'G-Q0TGBPVS92'\s*\)/);
+  assert.ok(html.includes('adsMode":"legacy"') || html.includes('"adsMode":"legacy"'));
+  assert.ok(!html.includes('VZUiCOPo64kdEObVz8E9'));
+  assert.ok(!html.includes('_7tKCObo64kdEObVz8E9'));
+  const offTracking = Object.assign({}, tracking, {
+    clientConfig: (callTracking) => tracking.clientConfig(callTracking, 'off'),
+  });
+  const offHtml = ejs.render(header, { siteTracking: offTracking, siteCallTracking: ct, sitePhone: phone }, {
+    filename: path.join(ROOT, 'partials/header.ejs'),
+    root: ROOT,
+  });
+  assert.ok(!offHtml.includes("gtag('config','AW-16512183014')"));
+  assert.ok(!offHtml.includes('gtag("config", "AW-16512183014")'));
+});
+
+test('header-less fragment block matches the tag pieces and is not double-injected', () => {
+  const block = tracking.fragmentTrackingBlock(ct, 'legacy');
+  assert.match(block, /googletagmanager\.com\/gtag\/js\?id=G-Q0TGBPVS92/);
+  assert.match(block, /gtag\('config', 'G-Q0TGBPVS92'\)/);
+  assert.match(block, /gtag\('config','AW-16512183014'\)/);
+  assert.ok(block.includes('window.KVI_TRACKING'));
+  assert.ok(block.includes('/public/js/kvi-tracking.js'));
+  assert.ok(!block.includes('main-header'));
+  assert.ok(!block.includes('VZUiCOPo64kdEObVz8E9'));
+  assert.ok(!block.includes('_7tKCObo64kdEObVz8E9'));
+  assert.equal(tracking.pageAlreadyTagged(block + '<!-- page -->'), true);
+  assert.equal(tracking.pageAlreadyTagged('<!-- COMPLETE PIE page -->\n<style></style>'), false);
+  assert.equal(tracking.pageAlreadyTagged('already has KVI_TRACKING'), true);
+  const off = tracking.fragmentTrackingBlock(ct, 'off');
+  assert.ok(!off.includes('AW-16512183014'));
+  assert.ok(off.includes('G-Q0TGBPVS92'));
+  const src = fs.readFileSync(path.join(ROOT, 'server.js'), 'utf8');
+  assert.match(src, /function renderLocalContent|const renderLocalContent/);
+  assert.equal(src.split('renderLocalContent(localPageContent[url]').length - 1, 2);
+  assert.ok(src.includes('pageAlreadyTagged'));
+  assert.ok(src.includes('fragmentTrackingBlock'));
 });
 
 // ---------------------------------------------------------------- browser scripts in a sandbox
@@ -161,19 +240,69 @@ test('consult-conversion.js: legacy keeps the VIP Ads conversion; off stops it; 
   const none = runConsult(null);
   assert.ok(none.some((c) => c[1] === 'conversion' && c[2].send_to === 'AW-16512183014/qFoZCJal6qscEObVz8E9'));
 });
+function runTracking(mode, procedure, mutate) {
+  const cfg = tracking.clientConfig(ct, mode);
+  if (mutate) mutate(cfg);
+  const sb = sandbox(cfg);
+  vm.runInContext(fs.readFileSync(path.join(ROOT, 'public/js/kvi-tracking.js'), 'utf8'), sb.ctx);
+  if (procedure !== undefined) sb.window.KviTracking.lead('booking_widget', procedure);
+  return sb;
+}
+function conversionCalls(sb) {
+  return sb.calls.filter((c) => c[1] === 'conversion');
+}
 test('kvi-tracking.js: tel/sms clicks send GA4 only unless a staged label is allowed', () => {
   const sb = sandbox(tracking.clientConfig(ct, 'legacy'));
   vm.runInContext(fs.readFileSync(path.join(ROOT, 'public/js/kvi-tracking.js'), 'utf8'), sb.ctx);
-  sb.click('tel:+13104821240'); sb.click('sms:+13104821240'); sb.window.KviTracking.lead('booking_widget', 'SMILE');
+  sb.click('tel:+13104821240'); sb.click('sms:+13104821240');
+  // LASIK is a menu value that must NOT send a legacy Ads conversion.
+  sb.window.KviTracking.lead('booking_widget', 'LASIK');
   const names = sb.calls.map((c) => c[1]);
   assert.deepEqual(names, ['phone_click', 'sms_click', 'generate_lead']);
-  assert.ok(!sb.calls.some((c) => String(c[1]).startsWith('AW-') || c[1] === 'conversion'));
+  assert.ok(!sb.calls.some((c) => String(c[1]).startsWith('AW-') || c[1] === 'conversion' || c[0] === 'config'));
 
   const cfg = tracking.clientConfig(ct, 'all'); cfg.ads.staged = { phone_click: 'AW-1/abc' }; // simulated filled label
   const sb2 = sandbox(cfg);
   vm.runInContext(fs.readFileSync(path.join(ROOT, 'public/js/kvi-tracking.js'), 'utf8'), sb2.ctx);
   sb2.click('tel:+13104821240');
   assert.ok(sb2.calls.some((c) => c[1] === 'conversion' && c[2].send_to === 'AW-1/abc'));
+});
+test('kvi-tracking.js lead(): legacy SMILE/PIE/VIP labels, nothing else; all sends staged only', () => {
+  const smile = 'AW-16512183014/d1J1CK2xzqscEObVz8E9';
+  const vip = 'AW-16512183014/qFoZCJal6qscEObVz8E9';
+  const stagedLead = 'AW-16512183014/_7tKCObo64kdEObVz8E9';
+  function leadAds(mode, procedure) {
+    const sb = runTracking(mode, procedure);
+    const ga4 = sb.calls.find((c) => c[1] === 'generate_lead');
+    assert.ok(ga4, procedure);
+    // Blank menu value is omitted from GA4 (not sent). Any other value is the menu string only.
+    assert.equal(ga4[2].procedure, procedure || undefined);
+    assert.equal(ga4[2].form_id, 'booking_widget');
+    return { conversions: conversionCalls(sb), calls: sb.calls };
+  }
+  const smileLead = leadAds('legacy', 'SMILE');
+  assert.equal(smileLead.conversions.length, 1);
+  assert.equal(smileLead.conversions[0][2].send_to, smile);
+  assert.equal(smileLead.conversions[0][2].procedure, undefined);
+  assert.deepEqual(Object.keys(smileLead.conversions[0][2]).sort(), ['send_to', 'transaction_id']);
+  const configBefore = smileLead.calls.findIndex((c) => c[0] === 'config' && c[1] === 'AW-16512183014');
+  const convAt = smileLead.calls.findIndex((c) => c[1] === 'conversion');
+  assert.ok(configBefore !== -1 && configBefore < convAt);
+
+  assert.equal(leadAds('legacy', 'PIE').conversions[0][2].send_to, vip);
+  assert.equal(leadAds('legacy', 'VIP').conversions[0][2].send_to, vip);
+  for (const proc of ['LASIK', 'SuperLASIK', 'EVO ICL', 'Laser cataract surgery', 'Cosmetic outcome pterygium', 'CXL / CTAK', 'Other', '']) {
+    assert.equal(leadAds('legacy', proc).conversions.length, 0, proc);
+  }
+
+  const allSmile = leadAds('all', 'SMILE');
+  assert.equal(allSmile.conversions.length, 1);
+  assert.equal(allSmile.conversions[0][2].send_to, stagedLead);
+  assert.ok(!allSmile.calls.some((c) => c[2] && (c[2].send_to === smile || c[2].send_to === vip)));
+
+  const off = leadAds('off', 'SMILE');
+  assert.equal(off.conversions.length, 0);
+  assert.ok(off.calls.some((c) => c[1] === 'generate_lead'));
 });
 
 test('server-side phone_call: 60 s minimum and gated by ADS_TAGS_ENABLED', () => {
