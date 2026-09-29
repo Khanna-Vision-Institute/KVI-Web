@@ -86,11 +86,16 @@ const siteHealth = {
   webhookUrl: envStr('SITE_HEALTH_WEBHOOK_URL'),
 };
 
+// GROWTHOPS_ADMIN_PASSWORD has no fallback: refuse to start without it (no hard-coded default).
+if (!envStr('GROWTHOPS_ADMIN_PASSWORD')) {
+  throw new Error('GROWTHOPS_ADMIN_PASSWORD is not set. Set it in the environment or .env before starting GrowthOps.');
+}
+
 const config = {
   port: Number(process.env.PORT) || 8080,
   mockMode: envBool('MOCK_MODE', true),
   adminUser: (process.env.GROWTHOPS_ADMIN_USER || 'admin').trim(),
-  adminPassword: (process.env.GROWTHOPS_ADMIN_PASSWORD || 'growthops').trim(),
+  adminPassword: envStr('GROWTHOPS_ADMIN_PASSWORD'),
   requireAuth: envBool('GROWTHOPS_REQUIRE_AUTH', true),
   trustProxy: envBool('GROWTHOPS_TRUST_PROXY', true),
   blogPublish: {

@@ -137,7 +137,8 @@ else
     if (u) { console.log(u); process.exit(0); }
     const db = process.env.MONGODB_DB || 'blog';
     const user = process.env.MONGODB_USER || 'bloguser';
-    const pass = process.env.MONGODB_PASS || '';
+    const pass = process.env.MONGODB_PASS;
+    if (!pass) process.exit(1); // no hard-coded fallback password; URI stays empty -> error below
     const host = process.env.MONGODB_HOST || '127.0.0.1';
     const port = process.env.MONGODB_PORT || '27017';
     const auth = encodeURIComponent(pass);

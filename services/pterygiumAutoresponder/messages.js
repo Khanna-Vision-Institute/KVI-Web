@@ -148,8 +148,8 @@ NEXT STEP — FREE pterygium evaluation:
 📅 Online: ${BOOK_URL}
 
 Locations:
-• Beverly Hills: 9100 Wilshire Blvd #265E
-• Westlake Village: 31824 Village Center Rd F
+• Beverly Hills: 9100 Wilshire Blvd, Suite 265E
+• Westlake Village: 31824 Village Center Rd, Suite F
 
 Don't wait until it grows larger. The smaller the pterygium, the better the outcome.
 

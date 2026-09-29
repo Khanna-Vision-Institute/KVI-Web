@@ -1927,7 +1927,7 @@
                     _vapiConnecting = false;
                     setTalkButtonLive(false);
                     setComposerIncall(false);
-                    addMessage('Voice call error. You can keep chatting by text or call +1 (805) 327-5758.', 'bot', true);
+                    addMessage('Voice call error. You can keep chatting by text or call (310) 482-1240.', 'bot', true);
                 }
             });
         }
@@ -1947,12 +1947,12 @@
         async function startVapiWebCall() {
             const assistantId = getActiveAssistantId();
             if (!assistantId) {
-                addMessage('Voice for this agent is not configured yet. Please chat by text or call +1 (805) 327-5758.', 'bot', true);
+                addMessage('Voice for this agent is not configured yet. Please chat by text or call (310) 482-1240.', 'bot', true);
                 return false;
             }
             const client = await ensureVapiClient();
             if (!client) {
-                addMessage('Voice is temporarily unavailable. Please try text chat or call +1 (805) 327-5758.', 'bot', true);
+                addMessage('Voice is temporarily unavailable. Please try text chat or call (310) 482-1240.', 'bot', true);
                 return false;
             }
             try {
@@ -2043,7 +2043,7 @@
                 return;
             }
             if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
-                addMessage('Voice conversation requires Chrome, Edge, or Safari. Please call us at: +1 (805) 327-5758', 'bot', true);
+                addMessage('Voice conversation requires Chrome, Edge, or Safari. Please call us at: (310) 482-1240', 'bot', true);
                 return;
             }
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;

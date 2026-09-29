@@ -106,11 +106,8 @@ if [ -z "$ADMIN_PASSWORD" ]; then
     echo ""
     
     if [ -z "$ADMIN_PASSWORD" ] || [ ${#ADMIN_PASSWORD} -lt 8 ]; then
-        echo -e "${RED}⚠️  Password too short. Using secure default (CHANGE THIS IMMEDIATELY!)${NC}"
-        ADMIN_PASSWORD="KVI2024Secure!ChangeMe"
-        echo -e "${YELLOW}⚠️  DEFAULT PASSWORD SET: ${ADMIN_PASSWORD}${NC}"
-        echo -e "${YELLOW}⚠️  CHANGE THIS PASSWORD IMMEDIATELY AFTER DEPLOYMENT!${NC}"
-        sleep 3
+        echo -e "${RED}ERROR: ADMIN_PASSWORD is missing or shorter than 8 characters. Aborting (no default password is used).${NC}"
+        exit 1
     fi
 else
     echo -e "${GREEN}Using password from environment variable${NC}"

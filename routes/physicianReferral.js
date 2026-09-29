@@ -7,14 +7,22 @@ const zohoBookingsService = require('../services/zohoBookingsService');
 const { sendPhysicianReferralStaffNotification } = require('../services/emailService');
 
 /** Same pairing as seminar pages + verified in routes/booking.js */
+// No hard-coded fallback: the reCAPTCHA v2 secret must come from the environment.
 const RECAPTCHA_SECRET_KEY =
   process.env.RECAPTCHA_SECRET_KEY ||
   process.env.RECAPTCHA_V2_SECRET_KEY ||
-  (process.env.RECAPTCHA_SECRET_KEY || '') /* REDACTED for Git: hardcoded reCAPTCHA secret removed; set RECAPTCHA_SECRET_KEY in .env before deploying */;
+  '';
+if (!RECAPTCHA_SECRET_KEY) {
+  console.error('[recaptcha] RECAPTCHA_SECRET_KEY is not set; form submissions that require reCAPTCHA will be rejected.');
+}
 
 const ALLOW_EXT = /\.(png|jpg|jpeg|bmp|mp4|webm|mov|pdf|doc|docx)$/i;
 
 async function verifyRecaptchaV2(token) {
+  if (!RECAPTCHA_SECRET_KEY) {
+    console.error('[recaptcha] RECAPTCHA_SECRET_KEY is not set; cannot verify reCAPTCHA.');
+    return false;
+  }
   try {
     const response = await axios.post(
       'https://www.google.com/recaptcha/api/siteverify',

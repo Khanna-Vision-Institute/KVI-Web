@@ -23,7 +23,9 @@
     "clear:pie-autoresponder-queue": "node scripts/clear-pie-autoresponder-queue.js --apply",
     "build:vapi-web": "esbuild node_modules/@vapi-ai/web/dist/vapi.js --bundle --format=iife --global-name=VapiWeb --platform=browser --outfile=public/js/vendor/vapi-web.bundle.js",
     "provision:vapi-web": "node scripts/provision-vapi-web-assistants.js",
-    "provision:vapi-web:apply": "node scripts/provision-vapi-web-assistants.js --apply"
+    "provision:vapi-web:apply": "node scripts/provision-vapi-web-assistants.js --apply",
+    "test:tracking": "node --test test/tracking.test.js",
+    "check:ga4": "node scripts/check-ga4-tag.js"
   },
   "dependencies": {
     "@slack/web-api": "^7.12.0",

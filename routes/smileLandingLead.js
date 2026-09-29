@@ -3,16 +3,24 @@ const axios = require('axios');
 const router = express.Router();
 const { sendSmileLandingLeadEmail } = require('../services/emailService');
 
+// No hard-coded fallback: the reCAPTCHA v2 secret must come from the environment.
 const RECAPTCHA_SECRET_KEY =
   process.env.RECAPTCHA_SECRET_KEY ||
   process.env.RECAPTCHA_V2_SECRET_KEY ||
-  (process.env.RECAPTCHA_SECRET_KEY || '') /* REDACTED for Git: hardcoded reCAPTCHA secret removed; set RECAPTCHA_SECRET_KEY in .env before deploying */;
+  '';
+if (!RECAPTCHA_SECRET_KEY) {
+  console.error('[recaptcha] RECAPTCHA_SECRET_KEY is not set; form submissions that require reCAPTCHA will be rejected.');
+}
 
 const RATE_WINDOW_MS = 15 * 60 * 1000;
 const RATE_MAX_REQUESTS = 15;
 const rateStore = new Map();
 
 async function verifyRecaptchaV2(token) {
+  if (!RECAPTCHA_SECRET_KEY) {
+    console.error('[recaptcha] RECAPTCHA_SECRET_KEY is not set; cannot verify reCAPTCHA.');
+    return false;
+  }
   try {
     const response = await axios.post(
       'https://www.google.com/recaptcha/api/siteverify',

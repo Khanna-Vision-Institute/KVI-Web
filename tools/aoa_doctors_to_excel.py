@@ -93,14 +93,14 @@ SECONDARY_DEDUPE_OFFICE_ZIP = "90212"
 KHANNA_OFFICE_CENTERS: list[dict[str, str]] = [
     {
         "office_id": "wv_village_ctr",
-        "anchor_label": "Khanna WV (31824 Village Center Rd F / 91361)",
+        "anchor_label": "Khanna WV (31824 Village Center Rd Suite F / 91361)",
         "city": "Westlake Village",
         "state": "CA",
         "zip": "91361",
     },
     {
         "office_id": "bh_wilshire",
-        "anchor_label": "Khanna BH (9100 Wilshire Ste 265E / 90212)",
+        "anchor_label": "Khanna BH (9100 Wilshire Suite 265E / 90212)",
         "city": "Beverly Hills",
         "state": "CA",
         "zip": "90212",

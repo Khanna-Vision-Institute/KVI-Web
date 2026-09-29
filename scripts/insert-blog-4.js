@@ -2,7 +2,8 @@ const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
 const MONGODB_USER = process.env.MONGODB_USER || 'bloguser';
-const MONGODB_PASS = process.env.MONGODB_PASS || '@dmKh@nna@2520';
+const MONGODB_PASS = process.env.MONGODB_PASS; // no hard-coded fallback
+if (!MONGODB_PASS) { console.error('MONGODB_PASS is not set'); process.exit(1); }
 const MONGODB_DB = process.env.MONGODB_DB || 'blog';
 
 const blogContent = `

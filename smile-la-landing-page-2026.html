@@ -12,6 +12,7 @@
   gtag('js', new Date());
   gtag('config', 'G-Q0TGBPVS92');
 </script>
+<%- include('/partials/tracking-tags') %>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -887,8 +888,8 @@
     </div>
     <div>
       <h4 class="font-serif font-semibold mb-6 text-white">Locations</h4>
-      <p class="text-xs leading-relaxed mb-4" style="color: rgba(239, 241, 243, 0.7);"><strong class="text-inverse-primary">Beverly Hills</strong><br/>9100 Wilshire Blvd<br/>Beverly Hills, CA 90212</p>
-      <p class="text-xs leading-relaxed" style="color: rgba(239, 241, 243, 0.7);"><strong class="text-inverse-primary">Westlake Village</strong><br/>1220 La Venta Dr<br/>Westlake Village, CA 91361</p>
+      <p class="text-xs leading-relaxed mb-4" style="color: rgba(239, 241, 243, 0.7);"><strong class="text-inverse-primary">Beverly Hills</strong><br/>9100 Wilshire Blvd, Suite 265E<br/>Beverly Hills, CA 90212</p>
+      <p class="text-xs leading-relaxed" style="color: rgba(239, 241, 243, 0.7);"><strong class="text-inverse-primary">Westlake Village</strong><br/>31824 Village Center Rd, Suite F<br/>Westlake Village, CA 91361</p>
     </div>
   </div>
   <div class="max-w-[1440px] mx-auto mt-16 pt-8 border-t border-white/10">
@@ -1142,6 +1143,8 @@
           msg.classList.add('text-red-600');
         }
       } else if (out.success) {
+        // GA4 generate_lead (+ staged Ads label only if ADS_TAGS_ENABLED='all'); see public/js/kvi-tracking.js
+        try { if (window.KviTracking) window.KviTracking.lead('smile_la_landing', 'SMILE'); } catch (_) {}
         form.reset();
         try { if (window.grecaptcha && window.grecaptcha.reset) window.grecaptcha.reset(); } catch (x) {}
         if (msg) {

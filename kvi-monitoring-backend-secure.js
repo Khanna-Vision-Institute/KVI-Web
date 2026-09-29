@@ -129,7 +129,12 @@ fs.mkdir(reportsDir, { recursive: true }).catch(() => {});
 
 // Default admin credentials (CHANGE IN PRODUCTION!)
 const DEFAULT_ADMIN_USER = process.env.ADMIN_USER || 'admin';
-const DEFAULT_ADMIN_PASS = process.env.ADMIN_PASSWORD || 'kvi2024secure!';
+const DEFAULT_ADMIN_PASS = process.env.ADMIN_PASSWORD;
+if (!DEFAULT_ADMIN_PASS) {
+    // No hard-coded fallback password: refuse to start without ADMIN_PASSWORD.
+    console.error('ADMIN_PASSWORD is not set. Refusing to start the monitoring backend.');
+    process.exit(1);
+}
 
 // Hash password on startup
 let hashedPassword = null;

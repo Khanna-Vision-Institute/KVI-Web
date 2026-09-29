@@ -130,6 +130,13 @@ app.set('view engine', 'html');
 app.set('views', path.join(__dirname));
 app.set("view cache", false);
 
+// Site-wide phone config for EJS templates (header/footer call link). See config/phone.js.
+app.locals.sitePhone = require('./config/phone');
+// Tagging (GA4 + Google Ads, one ADS_TAGS_ENABLED switch) and the in-house call-tracking swap (OFF).
+// See config/tracking.js, config/call-tracking.js and partials/tracking-tags.ejs.
+app.locals.siteTracking = require('./config/tracking');
+app.locals.siteCallTracking = require('./config/call-tracking');
+
 // Guru proxy MUST be before body parsing so the raw request body is forwarded
 const GURU_SERVER = process.env.GURU_SERVER_URL || 'http://ec2-100-28-122-42.compute-1.amazonaws.com:8000';
 app.use('/api/guru', createProxyMiddleware({
@@ -145,6 +152,7 @@ app.use('/api/guru', createProxyMiddleware({
 
 app.use(express.json({ limit: '200kb' }));
 app.use(express.urlencoded({ extended: true, limit: '200kb' }));
+
 
 /**
  * Physician portal — same-origin `/me` proxy.
@@ -365,6 +373,23 @@ const renderView = (viewPath, res, next) => {
     }
     res.send(html);
   });
+};
+
+/**
+ * 301 to a fixed target while keeping the request's query string (gclid, gbraid, wbraid,
+ * utm_*, fbclid, …). Before this, every table-driven redirect dropped the query string,
+ * so ad clicks landing on an old URL lost their click ID (gclid-loss bug). If the target
+ * already has a query, the params are appended with "&"; a #fragment stays at the end.
+ */
+const redirectPreservingQuery = (req, res, toPath, status = 301) => {
+  const qIndex = req.originalUrl.indexOf('?');
+  const incoming = qIndex === -1 ? '' : req.originalUrl.slice(qIndex + 1);
+  if (!incoming) return res.redirect(status, toPath);
+  const hashIndex = toPath.indexOf('#');
+  const base = hashIndex === -1 ? toPath : toPath.slice(0, hashIndex);
+  const hash = hashIndex === -1 ? '' : toPath.slice(hashIndex);
+  const joined = base + (base.includes('?') ? '&' : '?') + incoming + hash;
+  return res.redirect(status, joined);
 };
 
 app.use('/api/vision-quest', visionQuestRoutes);
@@ -1564,7 +1589,9 @@ const routeMap = {
   '/': 'index.html',
   
   // CRON DASHBOARD
-  '/cron-dashboard': 'cron-dashboard.html',
+  // Live serves the 'coming soon' page here (file absent on the server); kept that way so the
+  // internal cron dashboard is not public. File cron-dashboard.html is kept in the repo.
+  '/cron-dashboard': 'coming-soon.html',
   
   // MASTER SEO REPORT
   '/master-report': 'kvi-master-report.html',
@@ -1608,6 +1635,7 @@ const routeMap = {
   '/about/dr-khanna/credentials-awards/': 'about/dr-khanna/credentials-awards.html',
   '/about/dr-khanna/books/': 'about/dr-khanna/books.html',
   '/about/dr-khanna/media/': 'about/dr-khanna/media.html',
+  '/about/why-trust-khanna/': 'about/why-trust-khanna.html', // static template (no Strapi slug): trust hub, plan item G10
   
   // ABOUT - Why Choose Us
   '/about/why-choose-us/technology/': 'about/why-choose-us/Our technology.html',
@@ -1684,7 +1712,8 @@ const routeMap = {
   '/khanna-gamified-forms': 'khanna-gamified-forms.html',
   '/schedule-consultation': 'khanna-booking.html',
   '/khanna-booking': 'khanna-booking.html',
-  '/booking-success': 'booking-success.html',
+  // Live serves 'coming soon' here too (booking-success.html lists an unapproved phone number).
+  '/booking-success': 'coming-soon.html',
 };
 
 // Strapi page slugs mapping (URL path -> Strapi slug)
@@ -1707,7 +1736,7 @@ const strapiPageSlugs = {
   '/procedures/laser-vision/compare/pie-vs-evo-icl/': 'pie-vs-evo-icl-comparison',
   '/procedures/laser-vision/compare/presbyopic-iol/': 'presbyopic-iol-comparison',
   '/procedures/lens-solutions/which-lens-is-right/': 'which-lens-is-right',
-  '/procedures/specialty-treatments/cxl-keratoconus/': 'cxl-keratoconus-treatment',
+  // '/procedures/specialty-treatments/cxl-keratoconus/': 'cxl-keratoconus-treatment', // body: full template rebuilt from live Sep 26, 2026 (public Strapi entry still has the old 9735 Wilshire / 2625 Townsgate addresses)
   // '/procedures/specialty-treatments/ctak-keratoconus/': 'ctak-keratoconus-treatment', // body: partials/ctak-keratoconus-page-content.ejs (not Strapi)
   // '/procedures/specialty-treatments/pterygium-surgery/': 'pterygium-surgery', // body: partials/pterygium-surgery-page-content.ejs (not Strapi)
   '/procedures/specialty-treatments/dry-eye-solutions/': 'dry-eye-solutions',
@@ -1770,23 +1799,81 @@ const permanentRedirects = {
   '/smile-pro-eye-surgery/': '/procedures/laser-vision/smile-pro-eye-surgery/',
   '/procedures/laser-vision/smile-laser/': '/procedures/laser-vision/smile/',
 };
+// DEVIATION from live: live serves an old SMILE copy with 200 at the site-root
+// /smile-page-complete.html (canonical /smile-laser-eye-surgery/, which itself 301s to /smile/).
+// That file isn't in the repo; this 301s it to the current SMILE page instead (query kept).
+// Only the .html URL is covered (Express also matches '.html/'); extension-less
+// /smile-page-complete(/) stays 404 here (200 on live).
+app.get('/smile-page-complete.html', (req, res) => redirectPreservingQuery(req, res, '/procedures/laser-vision/smile/'));
 Object.entries(permanentRedirects).forEach(([fromPath, toPath]) => {
-  app.get(fromPath, (req, res) => res.redirect(301, toPath));
+  app.get(fromPath, (req, res) => redirectPreservingQuery(req, res, toPath));
   if (fromPath !== '/' && fromPath.endsWith('/')) {
-    app.get(fromPath.slice(0, -1), (req, res) => res.redirect(301, toPath));
+    app.get(fromPath.slice(0, -1), (req, res) => redirectPreservingQuery(req, res, toPath));
   }
+});
+
+// Black Friday 2025 city pages (black-friday/*.html). Live (checked Sep 26, 2026) 301s exactly
+// these 34 '/black-friday/black-friday-smile-eye-surgery-<city>.html' URLs to '/' (relative
+// Location, case-insensitive, trailing slash also matched). The other 6 files in the folder
+// (calabasas, mission-viejo, moorpark, pasadena, santa-clarita, thousand-oaks), every
+// extension-less variant and any other /black-friday/ path return the site 404 page on live.
+// It is an explicit list, not a prefix rule: /black-friday/foo.html is 404 on live, not 301.
+// The query string is kept (branch-wide gclid fix; live drops it).
+// The templates stay in the repo but are unreachable.
+const blackFridayRedirectCities = [
+  'agoura-hills',
+  'anaheim',
+  'bakersfield',
+  'beverly-hills',
+  'burbank',
+  'camarillo',
+  'corona',
+  'costa-mesa',
+  'laguna-beach',
+  'lancaster',
+  'long-beach',
+  'los-angeles',
+  'manhattan-beach',
+  'moreno-valley',
+  'murrieta',
+  'newbury-park',
+  'newport-beach',
+  'northridge',
+  'ontario',
+  'oxnard',
+  'palmdale',
+  'rancho-cucamonga',
+  'riverside',
+  'san-bernardino',
+  'santa-ana',
+  'santa-monica',
+  'simi-valley',
+  'temecula',
+  'torrance',
+  'valencia',
+  'ventura',
+  'west-hollywood',
+  'westlake-village',
+  'woodland-hills'
+];
+blackFridayRedirectCities.forEach((city) => {
+  app.get(`/black-friday/black-friday-smile-eye-surgery-${city}.html`, (req, res) => redirectPreservingQuery(req, res, '/'));
+});
+app.get(/^\/black-friday(\/|$)/i, (req, res) => {
+  res.status(404);
+  renderView('404.html', res, () => res.status(404).send('Page not found'));
 });
 
 /** Old WordPress / marketing URLs — register before routeMap */
 function registerLegacy301Routes(redirects) {
   Object.entries(redirects).forEach(([fromPath, toPath]) => {
     if (fromPath.includes('.')) {
-      app.get(fromPath, (req, res) => res.redirect(301, toPath));
+      app.get(fromPath, (req, res) => redirectPreservingQuery(req, res, toPath));
       return;
     }
     const base = fromPath.replace(/\/$/, '');
-    app.get(base, (req, res) => res.redirect(301, toPath));
-    app.get(`${base}/`, (req, res) => res.redirect(301, toPath));
+    app.get(base, (req, res) => redirectPreservingQuery(req, res, toPath));
+    app.get(`${base}/`, (req, res) => redirectPreservingQuery(req, res, toPath));
   });
 }
 registerLegacy301Routes(legacyWordPressRedirects);
@@ -1957,7 +2044,7 @@ const redirectMap = {
 // Register redirects
 Object.entries(redirectMap).forEach(([oldUrl, newUrl]) => {
   app.get(oldUrl, (req, res) => {
-    res.redirect(301, newUrl);
+    redirectPreservingQuery(req, res, newUrl);
   });
 });
 
