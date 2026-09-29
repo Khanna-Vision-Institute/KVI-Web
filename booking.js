@@ -457,7 +457,7 @@ router.post('/vip-consult', async (req, res) => {
       return res.status(503).json({
         success: false,
         message:
-          'We could not complete your request online. Please call 818 857 1735 or try again shortly.',
+          'We could not complete your request online. Please call (310) 482-1240 or try again shortly.',
         error: crmError.message || 'CRM unavailable'
       });
     }
@@ -472,7 +472,7 @@ router.post('/vip-consult', async (req, res) => {
     console.error('VIP consult error:', error.response?.data || error.message || error);
     return res.status(500).json({
       success: false,
-      message: 'Failed to send your request. Please call 818 857 1735 or try again.'
+      message: 'Failed to send your request. Please call (310) 482-1240 or try again.'
     });
   }
 });

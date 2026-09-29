@@ -14,6 +14,7 @@
       gtag("js", new Date());
       gtag("config", "G-Q0TGBPVS92");
     </script>
+    <%- include('/partials/tracking-tags') %>
     
     <link rel="stylesheet" href="/public/css/header.css">
     <link rel="stylesheet" href="/public/css/footer.css">
@@ -504,14 +505,7 @@
     </style>
 </head>
 <body>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q0TGBPVS92"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag("js", new Date());
-      gtag("config", "G-Q0TGBPVS92");
-    </script>
+    <%# duplicate GA4 snippet removed (double page_view); head copy + tracking tags remain %>
 
     <header class="main-header">
         <div class="header-inner">
@@ -538,7 +532,7 @@
                                 <div class="mega-column">
                                     <h4>Laser Vision</h4>
                                     <ul>
-                                        <li><a href="/procedures/laser-vision/smile-laser/">SMILE Laser</a></li>
+                                        <li><a href="/procedures/laser-vision/smile/">SMILE Pro</a></li>
                                         <li><a href="/procedures/laser-vision/lasik/">LASIK</a></li>
                                         <li><a href="/procedures/laser-vision/superlasik/">SuperLASIK</a></li>
                                         <li><a href="/procedures/laser-vision/asa/">Advanced Surface Ablation (ASA / LASEK)</a></li>
@@ -1149,19 +1143,19 @@
                 <h3>Locations</h3>
                 <ul>
                     <li><strong>Beverly Hills</strong></li>
-                    <li>9100 Wilshire Blvd #265E</li>
+                    <li>9100 Wilshire Blvd, Suite 265E</li>
                     <li>Beverly Hills, CA 90212</li>
-                    <li><a href="tel:310-777-3939">(310) 777-3939</a></li>
+                    <li><a href="tel:+13104821240">(310) 482-1240</a></li>
                     <li style="margin-top: 1rem;"><strong>Westlake Village</strong></li>
-                    <li>31824 Village Center Rd F</li>
+                    <li>31824 Village Center Rd, Suite F</li>
                     <li>Westlake Village, CA 91361</li>
-                    <li><a href="tel:805-777-3937">(805) 777-3937</a></li>
+                    <li><a href="tel:+18052302126">(805) 230-2126</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Procedures</h3>
                 <ul>
-                    <li><a href="/procedures/laser-vision/smile-page-complete.html">SMILE Laser</a></li>
+                    <li><a href="/procedures/laser-vision/smile/">SMILE Pro</a></li>
                     <li><a href="/procedures/laser-vision/lasik-page-complete.html">LASIK</a></li>
                     <li><a href="/procedures/laser-vision/superlasik-no-cut-page.html">SuperLASIK</a></li>
                     <li><a href="/procedures/lens-solutions/evo-icl-service-page.html">EVO ICL</a></li>

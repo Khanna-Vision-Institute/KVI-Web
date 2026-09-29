@@ -171,7 +171,7 @@
       <div id="rf-msg" class="rf-alert" role="status" aria-live="polite"></div>
       <p style="margin:0 0 16px;font-size:0.95rem;line-height:1.55;color:var(--rf-muted);">
         This form is for referring providers. If you are a patient, please use
-        <a href="/book-consultation/">online scheduling</a> or call <a href="tel:310-677-0760">(310) 677-0760</a>.
+        <a href="/book-consultation/">online scheduling</a> or call <a href="tel:+18052302126">(805) 230-2126</a>.
       </p>
 
       <form id="rf-form" action="/api/physician-referral/submit" method="post" novalidate>
@@ -400,7 +400,7 @@
 
           <div class="rf-field rf-field--full">
             <p class="rf-hint" style="margin:0;padding:12px 14px;background:#f8fafc;border:1px solid var(--rf-line);border-radius:10px;">
-              To share chart notes or imaging, please fax your office records to the number on your referral pad or call <a href="tel:310-677-0760">(310) 677-0760</a> after submitting this form. File upload is not required here.
+              To share chart notes or imaging, please fax your office records to the number on your referral pad or call <a href="tel:+18052302126">(805) 230-2126</a> after submitting this form. File upload is not required here.
             </p>
           </div>
         </details>
@@ -517,13 +517,13 @@
               setInterp();
               show('ok', 'Thank you — your referral was submitted. Our team will follow up using the contacts provided.');
             } else {
-              var m = (res.data && res.data.message) || 'Could not submit. Please call (310) 677-0760.';
+              var m = (res.data && res.data.message) || 'Could not submit. Please call (805) 230-2126.';
               show('err', m);
             }
           })
           .catch(function () {
             submit.disabled = false;
-            show('err', 'Network error. Please try again or call (310) 677-0760.');
+            show('err', 'Network error. Please try again or call (805) 230-2126.');
           });
       });
     })();

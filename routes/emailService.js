@@ -380,7 +380,7 @@ async function sendSeminarRsvpEmail(rsvpData) {
   if (userEmail) {
     const bookLink = 'https://khannainstitute.com/about/dr-khanna/books/';
     const zoomLink = 'https://us06web.zoom.us/j/88697907804?pwd=B2SGWPtWo1QZazndxVydb5STki3EGy.1';
-    const address = '31824 Village Center Rd F, Westlake Village, CA 91361';
+    const address = '31824 Village Center Rd, Suite F, Westlake Village, CA 91361';
     const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address);
     const firstName = rsvpData.firstName || (rsvpData.fullName || '').split(' ')[0] || 'there';
 

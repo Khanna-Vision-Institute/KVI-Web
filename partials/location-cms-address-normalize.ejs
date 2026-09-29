@@ -2,7 +2,7 @@
 <%
   var out = typeof html === 'string' ? html : String(html || '');
   if (site === 'westlake') {
-    const wlLine = '31824 Village Center Rd Suite F';
+    const wlLine = '31824 Village Center Rd, Suite F';
     out = out.replace(/31824\s+Village\s+Center\s+Road(?:\s|<[^>]+>|&nbsp;|,)*(?:Suite|Ste\.?)\s+F/gi, wlLine);
     out = out.replace(/31824\s+Village\s+Center\s+Rd\s*,\s*(?:Suite|Ste\.?)\s+F/gi, wlLine);
     out = out.replace(/31824\s+Village\s+Center\s+Rd\s*(?:#\s*)?F\b/gi, wlLine);
@@ -10,7 +10,7 @@
     out = out.replace(/Westlake\s+Village,\s*CA\s*91361(?:\s*,\s*United States)?/gi, 'Westlake Village, CA 91361, United States');
   }
   if (site === 'beverly') {
-    const bhStreet = '9100 Wilshire Blvd Suite 265E';
+    const bhStreet = '9100 Wilshire Blvd, Suite 265E';
     out = out.replace(/9100\s+Wilshire\s+Blvd\s*#\s*265\s*e/gi, bhStreet);
     out = out.replace(/9100\s+Wilshire\s+Blvd\s*#\s*265\s*E/gi, bhStreet);
     out = out.replace(/9100\s+Wilshire\s+Blvd\s*,?\s*Suite\s*#?\s*265\s*E/gi, bhStreet);

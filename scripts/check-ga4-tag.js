@@ -37,6 +37,12 @@ const EXCLUDED = {
   'public/physician-portal/for-physicians.html': 'physician referral portal - GA pending owner/privacy decision',
   'public/physician-portal/refer-a-patient.html': 'physician referral portal (patient referral form) - GA pending owner/privacy decision',
   'public/physician-portal/referral-directory.html': 'physician referral portal - GA pending owner/privacy decision',
+  'public/physician-portal/physician-portal/auth/sign-in.html': 'physician portal (nested live copy) - GA pending owner/privacy decision',
+  'public/physician-portal/physician-portal/book-consultation.html': 'physician portal (nested live copy) - GA pending owner/privacy decision',
+  'public/physician-portal/physician-portal/for-physicians.html': 'physician portal (nested live copy) - GA pending owner/privacy decision',
+  'public/physician-portal/physician-portal/refer-a-patient.html': 'physician portal (nested live copy) - GA pending owner/privacy decision',
+  'public/physician-portal/physician-portal/referral-directory.html': 'physician portal (nested live copy) - GA pending owner/privacy decision',
+  'routes/refer-a-patient.html': 'physician referral form copy (live-only) - GA pending owner/privacy decision',
 };
 
 const HEADER_INCLUDE_RE = /include\(\s*['"]\/?partials\/header(\.ejs)?['"]/;
