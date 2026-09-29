@@ -39,5 +39,6 @@ Served from `/public/images/press/`. Only covers with a real image. Display size
 |---|---|---|
 | `yhc-magazine-june-2009.webp/.jpg` | 420x508 | Westlake upload `JUNE09-YHC-MAGAZINE_DR.-KHANNA-pdf-846x1024-1.jpg` (846x1024), https://kvi.westlakevillagelasik.com/wp-content/uploads/2023/02/JUNE09-YHC-MAGAZINE_DR.-KHANNA-pdf-846x1024-1.jpg |
 | `life-after-50-january-2009.webp/.jpg` | 420x529 | Westlake upload `LifeAfter50_2937-1-scaled.webp` (2032x2560), https://kvi.westlakevillagelasik.com/wp-content/uploads/2023/02/LifeAfter50_2937-1-scaled.webp |
+| `beverly-hills-times-september-2007.webp/.jpg` | 420x489 | S3 `khannainstitute/Rajesh-Khanna-MD-on-cover-of-Beverly-Hills-Times.png` (496x578), September 2007 signed cover. Resized down to 420px wide (JPEG q=82, WebP q=92). |
 
-Not included: Beverly Hills Times (named in text only; no image). Los Angeles Magazine 2025 `Untitled-2-01.png` is a Top Doctors ad page, not a cover on the staging scroll, and was not added. Rising Star was not added.
+Not included: Los Angeles Magazine 2025 `Untitled-2-01.png` is a Top Doctors ad page, not a cover on the staging scroll, and was not added. Rising Star was not added.

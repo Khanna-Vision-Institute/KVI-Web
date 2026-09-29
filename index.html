@@ -195,10 +195,9 @@
             background: #e6f7f2;
         }
 
-        /* Hero clears the fixed header. --kvi-hero-offset is set by the small script after the hero
-           (header height minus the hero's own top offset); the px values are fallbacks.
-           Awards and magazine covers are the site-wide band in partials/trust-band.ejs (above the footer),
-           not a second strip inside this hero. */
+        /* Hero clears whatever sits above it. The awards band (partials/trust-band.ejs) is in normal
+           flow under the fixed header, so its height is already in the hero's offsetTop.
+           --kvi-hero-offset is header height minus that offset (0 once the band is in place). */
         /* Hero Section - Split Path */
         .hero {
             margin-top: 0;
@@ -850,7 +849,9 @@
     </section>
     <script>
     (function () {
-        /* Keep the hero just below the fixed header (header height varies by viewport). */
+        /* Keep the hero just below the fixed header and the trust band.
+           Band margin is set in partials/trust-band.ejs; this only removes leftover
+           header padding once the band already occupies that space. */
         function kviHeroOffset() {
             var header = document.querySelector('.main-header');
             var hero = document.querySelector('.hero');

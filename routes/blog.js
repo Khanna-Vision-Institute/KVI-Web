@@ -34,9 +34,16 @@ router.get(['/procedure-guides', '/procedure-guides/'], (req, res, next) => {
 });
 
 // Blog listing page
-router.get('/latest', async (req, res, next) => {
+router.get(['/latest', '/latest/'], async (req, res, next) => {
   try {
-    const blogs = await getAllBlogs();
+    let blogs = [];
+    try {
+      blogs = await getAllBlogs();
+    } catch (error) {
+      // Keep the page shell. Static entries below are real existing slugs, not invented posts.
+      console.error('Blog listing sources failed; rendering static posts only:', error);
+      blogs = [];
+    }
     
     // Add static blogs to the list
     const allBlogs = [...blogs, ...staticBlogs];

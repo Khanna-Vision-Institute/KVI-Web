@@ -35,6 +35,23 @@ async function connect() {
   }
 }
 
+async function getMongoPublishedPosts() {
+  // Legacy posts only. Missing MONGODB_PASS must not 500 the public blog:
+  // Strapi (and the route's static list) still render.
+  if (!MONGODB_PASS) {
+    console.error('MONGODB_PASS is not set; skipping legacy MongoDB blog posts.');
+    return [];
+  }
+  try {
+    const database = await connect();
+    const posts = database.collection('posts');
+    return await posts.find({ status: 'published' }).sort({ publishedAt: -1 }).toArray();
+  } catch (error) {
+    console.error('MongoDB blogs unavailable:', error.message);
+    return [];
+  }
+}
+
 async function getBlogBySlug(slug) {
   try {
     // First, try to get from Strapi (newer, editable version)
@@ -44,29 +61,28 @@ async function getBlogBySlug(slug) {
       return strapiBlog;
     }
     
-    // If not found in Strapi, check MongoDB (legacy posts)
+    // If not found in Strapi, check MongoDB (legacy posts). A down or
+    // unconfigured database is a miss, not a stack-trace page.
+    if (!MONGODB_PASS) {
+      console.error('MONGODB_PASS is not set; legacy MongoDB post lookup skipped for', slug);
+      return null;
+    }
     const database = await connect();
     const posts = database.collection('posts');
-    const mongoDBblog = await posts.findOne({ slug: slug, status: 'published' });
-    
-    return mongoDBblog;
+    return await posts.findOne({ slug: slug, status: 'published' });
   } catch (error) {
     console.error('Error fetching blog:', error);
-    throw error;
+    return null;
   }
 }
 
 async function getAllBlogs() {
   try {
-    // Fetch from both MongoDB and Strapi
-    const database = await connect();
-    const posts = database.collection('posts');
-    const mongoDBblogs = await posts.find({ status: 'published' }).sort({ publishedAt: -1 }).toArray();
-    
-    // Get Strapi blogs
+    // Strapi first (returns [] on failure). Mongo is optional.
     const strapiBlogs = await getAllStrapiBlogs();
+    const mongoDBblogs = await getMongoPublishedPosts();
     
-    // Merge both sources
+    // Merge both sources. Strapi wins on duplicate slugs.
     const allBlogs = [...strapiBlogs, ...mongoDBblogs];
     
     // Remove duplicates by slug (keep the first one)
