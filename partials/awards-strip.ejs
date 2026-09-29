@@ -12,8 +12,6 @@
  * Captions use only what the staging awards page and the badge artwork state. Years/issuers still to be
  * confirmed by KVI are listed in public/images/awards/README.md.
  *
- * Rising Star Award: the original badge file is not available (staging media is missing it), so it is shown
- * as a text badge until KVI supplies the image. Replace the text tile with a <picture> when the file arrives.
  */
 var kviVariant = (typeof awardsVariant !== 'undefined' && awardsVariant === 'compact') ? 'compact' : 'full';
 var kviShowLink = (typeof awardsLink !== 'undefined') ? !!awardsLink : true;
@@ -80,15 +78,10 @@ var kviAwards = [
     <ul class="kvi-awards__list">
       <% kviAwards.forEach(function (a) { %>
       <li class="kvi-awards__item">
-        <% if (a.file) { %>
         <picture>
           <source srcset="/public/images/awards/<%= a.file %>.webp" type="image/webp">
           <img src="/public/images/awards/<%= a.file %>.png" alt="<%= a.alt %>" width="<%= a.w %>" height="<%= a.h %>" loading="<%= kviVariant === 'compact' ? 'eager' : 'lazy' %>" decoding="async">
         </picture>
-        <% } else { %>
-        <!-- TODO(KVI): replace with the original Rising Star badge image when supplied -->
-        <span class="kvi-awards__text-badge" role="img" aria-label="<%= a.alt %>">Rising Star<small>Award</small></span>
-        <% } %>
         <span class="kvi-awards__caption"><%= a.name %></span>
       </li>
       <% }); %>
