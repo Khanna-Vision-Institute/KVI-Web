@@ -195,30 +195,14 @@
             background: #e6f7f2;
         }
 
-        /* Awards strip (partials/awards-strip.ejs): first row of the hero grid, spanning both paths, pushed just below
-           the fixed header so it is always above the fold. --kvi-hero-offset is set by the small script after the hero
-           (header height minus the hero's own top offset); the px values are fallbacks. */
-        .hero {
-            grid-template-rows: auto 1fr;
-        }
-        .hero > .kvi-awards {
-            grid-column: 1 / -1;
-            order: -1;
-            align-self: start;
-            margin-top: var(--kvi-hero-offset, 100px);
-        }
-        @media (max-width: 768px) {
-            .hero {
-                grid-template-rows: auto;
-            }
-            .hero > .kvi-awards {
-                margin-top: var(--kvi-hero-offset, 140px);
-            }
-        }
-
+        /* Hero clears the fixed header. --kvi-hero-offset is set by the small script after the hero
+           (header height minus the hero's own top offset); the px values are fallbacks.
+           Awards and magazine covers are the site-wide band in partials/trust-band.ejs (above the footer),
+           not a second strip inside this hero. */
         /* Hero Section - Split Path */
         .hero {
             margin-top: 0;
+            padding-top: var(--kvi-hero-offset, 142px);
             min-height: 76vh;
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -740,7 +724,8 @@
             }
             .hero {
                 grid-template-columns: 1fr;
-                margin-top: 140px;
+                margin-top: 0;
+                padding-top: var(--kvi-hero-offset, 220px);
             }
             
             .path-title {
@@ -862,12 +847,10 @@
             <a href="/about/why-choose-us/celebrity-patients/" class="path-cta secondary-cta">Watch Patient Stories</a>
         </div>
 
-        <!-- Awards strip (above the fold): partials/awards-strip.ejs -->
-        <%- include('/partials/awards-strip', { awardsVariant: 'compact', awardsLink: true }) %>
     </section>
     <script>
     (function () {
-        /* Keep the hero awards strip just below the fixed header (header height varies by viewport). */
+        /* Keep the hero just below the fixed header (header height varies by viewport). */
         function kviHeroOffset() {
             var header = document.querySelector('.main-header');
             var hero = document.querySelector('.hero');
