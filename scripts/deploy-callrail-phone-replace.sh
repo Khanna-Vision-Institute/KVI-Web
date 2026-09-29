@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+# RETIRED Sep 28, 2026 - DO NOT RUN. This script would put (310) 677-0760 back in the header/footer
+# as a STATIC number. (310) 677-0760 is now website swap-pool slot 1 (config/call-tracking.js) and must
+# never be displayed statically. Kept only for history.
+echo "deploy-callrail-phone-replace.sh is retired (see config/call-tracking.js). Nothing was changed." >&2
+exit 1
 # Deploy CallRail removal + replace tracking number with (310) 677-0760
 #
 # Uploads:

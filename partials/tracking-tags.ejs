@@ -1,0 +1,9 @@
+<%# Site tagging (config/tracking.js + config/call-tracking.js). Include right AFTER the GA4 gtag snippet.
+    - window.KVI_TRACKING: GA4 id, ADS_TAGS_ENABLED mode and ONLY the Ads labels that mode allows.
+    - kvi-tracking.js: GA4 phone_click / sms_click / generate_lead; Ads sends only if allowed.
+    - kvi-swap.js: in-house number swap, rendered ONLY when KVI_CALLTRACKER_ENABLED is true (currently false). %>
+<% var _kviCt = (typeof siteCallTracking !== 'undefined') ? siteCallTracking : null; %>
+<% if (typeof siteTracking !== 'undefined') { %><script>window.KVI_TRACKING = <%- siteTracking.clientConfigJson(_kviCt) %>;</script>
+<% } %><script src="/public/js/kvi-tracking.js" defer></script>
+<% if (_kviCt && _kviCt.KVI_CALLTRACKER_ENABLED === true && !(typeof sitePhone !== 'undefined' && sitePhone.CALLRAIL_SWAP_ENABLED)) { %><script src="<%= _kviCt.KVI_CALLTRACKER_SRC %>" defer></script>
+<% } %>

@@ -4,6 +4,12 @@
     vip: 'AW-16512183014/qFoZCJal6qscEObVz8E9',
     smile: 'AW-16512183014/d1J1CK2xzqscEObVz8E9'
   };
+  // ADS_TAGS_ENABLED (config/tracking.js, via window.KVI_TRACKING from partials/tracking-tags.ejs):
+  // 'legacy' (default) and 'all' keep these two Ads conversions firing exactly as on production;
+  // 'off' stops the Ads send (GA4 generate_lead still fires). If KVI_TRACKING is missing
+  // (page without the partial), behave exactly as before.
+  var kt = window.KVI_TRACKING;
+  var adsTargets = (kt && kt.ads && kt.ads.legacy) ? kt.ads.legacy : targets;
   var maxAge = 5 * 60 * 1000;
   function key(kind) { return 'kvi_consult_success_v1_' + kind; }
   function reset(kind) {
@@ -34,8 +40,11 @@
       window.gtag('event', 'generate_lead', {
         send_to: 'G-Q0TGBPVS92', form_id: kind === 'vip' ? 'vip_consult' : 'smile_consult'
       });
-      window.gtag('config', 'AW-16512183014');
-      window.gtag('event', 'conversion', { send_to: targets[kind], transaction_id: pending.receipt });
+      var sendTo = adsTargets[kind];
+      if (sendTo) {
+        window.gtag('config', sendTo.split('/')[0]);
+        window.gtag('event', 'conversion', { send_to: sendTo, transaction_id: pending.receipt });
+      }
       return true;
     } catch (_) { return false; }
   }

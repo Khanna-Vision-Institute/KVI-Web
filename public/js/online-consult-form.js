@@ -56,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error(result.message || 'Unable to save your request right now.');
       }
 
+      // GA4 generate_lead (+ staged Ads label only if ADS_TAGS_ENABLED='all'); see public/js/kvi-tracking.js
+      try { if (window.KviTracking) window.KviTracking.lead('virtual_consult'); } catch (_) {}
       setFeedback('✓ Consultation request received! We will contact you shortly.', 'success');
       form.reset();
     } catch (error) {

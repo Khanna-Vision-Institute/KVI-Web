@@ -43,6 +43,10 @@ app.set("view cache", false);
 
 // Site-wide phone config for EJS templates (header/footer call link). See config/phone.js.
 app.locals.sitePhone = require('./config/phone');
+// Tagging (GA4 + Google Ads, one ADS_TAGS_ENABLED switch) and the in-house call-tracking swap (OFF).
+// See config/tracking.js, config/call-tracking.js and partials/tracking-tags.ejs.
+app.locals.siteTracking = require('./config/tracking');
+app.locals.siteCallTracking = require('./config/call-tracking');
 
 // Guru proxy MUST be before body parsing so the raw request body is forwarded
 const GURU_SERVER = process.env.GURU_SERVER_URL || 'http://ec2-100-28-122-42.compute-1.amazonaws.com:8000';

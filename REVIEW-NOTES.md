@@ -31,3 +31,8 @@ Forms, booking, the Guru chat (`/api/guru`), CMS-driven blog and MongoDB feature
 ## Sep 28, 2026 additions (review branch only)
 - **Award badges (Phase 4):** 5-badge strip (`partials/awards-strip.ejs`, images in `public/images/awards/`) on the home page (top of the hero, just under the header) and at the top of `/about/dr-khanna/credentials-awards/` (in the template, so it shows even without Strapi). Updated CMS content with badge cards: `STRAPI_CONTENT_17_CREDENTIALS_BADGES_WITH_CSS.html` (not pasted into Strapi). The Rising Star badge is a text placeholder until KVI sends the original image. Open questions on award years and issuers: `public/images/awards/README.md`.
 - **Why Trust Khanna Institute (G10):** new static page `/about/why-trust-khanna/` (`about/why-trust-khanna.html`), linked from the About > Meet Dr. Khanna menu and added to `/main-pages-sitemap.xml`. Uses only figures already on the live site (25,000+, 30+ years, 4.9★, 99%, 2 books).
+- **Call tracking + tagging (staged, OFF):** see `docs/TRACKING-CHANGE-NOTE-2026-09-28.md`.
+  - One Ads switch, `ADS_TAGS_ENABLED` (`config/tracking.js`). The default is `legacy`: only the live VIP/SMILE `AW-16512183014` conversions fire. The new phone_click/sms_click/generate_lead/phone_call conversions for 811-555-5501 are off, with empty labels.
+  - GA4 `G-Q0TGBPVS92` is on every page, checked by `npm run check:ga4`.
+  - 10-slot website swap pool in `config/call-tracking.js`, swap off. The office mains and (818) 857-1735 are never pooled, and (310) 677-0760 is used only as a pool number.
+  - Tests: `npm run test:tracking`.
