@@ -798,6 +798,7 @@
         throw new Error(result.message || 'Unable to save your appointment at the moment.');
       }
 
+      try { if (window.KviTracking) window.KviTracking.lead('schedule_consult', formData.surgeryExamType); } catch (_) {}
       setFeedback('✓ Appointment Confirmed! ' + formData.location + ' — ' + formData.date + ' at ' + formData.time, 'success');
 
       bookingForm.reset();

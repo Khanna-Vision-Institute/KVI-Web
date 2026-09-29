@@ -1162,6 +1162,13 @@
         submit.disabled = false;
         if (res.ok && res.data && res.data.success) {
           try {
+            if (window.KviTracking) {
+              var vtEl = form.querySelector('input[name="visitType"]:checked');
+              window.KviTracking.lead('book_consultation', vtEl && vtEl.value ? vtEl.value : '');
+            }
+          } catch (_) {}
+
+          try {
             sessionStorage.removeItem(REFERRAL_DRAFT_KEY);
           } catch (clr) {}
           resetRecaptcha();

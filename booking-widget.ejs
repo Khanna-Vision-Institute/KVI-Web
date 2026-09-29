@@ -830,6 +830,7 @@
                 var result = await response.json();
                 
                 if (response.ok && result.success) {
+                    try { if (window.KviTracking) window.KviTracking.lead('booking_widget', formData.surgeryExamType); } catch (_) {}
                     feedback.className = 'booking-feedback success';
                     feedback.textContent = '✓ Booking confirmed! We\'ll contact you within 24 hours.';
                     form.reset();

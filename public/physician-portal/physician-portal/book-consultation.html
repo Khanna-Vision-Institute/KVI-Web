@@ -438,6 +438,13 @@
       .then(function (res) {
         submit.disabled = false;
         if (res.ok && res.data && res.data.success) {
+          try {
+            if (window.KviTracking) {
+              var vtEl = form.querySelector('input[name="visitType"]:checked');
+              window.KviTracking.lead('book_consultation', vtEl && vtEl.value ? vtEl.value : '');
+            }
+          } catch (_) {}
+
           form.style.display = 'none';
           if (confirm) {
             confirm.style.display = 'block';

@@ -1253,6 +1253,7 @@
                         const result = await response.json();
                         
                         if (result.success) {
+                            try { if (window.KviTracking) window.KviTracking.lead('booking_enhanced'); } catch (_) {}
                             // Show success modal
                             showSuccessModal();
                             
