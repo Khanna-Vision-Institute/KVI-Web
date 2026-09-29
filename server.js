@@ -948,18 +948,14 @@ app.get('/llms.txt', (req, res) => {
 app.get('/test/smile-laser/', async (req, res, next) => {
   try {
     const pageData = await getPageBySlug('test-smile-laser-eye-surgery');
-    
     if (pageData) {
-      console.log('✅ Loaded Strapi test page:', pageData.title);
-      // Render with the actual SMILE template (with all the beautiful design)
       return res.render('procedures/laser-vision/smile-page-complete.html', { pageData });
-    } else {
-      return res.status(404).send('Test page not found in Strapi. Make sure the page with slug "test-smile-laser-eye-surgery" is published.');
     }
   } catch (error) {
-    console.error('Error loading test page:', error);
-    return res.status(500).send('Error loading test page: ' + error.message);
+    console.error('Error loading test page:', error.message);
   }
+  // Strapi unreachable or unpublished: serve the corrected local copy.
+  return renderView('COMPLETE_SMILE_PAGE_CONTENT_FOR_STRAPI.html', res, next);
 });
 
 // ============================================
@@ -1716,77 +1712,63 @@ const routeMap = {
   '/booking-success': 'coming-soon.html',
 };
 
-// Strapi page slugs mapping (URL path -> Strapi slug)
-// Add pages here as you migrate them to Strapi
-const strapiPageSlugs = {
-  // Test URL - won't affect production page
-  '/test/smile-laser/': 'test-smile-laser-eye-surgery',
-  
-  // Production URLs - NOW LIVE with Strapi! (First 6)
-  '/procedures/laser-vision/smile/': 'test-smile-laser-eye-surgery',
-  // '/procedures/laser-vision/lasik/': 'lasik-eye-surgery', // body: partials/lasik-page-content.ejs (not Strapi)
-  // '/procedures/lens-solutions/evo-icl/': 'evo-icl-surgery', // body: partials/evo-icl-page-content.ejs (not Strapi)
-  '/procedures/lens-solutions/robotic-cataract-surgery/': 'robotic-cataract-surgery',
-  '/procedures/laser-vision/superlasik/': 'superlasik-surgery',
-  '/procedures/lens-solutions/pie/': 'pie-rle-surgery',
-  
-  // Additional Procedure Pages (Batch 2 - 10 more pages)
-  '/procedures/laser-vision/asa/': 'asa-procedure',
-  '/procedures/laser-vision/compare/': 'procedure-comparison',
-  '/procedures/laser-vision/compare/pie-vs-evo-icl/': 'pie-vs-evo-icl-comparison',
-  '/procedures/laser-vision/compare/presbyopic-iol/': 'presbyopic-iol-comparison',
-  '/procedures/lens-solutions/which-lens-is-right/': 'which-lens-is-right',
-  // '/procedures/specialty-treatments/cxl-keratoconus/': 'cxl-keratoconus-treatment', // body: full template rebuilt from live Sep 26, 2026 (public Strapi entry still has the old 9735 Wilshire / 2625 Townsgate addresses)
-  // '/procedures/specialty-treatments/ctak-keratoconus/': 'ctak-keratoconus-treatment', // body: partials/ctak-keratoconus-page-content.ejs (not Strapi)
-  // '/procedures/specialty-treatments/pterygium-surgery/': 'pterygium-surgery', // body: partials/pterygium-surgery-page-content.ejs (not Strapi)
-  '/procedures/specialty-treatments/dry-eye-solutions/': 'dry-eye-solutions',
-  '/procedures/specialty-treatments/chalazion-treatment/': 'chalazion-treatment',
-  
-  // About Pages (7 pages)
-  '/about/dr-khanna/biography/': 'dr-khanna-biography',
-  '/about/dr-khanna/credentials-awards/': 'dr-khanna-credentials-awards',
-  '/about/dr-khanna/books/': 'dr-khanna-books',
-  '/about/dr-khanna/media/': 'dr-khanna-media',
-  '/about/why-choose-us/technology/': 'our-technology',
-  '/about/locations/beverly-hills/': 'beverly-hills-location',
-  '/about/locations/westlake-village/': 'westlake-village-location',
-  
-  // Patient Resource Pages (19 pages)
-  '/patients/your-journey/what-to-expect/': 'what-to-expect',
-  '/patients/your-journey/recovery-timeline/': 'recovery-timeline',
-  '/patients/your-journey/post-op-care/': 'post-op-care',
-  '/patients/your-journey/what-to-expect/lasik/': 'what-to-expect-lasik',
-  '/patients/your-journey/what-to-expect/smile/': 'what-to-expect-smile',
-  '/patients/your-journey/what-to-expect/cataract/': 'what-to-expect-cataract',
-  '/patients/your-journey/what-to-expect/cxl/': 'what-to-expect-cxl',
-  '/patients/your-journey/what-to-expect/pterygium/': 'what-to-expect-pterygium',
-  '/patients/your-journey/recovery/lasik/': 'recovery-lasik',
-  '/patients/your-journey/recovery/smile/': 'recovery-smile',
-  '/patients/your-journey/recovery/cataract/': 'recovery-cataract',
-  '/patients/your-journey/recovery/cxl/': 'recovery-cxl',
-  '/patients/your-journey/recovery/pterygium/': 'recovery-pterygium',
-  '/patients/resources/faqs/': 'faqs-main',
-  '/patients/resources/faqs/smile/': 'faqs-smile',
-  '/patients/resources/faqs/lasik/': 'faqs-lasik',
-  '/patients/resources/faqs/cxl/': 'faqs-cxl',
-  '/patients/resources/faqs/ctak/': 'faqs-ctak',
-  '/patients/resources/faqs/pterygium-surgery/': 'faqs-pterygium',
-  '/patients/resources/faqs/robotic-laser-cataract/': 'faqs-robotic-cataract',
-  '/patients/resources/faqs/yag-vitreolysis/': 'faqs-yag-vitreolysis',
-  // '/patients/resources/financing-options/': 'financing-options', // static: patients/resources/All You Ever wanted to Know About financing.html
-
-  // Pricing & Financing
-  // '/pricing-financing/procedure-costs/': 'procedure-costs', // body: partials/procedure-costs-page-content.ejs (not Strapi)
-  '/pricing-financing/calculator/': 'financing-calculator',
-
-  // Contact Pages
-  '/contact/schedule-consultation/': 'contact-booking',
-  '/contact/forms/': 'contact-booking',
-  '/contact/virtual-consultation/': 'virtual-consultation',
-  '/contact/emergency-care/': 'emergency-care',
+// Local page content (Strapi retirement, 2026-09-29).
+// These routes used to fetch their body from Strapi (services/pages.js getPageBySlug) and
+// render the template with pageData.content. They now serve the corrected local
+// STRAPI_CONTENT_* copies directly (same URLs, same templates). Blog posts still come from
+// Strapi via services/mongodb.js — there are no local blog copies yet.
+// /test/smile-laser/ keeps its own handler below (it renders the SMILE template, not a
+// content copy), and falls back to the local copy when Strapi is unreachable.
+const localPageContent = {
+  // chalazion-treatment: the Strapi body is an older full-page draft; the live route serves the
+  // static template procedures/specialty-treatments/Advanced Chalazion Treatment.html (routeMap),
+  // so there is no local content copy for it.
+  '/test/smile-laser/': 'COMPLETE_SMILE_PAGE_CONTENT_FOR_STRAPI.html',
+  '/procedures/laser-vision/smile/': 'COMPLETE_SMILE_PAGE_CONTENT_FOR_STRAPI.html',
+  '/procedures/lens-solutions/robotic-cataract-surgery/': 'STRAPI_CONTENT_3_ROBOTIC_CATARACT_WITH_CSS.html',
+  '/procedures/laser-vision/superlasik/': 'STRAPI_CONTENT_4_SUPERLASIK_WITH_CSS.html',
+  '/procedures/lens-solutions/pie/': 'STRAPI_CONTENT_5_PIE_WITH_CSS.html',
+  '/procedures/laser-vision/asa/': 'STRAPI_CONTENT_6_ASA_WITH_CSS.html',
+  '/procedures/laser-vision/compare/': 'STRAPI_CONTENT_7_COMPARE_WITH_CSS.html',
+  '/procedures/laser-vision/compare/pie-vs-evo-icl/': 'STRAPI_CONTENT_8_PIE_VS_EVO_WITH_CSS.html',
+  '/procedures/laser-vision/compare/presbyopic-iol/': 'STRAPI_CONTENT_9_PRESBYOPIC_IOL_WITH_CSS.html',
+  '/procedures/lens-solutions/which-lens-is-right/': 'STRAPI_CONTENT_10_WHICH_LENS_WITH_CSS.html',
+  '/procedures/specialty-treatments/dry-eye-solutions/': 'STRAPI_CONTENT_14_DRY_EYE_WITH_CSS.html',
+  '/about/dr-khanna/biography/': 'STRAPI_CONTENT_16_BIOGRAPHY_WITH_CSS.html',
+  '/about/dr-khanna/credentials-awards/': 'STRAPI_CONTENT_17_CREDENTIALS_WITH_CSS.html',
+  '/about/dr-khanna/books/': 'STRAPI_CONTENT_18_BOOKS_WITH_CSS.html',
+  '/about/dr-khanna/media/': 'STRAPI_CONTENT_19_MEDIA_WITH_CSS.html',
+  '/about/why-choose-us/technology/': 'STRAPI_CONTENT_20_TECHNOLOGY_WITH_CSS.html',
+  '/about/locations/beverly-hills/': 'STRAPI_CONTENT_21_BEVERLY_HILLS_WITH_CSS.html',
+  '/about/locations/westlake-village/': 'STRAPI_CONTENT_22_WESTLAKE_WITH_CSS.html',
+  '/patients/your-journey/what-to-expect/': 'STRAPI_CONTENT_24_WHAT_TO_EXPECT_WITH_CSS.html',
+  '/patients/your-journey/recovery-timeline/': 'STRAPI_CONTENT_25_RECOVERY_TIMELINE_WITH_CSS.html',
+  '/patients/your-journey/post-op-care/': 'STRAPI_CONTENT_26_POST_OP_CARE_WITH_CSS.html',
+  '/patients/your-journey/what-to-expect/lasik/': 'STRAPI_CONTENT_27_EXPECT_LASIK_WITH_CSS.html',
+  '/patients/your-journey/what-to-expect/smile/': 'STRAPI_CONTENT_28_EXPECT_SMILE_WITH_CSS.html',
+  '/patients/your-journey/what-to-expect/cataract/': 'STRAPI_CONTENT_29_EXPECT_CATARACT_WITH_CSS.html',
+  '/patients/your-journey/what-to-expect/cxl/': 'STRAPI_CONTENT_30_EXPECT_CXL_WITH_CSS.html',
+  '/patients/your-journey/what-to-expect/pterygium/': 'STRAPI_CONTENT_31_EXPECT_PTERYGIUM_WITH_CSS.html',
+  '/patients/your-journey/recovery/lasik/': 'STRAPI_CONTENT_32_RECOVERY_LASIK_WITH_CSS.html',
+  '/patients/your-journey/recovery/smile/': 'STRAPI_CONTENT_33_RECOVERY_SMILE_WITH_CSS.html',
+  '/patients/your-journey/recovery/cataract/': 'STRAPI_CONTENT_34_RECOVERY_CATARACT_WITH_CSS.html',
+  '/patients/your-journey/recovery/cxl/': 'STRAPI_CONTENT_35_RECOVERY_CXL_WITH_CSS.html',
+  '/patients/your-journey/recovery/pterygium/': 'STRAPI_CONTENT_36_RECOVERY_PTERYGIUM_WITH_CSS.html',
+  '/patients/resources/faqs/': 'STRAPI_CONTENT_37_FAQS_MAIN_WITH_CSS.html',
+  '/patients/resources/faqs/smile/': 'STRAPI_CONTENT_38_FAQS_SMILE_WITH_CSS.html',
+  '/patients/resources/faqs/lasik/': 'STRAPI_CONTENT_39_FAQS_LASIK_WITH_CSS.html',
+  '/patients/resources/faqs/cxl/': 'STRAPI_CONTENT_40_FAQS_CXL_WITH_CSS.html',
+  '/patients/resources/faqs/ctak/': 'STRAPI_CONTENT_41_FAQS_CTAK_WITH_CSS.html',
+  '/patients/resources/faqs/pterygium-surgery/': 'STRAPI_CONTENT_42_FAQS_PTERYGIUM_WITH_CSS.html',
+  '/patients/resources/faqs/robotic-laser-cataract/': 'STRAPI_CONTENT_43_FAQS_ROBOTIC_CATARACT_WITH_CSS.html',
+  '/patients/resources/faqs/yag-vitreolysis/': 'STRAPI_CONTENT_44_FAQS_YAG_WITH_CSS.html',
+  '/pricing-financing/calculator/': 'STRAPI_CONTENT_49_FINANCING_CALC_WITH_CSS.html',
+  '/contact/schedule-consultation/': 'STRAPI_CONTENT_50_CONTACT_BOOKING_WITH_CSS.html',
+  '/contact/forms/': 'STRAPI_CONTENT_50_CONTACT_BOOKING_WITH_CSS.html',
+  '/contact/virtual-consultation/': 'STRAPI_CONTENT_51_VIRTUAL_CONSULT_WITH_CSS.html',
+  '/contact/emergency-care/': 'STRAPI_CONTENT_52_EMERGENCY_CARE_WITH_CSS.html',
 };
 
-// Permanent redirects — registered before routeMap so they override static/Strapi routes
 const permanentRedirects = {
   '/patients/resources/insurance-info/': '/patients/resources/financing-options/',
   '/pricing-financing/insurance-coverage/': '/patients/resources/financing-options/',
@@ -1887,20 +1869,10 @@ Object.entries(routeMap).forEach(([url, filePath]) => {
   // Register route with trailing slash
   app.get(url, async (req, res, next) => {
     // Check if this route has a Strapi page
-    const strapiSlug = strapiPageSlugs[url];
     
-    if (strapiSlug) {
-      try {
-        const pageData = await getPageBySlug(strapiSlug);
-        
-        if (pageData) {
-          // Render with Strapi data using the mapped template file
-          return res.render(normalizedFilePath, { pageData });
-        }
-      } catch (error) {
-        console.error(`Error fetching Strapi page for ${url}:`, error.message);
-        // Fall through to static rendering
-      }
+    if (localPageContent[url]) {
+      // Corrected local copy (STRAPI_CONTENT_*) instead of a live Strapi fetch.
+      return renderView(localPageContent[url], res, next);
     }
     
     // Fallback: render static file
@@ -1919,19 +1891,9 @@ Object.entries(routeMap).forEach(([url, filePath]) => {
     const urlWithoutSlash = url.slice(0, -1);
     app.get(urlWithoutSlash, async (req, res, next) => {
       // Check if this route has a Strapi page
-      const strapiSlug = strapiPageSlugs[url]; // Use original URL with slash
       
-      if (strapiSlug) {
-        try {
-          const pageData = await getPageBySlug(strapiSlug);
-          
-          if (pageData) {
-            return res.render(normalizedFilePath, { pageData });
-          }
-        } catch (error) {
-          console.error(`Error fetching Strapi page for ${urlWithoutSlash}:`, error.message);
-          // Fall through to static rendering
-        }
+      if (localPageContent[url]) {
+        return renderView(localPageContent[url], res, next);
       }
       
       // Fallback: render static file
