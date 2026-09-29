@@ -36,7 +36,8 @@ const ADS_CUSTOMER_ID = '811-555-5501';
 
 /**
  * Already live on production (do not change without Khanna's approval).
- * OPEN: confirm AW-16512183014 is the tag of account 811-555-5501 (vs 509-001-5659).
+ * Confirmed 2026-09-28 (Ads & Analytics): AW-16512183014 is account 811-555-5501.
+ *   vip = 'PIE Google Ads Lead', smile = 'SMILE Google Ads Lead' (both Primary).
  */
 const ADS_LEGACY_CONVERSIONS = Object.freeze({
   vip: 'AW-16512183014/qFoZCJal6qscEObVz8E9',
@@ -54,10 +55,10 @@ const ADS_LEGACY_CONVERSIONS = Object.freeze({
  *                   conversion upload by the call tracker; see services/callConversion.js)
  */
 const ADS_STAGED_CONVERSIONS = Object.freeze({
-  phone_click: '',
-  sms_click: '',
-  generate_lead: '',
-  phone_call: '', // server-side: conversion action resource name, e.g. customers/8115555501/conversionActions/<id>
+  phone_click: 'AW-16512183014/VZUiCOPo64kdEObVz8E9', // 'Website Phone Click' (Secondary)
+  sms_click: '', // no Ads action created; GA4 only
+  generate_lead: 'AW-16512183014/_7tKCObo64kdEObVz8E9', // 'Website Lead Form (all forms)' (Secondary)
+  phone_call: 'customers/8115555501/conversionActions/7805407420', // 'Qualified Phone Call (server, 60s+)', GCLID import; uploads need Ads API developer token
 });
 
 const PHONE_CALL_MIN_SECONDS = 60;

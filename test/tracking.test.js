@@ -110,7 +110,13 @@ test('ADS_TAGS_ENABLED defaults to legacy: VIP/SMILE keep firing, new conversion
   const c = tracking.clientConfig(ct);
   assert.deepEqual(c.ads.legacy, { vip: 'AW-16512183014/qFoZCJal6qscEObVz8E9', smile: 'AW-16512183014/d1J1CK2xzqscEObVz8E9' });
   assert.deepEqual(c.ads.staged, {});
-  for (const k of ['phone_click', 'sms_click', 'generate_lead', 'phone_call']) assert.equal(tracking.ADS_STAGED_CONVERSIONS[k], '', `${k} label must stay empty until the action exists`);
+  // Labels from the actions created in 811-555-5501 on 2026-09-28 (Secondary). They still never send under 'legacy'.
+  assert.deepEqual({ ...tracking.ADS_STAGED_CONVERSIONS }, {
+    phone_click: 'AW-16512183014/VZUiCOPo64kdEObVz8E9',
+    sms_click: '',
+    generate_lead: 'AW-16512183014/_7tKCObo64kdEObVz8E9',
+    phone_call: 'customers/8115555501/conversionActions/7805407420',
+  });
   assert.equal(tracking.ADS_CUSTOMER_ID, '811-555-5501');
 });
 test('ADS_TAGS_ENABLED values', () => {
@@ -121,7 +127,9 @@ test('ADS_TAGS_ENABLED values', () => {
   assert.equal(tracking.resolveAdsMode(''), 'legacy');
   assert.equal(tracking.resolveAdsMode('garbage'), 'legacy');
   assert.deepEqual(tracking.clientConfig(ct, 'off').ads, { legacy: {}, staged: {} });
-  assert.deepEqual(tracking.clientConfig(ct, 'all').ads.staged, {}); // empty labels never send
+  // 'all' exposes only filled labels; sms_click has none, so it never sends
+  assert.deepEqual(tracking.clientConfig(ct, 'all').ads.staged, { phone_click: 'AW-16512183014/VZUiCOPo64kdEObVz8E9', generate_lead: 'AW-16512183014/_7tKCObo64kdEObVz8E9' });
+  assert.deepEqual(tracking.clientConfig(ct, 'legacy').ads.staged, {});
 });
 
 // ---------------------------------------------------------------- browser scripts in a sandbox
@@ -172,7 +180,10 @@ test('server-side phone_call: 60 s minimum and gated by ADS_TAGS_ENABLED', () =>
   assert.equal(planCallConversion({ durationSeconds: 59, gclid: 'x', gaClientId: '1.2' }).qualifies, false);
   const legacy = planCallConversion({ durationSeconds: 60, gclid: 'x', gaClientId: '1.2' }, 'legacy');
   assert.equal(legacy.ads, null); assert.equal(legacy.ga4.events[0].name, 'phone_call');
-  assert.equal(planCallConversion({ durationSeconds: 90, gclid: 'x' }, 'all').ads, null); // no action configured yet
+  const all = planCallConversion({ durationSeconds: 90, gclid: 'x' }, 'all');
+  assert.equal(all.ads.conversionAction, 'customers/8115555501/conversionActions/7805407420');
+  assert.equal(all.ads.gclid, 'x');
+  assert.equal(planCallConversion({ durationSeconds: 90 }, 'all').ads, null); // no GCLID, nothing to upload
 });
 
 // ---------------------------------------------------------------- GA4 on every page
