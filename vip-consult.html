@@ -1734,6 +1734,7 @@
       .pie-form-repeat .vip-form { grid-template-columns: 1fr; }
     }
   </style>
+  <script src="/public/js/consult-conversion.js"></script>
 </head>
 
 <body>
@@ -2373,6 +2374,7 @@
     }
     document.querySelectorAll('form.vip-form').forEach(function (form) {
       form.addEventListener('submit', async function (e) {
+        if (window.KviConsultConversion) window.KviConsultConversion.reset('vip');
         e.preventDefault();
         var btn = form.querySelector('button[type="submit"]');
         var origText = btn ? btn.textContent : '';
@@ -2396,12 +2398,8 @@
             body: JSON.stringify(data)
           });
           var json = await res.json().catch(function () { return {}; });
-          if (res.ok && json.success !== false) {
-            try {
-              sessionStorage.setItem('kvi_vip_lead_ok', '1');
-              var src = (data && data.formSource) ? String(data.formSource) : 'VIP-Consult';
-              sessionStorage.setItem('kvi_vip_form_source', src);
-            } catch (e) {}
+          if (res.ok && json.success === true) {
+            if (window.KviConsultConversion) window.KviConsultConversion.recordSuccess('vip');
             window.location.assign('/VIP-Consult/thank-you/');
             return;
           } else {

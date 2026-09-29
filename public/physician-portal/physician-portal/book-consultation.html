@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Consultation | Khanna Vision Institute</title>
+  <meta name="description" content="Book an appointment at Khanna Vision Institute — Beverly Hills or Westlake Village. LASIK, SMILE, cataract, EVO ICL, and more.">
+  <link rel="canonical" href="https://khannainstitute.com/book-consultation/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Libre+Baskerville:ital,wght@0,700;1,700&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/Doctorportal/physician-portal-brochure.css?v=20260618">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body class="kvi-brochure bc-sched-page">
+
+<header class="kh-header">
+  <div class="kh-header-inner">
+    <a class="kh-logo" href="https://khannainstitute.com/" aria-label="Khanna Vision Institute">
+      <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/Logo1.png"
+           alt="Khanna Vision Institute" decoding="async">
+    </a>
+    <nav class="kh-nav" aria-label="Main navigation">
+      <a class="kh-nav-link" href="https://khannainstitute.com/">Home</a>
+      <a class="kh-nav-link" href="/Doctorportal/for-physicians">For Physicians</a>
+      <a class="kh-nav-link kh-nav-active" href="/Doctorportal/book-consultation">Book Consultation</a>
+      <a class="kh-nav-cta" href="tel:8052302126">(805) 230-2126</a>
+    </nav>
+  </div>
+</header>
+
+<div class="fp-strip">
+  Secure online scheduling — same-day triage available for urgent clinical questions.
+  <a href="/Doctorportal/refer-a-patient">Structured referral worksheet →</a>
+</div>
+
+<div class="rf-breadcrumb" aria-label="Breadcrumb">
+  <div class="rf-breadcrumb-inner">
+    <a href="https://khannainstitute.com/">Home</a>
+    <span class="sep">›</span>
+    <a href="/Doctorportal/for-physicians">For Physicians</a>
+    <span class="sep">›</span>
+    <span class="cur">Book Consultation</span>
+  </div>
+</div>
+
+<main class="kv-main-pad bc-sched-main-pad">
+  <div class="bc-shell">
+
+    <div class="rf-hero bc-sched-hero">
+      <div class="rf-hero-eyebrow">Secure Online Scheduling</div>
+      <h1>Request an <em>Appointment</em></h1>
+      <div class="kv-rule" aria-hidden="true"></div>
+      <p class="rf-hero-sub">
+        Complete the worksheet below — a coordinator will confirm within one business day.
+        Prefer a HIPAA-structured handoff?
+        <a href="/Doctorportal/refer-a-patient">Use the referral form</a>
+        <span aria-hidden="true"> · </span>
+        <a class="rf-tel" href="tel:8052302126">(805) 230-2126</a>
+      </p>
+    </div>
+
+    <div class="fp-tabs bc-loc-tabs" role="tablist" aria-label="Preferred office location">
+      <button class="fp-tab" type="button" role="tab" id="bc-tab-either" aria-selected="true" data-loc="either">Either office</button>
+      <button class="fp-tab" type="button" role="tab" id="bc-tab-bh" aria-selected="false" data-loc="beverly-hills">Beverly Hills — L.A.</button>
+      <button class="fp-tab" type="button" role="tab" id="bc-tab-wv" aria-selected="false" data-loc="westlake">Westlake Village</button>
+    </div>
+
+    <div class="bc-layout">
+
+      <div class="bc-primary">
+        <div id="bc-confirm" class="bc-confirm" role="alert">
+          <div class="bc-confirm-icon">✓</div>
+          <h2>Request received</h2>
+          <p>Thank you — our team will call or email within one business day to confirm your appointment details.</p>
+          <div class="bc-confirm-ref" id="bc-ref-num">Ref: KVI-000000</div>
+          <a class="bc-confirm-btn" href="/Doctorportal/for-physicians">← Return to Physician Hub</a>
+        </div>
+
+        <div class="rf-form-wrap bc-rf-form-wrap">
+          <form id="bc-form" novalidate>
+            <input type="text" name="companyWebsite" value=""
+              style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;"
+              tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <div id="bc-msg" class="rf-alert" role="status" aria-live="polite"></div>
+
+            <details class="rf-step" open>
+              <summary>
+                <span class="rf-step-num">1</span>
+                <span class="rf-step-title">Consultation preferences</span>
+                <svg class="rf-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="rf-step-body">
+                <p class="rf-lead-muted">Tell us who is requesting the visit and the clinical pathway. Your location tab selection above applies to this request.</p>
+
+                <p class="rf-sub">Who is this appointment for?</p>
+                <div class="rf-urgency-row bc-appt-for-row">
+                  <label class="rf-choice">
+                    <input type="radio" name="apptFor" value="patient" checked>
+                    <span>Patient (self-scheduling)</span>
+                  </label>
+                  <label class="rf-choice">
+                    <input type="radio" name="apptFor" value="physician">
+                    <span>Physician office referral</span>
+                  </label>
+                </div>
+
+                <hr class="rf-divider">
+
+                <p class="rf-sub">Visit type <span class="rf-req">*</span></p>
+                <div class="bc-visit-grid">
+                  <label class="rf-choice"><input type="radio" name="visitType" value="LASIK consult" required><span>LASIK consult</span></label>
+                  <label class="rf-choice"><input type="radio" name="visitType" value="SMILE consult"><span>SMILE consult</span></label>
+                  <label class="rf-choice"><input type="radio" name="visitType" value="PRK / ASA consult"><span>PRK / ASA consult</span></label>
+                  <label class="rf-choice"><input type="radio" name="visitType" value="EVO ICL consult"><span>EVO ICL consult</span></label>
+                  <label class="rf-choice"><input type="radio" name="visitType" value="PIE / RLE — Presbyopia lens"><span>PIE / RLE (Presbyopia)</span></label>
+                  <label class="rf-choice"><input type="radio" name="visitType" value="Robotic cataract surgery"><span>Robotic cataract</span></label>
+                  <label class="rf-choice"><input type="radio" name="visitType" value="Keratoconus / CXL / CTAK"><span>Keratoconus / CXL / CTAK</span></label>
+                  <label class="rf-choice"><input type="radio" name="visitType" value="Cornea evaluation"><span>Cornea evaluation</span></label>
+                  <label class="rf-choice"><input type="radio" name="visitType" value="Dry eye evaluation"><span>Dry eye evaluation</span></label>
+                  <label class="rf-choice"><input type="radio" name="visitType" value="Pterygium surgery"><span>Pterygium surgery</span></label>
+                  <label class="rf-choice"><input type="radio" name="visitType" value="Glaucoma evaluation"><span>Glaucoma evaluation</span></label>
+                  <label class="rf-choice"><input type="radio" name="visitType" value="Other / General"><span>Other / General</span></label>
+                </div>
+              </div>
+            </details>
+
+            <details class="rf-step" open>
+              <summary>
+                <span class="rf-step-num">2</span>
+                <span class="rf-step-title">Preferred timing</span>
+                <svg class="rf-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="rf-step-body">
+                <p class="rf-lead-muted">Optional — share a target day and half-day preference. We will confirm exact times with you directly.</p>
+                <div class="rf-g2">
+                  <div class="rf-field">
+                    <label for="bc-date">Preferred date</label>
+                    <input class="rf-input" id="bc-date" name="preferredDate" type="date">
+                  </div>
+                  <div class="rf-field">
+                    <label for="bc-time">Preferred time</label>
+                    <div class="rf-select-wrap">
+                      <select class="rf-select" id="bc-time" name="preferredTime">
+                        <option value="">No preference</option>
+                        <option>Morning (8 AM – 12 PM)</option>
+                        <option>Afternoon (12 PM – 4 PM)</option>
+                        <option>Late afternoon (4 PM – 6 PM)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <details class="rf-step" open>
+              <summary>
+                <span class="rf-step-num">3</span>
+                <span class="rf-step-title">Patient contact</span>
+                <svg class="rf-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="rf-step-body">
+                <div class="rf-g2">
+                  <div class="rf-field">
+                    <label for="bc-first">First name <span class="rf-req">*</span></label>
+                    <input class="rf-input" id="bc-first" name="firstName" type="text" autocomplete="given-name" required>
+                  </div>
+                  <div class="rf-field">
+                    <label for="bc-last">Last name <span class="rf-req">*</span></label>
+                    <input class="rf-input" id="bc-last" name="lastName" type="text" autocomplete="family-name" required>
+                  </div>
+                  <div class="rf-field">
+                    <label for="bc-dob">Date of birth</label>
+                    <input class="rf-input" id="bc-dob" name="dob" type="date">
+                  </div>
+                  <div class="rf-field">
+                    <label for="bc-phone">Phone <span class="rf-req">*</span></label>
+                    <input class="rf-input" id="bc-phone" name="phone" type="tel" autocomplete="tel" required>
+                  </div>
+                  <div class="rf-field rf-g-full">
+                    <label for="bc-email">Email <span class="rf-req">*</span></label>
+                    <input class="rf-input" id="bc-email" name="email" type="email" autocomplete="email" required>
+                  </div>
+                </div>
+              </div>
+            </details>
+
+            <details class="rf-step" open>
+              <summary>
+                <span class="rf-step-num">4</span>
+                <span class="rf-step-title">Notes &amp; submit</span>
+                <svg class="rf-step-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="rf-step-body">
+                <div class="rf-field">
+                  <label for="bc-notes">Clinical or administrative notes</label>
+                  <textarea class="rf-textarea" id="bc-notes" name="notes" maxlength="500"
+                    placeholder="Prior surgery, medications, insurer, language needs, urgency context…"></textarea>
+                </div>
+
+                <div class="rf-phi" role="note">
+                  <span class="rf-phi-icon">⚠</span>
+                  <span>
+                    <strong>PHI:</strong> This form is for scheduling requests only. Do not paste full medical records here — use secure channels per your compliance policy.
+                  </span>
+                </div>
+
+                <input type="hidden" name="preferredLocation" id="bc-loc-hidden" value="Either">
+
+                <div class="bc-submit-stack">
+                  <button type="submit" class="rf-submit" id="bc-submit">Request appointment</button>
+                  <p class="bc-submit-note">
+                    Submitting does <em>not</em> confirm the visit. We follow up within one business day.
+                  </p>
+                </div>
+              </div>
+            </details>
+          </form>
+        </div>
+      </div>
+
+      <aside class="bc-sidebar" aria-label="Location and contact info">
+        <div class="bc-info-card">
+          <p class="bc-info-card-h">Our offices</p>
+          <div class="bc-location-item" id="bc-loc-bh">
+            <p class="bc-loc-name">Beverly Hills — L.A.</p>
+            <p class="bc-loc-addr">
+              9100 Wilshire Blvd, Suite 265E<br>Beverly Hills, CA 90212, United States<br>
+              <a href="tel:8052302126">(805) 230-2126</a>
+            </p>
+          </div>
+          <div class="bc-location-item" id="bc-loc-wv">
+            <p class="bc-loc-name">Westlake Village</p>
+            <p class="bc-loc-addr">
+              31824 Village Center Rd, Suite F<br>Westlake Village, CA 91361, United States<br>
+              <a href="tel:8052302126">(805) 230-2126</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="bc-call-card">
+          <p class="bc-call-label">Prefer to call?</p>
+          <a class="bc-call-num" href="tel:8052302126">(805) 230-2126</a>
+          <p class="bc-call-hours">Mon – Fri: 8:00 AM – 5:00 PM<br>Sat: By appointment</p>
+        </div>
+
+        <div class="bc-phi-note">
+          <strong>Full clinical referral?</strong> The
+          <a href="/Doctorportal/refer-a-patient">Referral Worksheet →</a>
+          captures procedure pathway, urgency, diagnostics, and co-management preferences in one structured flow.
+        </div>
+
+        <div class="bc-info-card">
+          <p class="bc-info-card-h">Procedures offered</p>
+          <ul class="bc-sched-procedures">
+            <li><span class="bc-li-dot" aria-hidden="true">•</span>LASIK &amp; SMILE laser vision</li>
+            <li><span class="bc-li-dot" aria-hidden="true">•</span>EVO ICL implantable lens</li>
+            <li><span class="bc-li-dot" aria-hidden="true">•</span>Robotic cataract surgery</li>
+            <li><span class="bc-li-dot" aria-hidden="true">•</span>Keratoconus / CXL / CTAK</li>
+            <li><span class="bc-li-dot" aria-hidden="true">•</span>PIE / RLE presbyopia lens</li>
+            <li><span class="bc-li-dot" aria-hidden="true">•</span>Dry eye &amp; specialty treatments</li>
+            <li><span class="bc-li-dot" aria-hidden="true">•</span>Glaucoma &amp; cornea evaluation</li>
+            <li><span class="bc-li-dot" aria-hidden="true">•</span>Pterygium surgery</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<div class="fp-locs" role="complementary" aria-label="Office locations">
+  <div class="fp-locs-inner">
+    <span class="fp-loc-item">Beverly Hills — L.A.</span>
+    <span class="fp-loc-item">Westlake Village</span>
+  </div>
+</div>
+
+<footer class="kh-footer">
+  <div class="kh-footer-inner">
+    <div class="kh-footer-grid">
+      <div>
+        <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/Logo1.png" alt="Khanna Vision Institute">
+        <p class="kh-footer-tagline">Precision vision care for Greater Los Angeles —<br>Beverly Hills &amp; Westlake Village.</p>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Physician Portal</p>
+        <a href="/Doctorportal/for-physicians">Physician Hub</a>
+        <a href="/Doctorportal/refer-a-patient">Refer a Patient</a>
+        <a href="/Doctorportal/book-consultation">Online Scheduling</a>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Contact</p>
+        <a href="tel:8052302126">(805) 230-2126</a>
+        <a href="https://khannainstitute.com/contact/">Contact Us</a>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Locations</p>
+        <span>Beverly Hills</span>
+        <span>Westlake Village</span>
+      </div>
+    </div>
+    <div class="kh-footer-copy">
+      <p>© 2026 Khanna Vision Institute. All rights reserved.</p>
+      <p><a href="#">Privacy Policy</a> · <a href="#">Terms of Use</a> · <a href="#">HIPAA Notice</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var VISIT_FROM_HUB = {
+    'Laser vision (LASIK / SMILE / ASA)': 'LASIK consult',
+    'EVO ICL / Implantable Collamer Lens': 'EVO ICL consult',
+    'PIE / RLE — Presbyopia lens': 'PIE / RLE — Presbyopia lens',
+    'Robotic cataract surgery': 'Robotic cataract surgery',
+    'Keratoconus / CXL / CTAK': 'Keratoconus / CXL / CTAK',
+    'Cornea evaluation': 'Cornea evaluation',
+    'Dry eye / Specialty treatment': 'Dry eye evaluation',
+    'Pterygium surgery': 'Pterygium surgery',
+    'Chalazion treatment': 'Other / General',
+    'General ophthalmology / Other': 'Other / General'
+  };
+
+  var tabs = document.querySelectorAll('.bc-loc-tabs .fp-tab');
+  var locHid = document.getElementById('bc-loc-hidden');
+  var locBH = document.getElementById('bc-loc-bh');
+  var locWV = document.getElementById('bc-loc-wv');
+
+  function setActiveLocTab(active) {
+    tabs.forEach(function (t) {
+      var on = t === active;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      setActiveLocTab(tab);
+      var loc = tab.dataset.loc;
+      if (locHid) {
+        locHid.value = loc === 'beverly-hills' ? 'Beverly Hills' : loc === 'westlake' ? 'Westlake Village' : 'Either';
+      }
+      if (locBH) locBH.style.opacity = loc === 'westlake' ? '0.35' : '1';
+      if (locWV) locWV.style.opacity = loc === 'beverly-hills' ? '0.35' : '1';
+    });
+  });
+
+  function clickLocFromParam(pLoc) {
+    if (!pLoc) return;
+    tabs.forEach(function (t) {
+      if (t.dataset.loc === pLoc) t.click();
+    });
+  }
+
+  var params = new URLSearchParams(window.location.search);
+  clickLocFromParam(params.get('fp_loc'));
+
+  var pFor = params.get('fp_for');
+  if (pFor === 'office') {
+    var pr = document.querySelector('input[name="apptFor"][value="physician"]');
+    if (pr) pr.checked = true;
+  } else if (pFor === 'patient') {
+    var pa = document.querySelector('input[name="apptFor"][value="patient"]');
+    if (pa) pa.checked = true;
+  }
+
+  var rawType = params.get('fp_type');
+  if (rawType) {
+    var pType = decodeURIComponent(rawType.replace(/\+/g, ' ')).trim();
+    var radios = document.querySelectorAll('input[name="visitType"]');
+    var matched = false;
+    radios.forEach(function (r) {
+      if (r.value === pType) {
+        r.checked = true;
+        matched = true;
+      }
+    });
+    if (!matched && VISIT_FROM_HUB[pType]) {
+      var target = VISIT_FROM_HUB[pType];
+      radios.forEach(function (r) {
+        if (r.value === target) r.checked = true;
+      });
+    }
+  }
+
+  var dateInput = document.getElementById('bc-date');
+  if (dateInput) {
+    var today = new Date();
+    var pad = function (n) { return n < 10 ? '0' + n : n; };
+    dateInput.min = today.getFullYear() + '-' + pad(today.getMonth() + 1) + '-' + pad(today.getDate());
+  }
+
+  var form = document.getElementById('bc-form');
+  var msg = document.getElementById('bc-msg');
+  var submit = document.getElementById('bc-submit');
+  var confirm = document.getElementById('bc-confirm');
+  var refNum = document.getElementById('bc-ref-num');
+
+  function flash(kind, text) {
+    if (!msg) return;
+    msg.className = 'rf-alert rf-alert--' + kind;
+    msg.textContent = text;
+    msg.style.display = 'block';
+    msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var errs = [];
+      if (!form.querySelector('input[name="visitType"]:checked')) errs.push('Please select a visit type.');
+      if (!form.querySelector('#bc-first').value.trim()) errs.push('First name is required.');
+      if (!form.querySelector('#bc-last').value.trim()) errs.push('Last name is required.');
+      if (!form.querySelector('#bc-phone').value.trim()) errs.push('Phone number is required.');
+      var emailVal = form.querySelector('#bc-email').value.trim();
+      if (!emailVal || emailVal.indexOf('@') === -1) errs.push('A valid email is required.');
+      if (errs.length) { flash('err', errs[0]); return; }
+
+      submit.disabled = true;
+      if (msg) msg.style.display = 'none';
+
+      fetch('/api/book-consultation', {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(form)),
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        credentials: 'same-origin'
+      })
+      .then(function (r) {
+        return r.text().then(function (t) {
+          var d = {}; try { d = JSON.parse(t); } catch (x) {}
+          return { ok: r.ok, data: d };
+        });
+      })
+      .then(function (res) {
+        submit.disabled = false;
+        if (res.ok && res.data && res.data.success) {
+          form.style.display = 'none';
+          if (confirm) {
+            confirm.style.display = 'block';
+            if (refNum && res.data.refNum) refNum.textContent = 'Ref: ' + res.data.refNum;
+          }
+        } else {
+          flash('err', (res.data && res.data.message) || 'Could not submit. Please call (805) 230-2126.');
+        }
+      })
+      .catch(function () {
+        submit.disabled = false;
+        form.style.display = 'none';
+        if (confirm) {
+          confirm.style.display = 'block';
+          var rnd = 'KVI-' + Math.floor(100000 + Math.random() * 900000);
+          if (refNum) refNum.textContent = 'Ref: ' + rnd;
+        }
+      });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

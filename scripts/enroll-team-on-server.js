@@ -39,7 +39,7 @@ const RECIPIENTS = [
   },
   {
     fullName: 'Jill',
-    email: 'info@khannavision.com',
+    email: 'jillian@khannavision.com',
     phone: '+18059081132',
     smileVariant: 'a'
   }

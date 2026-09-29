@@ -29,8 +29,7 @@ async function probe() {
   console.log('entityTypeId:', cfg.entityTypeId);
   console.log('field map:', bitrixHeritageFieldMap());
 
-  const fieldsEnvelope = await bitrixCall('crm.item.fields', { entityTypeId: cfg.entityTypeId });
-  const fields = (fieldsEnvelope && fieldsEnvelope.result) || {};
+  const fields = await bitrixCall('crm.item.fields', { entityTypeId: cfg.entityTypeId });
   const fieldObj = (fields && fields.fields) || fields || {};
   if (fieldObj && typeof fieldObj === 'object') {
     console.log(
@@ -42,13 +41,19 @@ async function probe() {
     );
   }
 
-  // Re-fetch one page only for sample
-  const sampleEnvelope = await bitrixCall('crm.item.list', {
+  const items = await listAllDoctorOfficeItems({
     entityTypeId: cfg.entityTypeId,
+    pageSize: 1,
+    logger: { info() {}, warn: console.warn },
+  });
+
+  // Re-fetch one page only for sample
+  const sample = await bitrixCall('crm.item.list', {
+    entityTypeId: cfg.entityTypeId,
+    select: ['*', 'uf_*'],
     order: { id: 'ASC' },
     start: 0,
   });
-  const sample = (sampleEnvelope && sampleEnvelope.result) || {};
   const first = ((sample && sample.items) || [])[0];
   if (!first) {
     console.log('No Doctor Office items returned. Check webhook permissions and entityTypeId.');
@@ -57,8 +62,8 @@ async function probe() {
 
   console.log('Sample id:', first.id, 'title:', first.title);
   console.log('Sample keys:', Object.keys(first).sort().join(', '));
-  console.log('Bitrix reports total items:', sampleEnvelope.total);
-  console.log('(Use npm run sync:heritage-bitrix for a full pull of all pages)');
+  console.log('(listAllDoctorOfficeItems would fetch all; probe skipped full pull)');
+  console.log('Total hint from first page length:', ((sample && sample.items) || []).length);
 }
 
 async function main() {

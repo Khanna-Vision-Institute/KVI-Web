@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Latest Blog Posts - Khanna Vision Institute</title>
+  
+  <link rel="stylesheet" href="/public/css/header.css" />
+  <link rel="stylesheet" href="/public/css/footer.css" />
+  <link rel="stylesheet" href="/public/css/blog.css" />
+</head>
+<body>
+  <%- include('partials/header.ejs') %>
+
+  <main class="kvi-main">
+    <div class="kvi-container">
+      <h1 class="kvi-page-title">Latest Blog Posts</h1>
+
+      <div class="kvi-grid">
+        <% if (posts && posts.length > 0) { %>
+          <% posts.forEach(post => {
+            const dateRaw = post.Date || post.publishedAt || post.createdAt;
+            const d = dateRaw ? new Date(dateRaw) : null;
+            const yyyy = d ? d.getFullYear() : '2025';
+            const mm = d ? String(d.getMonth() + 1).padStart(2,'0') : '01';
+            const url = `/${yyyy}/${mm}/${post.slug}/`;
+          %>
+            <article class="kvi-card blog-post-card">
+              <h2>
+                <a href="<%= url %>"><%= post.Title || 'Blog Post' %></a>
+              </h2>
+
+              <% if (d) { %>
+                <p class="kvi-meta"><%= d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></p>
+              <% } %>
+
+              <% if (post.Excerpt) { %>
+                <p class="kvi-excerpt"><%= post.Excerpt %></p>
+              <% } %>
+
+              <a class="kvi-readmore" href="<%= url %>">Read More →</a>
+            </article>
+          <% }) %>
+        <% } else { %>
+          <p>No blog posts found.</p>
+        <% } %>
+      </div>
+    </div>
+  </main>
+
+  <%- include('partials/footer.ejs') %>
+</body>
+</html>

@@ -5,7 +5,7 @@ const zohoService = require('../services/zohoService');
 const { sendBookingNotification, sendOnlineConsultNotification, sendUserConfirmationEmail, sendCancellationNotification } = require('../services/emailService');
 
 // reCAPTCHA v2 configuration
-const RECAPTCHA_SECRET_KEY = '6Lf0P20sAAAAANP3mOsaj7QZ6bsl79cw_g49wnWn';
+const RECAPTCHA_SECRET_KEY = (process.env.RECAPTCHA_SECRET_KEY || '') /* REDACTED for Git */;
 
 async function verifyRecaptchaV2(token) {
   try {

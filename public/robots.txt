@@ -1,0 +1,9 @@
+# Updated At : Nov 22, 2025
+
+User-agent: *
+Allow: /
+
+Sitemap: https://khannainstitute.com/sitemap-navigation-pages.xml
+Sitemap: https://khannainstitute.com/sitemap-blog-pages.xml
+
+

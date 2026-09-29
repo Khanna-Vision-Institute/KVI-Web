@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= (post && post.Title) ? post.Title : 'Blog Post' %> - Khanna Vision Institute</title>
+  
+  <% if (post && post.Excerpt) { %>
+    <meta name="description" content="<%= post.Excerpt %>" />
+  <% } %>
+  <link rel="stylesheet" href="/public/css/header.css" />
+  <link rel="stylesheet" href="/public/css/footer.css" />
+  <link rel="stylesheet" href="/public/css/blog.css" />
+</head>
+<body>
+  <%- include('partials/header.ejs') %>
+
+  <main class="kvi-main">
+    <article class="kvi-article">
+      <a class="kvi-backlink" href="/blog/latest/">← Back to Latest</a>
+
+      <h1 class="kvi-page-title" style="margin-top: 0;"><%= post.Title %></h1>
+
+      <% const dateRaw = post.Date || post.publishedAt || post.createdAt;
+         const d = dateRaw ? new Date(dateRaw) : null; %>
+      <% if (d) { %>
+        <p class="kvi-meta">
+          <%= d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+          <% if (post.Author) { %> • <%= post.Author %> <% } %>
+        </p>
+      <% } %>
+
+      <div class="blog-content">
+        <%- post.Content || '' %>
+      </div>
+    </article>
+  </main>
+
+  <%- include('partials/footer.ejs') %>
+</body>
+</html>

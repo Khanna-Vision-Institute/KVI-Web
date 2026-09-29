@@ -1,8 +1,8 @@
 const express = require('express');
 const crypto = require('crypto');
 const fs = require('fs');
-const os = require('os');
 const path = require('path');
+const os = require('os');
 const router = express.Router();
 const zohoService = require('../services/zohoService');
 const emailService = require('../services/emailService');
@@ -271,7 +271,6 @@ router.get('/oauth/callback', async (req, res) => {
       <p>Copy this refresh token into your .env file:</p>
       <pre>${escapeHtml(rt)}</pre>
       <p>Set it as: <code>ZOHO_REFRESH_TOKEN=${escapeHtml(rt)}</code></p>
-      <p style="font-size:12px;color:#666;margin-top:2rem">Handled by server: <code>${escapeHtml(os.hostname())}</code></p>
     `);
   } catch (error) {
     console.error('Error generating refresh token:', error.response?.data || error.message);
@@ -288,15 +287,13 @@ router.get('/oauth/callback', async (req, res) => {
 <li>Use incognito mode or temporarily disable aggressive extensions — some prefetch duplicate GET requests.</li>
 <li>In Zoho API Console: authorized redirect URI must match exactly (same host as authorize URL — try registering both non‑www and www if unsure).</li>
 <li>If your Zoho account spans regions, enable <strong>Multi‑DC</strong> for this client or generate tokens using the domain shown on your consent screen.</li>
-<li><strong>Bypass redirect OAuth (recommended if this keeps failing):</strong> In <a href="https://api-console.zoho.com/">Zoho API Console</a> open <strong>Self Client</strong> → <strong>Generate Code</strong> with scopes such as <code>ZohoCRM.modules.leads.ALL</code>. On <strong>this same machine</strong> run:<pre style="white-space:pre-wrap;background:#f5f5f5;padding:10px">cd "/home/ec2-user/kvi-home/kvi home"
-node scripts/zoho-exchange-self-client-code.js "PASTE_GRANT_CODE_HERE"</pre>Use the <strong>Self Client</strong> client id/secret in <code>.env</code> (they differ from “Server-based” clients). Grant codes expire quickly.</li>
-<li>If you use a <strong>load balancer</strong> with several EC2 instances, two servers may still race OAuth; Self Client exchange runs once on one box.</li>
+<li>If <strong>PM2 cluster</strong> or multiple Node workers run this app, duplicate callbacks used to cause <code>invalid_code</code>; deploy the latest <code>visionQuest.js</code> or run <code>kvi-home</code> with <strong>one instance</strong> while exchanging.</li>
 </ul>`;
 
     return res
       .status(500)
       .send(
-        `<h1>OAuth token exchange failed</h1><p>${escapeHtml(error.message)}</p>${snapshotBlock}${hints}<p style="font-size:12px;color:#666;margin-top:2rem">Handled by server: <code>${escapeHtml(os.hostname())}</code></p>`
+        `<h1>OAuth token exchange failed</h1><p>${escapeHtml(error.message)}</p>${snapshotBlock}${hints}`
       );
   }
 });

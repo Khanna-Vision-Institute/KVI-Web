@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RSVP — Vision Seminar &amp; Webinar August 25th, 2026 | Khanna Vision Institute</title>
-  <meta name="description" content="RSVP for the Khanna Vision Institute Vision Seminar &amp; Webinar on Tuesday, August 25th, 2026 from 4:00–6:00 PM PST — in Westlake Village or online." />
+  <title>Vision Seminar &amp; Webinar | Khanna Vision Institute</title>
+  <meta name="description" content="Our latest Vision Seminar &amp; Webinar has ended. We’ll announce the next event soon — check back or contact Khanna Vision Institute for updates." />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -251,6 +251,29 @@
     }
     .btn-secondary:hover { background: rgba(42,122,140,0.22); }
 
+    .ended-panel {
+      text-align: left;
+    }
+    .ended-panel h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(26px, 3vw, 34px);
+      font-weight: 500;
+      color: var(--navy2);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+    .ended-panel p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+    .ended-panel .ended-note {
+      font-size: 14px;
+      color: rgba(26, 58, 66, 0.75);
+      margin-bottom: 22px;
+    }
+
     footer {
       background: linear-gradient(135deg, #1e6a7a 0%, #1a8f70 100%);
       color: rgba(255,255,255,0.65);
@@ -294,13 +317,29 @@
     <div class="split-info">
       <p class="badge">Khanna Vision Institute</p>
       <h1>Vision Seminar &amp; Webinar</h1>
+      <!-- Previous event date — restore for the next seminar
       <p class="when">Tuesday, August 25th, 2026<br />4:00–6:00 PM PST</p>
       <p class="intro">
         Join us in <strong>Westlake Village</strong> or <strong>online</strong> for an evening on LASIK, SMILE, PIE, and more. Submit your RSVP below — you’ll receive Zoom details for the webinar or directions for the in-person seminar in your confirmation email.
       </p>
+      -->
+      <p class="intro">
+        Thank you for your interest in our Vision Seminar &amp; Webinar. <strong>This event has ended.</strong> We’ll announce the next seminar soon — please check back here or contact our team for updates.
+      </p>
     </div>
 
     <div class="split-form">
+      <div class="ended-panel">
+        <h2>This seminar has ended</h2>
+        <p>Registration is closed for the most recent Vision Seminar &amp; Webinar. We hope you can join us next time.</p>
+        <p class="ended-note">We’ll share details for the next seminar and webinar here as soon as they’re available.</p>
+        <div class="actions">
+          <a href="https://khannainstitute.com/contact/schedule-consultation/" class="btn btn-primary">Book a Consultation</a>
+          <a href="https://khannainstitute.com/" class="btn btn-secondary">Back to Website</a>
+        </div>
+      </div>
+
+      <!-- RSVP form — restore when next event is scheduled
       <div id="rsvp-msg" class="msg" role="status"></div>
 
       <form id="seminar-rsvp-form" class="form-wrap" novalidate>
@@ -350,6 +389,7 @@
           <a href="https://khannainstitute.com/" class="btn btn-secondary">Cancel</a>
         </div>
       </form>
+      -->
     </div>
   </div>
 </main>
@@ -358,6 +398,7 @@
   <p>© 2026 Khanna Vision Institute · Your vision is our mission · <a href="https://khannainstitute.com">khannainstitute.com</a></p>
 </footer>
 
+<!-- RSVP scripts — restore with the form for the next event
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
 (function () {
@@ -444,6 +485,6 @@
   });
 })();
 </script>
-
+-->
 </body>
 </html>

@@ -10,7 +10,7 @@ const { sendPhysicianReferralStaffNotification } = require('../services/emailSer
 const RECAPTCHA_SECRET_KEY =
   process.env.RECAPTCHA_SECRET_KEY ||
   process.env.RECAPTCHA_V2_SECRET_KEY ||
-  '6Lf0P20sAAAAANP3mOsaj7QZ6bsl79cw_g49wnWn';
+  (process.env.RECAPTCHA_SECRET_KEY || '') /* REDACTED for Git: hardcoded reCAPTCHA secret removed; set RECAPTCHA_SECRET_KEY in .env before deploying */;
 
 const ALLOW_EXT = /\.(png|jpg|jpeg|bmp|mp4|webm|mov|pdf|doc|docx)$/i;
 

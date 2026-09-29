@@ -25,7 +25,7 @@ if (typeof sendVipConsultUserThankYouEmail !== 'function') {
 }
 
 // reCAPTCHA v2 configuration
-const RECAPTCHA_SECRET_KEY = '6Lf0P20sAAAAANP3mOsaj7QZ6bsl79cw_g49wnWn';
+const RECAPTCHA_SECRET_KEY = (process.env.RECAPTCHA_SECRET_KEY || '') /* REDACTED for Git: hardcoded reCAPTCHA secret removed; set RECAPTCHA_SECRET_KEY in .env before deploying */;
 
 async function verifyRecaptchaV2(token) {
   try {

@@ -204,7 +204,9 @@ function main() {
 
   manifest.directoryPages = manifest.directoryPages || {};
   manifest.directoryPages.HeritageFamily = {
-    title: 'Doctor outreach',
+    title: 'Heritage Family referral network',
+    subtitle:
+      'Optometrists (OD) use the structured referral worksheet. MD/DO physicians schedule online with referring practice details preloaded.'
   };
 
   manifest.offices = [...kept, ...mdRows];

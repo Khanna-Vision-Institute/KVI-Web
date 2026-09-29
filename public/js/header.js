@@ -2,16 +2,16 @@
     'use strict';
     
     function initHeaderMenu() {
-    const headerInner = document.querySelector('.header-inner');
-    const toggleButton = document.querySelector('.menu-toggle');
-    const navPrimary = document.querySelector('.nav-primary');
+        const headerInner = document.querySelector('.header-inner');
+        const toggleButton = document.querySelector('.menu-toggle');
+        const navPrimary = document.querySelector('.nav-primary');
         const navItems = document.querySelectorAll('.nav-item.has-mega, .nav-item.has-dropdown');
 
-    if (!headerInner || !toggleButton || !navPrimary) {
+        if (!headerInner || !toggleButton || !navPrimary) {
             console.warn('Header elements not found, retrying...');
             setTimeout(initHeaderMenu, 100);
-        return;
-    }
+            return;
+        }
 
         // Toggle main mobile menu
         toggleButton.addEventListener('click', function(e) {
@@ -46,14 +46,14 @@
         // Close menu when clicking outside
         document.addEventListener('click', function(e) {
             if (window.innerWidth <= 1024 && 
-            headerInner.classList.contains('is-open') &&
+                headerInner.classList.contains('is-open') && 
                 !headerInner.contains(e.target)) {
                 headerInner.classList.remove('is-open');
                 navItems.forEach(function(item) {
                     item.classList.remove('is-expanded');
                 });
-        }
-    });
+            }
+        });
 
         // Close on Escape key
         document.addEventListener('keydown', function(e) {
@@ -62,15 +62,15 @@
                 navItems.forEach(function(item) {
                     item.classList.remove('is-expanded');
                 });
-            toggleButton.focus();
-        }
-    });
+                toggleButton.focus();
+            }
+        });
     }
 
     // Initialize
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initHeaderMenu);
-            } else {
+    } else {
         initHeaderMenu();
     }
 })();

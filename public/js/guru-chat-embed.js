@@ -1496,11 +1496,10 @@
                 (firstMsg && (firstMsg.text ?? firstMsg.content)) ||
                 data.answer ||
                 'I received your message.';
-            // Track active agent for typing indicator + handoff UI
-            if (data.active_agent) {
-                const changed = data.active_agent !== _activeAgent;
+            // Track active agent + update UI when agent changes
+            if (data.active_agent && data.active_agent !== _activeAgent) {
                 _activeAgent = data.active_agent;
-                if (changed) updateAgentUI(_activeAgent);
+                updateAgentUI(_activeAgent);
             }
             return {
                 answer: text,

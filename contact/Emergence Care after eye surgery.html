@@ -1,31 +1,268 @@
-<!DOCTYPE html>
-<html lang="en-US">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <title>Emergency Eye Care | 24/7 Post-Op Support | Khanna Vision Institute</title>
+  <meta name="description" content="24/7 emergency support after SMILE, LASIK, PRK, EVO ICL, and PIE/RLE. Same-day urgent visits, after-hours hotline, and telehealth. Clear steps on what to do and when to call." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="canonical" href="https://khannainstitute.com/emergency-care" />
+  <link rel="alternate" href="https://khannainstitute.com/emergency-care" hreflang="en-us" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
 
-  <% if (typeof pageData !== 'undefined' && pageData && pageData.metaTitle) { %>
-  <title><%= pageData.metaTitle %></title>
-  <% } else { %>
-  <title>Emergency Care After Eye Surgery | Khanna Vision Institute</title>
-  <% } %>
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Emergency Eye Care | 24/7 Post-Op Support" />
+  <meta property="og:description" content="Same-day urgent visits, after-hours hotline, and telehealth for KVI patients. Know what to do and when to call." />
+  <meta property="og:url" content="https://khannainstitute.com/emergency-care" />
+  <meta property="og:image" content="https://khannainstitute.com/assets/og/emergency-care.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Emergency Eye Care | 24/7 Post-Op Support" />
+  <meta name="twitter:description" content="24/7 support after refractive procedures at Khanna Vision Institute." />
+  <meta name="twitter:image" content="https://khannainstitute.com/assets/og/emergency-care.jpg" />
+  <link rel="stylesheet" href="/public/css/header.css" />
+  <link rel="stylesheet" href="/public/css/footer.css" />
 
-  <% if (typeof pageData !== 'undefined' && pageData && pageData.metaDescription) { %>
-  <meta name="description" content="<%= pageData.metaDescription %>">
-  <% } else { %>
-  <meta name="description" content="Emergency contact info and after-hours support following eye surgery.">
-  <% } %>
+  <!-- Minimal CSS (matches your financing page aesthetic) -->
+  <style>
+    :root{
+      --bg:#f8fafc;--text:#1e293b;--muted:#64748b;--card:#ffffff;--border:#e2e8f0;
+      --accent:#5EE1E6;--good:#12B76A;--warn:#F79009;--focus:#94A3FF
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:#f8fafc;color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1120px;margin:0 auto;padding:24px}
+    header.hero{margin-top:120px;border:1px solid var(--border);background:linear-gradient(180deg,#f8fafc 0%, #e0f2fe 60%);border-radius:24px;padding:28px;margin-bottom:18px}
+    .kicker{color:var(--accent);font-weight:800;letter-spacing:.04em;font-size:12px;text-transform:uppercase}
+    h1{font-size:clamp(28px,4vw,44px);line-height:1.05;margin:10px 0 12px}
+    p.lead{color:var(--muted);font-size:clamp(16px,2.2vw,18px)}
+    .grid{display:grid;gap:20px}
+    .cards{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 18px;border-radius:14px;border:1px solid transparent;font-weight:700}
+    .btn:focus{outline:3px solid var(--focus);outline-offset:2px}
+    .btn-primary{background:var(--accent);color:#0B0D12}
+    .btn-ghost{border-color:var(--border);background:transparent;color:var(--text)}
+    .pill{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-size:12px;color:var(--muted)}
+    .list{margin:10px 0 0;padding:0;list-style:none}
+    .list li{padding-left:22px;position:relative;margin:10px 0}
+    .list li:before{content:"✔";position:absolute;left:0;top:0;color:var(--good);font-weight:700}
+    .list.warn li:before{content:"!";color:var(--warn);font-weight:900}
+    .note{font-size:12px;color:var(--muted)}
+    nav.breadcrumb{font-size:12px;color:var(--muted);margin:6px 0 16px}
+    nav.breadcrumb a{color:var(--muted);text-decoration:underline}
+    .split{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+    @media (max-width:900px){.split{grid-template-columns:1fr}}
+    img{width:100%;height:auto;border-radius:16px;border:1px solid var(--border)}
+    footer{margin-top:32px;color:var(--muted);font-size:12px}
+    .faq{border-top:1px solid var(--border);margin-top:24px}
+    .faq details{border-bottom:1px solid var(--border)}
+    .faq summary{cursor:pointer;padding:16px;font-weight:700}
+    .faq .a{padding:0 16px 16px;color:var(--muted)}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+    .inline-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;background:#0D1A2B;border:1px solid var(--border);border-radius:8px;padding:2px 6px}
+  </style>
 
-  <link rel="canonical" href="https://khannainstitute.com/contact/emergency-care/">
-  <link rel="stylesheet" href="/public/css/header.css">
-  <link rel="stylesheet" href="/public/css/footer.css">
+  <!-- JSON-LD: WebPage + Organization + FAQPage + BreadcrumbList + Service -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebPage",
+        "@id":"https://khannainstitute.com/emergency-care",
+        "url":"https://khannainstitute.com/emergency-care",
+        "name":"Emergency Eye Care | 24/7 Post-Op Support",
+        "description":"24/7 emergency support after refractive procedures. Same-day urgent visits, after-hours hotline, and telehealth.",
+        "primaryImageOfPage":"https://khannainstitute.com/assets/og/emergency-care.jpg",
+        "breadcrumb":{"@id":"https://khannainstitute.com/emergency-care#breadcrumb"},
+        "inLanguage":"en-US",
+        "isPartOf":{"@id":"https://khannainstitute.com/#site"}
+      },
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://khannainstitute.com/emergency-care#breadcrumb",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://khannainstitute.com/"},
+          {"@type":"ListItem","position":2,"name":"Emergency Care","item":"https://khannainstitute.com/emergency-care"}
+        ]
+      },
+      {
+        "@type":"Organization",
+        "@id":"https://khannainstitute.com/#org",
+        "name":"Khanna Vision Institute",
+        "url":"https://khannainstitute.com",
+        "logo":"https://khannainstitute.com/assets/logo.png",
+        "telephone":"+1-000-000-0000"
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://khannainstitute.com/emergency-care#faq",
+        "mainEntity":[
+          {"@type":"Question","name":"Do you offer 24/7 support after surgery?","acceptedAnswer":{"@type":"Answer","text":"Yes. Patients receive access to an after-hours hotline for urgent concerns following any refractive procedure."}},
+          {"@type":"Question","name":"What counts as an eye emergency after refractive surgery?","acceptedAnswer":{"@type":"Answer","text":"Severe or increasing eye pain, sudden drop in vision, new flashes of light, many floaters, curtain-like shadow, chemical exposure, or significant trauma."}},
+          {"@type":"Question","name":"Are emergency visits during the post-op period included?","acceptedAnswer":{"@type":"Answer","text":"Urgent checks related to your recent procedure are typically included during the defined post-op care window. Any external facility fees are separate."}},
+          {"@type":"Question","name":"Do you offer telehealth?","acceptedAnswer":{"@type":"Answer","text":"Yes. Tele-consults are available to triage, advise next steps, or confirm if an in-person exam is needed."}}
+        ]
+      },
+      {
+        "@type":"Service",
+        "@id":"https://khannainstitute.com/emergency-care#service",
+        "serviceType":"Emergency ophthalmic support",
+        "provider":{"@id":"https://khannainstitute.com/#org"},
+        "areaServed":{"@type":"AdministrativeArea","name":"Southern California"},
+        "availableChannel":[
+          {"@type":"ServiceChannel","serviceUrl":"https://khannainstitute.com/book","name":"Same-day urgent visit"},
+          {"@type":"ServiceChannel","serviceUrl":"tel:+10000000000","name":"After-hours hotline"},
+          {"@type":"ServiceChannel","serviceUrl":"https://khannainstitute.com/telehealth","name":"Telehealth"}
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <%- include('/partials/header') %>
+  <a class="sr-only" href="#main">Skip to content</a>
+  <div class="wrap" id="main">
 
-  <% if (typeof pageData !== 'undefined' && pageData && pageData.content) { %>
-    <%- pageData.content %>
-  <% } %>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> › <span>Emergency Care</span>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero split" role="banner" aria-label="Emergency care hero">
+      <div>
+        <div class="kicker">Khanna Vision Institute</div>
+        <h1>Emergency Eye Care & 24/7 Post-Op Support</h1>
+        <p class="lead">If you’re worried, contact us. Same-day urgent visits. After-hours hotline. Telehealth when you’re traveling.</p>
+        <div class="cta-row" role="group" aria-label="Emergency contact options">
+          <!-- Replace tel and hrefs with live endpoints -->
+          <a class="btn btn-primary" href="tel:+10000000000">Call After-Hours Hotline</a>
+          <a class="btn btn-ghost" href="/book">Book Same-Day Visit</a>
+          <a class="btn btn-ghost" href="/telehealth">Start Telehealth</a>
+        </div>
+        <p class="note">If you have a life-threatening emergency or chemical burn, call <span class="kbd">911</span> first.</p>
+      </div>
+      <div>
+      </div>
+    </header>
+
+    <!-- WHEN TO CALL -->
+    <section class="grid cards" aria-label="When to call">
+      <article class="card">
+        <span class="pill">Call Now</span>
+        <h2>Urgent Symptoms</h2>
+        <ul class="list warn">
+          <li>Severe or increasing eye pain</li>
+          <li>Sudden drop in vision or new blur</li>
+          <li>Flashes, many floaters, curtain-like shadow</li>
+          <li>Chemical exposure or significant trauma</li>
+          <li>Persistent redness with light sensitivity</li>
+        </ul>
+      </article>
+      <article class="card">
+        <span class="pill">Usually Normal</span>
+        <h2>Common Post-Op Sensations</h2>
+        <ul class="list">
+          <li>Mild dryness or gritty feeling</li>
+          <li>Light sensitivity for a short time</li>
+          <li>Halo or glare at night early on</li>
+          <li>Fluctuating vision during healing</li>
+        </ul>
+        <p class="note">If unsure, contact us. We will advise next steps.</p>
+      </article>
+      <article class="card">
+        <span class="pill">Included</span>
+        <h2>What You Get</h2>
+        <ul class="list">
+          <li>24/7 hotline access after procedures</li>
+          <li>Same-day urgent slots on clinic days</li>
+          <li>Tele-triage when you’re out of town</li>
+          <li>Post-op emergency checks typically included*</li>
+        </ul>
+        <p class="note">*External facility fees, meds, or unrelated issues may be separate.</p>
+      </article>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="card" aria-label="How emergency care works">
+      <h2>How It Works</h2>
+      <ol class="list">
+        <li><strong>Contact:</strong> Call the after-hours line or start telehealth.</li>
+        <li><strong>Triage:</strong> A clinician reviews symptoms and timing.</li>
+        <li><strong>Plan:</strong> Home care advice, Rx, or in-person exam same day.</li>
+        <li><strong>Follow-up:</strong> We check in and schedule re-exam as needed.</li>
+      </ol>
+      <div class="inline-cta">
+        <a class="btn btn-primary" href="tel:+10000000000">Call Now</a>
+        <a class="btn btn-ghost" href="/book">Book Urgent Visit</a>
+      </div>
+    </section>
+
+    <!-- INSURANCE / COSTS -->
+    <section class="card" aria-label="Insurance and costs">
+      <h2>Insurance & Costs</h2>
+      <ul class="list">
+        <li>Post-op emergency checks tied to your recent procedure are generally included in your post-op window.</li>
+        <li>Prescription meds, imaging, or outside ER/urgent-care fees are separate.</li>
+        <li>We accept HSA/FSA cards for eligible expenses.</li>
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq" aria-label="Frequently asked questions">
+      <h2>Emergency Care FAQs</h2>
+
+      <details>
+        <summary>Is the hotline truly 24/7?</summary>
+        <div class="a">Yes. After-hours calls are routed to on-call clinical support. If we miss you, we return calls promptly.</div>
+      </details>
+
+      <details>
+        <summary>Can non-patients use this service?</summary>
+        <div class="a">The 24/7 line is for our active or recent post-op patients. New patients can book urgent visits during clinic hours.</div>
+      </details>
+
+      <details>
+        <summary>Do I go to the ER or call you first?</summary>
+        <div class="a">For life-threatening issues or chemical burns, call 911 or go to the nearest ER first. Then notify us.</div>
+      </details>
+
+      <details>
+        <summary>Do you offer video calls?</summary>
+        <div class="a">Yes. Telehealth helps triage fast. Some conditions still require in-person exams to protect vision.</div>
+      </details>
+    </section>
+
+    <!-- CROSS-LINKS -->
+    <section class="grid cards" aria-label="Related pages">
+      <article class="card">
+        <h3>Financing Options</h3>
+        <p class="note">Soft check pre-qual. 0% APR options.</p>
+        <a class="btn btn-ghost" href="/financing">View Financing</a>
+      </article>
+      <article class="card">
+        <h3>Post-Op Guidelines</h3>
+        <p class="note">Simple do’s and don’ts after your procedure.</p>
+        <a class="btn btn-ghost" href="/post-op">Read Post-Op Guide</a>
+      </article>
+      <article class="card">
+        <h3>Book a Consultation</h3>
+        <p class="note">Get a plan tailored to your eyes.</p>
+        <a class="btn btn-ghost" href="/book">Book Now</a>
+      </article>
+    </section>
+
+  </div>
+
+  <!-- Event tracking placeholders -->
+  <script>
+    const track=(e,d={})=>{try{window.dataLayer=window.dataLayer||[];d.event=e;window.dataLayer.push(d);}catch(_){}}; 
+    document.querySelectorAll('a.btn').forEach(a=>a.addEventListener('click',()=>track('emergency_cta_click',{label:a.textContent.trim()})));
+  </script>
 
   <%- include('/partials/footer') %>
 </body>

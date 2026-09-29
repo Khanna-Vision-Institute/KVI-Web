@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Referral partners | Khanna Vision Institute</title>
+  <meta name="description" content="Find your practice and open your personalized physician referral worksheet (LeadSquared-style prefill).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Libre+Baskerville:ital,wght@0,700;1,700&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/Doctorportal/physician-portal-brochure.css?v=20260619">
+  <style>
+    .rd-wrap { max-width: 1180px; margin: 0 auto; }
+    .rd-hero h1 { margin: 0 0 10px; }
+    .rd-sub { color: #c7c9d1; margin: 0 0 22px; line-height: 1.55; max-width: 860px; }
+    .rd-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 18px 0 14px; }
+    .rd-search { flex: 1 1 280px; min-width: 220px; }
+    .rd-input {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(10,12,20,0.55);
+      color: #f4f5f7;
+      padding: 12px 12px;
+      outline: none;
+    }
+    .rd-btn {
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(214,176,102,0.14);
+      color: #f4e6c8;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .rd-btn--quiet {
+      background: transparent;
+      color: #e7e9ef;
+      border-color: rgba(255,255,255,0.12);
+      font-weight: 700;
+    }
+    .rd-meta { color: #a7adbb; font-size: 0.92rem; margin: 0 0 10px; }
+    .rd-table-wrap { overflow: auto; border-radius: 14px; border: 1px solid rgba(255,255,255,0.10); }
+    table.rd-table { width: 100%; border-collapse: collapse; min-width: 1040px; }
+    .rd-table th, .rd-table td { text-align: left; padding: 12px 12px; border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: top; }
+    .rd-table th { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: #a7adbb; }
+    .rd-table tr:last-child td { border-bottom: none; }
+    .rd-practice { font-weight: 800; color: #f4f5f7; line-height: 1.35; }
+    .rd-doc { color: #e7e9ef; line-height: 1.35; }
+    .rd-muted { color: #a7adbb; font-size: 0.92rem; line-height: 1.45; }
+    .rd-link {
+      display: inline-block;
+      margin-top: 6px;
+      border-radius: 999px;
+      padding: 8px 12px;
+      border: 1px solid rgba(214,176,102,0.35);
+      color: #f4e6c8;
+      text-decoration: none;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .rd-link:hover { background: rgba(214,176,102,0.10); }
+    .rd-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+    .rd-url {
+      margin-top: 6px;
+      font-size: 0.82rem;
+      color: #d7dae3;
+      word-break: break-all;
+      line-height: 1.35;
+      max-width: 420px;
+    }
+    .rd-err { margin: 12px 0; color: #fecaca; }
+  </style>
+</head>
+<body class="kvi-brochure">
+
+<header class="kh-header">
+  <div class="kh-header-inner">
+    <a class="kh-logo" href="https://khannainstitute.com/" aria-label="Khanna Vision Institute">
+      <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/Logo1.png"
+           alt="Khanna Vision Institute" decoding="async">
+    </a>
+    <nav class="kh-nav" aria-label="Main navigation">
+      <a class="kh-nav-link" href="https://khannainstitute.com/">Home</a>
+      <a class="kh-nav-link" href="/Doctorportal/for-physicians">For Physicians</a>
+      <a class="kh-nav-link" href="/Doctorportal/refer-a-patient">Referral Worksheet</a>
+      <a class="kh-nav-cta" href="tel:8052302126">(805) 230-2126</a>
+    </nav>
+  </div>
+</header>
+
+<div class="rf-breadcrumb" aria-label="Breadcrumb">
+  <div class="rf-breadcrumb-inner">
+    <a href="https://khannainstitute.com/">Home</a>
+    <span class="sep">›</span>
+    <a href="/Doctorportal/for-physicians">For Physicians</a>
+    <span class="sep">›</span>
+    <span class="cur" id="rd-crumb">Referral partners</span>
+  </div>
+</div>
+
+<main class="kv-main-pad rf-refer-main">
+  <div class="rf-page rf-page--wide rd-wrap">
+    <div class="rd-hero">
+      <h1 id="rd-title">Referral partners</h1>
+      <p class="rd-sub" id="rd-subtitle">Select your office to open a referral worksheet with your referring provider details preloaded.</p>
+      <div class="kv-rule" aria-hidden="true"></div>
+    </div>
+
+    <div class="rd-toolbar" role="search">
+      <label class="rd-search" for="rd-q">
+        <span class="sr-only">Search partners</span>
+        <input class="rd-input" id="rd-q" type="search" placeholder="Search practice, physician, phone, fax, email, NPI…" autocomplete="off">
+      </label>
+      <button class="rd-btn" type="button" id="rd-search-btn">Search</button>
+    </div>
+
+    <p class="rd-meta" id="rd-meta" aria-live="polite"></p>
+    <div class="rd-err" id="rd-err" hidden></div>
+
+    <div class="rd-table-wrap">
+      <table class="rd-table" aria-label="Referral partner directory">
+        <thead>
+          <tr>
+            <th scope="col">Practice</th>
+            <th scope="col">Referring physician</th>
+            <th scope="col">NPI</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Practice address</th>
+            <th scope="col">Personal worksheet link</th>
+          </tr>
+        </thead>
+        <tbody id="rd-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<footer class="kh-footer">
+  <div class="kh-footer-inner">
+    <div class="kh-footer-grid">
+      <div>
+        <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/Logo1.png" alt="Khanna Vision Institute">
+        <p class="kh-footer-tagline">Precision vision care for Greater Los Angeles —<br>Beverly Hills & Westlake Village.</p>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Physician Portal</p>
+        <a href="/Doctorportal/for-physicians">Physician Hub</a>
+        <a href="/Doctorportal/refer-a-patient">Refer a Patient</a>
+        <a href="/Doctorportal/book-consultation">Online Scheduling</a>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Contact</p>
+        <a href="tel:8052302126">(805) 230-2126</a>
+        <a href="https://khannainstitute.com/contact/">Contact Us</a>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Locations</p>
+        <span>Beverly Hills</span>
+        <span>Westlake Village</span>
+      </div>
+    </div>
+    <div class="kh-footer-copy">
+      <p>© 2026 Khanna Vision Institute. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  function hubKeyFromPath() {
+    try {
+      var p = location.pathname || '';
+      var m = p.match(/\/Doctorportal\/network\/([^/]+)\/?$/i);
+      if (m && m[1]) return decodeURIComponent(m[1]).replace(/\.html$/i, '');
+      var parts = p.split('/').filter(Boolean);
+      if (!parts.length) return '';
+      return parts[parts.length - 1].replace(/\.html$/i, '');
+    } catch (e) {
+      return '';
+    }
+  }
+
+  var hub = hubKeyFromPath();
+  var tbody = document.getElementById('rd-tbody');
+  var title = document.getElementById('rd-title');
+  var sub = document.getElementById('rd-subtitle');
+  var meta = document.getElementById('rd-meta');
+  var err = document.getElementById('rd-err');
+  var crumb = document.getElementById('rd-crumb');
+  var qEl = document.getElementById('rd-q');
+  var btn = document.getElementById('rd-search-btn');
+
+  function showErr(t) {
+    if (!err) return;
+    err.hidden = !t;
+    err.textContent = t || '';
+  }
+
+  function absUrl(rel) {
+    try {
+      return new URL(rel, location.origin).toString();
+    } catch (e) {
+      return rel;
+    }
+  }
+
+  function escHtml(s) {
+    return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+  }
+
+  function escAttr(s) {
+    return String(s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;');
+  }
+
+  function lineBlock(lines) {
+    var parts = [];
+    for (var i = 0; i < lines.length; i++) {
+      if (lines[i] && String(lines[i]).trim()) {
+        parts.push('<div>' + escHtml(String(lines[i]).trim()) + '</div>');
+      }
+    }
+    return parts.length ? parts.join('') : '<div class="rd-muted">—</div>';
+  }
+
+  function copyText(t) {
+    if (!t) return Promise.resolve();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(String(t)).catch(function () {
+        try {
+          window.prompt('Copy link:', String(t));
+        } catch (e2) {}
+        return undefined;
+      });
+    }
+    try {
+      window.prompt('Copy link:', String(t));
+    } catch (e2) {}
+    return Promise.resolve();
+  }
+
+  function renderRows(offices) {
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    offices.forEach(function (row) {
+      var rel = row.referralRelativeUrl || '';
+      var full = row.referralAbsoluteUrl || absUrl(rel);
+
+      var tr = document.createElement('tr');
+
+      var tdP = document.createElement('td');
+      tdP.innerHTML = '<div class="rd-practice">' + escHtml(row.practiceName) + '</div>';
+      tr.appendChild(tdP);
+
+      var tdProv = document.createElement('td');
+      var docHtml = '<div class="rd-doc">' + escHtml(row.doctorName) + '</div>';
+      if (row.credentials && String(row.credentials).trim()) {
+        docHtml += '<div class="rd-muted">' + escHtml(row.credentials) + '</div>';
+      }
+      docHtml +=
+        '<div class="rd-muted" style="margin-top:8px;line-height:1.35;">Listing key · <span style="white-space:nowrap;">' +
+        escHtml(row.slug) +
+        '</span></div>';
+      tdProv.innerHTML = docHtml;
+      tr.appendChild(tdProv);
+
+      var tdNpi = document.createElement('td');
+      tdNpi.innerHTML =
+        row.npi && String(row.npi).trim()
+          ? '<div class="rd-doc" style="white-space:nowrap;">' + escHtml(row.npi) + '</div>'
+          : '<div class="rd-muted">—</div>';
+      tr.appendChild(tdNpi);
+
+      var tdCt = document.createElement('td');
+      tdCt.innerHTML = lineBlock([row.phone, row.fax, row.email]);
+      tr.appendChild(tdCt);
+
+      var tdA = document.createElement('td');
+      if (row.addressLine && String(row.addressLine).trim()) {
+        tdA.innerHTML =
+          '<div class="rd-muted" style="max-width:340px;line-height:1.45;">' +
+          escHtml(String(row.addressLine).trim()) +
+          '</div>';
+      } else {
+        tdA.innerHTML = '<div class="rd-muted">—</div>';
+      }
+
+      tr.appendChild(tdA);
+
+      var tdGo = document.createElement('td');
+      tdGo.innerHTML =
+        '<div class="rd-actions">' +
+          '<a class="rd-link" href="' +
+          escAttr(rel) +
+          '">Open worksheet</a>' +
+          '<button type="button" class="rd-btn rd-btn--quiet rd-copy-btn" data-copy="' +
+          escAttr(full) +
+          '">Copy link</button>' +
+        '</div>' +
+        '<div class="rd-muted" style="margin-top:10px;line-height:1.45;">Unique link for LeadSquared-style prefill (bookmark or share).</div>' +
+        '<div class="rd-url" title="Personalized worksheet URL">' +
+          escHtml(full) +
+        '</div>';
+      tr.appendChild(tdGo);
+
+      tbody.appendChild(tr);
+    });
+
+    tbody.onclick = function (ev) {
+      var tgt = ev.target;
+      if (!tgt || typeof tgt.closest !== 'function') return;
+      var b = tgt.closest('.rd-copy-btn');
+      if (!b) return;
+      var url = b.getAttribute('data-copy') || '';
+      copyText(url).then(function () {
+        try {
+          b.textContent = 'Copied!';
+          window.setTimeout(function () { b.textContent = 'Copy link'; }, 1600);
+        } catch (e3) {}
+      });
+    };
+  }
+
+  function load() {
+    if (!hub) {
+      showErr('Missing referral hub segment in URL.');
+      if (meta) meta.textContent = '';
+      return;
+    }
+    showErr('');
+    if (meta) meta.textContent = 'Loading partner list…';
+
+    var qp = qEl && qEl.value ? '?q=' + encodeURIComponent(qEl.value) + '&limit=2500' : '?limit=2500';
+
+    fetch('/api/referral-directory/' + encodeURIComponent(hub) + qp, {
+      credentials: 'same-origin',
+      headers: { Accept: 'application/json' }
+    })
+      .then(function (r) { return r.json().catch(function () { return {}; }); })
+      .then(function (data) {
+        if (!data || !data.ok) {
+          if (meta) meta.textContent = '';
+          showErr((data && data.message) || 'Could not load directory.');
+          renderRows([]);
+          return;
+        }
+        var disp =
+          data.hub && data.hub.displaySlug
+            ? data.hub.displaySlug
+            : hub;
+        if (crumb) crumb.textContent = disp || 'Referral partners';
+
+        if (title && data.hub && data.hub.title) title.textContent = data.hub.title;
+        document.title = (data.hub && data.hub.title ? data.hub.title + ' · ' : '') + 'Khanna Vision Institute';
+        if (sub && data.hub && data.hub.subtitle) sub.textContent = data.hub.subtitle;
+
+        var off = Array.isArray(data.offices) ? data.offices : [];
+        renderRows(off);
+        if (meta) {
+          meta.textContent =
+            'Showing ' +
+            off.length +
+            ' partner' +
+            (off.length === 1 ? '' : 's') +
+            ' for "' +
+            disp +
+            '". Personalized links point to "' +
+            absUrl('/Doctorportal/refer-a-patient') +
+            '" with a unique "?ref=<key>" appended.';
+        }
+      })
+      .catch(function () {
+        if (meta) meta.textContent = '';
+        showErr('Network error loading partner list.');
+      });
+  }
+
+  if (btn) btn.addEventListener('click', load);
+  if (qEl) qEl.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Enter') { ev.preventDefault(); load(); }
+  });
+
+  load();
+})();
+</script>
+
+</body>
+</html>

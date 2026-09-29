@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  
+  <% if (metaDescription) { %>
+    <meta name="description" content="<%= metaDescription %>">
+  <% } %>
+  <link rel="stylesheet" href="/public/css/header.css" />
+  <link rel="stylesheet" href="/public/css/footer.css" />
+  <link rel="stylesheet" href="/public/css/blog.css" />
+</head>
+<body>
+  <%- include('partials/header.ejs') %>
+
+  <main class="kvi-main">
+    <article class="kvi-article">
+      <h1 class="kvi-page-title" style="margin-top: 0;"><%= title %></h1>
+      <div class="page-content">
+        <%- content %>
+      </div>
+    </article>
+  </main>
+
+  <%- include('partials/footer.ejs') %>
+</body>
+</html>

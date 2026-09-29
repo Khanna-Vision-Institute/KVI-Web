@@ -1,0 +1,44 @@
+
+// Geo-blocking middleware
+const maxmind = require('maxmind');
+let geoLookup = null;
+
+// Load GeoIP database
+(async () => {
+  try {
+    geoLookup = await maxmind.open('/usr/share/GeoIP/GeoLite2-Country.mmdb');
+    console.log('GeoIP database loaded successfully');
+  } catch (err) {
+    console.error('Failed to load GeoIP database:', err);
+  }
+})();
+
+// Middleware to block specific countries
+app.use((req, res, next) => {
+  if (!geoLookup) {
+    return next();
+  }
+  
+  try {
+    const clientIP = req.headers['x-forwarded-for']?.split(',')[0].trim() || 
+                     req.headers['x-real-ip'] || 
+                     req.connection.remoteAddress || 
+                     req.socket.remoteAddress;
+    
+    const cleanIP = clientIP.replace('::ffff:', '');
+    const geo = geoLookup.get(cleanIP);
+    const countryCode = geo?.country?.iso_code;
+    
+    const blockedCountries = ['CN', 'SG'];
+    
+    if (countryCode && blockedCountries.includes(countryCode)) {
+      console.log('Blocked request from ' + countryCode + ': ' + cleanIP);
+      return res.status(403).send('Access denied from your region.');
+    }
+    
+    next();
+  } catch (err) {
+    console.error('Geo-blocking error:', err);
+    next();
+  }
+});

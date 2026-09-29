@@ -17,14 +17,6 @@
     gtag('js', new Date());
     gtag('config', 'G-Q0TGBPVS92');
   </script>
-  <!-- Event snippet for PIE Google Ads Lead conversion page -->
-  <script>
-    gtag('event', 'conversion', {'send_to': 'AW-16512183014/qFoZCJal6qscEObVz8E9'});
-  </script>
-  <script>
-    window.VIP_GOOGLE_ADS_CONVERSION_SEND_TO = '';
-  </script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -438,6 +430,7 @@
       .header-brand-text { display: none; }
     }
   </style>
+  <script src="/public/js/consult-conversion.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -493,26 +486,7 @@
   </main>
 
   <script>
-    (function () {
-      try {
-        if (sessionStorage.getItem('kvi_vip_lead_ok') !== '1') return;
-        sessionStorage.removeItem('kvi_vip_lead_ok');
-        var fs = sessionStorage.getItem('kvi_vip_form_source') || 'VIP-Consult';
-        sessionStorage.removeItem('kvi_vip_form_source');
-        if (typeof gtag !== 'function') return;
-        gtag('event', 'generate_lead', {
-          form_destination: 'vip-consult',
-          form_id: String(fs).replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 64)
-        });
-        var sendTo =
-          typeof window.VIP_GOOGLE_ADS_CONVERSION_SEND_TO === 'string'
-            ? window.VIP_GOOGLE_ADS_CONVERSION_SEND_TO.trim()
-            : '';
-        if (sendTo) {
-          gtag('event', 'conversion', { send_to: sendTo });
-        }
-      } catch (e) {}
-    })();
+    if (window.KviConsultConversion) window.KviConsultConversion.reportSuccess('vip');
   </script>
 </body>
 </html>

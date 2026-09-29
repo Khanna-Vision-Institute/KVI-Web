@@ -353,6 +353,90 @@ class ZohoService {
   }
 
   /**
+   * Paginated fetch of all records in a Zoho CRM module (standard or custom).
+   * @param {string} moduleApiName e.g. Leads, Contacts, OD_Master
+   * @param {{ fields?: string, cvid?: string, perPage?: number, maxPages?: number }} [opts]
+   */
+  async listAllRecords(moduleApiName, opts = {}) {
+    const module = String(moduleApiName || '').trim();
+    if (!module) throw new Error('listAllRecords: moduleApiName is required');
+
+    const perPage = Math.max(1, Math.min(200, Number(opts.perPage) || 200));
+    const maxPages = Math.max(1, Math.min(200, Number(opts.maxPages) || 100));
+    const accessToken = await this.getAccessToken();
+    const headers = { Authorization: `Zoho-oauthtoken ${accessToken}` };
+
+    /** @type {Record<string, unknown>[]} */
+    const all = [];
+    let page = 1;
+
+    while (page <= maxPages) {
+      /** @type {Record<string, string | number>} */
+      const params = { page, per_page: perPage };
+      if (opts.fields) params.fields = String(opts.fields);
+      if (opts.cvid) params.cvid = String(opts.cvid);
+
+      const response = await axios.get(this.buildCRMUrl(`/${encodeURIComponent(module)}`), {
+        params,
+        headers,
+        validateStatus: () => true,
+      });
+
+      if (response.status === 204) break;
+      if (response.status >= 400) {
+        const err = new Error(
+          `Zoho list ${module} failed (${response.status}): ${JSON.stringify(response.data || {}).slice(0, 400)}`
+        );
+        err.response = response;
+        throw err;
+      }
+
+      const batch = response.data && Array.isArray(response.data.data) ? response.data.data : [];
+      all.push(...batch);
+
+      const more = response.data && response.data.info && response.data.info.more_records;
+      if (!more) break;
+      page += 1;
+    }
+
+    return all;
+  }
+
+  /**
+   * Related records for a parent CRM row (e.g. Contacts on an Account / Doctor Office).
+   * @param {string} parentModule e.g. Accounts
+   * @param {string} parentId Zoho record id
+   * @param {string} relatedModule e.g. Contacts
+   */
+  async listRelatedRecords(parentModule, parentId, relatedModule) {
+    const parent = String(parentModule || '').trim();
+    const id = String(parentId || '').trim();
+    const related = String(relatedModule || '').trim();
+    if (!parent || !id || !related) {
+      throw new Error('listRelatedRecords: parentModule, parentId, and relatedModule are required');
+    }
+
+    const accessToken = await this.getAccessToken();
+    const headers = { Authorization: `Zoho-oauthtoken ${accessToken}` };
+
+    const response = await axios.get(
+      this.buildCRMUrl(`/${encodeURIComponent(parent)}/${encodeURIComponent(id)}/${encodeURIComponent(related)}`),
+      { headers, validateStatus: () => true }
+    );
+
+    if (response.status === 204) return [];
+    if (response.status >= 400) {
+      const err = new Error(
+        `Zoho related ${parent}/${id}/${related} failed (${response.status}): ${JSON.stringify(response.data || {}).slice(0, 300)}`
+      );
+      err.response = response;
+      throw err;
+    }
+
+    return response.data && Array.isArray(response.data.data) ? response.data.data : [];
+  }
+
+  /**
    * Upload a file attachment to an existing Lead record in Zoho CRM.
    * Appears under the "Attachments" section of the lead.
    *

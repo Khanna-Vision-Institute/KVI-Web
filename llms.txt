@@ -1,0 +1,60 @@
+# Khanna Vision
+
+> Khanna Vision is a vision correction and eye care institute serving patients in Southern California, with locations in Beverly Hills and Westlake Village, California. Khanna Vision provides information and services related to vision correction, laser eye surgery, lens-based vision correction, cataract surgery, and ophthalmic care.
+
+Khanna Vision is the organization represented by the website https://khannainstitute.com/. The website provides information about vision correction procedures, eye care services, physicians, treatment options, patient resources, locations, and educational content.
+
+The primary service area is Southern California, with locations in Beverly Hills and Westlake Village, California. The primary physician associated with Khanna Vision is Dr. Rajesh Khanna.
+
+The website covers vision correction and ophthalmic services including SMILE Pro laser vision correction, SMILE laser vision correction, LASIK, SuperLASIK, EVO ICL, presbyopia treatment, lens-based vision correction, cataract surgery, and other eye-care services.
+
+## About Khanna Vision
+
+- [Khanna Vision](https://khannainstitute.com/): Official website of Khanna Vision.
+- [About Khanna Vision](https://khannainstitute.com/about/dr-khanna/biography/): Information about Khanna Vision, its services, doctors, technologies, and patient resources.
+
+## Doctors
+
+- [Dr. Rajesh Khanna](https://khannainstitute.com/about/dr-khanna/): Information about Dr. Rajesh Khanna.
+- [Dr. Khanna Biography](https://khannainstitute.com/about/dr-khanna/biography/): Biography and professional background of Dr. Rajesh Khanna.
+- [Dr. Khanna Credentials and Awards](https://khannainstitute.com/about/dr-khanna/credentials-awards/): Professional credentials, education, training, certifications, awards, and memberships.
+
+## Locations
+
+- [Beverly Hills](https://khannainstitute.com/about/locations/beverly-hills/): Khanna Vision Beverly Hills location information.
+- [Westlake Village](https://khannainstitute.com/about/locations/westlake-village/): Khanna Vision Westlake Village location information.
+
+## Vision Correction
+
+- [Khanna Vision](https://khannainstitute.com/): Overview of vision correction services.
+- [SMILE](https://khannainstitute.com/procedures/laser-vision/smile-pro-eye-surgery/): Information about SMILE Pro laser vision correction.
+- [SMILE](https://khannainstitute.com/procedures/laser-vision/smile/): Information about SMILE laser vision correction.
+- [LASIK](https://khannainstitute.com/procedures/laser-vision/lasik/): Information about LASIK vision correction.
+- [SuperLASIK](https://khannainstitute.com/procedures/laser-vision/superlasik/): Information about SuperLASIK and customized laser vision correction.
+- [EVO ICL](https://khannainstitute.com/procedures/lens-solutions/evo-icl/): Information about EVO ICL vision correction.
+- [PIE](https://khannainstitute.com/procedures/lens-solutions/pie/): Information about presbyopia and lens-based vision correction.
+
+## Cataract and Lens Procedures
+
+- [Khanna Vision](https://khannainstitute.com/procedures/lens-solutions/robotic-cataract-surgery/): Information about cataract and lens-based vision correction services.
+
+## Patient Resources
+
+- [Khanna Vision](https://khannainstitute.com/patients/your-journey/first-visit-guide/): Patient information, consultation resources, treatment information, and contact information.
+
+## Educational Resources
+
+- [Latest Articles](https://khannainstitute.com/blog/latest/): Latest educational content published by Khanna Vision.
+
+## Website Files
+
+- [Robots.txt](https://khannainstitute.com/robots.txt): Crawler directives for the Khanna Vision website.
+- [XML Sitemap](https://khannainstitute.com/sitemap.xml): XML sitemap for website URL discovery.
+
+## Official Sources
+
+- [Khanna Vision](https://khannainstitute.com/): Primary official source for Khanna Vision information.
+- [Dr. Rajesh Khanna](https://khannainstitute.com/about/dr-khanna/biography/): Official physician information.
+- [Beverly Hills Location](https://khannainstitute.com/about/locations/beverly-hills/): Official Beverly Hills location information.
+- [Westlake Village Location](https://khannainstitute.com/about/locations/westlake-village/): Official Westlake Village location information.
+- [Khanna Vision Blog](https://khannainstitute.com/blog/latest/): Official educational resources.

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Physician sign in | Khanna Vision Institute</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/Doctorportal/physician-portal-brochure.css?v=20260519">
+  <link rel="stylesheet" href="./portal-auth.css?v=20260701">
+</head>
+<body class="kvi-brochure">
+
+<header class="kh-header">
+  <div class="kh-header-inner">
+    <a class="kh-logo" href="https://khannainstitute.com/" aria-label="Khanna Vision Institute">
+      <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/Logo1.png"
+           alt="Khanna Vision Institute" decoding="async">
+    </a>
+    <nav class="kh-nav" aria-label="Sign in shortcuts">
+      <a class="kh-nav-cta" href="tel:8052302126">(805) 230-2126</a>
+    </nav>
+  </div>
+</header>
+
+<main class="kv-main-pad rf-refer-main">
+  <div class="rf-page rf-page--narrow" style="max-width:560px;margin:0 auto;">
+    <div class="rf-simple-card">
+      <h1 class="rf-simple-h" style="margin-top:0">Physician sign in</h1>
+      <p class="rf-sub">Use your email and password supplied by Khanna Vision Institute.</p>
+
+      <div id="sig-msg" class="rf-alert rf-alert--err" role="status" aria-live="polite" style="display:none"></div>
+
+      <form id="sig-form" novalidate autocomplete="off" style="margin-top:1rem">
+        <div class="rf-field rf-g-full">
+          <label for="sig-email">Work email</label>
+          <input class="rf-input" id="sig-email" name="email" type="email" inputmode="email" autocomplete="username" required>
+        </div>
+        <div class="rf-field rf-g-full">
+          <label for="sig-pass">Password</label>
+          <input class="rf-input" id="sig-pass" name="password" type="password" autocomplete="current-password" required>
+        </div>
+
+        <div style="margin-top:1.15rem;display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center">
+          <button class="kh-btn rf-btn-submit" id="sig-submit" type="submit">Sign in</button>
+          <a class="rf-sub" href="https://khannainstitute.com/contact/">Need access?</a>
+        </div>
+      </form>
+
+      <div id="sig-challenge-panel" hidden style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(13,10,41,0.12)">
+        <p class="rf-sub" id="sig-challenge-lead"></p>
+        <div class="rf-field rf-g-full">
+          <label for="sig-new-password">Choose a permanent password</label>
+          <input class="rf-input" id="sig-new-password" name="newPassword" type="password" autocomplete="new-password" minlength="10">
+        </div>
+        <div class="rf-field rf-g-full">
+          <label for="sig-new-password-confirm">Confirm password</label>
+          <input class="rf-input" id="sig-new-password-confirm" name="confirm" type="password" autocomplete="new-password" minlength="10">
+        </div>
+        <div style="margin-top:0.95rem;display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center">
+          <button class="kh-btn rf-btn-submit" id="sig-challenge-submit" type="button">Save password &amp; continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script defer src="./config.js?v=20260701"></script>
+<script>
+(function(){
+  function flash(kind, txt){
+    var el = document.getElementById('sig-msg');
+    if (!el) return;
+    var k = String(kind||'info');
+    el.className = 'rf-alert' + (k === 'ok' ? ' rf-alert--ok' : (k === 'err' ? ' rf-alert--err' : ''));
+    el.textContent = txt || '';
+    el.style.display = txt ? 'block' : 'none';
+  }
+
+  function decodeJwtPayload(jwt){
+    try {
+      var p = jwt.split('.')[1];
+      if (!p) return null;
+      p = p.replace(/-/g, '+').replace(/_/g, '/');
+      while (p.length % 4) p += '=';
+      return JSON.parse(atob(p));
+    } catch (_) { return null; }
+  }
+
+  function qs(name){
+    var m = new RegExp('[?&]'+name+'=([^&]*)').exec(location.search||'');
+    return m ? decodeURIComponent(m[1].replace(/\+/g,' ')) : '';
+  }
+
+  function safeReturnUrl(){
+    var r = qs('return') || qs('redirect') || '';
+    if (!r.startsWith('/') || /^\/\/|https?:\/\//i.test(r)) return '/Doctorportal/for-physicians';
+    return r;
+  }
+
+  window.addEventListener('DOMContentLoaded', function(){
+    var form = document.getElementById('sig-form');
+    var cfg = window.KVI_PORTAL_AUTH;
+    var btn = document.getElementById('sig-submit');
+
+    if (!cfg || !cfg.region || !cfg.clientId || !cfg.userPoolId || cfg.clientId === 'DISABLED') {
+      flash('err', 'Physician sign-in is disabled. Open the hub from /Doctorportal/for-physicians.');
+      if (btn) btn.disabled = true;
+      return;
+    }
+
+    if (cfg.clientId.indexOf('REPLACE') !== -1) {
+      flash('err', 'Copy auth/config.example.js to config.js and fill Cognito values.');
+      if (btn) btn.disabled = true;
+      return;
+    }
+
+    async function parseCognito(resp){
+      var text = await resp.text();
+      var data;
+      try {
+        data = JSON.parse(text);
+      } catch (_) {
+        throw new Error('Unexpected response (' + resp.status + ').');
+      }
+      return data;
+    }
+
+    async function initiateAuth(email, pw){
+      var resp = await fetch('https://cognito-idp.'+ cfg.region +'.amazonaws.com/',{
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/x-amz-json-1.1',
+          'Accept': 'application/json',
+          'X-Amz-Target': 'AWSCognitoIdentityProviderService.InitiateAuth',
+        },
+        body: JSON.stringify({
+          AuthFlow:'USER_PASSWORD_AUTH',
+          ClientId: cfg.clientId,
+          AuthParameters:{ USERNAME: email, PASSWORD: pw },
+        }),
+      });
+
+      var data = await parseCognito(resp);
+      /** Cognito service errors serialize as `{ __type, message }` (HTTP 400) */
+      var cognitoOk = !!(resp.ok && !(data && data.__type));
+      return { httpOk: resp.ok, cognitoOk: cognitoOk, status: resp.status, data: data };
+    }
+
+    async function respondNewPassword(email, session, newPassword){
+      var resp = await fetch('https://cognito-idp.'+ cfg.region +'.amazonaws.com/',{
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/x-amz-json-1.1',
+          'Accept': 'application/json',
+          'X-Amz-Target': 'AWSCognitoIdentityProviderService.RespondToAuthChallenge',
+        },
+        body: JSON.stringify({
+          ChallengeName:'NEW_PASSWORD_REQUIRED',
+          ClientId: cfg.clientId,
+          Session: session,
+          ChallengeResponses:{
+            USERNAME: email,
+            NEW_PASSWORD: newPassword,
+          },
+        }),
+      });
+      var data = await parseCognito(resp);
+      var cognitoOk = !!(resp.ok && !(data && data.__type));
+      return { httpOk: resp.ok, cognitoOk:cognitoOk, status: resp.status, data:data };
+    }
+
+    if (!form) return;
+
+    var challengeEmail = '';
+    var challengeSession = '';
+    var challengeSubmitBound = false;
+
+    function resetChallengeUi(){
+      var panel = document.getElementById('sig-challenge-panel');
+      if (panel){
+        panel.setAttribute('hidden', 'hidden');
+        panel.style.display = 'none';
+      }
+      var np = document.getElementById('sig-new-password');
+      var npc = document.getElementById('sig-new-password-confirm');
+      if (np) np.value = '';
+      if (npc) npc.value = '';
+    }
+
+    function completeLogin(ar){
+      sessionStorage.setItem('kvi_physician_access_token', ar.AccessToken);
+      sessionStorage.setItem('kvi_physician_refresh_token', ar.RefreshToken || '');
+      sessionStorage.setItem('kvi_physician_id_token', ar.IdToken || '');
+
+      var idp = decodeJwtPayload(ar.IdToken || '');
+      if (idp && idp.email) sessionStorage.setItem('kvi_physician_display_email', String(idp.email));
+      try {
+        sessionStorage.setItem('kvi_physician_profile', JSON.stringify({
+          given_name: (idp && idp.given_name) ? String(idp.given_name) : '',
+          family_name: (idp && idp.family_name) ? String(idp.family_name) : '',
+          email: (idp && idp.email) ? String(idp.email) : '',
+          name: (idp && idp.name) ? String(idp.name) : '',
+        }));
+      } catch (_e) {}
+
+      flash('ok', 'Signed in — redirecting…');
+      window.location.assign(safeReturnUrl());
+    }
+
+    function bindChallengeSubmitOnce(){
+      var cbBtn = document.getElementById('sig-challenge-submit');
+      if (!cbBtn || challengeSubmitBound) return;
+      challengeSubmitBound = true;
+      cbBtn.addEventListener('click', async function(){
+        var np = (document.getElementById('sig-new-password')||{}).value || '';
+        var np2 = (document.getElementById('sig-new-password-confirm')||{}).value || '';
+        if (!challengeEmail || !challengeSession){
+          flash('err', 'Session missing — submit your email/password again.');
+          return;
+        }
+        if (np !== np2){
+          flash('err', 'New passwords do not match.');
+          return;
+        }
+        if (String(np).length < 10){
+          flash('err', 'Password must be at least 10 characters.');
+          return;
+        }
+
+        btn.disabled = true;
+        flash('info', 'Saving password…');
+
+        try {
+          var r = await respondNewPassword(challengeEmail, challengeSession, np);
+          var d = r.data;
+
+          if (!r.httpOk || !r.cognitoOk){
+            var msg = (d && d.message) ? String(d.message) : ('Could not set password (' + r.status + ').');
+            if (String(d.__type||'').includes('NotAuthorized')) throw new Error('Session expired — sign in again with your invite password.');
+            throw new Error(msg);
+          }
+
+          var ar = d.AuthenticationResult || {};
+          if (!ar.AccessToken){
+            flash('err', 'Unexpected next step — contact Khanna Vision Institute.');
+            btn.disabled=false;
+            return;
+          }
+
+          completeLogin(ar);
+        } catch (ee){
+          flash('err', (ee && ee.message) ? ee.message : 'Could not finish password setup.');
+          btn.disabled=false;
+        }
+      }, { passive: true });
+    }
+
+    function showNewPasswordChallenge(email, sessionToken){
+      challengeEmail = email;
+      challengeSession = sessionToken;
+      bindChallengeSubmitOnce();
+
+      flash('info', 'Cognito accepted your invite password — choose a permanent password below.');
+      var panel = document.getElementById('sig-challenge-panel');
+      if (panel){
+        panel.removeAttribute('hidden');
+        panel.style.display = '';
+      }
+      var lead = document.getElementById('sig-challenge-lead');
+      if (lead) lead.textContent = 'Temporary passwords must be replaced once before referrals unlock.';
+      btn.disabled = false;
+    }
+
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+
+      resetChallengeUi();
+      challengeEmail = '';
+      challengeSession = '';
+
+      flash('info', 'Signing in…');
+      btn.disabled = true;
+
+      try {
+        var email = (document.getElementById('sig-email').value||'').trim().toLowerCase();
+        var pw = document.getElementById('sig-pass').value || '';
+        var res = await initiateAuth(email, pw);
+        var d = res.data || {};
+
+        if (!res.httpOk || !res.cognitoOk) {
+          if (String(d.__type||'').includes('NotAuthorized')) throw new Error('Incorrect email or password.');
+          if (String(d.message||d.__type||'').includes('PasswordResetRequired'))
+            throw new Error('Password reset required — please contact Khanna Vision Institute.');
+          if (String(d.__type||'').includes('UserNotConfirmed'))
+            throw new Error('Verify your inbox (or spam) for a confirmation message before signing in.');
+          if (String(d.message||'')) throw new Error(d.message);
+          throw new Error('Could not sign in (' + res.status + ').');
+        }
+
+        if (String(d.ChallengeName||'') === 'NEW_PASSWORD_REQUIRED' && d.Session){
+          showNewPasswordChallenge(email, String(d.Session));
+          return;
+        }
+
+        var ar = d.AuthenticationResult || {};
+        if (!ar.AccessToken){
+          flash('err', 'Cognito returned an unexpected challenge. Please contact Khanna Vision Institute.');
+          btn.disabled=false;
+          return;
+        }
+
+        completeLogin(ar);
+      } catch(err){
+        flash('err', (err && err.message) || 'Unexpected error.');
+        btn.disabled=false;
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

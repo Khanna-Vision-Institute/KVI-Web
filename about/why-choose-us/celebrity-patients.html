@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <% if (typeof pageData !== 'undefined' && pageData && pageData.metaTitle) { %>
+  <title><%= pageData.metaTitle %></title>
+  <% } else { %>
+  <title>Celebrity Patients | Khanna Vision Institute</title>
+  <% } %>
+  <% if (typeof pageData !== 'undefined' && pageData && pageData.metaDescription) { %>
+  <meta name="description" content="<%= pageData.metaDescription %>">
+  <% } else { %>
+  <meta name="description" content="Watch celebrity patient stories and vision journeys at Khanna Vision Institute — Beverly Hills &amp; Westlake Village. Full YouTube playlist.">
+  <% } %>
+  <link rel="canonical" href="https://khannainstitute.com/about/why-choose-us/celebrity-patients/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/public/css/header.css">
+  <link rel="stylesheet" href="/public/css/footer.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "name": "Celebrity Patients",
+        "description": "Celebrity patient video stories at Khanna Vision Institute.",
+        "url": "https://khannainstitute.com/about/why-choose-us/celebrity-patients/"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://khannainstitute.com/" },
+          { "@type": "ListItem", "position": 2, "name": "About", "item": "https://khannainstitute.com/about/dr-khanna/biography/" },
+          { "@type": "ListItem", "position": 3, "name": "Celebrity Patients", "item": "https://khannainstitute.com/about/why-choose-us/celebrity-patients/" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --cp-ink: #0c1222;
+      --cp-muted: #475569;
+      --cp-line: #e2e8f0;
+      --cp-surface: #ffffff;
+      --cp-wash: #f4f6fb;
+      --cp-navy: #152a52;
+      --cp-navy2: #234a8c;
+      --cp-gold: #b8860b;
+      --cp-gold-light: #e8c96b;
+      --cp-accent: #c45c5c;
+    }
+    .cp-page {
+      font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+      color: var(--cp-ink);
+      background:
+        radial-gradient(900px 420px at 12% -10%, rgba(255, 228, 180, 0.45), transparent 55%),
+        radial-gradient(700px 380px at 92% 0%, rgba(196, 92, 92, 0.08), transparent 50%),
+        radial-gradient(600px 500px at 50% 100%, rgba(21, 42, 82, 0.06), transparent 45%),
+        linear-gradient(180deg, var(--cp-wash) 0%, #fafbfd 45%, var(--cp-wash) 100%);
+    }
+    .cp-page h1, .cp-page h2, .cp-page h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .cp-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 22px 80px;
+    }
+    .cp-hero {
+      text-align: center;
+      padding: 28px 0 8px;
+      position: relative;
+    }
+    .cp-hero::after {
+      content: "";
+      display: block;
+      width: min(200px, 40vw);
+      height: 3px;
+      margin: 28px auto 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, var(--cp-gold), var(--cp-gold-light), var(--cp-gold), transparent);
+      opacity: 0.85;
+    }
+    .cp-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cp-navy2);
+      margin-bottom: 14px;
+    }
+    .cp-hero h1 {
+      font-size: clamp(2.05rem, 4.8vw, 3.15rem);
+      line-height: 1.08;
+      margin: 0 0 16px;
+      background: linear-gradient(125deg, var(--cp-navy) 0%, #1e4976 42%, var(--cp-navy2) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .cp-lead {
+      max-width: 620px;
+      margin: 0 auto;
+      font-size: 1.07rem;
+      line-height: 1.65;
+      color: var(--cp-muted);
+    }
+    .cp-video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+      gap: 22px;
+      margin-top: 8px;
+    }
+    .cp-video-card {
+      background: var(--cp-surface);
+      border: 1px solid var(--cp-line);
+      border-radius: 20px;
+      padding: 14px;
+      box-shadow: 0 12px 32px rgba(21, 42, 82, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .cp-video-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px rgba(21, 42, 82, 0.12);
+    }
+    .cp-video-card .cp-embed {
+      border-radius: 14px;
+    }
+    /* Click-to-play facade: avoids YouTube’s large centered play button on thumbnails */
+    .cp-video-facade {
+      position: absolute;
+      inset: 0;
+    }
+    .cp-video-facade iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .cp-video-poster {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      border-radius: inherit;
+      background: #0a0f1a;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .cp-video-poster:hover .cp-video-play-badge,
+    .cp-video-poster:focus-visible .cp-video-play-badge {
+      transform: scale(1.06);
+      background: rgba(21, 42, 82, 0.95);
+    }
+    .cp-video-poster:focus-visible {
+      outline: 3px solid var(--cp-gold-light);
+      outline-offset: 2px;
+    }
+    .cp-video-poster img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: inherit;
+    }
+    .cp-video-play-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.88);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+      transition: transform 0.2s ease, background 0.2s ease;
+      pointer-events: none;
+    }
+    .cp-video-play-badge svg {
+      width: 22px;
+      height: 22px;
+      margin-left: 3px;
+    }
+    .cp-video-facade.is-playing .cp-video-poster {
+      display: none;
+    }
+    .cp-video-name {
+      margin: 12px 4px 0;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--cp-navy);
+      text-align: center;
+    }
+    .cp-video-role {
+      margin: 4px 4px 0;
+      font-size: 0.82rem;
+      color: var(--cp-muted);
+      text-align: center;
+      line-height: 1.4;
+    }
+    .cp-playlist-more {
+      text-align: center;
+      margin-top: 28px;
+      font-size: 0.95rem;
+      color: var(--cp-muted);
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.55;
+    }
+    .cp-playlist-more a {
+      color: var(--cp-navy2);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .cp-spotlight {
+      margin-top: 40px;
+      display: grid;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (min-width: 900px) {
+      .cp-spotlight {
+        grid-template-columns: 1fr minmax(260px, 320px);
+        gap: 32px;
+      }
+    }
+    .cp-player-shell {
+      background: var(--cp-surface);
+      border-radius: 24px;
+      border: 1px solid var(--cp-line);
+      padding: 14px;
+      box-shadow:
+        0 24px 48px rgba(21, 42, 82, 0.12),
+        0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+    }
+    .cp-player-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+    .cp-player-label span {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cp-navy2);
+    }
+    .cp-embed {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #0a0f1a;
+    }
+    .cp-embed iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .cp-playlist-card {
+      background: linear-gradient(160deg, var(--cp-navy) 0%, #1a3558 50%, var(--cp-navy2) 100%);
+      color: #fff;
+      border-radius: 24px;
+      padding: 1.5rem 1.4rem;
+      box-shadow: 0 20px 40px rgba(21, 42, 82, 0.28);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      min-height: 100%;
+    }
+    .cp-playlist-card h2 {
+      font-size: 1.25rem;
+      margin: 0;
+      color: #fff;
+      line-height: 1.25;
+    }
+    .cp-playlist-card p {
+      margin: 0;
+      font-size: 0.94rem;
+      line-height: 1.55;
+      opacity: 0.9;
+    }
+    .cp-playlist-card a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: auto;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      background: linear-gradient(135deg, #fff 0%, #f1f5f9 100%);
+      color: var(--cp-navy);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s, filter 0.2s;
+    }
+    .cp-playlist-card a:hover {
+      filter: brightness(1.03);
+      transform: translateY(-1px);
+    }
+    .cp-playlist-card a svg {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+    }
+    .cp-section {
+      margin-top: 52px;
+    }
+    .cp-section-head {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .cp-section-head h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin: 0 0 10px;
+      color: var(--cp-navy);
+    }
+    .cp-section-head p {
+      margin: 0;
+      color: var(--cp-muted);
+      font-size: 1rem;
+      max-width: 540px;
+      margin-inline: auto;
+      line-height: 1.55;
+    }
+    .cp-pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+      gap: 18px;
+    }
+    .cp-pillar {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--cp-line);
+      border-radius: 18px;
+      padding: 1.35rem 1.25rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .cp-pillar:hover {
+      box-shadow: 0 16px 36px rgba(21, 42, 82, 0.08);
+      transform: translateY(-2px);
+    }
+    .cp-pillar h3 {
+      font-size: 1.08rem;
+      margin: 0 0 8px;
+      color: var(--cp-navy);
+    }
+    .cp-pillar p {
+      margin: 0;
+      font-size: 0.93rem;
+      line-height: 1.55;
+      color: var(--cp-muted);
+    }
+    .cp-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 32px;
+    }
+    .cp-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: filter 0.2s, transform 0.2s;
+    }
+    .cp-btn:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+    .cp-btn--primary {
+      background: linear-gradient(135deg, var(--cp-navy), var(--cp-navy2));
+      color: #fff;
+      box-shadow: 0 8px 22px rgba(21, 42, 82, 0.28);
+    }
+    .cp-btn--ghost {
+      background: var(--cp-surface);
+      color: var(--cp-navy);
+      border-color: var(--cp-line);
+    }
+    .cp-cta {
+      margin-top: 52px;
+      text-align: center;
+      padding: 40px 26px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--cp-navy) 0%, #1e3a5f 50%, var(--cp-navy2) 100%);
+      color: #fff;
+      box-shadow: 0 24px 56px rgba(21, 42, 82, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .cp-cta::before {
+      content: "";
+      position: absolute;
+      inset: -40% 50% auto -20%;
+      height: 120%;
+      background: radial-gradient(circle, rgba(232, 201, 107, 0.2) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cp-cta h2 {
+      position: relative;
+      color: #fff;
+      margin: 0 0 12px;
+      font-size: clamp(1.35rem, 3vw, 1.85rem);
+    }
+    .cp-cta p {
+      position: relative;
+      margin: 0 0 22px;
+      opacity: 0.92;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+    .cp-cta a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--cp-gold-light), var(--cp-gold));
+      color: #1a1508;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+    }
+    .cp-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--cp-muted);
+      margin-top: 24px;
+      max-width: 640px;
+      margin-inline: auto;
+      line-height: 1.5;
+    }
+    @media (max-width: 640px) {
+      .cp-wrap { padding: 0 16px 64px; }
+      .cp-hero { padding: 22px 0 4px; }
+      .cp-player-shell { padding: 10px; }
+    }
+  </style>
+</head>
+<body class="cp-page">
+  <%- include('/partials/header') %>
+  <%- include('/partials/seminar-banner') %>
+
+  <main>
+    <div class="cp-wrap">
+      <header class="cp-hero">
+        <p class="cp-eyebrow">Why choose us</p>
+        <h1>Celebrity patients</h1>
+        <p class="cp-lead">When your career depends on clear, comfortable vision, details matter. Hear from public figures who chose Khanna Vision Institute—and browse our full collection of stories on YouTube.</p>
+      </header>
+
+      <% if (typeof pageData !== 'undefined' && pageData && pageData.content) { %>
+      <section class="cp-section" aria-label="Additional content">
+        <%- pageData.content %>
+      </section>
+      <% } %>
+
+      <section class="cp-section" aria-labelledby="featured-videos-heading">
+        <div class="cp-section-head">
+          <h2 id="featured-videos-heading">Featured celebrity stories</h2>
+          <p>A few of the public figures who have shared their Khanna Vision experience on camera. For the complete set of videos, scroll down to the playlist or open it on YouTube.</p>
+        </div>
+        <div class="cp-video-grid">
+          <article class="cp-video-card">
+            <div class="cp-embed">
+              <div class="cp-video-facade">
+                <iframe title="Brenda Song — LASIK patient testimonial at Khanna Vision Institute" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen data-src="https://www.youtube.com/embed/eyXmume57r4"></iframe>
+                <button type="button" class="cp-video-poster" aria-label="Play video: Brenda Song LASIK testimonial">
+                  <img src="https://i.ytimg.com/vi/eyXmume57r4/hqdefault.jpg" alt="" width="480" height="360" decoding="async" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/eyXmume57r4/mqdefault.jpg'">
+                  <span class="cp-video-play-badge" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                </button>
+              </div>
+            </div>
+            <p class="cp-video-name">Brenda Song</p>
+            <p class="cp-video-role">Actress · LASIK testimonial</p>
+          </article>
+          <article class="cp-video-card">
+            <div class="cp-embed">
+              <div class="cp-video-facade">
+                <iframe title="Corbin Bleu — LASIK surgery testimonial at Khanna Vision Institute" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen data-src="https://www.youtube.com/embed/80SyS_facWs"></iframe>
+                <button type="button" class="cp-video-poster" aria-label="Play video: Corbin Bleu LASIK testimonial">
+                  <img src="https://i.ytimg.com/vi/80SyS_facWs/hqdefault.jpg" alt="" width="480" height="360" decoding="async" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/80SyS_facWs/mqdefault.jpg'">
+                  <span class="cp-video-play-badge" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                </button>
+              </div>
+            </div>
+            <p class="cp-video-name">Corbin Bleu</p>
+            <p class="cp-video-role">Actor &amp; singer · LASIK testimonial</p>
+          </article>
+          <article class="cp-video-card">
+            <div class="cp-embed">
+              <div class="cp-video-facade">
+                <iframe title="Kevin Sorbo with Dr. Khanna — Beverly Hills LASIK" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen data-src="https://www.youtube.com/embed/N1VUsL1ospM"></iframe>
+                <button type="button" class="cp-video-poster" aria-label="Play video: Kevin Sorbo and Dr. Khanna">
+                  <img src="https://i.ytimg.com/vi/N1VUsL1ospM/hqdefault.jpg" alt="" width="480" height="360" decoding="async" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/N1VUsL1ospM/mqdefault.jpg'">
+                  <span class="cp-video-play-badge" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                </button>
+              </div>
+            </div>
+            <p class="cp-video-name">Kevin Sorbo</p>
+            <p class="cp-video-role">Actor · Vision correction with Dr. Khanna</p>
+          </article>
+          <article class="cp-video-card">
+            <div class="cp-embed">
+              <div class="cp-video-facade">
+                <iframe title="Raquel Gardener — LASIK experience at Khanna Vision Institute" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen data-src="https://www.youtube.com/embed/CnecRgJNN70"></iframe>
+                <button type="button" class="cp-video-poster" aria-label="Play video: Raquel Gardener LASIK journey">
+                  <img src="https://i.ytimg.com/vi/CnecRgJNN70/hqdefault.jpg" alt="" width="480" height="360" decoding="async" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/CnecRgJNN70/mqdefault.jpg'">
+                  <span class="cp-video-play-badge" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+                </button>
+              </div>
+            </div>
+            <p class="cp-video-name">Raquel Gardener</p>
+            <p class="cp-video-role">Actress · LASIK journey</p>
+          </article>
+        </div>
+        <p class="cp-playlist-more"><strong>Want more?</strong> Watch every celebrity patient video in our <a href="https://www.youtube.com/playlist?list=PL2-FfYtIeyaKehoh1dKms_5K1BsxUmHmC" target="_blank" rel="noopener noreferrer">Khanna Vision Celebrities playlist on YouTube</a> — or use the full playlist player below.</p>
+      </section>
+
+      <div class="cp-spotlight">
+        <div class="cp-player-shell">
+          <div class="cp-player-label">
+            <span>Full playlist</span>
+            <span style="opacity:0.75;font-weight:600;letter-spacing:0.06em;">All celebrity patient videos</span>
+          </div>
+          <div class="cp-embed">
+            <!-- Playlist player starts on this video (in playlist context). Poster matches the same video. -->
+            <div class="cp-video-facade">
+              <iframe
+                title="Khanna Vision Institute — celebrity patient videos (YouTube playlist)"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+                data-src="https://www.youtube.com/embed/ndXqgmCCFj8?list=PL2-FfYtIeyaKehoh1dKms_5K1BsxUmHmC"></iframe>
+              <button type="button" class="cp-video-poster" aria-label="Play celebrity patient playlist (starts with this video)">
+                <img src="https://i.ytimg.com/vi/ndXqgmCCFj8/hqdefault.jpg" alt="" width="480" height="360" decoding="async" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/ndXqgmCCFj8/mqdefault.jpg'">
+                <span class="cp-video-play-badge" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <aside class="cp-playlist-card" aria-labelledby="playlist-heading">
+          <h2 id="playlist-heading">More on YouTube</h2>
+          <p>Browse the entire celebrity collection: use the playlist menu in the player, or tap through to YouTube for the best full-screen experience.</p>
+          <a href="https://www.youtube.com/playlist?list=PL2-FfYtIeyaKehoh1dKms_5K1BsxUmHmC" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            Open playlist on YouTube
+          </a>
+        </aside>
+      </div>
+
+      <section class="cp-section" aria-labelledby="trust-heading">
+        <div class="cp-section-head">
+          <h2 id="trust-heading">The same team. The same standards.</h2>
+          <p>Whether you are on camera or off, we approach every consultation with advanced diagnostics, candid guidance, and a long-term view of eye health.</p>
+        </div>
+        <div class="cp-pillars">
+          <div class="cp-pillar">
+            <h3>Privacy-conscious care</h3>
+            <p>Discretion is built into how we schedule, coordinate, and follow up—so you can focus on your results.</p>
+          </div>
+          <div class="cp-pillar">
+            <h3>Full-spectrum vision solutions</h3>
+            <p>From SMILE and LASIK to EVO ICL, PIE, and laser cataract surgery—we match technology to your eyes, not the other way around.</p>
+          </div>
+          <div class="cp-pillar">
+            <h3>Experience you can verify</h3>
+            <p>25,000+ vision procedures performed, with two locations serving Beverly Hills and Westlake Village.</p>
+          </div>
+        </div>
+        <div class="cp-links">
+          <a class="cp-btn cp-btn--primary" href="/about/why-choose-us/success-stories/">More patient stories</a>
+          <a class="cp-btn cp-btn--ghost" href="/patients/results/reviews/">Reviews &amp; testimonials</a>
+          <a class="cp-btn cp-btn--ghost" href="/about/why-choose-us/gallery/">Before / after gallery</a>
+        </div>
+        <p class="cp-note">Videos feature real patients sharing their experience; individual candidacy and results vary. A consultation with diagnostic testing determines which options are appropriate for you.</p>
+      </section>
+
+      <section class="cp-cta" aria-labelledby="cta-heading">
+        <h2 id="cta-heading">See if you&rsquo;re a candidate</h2>
+        <p>Schedule a consultation in Beverly Hills or Westlake Village. We&rsquo;ll walk through your goals and your diagnostic data—clearly and honestly.</p>
+        <a href="/book-consultation/">Book a consultation</a>
+      </section>
+    </div>
+  </main>
+
+  <%- include('/partials/footer') %>
+  <script>
+  (function () {
+    document.querySelectorAll('.cp-video-facade').forEach(function (facade) {
+      var btn = facade.querySelector('.cp-video-poster');
+      var frame = facade.querySelector('iframe');
+      var base = frame && frame.getAttribute('data-src');
+      if (!btn || !frame || !base) return;
+      btn.addEventListener('click', function () {
+        var sep = base.indexOf('?') >= 0 ? '&' : '?';
+        frame.src = base + sep + 'autoplay=1';
+        facade.classList.add('is-playing');
+      });
+    });
+  })();
+  </script>
+</body>
+</html>

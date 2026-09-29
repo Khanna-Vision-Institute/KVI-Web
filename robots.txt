@@ -1,0 +1,57 @@
+# Updated SEO + AI robots.txt
+
+# === Standard Search Engines ===
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# === OpenAI ===
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# === Google AI ===
+User-agent: Google-Extended
+Allow: /
+
+# === Anthropic ===
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# === Perplexity ===
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# === Apple ===
+User-agent: Applebot
+Allow: /
+
+# === Default Rules ===
+User-agent: *
+Allow: /
+
+# Private / authenticated area
+
+# Block duplicate / tracking URLs
+Disallow: /*?utm_
+Disallow: /*&utm_
+Disallow: /*?refineParams=
+
+# Sitemaps
+Sitemap: https://khannainstitute.com/sitemap.xml

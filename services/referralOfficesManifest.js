@@ -76,7 +76,9 @@ function readExistingManifest(absOut) {
 function defaultDirectoryPages() {
   return {
     HeritageFamily: {
-      title: 'Doctor outreach',
+      title: 'Heritage Family referral network',
+      subtitle:
+        'Optometrists (OD) use the structured referral worksheet. MD/DO physicians schedule online with referring practice details preloaded.',
     },
   };
 }

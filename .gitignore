@@ -42,3 +42,27 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+
+# --- added by sync/production-2026-09-28 (server snapshot) ---
+# Runtime lead queues (contain lead PII) and other runtime data queues
+data/*queue*.json
+# Logs and server-side backups
+logs/
+backups/*/
+*.bak
+*.bak-*
+*.backup
+*.backup.*
+*.backup-*
+*.old
+*.old[0-9]
+*.broken
+*.messed-up
+*.before-*
+# Keys / certs
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+*.p12
+*.pfx

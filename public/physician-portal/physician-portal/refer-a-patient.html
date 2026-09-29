@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Refer a Patient | Physician Referral Worksheet | Khanna Vision Institute</title>
+  <meta name="description" content="Physician referral worksheet for Khanna Vision Institute — Beverly Hills and Westlake Village.">
+  <link rel="canonical" href="https://khannainstitute.com/referrals/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Libre+Baskerville:ital,wght@0,700;1,700&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/Doctorportal/physician-portal-brochure.css?v=20260618">
+  <style>
+    .rf-office-personal {
+      margin: 18px auto 28px;
+      max-width: 920px;
+    }
+    .rf-office-personal-inner { padding-bottom: 2px; }
+    .rf-office-personal-tag {
+      font-family: Montserrat, system-ui, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin: 0 0 8px;
+    }
+    .rf-office-personal-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin: 0 0 4px;
+      color: #121826;
+    }
+    .rf-office-personal-sub { margin: 0 0 4px; line-height: 1.45; }
+    .rf-office-personal-addr { margin: 6px 0 0; white-space: pre-wrap; }
+    .rf-office-personal-notes summary { cursor: pointer; font-size: 0.9rem; margin-top: 8px; color: #4b5563; }
+    .rf-office-personal-pre {
+      font-size: 0.85rem;
+      background: #f6f8fb;
+      border-radius: 8px;
+      padding: 10px;
+      overflow: auto;
+      max-height: 220px;
+      margin: 8px 0 0;
+    }
+    .rf-office-personal-hint { margin-top: 14px; }
+    .rf-ref-provider .rf-muted-inline { margin: 6px 0 10px; font-size: 0.92rem; }
+    .rf-ref-provider .rf-field-pair-three {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 720px) {
+      .rf-ref-provider .rf-field-pair-three { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    .rf-provider-npi-row { align-items: start; gap: 12px 20px; }
+    .rf-provider-npi-row .rf-inline-link { margin: 8px 0 0; }
+    form#rf-form:not([data-refer-personalized="1"]) .rf-refer-req-mark { display: none; }
+  </style>
+</head>
+<body class="kvi-brochure">
+
+<header class="kh-header">
+  <div class="kh-header-inner">
+    <a class="kh-logo" href="https://khannainstitute.com/" aria-label="Khanna Vision Institute">
+      <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/Logo1.png"
+           alt="Khanna Vision Institute" decoding="async">
+    </a>
+    <nav class="kh-nav" aria-label="Main navigation">
+      <a class="kh-nav-link" href="https://khannainstitute.com/">Home</a>
+      <a class="kh-nav-link" href="/Doctorportal/for-physicians">For Physicians</a>
+      <a class="kh-nav-link kh-nav-active" href="/Doctorportal/refer-a-patient">Referral Worksheet</a>
+      <a class="kh-nav-cta" href="tel:8052302126">(805) 230-2126</a>
+    </nav>
+  </div>
+</header>
+
+<div class="rf-breadcrumb" aria-label="Breadcrumb">
+  <div class="rf-breadcrumb-inner">
+    <a href="https://khannainstitute.com/">Home</a>
+    <span class="sep">›</span>
+    <a href="/Doctorportal/for-physicians">For Physicians</a>
+    <span class="sep">›</span>
+    <span class="cur">Referral Worksheet</span>
+  </div>
+</div>
+
+<main class="kv-main-pad rf-refer-main">
+<div class="rf-page rf-page--wide">
+
+<div class="rf-hero">
+  <h1>Physician Referral <em>Worksheet</em></h1>
+  <div class="kv-rule" aria-hidden="true"></div>
+</div>
+
+<section id="rf-office-card" class="rf-office-personal rf-simple-card" hidden aria-labelledby="rf-office-personal-h">
+  <div class="rf-office-personal-inner">
+    <p class="rf-office-personal-tag" id="rf-office-personal-h">Referring office</p>
+    <div class="rf-office-personal-body">
+      <p class="rf-office-personal-name" id="rf-office-practice"></p>
+      <p class="rf-office-personal-sub" id="rf-office-doctor"></p>
+      <p class="rf-office-personal-sub" id="rf-office-phone"></p>
+      <p class="rf-office-personal-addr rf-muted-note" id="rf-office-address"></p>
+      <details class="rf-office-personal-notes" id="rf-office-notes-wrap" hidden>
+        <summary>Full practice block</summary>
+        <pre class="rf-office-personal-pre" id="rf-office-raw"></pre>
+      </details>
+    </div>
+    <div class="rf-office-personal-hint rf-muted-note" id="rf-office-hint"></div>
+  </div>
+</section>
+
+<div class="rf-form-wrap">
+  <div id="rf-msg" class="rf-alert" role="status" aria-live="polite"></div>
+  <form id="rf-form" action="/api/physician-referral/submit" method="post" enctype="multipart/form-data" novalidate>
+    <input type="text" name="companyWebsite" value=""
+      style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;"
+      tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <input type="hidden" name="referringOfficeSlug" id="referringOfficeSlug" value="">
+    <input type="hidden" name="referringUrlKey" id="referringUrlKey" value="">
+
+    <section class="rf-simple-card rf-ref-provider" aria-labelledby="rf-refprov-h">
+      <h2 class="rf-simple-h" id="rf-refprov-h">Referring provider information</h2>
+      <p class="rf-muted-note rf-muted-inline">
+        Completed automatically when opened from your office link. Needed for routed referrals —
+        matches common electronic referral portals (LeadSquared-style).
+      </p>
+
+      <div class="rf-field-pair rf-provider-npi-row">
+        <div class="rf-field">
+          <label for="referringDoctorNpi">Referring Doctor NPI <span class="rf-req rf-refer-req-mark" aria-hidden="true">*</span></label>
+          <input class="rf-input" id="referringDoctorNpi" name="referringDoctorNpi" inputmode="numeric" maxlength="15"
+            autocomplete="off" placeholder="10-digit NPI (confirm with registry)" data-refer-required="personalized-only">
+          <p class="rf-inline-link rf-muted-note">
+            NPI Registry — <a href="https://npiregistry.cms.hhs.gov/search" target="_blank" rel="noopener noreferrer">Search for NPI</a>
+          </p>
+          <label class="rf-choice" style="margin-top:8px;">
+            <input type="checkbox" name="referringNpiConfirmed" id="referringNpiConfirmed" value="yes" data-refer-required="personalized-only">
+            <span>Confirm NPI info</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="rf-field-pair">
+        <div class="rf-field">
+          <label for="referringDoctorName">Referring Doctor Name <span class="rf-req rf-refer-req-mark" aria-hidden="true">*</span></label>
+          <input class="rf-input" id="referringDoctorName" name="referringDoctorName" type="text" autocomplete="name" data-refer-required="personalized-only">
+        </div>
+        <div class="rf-field">
+          <label for="referringDoctorPractice">Referring Doctor Practice</label>
+          <input class="rf-input" id="referringDoctorPractice" name="referringDoctorPractice" type="text" autocomplete="organization">
+        </div>
+      </div>
+
+      <div class="rf-field-pair">
+        <div class="rf-field">
+          <label for="referringDoctorCredentials">Referring Doctor Credentials <span class="rf-req rf-refer-req-mark" aria-hidden="true">*</span></label>
+          <div class="rf-select-wrap">
+            <select class="rf-select" id="referringDoctorCredentials" name="referringDoctorCredentials" data-refer-required="personalized-only">
+              <option value="">Select</option>
+              <option value="OD">OD</option>
+              <option value="MD">MD</option>
+              <option value="DO">DO</option>
+              <option value="NP">NP</option>
+              <option value="PA">PA</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="rf-field">
+          <label for="referringDoctorEmail">Referring Doctor Email</label>
+          <input class="rf-input" id="referringDoctorEmail" name="referringDoctorEmail" type="email" autocomplete="email">
+        </div>
+      </div>
+
+      <div class="rf-field-pair rf-field-pair-three">
+        <div class="rf-field">
+          <label for="referringDoctorPhone">Referring Doctor Phone <span class="rf-req rf-refer-req-mark" aria-hidden="true">*</span></label>
+          <input class="rf-input" id="referringDoctorPhone" name="referringDoctorPhone" type="tel" autocomplete="tel" placeholder="10 digit number" data-refer-required="personalized-only">
+        </div>
+        <div class="rf-field">
+          <label for="referringDoctorFax">Referring Doctor Fax <span class="rf-req rf-refer-req-mark" aria-hidden="true">*</span></label>
+          <input class="rf-input" id="referringDoctorFax" name="referringDoctorFax" type="tel" placeholder="10 digit number" data-refer-required="personalized-only">
+        </div>
+        <div class="rf-field" style="grid-column:1/-1;"></div>
+      </div>
+
+      <div class="rf-field rf-g-full">
+        <label for="referringDoctorAddress">Referring Doctor Address</label>
+        <input class="rf-input" id="referringDoctorAddress" name="referringDoctorAddress" type="text" autocomplete="street-address">
+      </div>
+
+      <div class="rf-field-pair rf-field-pair-three">
+        <div class="rf-field">
+          <label for="referringDoctorCity">Referring Doctor City</label>
+          <input class="rf-input" id="referringDoctorCity" name="referringDoctorCity" type="text" autocomplete="address-level2">
+        </div>
+        <div class="rf-field rf-g-span2">
+          <label for="referringDoctorStateZip">Referring Doctor State or ZIP</label>
+          <input class="rf-input" id="referringDoctorStateZip" name="referringDoctorStateZip" type="text" autocomplete="address-level1">
+        </div>
+      </div>
+    </section>
+
+    <section class="rf-simple-card" aria-labelledby="rf-patient-h">
+      <h2 class="rf-simple-h" id="rf-patient-h">Patient details</h2>
+      <div class="rf-field rf-g-full">
+        <label for="patientName">Patient name <span class="rf-req">*</span></label>
+        <input class="rf-input" id="patientName" name="patientName" type="text" autocomplete="name" required>
+      </div>
+      <div class="rf-field-pair" role="group" aria-label="Date of birth or age and phone">
+        <div class="rf-field">
+          <label for="patientDobAge">DOB / age</label>
+          <input class="rf-input" id="patientDobAge" name="patientDobAge" type="text" placeholder="e.g. 03/14/1985 or 39">
+        </div>
+        <div class="rf-field">
+          <label for="patientPhone">Phone <span class="rf-req">*</span></label>
+          <input class="rf-input" id="patientPhone" name="patientPhone" type="tel" autocomplete="tel" required>
+        </div>
+      </div>
+      <div class="rf-field rf-g-full">
+        <label for="patientEmail">Email <span class="rf-req">*</span></label>
+        <input class="rf-input" id="patientEmail" name="patientEmail" type="email" autocomplete="email" required>
+      </div>
+      <div class="rf-preferred-block">
+        <p class="rf-sub">Preferred location <span class="rf-req">*</span></p>
+        <div class="rf-choice-row" role="group" aria-label="Preferred location">
+          <label class="rf-choice"><input type="checkbox" name="preferredLocation" value="Beverly Hills"><span>Beverly Hills</span></label>
+          <label class="rf-choice"><input type="checkbox" name="preferredLocation" value="Westlake Village"><span>Westlake Village</span></label>
+          <label class="rf-choice"><input type="checkbox" name="preferredLocation" value="First available"><span>First available</span></label>
+        </div>
+      </div>
+    </section>
+
+    <section class="rf-simple-card" aria-labelledby="rf-clinical-h">
+      <h2 class="rf-simple-h" id="rf-clinical-h">Diagnosis &amp; suggested procedure</h2>
+      <div class="rf-dx-proc">
+        <div>
+          <h3 class="rf-simple-h-sub">Diagnosis</h3>
+          <div class="rf-choice-stack">
+            <label class="rf-choice"><input type="checkbox" name="diagnosis" value="Myopia"><span>Myopia</span></label>
+            <label class="rf-choice"><input type="checkbox" name="diagnosis" value="Hyperopia"><span>Hyperopia</span></label>
+            <label class="rf-choice"><input type="checkbox" name="diagnosis" value="Astigmatism"><span>Astigmatism</span></label>
+            <label class="rf-choice"><input type="checkbox" name="diagnosis" value="Presbyopia"><span>Presbyopia</span></label>
+            <label class="rf-choice"><input type="checkbox" name="diagnosis" value="Keratoconus"><span>Keratoconus</span></label>
+            <label class="rf-choice"><input type="checkbox" name="diagnosis" value="Post LASIK ectasia"><span>Post LASIK ectasia</span></label>
+            <label class="rf-choice"><input type="checkbox" name="diagnosis" value="Cataract"><span>Cataract</span></label>
+            <label class="rf-choice"><input type="checkbox" name="diagnosis" value="Pterygium"><span>Pterygium</span></label>
+          </div>
+        </div>
+        <div>
+          <h3 class="rf-simple-h-sub">Suggested procedure</h3>
+          <div class="rf-choice-stack">
+            <label class="rf-choice"><input type="checkbox" name="procedure" value="SMILE Laser"><span>SMILE Laser</span></label>
+            <label class="rf-choice"><input type="checkbox" name="procedure" value="LASIK / custom corneal laser"><span>LASIK / custom corneal laser</span></label>
+            <label class="rf-choice"><input type="checkbox" name="procedure" value="EVO ICL"><span>EVO ICL</span></label>
+            <label class="rf-choice"><input type="checkbox" name="procedure" value="PIE / presbyopic implant in eye"><span>PIE / presbyopic implant in eye</span></label>
+            <label class="rf-choice"><input type="checkbox" name="procedure" value="Keratoconus evaluation (EpiOXA)"><span>Keratoconus evaluation (EpiOXA)</span></label>
+            <label class="rf-choice rf-choice--indent"><input type="checkbox" name="procedure" value="CTAK"><span>CTAK</span></label>
+            <label class="rf-choice"><input type="checkbox" name="procedure" value="Cosmetic pterygium"><span>Cosmetic pterygium</span></label>
+            <label class="rf-choice"><input type="checkbox" name="procedure" value="Robotic laser cataract surgery"><span>Robotic laser cataract surgery</span></label>
+            <label class="rf-choice"><input type="checkbox" name="procedure" value="Second opinion / complex candidacy"><span>Second opinion / complex candidacy</span></label>
+          </div>
+        </div>
+      </div>
+      <p class="rf-muted-note">Select at least one item under diagnosis <em>or</em> suggested procedure.</p>
+    </section>
+
+    <section class="rf-simple-card" aria-labelledby="rf-upload-h">
+      <h2 class="rf-simple-h" id="rf-upload-h">Uploads, shared care &amp; clinical data</h2>
+
+      <div class="rf-upload-pair">
+        <div class="rf-upload-cell rf-upload-cell--insurance rf-upload-ins-col">
+          <div class="rf-field">
+            <label for="uploadInsurance">Upload insurance</label>
+            <input class="rf-file-input" id="uploadInsurance" name="uploadInsurance" type="file"
+              accept=".png,.jpg,.jpeg,.bmp,.mp4,.webm,.mov,.pdf,.doc,.docx,image/png,image/jpeg,image/bmp,video/mp4,video/webm,video/quicktime,application/pdf">
+          </div>
+          <p class="rf-file-formats rf-file-formats--inline">Supported file formats: png, jpg, jpeg, bmp, mp4, webm, mov, pdf, doc, and docx.</p>
+        </div>
+        <div class="rf-upload-cell rf-upload-cell--chart">
+          <div class="rf-field">
+            <label for="uploadClinicalChart">Upload clinical chart <span class="rf-hint-inline">(multiple files allowed)</span></label>
+            <input class="rf-file-input" id="uploadClinicalChart" name="uploadClinicalChart" type="file" multiple
+              accept=".png,.jpg,.jpeg,.bmp,.mp4,.webm,.mov,.pdf,.doc,.docx,image/png,image/jpeg,image/bmp,video/mp4,video/webm,video/quicktime,application/pdf">
+          </div>
+        </div>
+        <div class="rf-upload-cell rf-upload-cell--shared-care">
+          <div class="rf-field rf-field--shared-care">
+            <label for="sharedCare">Shared care</label>
+            <div class="rf-select-wrap">
+              <select class="rf-select" id="sharedCare" name="sharedCare">
+                <option value="">Select an option</option>
+                <option value="comanage">I will comanage as soon as medically appropriate</option>
+                <option value="kvi-postop">KVI do post op &amp; return for general eye care</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="rf-upload-cell rf-upload-cell--clinical-data rf-clinical-bundle">
+          <p class="rf-sub rf-sub--clinical-cap">Clinical data available</p>
+          <div class="rf-check-grid rf-check-grid--clinical">
+            <label class="rf-choice"><input type="checkbox" name="clinicalData" value="Manifest / cycloplegic refraction"><span>Manifest / cycloplegic refraction</span></label>
+            <label class="rf-choice"><input type="checkbox" name="clinicalData" value="Topography / tomography"><span>Topography / tomography</span></label>
+            <label class="rf-choice"><input type="checkbox" name="clinicalData" value="OCT"><span>OCT</span></label>
+            <label class="rf-choice"><input type="checkbox" name="clinicalData" value="Pachymetry"><span>Pachymetry</span></label>
+            <label class="rf-choice"><input type="checkbox" name="clinicalData" value="Pentacam"><span>Pentacam</span></label>
+            <label class="rf-choice"><input type="checkbox" name="clinicalData" value="Corneal mapping"><span>Corneal mapping</span></label>
+            <label class="rf-choice"><input type="checkbox" name="clinicalData" value="Photos"><span>Photos</span></label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rf-simple-card" aria-labelledby="rf-submit-h">
+      <h2 class="rf-simple-h" id="rf-submit-h">Instructions &amp; submit</h2>
+      <div class="rf-field rf-g-full">
+        <label for="specialInstructions">Special instructions</label>
+        <textarea class="rf-textarea rf-textarea--short" id="specialInstructions" name="specialInstructions" maxlength="2000"
+          placeholder="Timing preferences, urgency context, language needs…"></textarea>
+      </div>
+      <div class="rf-g2">
+        <div class="rf-field">
+          <label for="preferredDoctor">Doctor name <span class="rf-req">*</span></label>
+          <div class="rf-select-wrap">
+            <select class="rf-select" id="preferredDoctor" name="preferredDoctor" required>
+              <option value="">Select</option>
+              <option>Dr. Rajesh Khanna, MD</option>
+              <option>No preference / first available</option>
+            </select>
+          </div>
+        </div>
+        <div class="rf-field">
+          <label for="submittedBy">Who is submitting <span class="rf-req">*</span></label>
+          <input class="rf-input" id="submittedBy" name="submittedBy" type="text" placeholder="Staff name &amp; role" required>
+        </div>
+      </div>
+    </section>
+
+    <div class="rf-action-bar rf-action-bar--dual">
+      <a class="rf-schedule-cta" href="/Doctorportal/book-consultation">Schedule now</a>
+      <button type="submit" class="rf-submit" id="rf-submit">Submit</button>
+    </div>
+  </form>
+
+  <div class="rf-phi rf-phi--footer" role="note">
+    <span class="rf-phi-icon">⚠</span>
+    <span>
+      <strong>PHI Notice:</strong> Do not email identifiable records from a non-compliant client.
+      Pair this summary with secure fax, encrypted relay, your EHR tether, or direct upload workflow.
+    </span>
+  </div>
+</div>
+
+</div>
+</main>
+
+<footer class="kh-footer">
+  <div class="kh-footer-inner">
+    <div class="kh-footer-grid">
+      <div>
+        <img src="https://khanna-media-bucket.s3.us-east-1.amazonaws.com/Logo1.png" alt="Khanna Vision Institute">
+        <p class="kh-footer-tagline">Precision vision care for Greater Los Angeles —<br>Beverly Hills & Westlake Village.</p>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Physician Portal</p>
+        <a href="/Doctorportal/for-physicians">Physician Hub</a>
+        <a href="/Doctorportal/refer-a-patient">Refer a Patient</a>
+        <a href="/Doctorportal/book-consultation">Online Scheduling</a>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Contact</p>
+        <a href="tel:8052302126">(805) 230-2126</a>
+        <a href="https://khannainstitute.com/contact/">Contact Us</a>
+      </div>
+      <div class="kh-footer-col">
+        <p class="kh-footer-col-h">Locations</p>
+        <span>Beverly Hills</span>
+        <span>Westlake Village</span>
+      </div>
+    </div>
+    <div class="kh-footer-copy">
+      <p>© 2026 Khanna Vision Institute. All rights reserved.</p>
+      <p><a href="#">Privacy Policy</a>  ·  <a href="#">Terms of Use</a>  ·  <a href="#">HIPAA Notice</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  function lineFromRaw(rb, idx) {
+    if (!rb) return '';
+    var ls = String(rb).split(/\r?\n/).map(function (s) { return s.trim(); }).filter(Boolean);
+    return ls[idx] || '';
+  }
+
+  function splitCityState(addressLine) {
+    var al = String(addressLine || '').trim();
+    if (!al) return { city: '', stateZip: '' };
+    var comma = al.indexOf(',');
+    if (comma < 1) return { city: '', stateZip: al };
+    return {
+      city: al.slice(0, comma).trim(),
+      stateZip: al.slice(comma + 1).trim()
+    };
+  }
+
+  function digitsOnly(s) {
+    return String(s || '').replace(/\D/g, '');
+  }
+
+  function isUsPhone10(s) {
+    var d = digitsOnly(s);
+    if (d.length === 11 && d.charAt(0) === '1') d = d.slice(1);
+    return d.length === 10;
+  }
+
+  function getOfficeRefFromUrl() {
+    try {
+      var qp = new URLSearchParams(location.search).get('ref');
+      if (qp && qp.trim()) return qp.trim();
+
+      var path = location.pathname || '';
+      var mLink = path.match(/\/Doctorportal\/link\/([^/]+)\/?$/i);
+      if (mLink && mLink[1]) {
+        return decodeURIComponent(mLink[1]).replace(/\.html$/i, '');
+      }
+
+      var parts = path.split('/').filter(Boolean);
+      if (!parts.length) return '';
+      var last = parts[parts.length - 1] || '';
+      var low = String(last).toLowerCase().replace(/\.html$/i, '');
+      if (low === 'refer-a-patient' || low === 'link') return '';
+      return last;
+    } catch (x) {
+      return '';
+    }
+  }
+
+  var refKeyFromUrl = getOfficeRefFromUrl();
+  var form = document.getElementById('rf-form');
+
+  function applyPersonalizedOffice(payload) {
+    if (!payload || !payload.office) return;
+    var o = payload.office;
+
+    if (form) form.setAttribute('data-refer-personalized', '1');
+
+    var card = document.getElementById('rf-office-card');
+    var pr = document.getElementById('rf-office-practice');
+    var dr = document.getElementById('rf-office-doctor');
+    var ph = document.getElementById('rf-office-phone');
+    var ad = document.getElementById('rf-office-address');
+    var rawWrap = document.getElementById('rf-office-notes-wrap');
+    var rawPre = document.getElementById('rf-office-raw');
+    var hint = document.getElementById('rf-office-hint');
+
+    function setTxt(el, txt) {
+      if (!el) return;
+      if (txt && String(txt).trim()) el.textContent = String(txt).trim();
+      else el.textContent = '';
+    }
+
+    if (pr) setTxt(pr, o.practiceName);
+    if (dr) setTxt(dr, o.doctorName);
+    if (ph) setTxt(ph, o.phone);
+    setTxt(ad, o.addressLine);
+
+    var hasExtras = !!(o.rawBlock && String(o.rawBlock).trim());
+    if (rawWrap && rawPre && hasExtras) {
+      rawPre.textContent = String(o.rawBlock).trim();
+      rawWrap.hidden = false;
+    }
+
+    var slugEl = document.getElementById('referringOfficeSlug');
+    var urlKeyEl = document.getElementById('referringUrlKey');
+    if (slugEl) slugEl.value = o.slug || '';
+    if (urlKeyEl) urlKeyEl.value = refKeyFromUrl || '';
+
+    function setVal(id, v) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var nextVal = v !== undefined && v !== null ? String(v).trim() : '';
+      el.value = nextVal;
+    }
+
+    setVal('referringDoctorNpi', o.npi);
+    setVal('referringDoctorName', o.doctorName);
+    setVal('referringDoctorPractice', o.practiceName);
+
+    var cred = document.getElementById('referringDoctorCredentials');
+    if (cred && o.credentials) {
+      var want = String(o.credentials).trim();
+      var ok = false;
+      for (var ci = 0; ci < cred.options.length; ci++) {
+        if (String(cred.options[ci].value).toLowerCase() === want.toLowerCase()) {
+          cred.selectedIndex = ci;
+          ok = true;
+          break;
+        }
+      }
+      if (!ok) {
+        for (var cj = 0; cj < cred.options.length; cj++) {
+          if (String(cred.options[cj].value).toLowerCase() === 'other') {
+            cred.selectedIndex = cj;
+            break;
+          }
+        }
+      }
+    }
+
+    setVal('referringDoctorEmail', o.email);
+    setVal('referringDoctorPhone', o.phone);
+    setVal('referringDoctorFax', o.fax);
+
+    var street = (o.addressStreet && String(o.addressStreet).trim()) || lineFromRaw(o.rawBlock, 2) || '';
+    if (!street && o.addressLine) {
+      var al0 = String(o.addressLine);
+      var ixComma = al0.indexOf(',');
+      street = ixComma > -1 ? al0.slice(0, ixComma).trim() : al0.trim();
+    }
+
+    var cityGuess = (o.city && String(o.city).trim()) || '';
+    var stateGuess = (o.stateOrZip && String(o.stateOrZip).trim()) || '';
+    if (!cityGuess || !stateGuess) {
+      var sp = splitCityState(o.addressLine);
+      if (!cityGuess) cityGuess = sp.city;
+      if (!stateGuess) stateGuess = sp.stateZip;
+    }
+
+    setVal('referringDoctorAddress', street);
+    setVal('referringDoctorCity', cityGuess);
+    setVal('referringDoctorStateZip', stateGuess);
+
+    var sb = document.getElementById('submittedBy');
+    if (sb && !sb.value.trim() && (o.practiceName || '').trim()) {
+      sb.placeholder = 'Staff name & role (e.g. ' + String(o.practiceName).trim() + ' referral desk)';
+      var seed = '';
+      if (o.practiceName && o.practiceName.trim()) seed = o.practiceName.trim();
+      else if (o.doctorName && o.doctorName.trim()) seed = o.doctorName.trim();
+      if (seed) sb.value = seed + ' — ';
+    }
+
+    if (hint) {
+      hint.textContent =
+        'This worksheet was opened via your office link — confirm NPI, fax, and practice details before submitting. Personalization is not a security barrier; anyone with the link can view this.';
+    }
+
+    if (card) card.hidden = false;
+
+    requestAnimationFrame(function () {
+      var h = document.getElementById('rf-refprov-h');
+      if (h && typeof h.scrollIntoView === 'function') {
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
+  if (refKeyFromUrl) {
+    fetch('/api/referral-office/' + encodeURIComponent(refKeyFromUrl), {
+      method: 'GET',
+      credentials: 'same-origin',
+      headers: { Accept: 'application/json' }
+    })
+      .then(function (r) { return r.json().catch(function () { return {}; }); })
+      .then(function (body) {
+        if (body && body.ok && body.office) applyPersonalizedOffice(body);
+      })
+      .catch(function () {});
+  }
+
+  form = document.getElementById('rf-form');
+  var msg = document.getElementById('rf-msg');
+  var submit = document.getElementById('rf-submit');
+
+  function flash(kind, text) {
+    msg.className = 'rf-alert rf-alert--' + kind;
+    msg.textContent = text;
+    msg.style.display = 'block';
+    msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  if (!form) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var errs = [];
+    var pn = form.querySelector('[name="patientName"]');
+    if (!pn || !pn.value.trim()) errs.push('Patient name is required.');
+    if (!form.querySelector('[name="patientPhone"]').value.trim()) errs.push('Phone is required.');
+    if (!form.querySelector('[name="patientEmail"]').value.trim()) errs.push('Email is required.');
+    if (!form.querySelectorAll('input[name="preferredLocation"]:checked').length) errs.push('Select at least one preferred location.');
+    var dx = form.querySelectorAll('input[name="diagnosis"]:checked').length;
+    var proc = form.querySelectorAll('input[name="procedure"]:checked').length;
+    if (!dx && !proc) errs.push('Select at least one diagnosis or suggested procedure.');
+    if (!form.querySelector('[name="preferredDoctor"]').value.trim()) errs.push('Select a doctor.');
+    if (!form.querySelector('[name="submittedBy"]').value.trim()) errs.push('Who is submitting is required.');
+    var personalized = form.getAttribute('data-refer-personalized') === '1';
+    if (personalized) {
+      var cbNpi = form.querySelector('[name="referringNpiConfirmed"]');
+      if (!cbNpi || !cbNpi.checked) errs.push('Please confirm Referring Provider NPI information.');
+      var npi = digitsOnly((form.querySelector('[name="referringDoctorNpi"]') || {}).value);
+      if (npi.length !== 10) errs.push('Referring Doctor NPI must be exactly 10 digits.');
+      var rname = form.querySelector('[name="referringDoctorName"]');
+      if (!rname || !rname.value.trim()) errs.push('Referring Doctor Name is required.');
+      var rcred = form.querySelector('[name="referringDoctorCredentials"]');
+      if (!rcred || !rcred.value.trim()) errs.push('Referring Doctor Credentials are required.');
+      var rphone = form.querySelector('[name="referringDoctorPhone"]');
+      if (!rphone || !isUsPhone10(rphone.value)) errs.push('Referring Doctor Phone must be a 10-digit US number.');
+      var rfax = form.querySelector('[name="referringDoctorFax"]');
+      if (!rfax || !isUsPhone10(rfax.value)) errs.push('Referring Doctor Fax must be a 10-digit US number.');
+    }
+    if (errs.length) { flash('err', errs[0]); return; }
+
+    submit.disabled = true;
+    msg.style.display = 'none';
+
+    fetch('/api/physician-referral/submit', {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' },
+      credentials: 'same-origin'
+    })
+    .then(function (r) { return r.text().then(function (t) { var d = {}; try { d = JSON.parse(t); } catch (x) {} return { ok: r.ok, data: d }; }); })
+    .then(function (res) {
+      submit.disabled = false;
+      if (res.ok && res.data && res.data.success) {
+        form.reset();
+        form.removeAttribute('data-refer-personalized');
+        flash('ok', 'Referral submitted — our team will follow up at the contacts provided.');
+      } else {
+        flash('err', (res.data && res.data.message) || 'Could not submit. Please call (805) 230-2126.');
+      }
+    })
+    .catch(function () { submit.disabled = false; flash('err', 'Network error. Please call (805) 230-2126.'); });
+  });
+})();
+</script>
+
+</body>
+</html>
