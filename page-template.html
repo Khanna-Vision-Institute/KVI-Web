@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <% if (title) { %>
   <title><%= title %></title>
+  <% } %>
   
   <% if (metaDescription) { %>
     <meta name="description" content="<%= metaDescription %>">
@@ -17,7 +19,9 @@
 
   <main class="kvi-main">
     <article class="kvi-article">
+      <% if (title) { %>
       <h1 class="kvi-page-title" style="margin-top: 0;"><%= title %></h1>
+      <% } %>
       <div class="page-content">
         <%- content %>
       </div>

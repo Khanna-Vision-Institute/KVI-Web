@@ -3,8 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= blog.title || 'Blog Post' %> - Khanna Vision Institute</title>
+    <% const articleTitle = blog.title || 'Blog Post';
+       const longSuffix = ' - Khanna Vision Institute';
+       const shortSuffix = ' | Khanna Vision Institute';
+       const titleSuffix = (articleTitle + longSuffix).length > 60 ? shortSuffix : longSuffix; %>
+    <title><%= articleTitle + titleSuffix %></title>
     <meta name="description" content="<%= blog.metaDescription || blog.excerpt || '' %>">
+    <script type="application/ld+json">
+    <%
+      const articleUrl = 'https://khannainstitute.com/' + String(blog.slug || '').replace(/^\//, '').replace(/\/?$/, '/');
+      const article = {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: articleTitle,
+        mainEntityOfPage: articleUrl,
+        publisher: { '@id': 'https://khannainstitute.com/#organization' }
+      };
+      const published = blog.publishedAt || blog.date || blog.Date || '';
+      if (published) article.datePublished = published;
+      if (blog.author) article.author = { '@type': 'Person', name: blog.author };
+      if (blog.featuredImage || blog.featuredImageUrl) article.image = blog.featuredImage || blog.featuredImageUrl;
+    %>
+    <%- JSON.stringify(article) %>
+    </script>
     <% if (blog.keywords) { %>
     <meta name="keywords" content="<%= blog.keywords %>">
     <% } %>

@@ -5,6 +5,7 @@ const ejs = require('ejs');
 const dotenv = require('dotenv');
 const cron = require('node-cron');
 const axios = require('axios');
+const compression = require('compression');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 dotenv.config({ path: path.resolve(__dirname, '.env'), quiet: true });
@@ -36,6 +37,17 @@ const CHAT_OPENERS_JSON = path.join(PUBLIC_DIR, 'js', 'kvi-chat-openers.json');
 /* Nginx / Cloudflare — needed so req.protocol and forwarded Host/proto match the browser URL for OAuth redirect_uri. */
 app.set('trust proxy', Number(process.env.TRUST_PROXY_HOPS || 1));
 
+// Gzip when the client accepts it. Nginx terminates HTTPS, so this app does not send HSTS.
+app.use(compression());
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  // No Content-Security-Policy: pages rely on inline scripts (gtag, booking, header)
+  // and images from the S3/Strapi hosts. A strict CSP would blank or break the site.
+  next();
+});
+
 const PREFERRED_ORIGIN = 'https://khannainstitute.com';
 
 function requestHost(req) {
@@ -66,29 +78,186 @@ function altFromImageSrc(src) {
 
 const NON_INDEXABLE_PATH = /thank-you|booking-success|physician-portal|doctorportal|\/Doctorportal|cron-dashboard|master-report|\/test\/|sign-in/i;
 
+const DEFAULT_SOCIAL_IMAGE = 'https://khanna-media-bucket.s3.us-east-1.amazonaws.com/khannainstitute/Logo+2.png';
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function stripHtmlText(value) {
+  return String(value || '')
+    .replace(/<br\s*\/?>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function firstH1Text(html) {
+  const match = String(html).match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i);
+  return match ? stripHtmlText(match[1]) : '';
+}
+
+function firstParagraphText(html) {
+  const re = /<p\b[^>]*>([\s\S]*?)<\/p>/gi;
+  let match;
+  while ((match = re.exec(html))) {
+    const text = stripHtmlText(match[1]);
+    if (text) return text;
+  }
+  return '';
+}
+
+function canonicalPathForRequest(req) {
+  const raw = String(req.originalUrl || req.url || '/').split('?')[0].split('#')[0] || '/';
+  let pathName = raw.startsWith('/') ? raw : `/${raw}`;
+  if (pathName === '/') return '/';
+  if (/\.[a-z0-9]+$/i.test(pathName)) return pathName;
+  if (!pathName.endsWith('/')) pathName += '/';
+  return pathName;
+}
+
+function pathnameOfHref(href) {
+  try {
+    if (/^https?:\/\//i.test(href)) return new URL(href).pathname || '/';
+  } catch (_) {}
+  const pathOnly = String(href || '').split('?')[0].split('#')[0];
+  return pathOnly.startsWith('/') ? pathOnly : '';
+}
+
+function canonicalNeedsSelf(existingHref, requestPath) {
+  const pathName = pathnameOfHref(existingHref);
+  if (!pathName) return false;
+  const norm = pathName.length > 1 && pathName.endsWith('/') ? pathName.slice(0, -1) : pathName;
+  const forced = new Set([
+    '/tecnis-puresee-vs-panoptix-vs-odyssey',
+    '/finevision-vs-panoptix-vs-odyssey',
+    '/procedures/specialty-treatments/epioxa-beverly-hills',
+  ]);
+  if (forced.has(norm)) return true;
+  const reqNorm = requestPath.length > 1 && requestPath.endsWith('/') ? requestPath.slice(0, -1) : requestPath;
+  return reqNorm === '/blog/latest' && norm === '/latest';
+}
+
+function metaDescriptionTag(html) {
+  return String(html).match(/<meta\s+[^>]*name=["']description["'][^>]*>/i);
+}
+
+function jsonLdScript(data) {
+  return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
+}
+
 function ensureIndexableHead(html, req) {
   if (!html || !/<head[\s>]/i.test(html)) return html;
-  const canonical = preferredPageUrl(req);
-  let out = html.replace(
-    /<link\s+rel=["']canonical["']\s+href=["']https?:\/\/(?:www\.)?khannainstitute\.com([^"']*)["']\s*\/?>/i,
-    (match, rest) => `<link rel="canonical" href="${PREFERRED_ORIGIN}${rest || '/'}">`
-  );
+  const requestPath = canonicalPathForRequest(req);
+  const canonical = PREFERRED_ORIGIN + requestPath;
+  let out = html;
+
+  const h1 = firstH1Text(out);
+  const hasTitle = /<title\b[^>]*>[\s\S]*?\S[\s\S]*?<\/title>/i.test(out);
+  if (!hasTitle && h1) {
+    out = out.replace(/<head([^>]*)>/i, `<head$1>\n<title>${escapeHtml(`${h1} | Khanna Vision Institute`)}</title>`);
+  }
+
+  const paragraph = firstParagraphText(out);
+  const descTag = metaDescriptionTag(out);
+  if (paragraph) {
+    const current = descTag ? ((descTag[0].match(/content=["']([^"']*)["']/i) || [])[1] || '') : null;
+    if (current === null) {
+      out = out.replace(/<head([^>]*)>/i, `<head$1>\n<meta name="description" content="${escapeHtml(paragraph)}">`);
+    } else if (!String(current).trim()) {
+      out = out.replace(descTag[0], `<meta name="description" content="${escapeHtml(paragraph)}">`);
+    }
+  }
+
+  out = out.replace(/<link\s+rel=["']canonical["'][^>]*>/gi, (tag) => {
+    const href = (tag.match(/href=["']([^"']+)["']/i) || [])[1] || '';
+    if (!canonicalNeedsSelf(href, requestPath)) return tag;
+    return `<link rel="canonical" href="${canonical}">`;
+  });
   if (!/rel=["']canonical["']/i.test(out)) {
-    out = out.replace(/<head([^>]*)>/i, `<head$1>\n  <link rel="canonical" href="${canonical}">`);
+    out = out.replace(/<head([^>]*)>/i, `<head$1>\n<link rel="canonical" href="${canonical}">`);
   }
   if (!/name=["']robots["']/i.test(out)) {
-    const content = NON_INDEXABLE_PATH.test(req.path || '') ? 'noindex, follow' : 'index, follow';
-    out = out.replace(/<head([^>]*)>/i, `<head$1>\n  <meta name="robots" content="${content}">`);
+    const content = NON_INDEXABLE_PATH.test(requestPath) ? 'noindex, follow' : 'index, follow';
+    out = out.replace(/<head([^>]*)>/i, `<head$1>\n<meta name="robots" content="${content}">`);
   }
+  if (!/property=["']og:image["']/i.test(out)) {
+    out = out.replace(/<\/head>/i, `<meta property="og:image" content="${DEFAULT_SOCIAL_IMAGE}">\n</head>`);
+  }
+  if (!/name=["']twitter:card["']/i.test(out)) {
+    out = out.replace(/<\/head>/i, `<meta name="twitter:card" content="summary">\n<meta name="twitter:image" content="${DEFAULT_SOCIAL_IMAGE}">\n</head>`);
+  }
+  if (!/"@type"\s*:\s*"Organization"/i.test(out)) {
+    out = out.replace(/<\/head>/i, `${jsonLdScript({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      '@id': 'https://khannainstitute.com/#organization',
+      name: 'Khanna Vision Institute',
+      url: 'https://khannainstitute.com/',
+      logo: DEFAULT_SOCIAL_IMAGE,
+      sameAs: [
+        'https://www.facebook.com/KhannaVision/',
+        'https://www.instagram.com/khannalasik/',
+        'https://tiktok.com/@khannavision',
+        'https://www.youtube.com/channel/UCFf6F9grsR0z0xftFIicKIw',
+      ],
+      address: [
+        {
+          '@type': 'PostalAddress',
+          streetAddress: '9100 Wilshire Blvd, Suite 265E',
+          addressLocality: 'Beverly Hills',
+          addressRegion: 'CA',
+          postalCode: '90212',
+          addressCountry: 'US',
+        },
+        {
+          '@type': 'PostalAddress',
+          streetAddress: '31824 Village Center Rd, Suite F',
+          addressLocality: 'Westlake Village',
+          addressRegion: 'CA',
+          postalCode: '91361',
+          addressCountry: 'US',
+        },
+      ],
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          telephone: '+1-805-230-2126',
+          contactType: 'customer service',
+          areaServed: 'US',
+          availableLanguage: ['English'],
+        },
+        {
+          '@type': 'ContactPoint',
+          contactType: 'Emergency',
+          name: 'Emergency',
+        },
+      ],
+    })}\n</head>`);
+  }
+  if (!/"@type"\s*:\s*"WebSite"/i.test(out)) {
+    out = out.replace(/<\/head>/i, `${jsonLdScript({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      '@id': 'https://khannainstitute.com/#website',
+      url: 'https://khannainstitute.com/',
+      name: 'Khanna Vision Institute',
+      publisher: { '@id': 'https://khannainstitute.com/#organization' },
+    })}\n</head>`);
+  }
+
   let imageIndex = 0;
   out = out.replace(/<img\b[^>]*>/gi, (tag) => {
     imageIndex += 1;
     let next = tag;
-    if (!/\balt\s*=/i.test(next)) {
-      const src = (next.match(/\bsrc\s*=\s*["']([^"']+)["']/i) || [])[1] || '';
-      const alt = altFromImageSrc(src).replace(/"/g, '&quot;');
-      next = next.replace(/<img\b/i, `<img alt="${alt}"`);
-    }
     const eager = /\bfetchpriority\s*=\s*["']high["']/i.test(next) || imageIndex === 1;
     if (!/\bloading\s*=/i.test(next) && !eager) {
       next = next.replace(/<img\b/i, '<img loading="lazy"');
@@ -98,6 +267,7 @@ function ensureIndexableHead(html, req) {
     }
     return next;
   });
+
   out = out.replace(/<video\b[^>]*>/gi, (tag) => {
     let next = tag;
     if (!/\bpreload\s*=/i.test(next)) next = next.replace(/<video\b/i, '<video preload="none"');
@@ -105,6 +275,7 @@ function ensureIndexableHead(html, req) {
   });
   return out;
 }
+
 
 app.use((req, res, next) => {
   const host = requestHost(req);
@@ -389,6 +560,12 @@ const renderLocalContent = (viewPath, res, next) => {
     const tracking = app.locals.siteTracking;
     if (tracking && typeof tracking.pageAlreadyTagged === 'function' && !tracking.pageAlreadyTagged(html)) {
       html = tracking.fragmentTrackingBlock(app.locals.siteCallTracking) + html;
+    }
+    if (!/<html[\s>]/i.test(html)) {
+      return res.render('partials/content-shell.html', { pageContent: html }, (wrapErr, wrapped) => {
+        if (wrapErr) return next(wrapErr);
+        res.send(wrapped);
+      });
     }
     res.send(html);
   });
@@ -876,6 +1053,12 @@ function buildMainPagesSitemap() {
   return xml.replace('</urlset>', `${block}\n</urlset>`);
 }
 
+
+function isHomepageRedirectPath(urlPath) {
+  const key = sitemapCanon(urlPath);
+  return Object.keys(ga4404HomepageRedirects).some((fromPath) => sitemapCanon(fromPath) === key);
+}
+
 function blogSitemapEntry(fullUrl, lastModDate) {
   return `  <url>
     <loc>${fullUrl}</loc>
@@ -916,6 +1099,7 @@ app.get('/blog-sitemap.xml', async (req, res) => {
     blogs.forEach((blog) => {
       const blogUrl = blog.slug && blog.slug.startsWith('/') ? blog.slug : `/${blog.slug || ''}`;
       if (!blog.slug || !isBlogArticlePath(blogUrl)) return;
+      if (isHomepageRedirectPath(blogUrl)) return;
       const key = sitemapCanon(blogUrl);
       if (seen.has(key)) return;
       seen.add(key);
@@ -927,7 +1111,7 @@ app.get('/blog-sitemap.xml', async (req, res) => {
     if (fs.existsSync(BLOG_SITEMAP_FILE)) {
       readSitemapLocs(fs.readFileSync(BLOG_SITEMAP_FILE, 'utf8')).forEach((loc) => {
         const key = sitemapCanon(loc);
-        if (seen.has(key) || !isBlogArticlePath(loc)) return;
+        if (seen.has(key) || !isBlogArticlePath(loc) || isHomepageRedirectPath(loc)) return;
         seen.add(key);
         entries.push(blogSitemapEntry(loc, new Date().toISOString().split('T')[0]));
       });
@@ -1748,6 +1932,7 @@ const localPageContent = {
   '/procedures/lens-solutions/pie/': 'STRAPI_CONTENT_5_PIE_WITH_CSS.html',
   '/procedures/laser-vision/asa/': 'STRAPI_CONTENT_6_ASA_WITH_CSS.html',
   '/procedures/laser-vision/compare/': 'STRAPI_CONTENT_7_COMPARE_WITH_CSS.html',
+  '/tools/procedure-comparison/': 'STRAPI_CONTENT_7_COMPARE_WITH_CSS.html',
   '/procedures/laser-vision/compare/pie-vs-evo-icl/': 'STRAPI_CONTENT_8_PIE_VS_EVO_WITH_CSS.html',
   '/procedures/laser-vision/compare/presbyopic-iol/': 'STRAPI_CONTENT_9_PRESBYOPIC_IOL_WITH_CSS.html',
   '/procedures/lens-solutions/which-lens-is-right/': 'STRAPI_CONTENT_10_WHICH_LENS_WITH_CSS.html',
