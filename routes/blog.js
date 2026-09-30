@@ -22,7 +22,6 @@ const staticBlogs = [
   { slug: "2024/02/evo-icl-vs-lasik-pros-and-cons-of-each-procedure", title: "EVO ICL vs LASIK: Pros and Cons of Each Procedure", publishedAt: "2024-02-01", author: "Dr. Rajesh Khanna" },
   { slug: "2020/11/in-7-minutes-get-young-again-new-eyes-with-pie", title: "In 7 Minutes Get Young Again: New Eyes with PIE", publishedAt: "2020-11-01", author: "Dr. Rajesh Khanna" },
   { slug: "2020/08/3-innovative-eye-surgeries-fix-astigmatism-enhance-vision", title: "3 Innovative Eye Surgeries: Fix Astigmatism & Enhance Vision", publishedAt: "2020-08-01", author: "Dr. Rajesh Khanna" },
-  { slug: "2024/10/guide-to-common-eye-surgeries-for-seniors", title: "Guide to Common Eye Surgeries for Seniors", publishedAt: "2024-10-01", author: "Dr. Rajesh Khanna" }
 ];
 
 // Procedure guides hub (must be before /:year/:month/:slug)
